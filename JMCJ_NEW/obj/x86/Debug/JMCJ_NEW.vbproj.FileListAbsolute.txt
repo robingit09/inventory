@@ -1,0 +1,75 @@
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.exe
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.pdb
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.xml
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryForm.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryList.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrderForm.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmLedger.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmCustomerList.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmListEdger.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Resources.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductForm.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductList.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitForm.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitList.resources
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.vbproj.GenerateResource.Cache
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.exe
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.xml
+C:\Users\User\Documents\Visual Studio 2008\Projects\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.pdb
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.exe
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.xml
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.pdb
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.exe
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.pdb
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.xml
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrderForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmCustomerList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Resources.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.POList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseOrderForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitForm.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitList.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.vbproj.GenerateResource.Cache
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.exe
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.xml
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.pdb
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrderForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmLedger.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmCustomerList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmListEdger.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Resources.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.POList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PriceList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseOrderForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitForm.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UnitList.resources
+D:\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.vbproj.GenerateResource.Cache
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Pricing.resources
+C:\Users\user\Desktop\JMCJ_NEW\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PricingProductForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.exe
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.xml
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.pdb

@@ -1,0 +1,265 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class PricingProductForm
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Brand = New System.Windows.Forms.DataGridViewComboBoxColumn
+        Me.Unit = New System.Windows.Forms.DataGridViewComboBoxColumn
+        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.TextBox3 = New System.Windows.Forms.TextBox
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.Label4 = New System.Windows.Forms.Label
+        Me.Label3 = New System.Windows.Forms.Label
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.TextBox2 = New System.Windows.Forms.TextBox
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.TextBox1 = New System.Windows.Forms.TextBox
+        Me.btnSave = New System.Windows.Forms.Button
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectp, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.Category, Me.Subcategory})
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 184)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(1055, 372)
+        Me.DataGridView1.TabIndex = 21
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'selectp
+        '
+        Me.selectp.HeaderText = ""
+        Me.selectp.Name = "selectp"
+        Me.selectp.Width = 50
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        Me.Barcode.Width = 140
+        '
+        'ProductDescription
+        '
+        Me.ProductDescription.HeaderText = "Product Description"
+        Me.ProductDescription.Name = "ProductDescription"
+        Me.ProductDescription.ReadOnly = True
+        Me.ProductDescription.Width = 190
+        '
+        'Brand
+        '
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'UnitPrice
+        '
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        Me.UnitPrice.Width = 120
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        Me.Category.Width = 150
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 150
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(912, 53)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Filter"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(760, 15)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(227, 22)
+        Me.TextBox3.TabIndex = 6
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.TextBox3)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.TextBox2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1010, 85)
+        Me.GroupBox1.TabIndex = 22
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filter"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(702, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(52, 15)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "Barcode"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(411, 18)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 15)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Brand"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(129, 50)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(147, 23)
+        Me.ComboBox1.TabIndex = 3
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 53)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(57, 15)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Category"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(458, 15)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(130, 22)
+        Me.TextBox2.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 18)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(117, 15)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Product Description"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(129, 15)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(278, 22)
+        Me.TextBox1.TabIndex = 0
+        '
+        'btnSave
+        '
+        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(902, 120)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(120, 31)
+        Me.btnSave.TabIndex = 9
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'PricingProductForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1113, 579)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.DataGridView1)
+        Me.Name = "PricingProductForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Pricing Product Form"
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents id As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents selectp As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Barcode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProductDescription As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Brand As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Unit As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents UnitPrice As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Subcategory As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+End Class
