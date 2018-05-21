@@ -22,21 +22,21 @@ Partial Class ProductForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.txtProduct = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.Brand = New System.Windows.Forms.DataGridViewComboBoxColumn
-        Me.Unit = New System.Windows.Forms.DataGridViewComboBoxColumn
-        Me.Price = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtProduct = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbCategory = New System.Windows.Forms.ComboBox()
+        Me.cbSubcategory = New System.Windows.Forms.ComboBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Brand = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,7 +60,7 @@ Partial Class ProductForm
         Me.txtProduct.Location = New System.Drawing.Point(182, 127)
         Me.txtProduct.Name = "txtProduct"
         Me.txtProduct.Size = New System.Drawing.Size(541, 26)
-        Me.txtProduct.TabIndex = 4
+        Me.txtProduct.TabIndex = 2
         '
         'Label5
         '
@@ -102,7 +102,7 @@ Partial Class ProductForm
         Me.TextBox1.Location = New System.Drawing.Point(182, 77)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(329, 26)
-        Me.TextBox1.TabIndex = 16
+        Me.TextBox1.TabIndex = 1
         '
         'Label2
         '
@@ -115,23 +115,23 @@ Partial Class ProductForm
         Me.Label2.TabIndex = 17
         Me.Label2.Text = "Subcategory"
         '
-        'ComboBox1
+        'cbCategory
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(182, 177)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(449, 27)
-        Me.ComboBox1.TabIndex = 18
+        Me.cbCategory.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCategory.FormattingEnabled = True
+        Me.cbCategory.Location = New System.Drawing.Point(182, 177)
+        Me.cbCategory.Name = "cbCategory"
+        Me.cbCategory.Size = New System.Drawing.Size(449, 27)
+        Me.cbCategory.TabIndex = 3
         '
-        'ComboBox2
+        'cbSubcategory
         '
-        Me.ComboBox2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(182, 226)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(449, 27)
-        Me.ComboBox2.TabIndex = 19
+        Me.cbSubcategory.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbSubcategory.FormattingEnabled = True
+        Me.cbSubcategory.Location = New System.Drawing.Point(182, 226)
+        Me.cbSubcategory.Name = "cbSubcategory"
+        Me.cbSubcategory.Size = New System.Drawing.Size(449, 27)
+        Me.cbSubcategory.TabIndex = 4
         '
         'TabControl1
         '
@@ -188,8 +188,8 @@ Partial Class ProductForm
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(910, 566)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.ComboBox2)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cbSubcategory)
+        Me.Controls.Add(Me.cbCategory)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label7)
@@ -213,8 +213,8 @@ Partial Class ProductForm
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbCategory As System.Windows.Forms.ComboBox
+    Friend WithEvents cbSubcategory As System.Windows.Forms.ComboBox
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView

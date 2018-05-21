@@ -34,7 +34,6 @@
         PictureBox1.BorderStyle = BorderStyle.None
 
         Timer1.Start()
-
     End Sub
 
     Private Sub lblDate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDate.Click

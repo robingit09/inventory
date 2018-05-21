@@ -14,6 +14,27 @@
     End Sub
 
     Public Sub loadList(ByVal key As String)
+        DataGridView1.Rows.Clear()
+        Dim db As New DatabaseConnect
+        If key = "" Then
+            db.selectByQuery("Select id,name from categories where status = 1 and parent_id = 0")
+        Else
+
+        End If
+        With db
+            If .dr.Read Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    Dim row As String() = New String() {id, name}
+                    DataGridView1.Rows.Add(row)
+                End While
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
 
         'Dim database As New DatabaseConnect
         'database.dbConnect()

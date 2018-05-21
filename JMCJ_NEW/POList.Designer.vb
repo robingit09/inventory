@@ -22,14 +22,14 @@ Partial Class POList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnAddNew = New System.Windows.Forms.Button
-        Me.dgvPO = New System.Windows.Forms.DataGridView
-        Me.DateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.PONumber = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.SupplierName = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.dgvPO = New System.Windows.Forms.DataGridView()
+        Me.DateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PONumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SupplierName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '

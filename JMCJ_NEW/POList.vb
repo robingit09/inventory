@@ -4,4 +4,8 @@
 
         PurchaseOrderForm.ShowDialog()
     End Sub
+
+    Private Sub POList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

@@ -1,7 +1,10 @@
 ﻿Public Class ProductForm
-
-
+    Private selectedCategory As Integer = 0
+    Private selectedSubcategory As Integer = 0
     Private Sub saveData()
+        Dim db As New DatabaseConnect
+        db.cmd.CommandType = CommandType.Text
+        db.cmd.CommandText = ""
         'Dim database As New DatabaseConnect
         'database.dbConnect()
         'database.cmd.CommandType = CommandType.Text
@@ -76,43 +79,45 @@
     End Sub
 
     Public Sub populateCategory()
+        cbCategory.DataSource = Nothing
+        cbCategory.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Category")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
+            If .dr.Read Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+                cbCategory.DataSource = New BindingSource(comboSource, Nothing)
+                cbCategory.DisplayMember = "Value"
+                cbCategory.ValueMember = "Key"
+            End If
+        End With
+    End Sub
 
-        'Dim database As New DatabaseConnect
-        'database.dbConnect()
-        'database.cmd.CommandType = CommandType.Text
-
-        'database.cmd.CommandText = "SELECT name,id FROM categories where status = 1"
-
-        'database.cmd.Connection = database.con
-
-        'Try
-
-        '    database.dr = database.cmd.ExecuteReader
-
-        '    If database.dr.HasRows Then
-        '        cbCat.Items.Clear()
-
-        '        While database.dr.Read
-        '            Dim arr(1) As String
-
-        '            Dim id As String = database.dr.GetValue(1)
-        '            Dim category As String = database.dr.GetValue(0)
-
-        '            arr(0) = category
-        '            arr(1) = id
-
-
-        '            cbCat.Items.Add(category)
-
-        '        End While
-
-        '    End If
-
-        '    database.con.Close()
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        'End Try
-
+    Public Sub populateSubcategory()
+        cbSubcategory.DataSource = Nothing
+        cbSubcategory.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Subcategory")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = " & selectedCategory)
+            If .dr.Read Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+                cbSubcategory.DataSource = New BindingSource(comboSource, Nothing)
+                cbSubcategory.DisplayMember = "Value"
+                cbSubcategory.ValueMember = "Key"
+            End If
+        End With
     End Sub
 
     Public Sub populateUnit()
@@ -158,19 +163,26 @@
 
         If btnSave.Text = "Save" Then
             saveData()
-
         ElseIf btnSave.Text = "Update" Then
             updateData()
-
         End If
 
     End Sub
 
     Private Sub ProductForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         populateCategory()
         populateUnit()
 
     End Sub
 
+    Private Sub cbCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCategory.SelectedIndexChanged
+
+        If cbCategory.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedCategory = CInt(key)
+            populateSubcategory()
+        End If
+
+    End Sub
 End Class

@@ -56,5 +56,28 @@
 
     End Sub
 
+    Private Sub CategoryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        populateCategory()
+    End Sub
 
+    Public Sub populateCategory()
+        cbParent.DataSource = Nothing
+        cbParent.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Category")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
+            If .dr.Read Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+                cbParent.DataSource = New BindingSource(comboSource, Nothing)
+                cbParent.DisplayMember = "Value"
+                cbParent.ValueMember = "Key"
+            End If
+        End With
+    End Sub
 End Class
