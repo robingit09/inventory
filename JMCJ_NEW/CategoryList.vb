@@ -1,11 +1,24 @@
 ﻿Public Class CategoryList
 
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
-        CategoryForm.SelectedCategory = 0
-        CategoryForm.txtCat.Text = ""
+
+        CategoryForm.SelectedID = 0
+        CategoryForm.txtName.Text = ""
         CategoryForm.btnSave.Text = "Save"
         CategoryForm.ShowDialog()
 
+    End Sub
+
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If dgvCat.SelectedRows.Count = 1 Then
+            CategoryForm.SelectedID = CInt(dgvCat.SelectedRows(0).Cells(0).Value)
+            CategoryForm.toUpdateInfo(CategoryForm.SelectedID)
+            CategoryForm.btnSave.Text = "Update"
+            CategoryForm.ShowDialog()
+        Else
+            MsgBox("Please select record to update", MsgBoxStyle.Critical)
+        End If
     End Sub
 
     Private Sub CategoryList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -14,20 +27,28 @@
     End Sub
 
     Public Sub loadList(ByVal key As String)
-        DataGridView1.Rows.Clear()
+        dgvCat.Rows.Clear()
         Dim db As New DatabaseConnect
         If key = "" Then
-            db.selectByQuery("Select id,name from categories where status = 1 and parent_id = 0")
+            db.selectByQuery("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id")
         Else
 
         End If
         With db
-            If .dr.Read Then
+            If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
-                    Dim name As String = .dr.GetValue(1)
-                    Dim row As String() = New String() {id, name}
-                    DataGridView1.Rows.Add(row)
+                    Dim category As String = If(IsDBNull(.dr.GetValue(1)), "N/A", .dr.GetValue(1))
+                    Dim subcat As String = If(IsDBNull(.dr.GetValue(2)), "N/A", .dr.GetValue(2))
+                    If category = "N/A" Then
+                        Dim temp As String
+                        temp = subcat
+                        subcat = category
+                        category = temp
+                    End If
+
+                    Dim row As String() = New String() {id, category, subcat}
+                    dgvCat.Rows.Add(row)
                 End While
             End If
             .dr.Close()
@@ -95,26 +116,6 @@
         End If
     End Sub
 
-    Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
-
-        'If lvCat.SelectedItems.Count > 0 Then
-        '    Dim key As Integer = CInt(lvCat.SelectedItems(0).SubItems(1).Text)
-        '    Dim cat As String = lvCat.SelectedItems(0).SubItems(0).Text
-
-        '    CategoryForm.btnSave.Text = "Update"
-        '    CategoryForm.txtCat.Text = cat
-        '    CategoryForm.txtCat.SelectAll()
-        '    CategoryForm.SelectedCategory = key
-        '    CategoryForm.ShowDialog()
-
-        'End If
-
-        'If lvCat.SelectedItems.Count <= 0 Then
-        '    MsgBox("Please select category you want to edit", MsgBoxStyle.Exclamation)
-        'End If
-
-    End Sub
-
     Private Sub lvCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         'If lvCat.SelectedItems.Count > 0 Then
@@ -162,6 +163,11 @@
         'Else
         '    MsgBox("Please select category you want to delete", MsgBoxStyle.Exclamation)
         'End If
-        
+
     End Sub
+
+    Private Sub dgvCat_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCat.CellContentClick
+
+    End Sub
+
 End Class

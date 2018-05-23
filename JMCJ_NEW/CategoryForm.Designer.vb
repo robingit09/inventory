@@ -23,7 +23,7 @@ Partial Class CategoryForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtCat = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.cbParent = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,13 +41,13 @@ Partial Class CategoryForm
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Name:"
         '
-        'txtCat
+        'txtName
         '
-        Me.txtCat.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCat.Location = New System.Drawing.Point(154, 114)
-        Me.txtCat.Name = "txtCat"
-        Me.txtCat.Size = New System.Drawing.Size(319, 29)
-        Me.txtCat.TabIndex = 1
+        Me.txtName.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.Location = New System.Drawing.Point(154, 114)
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(319, 29)
+        Me.txtName.TabIndex = 1
         '
         'btnSave
         '
@@ -100,7 +100,7 @@ Partial Class CategoryForm
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cbParent)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.txtCat)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Label1)
         Me.Name = "CategoryForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -110,7 +110,7 @@ Partial Class CategoryForm
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtCat As System.Windows.Forms.TextBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents cbParent As ComboBox
     Friend WithEvents Label2 As Label

@@ -1,6 +1,7 @@
 ﻿Public Class CategoryForm
 
-    Public SelectedCategory As Integer = 0
+
+    Public SelectedID As Integer = 0
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
         If btnSave.Text = "Save" Then
@@ -14,16 +15,26 @@
         End If
     End Sub
 
+    Public Sub toUpdateInfo(ByVal id As Integer)
+        Dim db As New DatabaseConnect
+        db.selectByQuery("Select id,name from categories where status = 1 and id = " & id)
+
+        With db
+            If .dr.Read Then
+                txtName.Text = .dr.GetValue(1)
+            End If
+        End With
+    End Sub
+
     Private Sub saveData()
 
         Dim database As New DatabaseConnect
-        database.dbConnect()
         database.cmd.CommandType = CommandType.Text
-        database.cmd.CommandText = "INSERT INTO categories([parent_id],[name],[status],[created_at],[updated_at])" & _
+        database.cmd.CommandText = "INSERT INTO categories([parent_id],[name],[status],[created_at],[updated_at])" &
         "VALUES(@parent_id,@name,@status,@created_at,@updated_at)"
 
-        database.cmd.Parameters.AddWithValue("@parent_id", 0)
-        database.cmd.Parameters.AddWithValue("@name", txtCat.Text)
+        database.cmd.Parameters.AddWithValue("@parent_id", If((SelectedID > 0), SelectedID, 0))
+        database.cmd.Parameters.AddWithValue("@name", txtName.Text)
         database.cmd.Parameters.AddWithValue("@st", 1)
         database.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
         database.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -31,7 +42,7 @@
         database.cmd.ExecuteNonQuery()
         database.con.Close()
         MsgBox("Category Save Successful", MsgBoxStyle.Information)
-        txtCat.Text = ""
+        txtName.Text = ""
         CategoryList.loadList("")
         Me.Close()
     End Sub
@@ -41,7 +52,7 @@
             Dim db As New DatabaseConnect
             db.dbConnect()
             db.cmd.CommandType = CommandType.Text
-            db.cmd.CommandText = "UPDATE categories set [name] = '" & txtCat.Text & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedCategory
+            db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
             db.cmd.Connection = db.con
             db.cmd.ExecuteNonQuery()
             db.cmd.Dispose()
@@ -79,5 +90,16 @@
                 cbParent.ValueMember = "Key"
             End If
         End With
+    End Sub
+
+    Private Sub cbParent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParent.SelectedIndexChanged
+
+        If cbParent.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbParent.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbParent.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedID = CInt(key)
+        End If
+
+
     End Sub
 End Class
