@@ -137,7 +137,7 @@ Partial Class CategoryList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(1025, 718)
+        Me.ClientSize = New System.Drawing.Size(937, 718)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.dgvCat)
         Me.Controls.Add(Me.btnDelete)

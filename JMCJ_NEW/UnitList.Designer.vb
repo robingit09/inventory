@@ -22,43 +22,44 @@ Partial Class UnitList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.btnAddNew = New System.Windows.Forms.Button
-        Me.btnEdit = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.txtSearch = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.dgvUnit = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAll = New System.Windows.Forms.Button()
+        CType(Me.dgvUnit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnAddNew
         '
         Me.btnAddNew.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNew.Location = New System.Drawing.Point(19, 36)
+        Me.btnAddNew.Location = New System.Drawing.Point(19, 25)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 32)
         Me.btnAddNew.TabIndex = 1
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'btnEdit
+        'btnUpdate
         '
-        Me.btnEdit.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.Location = New System.Drawing.Point(100, 36)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(75, 32)
-        Me.btnEdit.TabIndex = 2
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = True
+        Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Location = New System.Drawing.Point(113, 25)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(91, 32)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
         Me.btnDelete.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Location = New System.Drawing.Point(181, 36)
+        Me.btnDelete.Location = New System.Drawing.Point(226, 25)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 32)
         Me.btnDelete.TabIndex = 3
@@ -67,9 +68,9 @@ Partial Class UnitList
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(100, 85)
+        Me.txtSearch.Location = New System.Drawing.Point(85, 82)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(171, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(139, 20)
         Me.txtSearch.TabIndex = 4
         '
         'Label1
@@ -82,17 +83,17 @@ Partial Class UnitList
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Search"
         '
-        'Button1
+        'btnFilter
         '
-        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(291, 77)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 32)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Filter"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(230, 74)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(75, 32)
+        Me.btnFilter.TabIndex = 6
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dgvUnit
         '
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
@@ -101,13 +102,14 @@ Partial Class UnitList
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Unit})
-        Me.DataGridView1.Location = New System.Drawing.Point(19, 133)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(347, 353)
-        Me.DataGridView1.TabIndex = 7
+        Me.dgvUnit.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvUnit.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Unit})
+        Me.dgvUnit.Location = New System.Drawing.Point(28, 133)
+        Me.dgvUnit.Name = "dgvUnit"
+        Me.dgvUnit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvUnit.Size = New System.Drawing.Size(347, 353)
+        Me.dgvUnit.TabIndex = 7
         '
         'id
         '
@@ -123,35 +125,47 @@ Partial Class UnitList
         Me.Unit.ReadOnly = True
         Me.Unit.Width = 300
         '
+        'btnAll
+        '
+        Me.btnAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAll.Location = New System.Drawing.Point(311, 74)
+        Me.btnAll.Name = "btnAll"
+        Me.btnAll.Size = New System.Drawing.Size(75, 32)
+        Me.btnAll.TabIndex = 8
+        Me.btnAll.Text = "All"
+        Me.btnAll.UseVisualStyleBackColor = True
+        '
         'UnitList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(396, 509)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(407, 509)
+        Me.Controls.Add(Me.btnAll)
+        Me.Controls.Add(Me.dgvUnit)
+        Me.Controls.Add(Me.btnFilter)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.btnEdit)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAddNew)
         Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "UnitList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Unit List"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvUnit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnAddNew As System.Windows.Forms.Button
-    Friend WithEvents btnEdit As System.Windows.Forms.Button
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents btnFilter As System.Windows.Forms.Button
+    Friend WithEvents dgvUnit As System.Windows.Forms.DataGridView
     Friend WithEvents id As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Unit As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnAll As Button
 End Class
