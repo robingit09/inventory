@@ -22,35 +22,43 @@ Partial Class Main_form
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main_form))
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
-        Me.SupplierToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PurchaseOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.PurchaseInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.UnitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.lblDate = New System.Windows.Forms.Label
-        Me.lblTime = New System.Windows.Forms.Label
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SupplierToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblTime = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.PriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.BrandToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(926, 29)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ProductToolStripMenuItem
+        '
+        Me.ProductToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ProductToolStripMenuItem.Name = "ProductToolStripMenuItem"
+        Me.ProductToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
+        Me.ProductToolStripMenuItem.Text = "Product"
         '
         'SupplierToolStripMenuItem
         '
@@ -59,25 +67,12 @@ Partial Class Main_form
         Me.SupplierToolStripMenuItem.Size = New System.Drawing.Size(86, 25)
         Me.SupplierToolStripMenuItem.Text = "Supplier"
         '
-        'PurchaseOrderToolStripMenuItem
+        'PriceListToolStripMenuItem
         '
-        Me.PurchaseOrderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem1, Me.PurchaseInvoiceToolStripMenuItem})
-        Me.PurchaseOrderToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PurchaseOrderToolStripMenuItem.Name = "PurchaseOrderToolStripMenuItem"
-        Me.PurchaseOrderToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
-        Me.PurchaseOrderToolStripMenuItem.Text = "Purchase"
-        '
-        'PurchaseOrderToolStripMenuItem1
-        '
-        Me.PurchaseOrderToolStripMenuItem1.Name = "PurchaseOrderToolStripMenuItem1"
-        Me.PurchaseOrderToolStripMenuItem1.Size = New System.Drawing.Size(209, 26)
-        Me.PurchaseOrderToolStripMenuItem1.Text = "Purchase Order"
-        '
-        'PurchaseInvoiceToolStripMenuItem
-        '
-        Me.PurchaseInvoiceToolStripMenuItem.Name = "PurchaseInvoiceToolStripMenuItem"
-        Me.PurchaseInvoiceToolStripMenuItem.Size = New System.Drawing.Size(209, 26)
-        Me.PurchaseInvoiceToolStripMenuItem.Text = "Purchase Invoice"
+        Me.PriceListToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PriceListToolStripMenuItem.Name = "PriceListToolStripMenuItem"
+        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(90, 25)
+        Me.PriceListToolStripMenuItem.Text = "Price List"
         '
         'CustomerToolStripMenuItem
         '
@@ -100,12 +95,25 @@ Partial Class Main_form
         Me.UnitToolStripMenuItem.Size = New System.Drawing.Size(55, 25)
         Me.UnitToolStripMenuItem.Text = "Unit"
         '
-        'ProductToolStripMenuItem
+        'PurchaseOrderToolStripMenuItem
         '
-        Me.ProductToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductToolStripMenuItem.Name = "ProductToolStripMenuItem"
-        Me.ProductToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
-        Me.ProductToolStripMenuItem.Text = "Product"
+        Me.PurchaseOrderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem1, Me.PurchaseInvoiceToolStripMenuItem})
+        Me.PurchaseOrderToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PurchaseOrderToolStripMenuItem.Name = "PurchaseOrderToolStripMenuItem"
+        Me.PurchaseOrderToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
+        Me.PurchaseOrderToolStripMenuItem.Text = "Purchase"
+        '
+        'PurchaseOrderToolStripMenuItem1
+        '
+        Me.PurchaseOrderToolStripMenuItem1.Name = "PurchaseOrderToolStripMenuItem1"
+        Me.PurchaseOrderToolStripMenuItem1.Size = New System.Drawing.Size(209, 26)
+        Me.PurchaseOrderToolStripMenuItem1.Text = "Purchase Order"
+        '
+        'PurchaseInvoiceToolStripMenuItem
+        '
+        Me.PurchaseInvoiceToolStripMenuItem.Name = "PurchaseInvoiceToolStripMenuItem"
+        Me.PurchaseInvoiceToolStripMenuItem.Size = New System.Drawing.Size(209, 26)
+        Me.PurchaseInvoiceToolStripMenuItem.Text = "Purchase Invoice"
         '
         'CustomerOrderToolStripMenuItem
         '
@@ -139,8 +147,8 @@ Partial Class Main_form
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -156,12 +164,12 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
-        'PriceListToolStripMenuItem
+        'BrandToolStripMenuItem
         '
-        Me.PriceListToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PriceListToolStripMenuItem.Name = "PriceListToolStripMenuItem"
-        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(90, 25)
-        Me.PriceListToolStripMenuItem.Text = "Price List"
+        Me.BrandToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BrandToolStripMenuItem.Name = "BrandToolStripMenuItem"
+        Me.BrandToolStripMenuItem.Size = New System.Drawing.Size(67, 25)
+        Me.BrandToolStripMenuItem.Text = "Brand"
         '
         'Main_form
         '
@@ -201,4 +209,5 @@ Partial Class Main_form
     Friend WithEvents PurchaseInvoiceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents PriceListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BrandToolStripMenuItem As ToolStripMenuItem
 End Class

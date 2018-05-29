@@ -17,14 +17,33 @@
 
     Public Sub toUpdateInfo(ByVal id As Integer)
         Dim db As New DatabaseConnect
-        db.selectByQuery("Select id,name from categories where status = 1 and id = " & id)
-
         With db
+            .selectByQuery("Select id,name,parent_id from categories where status = 1 and id = " & id)
+
             If .dr.Read Then
                 txtName.Text = .dr.GetValue(1)
+                'cbParent.Text = getParent(CInt(.dr.GetValue(2)))
             End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
         End With
     End Sub
+
+    'Public Function getParent(ByVal parent_id As Integer) As String
+    '    Dim result As String = ""
+    '    Dim db As New DatabaseConnect
+    '    With db
+    '        .selectByQuery("Select name from categories where id = " & parent_id)
+    '        If .dr.Read Then
+    '            result = .dr.GetValue(0)
+    '        End If
+    '        .cmd.Dispose()
+    '        .dr.Close()
+    '        .con.Close()
+    '    End With
+    '    Return result
+    'End Function
 
     Private Sub saveData()
 
@@ -50,7 +69,6 @@
     Private Sub UpdateData()
         Try
             Dim db As New DatabaseConnect
-            db.dbConnect()
             db.cmd.CommandType = CommandType.Text
             db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
             db.cmd.Connection = db.con
@@ -58,7 +76,7 @@
             db.cmd.Dispose()
             db.con.Close()
 
-            MsgBox("Category Successfully Updated", MsgBoxStyle.Information)
+            MsgBox("Successfully Update", MsgBoxStyle.Information)
             Me.Close()
             CategoryList.loadList("")
         Catch ex As Exception
@@ -79,7 +97,7 @@
         Dim db As New DatabaseConnect
         With db
             .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
-            If .dr.Read Then
+            If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
                     Dim name As String = .dr.GetValue(1)
@@ -89,6 +107,9 @@
                 cbParent.DisplayMember = "Value"
                 cbParent.ValueMember = "Key"
             End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
         End With
     End Sub
 

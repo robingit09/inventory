@@ -2,9 +2,31 @@
     Private selectedCategory As Integer = 0
     Private selectedSubcategory As Integer = 0
     Private Sub saveData()
+        Dim prod_id = getLatestID("products") + 1
         Dim db As New DatabaseConnect
-        db.cmd.CommandType = CommandType.Text
-        db.cmd.CommandText = ""
+        With db
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "INSERT INTO PRODUCTS (barcode,description,status,created_at,updated_at)
+        VALUES ('" & txtBarcode.Text & "','" & txtProduct.Text & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
+            If (.cmd.ExecuteNonQuery()) Then
+                .cmd.CommandText = "INSERT INTO product_categories (product_id,category_id) VALUES(" & prod_id & "," & selectedCategory & ")"
+                .cmd.ExecuteNonQuery()
+
+                .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id) VALUES(" & prod_id & "," & selectedSubcategory & ")"
+                .cmd.ExecuteNonQuery()
+
+            End If
+
+
+            .cmd.Dispose()
+            .con.Close()
+
+            MsgBox("Save Successfully!", MsgBoxStyle.Information)
+
+
+        End With
+
         'Dim database As New DatabaseConnect
         'database.dbConnect()
         'database.cmd.CommandType = CommandType.Text
@@ -49,6 +71,21 @@
         'Me.Close()
 
     End Sub
+
+    Private Function getLatestID(ByVal table As String) As Integer
+        Dim result As Integer = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select TOP 1 id from " & table & " ORDER BY created_at desc")
+            If .dr.Read Then
+                result = .dr.GetValue(0)
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+        Return result
+    End Function
 
     Private Sub updateData()
 
@@ -96,27 +133,34 @@
                 cbCategory.DisplayMember = "Value"
                 cbCategory.ValueMember = "Key"
             End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
         End With
     End Sub
 
-    Public Sub populateSubcategory()
+    Public Sub populateSubcategory(ByVal category As Integer)
         cbSubcategory.DataSource = Nothing
         cbSubcategory.Items.Clear()
         Dim comboSource As New Dictionary(Of String, String)()
-        comboSource.Add(0, "Subcategory")
+        comboSource.Add(0, "Select Subcategory")
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = " & selectedCategory)
-            If .dr.Read Then
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = " & category)
+            If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
                     Dim name As String = .dr.GetValue(1)
                     comboSource.Add(id, name)
                 End While
-                cbSubcategory.DataSource = New BindingSource(comboSource, Nothing)
-                cbSubcategory.DisplayMember = "Value"
-                cbSubcategory.ValueMember = "Key"
             End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+
+            cbSubcategory.DataSource = New BindingSource(comboSource, Nothing)
+            cbSubcategory.DisplayMember = "Value"
+            cbSubcategory.ValueMember = "Key"
         End With
     End Sub
 
@@ -181,8 +225,17 @@
             Dim key As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCategory = CInt(key)
-            populateSubcategory()
+            populateSubcategory(selectedCategory)
+            MsgBox(selectedCategory)
         End If
 
+    End Sub
+
+    Private Sub cbSubcategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubcategory.SelectedIndexChanged
+        If cbSubcategory.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbSubcategory.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbSubcategory.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedSubcategory = CInt(key)
+        End If
     End Sub
 End Class

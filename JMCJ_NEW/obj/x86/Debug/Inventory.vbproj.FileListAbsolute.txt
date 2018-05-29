@@ -34,3 +34,5 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.ReportSource.xml
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Shared.xml
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Windows.Forms.xml
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\Inventory.vbprojResolveAssemblyReference.cache
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.BrandForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.BrandList.resources

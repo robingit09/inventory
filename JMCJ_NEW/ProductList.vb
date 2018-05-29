@@ -136,6 +136,7 @@
     End Sub
     
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        ProductForm.btnSave.Text = "Save"
         ProductForm.ShowDialog()
 
     End Sub

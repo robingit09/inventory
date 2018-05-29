@@ -117,6 +117,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrandForm.Designer.vb">
+      <DependentUpon>BrandForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BrandForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BrandList.Designer.vb">
       <DependentUpon>BrandList.vb</DependentUpon>
     </Compile>
@@ -249,6 +255,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BrandForm.resx">
+      <DependentUpon>BrandForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BrandList.resx">
       <DependentUpon>BrandList.vb</DependentUpon>
     </EmbeddedResource>

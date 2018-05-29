@@ -31,7 +31,7 @@ Partial Class CategoryList
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnFilter = New System.Windows.Forms.Button()
         CType(Me.dgvCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,6 +96,7 @@ Partial Class CategoryList
         Me.dgvCat.Location = New System.Drawing.Point(53, 156)
         Me.dgvCat.Margin = New System.Windows.Forms.Padding(5)
         Me.dgvCat.Name = "dgvCat"
+        Me.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvCat.Size = New System.Drawing.Size(841, 400)
         Me.dgvCat.TabIndex = 24
         '
@@ -120,17 +121,17 @@ Partial Class CategoryList
         Me.Subcategory.ReadOnly = True
         Me.Subcategory.Width = 400
         '
-        'Button1
+        'btnFilter
         '
-        Me.Button1.Enabled = False
-        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(789, 66)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(5)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(105, 41)
-        Me.Button1.TabIndex = 25
-        Me.Button1.Text = "Filter"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnFilter.Enabled = False
+        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(789, 66)
+        Me.btnFilter.Margin = New System.Windows.Forms.Padding(5)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(105, 41)
+        Me.btnFilter.TabIndex = 25
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
         'CategoryList
         '
@@ -138,7 +139,7 @@ Partial Class CategoryList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(937, 718)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnFilter)
         Me.Controls.Add(Me.dgvCat)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
@@ -161,7 +162,7 @@ Partial Class CategoryList
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnAddNew As System.Windows.Forms.Button
     Friend WithEvents dgvCat As System.Windows.Forms.DataGridView
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnFilter As System.Windows.Forms.Button
     Friend WithEvents id As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As System.Windows.Forms.DataGridViewTextBoxColumn
