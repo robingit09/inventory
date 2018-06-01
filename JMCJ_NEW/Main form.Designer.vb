@@ -30,6 +30,7 @@ Partial Class Main_form
         Me.PriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BrandToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,7 +40,6 @@ Partial Class Main_form
         Me.lblTime = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.BrandToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -87,6 +87,13 @@ Partial Class Main_form
         Me.CategoriesToolStripMenuItem.Name = "CategoriesToolStripMenuItem"
         Me.CategoriesToolStripMenuItem.Size = New System.Drawing.Size(103, 25)
         Me.CategoriesToolStripMenuItem.Text = "Categories"
+        '
+        'BrandToolStripMenuItem
+        '
+        Me.BrandToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BrandToolStripMenuItem.Name = "BrandToolStripMenuItem"
+        Me.BrandToolStripMenuItem.Size = New System.Drawing.Size(67, 25)
+        Me.BrandToolStripMenuItem.Text = "Brand"
         '
         'UnitToolStripMenuItem
         '
@@ -164,18 +171,11 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
-        'BrandToolStripMenuItem
-        '
-        Me.BrandToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BrandToolStripMenuItem.Name = "BrandToolStripMenuItem"
-        Me.BrandToolStripMenuItem.Size = New System.Drawing.Size(67, 25)
-        Me.BrandToolStripMenuItem.Text = "Brand"
-        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.MediumSeaGreen
+        Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(926, 429)
         Me.Controls.Add(Me.PictureBox1)
