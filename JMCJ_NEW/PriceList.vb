@@ -1,70 +1,32 @@
-﻿Public Class Pricing
-    Public isSupplierLoaded As Boolean = False
-    Private Sub PriceList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        loadSupplier()
-        loadCategory()
-    End Sub
+﻿Public Class CustomerPriceList
 
-    Public Sub loadSupplier()
-        'cbSupplier.DataSource = Nothing
-        'cbSupplier.Items.Clear()
+    Public selectedCustomer As Integer = 0
 
-        'Dim db As New DatabaseConnect
-        'With db
-        '    .dbConnect()
-        '    .cmd.Connection = .con
-        '    .cmd.CommandType = CommandType.Text
-        '    .cmd.CommandText = "SELECT id,supplier from suppliers where status <> 0"
-        '    .dr = .cmd.ExecuteReader
-        '    Dim comboSource As New Dictionary(Of String, String)()
-        '    comboSource.Add(0, "Select Supplier")
+    Private Sub getCustomer()
+        cbCustomer.DataSource = Nothing
+        cbCustomer.Items.Clear()
 
-        '    While .dr.Read
-        '        Dim id As Integer = CInt(.dr.GetValue(0))
-        '        Dim sup As String = .dr.GetValue(1)
-        '        comboSource.Add(id, sup)
-        '    End While
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Customer")
+        Dim dbcustomer As New DatabaseConnect
+        With dbcustomer
+            .selectByQuery("Select id,company from company where status = 1 order by company")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim customer As String = .dr.GetValue(1)
+                    comboSource.Add(id, customer)
+                End While
 
-        '    cbSupplier.DataSource = New BindingSource(comboSource, Nothing)
-        '    cbSupplier.DisplayMember = "Value"
-        '    cbSupplier.ValueMember = "Key"
+                cbCustomer.DataSource = New BindingSource(comboSource, Nothing)
+                cbCustomer.DisplayMember = "Value"
+                cbCustomer.ValueMember = "Key"
+            End If
 
-        '    If .dr.HasRows Then
-        '        isSupplierLoaded = True
-        '    Else
-        '        isSupplierLoaded = False
-        '    End If
-
-        '    .dr.Close()
-        '    .cmd.Dispose()
-        '    .con.Close()
-        'End With
-
-    End Sub
-
-    Private Sub loadCategory()
-        'cbCategory.Items.Clear()
-
-        'Dim db As New DatabaseConnect
-        'With db
-        '    .dbConnect()
-        '    .cmd.Connection = .con
-        '    .cmd.CommandType = CommandType.Text
-        '    .cmd.CommandText = "SELECT distinct category from products where status <> 0"
-        '    .dr = .cmd.ExecuteReader
-
-        '    cbCategory.Items.Add("Select Category")
-        '    cbCategory.Items.Add("All")
-        '    cbCategory.SelectedIndex = 0
-
-        '    While .dr.Read
-        '        cbCategory.Items.Add(.dr.GetValue(0))
-        '    End While
-        '    .dr.Close()
-        '    .cmd.Dispose()
-        '    .con.Close()
-
-        'End With
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
     End Sub
 
     Private Sub loadproduct(ByVal category As String)
@@ -97,8 +59,29 @@
         'End With
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        PricingProductForm.ShowDialog()
+
+
+    Private Sub Pricing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        getCustomer()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If cbCustomer.SelectedIndex > 0 Then
+            AddProductForm.selectedCustomer = Me.selectedCustomer
+            AddProductForm.ShowDialog()
+        Else
+            selectedCustomer = 0
+            AddProductForm.selectedCustomer = 0
+            MsgBox("Please select customer", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub cbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomer.SelectedIndexChanged
+        If cbCustomer.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedCustomer = key
+        End If
     End Sub
 End Class
 

@@ -55,7 +55,7 @@
     End Sub
 
     Private Sub PriceListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PriceListToolStripMenuItem.Click
-        Pricing.ShowDialog()
+        CustomerPriceList.ShowDialog()
     End Sub
 
     Private Sub BrandToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BrandToolStripMenuItem.Click

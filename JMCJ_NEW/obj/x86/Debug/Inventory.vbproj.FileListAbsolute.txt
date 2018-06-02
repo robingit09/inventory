@@ -10,8 +10,6 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Resources.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.POList.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Pricing.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PricingProductForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductList.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseOrderForm.resources
@@ -36,3 +34,5 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Windows.Forms.xml
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\Inventory.vbprojResolveAssemblyReference.cache
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.BrandForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.BrandList.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerPriceList.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddProductForm.resources
