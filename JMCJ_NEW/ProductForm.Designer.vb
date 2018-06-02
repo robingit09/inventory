@@ -35,22 +35,14 @@ Partial Class ProductForm
         Me.tbMeasurement = New System.Windows.Forms.TabPage()
         Me.btnAddMoreUnit = New System.Windows.Forms.Button()
         Me.dgvMeasurement = New System.Windows.Forms.DataGridView()
-        Me.tbPrices = New System.Windows.Forms.TabPage()
-        Me.btnAddMorePrice = New System.Windows.Forms.Button()
-        Me.dgvPrices = New System.Windows.Forms.DataGridView()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Brand = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Unit = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remove_column = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.default_unitprice = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasurement.SuspendLayout()
         CType(Me.dgvMeasurement, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbPrices.SuspendLayout()
-        CType(Me.dgvPrices, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -147,11 +139,10 @@ Partial Class ProductForm
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.tbMeasurement)
-        Me.TabControl1.Controls.Add(Me.tbPrices)
-        Me.TabControl1.Location = New System.Drawing.Point(39, 297)
+        Me.TabControl1.Location = New System.Drawing.Point(39, 290)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(859, 240)
+        Me.TabControl1.Size = New System.Drawing.Size(859, 247)
         Me.TabControl1.TabIndex = 20
         '
         'tbMeasurement
@@ -161,7 +152,7 @@ Partial Class ProductForm
         Me.tbMeasurement.Location = New System.Drawing.Point(4, 22)
         Me.tbMeasurement.Name = "tbMeasurement"
         Me.tbMeasurement.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMeasurement.Size = New System.Drawing.Size(851, 214)
+        Me.tbMeasurement.Size = New System.Drawing.Size(851, 221)
         Me.tbMeasurement.TabIndex = 0
         Me.tbMeasurement.Text = "Measurement"
         Me.tbMeasurement.UseVisualStyleBackColor = True
@@ -178,40 +169,11 @@ Partial Class ProductForm
         'dgvMeasurement
         '
         Me.dgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMeasurement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Barcode, Me.Brand, Me.Unit, Me.remove_column})
+        Me.dgvMeasurement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Barcode, Me.Brand, Me.Unit, Me.price, Me.remove_column})
         Me.dgvMeasurement.Location = New System.Drawing.Point(6, 45)
         Me.dgvMeasurement.Name = "dgvMeasurement"
         Me.dgvMeasurement.Size = New System.Drawing.Size(839, 163)
         Me.dgvMeasurement.TabIndex = 0
-        '
-        'tbPrices
-        '
-        Me.tbPrices.Controls.Add(Me.btnAddMorePrice)
-        Me.tbPrices.Controls.Add(Me.dgvPrices)
-        Me.tbPrices.Location = New System.Drawing.Point(4, 22)
-        Me.tbPrices.Name = "tbPrices"
-        Me.tbPrices.Size = New System.Drawing.Size(851, 214)
-        Me.tbPrices.TabIndex = 1
-        Me.tbPrices.Text = "Prices"
-        Me.tbPrices.UseVisualStyleBackColor = True
-        '
-        'btnAddMorePrice
-        '
-        Me.btnAddMorePrice.Location = New System.Drawing.Point(757, 19)
-        Me.btnAddMorePrice.Name = "btnAddMorePrice"
-        Me.btnAddMorePrice.Size = New System.Drawing.Size(88, 23)
-        Me.btnAddMorePrice.TabIndex = 2
-        Me.btnAddMorePrice.Text = "Add More +"
-        Me.btnAddMorePrice.UseVisualStyleBackColor = True
-        '
-        'dgvPrices
-        '
-        Me.dgvPrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPrices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.default_unitprice, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.Price})
-        Me.dgvPrices.Location = New System.Drawing.Point(9, 48)
-        Me.dgvPrices.Name = "dgvPrices"
-        Me.dgvPrices.Size = New System.Drawing.Size(839, 163)
-        Me.dgvPrices.TabIndex = 1
         '
         'Barcode
         '
@@ -234,37 +196,15 @@ Partial Class ProductForm
         Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
+        'price
+        '
+        Me.price.HeaderText = "Price"
+        Me.price.Name = "price"
+        '
         'remove_column
         '
         Me.remove_column.HeaderText = "Action"
         Me.remove_column.Name = "remove_column"
-        '
-        'default_unitprice
-        '
-        Me.default_unitprice.HeaderText = "Default"
-        Me.default_unitprice.Name = "default_unitprice"
-        Me.default_unitprice.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.default_unitprice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.default_unitprice.Width = 50
-        '
-        'DataGridViewComboBoxColumn1
-        '
-        Me.DataGridViewComboBoxColumn1.HeaderText = "Brand"
-        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
-        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'DataGridViewComboBoxColumn2
-        '
-        Me.DataGridViewComboBoxColumn2.HeaderText = "Unit"
-        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
-        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'Price
-        '
-        Me.Price.HeaderText = "Price"
-        Me.Price.Name = "Price"
         '
         'ProductForm
         '
@@ -287,8 +227,6 @@ Partial Class ProductForm
         Me.TabControl1.ResumeLayout(False)
         Me.tbMeasurement.ResumeLayout(False)
         CType(Me.dgvMeasurement, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbPrices.ResumeLayout(False)
-        CType(Me.dgvPrices, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -305,16 +243,10 @@ Partial Class ProductForm
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents tbMeasurement As System.Windows.Forms.TabPage
     Friend WithEvents dgvMeasurement As System.Windows.Forms.DataGridView
-    Friend WithEvents tbPrices As TabPage
-    Friend WithEvents dgvPrices As DataGridView
     Friend WithEvents btnAddMoreUnit As Button
-    Friend WithEvents btnAddMorePrice As Button
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents Brand As DataGridViewComboBoxColumn
     Friend WithEvents Unit As DataGridViewComboBoxColumn
+    Friend WithEvents price As DataGridViewTextBoxColumn
     Friend WithEvents remove_column As DataGridViewButtonColumn
-    Friend WithEvents default_unitprice As DataGridViewCheckBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn2 As DataGridViewComboBoxColumn
-    Friend WithEvents Price As DataGridViewTextBoxColumn
 End Class

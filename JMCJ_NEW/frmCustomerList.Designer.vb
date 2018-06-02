@@ -28,7 +28,7 @@ Partial Class frmCustomerList
         Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.CityTown = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Owner = New System.Windows.Forms.DataGridViewTextBoxColumn
+
         Me.OwnerAddress = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -53,7 +53,7 @@ Partial Class frmCustomerList
         'dgvCustomer
         '
         Me.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus})
+        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus})
         Me.dgvCustomer.Location = New System.Drawing.Point(25, 152)
         Me.dgvCustomer.Name = "dgvCustomer"
         Me.dgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -93,9 +93,9 @@ Partial Class frmCustomerList
         '
         'Owner
         '
-        Me.Owner.HeaderText = "Owner"
+
         Me.Owner.Name = "Owner"
-        Me.Owner.ReadOnly = True
+
         '
         'OwnerAddress
         '
@@ -257,7 +257,7 @@ Partial Class frmCustomerList
     Friend WithEvents ContactPerson As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Address As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CityTown As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Owner As System.Windows.Forms.DataGridViewTextBoxColumn
+
     Friend WithEvents OwnerAddress As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber2 As System.Windows.Forms.DataGridViewTextBoxColumn

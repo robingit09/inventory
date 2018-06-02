@@ -9,8 +9,6 @@
 
     Private Sub ProductToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductToolStripMenuItem.Click
 
-    
-
         ProductList.ShowDialog()
     End Sub
 
