@@ -59,8 +59,6 @@
         'End With
     End Sub
 
-
-
     Private Sub Pricing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getCustomer()
     End Sub
@@ -81,7 +79,59 @@
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
+            getList("", selectedCustomer)
         End If
+    End Sub
+
+    Public Sub getList(ByVal query As String, ByVal customer_id As Integer)
+        dgvPriceList.Rows.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            If query = "" Then
+                .selectByQuery("Select distinct pu.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,pu.price as price,cpp.sell_price, c.name, sub.name
+                from ((((((((product_unit as pu
+                INNER JOIN products as p on p.id = pu.product_id)
+                INNER JOIN customer_product_prices as cpp on cpp.product_id = p.id)
+                INNER JOIN brand as b on b.id = cpp.brand)
+                INNER JOIN unit as u on u.id = cpp.unit)
+                INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
+                INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
+                INNER JOIN categories as c ON c.id = pc.category_id)
+                INNER JOIN categories as sub ON sub.id = psc.subcategory_id) 
+                where cpp.customer_id = " & customer_id)
+            End If
+
+            Dim recordfound As Boolean = False
+            If .dr.HasRows Then
+                recordfound = True
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim barcode As String = .dr.GetValue(1)
+                    Dim desc As String = .dr.GetValue(2)
+                    Dim brand As String = .dr.GetValue(3)
+                    Dim unit As String = .dr.GetValue(4)
+                    Dim price As String = .dr.GetValue(5)
+                    Dim sell_price As String = .dr.GetValue(6)
+                    Dim cat As String = .dr.GetValue(7)
+                    Dim subcat As String = .dr.GetValue(8)
+                    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
+                    dgvPriceList.Rows.Add(row)
+                End While
+            Else
+                recordfound = False
+                MsgBox("No record products found!", MsgBoxStyle.Critical)
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+
+            If recordfound = False Then
+                Dim d As Integer = MsgBox("Do you want to add product for " & cbCustomer.Text & "?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+                If d = MsgBoxResult.Yes Then
+                    btnAdd.PerformClick()
+                End If
+            End If
+        End With
     End Sub
 End Class
 

@@ -51,6 +51,22 @@ Public Class DatabaseConnect
 
     End Sub
 
+    Public Function get_id(ByVal table As String, ByVal col As String, ByVal val As String) As Integer
+        Dim res As Integer = 0
+        cmd.Connection = con
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "Select id from " & table & " Where " & col & " = '" & val & "'"
+        dr = cmd.ExecuteReader
+        If dr.Read Then
+            res = dr.GetValue(0)
+        End If
+        dr.Close()
+        cmd.Dispose()
+        con.Close()
+        Return res
+    End Function
+
+
     Public Sub update_where(ByVal table As String, ByVal ID As String, ByVal col As String, ByVal val As String)
         Try
             cmd.Connection = con

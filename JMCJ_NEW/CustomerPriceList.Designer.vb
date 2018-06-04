@@ -43,9 +43,9 @@ Partial Class CustomerPriceList
         '
         Me.dgvPriceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.SellPrice, Me.Category, Me.Subcategory})
-        Me.dgvPriceList.Location = New System.Drawing.Point(12, 118)
+        Me.dgvPriceList.Location = New System.Drawing.Point(12, 119)
         Me.dgvPriceList.Name = "dgvPriceList"
-        Me.dgvPriceList.Size = New System.Drawing.Size(1057, 398)
+        Me.dgvPriceList.Size = New System.Drawing.Size(1057, 397)
         Me.dgvPriceList.TabIndex = 21
         '
         'id
