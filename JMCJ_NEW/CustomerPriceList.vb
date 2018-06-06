@@ -133,6 +133,32 @@
             End If
         End With
     End Sub
+
+    Private Sub btnCreateOrder_Click(sender As Object, e As EventArgs) Handles btnCreateOrder.Click
+        If selectedCustomer > 0 Then
+            CustomerOrderForm.SelectedCustomer = Me.selectedCustomer
+            CustomerOrderForm.dgvProd.Rows.Clear()
+            For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+                Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
+                If selectedproduct Then
+                    Dim prod_id As String = dgvPriceList.Rows(item.Index).Cells("id").Value
+                    Dim barcode As String = dgvPriceList.Rows(item.Index).Cells("barcode").Value
+                    Dim desc As String = dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value
+                    Dim brand As String = dgvPriceList.Rows(item.Index).Cells("Brand").Value
+                    Dim unit As String = dgvPriceList.Rows(item.Index).Cells("Unit").Value
+                    Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
+                    Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("SellPrice").Value
+
+                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", "0.00", "0.00", "Remove"}
+                    CustomerOrderForm.dgvProd.Rows.Add(row)
+                End If
+            Next
+            CustomerOrderForm.ShowDialog()
+        Else
+            MsgBox("Please select customer", MsgBoxStyle.Critical)
+            cbCustomer.Focus()
+        End If
+    End Sub
 End Class
 
 

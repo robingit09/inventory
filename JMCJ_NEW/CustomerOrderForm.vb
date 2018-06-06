@@ -11,134 +11,107 @@
     End Sub
 
     Public Sub populateCustomer()
-
         cbCustomer.DataSource = Nothing
         cbCustomer.Items.Clear()
 
-        Dim database As New DatabaseConnect
-        database.dbConnect()
-        database.cmd.CommandType = CommandType.Text
-        database.cmd.CommandText = "SELECT distinct company, ID FROM company where status = 1"
-        database.cmd.Connection = database.con
-        Try
-            database.dr = database.cmd.ExecuteReader
-
-
-
-            If database.dr.HasRows Then
-
-
-                Dim comboSource As New Dictionary(Of String, String)()
-                comboSource.Add(0, "Select Customer")
-
-                While database.dr.Read
-
-                    Dim cus As String = database.dr.GetValue(0)
-                    Dim id As String = database.dr.GetValue(1)
-
-                    comboSource.Add(id, cus)
-
-
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Customer")
+        Dim dbcustomer As New DatabaseConnect
+        With dbcustomer
+            .selectByQuery("Select id,company from company where status = 1 order by company")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim customer As String = .dr.GetValue(1)
+                    comboSource.Add(id, customer)
                 End While
 
                 cbCustomer.DataSource = New BindingSource(comboSource, Nothing)
                 cbCustomer.DisplayMember = "Value"
                 cbCustomer.ValueMember = "Key"
-
             End If
 
-            database.con.Close()
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
 
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
     End Sub
 
     Public Sub populateProducts(ByVal cat As String)
 
-        Dim database As New DatabaseConnect
-        database.dbConnect()
-        database.cmd.CommandType = CommandType.Text
+        'Dim database As New DatabaseConnect
+        'database.dbConnect()
+        'database.cmd.CommandType = CommandType.Text
 
 
-        If cat = "All" Then
+        'If cat = "All" Then
 
-            database.cmd.CommandText = "SELECT distinct id, name FROM products where status = 1"
-        Else
-            database.cmd.CommandText = "SELECT distinct id, name FROM products where status = 1 and category like '%" & cat & "%'"
-        End If
-
-
-
-        database.cmd.Connection = database.con
-
-        Try
-            database.dr = database.cmd.ExecuteReader
+        '    database.cmd.CommandText = "SELECT distinct id, name FROM products where status = 1"
+        'Else
+        '    database.cmd.CommandText = "SELECT distinct id, name FROM products where status = 1 and category like '%" & cat & "%'"
+        'End If
 
 
-            If database.dr.HasRows Then
 
-                cbProdId.Items.Clear()
-                cbProducts.Items.Clear()
+        'database.cmd.Connection = database.con
 
-
-                cbProducts.Items.Add("Select Product")
-                cbProdId.Items.Add("Select Product ID")
-
-                Dim comboSource As New Dictionary(Of String, String)()
+        'Try
+        '    database.dr = database.cmd.ExecuteReader
 
 
-                While database.dr.Read
-                    Dim id As String = database.dr.GetValue(0)
-                    Dim prod As String = database.dr.GetValue(1)
-                    cbProducts.Items.Add(prod)
-                    cbProdId.Items.Add(id)
+        '    If database.dr.HasRows Then
 
-                End While
+        '        cbProdId.Items.Clear()
+        '        cbProducts.Items.Clear()
 
-            End If
 
-            database.con.Close()
+        '        cbProducts.Items.Add("Select Product")
+        '        cbProdId.Items.Add("Select Product ID")
 
-            cbProducts.Text = "Select Product"
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        '        Dim comboSource As New Dictionary(Of String, String)()
+
+
+        '        While database.dr.Read
+        '            Dim id As String = database.dr.GetValue(0)
+        '            Dim prod As String = database.dr.GetValue(1)
+        '            cbProducts.Items.Add(prod)
+        '            cbProdId.Items.Add(id)
+
+        '        End While
+
+        '    End If
+
+        '    database.con.Close()
+
+        '    cbProducts.Text = "Select Product"
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
     End Sub
 
     Public Sub populateCategory()
-
-        Dim database As New DatabaseConnect
-        database.dbConnect()
-        database.cmd.CommandType = CommandType.Text
-        database.cmd.CommandText = "SELECT distinct id, category FROM products where status = 1"
-        database.cmd.Connection = database.con
-
-        Try
-            database.dr = database.cmd.ExecuteReader
-
-
-            If database.dr.HasRows Then
-                cbCat.Items.Clear()
-                cbCat.Items.Add("Select Category")
-
-                While database.dr.Read
-
-                    Dim cat As String = database.dr.GetValue(1)
-
-                    cbCat.Items.Add(cat)
-
-
+        cbCat.DataSource = Nothing
+        cbCat.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Category")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
+            If .dr.Read Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
                 End While
-
+                cbCat.DataSource = New BindingSource(comboSource, Nothing)
+                cbCat.DisplayMember = "Value"
+                cbCat.ValueMember = "Key"
             End If
-
-            database.con.Close()
-
-            cbCat.Text = "Select Category"
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
     End Sub
 
     Private Sub cbCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbCat.SelectedIndexChanged
@@ -152,8 +125,8 @@
 
         'MsgBox(cbProdId.Items(cbProducts.SelectedIndex))
 
-        Dim prodid As String = cbProdId.Items(cbProducts.SelectedIndex)
-        addproduct(prodid)
+        'Dim prodid As String = cbProdId.Items(cbProducts.SelectedIndex)
+        'addproduct(prodid)
 
         computeTotalAmount()
 
@@ -162,71 +135,71 @@
 
     Public Sub addproduct(ByVal id As String)
         'validation
-        For Each item As DataGridViewRow In Me.dgvProd.Rows
+        'For Each item As DataGridViewRow In Me.dgvProd.Rows
 
-            Dim key As String = dgvProd.Rows(item.Index).Cells(10).Value
+        '    Dim key As String = dgvProd.Rows(item.Index).Cells(10).Value
 
-            Dim selectedId As String = cbProdId.Items(cbProducts.SelectedIndex)
+        '    Dim selectedId As String = cbProdId.Items(cbProducts.SelectedIndex)
 
-            If key = selectedId Then
-                MsgBox("Already added!", MsgBoxStyle.Critical)
-                Exit Sub
-            End If
+        '    If key = selectedId Then
+        '        MsgBox("Already added!", MsgBoxStyle.Critical)
+        '        Exit Sub
+        '    End If
 
-        Next
-        'end validation
+        'Next
+        ''end validation
 
-        Dim database As New DatabaseConnect
-        database.dbConnect()
-        database.cmd.CommandType = CommandType.Text
+        'Dim database As New DatabaseConnect
+        'database.dbConnect()
+        'database.cmd.CommandType = CommandType.Text
 
-        database.cmd.CommandText = "SELECT id,name,brand,unit,price FROM products where status = 1 and ID = " & id
-        database.cmd.Connection = database.con
-
-
-        Try
-            database.dr = database.cmd.ExecuteReader
-            If database.dr.HasRows Then
-
-                If database.dr.Read Then
-                    Dim arr(10) As String
-
-                    Dim prodid As String = database.dr.GetValue(0)
-                    Dim name As String = database.dr.GetValue(1)
-                    Dim brand As String = database.dr.GetValue(2)
-                    Dim unit As String = database.dr.GetValue(3)
-
-                    Dim price As String = database.dr.GetValue(4)
-
-                    arr(0) = name
-                    arr(1) = brand
-                    arr(2) = unit
-                    arr(3) = price
-                    arr(4) = "0.00"
-                    arr(5) = "0"
-                    arr(6) = "Add less"
-                    arr(7) = "Minus"
-                    arr(8) = "0.00"
-                    arr(9) = "%"
-                    arr(10) = prodid
+        'database.cmd.CommandText = "SELECT id,name,brand,unit,price FROM products where status = 1 and ID = " & id
+        'database.cmd.Connection = database.con
 
 
-                    Dim row As String() = New String() {"1", name, brand, unit, price, "0", "Add less", "Reset", price, price, prodid}
-                    dgvProd.Rows.Add(row)
+        'Try
+        '    database.dr = database.cmd.ExecuteReader
+        '    If database.dr.HasRows Then
+
+        '        If database.dr.Read Then
+        '            Dim arr(10) As String
+
+        '            Dim prodid As String = database.dr.GetValue(0)
+        '            Dim name As String = database.dr.GetValue(1)
+        '            Dim brand As String = database.dr.GetValue(2)
+        '            Dim unit As String = database.dr.GetValue(3)
+
+        '            Dim price As String = database.dr.GetValue(4)
+
+        '            arr(0) = name
+        '            arr(1) = brand
+        '            arr(2) = unit
+        '            arr(3) = price
+        '            arr(4) = "0.00"
+        '            arr(5) = "0"
+        '            arr(6) = "Add less"
+        '            arr(7) = "Minus"
+        '            arr(8) = "0.00"
+        '            arr(9) = "%"
+        '            arr(10) = prodid
 
 
-                    'Dim lvitem As New ListViewItem(arr)
+        '            Dim row As String() = New String() {"1", name, brand, unit, price, "0", "Add less", "Reset", price, price, prodid}
+        '            dgvProd.Rows.Add(row)
 
-                    'lvProd.Items.Add(lvitem)
 
-                End If
+        '            'Dim lvitem As New ListViewItem(arr)
 
-            End If
+        '            'lvProd.Items.Add(lvitem)
 
-            database.con.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        '        End If
+
+        '    End If
+
+        '    database.con.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
     End Sub
 
     Public Sub computeTotalAmount()
@@ -237,7 +210,7 @@
             For Each item As DataGridViewRow In Me.dgvProd.Rows
 
 
-                Dim amount As Double = dgvProd.Rows(item.Index).Cells(9).Value
+                Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
                 totalamount += amount
 
             Next
@@ -310,8 +283,8 @@
             If e.ColumnIndex = 5 Then
                 Dim amount As Double = 0
 
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells(0).Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells(4).Value)
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
 
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells(5).Value)
                 Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells(8).Value)
@@ -372,7 +345,7 @@
         End If
     End Sub
 
-    Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
+    Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If dgvProd.SelectedRows.Count > 0 Then
 
@@ -525,57 +498,28 @@
     End Sub
 
     Private Sub dgvProd_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
-        If e.ColumnIndex = 6 Then
+        If e.ColumnIndex = 8 Then
 
             Dim less As String = ""
             less = InputBox("Add less", "Enter the additional less(Numbers Only)", "0")
 
-            Dim less_string As String = dgvProd.Rows(e.RowIndex).Cells(5).Value
+            Dim less_string As String = dgvProd.Rows(e.RowIndex).Cells("less").Value
             If less_string.Length > 0 Then
                 If less_string.Contains(",") Then
+                    dgvProd.Rows(e.RowIndex).Cells("less").Value = less_string & "," & less
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    dgvProd.Rows(e.RowIndex).Cells(5).Value = less_string & "," & less
                 ElseIf CInt(less_string) > 0 Then
-                    dgvProd.Rows(e.RowIndex).Cells(5).Value = less_string & "," & less
-                Else
-                    dgvProd.Rows(e.RowIndex).Cells(5).Value = less
+                    dgvProd.Rows(e.RowIndex).Cells("less").Value = less_string & "," & less
+
                 End If
+
+            Else
+                dgvProd.Rows(e.RowIndex).Cells("less").Value = less
             End If
 
         End If
 
-        If e.ColumnIndex = 7 Then
+        If e.ColumnIndex = 9 Then
 
 
             dgvProd.Rows(e.RowIndex).Cells(5).Value = "0"

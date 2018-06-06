@@ -36,6 +36,8 @@ Partial Class CustomerPriceList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnCreateOrder = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -43,7 +45,7 @@ Partial Class CustomerPriceList
         '
         Me.dgvPriceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.SellPrice, Me.Category, Me.Subcategory})
-        Me.dgvPriceList.Location = New System.Drawing.Point(12, 119)
+        Me.dgvPriceList.Location = New System.Drawing.Point(15, 108)
         Me.dgvPriceList.Name = "dgvPriceList"
         Me.dgvPriceList.Size = New System.Drawing.Size(1057, 397)
         Me.dgvPriceList.TabIndex = 21
@@ -142,11 +144,31 @@ Partial Class CustomerPriceList
         Me.btnAdd.Text = "Add Product"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
+        'btnCreateOrder
+        '
+        Me.btnCreateOrder.Location = New System.Drawing.Point(929, 12)
+        Me.btnCreateOrder.Name = "btnCreateOrder"
+        Me.btnCreateOrder.Size = New System.Drawing.Size(140, 42)
+        Me.btnCreateOrder.TabIndex = 25
+        Me.btnCreateOrder.Text = "Create Customer Order"
+        Me.btnCreateOrder.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(133, 79)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(100, 23)
+        Me.Button2.TabIndex = 26
+        Me.Button2.Text = "Update Price"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1213, 551)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnCreateOrder)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.cbCustomer)
         Me.Controls.Add(Me.Label1)
@@ -173,4 +195,6 @@ Partial Class CustomerPriceList
     Friend WithEvents SellPrice As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
+    Friend WithEvents btnCreateOrder As Button
+    Friend WithEvents Button2 As Button
 End Class

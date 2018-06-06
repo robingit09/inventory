@@ -56,7 +56,6 @@
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
                 LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1")
-            Else
 
             End If
 
