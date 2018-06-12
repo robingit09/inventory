@@ -13,12 +13,12 @@
             If q = "" Then
                 .selectByQuery("Select distinct p.id,pu.barcode, p.description,b.name as brand, u.name as unit,pu.price,c.name,sub.name FROM (((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
-                INNER JOIN brand as b ON b.id = pu.brand)
+                LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                INNER JOIN product_subcategories as psc ON psc.product_id = p.id)
-                INNER JOIN categories as c ON c.id = pc.category_id)
-                INNER JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1 order by p.description")
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1 order by p.description")
             Else
 
             End If
@@ -32,7 +32,7 @@
                     Dim unit As String = .dr.GetValue(4)
                     Dim price As String = .dr.GetValue(5)
                     Dim cat As String = .dr.GetValue(6)
-                    Dim subcat As String = .dr.GetValue(7)
+                    Dim subcat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, "0.00", cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While

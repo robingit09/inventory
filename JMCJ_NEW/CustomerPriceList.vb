@@ -110,8 +110,8 @@
                     Dim desc As String = .dr.GetValue(2)
                     Dim brand As String = .dr.GetValue(3)
                     Dim unit As String = .dr.GetValue(4)
-                    Dim price As String = .dr.GetValue(5)
-                    Dim sell_price As String = .dr.GetValue(6)
+                    Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
+                    Dim sell_price As String = Val(.dr.GetValue(6)).ToString("N2")
                     Dim cat As String = .dr.GetValue(7)
                     Dim subcat As String = .dr.GetValue(8)
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
@@ -147,9 +147,9 @@
                     Dim brand As String = dgvPriceList.Rows(item.Index).Cells("Brand").Value
                     Dim unit As String = dgvPriceList.Rows(item.Index).Cells("Unit").Value
                     Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
-                    Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("SellPrice").Value
+                    Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
 
-                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", "0.00", "0.00", "Remove"}
+                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", "0.00", "0.00", "", "Remove"}
                     CustomerOrderForm.dgvProd.Rows.Add(row)
                 End If
             Next
@@ -158,6 +158,41 @@
             MsgBox("Please select customer", MsgBoxStyle.Critical)
             cbCustomer.Focus()
         End If
+    End Sub
+
+    Private Sub btnUpdatePrice_Click(sender As Object, e As EventArgs) Handles btnUpdatePrice.Click
+        'validation
+        If cbCustomer.SelectedIndex = 0 And cbCustomer.Text.Length > 0 Then
+            MsgBox("Please select customer!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        If dgvPriceList.SelectedRows.Count = 1 Then
+            Dim customer As String = cbCustomer.Text
+            Dim barcode As String = dgvPriceList.SelectedRows(0).Cells("Barcode").Value
+            Dim prod_desc As String = dgvPriceList.SelectedRows(0).Cells("ProductDescription").Value
+            Dim brand As String = dgvPriceList.SelectedRows(0).Cells("Brand").Value
+            Dim unit As String = dgvPriceList.SelectedRows(0).Cells("Unit").Value
+            Dim unit_price As String = dgvPriceList.SelectedRows(0).Cells("UnitPrice").Value
+            Dim sellprice As String = dgvPriceList.SelectedRows(0).Cells("sell_price").Value
+
+            UpdatePriceForm.txtCustomer.Text = customer
+            UpdatePriceForm.txtBarcode.Text = barcode
+            UpdatePriceForm.txtProductDesc.Text = prod_desc
+            UpdatePriceForm.txtBrand.Text = brand
+            UpdatePriceForm.txtUnit.Text = unit
+            UpdatePriceForm.txtUnitPrice.Text = unit_price
+            UpdatePriceForm.txtSellPrice.Text = sellprice
+            UpdatePriceForm.ShowDialog()
+            Exit Sub
+        End If
+
+        If dgvPriceList.SelectedRows.Count = 0 Or dgvPriceList.SelectedRows.Count > 1 Then
+            MsgBox("Please select product you want to update price!", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub dgvPriceList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPriceList.CellContentClick
+
     End Sub
 End Class
 

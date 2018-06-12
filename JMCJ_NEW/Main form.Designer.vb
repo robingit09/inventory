@@ -71,8 +71,8 @@ Partial Class Main_form
         '
         Me.PriceListToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PriceListToolStripMenuItem.Name = "PriceListToolStripMenuItem"
-        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(90, 25)
-        Me.PriceListToolStripMenuItem.Text = "Price List"
+        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(76, 25)
+        Me.PriceListToolStripMenuItem.Text = "Pricing"
         '
         'CustomerToolStripMenuItem
         '
