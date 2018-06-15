@@ -4,6 +4,7 @@ Public Class DatabaseConnect
     Public con As New OleDbConnection
     Public cmd As New OleDbCommand
     Public dr As OleDbDataReader
+    Public trans As OleDbTransaction
 
     Public Sub New()
         Try
@@ -61,8 +62,6 @@ Public Class DatabaseConnect
             res = dr.GetValue(0)
         End If
         dr.Close()
-        cmd.Dispose()
-        con.Close()
         Return res
     End Function
 

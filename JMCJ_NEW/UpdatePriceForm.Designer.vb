@@ -34,7 +34,7 @@ Partial Class UpdatePriceForm
         Me.txtUnit = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtSellPrice = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtUnitPrice = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
@@ -154,15 +154,15 @@ Partial Class UpdatePriceForm
         Me.txtSellPrice.Text = "0"
         Me.txtSellPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Button1
+        'btnUpdate
         '
-        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(261, 327)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(111, 36)
-        Me.Button1.TabIndex = 12
-        Me.Button1.Text = "Update Price"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Location = New System.Drawing.Point(261, 327)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(111, 36)
+        Me.btnUpdate.TabIndex = 12
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -187,10 +187,10 @@ Partial Class UpdatePriceForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(392, 375)
+        Me.ClientSize = New System.Drawing.Size(412, 387)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.txtUnitPrice)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txtSellPrice)
         Me.Controls.Add(Me.Label5)
@@ -223,7 +223,7 @@ Partial Class UpdatePriceForm
     Friend WithEvents txtUnit As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents txtSellPrice As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnUpdate As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents txtUnitPrice As TextBox
 End Class

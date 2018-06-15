@@ -22,7 +22,7 @@
     End Sub
 
     Private Sub CustomerOrderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomerOrderToolStripMenuItem.Click
-        CustomerOrderForm.ShowDialog()
+        CustomerOrder.ShowDialog()
     End Sub
 
     Private Sub Main_form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

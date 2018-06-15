@@ -4,9 +4,11 @@
     Public SelectedCustomer As Integer = 0
     Public seletedCategory As Integer = 0
     Public selectedSubcategory As Integer = 0
-    Public Date_payment As New DateTime
+    Public term As Integer = 0
+    Public payment_method As Integer = 0
+
     Private Sub CustomerOrderForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        populateCustomer()
+
         populateCategory()
         populateSubCategory(0)
         populateProducts(0, 0)
@@ -283,7 +285,7 @@
                 Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
                 totalamount += amount
             Next
-            lblAmount.Text = totalamount.ToString("f2")
+            lblTotalAmount.Text = totalamount.ToString("f2")
         End If
     End Sub
 
@@ -291,8 +293,6 @@
         If dgvProd.Rows.Count > 1 Then
             'change if edit the qty
             If e.ColumnIndex = 2 Then
-
-
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
                 Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
@@ -319,6 +319,13 @@
 
                 'compute amount
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+
+                'change color
+                If qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.Red
+                End If
             End If
 
             If e.ColumnIndex = 7 Then
@@ -355,136 +362,120 @@
         End If
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        'saveData()
-        'Dim cusRpt As New crCustomerOrder
-        'cusRpt.RecordSelectionFormula = "{customer_orders.ID} = " & getLastID()
-        'frmReportViewer.Enabled = True
-        'frmReportViewer.CrystalReportViewer1.ReportSource = cusRpt
-        'frmReportViewer.CrystalReportViewer1.Refresh()
-        'frmReportViewer.CrystalReportViewer1.RefreshReport()
-        'frmReportViewer.ShowDialog()
-    End Sub
 
-    Private Function getLastID() As Integer
-        Dim id As Integer
-        'Dim db As New DatabaseConnect
-        'db.dbConnect()
-        'db.cmd.CommandText = "SELECT MAX(ID) from customer_orders"
-        'db.cmd.Connection = db.con
-        'db.cmd.CommandType = CommandType.Text
-        'db.dr = db.cmd.ExecuteReader
 
-        'If db.dr.Read Then
-        '    id = db.dr.GetValue(0)
-        'End If
-        'db.cmd.Dispose()
-        'db.dr.Close()
-        'db.con.Close()
+    Private Function getLastID(ByVal table As String) As Integer
+        Dim id As Integer = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT MAX(ID) from " & table)
+            If .dr.HasRows Then
+                .dr.Read()
+                id = .dr.GetValue(0)
+            Else
+                id = 1
+            End If
+        End With
         Return id
     End Function
 
-    Private Sub saveData()
-        Dim database As New DatabaseConnect
-        database.dbConnect()
+    Private Function generateInvoice() As String
+        Dim res As String = ""
+        Dim id As Integer = 0
 
-        database.cmd.CommandType = CommandType.Text
-        database.cmd.CommandText = "INSERT INTO customer_orders([customer],[received_by],[delivered_by],[total_amount],[terms_of_payment],[date_issue],[date_payment])" & _
-        "VALUES(@customer,@received_by,@delivered_by,@total_amount,@terms_of_payment,@date_issue,@date_payment)"
-
-        database.cmd.Parameters.AddWithValue("@customer", selectedCustomer)
-        database.cmd.Parameters.AddWithValue("@received_by", txtReceivedBy.Text)
-        database.cmd.Parameters.AddWithValue("@delivered_by", txtDeliveredBy.Text)
-        database.cmd.Parameters.AddWithValue("@total_amount", lblAmount.Text)
-
-
-        Dim d As Integer = 0
-        Select Case cbTermPayment.Text
-
-            Case "30 days"
-                d = 30
-            Case "60 days"
-                d = 60
-            Case "90 days"
-                d = 90
-            Case "120 days"
-                d = 120
-            Case Else
-                d = 0
-
-        End Select
-
-        database.cmd.Parameters.AddWithValue("@terms_of_payment", d)
-        database.cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date)
-        database.cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.AddDays(d))
-        database.cmd.Connection = database.con
-        database.cmd.ExecuteNonQuery()
-        database.con.Close()
-
-        'insert products
-        Dim customer_order_id As Integer
-
-        database.dbConnect()
-        database.cmd.CommandType = CommandType.Text
-        database.cmd.CommandText = "Select max(ID) from customer_orders"
-
-        database.dr = database.cmd.ExecuteReader
-
-        If database.dr.Read Then
-            customer_order_id = database.dr.GetValue(0)
-
-        End If
-        database.dr.Close()
-
-        Try
-            If dgvProd.Rows.Count > 1 Then
-                For Each item As DataGridViewRow In Me.dgvProd.Rows
-
-                    Dim qty As String = dgvProd.Rows(item.Index).Cells(0).Value.ToString
-                    Dim prod As String = dgvProd.Rows(item.Index).Cells(1).Value.ToString
-
-                    Dim brand As String = dgvProd.Rows(item.Index).Cells(2).Value.ToString
-                    Dim unit As String = dgvProd.Rows(item.Index).Cells(3).Value.ToString
-                    Dim price As String = dgvProd.Rows(item.Index).Cells(4).Value.ToString
-                    Dim less As String = dgvProd.Rows(item.Index).Cells(5).Value.ToString
-                    Dim sellprice As String = dgvProd.Rows(item.Index).Cells(8).Value.ToString
-                    Dim amount As String = dgvProd.Rows(item.Index).Cells(9).Value.ToString
-                    Dim prodid As String = dgvProd.Rows(item.Index).Cells(10).Value.ToString
-
-
-                    database.cmd.CommandType = CommandType.Text
-                    database.cmd.CommandText = "INSERT INTO customer_order_products([customer_order_id],[product_id],[brand],[unit],[price],[quantity],[sell_price],[less],[total_amount])" & _
-                    " VALUES(" & customer_order_id & "," & prodid & ",'" & brand & "', '" & unit & "', " & price & ", " & qty & ", " & sellprice & ", '" & less & "'," & amount & ")"
-                    database.cmd.ExecuteNonQuery()
-
-                Next
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select max(id) from customer_orders")
+            If .dr.HasRows Then
+                .dr.Read()
+                id = CInt(.dr.GetValue(0))
+                res = (id + 1).ToString("D7")
+            Else
+                res = (id + 1).ToString("D7")
             End If
-        Catch ex As Exception
-            'MsgBox(database.cmd.CommandText)
-            'MsgBox(ex.Message)
-        End Try
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
 
-        database.con.Close()
+        Return res
+    End Function
 
+    Private Sub saveData()
+        Dim dborder As New DatabaseConnect
+        With dborder
+            .trans = .con.BeginTransaction(IsolationLevel.ReadCommitted)
+            .cmd.Connection = .con
+            .cmd.Transaction = .trans
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "insert into customer_orders ([invoice_no],[customer],[received_by],[delivered_by],
+                [net_amount],[total_amount],[payment_method],[terms],[date_issue],[created_at],[updated_at])VALUES(?,?,?,?,?,?,?,?
+                ,?,?,?)"
+            .cmd.Parameters.AddWithValue("@invoice_no", generateInvoice())
+            .cmd.Parameters.AddWithValue("@customer", SelectedCustomer)
+            .cmd.Parameters.AddWithValue("@received_by", txtReceivedBy.Text)
+            .cmd.Parameters.AddWithValue("@delivered_by", txtDeliveredBy.Text)
+            .cmd.Parameters.AddWithValue("@net_amount", lblTotalAmount.Text)
+            .cmd.Parameters.AddWithValue("@total_amount", lblTotalAmount.Text)
+            .cmd.Parameters.AddWithValue("@payment_method", Me.payment_method)
+            .cmd.Parameters.AddWithValue("@terms", Me.term)
+            .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.ToString)
+            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.ExecuteNonQuery()
 
-        MsgBox("Save Successful", MsgBoxStyle.Information)
+            Dim cmd2 As New System.Data.OleDb.OleDbCommand
+            cmd2.Transaction = .trans
+            cmd2.Connection = .con
+            cmd2.CommandType = CommandType.Text
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
 
+                Dim product As Integer = .get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
+                Dim brand As Integer = .get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
+                Dim unit As Integer = .get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
+                Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
+                Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
+                Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
+                Dim less As String = dgvProd.Rows(item.Index).Cells("less").Value
+                Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
-        'ProductList.lvEdger.Items.Clear()
-        'frmListEdger.loadList("")
+                ' check if not blank
+                If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
+                    cmd2.CommandText = "insert into customer_order_products (customer_order_id,product_id,brand,unit,quantity,unit_price,sell_price,less,
+                total_amount)VALUES(?,?,?,?,?,?,?,?,?)"
+                    cmd2.Parameters.AddWithValue("@customer_order_id", getLastID("customer_order_products"))
+                    cmd2.Parameters.AddWithValue("@product_id", product)
+                    cmd2.Parameters.AddWithValue("@brand", brand)
+                    cmd2.Parameters.AddWithValue("@unit", unit)
+                    cmd2.Parameters.AddWithValue("@quantity", qty)
+                    cmd2.Parameters.AddWithValue("@unit_price", price)
+                    cmd2.Parameters.AddWithValue("@sell_price", sell_price)
+                    cmd2.Parameters.AddWithValue("@quantity", qty)
+                    cmd2.Parameters.AddWithValue("@less", less)
+                    cmd2.Parameters.AddWithValue("@total_amount", total_amount)
+                    cmd2.ExecuteNonQuery()
+                    cmd2.Parameters.Clear()
 
+                End If
+            Next
 
-        cbCustomer.Text = "Select Customer"
-        cbCat.Text = "Select Category"
-        cbProducts.Text = "Select Products"
+            .trans.Commit()
+            .cmd.Dispose()
+            .con.Close()
+            MsgBox("Save Successfully.", MsgBoxStyle.Information)
+        End With
+
+        cbCustomer.SelectedIndex = 0
+        cbCat.SelectedIndex = 0
+        cbProducts.SelectedIndex = 0
         txtDeliveredBy.Text = ""
         txtReceivedBy.Text = ""
 
         dgvProd.Rows.Clear()
 
 
-        cbTermPayment.Text = "Select Terms of Payment"
-        lblAmount.Text = "0.00"
+        cbTermPayment.SelectedIndex = 0
+        lblTotalAmount.Text = "0.00"
 
         Me.Close()
 
@@ -533,7 +524,11 @@
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
 
-            Me.selectedCustomer = key
+            Me.SelectedCustomer = key
+
+            If Me.SelectedCustomer > 0 Then
+                cbCustomer.BackColor = Color.White
+            End If
         End If
     End Sub
 
@@ -585,5 +580,97 @@
         cbTermPayment.DataSource = New BindingSource(comboSource, Nothing)
         cbTermPayment.DisplayMember = "Value"
         cbTermPayment.ValueMember = "Key"
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If validator() = True Then
+            Exit Sub
+        End If
+
+        ' product validation
+        Dim validate As Boolean = False
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If qty <= 0 And prod <> "" Then
+                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Color.Red
+                validate = True
+            End If
+        Next
+        If validate = True Then
+            Exit Sub
+        End If
+        saveData()
+
+    End Sub
+
+    Private Sub btnSaveAndPrint_Click(sender As Object, e As EventArgs) Handles btnSaveAndPrint.Click
+
+    End Sub
+
+    Private Function validator() As Boolean
+        Dim res As Boolean = False
+        If cbCustomer.SelectedIndex = 0 Then
+            res = True
+            MsgBox("Customer are required fields!", MsgBoxStyle.Critical)
+            cbCustomer.BackColor = Color.Red
+            cbCustomer.Focus()
+            Return res
+        End If
+
+        If txtDeliveredBy.TextLength = 0 Then
+            res = True
+            MsgBox("Delivered by are required fields!", MsgBoxStyle.Critical)
+            txtDeliveredBy.BackColor = Color.Red
+            txtDeliveredBy.Focus()
+            Return res
+        End If
+
+        If txtReceivedBy.TextLength = 0 Then
+            res = True
+            MsgBox("Received by are required fields!", MsgBoxStyle.Critical)
+            txtReceivedBy.BackColor = Color.Red
+            txtReceivedBy.Focus()
+            Return res
+        End If
+
+
+        If dgvProd.Rows.Count = 0 Or dgvProd.Rows.Count = 1 Then
+            res = True
+            MsgBox("Please add a product!", MsgBoxStyle.Critical)
+            dgvProd.BackgroundColor = Color.Red
+            dgvProd.Focus()
+            Return res
+        End If
+
+        Return res
+    End Function
+
+    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
+        If cbPaymentType.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
+            payment_method = key
+        End If
+    End Sub
+
+    Private Sub cbTermPayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTermPayment.SelectedIndexChanged
+        If cbTermPayment.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbTermPayment.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbTermPayment.SelectedItem, KeyValuePair(Of String, String)).Value
+            Me.term = key
+        End If
+    End Sub
+
+    Private Sub txtDeliveredBy_TextChanged(sender As Object, e As EventArgs) Handles txtDeliveredBy.TextChanged
+        If txtDeliveredBy.TextLength > 0 Then
+            txtDeliveredBy.BackColor = Color.White
+        End If
+    End Sub
+
+    Private Sub txtReceivedBy_TextChanged(sender As Object, e As EventArgs) Handles txtReceivedBy.TextChanged
+        If txtReceivedBy.TextLength > 0 Then
+            txtReceivedBy.BackColor = Color.White
+        End If
     End Sub
 End Class

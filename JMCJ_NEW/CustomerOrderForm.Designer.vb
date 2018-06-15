@@ -30,8 +30,8 @@ Partial Class CustomerOrderForm
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbCat = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblAmount = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cbTermPayment = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -63,7 +63,7 @@ Partial Class CustomerOrderForm
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cbUnit = New System.Windows.Forms.ComboBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -144,26 +144,26 @@ Partial Class CustomerOrderForm
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Total Amount"
         '
-        'lblAmount
+        'lblTotalAmount
         '
-        Me.lblAmount.AutoSize = True
-        Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAmount.ForeColor = System.Drawing.Color.Red
-        Me.lblAmount.Location = New System.Drawing.Point(849, 532)
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Size = New System.Drawing.Size(88, 39)
-        Me.lblAmount.TabIndex = 10
-        Me.lblAmount.Text = "0.00"
+        Me.lblTotalAmount.AutoSize = True
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.lblTotalAmount.Location = New System.Drawing.Point(849, 532)
+        Me.lblTotalAmount.Name = "lblTotalAmount"
+        Me.lblTotalAmount.Size = New System.Drawing.Size(88, 39)
+        Me.lblTotalAmount.TabIndex = 10
+        Me.lblTotalAmount.Text = "0.00"
         '
-        'btnSave
+        'btnSaveAndPrint
         '
-        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(1231, 527)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(127, 62)
-        Me.btnSave.TabIndex = 12
-        Me.btnSave.Text = "Save and Print"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSaveAndPrint.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1231, 527)
+        Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
+        Me.btnSaveAndPrint.Size = New System.Drawing.Size(127, 62)
+        Me.btnSaveAndPrint.TabIndex = 12
+        Me.btnSaveAndPrint.Text = "Save and Print"
+        Me.btnSaveAndPrint.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -259,6 +259,7 @@ Partial Class CustomerOrderForm
         '
         Me.Barcode.HeaderText = "Barcode"
         Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
         '
         'quantity
         '
@@ -413,15 +414,15 @@ Partial Class CustomerOrderForm
         Me.cbUnit.Size = New System.Drawing.Size(130, 23)
         Me.cbUnit.TabIndex = 31
         '
-        'Button1
+        'btnSave
         '
-        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(1084, 525)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(127, 62)
-        Me.Button1.TabIndex = 33
-        Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(1084, 525)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(127, 62)
+        Me.btnSave.TabIndex = 33
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'CustomerOrderForm
         '
@@ -429,7 +430,7 @@ Partial Class CustomerOrderForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1370, 610)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.cbUnit)
         Me.Controls.Add(Me.Label11)
@@ -447,8 +448,8 @@ Partial Class CustomerOrderForm
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.cbTermPayment)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.lblAmount)
+        Me.Controls.Add(Me.btnSaveAndPrint)
+        Me.Controls.Add(Me.lblTotalAmount)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cbCat)
@@ -475,8 +476,8 @@ Partial Class CustomerOrderForm
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cbCat As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents lblAmount As System.Windows.Forms.Label
-    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents lblTotalAmount As System.Windows.Forms.Label
+    Friend WithEvents btnSaveAndPrint As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cbTermPayment As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
@@ -490,6 +491,11 @@ Partial Class CustomerOrderForm
     Friend WithEvents cbPaymentType As System.Windows.Forms.ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents cbSubcat As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cbBrand As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cbUnit As ComboBox
+    Friend WithEvents btnSave As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
@@ -504,9 +510,4 @@ Partial Class CustomerOrderForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents Label11 As Label
-    Friend WithEvents cbBrand As ComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents cbUnit As ComboBox
-    Friend WithEvents Button1 As Button
 End Class

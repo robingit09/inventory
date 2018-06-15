@@ -92,12 +92,12 @@
                 from ((((((((product_unit as pu
                 INNER JOIN products as p on p.id = pu.product_id)
                 INNER JOIN customer_product_prices as cpp on cpp.product_id = p.id)
-                INNER JOIN brand as b on b.id = cpp.brand)
+                LEFT JOIN brand as b on b.id = cpp.brand)
                 INNER JOIN unit as u on u.id = cpp.unit)
-                INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
-                INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
-                INNER JOIN categories as c ON c.id = pc.category_id)
-                INNER JOIN categories as sub ON sub.id = psc.subcategory_id) 
+                LEFT JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id) 
                 where cpp.customer_id = " & customer_id)
             End If
 
@@ -108,12 +108,12 @@
                     Dim id As String = .dr.GetValue(0)
                     Dim barcode As String = .dr.GetValue(1)
                     Dim desc As String = .dr.GetValue(2)
-                    Dim brand As String = .dr.GetValue(3)
+                    Dim brand As String = If(IsDBNull(.dr.GetValue(3)), "", .dr.GetValue(3))
                     Dim unit As String = .dr.GetValue(4)
                     Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
                     Dim sell_price As String = Val(.dr.GetValue(6)).ToString("N2")
                     Dim cat As String = .dr.GetValue(7)
-                    Dim subcat As String = .dr.GetValue(8)
+                    Dim subcat As String = If(IsDBNull(.dr.GetValue(8)), "", .dr.GetValue(8))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
@@ -136,7 +136,9 @@
 
     Private Sub btnCreateOrder_Click(sender As Object, e As EventArgs) Handles btnCreateOrder.Click
         If selectedCustomer > 0 Then
+            CustomerOrderForm.populateCustomer()
             CustomerOrderForm.SelectedCustomer = Me.selectedCustomer
+            CustomerOrderForm.cbCustomer.Text = Me.cbCustomer.Text
             CustomerOrderForm.dgvProd.Rows.Clear()
             For Each item As DataGridViewRow In Me.dgvPriceList.Rows
                 Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
@@ -149,7 +151,7 @@
                     Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
                     Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
 
-                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", "0.00", "0.00", "", "Remove"}
+                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", unit_price, "0.00", "", "Remove"}
                     CustomerOrderForm.dgvProd.Rows.Add(row)
                 End If
             Next
