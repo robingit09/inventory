@@ -111,7 +111,7 @@
                     Dim brand As String = If(IsDBNull(.dr.GetValue(3)), "", .dr.GetValue(3))
                     Dim unit As String = .dr.GetValue(4)
                     Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
-                    Dim sell_price As String = Val(.dr.GetValue(6)).ToString("N2")
+                    Dim sell_price As String = If(.dr("sell_price") = 0, price, Val(.dr("sell_price")).ToString("N2"))
                     Dim cat As String = .dr.GetValue(7)
                     Dim subcat As String = If(IsDBNull(.dr.GetValue(8)), "", .dr.GetValue(8))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
@@ -121,6 +121,7 @@
                 recordfound = False
                 MsgBox("No record products found!", MsgBoxStyle.Critical)
             End If
+
             .dr.Close()
             .cmd.Dispose()
             .con.Close()
@@ -151,7 +152,7 @@
                     Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
                     Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
 
-                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", unit_price, "0.00", "", "Remove"}
+                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", sell_price, "0.00", "", "Remove"}
                     CustomerOrderForm.dgvProd.Rows.Add(row)
                 End If
             Next
@@ -193,10 +194,4 @@
         End If
     End Sub
 
-    Private Sub dgvPriceList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPriceList.CellContentClick
-
-    End Sub
 End Class
-
-
-

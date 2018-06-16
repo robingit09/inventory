@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCustomerList
+Partial Class CustomerList
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,30 +22,29 @@ Partial Class frmCustomerList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.dgvCustomer = New System.Windows.Forms.DataGridView
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CityTown = New System.Windows.Forms.DataGridViewTextBoxColumn
-
-        Me.OwnerAddress = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.FaxTel = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TIN = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CompanyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.txtShowAll = New System.Windows.Forms.Button
-        Me.btnFilter = New System.Windows.Forms.Button
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.btnAddNew = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.txtLocation = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.txtCustomer = New System.Windows.Forms.TextBox
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnUpdate = New System.Windows.Forms.Button
+        Me.dgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CityTown = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OwnerAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FaxTel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TIN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CompanyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtShowAll = New System.Windows.Forms.Button()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCustomer = New System.Windows.Forms.TextBox()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -90,12 +89,6 @@ Partial Class frmCustomerList
         Me.CityTown.HeaderText = "City/Town"
         Me.CityTown.Name = "CityTown"
         Me.CityTown.ReadOnly = True
-        '
-        'Owner
-        '
-
-        Me.Owner.Name = "Owner"
-
         '
         'OwnerAddress
         '
@@ -231,7 +224,7 @@ Partial Class frmCustomerList
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'frmCustomerList
+        'CustomerList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -242,7 +235,7 @@ Partial Class frmCustomerList
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
-        Me.Name = "frmCustomerList"
+        Me.Name = "CustomerList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer List"
         CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).EndInit()

@@ -17,7 +17,7 @@
         database.dbConnect()
         database.cmd.CommandType = CommandType.Text
         database.cmd.CommandText = "UPDATE company SET [company]='" & txtCompany.Text & "',[contact_person]='" & txtContactPerson.Text & "',[address]='" & txtAddress.Text & "',[contact_number1]=" & txtContact1.Text & ", " & _
-                                    "[contact_number2]=" & txtContact2.Text & ",[fax_tel]='" & txtFax.Text & "', [tin]=" & txtTin.Text & ",[email]='" & txtEmail.Text & "',[city]='" & txtCity.Text & "' WHERE [ID] = " & frmCustomerList.selectedID
+                                    "[contact_number2]=" & txtContact2.Text & ",[fax_tel]='" & txtFax.Text & "', [tin]=" & txtTin.Text & ",[email]='" & txtEmail.Text & "',[city]='" & txtCity.Text & "' WHERE [ID] = " & CustomerList.selectedID
 
 
         database.cmd.Connection = database.con
@@ -35,8 +35,8 @@
 
 
 
-        frmCustomerList.populateComboLocation()
-        frmCustomerList.loadList("")
+        CustomerList.populateComboLocation()
+        CustomerList.loadList("")
     End Sub
 
     Private Sub saveData()
@@ -84,8 +84,8 @@
         txtFax.Text = ""
         txtTin.Text = ""
 
-        frmCustomerList.loadList("")
-        frmCustomerList.populateComboLocation()
+        CustomerList.loadList("")
+        CustomerList.populateComboLocation()
 
         Me.Close()
 

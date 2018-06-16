@@ -65,7 +65,6 @@ Public Class DatabaseConnect
         Return res
     End Function
 
-
     Public Sub update_where(ByVal table As String, ByVal ID As String, ByVal col As String, ByVal val As String)
         Try
             cmd.Connection = con

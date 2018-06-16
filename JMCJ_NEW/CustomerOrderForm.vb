@@ -1,6 +1,8 @@
 ﻿Public Class CustomerOrderForm
 
     Public SelectedProdID As Integer = 0
+    Public SelectedBrand As Integer = 0
+    Public SelectedUnit As Integer = 0
     Public SelectedCustomer As Integer = 0
     Public seletedCategory As Integer = 0
     Public selectedSubcategory As Integer = 0
@@ -114,7 +116,7 @@
             cbUnit.Items.Clear()
             Dim comboSource As New Dictionary(Of String, String)()
             comboSource.Add(0, "Select Unit")
-            Dim query As String = "Select u.id, u.name from (product_unit as pu LEFT JOIN unit as u on u.id = pu.unit) 
+            Dim query As String = "Select distinct u.id, u.name from (product_unit as pu LEFT JOIN unit as u on u.id = pu.unit) 
             where pu.product_id = " & prodid
             .selectByQuery(query)
             If .dr.HasRows Then
@@ -194,6 +196,19 @@
             seletedCategory = key
             populateSubCategory(seletedCategory)
             populateProducts(Me.seletedCategory, selectedSubcategory)
+            SelectedProdID = 0
+
+            populateBrand(SelectedProdID)
+            SelectedBrand = 0
+
+            populateUnit(SelectedProdID)
+            SelectedUnit = 0
+
+            cbProducts.SelectedIndex = 0
+            cbBrand.SelectedIndex = 0
+            cbUnit.SelectedIndex = 0
+
+
         End If
 
         If cbCat.SelectedIndex = 0 Then
@@ -201,12 +216,31 @@
             populateProducts(0, selectedSubcategory)
         End If
     End Sub
-    Private Sub btnAddProd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddProd.Click
+    Private Sub btnAddProd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddToCart.Click
 
-        'MsgBox(cbProdId.Items(cbProducts.SelectedIndex))
-        'Dim prodid As String = cbProdId.Items(cbProducts.SelectedIndex)
-        'addproduct(prodid)
 
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,pu.price from (((products as p 
+                left join product_unit as pu on pu.product_id = p.id)
+                left join brand as b on b.id = pu.brand)
+                left join unit as u on u.id = pu.unit)
+                where pu.brand = " & SelectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & SelectedUnit)
+
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    Dim product_id As String = .dr("id").ToString
+                    Dim barcode As String = .dr("barcode").ToString
+                    Dim desc As String = .dr("description").ToString
+                    Dim brand As String = .dr("brand").ToString
+                    Dim unit As String = .dr("unit").ToString
+                    Dim unitprice As String = .dr("price").ToString
+                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, unitprice, "", "Add less", "Reset", "", "0.00", "", "Remove"}
+                    dgvProd.Rows.Add(row)
+
+                End If
+            End If
+        End With
         computeTotalAmount()
     End Sub
 
@@ -298,27 +332,24 @@
                 Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
                 Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
 
                 If less.Contains(",") Then
                     Dim split = less.Split(",")
                     Try
-                        Dim temp As Double = price
+                        Dim temp As Double = amount
                         Dim res As Double = 0
                         Dim x As Double = 0
                         For i As Integer = 0 To split.Length - 1
                             temp = temp * (1.0 - (Val(split(i)) / 100))
-
                         Next
-                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Value = temp
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Value = price * (1.0 - (Val(less) / 100))
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
                 End If
-
-                'compute amount
-                dgvProd.Rows(e.RowIndex).Cells("amount").Value = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
 
                 'change color
                 If qty > 0 Then
@@ -334,35 +365,28 @@
                 Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
                 Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
 
                 If less.Contains(",") Then
                     Dim split = less.Split(",")
                     Try
-                        Dim temp As Double = price
+                        Dim temp As Double = amount
                         Dim res As Double = 0
                         Dim x As Double = 0
                         For i As Integer = 0 To split.Length - 1
                             temp = temp * (1.0 - (Val(split(i)) / 100))
-
                         Next
-                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Value = temp
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Value = price * (1.0 - (Val(less) / 100))
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
                 End If
-
-                dgvProd.Rows(e.RowIndex).Cells("amount").Value = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
-
             End If
-
             computeTotalAmount()
-
         End If
     End Sub
-
-
 
     Private Function getLastID(ByVal table As String) As Integer
         Dim id As Integer = 0
@@ -371,7 +395,7 @@
             .selectByQuery("SELECT MAX(ID) from " & table)
             If .dr.HasRows Then
                 .dr.Read()
-                id = .dr.GetValue(0)
+                id = If(IsDBNull(.dr.GetValue(0)), 1, .dr.GetValue(0))
             Else
                 id = 1
             End If
@@ -388,7 +412,7 @@
             .selectByQuery("Select max(id) from customer_orders")
             If .dr.HasRows Then
                 .dr.Read()
-                id = CInt(.dr.GetValue(0))
+                id = If(IsDBNull(.dr.GetValue(0)), 0, .dr.GetValue(0))
                 res = (id + 1).ToString("D7")
             Else
                 res = (id + 1).ToString("D7")
@@ -404,13 +428,11 @@
     Private Sub saveData()
         Dim dborder As New DatabaseConnect
         With dborder
-            .trans = .con.BeginTransaction(IsolationLevel.ReadCommitted)
             .cmd.Connection = .con
-            .cmd.Transaction = .trans
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "insert into customer_orders ([invoice_no],[customer],[received_by],[delivered_by],
-                [net_amount],[total_amount],[payment_method],[terms],[date_issue],[created_at],[updated_at])VALUES(?,?,?,?,?,?,?,?
-                ,?,?,?)"
+                [net_amount],[total_amount],[payment_method],[terms],[date_issue],[created_at],[updated_at],[status])VALUES(?,?,?,?,?,?,?,?
+                ,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@invoice_no", generateInvoice())
             .cmd.Parameters.AddWithValue("@customer", SelectedCustomer)
             .cmd.Parameters.AddWithValue("@received_by", txtReceivedBy.Text)
@@ -422,10 +444,10 @@
             .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.ToString)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.ExecuteNonQuery()
 
             Dim cmd2 As New System.Data.OleDb.OleDbCommand
-            cmd2.Transaction = .trans
             cmd2.Connection = .con
             cmd2.CommandType = CommandType.Text
             For Each item As DataGridViewRow In Me.dgvProd.Rows
@@ -443,7 +465,7 @@
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
                     cmd2.CommandText = "insert into customer_order_products (customer_order_id,product_id,brand,unit,quantity,unit_price,sell_price,less,
                 total_amount)VALUES(?,?,?,?,?,?,?,?,?)"
-                    cmd2.Parameters.AddWithValue("@customer_order_id", getLastID("customer_order_products"))
+                    cmd2.Parameters.AddWithValue("@customer_order_id", getLastID("customer_orders"))
                     cmd2.Parameters.AddWithValue("@product_id", product)
                     cmd2.Parameters.AddWithValue("@brand", brand)
                     cmd2.Parameters.AddWithValue("@unit", unit)
@@ -458,27 +480,26 @@
 
                 End If
             Next
-
-            .trans.Commit()
+            cmd2.Dispose()
             .cmd.Dispose()
             .con.Close()
-            MsgBox("Save Successfully.", MsgBoxStyle.Information)
+            MsgBox("Customer Order Save Successfully.", MsgBoxStyle.Information)
+            clearSelection()
+            CustomerOrder.loadCustomer("")
         End With
+        Me.Close()
 
+    End Sub
+
+    Public Sub clearSelection()
         cbCustomer.SelectedIndex = 0
         cbCat.SelectedIndex = 0
         cbProducts.SelectedIndex = 0
         txtDeliveredBy.Text = ""
         txtReceivedBy.Text = ""
-
         dgvProd.Rows.Clear()
-
-
         cbTermPayment.SelectedIndex = 0
         lblTotalAmount.Text = "0.00"
-
-        Me.Close()
-
     End Sub
 
     Private Sub dgvProd_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
@@ -552,6 +573,23 @@
             SelectedProdID = key
             populateBrand(SelectedProdID)
             populateUnit(SelectedProdID)
+
+        End If
+    End Sub
+
+    Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
+        If cbBrand.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedBrand = key
+        End If
+    End Sub
+
+    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
+        If cbUnit.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedUnit = key
         End If
     End Sub
 
@@ -563,7 +601,6 @@
         comboSource.Add(0, "Cash")
         comboSource.Add(1, "C.O.D")
         comboSource.Add(2, "Credit")
-        comboSource.Add(3, "Post Dated")
         cbPaymentType.DataSource = New BindingSource(comboSource, Nothing)
         cbPaymentType.DisplayMember = "Value"
         cbPaymentType.ValueMember = "Key"
@@ -577,6 +614,7 @@
         comboSource.Add(30, "30 Days")
         comboSource.Add(60, "60 Days")
         comboSource.Add(90, "90 Days")
+        comboSource.Add(120, "120 Days")
         cbTermPayment.DataSource = New BindingSource(comboSource, Nothing)
         cbTermPayment.DisplayMember = "Value"
         cbTermPayment.ValueMember = "Key"
@@ -587,7 +625,7 @@
             Exit Sub
         End If
 
-        ' product validation
+        ' *** product validation ***
         Dim validate As Boolean = False
         For Each item As DataGridViewRow In Me.dgvProd.Rows
             Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
@@ -597,6 +635,16 @@
                 validate = True
             End If
         Next
+
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim sell_price As Double = dgvProd.Rows(item.Index).Cells("sell_price").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If sell_price <= 0.00 And prod <> "" Then
+                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Color.Red
+                validate = True
+            End If
+        Next
+
         If validate = True Then
             Exit Sub
         End If
@@ -643,6 +691,24 @@
             Return res
         End If
 
+        If cbPaymentType.SelectedIndex = 0 Then
+            res = True
+            MsgBox("Please add payment method!", MsgBoxStyle.Critical)
+            cbPaymentType.BackColor = Color.Red
+            cbPaymentType.Focus()
+            Return res
+        End If
+
+        If cbTermPayment.SelectedIndex = 0 Then
+            res = True
+            MsgBox("Please add terms!", MsgBoxStyle.Critical)
+            cbTermPayment.BackColor = Color.Red
+            cbTermPayment.Focus()
+            Return res
+        End If
+
+
+
         Return res
     End Function
 
@@ -651,6 +717,7 @@
             Dim key As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             payment_method = key
+            cbPaymentType.BackColor = Color.White
         End If
     End Sub
 
@@ -658,6 +725,7 @@
         If cbTermPayment.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbTermPayment.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbTermPayment.SelectedItem, KeyValuePair(Of String, String)).Value
+            cbTermPayment.BackColor = Color.White
             Me.term = key
         End If
     End Sub
@@ -673,4 +741,6 @@
             txtReceivedBy.BackColor = Color.White
         End If
     End Sub
+
+
 End Class

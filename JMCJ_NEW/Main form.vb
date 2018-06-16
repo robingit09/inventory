@@ -1,14 +1,8 @@
 ﻿Public Class Main_form
 
-   
 
-    Private Sub CustomerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomerToolStripMenuItem.Click
-        frmCustomerList.ShowDialog()
-
-    End Sub
 
     Private Sub ProductToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductToolStripMenuItem.Click
-
         ProductList.ShowDialog()
     End Sub
 
@@ -17,7 +11,6 @@
     End Sub
 
     Private Sub UnitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UnitToolStripMenuItem.Click
-
         UnitList.ShowDialog()
     End Sub
 
@@ -26,7 +19,6 @@
     End Sub
 
     Private Sub Main_form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         lblDate.Text = DateTime.Now.ToLongDateString
         lblTime.Text = DateTime.Now.ToLongTimeString
         PictureBox1.BorderStyle = BorderStyle.None
@@ -60,5 +52,9 @@
 
     Private Sub BrandToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BrandToolStripMenuItem.Click
         BrandList.ShowDialog()
+    End Sub
+
+    Private Sub CustomerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerToolStripMenuItem.Click
+        CustomerList.ShowDialog()
     End Sub
 End Class

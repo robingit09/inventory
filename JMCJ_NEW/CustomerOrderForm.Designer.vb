@@ -26,7 +26,7 @@ Partial Class CustomerOrderForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbProducts = New System.Windows.Forms.ComboBox()
-        Me.btnAddProd = New System.Windows.Forms.Button()
+        Me.btnAddToCart = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbCat = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -105,15 +105,15 @@ Partial Class CustomerOrderForm
         Me.cbProducts.Size = New System.Drawing.Size(199, 23)
         Me.cbProducts.TabIndex = 3
         '
-        'btnAddProd
+        'btnAddToCart
         '
-        Me.btnAddProd.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddProd.Location = New System.Drawing.Point(740, 78)
-        Me.btnAddProd.Name = "btnAddProd"
-        Me.btnAddProd.Size = New System.Drawing.Size(133, 63)
-        Me.btnAddProd.TabIndex = 5
-        Me.btnAddProd.Text = "Add to Cart"
-        Me.btnAddProd.UseVisualStyleBackColor = True
+        Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddToCart.Location = New System.Drawing.Point(740, 78)
+        Me.btnAddToCart.Name = "btnAddToCart"
+        Me.btnAddToCart.Size = New System.Drawing.Size(133, 63)
+        Me.btnAddToCart.TabIndex = 5
+        Me.btnAddToCart.Text = "Add to Cart"
+        Me.btnAddToCart.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -453,7 +453,7 @@ Partial Class CustomerOrderForm
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cbCat)
-        Me.Controls.Add(Me.btnAddProd)
+        Me.Controls.Add(Me.btnAddToCart)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cbProducts)
         Me.Controls.Add(Me.Label1)
@@ -472,7 +472,7 @@ Partial Class CustomerOrderForm
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbProducts As System.Windows.Forms.ComboBox
-    Friend WithEvents btnAddProd As System.Windows.Forms.Button
+    Friend WithEvents btnAddToCart As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cbCat As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label

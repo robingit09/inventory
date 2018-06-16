@@ -1,4 +1,4 @@
-﻿Public Class frmCustomerList
+﻿Public Class CustomerList
     Public selectedID As String
 
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -8,7 +8,7 @@
 
     Private Sub frmCustomerList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        loadList("")
+        'loadList("")
         populateComboLocation()
     End Sub
 
@@ -256,5 +256,5 @@
 
     End Sub
 
-  
+
 End Class
