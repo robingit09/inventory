@@ -38,15 +38,16 @@
 
                         Select Case status
                             Case "0"
-                                status = "Deleted"
+                                status = "Voided"
                             Case "1"
-                                status = "Active"
+                                status = "Delivered"
                             Case "2"
                                 status = "Inactive"
                         End Select
 
                         Dim row As String() = New String() {id, date_issue, invoice_no, customer, received_by, delivered_by, total_amount, payment_method, terms & " Days", status}
                         dgvCO.Rows.Add(row)
+
                     End While
                 End If
                 .dr.Close()
@@ -67,5 +68,16 @@
         CustomerOrderForm.clearSelection()
         CustomerOrderForm.ShowDialog()
 
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+
+        If dgvCO.SelectedRows.Count = 1 Then
+            Dim id As Integer = dgvCO.SelectedRows(0).Cells("id").Value
+            CustomerOrderForm.populatepayment()
+            CustomerOrderForm.populateTerms()
+            CustomerOrderForm.toloadinfo(id)
+            CustomerOrderForm.ShowDialog()
+        End If
     End Sub
 End Class

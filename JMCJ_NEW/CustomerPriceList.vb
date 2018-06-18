@@ -137,6 +137,9 @@
 
     Private Sub btnCreateOrder_Click(sender As Object, e As EventArgs) Handles btnCreateOrder.Click
         If selectedCustomer > 0 Then
+            CustomerOrderForm.enableControl(True)
+            CustomerOrderForm.populatepayment()
+            CustomerOrderForm.populateTerms()
             CustomerOrderForm.populateCustomer()
             CustomerOrderForm.SelectedCustomer = Me.selectedCustomer
             CustomerOrderForm.cbCustomer.Text = Me.cbCustomer.Text

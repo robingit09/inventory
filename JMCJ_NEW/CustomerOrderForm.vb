@@ -16,8 +16,8 @@
         populateProducts(0, 0)
         populateBrand(0)
         populateUnit(0)
-        populatepayment()
-        populateTerms()
+        'populatepayment()
+        'populateTerms()
     End Sub
 
     Public Sub populateCustomer()
@@ -217,7 +217,6 @@
         End If
     End Sub
     Private Sub btnAddProd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddToCart.Click
-
 
         Dim db As New DatabaseConnect
         With db
@@ -451,7 +450,6 @@
             cmd2.Connection = .con
             cmd2.CommandType = CommandType.Text
             For Each item As DataGridViewRow In Me.dgvProd.Rows
-
                 Dim product As Integer = .get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
                 Dim brand As Integer = .get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
                 Dim unit As Integer = .get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
@@ -472,7 +470,6 @@
                     cmd2.Parameters.AddWithValue("@quantity", qty)
                     cmd2.Parameters.AddWithValue("@unit_price", price)
                     cmd2.Parameters.AddWithValue("@sell_price", sell_price)
-                    cmd2.Parameters.AddWithValue("@quantity", qty)
                     cmd2.Parameters.AddWithValue("@less", less)
                     cmd2.Parameters.AddWithValue("@total_amount", total_amount)
                     cmd2.ExecuteNonQuery()
@@ -544,9 +541,7 @@
         If cbCustomer.Text.Length > 0 Then
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
-
             Me.SelectedCustomer = key
-
             If Me.SelectedCustomer > 0 Then
                 cbCustomer.BackColor = Color.White
             End If
@@ -593,7 +588,7 @@
         End If
     End Sub
 
-    Private Sub populatepayment()
+    Public Sub populatepayment()
         cbPaymentType.DataSource = Nothing
         cbPaymentType.Items.Clear()
         Dim comboSource As New Dictionary(Of String, String)()
@@ -604,9 +599,10 @@
         cbPaymentType.DataSource = New BindingSource(comboSource, Nothing)
         cbPaymentType.DisplayMember = "Value"
         cbPaymentType.ValueMember = "Key"
+        cbPaymentType.SelectedIndex = 0
     End Sub
 
-    Private Sub populateTerms()
+    Public Sub populateTerms()
         cbTermPayment.DataSource = Nothing
         cbTermPayment.Items.Clear()
         Dim comboSource As New Dictionary(Of String, String)()
@@ -742,5 +738,92 @@
         End If
     End Sub
 
+    Public Sub toloadinfo(ByVal id As Integer)
+        Dim dbOrder As New DatabaseConnect
+        With dbOrder
+            .selectByQuery("Select co.*,c.company as customer from customer_orders as co left join company as c on c.id = co.customer  where co.id = " & id)
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    Dim date_issue As String = .dr("date_issue")
+                    dtpDateIssue.Value = date_issue
+                    dtpDateIssue.Enabled = False
+                    Dim customer As String = .dr("customer")
+                    cbCustomer.Text = customer
+                    cbCustomer.Enabled = False
+                    Dim delivered_by As String = .dr("delivered_by")
+                    txtDeliveredBy.Text = delivered_by
+                    txtDeliveredBy.Enabled = False
+                    Dim received_by As String = .dr("received_by")
+                    txtReceivedBy.Text = received_by
+                    txtReceivedBy.Enabled = False
+                    btnAddToCart.Enabled = False
+                    btnSave.Enabled = False
+                    btnSaveAndPrint.Enabled = False
+                    dgvProd.Enabled = False
 
+                    Dim payment_method As String = .dr("payment_method")
+                    Select Case payment_method
+                        Case "0"
+                            payment_method = "Cash"
+                        Case "1"
+                            payment_method = "C.O.D"
+                        Case "2"
+                            payment_method = "Credit"
+                    End Select
+                    cbPaymentType.Text = payment_method
+                    cbPaymentType.Enabled = False
+                    Dim term As String = .dr("terms")
+                    cbTermPayment.SelectedValue = term
+                    cbTermPayment.Enabled = False
+
+                End If
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        Dim dbOrderProduct As New DatabaseConnect
+        With dbOrderProduct
+            .selectByQuery("Select distinct p.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,pu.price,cop.less,cop.sell_price,cop.total_amount from ((((customer_order_products as cop
+                left join products as p on p.id = cop.product_id)
+                left join brand as b on b.id = cop.brand)
+                left join unit as u on u.id = cop.unit)
+                left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit)
+                where cop.customer_order_id = " & id)
+
+            dgvProd.Rows.Clear()
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim p_id As String = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As String = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = .dr("brand")
+                    Dim unit As String = .dr("unit")
+                    Dim price As String = Math.Round(Val(.dr("price")), 2).ToString("N2")
+                    Dim less As String = .dr("less")
+                    Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")
+                    Dim total_amount As String = Math.Round(Val(.dr("total_amount")), 2).ToString("N2")
+
+                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, price, less, "Add less", "Reset", sell_price, total_amount, "", "Remove"}
+                    Me.dgvProd.Rows.Add(row)
+                End While
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub enableControl(ByVal flag As Boolean)
+        dtpDateIssue.Enabled = flag
+        cbCustomer.Enabled = flag
+        txtDeliveredBy.Enabled = flag
+        txtReceivedBy.Enabled = flag
+        btnAddToCart.Enabled = flag
+        btnSave.Enabled = flag
+        btnSaveAndPrint.Enabled = flag
+        dgvProd.Enabled = flag
+    End Sub
 End Class

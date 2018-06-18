@@ -23,8 +23,6 @@ Partial Class CustomerOrder
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dgvCO = New System.Windows.Forms.DataGridView()
-        Me.btnNew = New System.Windows.Forms.Button()
-        Me.btnVoid = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_issue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.invoice_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,6 +33,9 @@ Partial Class CustomerOrder
         Me.payment_method = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.terms = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnNew = New System.Windows.Forms.Button()
+        Me.btnVoid = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
         CType(Me.dgvCO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,24 +47,6 @@ Partial Class CustomerOrder
         Me.dgvCO.Name = "dgvCO"
         Me.dgvCO.Size = New System.Drawing.Size(969, 323)
         Me.dgvCO.TabIndex = 0
-        '
-        'btnNew
-        '
-        Me.btnNew.Location = New System.Drawing.Point(24, 23)
-        Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnNew.TabIndex = 1
-        Me.btnNew.Text = "Add New +"
-        Me.btnNew.UseVisualStyleBackColor = True
-        '
-        'btnVoid
-        '
-        Me.btnVoid.Location = New System.Drawing.Point(121, 23)
-        Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(75, 23)
-        Me.btnVoid.TabIndex = 2
-        Me.btnVoid.Text = "Void"
-        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -127,11 +110,39 @@ Partial Class CustomerOrder
         Me.status.Name = "status"
         Me.status.ReadOnly = True
         '
+        'btnNew
+        '
+        Me.btnNew.Location = New System.Drawing.Point(24, 23)
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnNew.TabIndex = 1
+        Me.btnNew.Text = "Add New +"
+        Me.btnNew.UseVisualStyleBackColor = True
+        '
+        'btnVoid
+        '
+        Me.btnVoid.Location = New System.Drawing.Point(230, 23)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(75, 23)
+        Me.btnVoid.TabIndex = 2
+        Me.btnVoid.Text = "Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(128, 23)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 3
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'CustomerOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1051, 459)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.dgvCO)
@@ -157,4 +168,5 @@ Partial Class CustomerOrder
     Friend WithEvents payment_method As DataGridViewTextBoxColumn
     Friend WithEvents terms As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents btnView As Button
 End Class
