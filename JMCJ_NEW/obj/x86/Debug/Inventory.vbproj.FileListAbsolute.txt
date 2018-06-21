@@ -48,3 +48,6 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.ReportSource.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Shared.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Windows.Forms.dll
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerList.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.LedgerList.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Loading.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.LedgerForm.resources
