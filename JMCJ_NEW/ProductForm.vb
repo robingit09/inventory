@@ -300,8 +300,6 @@
     End Sub
 
     Private Sub dgvMeasurement_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvMeasurement.RowsAdded
-
-
         If dgvMeasurement.Rows.Count <> 1 Then
             Try
                 Dim dtgCol As DataGridViewComboBoxCell
@@ -331,8 +329,6 @@
                     comboColumn.DataSource = New BindingSource(comboSource, Nothing)
                     comboColumn.DisplayMember = "Value"
                     comboColumn.ValueMember = "Key"
-
-
                 End With
 
                 Dim comboSourceUnit As New Dictionary(Of String, String)()
@@ -420,8 +416,15 @@
                         dgvMeasurement.Rows.Add(1)
                         dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(0).Value = barcode
 
-                        Dim dtgCol As DataGridViewComboBoxCell
-                        dtgCol = dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(1)
+                        'Dim dtgCol As DataGridViewComboBoxColumn
+                        'dtgCol = dgvMeasurement.Columns(1)
+
+                        ''dtgCol = dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(1)
+
+                        'dtgCol.DisplayMember = "Value"
+                        'dtgCol.ValueMember = "Key"
+
+
 
                         'Dim comboSource As New Dictionary(Of String, String)()
                         ''comboSource.Add(0, "Select Brand")

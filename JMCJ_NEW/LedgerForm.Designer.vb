@@ -57,9 +57,27 @@ Partial Class LedgerForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.less = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.add_less = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
+        CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rbFloatingNo
@@ -145,7 +163,7 @@ Partial Class LedgerForm
         Me.txtRemarks.Location = New System.Drawing.Point(756, 42)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(268, 126)
+        Me.txtRemarks.Size = New System.Drawing.Size(215, 120)
         Me.txtRemarks.TabIndex = 47
         '
         'Label11
@@ -185,7 +203,7 @@ Partial Class LedgerForm
         '
         'btnSaveAndPrint
         '
-        Me.btnSaveAndPrint.Location = New System.Drawing.Point(927, 301)
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1005, 71)
         Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
         Me.btnSaveAndPrint.Size = New System.Drawing.Size(97, 37)
         Me.btnSaveAndPrint.TabIndex = 50
@@ -229,7 +247,7 @@ Partial Class LedgerForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(927, 248)
+        Me.btnSave.Location = New System.Drawing.Point(1005, 20)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(97, 37)
         Me.btnSave.TabIndex = 48
@@ -380,11 +398,133 @@ Partial Class LedgerForm
         Me.Label1.TabIndex = 27
         Me.Label1.Text = "Customer"
         '
+        'dgvProd
+        '
+        Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.price, Me.less, Me.add_less, Me.Column2, Me.sell_price, Me.amount, Me.stock, Me.action})
+        Me.dgvProd.Location = New System.Drawing.Point(12, 355)
+        Me.dgvProd.Name = "dgvProd"
+        Me.dgvProd.Size = New System.Drawing.Size(1347, 271)
+        Me.dgvProd.TabIndex = 53
+        '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 150
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'price
+        '
+        Me.price.HeaderText = "Unit Price"
+        Me.price.Name = "price"
+        Me.price.ReadOnly = True
+        '
+        'less
+        '
+        Me.less.HeaderText = "Less"
+        Me.less.Name = "less"
+        Me.less.ReadOnly = True
+        '
+        'add_less
+        '
+        Me.add_less.HeaderText = "Add less"
+        Me.add_less.Name = "add_less"
+        Me.add_less.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.add_less.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.add_less.Text = "ADD"
+        Me.add_less.Width = 70
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Set less to 0"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column2.Width = 80
+        '
+        'sell_price
+        '
+        Me.sell_price.HeaderText = "Sell Price"
+        Me.sell_price.Name = "sell_price"
+        Me.sell_price.ReadOnly = True
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
+        'lblTotalAmount
+        '
+        Me.lblTotalAmount.AutoSize = True
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.lblTotalAmount.Location = New System.Drawing.Point(931, 258)
+        Me.lblTotalAmount.Name = "lblTotalAmount"
+        Me.lblTotalAmount.Size = New System.Drawing.Size(88, 39)
+        Me.lblTotalAmount.TabIndex = 55
+        Me.lblTotalAmount.Text = "0.00"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(805, 265)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(120, 22)
+        Me.Label13.TabIndex = 54
+        Me.Label13.Text = "Total Amount"
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1043, 395)
+        Me.ClientSize = New System.Drawing.Size(1114, 543)
+        Me.Controls.Add(Me.lblTotalAmount)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.cbDisable)
         Me.Controls.Add(Me.txtRemarks)
         Me.Controls.Add(Me.Label11)
@@ -414,12 +554,14 @@ Partial Class LedgerForm
         Me.Name = "LedgerForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ledger Form"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gpCheck.ResumeLayout(False)
         Me.gpCheck.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.gpPaid.ResumeLayout(False)
         Me.gpPaid.PerformLayout()
+        CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -460,4 +602,21 @@ Partial Class LedgerForm
     Friend WithEvents Label2 As Label
     Friend WithEvents cbCustomer As ComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents dgvProd As DataGridView
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents Barcode As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents product As DataGridViewTextBoxColumn
+    Friend WithEvents brand As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents price As DataGridViewTextBoxColumn
+    Friend WithEvents less As DataGridViewTextBoxColumn
+    Friend WithEvents add_less As DataGridViewButtonColumn
+    Friend WithEvents Column2 As DataGridViewButtonColumn
+    Friend WithEvents sell_price As DataGridViewTextBoxColumn
+    Friend WithEvents amount As DataGridViewTextBoxColumn
+    Friend WithEvents stock As DataGridViewTextBoxColumn
+    Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents lblTotalAmount As Label
+    Friend WithEvents Label13 As Label
 End Class

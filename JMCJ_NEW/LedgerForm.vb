@@ -653,4 +653,118 @@
     Private Sub rPaidNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rPaidNo.CheckedChanged
 
     End Sub
+
+    Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
+        ' clicking add less
+        If e.ColumnIndex = 8 Then
+            Dim less As String = ""
+            less = InputBox("Add less", "Enter the additional less(Numbers Only)", "0")
+
+            ' validation
+            If Not IsNumeric(less) Then
+                MsgBox("Please insert number for less!", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+
+            If Trim(less).Length > 0 Then
+                Dim less_string As String = dgvProd.Rows(e.RowIndex).Cells("less").Value
+                If less_string.Length > 0 Then
+                    If less_string.Contains(",") Then
+                        dgvProd.Rows(e.RowIndex).Cells("less").Value = less_string & "," & less
+                    ElseIf less_string.Length > 0 Then
+                        dgvProd.Rows(e.RowIndex).Cells("less").Value = less_string & "," & less
+                    End If
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("less").Value = less
+                End If
+            End If
+        End If
+        'reset less
+        If e.ColumnIndex = 9 Then
+            dgvProd.Rows(e.RowIndex).Cells("less").Value = "0"
+        End If
+
+        'remove product
+        If e.ColumnIndex = 13 Then
+            dgvProd.Rows.RemoveAt(e.RowIndex)
+            computeTotalAmount()
+        End If
+    End Sub
+
+    Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
+        If dgvProd.Rows.Count > 1 Then
+            'change if edit the qty
+            If e.ColumnIndex = 2 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
+                Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
+                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+
+                If less.Contains(",") Then
+                    Dim split = less.Split(",")
+                    Try
+                        Dim temp As Double = amount
+                        Dim res As Double = 0
+                        Dim x As Double = 0
+                        For i As Integer = 0 To split.Length - 1
+                            temp = temp * (1.0 - (Val(split(i)) / 100))
+                        Next
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
+                End If
+
+                'change color
+                If qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.Red
+                End If
+            End If
+
+            If e.ColumnIndex = 7 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
+                Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
+                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+
+                If less.Contains(",") Then
+                    Dim split = less.Split(",")
+                    Try
+                        Dim temp As Double = amount
+                        Dim res As Double = 0
+                        Dim x As Double = 0
+                        For i As Integer = 0 To split.Length - 1
+                            temp = temp * (1.0 - (Val(split(i)) / 100))
+                        Next
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
+                End If
+            End If
+            computeTotalAmount()
+        End If
+    End Sub
+
+    Public Sub computeTotalAmount()
+
+        If dgvProd.Rows.Count > 1 Then
+            Dim totalamount = 0.0
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+                Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
+                totalamount += amount
+            Next
+            lblTotalAmount.Text = totalamount.ToString("f2")
+        End If
+    End Sub
 End Class
