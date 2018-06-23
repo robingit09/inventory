@@ -5,9 +5,11 @@
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
 
         LedgerForm.getCustomerList("")
+        LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
         LedgerForm.loadPaymentType()
         LedgerForm.loadLedgerType()
         LedgerForm.loadTerm()
+        LedgerForm.enableControl(True)
         LedgerForm.btnSave.Text = "Save"
         LedgerForm.btnSaveAndPrint.Text = "Save and Print"
         LedgerForm.ShowDialog()
@@ -16,13 +18,13 @@
     End Sub
 
     Public Sub loadLedger(ByVal query As String)
-
+        Loading.Show()
         dgvLedger.Rows.Clear()
 
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                .selectByQuery("SELECT * from ledger where status <> 0  order by id desc")
+                .selectByQuery("SELECT * from ledger order by id desc")
             Else
                 .selectByQuery(query)
             End If
@@ -53,6 +55,8 @@
                 Dim status As Integer = CInt(.dr.GetValue(10))
                 Dim status_val As String = ""
                 Select Case status
+                    Case 0
+                        status_val = "Voided"
                     Case 1
                         status_val = "Active"
                     Case 2
@@ -126,8 +130,14 @@
             .cmd.Dispose()
             .dr.Close()
             .con.Close()
-        End With
+            For Each row As DataGridViewRow In dgvLedger.Rows
+                If row.Cells("status").Value = "Voided" Then
+                    row.DefaultCellStyle.BackColor = Color.OrangeRed
+                End If
+            Next
 
+        End With
+        Loading.Hide()
     End Sub
 
 
@@ -141,6 +151,8 @@
             LedgerForm.loadLedgerType()
             LedgerForm.loadTerm()
             loadToUpdateInfo(selectedID)
+            LedgerForm.toloadproductinfo(selectedID)
+            LedgerForm.enableControl(False)
             LedgerForm.ShowDialog()
         Else
             MsgBox("Please select ledger!", MsgBoxStyle.Critical)
@@ -152,9 +164,9 @@
         If dgvLedger.SelectedRows.Count = 1 Then
             Dim id As String = dgvLedger.SelectedRows(0).Cells(0).Value
             Dim customer As String = dgvLedger.SelectedRows(0).Cells(2).Value
-            Dim invoice As String = dgvLedger.SelectedRows(0).Cells(4).Value
+            Dim invoice As String = dgvLedger.SelectedRows(0).Cells("InvoiceNo").Value
 
-            Dim yesno As Integer = MsgBox("Are you sure you want to delete this payment ?", MsgBoxStyle.YesNo + MsgBoxStyle.Question)
+            Dim yesno As Integer = MsgBox("Are you sure you want to void this transaction ?", MsgBoxStyle.YesNo + MsgBoxStyle.Question)
             If yesno = MsgBoxResult.Yes Then
                 Dim dbdelete As New DatabaseConnect
                 With dbdelete
@@ -476,5 +488,9 @@
                 loadLedger("select * from ledger where counter_no like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' or invoice_no like '%" & txtSearch.Text & "%' or amount like '%" & txtSearch.Text & "%' or date_paid like '%" & txtSearch.Text & "%' or bank_details like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' and status <> 0")
             End If
         End If
+    End Sub
+
+    Private Sub btnViewLoad_Click(sender As Object, e As EventArgs) Handles btnViewLoad.Click
+        loadLedger("")
     End Sub
 End Class

@@ -38,7 +38,7 @@ Partial Class LedgerList
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnLoad = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnViewLoad = New System.Windows.Forms.Button()
         Me.dgvLedger = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -69,7 +69,7 @@ Partial Class LedgerList
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 5
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Void"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
@@ -111,7 +111,7 @@ Partial Class LedgerList
         '
         Me.txtCustomer.Location = New System.Drawing.Point(80, 23)
         Me.txtCustomer.Name = "txtCustomer"
-        Me.txtCustomer.Size = New System.Drawing.Size(175, 20)
+        Me.txtCustomer.Size = New System.Drawing.Size(190, 20)
         Me.txtCustomer.TabIndex = 9
         '
         'cbLedgerType
@@ -119,7 +119,7 @@ Partial Class LedgerList
         Me.cbLedgerType.FormattingEnabled = True
         Me.cbLedgerType.Location = New System.Drawing.Point(80, 56)
         Me.cbLedgerType.Name = "cbLedgerType"
-        Me.cbLedgerType.Size = New System.Drawing.Size(175, 21)
+        Me.cbLedgerType.Size = New System.Drawing.Size(190, 21)
         Me.cbLedgerType.TabIndex = 8
         '
         'Label2
@@ -205,15 +205,15 @@ Partial Class LedgerList
         Me.btnLoad.Text = "Show All"
         Me.btnLoad.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnViewLoad
         '
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(1077, 23)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(92, 35)
-        Me.Button1.TabIndex = 12
-        Me.Button1.Text = "Show All"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnViewLoad.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnViewLoad.Location = New System.Drawing.Point(1077, 23)
+        Me.btnViewLoad.Name = "btnViewLoad"
+        Me.btnViewLoad.Size = New System.Drawing.Size(92, 35)
+        Me.btnViewLoad.TabIndex = 12
+        Me.btnViewLoad.Text = "Show All"
+        Me.btnViewLoad.UseVisualStyleBackColor = True
         '
         'dgvLedger
         '
@@ -344,7 +344,7 @@ Partial Class LedgerList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1198, 569)
         Me.Controls.Add(Me.dgvLedger)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnViewLoad)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnLoad)
@@ -353,7 +353,7 @@ Partial Class LedgerList
         Me.Controls.Add(Me.btnAddNew)
         Me.Name = "LedgerList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "LedgerList"
+        Me.Text = "Customer Order List (Ledger)"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -380,7 +380,7 @@ Partial Class LedgerList
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnLoad As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnViewLoad As Button
     Friend WithEvents dgvLedger As DataGridView
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents DateIssue As DataGridViewTextBoxColumn

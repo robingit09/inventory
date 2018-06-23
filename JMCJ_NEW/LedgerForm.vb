@@ -6,6 +6,10 @@
     Public term As Integer = 0
     Public isfloating As Boolean = False
 
+    Public SelectedProdID As Integer = 0
+    Public SelectedBrand As Integer = 0
+    Public SelectedUnit As Integer = 0
+
     Public Sub loadTerm()
         cbTerms.Items.Clear()
         cbTerms.Items.Add("Select Term")
@@ -92,6 +96,9 @@
         cbTerms.SelectedIndex = 0
         txtRemarks.Clear()
 
+        '** product clearing **'
+        dgvProd.Rows.Clear()
+
     End Sub
 
     Private Sub insertData()
@@ -158,10 +165,43 @@
                 .cmd.Parameters.AddWithValue("@payment_terms", term)
                 .cmd.Parameters.AddWithValue("@remarks", txtRemarks.Text)
                 .cmd.ExecuteNonQuery()
+
+                Dim cmd2 As New System.Data.OleDb.OleDbCommand
+                cmd2.Connection = .con
+                cmd2.CommandType = CommandType.Text
+                For Each item As DataGridViewRow In Me.dgvProd.Rows
+                    Dim product As Integer = .get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
+                    Dim brand As Integer = .get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
+                    Dim unit As Integer = .get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
+                    Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
+                    Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
+                    Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
+                    Dim less As String = dgvProd.Rows(item.Index).Cells("less").Value
+                    Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
+
+                    ' check if not blank
+                    If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
+                        cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,quantity,unit_price,sell_price,less,
+                total_amount)VALUES(?,?,?,?,?,?,?,?,?)"
+                        cmd2.Parameters.AddWithValue("@customer_order_ledger_id", getLastID("ledger"))
+                        cmd2.Parameters.AddWithValue("@product_id", product)
+                        cmd2.Parameters.AddWithValue("@brand", brand)
+                        cmd2.Parameters.AddWithValue("@unit", unit)
+                        cmd2.Parameters.AddWithValue("@quantity", qty)
+                        cmd2.Parameters.AddWithValue("@unit_price", price)
+                        cmd2.Parameters.AddWithValue("@sell_price", sell_price)
+                        cmd2.Parameters.AddWithValue("@less", less)
+                        cmd2.Parameters.AddWithValue("@total_amount", total_amount)
+                        cmd2.ExecuteNonQuery()
+                        cmd2.Parameters.Clear()
+
+                    End If
+                Next
+                cmd2.Dispose()
                 .cmd.Dispose()
                 .con.Close()
 
-                MsgBox("Save Successful!", MsgBoxStyle.Information)
+                MsgBox("Customer Order Save Successfully", MsgBoxStyle.Information)
                 clearfields()
                 Me.Close()
             Catch ex As Exception
@@ -474,6 +514,40 @@
             Return err_
         End If
 
+        ' ** product validation ** 
+
+        If dgvProd.Rows.Count = 0 Or dgvProd.Rows.Count = 1 Then
+            err_ = True
+            MsgBox("Please add a product!", MsgBoxStyle.Critical)
+            dgvProd.BackgroundColor = Color.Red
+            dgvProd.Focus()
+            Return err_
+        End If
+
+        Dim validate As Boolean = False
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If qty <= 0 And prod <> "" Then
+                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Color.Red
+                validate = True
+            End If
+        Next
+
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim sell_price As Double = dgvProd.Rows(item.Index).Cells("sell_price").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If sell_price <= 0.00 And prod <> "" Then
+                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Color.Red
+                validate = True
+            End If
+        Next
+
+        If validate = True Then
+            err_ = True
+            Return err_
+        End If
+
         Return err_
     End Function
 
@@ -633,6 +707,9 @@
     End Sub
 
     Private Sub LedgerForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        populateProducts(0, 0)
+        populateBrand(0)
+        populateUnit(0)
     End Sub
 
     Private Sub cbDisable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisable.CheckedChanged
@@ -685,7 +762,7 @@
         End If
 
         'remove product
-        If e.ColumnIndex = 13 Then
+        If e.ColumnIndex = 13 And dgvProd.Rows.Count > 1 Then
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
@@ -757,14 +834,261 @@
     End Sub
 
     Public Sub computeTotalAmount()
-
+        Dim totalamount = 0.0
         If dgvProd.Rows.Count > 1 Then
-            Dim totalamount = 0.0
+
             For Each item As DataGridViewRow In Me.dgvProd.Rows
                 Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
                 totalamount += amount
             Next
-            lblTotalAmount.Text = totalamount.ToString("f2")
+
         End If
+        lblTotalAmount.Text = totalamount.ToString("f2")
+        txtAmount.Text = totalamount.ToString("f2")
+    End Sub
+
+    Public Sub populateProducts(ByVal catid As Integer, ByVal subcatid As Integer)
+        Dim dbproduct As New DatabaseConnect
+        With dbproduct
+            cbProducts.DataSource = Nothing
+            cbProducts.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Product")
+            Dim query As String = ""
+            query = "Select distinct p.id, p.description,c.name,sub.name FROM ((((products As p 
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1"
+            ' if filter by category
+            If catid > 0 Then
+                query = query & " And c.id = " & catid
+            End If
+            If subcatid > 0 Then
+                query = query & " And Sub() .id = " & subcatid
+            End If
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim product_desc As String = .dr.GetValue(1)
+                    comboSource.Add(id, product_desc)
+                End While
+            End If
+            cbProducts.DataSource = New BindingSource(comboSource, Nothing)
+            cbProducts.DisplayMember = "Value"
+            cbProducts.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub populateBrand(ByVal prodid As Integer)
+        Dim dbbrand As New DatabaseConnect
+        With dbbrand
+            cbBrand.DataSource = Nothing
+            cbBrand.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Brand")
+            Dim query As String = "Select b.id, b.name from (product_unit as pu LEFT JOIN brand as b on b.id = pu.brand) 
+            where pu.product_id = " & prodid
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim brand As String = .dr.GetValue(1)
+                    comboSource.Add(id, brand)
+                End While
+            End If
+            cbBrand.DataSource = New BindingSource(comboSource, Nothing)
+            cbBrand.DisplayMember = "Value"
+            cbBrand.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub populateUnit(ByVal prodid As Integer)
+        Dim dbunit As New DatabaseConnect
+        With dbunit
+            cbUnit.DataSource = Nothing
+            cbUnit.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Unit")
+            Dim query As String = "Select distinct u.id, u.name from (product_unit as pu LEFT JOIN unit as u on u.id = pu.unit) 
+            where pu.product_id = " & prodid
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim unit As String = .dr.GetValue(1)
+                    comboSource.Add(id, unit)
+                End While
+            End If
+            cbUnit.DataSource = New BindingSource(comboSource, Nothing)
+            cbUnit.DisplayMember = "Value"
+            cbUnit.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
+        If selectedCustomer = 0 Then
+            MsgBox("Please select customer before adding product!", MsgBoxStyle.Critical)
+            cbCustomer.Focus()
+            cbCustomer.BackColor = Color.Red
+            Exit Sub
+        End If
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,pu.price from (((products as p 
+                left join product_unit as pu on pu.product_id = p.id)
+                left join brand as b on b.id = pu.brand)
+                left join unit as u on u.id = pu.unit)
+                where pu.brand = " & SelectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & SelectedUnit)
+
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    Dim product_id As String = .dr("id").ToString
+                    Dim barcode As String = .dr("barcode").ToString
+                    Dim desc As String = .dr("description").ToString
+                    Dim brand As String = .dr("brand").ToString
+                    Dim unit As String = .dr("unit").ToString
+                    Dim unitprice As String = Val(.dr("price")).ToString("N2")
+                    Dim sellprice As String = unitprice
+                    'get sell price
+                    Dim dbsellprice As New DatabaseConnect
+                    With dbsellprice
+                        .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & selectedCustomer & " and product_id = " & SelectedProdID & "
+                        and brand = " & SelectedBrand & " and unit = " & SelectedUnit)
+                        If .dr.HasRows Then
+                            If .dr.Read Then
+                                If (Val(.dr("sell_price") > 0)) Then
+                                    sellprice = Val(.dr("sell_price")).ToString("N2")
+                                Else
+                                    sellprice = unitprice
+                                End If
+                            End If
+                        End If
+                        .con.Close()
+                        .dr.Close()
+                        .cmd.Dispose()
+                    End With
+
+                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, unitprice, "", "Add less", "Reset", sellprice, "0.00", "", "Remove"}
+                    dgvProd.Rows.Add(row)
+
+                End If
+            End If
+        End With
+        computeTotalAmount()
+    End Sub
+
+    Private Sub cbProducts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProducts.SelectedIndexChanged
+        If cbProducts.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedProdID = key
+            populateBrand(SelectedProdID)
+            populateUnit(SelectedProdID)
+
+        End If
+    End Sub
+
+    Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
+        If cbBrand.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedBrand = key
+        End If
+    End Sub
+
+    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
+        If cbUnit.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedUnit = key
+        End If
+    End Sub
+
+    Private Function getLastID(ByVal table As String) As Integer
+        Dim id As Integer = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT MAX(ID) from " & table)
+            If .dr.HasRows Then
+                .dr.Read()
+                id = If(IsDBNull(.dr.GetValue(0)), 1, .dr.GetValue(0))
+            Else
+                id = 1
+            End If
+        End With
+        Return id
+    End Function
+
+    Public Function generateInvoice() As String
+        Dim res As String = ""
+        Dim id As Integer = 0
+
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select max(id) from ledger")
+            If .dr.HasRows Then
+                .dr.Read()
+                id = If(IsDBNull(.dr.GetValue(0)), 0, .dr.GetValue(0))
+                res = (id + 1).ToString("D5")
+            Else
+                res = (id + 1).ToString("D5")
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+
+        Return res
+    End Function
+
+    Public Sub toloadproductinfo(ByVal id As Integer)
+
+        Dim dbOrderProduct As New DatabaseConnect
+        With dbOrderProduct
+            .selectByQuery("Select distinct p.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,pu.price,cop.less,cop.sell_price,cop.total_amount from ((((customer_order_products as cop
+                left join products as p on p.id = cop.product_id)
+                left join brand as b on b.id = cop.brand)
+                left join unit as u on u.id = cop.unit)
+                left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit)
+                where cop.customer_order_ledger_id = " & id)
+
+            dgvProd.Rows.Clear()
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim p_id As String = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As String = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = .dr("brand")
+                    Dim unit As String = .dr("unit")
+                    Dim price As String = Math.Round(Val(.dr("price")), 2).ToString("N2")
+                    Dim less As String = .dr("less")
+                    Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")
+                    Dim total_amount As String = Math.Round(Val(.dr("total_amount")), 2).ToString("N2")
+
+                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, price, less, "Add less", "Reset", sell_price, total_amount, "", "Remove"}
+                    Me.dgvProd.Rows.Add(row)
+                End While
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub enableControl(ByVal flag As Boolean)
+        btnAddToCart.Enabled = flag
+        dgvProd.Enabled = flag
     End Sub
 End Class
