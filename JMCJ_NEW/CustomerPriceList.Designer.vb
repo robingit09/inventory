@@ -39,6 +39,7 @@ Partial Class CustomerPriceList
         Me.btnCreateOrder = New System.Windows.Forms.Button()
         Me.btnUpdatePrice = New System.Windows.Forms.Button()
         Me.btnDeleteProduct = New System.Windows.Forms.Button()
+        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,9 +47,9 @@ Partial Class CustomerPriceList
         '
         Me.dgvPriceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.sell_price, Me.Category, Me.Subcategory})
-        Me.dgvPriceList.Location = New System.Drawing.Point(12, 117)
+        Me.dgvPriceList.Location = New System.Drawing.Point(12, 156)
         Me.dgvPriceList.Name = "dgvPriceList"
-        Me.dgvPriceList.Size = New System.Drawing.Size(1057, 397)
+        Me.dgvPriceList.Size = New System.Drawing.Size(1057, 358)
         Me.dgvPriceList.TabIndex = 21
         '
         'id
@@ -178,11 +179,24 @@ Partial Class CustomerPriceList
         Me.btnDeleteProduct.Text = "Delete Product"
         Me.btnDeleteProduct.UseVisualStyleBackColor = True
         '
+        'ckSelectAll
+        '
+        Me.ckSelectAll.AutoSize = True
+        Me.ckSelectAll.Checked = True
+        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSelectAll.Location = New System.Drawing.Point(12, 133)
+        Me.ckSelectAll.Name = "ckSelectAll"
+        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
+        Me.ckSelectAll.TabIndex = 28
+        Me.ckSelectAll.Text = "Select All"
+        Me.ckSelectAll.UseVisualStyleBackColor = True
+        '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1213, 551)
+        Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnDeleteProduct)
         Me.Controls.Add(Me.btnUpdatePrice)
         Me.Controls.Add(Me.btnCreateOrder)
@@ -192,7 +206,7 @@ Partial Class CustomerPriceList
         Me.Controls.Add(Me.dgvPriceList)
         Me.Name = "CustomerPriceList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Customer Price List"
+        Me.Text = "Customer Product Price List"
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -215,4 +229,5 @@ Partial Class CustomerPriceList
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
     Friend WithEvents btnDeleteProduct As Button
+    Friend WithEvents ckSelectAll As CheckBox
 End Class

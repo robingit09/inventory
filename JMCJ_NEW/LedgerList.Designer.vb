@@ -40,6 +40,8 @@ Partial Class LedgerList
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.btnViewLoad = New System.Windows.Forms.Button()
         Me.dgvLedger = New System.Windows.Forms.DataGridView()
+        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,8 +57,6 @@ Partial Class LedgerList
         Me.PaymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ledger = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvLedger, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -225,6 +225,18 @@ Partial Class LedgerList
         Me.dgvLedger.Size = New System.Drawing.Size(1431, 502)
         Me.dgvLedger.TabIndex = 13
         '
+        'View
+        '
+        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.View.Name = "View"
+        Me.View.Size = New System.Drawing.Size(155, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ViewToolStripMenuItem.Text = "View or Update"
+        '
         'ID
         '
         Me.ID.HeaderText = "ID"
@@ -243,7 +255,7 @@ Partial Class LedgerList
         Me.Customer.HeaderText = "Customer"
         Me.Customer.Name = "Customer"
         Me.Customer.ReadOnly = True
-        Me.Customer.Width = 170
+        Me.Customer.Width = 140
         '
         'InvoiceNo
         '
@@ -326,18 +338,6 @@ Partial Class LedgerList
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
         '
-        'View
-        '
-        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.View.Name = "View"
-        Me.View.Size = New System.Drawing.Size(155, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.ViewToolStripMenuItem.Text = "View or Update"
-        '
         'LedgerList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -382,6 +382,8 @@ Partial Class LedgerList
     Friend WithEvents btnLoad As Button
     Friend WithEvents btnViewLoad As Button
     Friend WithEvents dgvLedger As DataGridView
+    Friend WithEvents View As ContextMenuStrip
+    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents DateIssue As DataGridViewTextBoxColumn
     Friend WithEvents Customer As DataGridViewTextBoxColumn
@@ -397,6 +399,4 @@ Partial Class LedgerList
     Friend WithEvents PaymentType As DataGridViewTextBoxColumn
     Friend WithEvents Ledger As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents View As ContextMenuStrip
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
 End Class

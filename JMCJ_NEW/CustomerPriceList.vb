@@ -59,10 +59,6 @@
         'End With
     End Sub
 
-    Private Sub Pricing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        getCustomer()
-    End Sub
-
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If cbCustomer.SelectedIndex > 0 Then
             AddProductForm.selectedCustomer = Me.selectedCustomer
@@ -136,14 +132,19 @@
     End Sub
 
     Private Sub btnCreateOrder_Click(sender As Object, e As EventArgs) Handles btnCreateOrder.Click
+        If dgvPriceList.Rows.Count = 0 Then
+            MsgBox("Please add product for this customer!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
         If selectedCustomer > 0 Then
-            CustomerOrderForm.enableControl(True)
-            CustomerOrderForm.populatepayment()
-            CustomerOrderForm.populateTerms()
-            CustomerOrderForm.populateCustomer()
-            CustomerOrderForm.SelectedCustomer = Me.selectedCustomer
-            CustomerOrderForm.cbCustomer.Text = Me.cbCustomer.Text
-            CustomerOrderForm.dgvProd.Rows.Clear()
+            LedgerForm.enableControl(True)
+            LedgerForm.loadTerm()
+            LedgerForm.loadPaymentType()
+            LedgerForm.loadLedgerType()
+            LedgerForm.selectedCustomer = Me.selectedCustomer
+            LedgerForm.cbCustomer.Text = Me.cbCustomer.Text
+            LedgerForm.dgvProd.Rows.Clear()
+
             For Each item As DataGridViewRow In Me.dgvPriceList.Rows
                 Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
                 If selectedproduct Then
@@ -156,10 +157,10 @@
                     Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
 
                     Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", sell_price, "0.00", "", "Remove"}
-                    CustomerOrderForm.dgvProd.Rows.Add(row)
+                    LedgerForm.dgvProd.Rows.Add(row)
                 End If
             Next
-            CustomerOrderForm.ShowDialog()
+            LedgerForm.ShowDialog()
         Else
             MsgBox("Please select customer", MsgBoxStyle.Critical)
             cbCustomer.Focus()
@@ -197,4 +198,27 @@
         End If
     End Sub
 
+    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
+
+        If dgvPriceList.Rows.Count > 0 Then
+            If ckSelectAll.Checked = True Then
+                For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+                    If dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value <> "" Then
+                        dgvPriceList.Rows(item.Index).Cells(1).Value = True
+                    End If
+                Next
+            Else
+                For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+                    If dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value <> "" Then
+                        dgvPriceList.Rows(item.Index).Cells(1).Value = False
+                    End If
+                Next
+            End If
+        End If
+
+    End Sub
+
+    Private Sub CustomerPriceList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        getCustomer()
+    End Sub
 End Class
