@@ -40,9 +40,17 @@ Partial Class ProductForm
         Me.Unit = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remove_column = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnEditUnit = New System.Windows.Forms.Button()
+        Me.dgvMeasure = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasurement.SuspendLayout()
         CType(Me.dgvMeasurement, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -142,28 +150,30 @@ Partial Class ProductForm
         Me.TabControl1.Location = New System.Drawing.Point(39, 290)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(859, 247)
+        Me.TabControl1.Size = New System.Drawing.Size(859, 264)
         Me.TabControl1.TabIndex = 20
         '
         'tbMeasurement
         '
+        Me.tbMeasurement.Controls.Add(Me.dgvMeasure)
+        Me.tbMeasurement.Controls.Add(Me.btnEditUnit)
         Me.tbMeasurement.Controls.Add(Me.btnAddMoreUnit)
         Me.tbMeasurement.Controls.Add(Me.dgvMeasurement)
         Me.tbMeasurement.Location = New System.Drawing.Point(4, 22)
         Me.tbMeasurement.Name = "tbMeasurement"
         Me.tbMeasurement.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMeasurement.Size = New System.Drawing.Size(851, 221)
+        Me.tbMeasurement.Size = New System.Drawing.Size(851, 238)
         Me.tbMeasurement.TabIndex = 0
         Me.tbMeasurement.Text = "Measurement"
         Me.tbMeasurement.UseVisualStyleBackColor = True
         '
         'btnAddMoreUnit
         '
-        Me.btnAddMoreUnit.Location = New System.Drawing.Point(757, 7)
+        Me.btnAddMoreUnit.Location = New System.Drawing.Point(6, 16)
         Me.btnAddMoreUnit.Name = "btnAddMoreUnit"
         Me.btnAddMoreUnit.Size = New System.Drawing.Size(88, 23)
         Me.btnAddMoreUnit.TabIndex = 1
-        Me.btnAddMoreUnit.Text = "Add More +"
+        Me.btnAddMoreUnit.Text = "Add"
         Me.btnAddMoreUnit.UseVisualStyleBackColor = True
         '
         'dgvMeasurement
@@ -172,7 +182,7 @@ Partial Class ProductForm
         Me.dgvMeasurement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Barcode, Me.Brand, Me.Unit, Me.price, Me.remove_column})
         Me.dgvMeasurement.Location = New System.Drawing.Point(6, 45)
         Me.dgvMeasurement.Name = "dgvMeasurement"
-        Me.dgvMeasurement.Size = New System.Drawing.Size(839, 163)
+        Me.dgvMeasurement.Size = New System.Drawing.Size(839, 61)
         Me.dgvMeasurement.TabIndex = 0
         '
         'Barcode
@@ -206,6 +216,57 @@ Partial Class ProductForm
         Me.remove_column.HeaderText = "Action"
         Me.remove_column.Name = "remove_column"
         '
+        'btnEditUnit
+        '
+        Me.btnEditUnit.Location = New System.Drawing.Point(113, 16)
+        Me.btnEditUnit.Name = "btnEditUnit"
+        Me.btnEditUnit.Size = New System.Drawing.Size(94, 23)
+        Me.btnEditUnit.TabIndex = 2
+        Me.btnEditUnit.Text = "Edit"
+        Me.btnEditUnit.UseVisualStyleBackColor = True
+        '
+        'dgvMeasure
+        '
+        Me.dgvMeasure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.DataGridViewTextBoxColumn2, Me.DataGridViewButtonColumn1})
+        Me.dgvMeasure.Location = New System.Drawing.Point(6, 135)
+        Me.dgvMeasure.Name = "dgvMeasure"
+        Me.dgvMeasure.Size = New System.Drawing.Size(839, 88)
+        Me.dgvMeasure.TabIndex = 3
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Barcode"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 200
+        '
+        'DataGridViewComboBoxColumn1
+        '
+        Me.DataGridViewComboBoxColumn1.HeaderText = "Brand"
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.ReadOnly = True
+        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn1.Width = 150
+        '
+        'DataGridViewComboBoxColumn2
+        '
+        Me.DataGridViewComboBoxColumn2.HeaderText = "Unit"
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.ReadOnly = True
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Price"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewButtonColumn1
+        '
+        Me.DataGridViewButtonColumn1.HeaderText = "Action"
+        Me.DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
+        '
         'ProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -227,6 +288,7 @@ Partial Class ProductForm
         Me.TabControl1.ResumeLayout(False)
         Me.tbMeasurement.ResumeLayout(False)
         CType(Me.dgvMeasurement, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -249,4 +311,11 @@ Partial Class ProductForm
     Friend WithEvents Unit As DataGridViewComboBoxColumn
     Friend WithEvents price As DataGridViewTextBoxColumn
     Friend WithEvents remove_column As DataGridViewButtonColumn
+    Friend WithEvents btnEditUnit As Button
+    Friend WithEvents dgvMeasure As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
 End Class

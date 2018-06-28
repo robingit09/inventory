@@ -283,7 +283,8 @@
     End Sub
 
     Private Sub btnAddMoreUnit_Click(sxxender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
-        dgvMeasurement.Rows.Add(1)
+        'dgvMeasurement.Rows.Add(1)
+        ProductAddUnitForm.ShowDialog()
     End Sub
 
     Private Sub dgvMeasurement_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasurement.CellClick
