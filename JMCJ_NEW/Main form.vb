@@ -61,6 +61,6 @@
     End Sub
 
     Private Sub ColorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColorToolStripMenuItem.Click
-
+        ColorList.ShowDialog()
     End Sub
 End Class

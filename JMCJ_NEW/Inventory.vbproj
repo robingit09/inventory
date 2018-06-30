@@ -142,6 +142,18 @@
     <Compile Include="CategoryList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ColorForm.Designer.vb">
+      <DependentUpon>ColorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ColorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColorList.Designer.vb">
+      <DependentUpon>ColorList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ColorList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="crCustomerOrder.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -305,6 +317,12 @@
     <EmbeddedResource Include="CategoryList.resx">
       <DependentUpon>CategoryList.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorForm.resx">
+      <DependentUpon>ColorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorList.resx">
+      <DependentUpon>ColorList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="crCustomerOrder.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

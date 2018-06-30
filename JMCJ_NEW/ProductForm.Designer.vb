@@ -52,31 +52,31 @@ Partial Class ProductForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(35, 96)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(141, 19)
+        Me.Label1.Size = New System.Drawing.Size(117, 15)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Product Description"
         '
         'txtProduct
         '
-        Me.txtProduct.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtProduct.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtProduct.ForeColor = System.Drawing.Color.Black
-        Me.txtProduct.Location = New System.Drawing.Point(182, 93)
+        Me.txtProduct.Location = New System.Drawing.Point(166, 93)
         Me.txtProduct.Name = "txtProduct"
-        Me.txtProduct.Size = New System.Drawing.Size(449, 26)
+        Me.txtProduct.Size = New System.Drawing.Size(449, 22)
         Me.txtProduct.TabIndex = 2
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
         Me.Label5.Location = New System.Drawing.Point(35, 136)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(71, 19)
+        Me.Label5.Size = New System.Drawing.Size(57, 15)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Category"
         '
@@ -94,50 +94,50 @@ Partial Class ProductForm
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(35, 50)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(65, 19)
+        Me.Label7.Size = New System.Drawing.Size(52, 15)
         Me.Label7.TabIndex = 15
         Me.Label7.Text = "Barcode"
         '
         'txtBarcode
         '
-        Me.txtBarcode.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBarcode.ForeColor = System.Drawing.Color.Black
-        Me.txtBarcode.Location = New System.Drawing.Point(182, 47)
+        Me.txtBarcode.Location = New System.Drawing.Point(166, 47)
         Me.txtBarcode.Name = "txtBarcode"
-        Me.txtBarcode.Size = New System.Drawing.Size(449, 26)
+        Me.txtBarcode.Size = New System.Drawing.Size(449, 22)
         Me.txtBarcode.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(35, 179)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(92, 19)
+        Me.Label2.Size = New System.Drawing.Size(75, 15)
         Me.Label2.TabIndex = 17
         Me.Label2.Text = "Subcategory"
         '
         'cbCategory
         '
-        Me.cbCategory.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCategory.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCategory.FormattingEnabled = True
-        Me.cbCategory.Location = New System.Drawing.Point(182, 133)
+        Me.cbCategory.Location = New System.Drawing.Point(166, 133)
         Me.cbCategory.Name = "cbCategory"
-        Me.cbCategory.Size = New System.Drawing.Size(449, 27)
+        Me.cbCategory.Size = New System.Drawing.Size(449, 23)
         Me.cbCategory.TabIndex = 3
         '
         'cbSubcategory
         '
-        Me.cbSubcategory.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbSubcategory.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbSubcategory.FormattingEnabled = True
-        Me.cbSubcategory.Location = New System.Drawing.Point(182, 176)
+        Me.cbSubcategory.Location = New System.Drawing.Point(166, 176)
         Me.cbSubcategory.Name = "cbSubcategory"
-        Me.cbSubcategory.Size = New System.Drawing.Size(449, 27)
+        Me.cbSubcategory.Size = New System.Drawing.Size(449, 23)
         Me.cbSubcategory.TabIndex = 4
         '
         'TabControl1
@@ -227,7 +227,7 @@ Partial Class ProductForm
         '
         Me.tbSupplier.Location = New System.Drawing.Point(4, 22)
         Me.tbSupplier.Name = "tbSupplier"
-        Me.tbSupplier.Size = New System.Drawing.Size(851, 238)
+        Me.tbSupplier.Size = New System.Drawing.Size(851, 244)
         Me.tbSupplier.TabIndex = 1
         Me.tbSupplier.Text = "Supplier"
         Me.tbSupplier.UseVisualStyleBackColor = True
@@ -235,21 +235,21 @@ Partial Class ProductForm
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Black
         Me.Label3.Location = New System.Drawing.Point(35, 224)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(46, 19)
+        Me.Label3.Size = New System.Drawing.Size(38, 15)
         Me.Label3.TabIndex = 21
         Me.Label3.Text = "Color"
         '
         'cbColor
         '
-        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(182, 221)
+        Me.cbColor.Location = New System.Drawing.Point(166, 221)
         Me.cbColor.Name = "cbColor"
-        Me.cbColor.Size = New System.Drawing.Size(449, 27)
+        Me.cbColor.Size = New System.Drawing.Size(449, 23)
         Me.cbColor.TabIndex = 22
         '
         'ProductForm

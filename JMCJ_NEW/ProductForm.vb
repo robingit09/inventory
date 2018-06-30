@@ -510,5 +510,4 @@
 
         dgvMeasure.Rows.Clear()
     End Sub
-
 End Class
