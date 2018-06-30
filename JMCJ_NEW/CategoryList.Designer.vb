@@ -28,18 +28,18 @@ Partial Class CategoryList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvCat = New System.Windows.Forms.DataGridView()
+        Me.btnFilter = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.btnLoadAll = New System.Windows.Forms.Button()
         CType(Me.dgvCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnDelete
         '
-        Me.btnDelete.Enabled = False
         Me.btnDelete.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Location = New System.Drawing.Point(290, 66)
+        Me.btnDelete.Location = New System.Drawing.Point(307, 66)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(5)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 41)
@@ -61,17 +61,17 @@ Partial Class CategoryList
         'txtSearch
         '
         Me.txtSearch.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(513, 72)
+        Me.txtSearch.Location = New System.Drawing.Point(534, 72)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(5)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(266, 29)
+        Me.txtSearch.Size = New System.Drawing.Size(186, 29)
         Me.txtSearch.TabIndex = 21
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(422, 75)
+        Me.Label1.Location = New System.Drawing.Point(457, 75)
         Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 22)
@@ -97,8 +97,19 @@ Partial Class CategoryList
         Me.dgvCat.Margin = New System.Windows.Forms.Padding(5)
         Me.dgvCat.Name = "dgvCat"
         Me.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCat.Size = New System.Drawing.Size(841, 400)
+        Me.dgvCat.Size = New System.Drawing.Size(851, 400)
         Me.dgvCat.TabIndex = 24
+        '
+        'btnFilter
+        '
+        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(730, 68)
+        Me.btnFilter.Margin = New System.Windows.Forms.Padding(5)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(79, 36)
+        Me.btnFilter.TabIndex = 25
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -121,17 +132,16 @@ Partial Class CategoryList
         Me.Subcategory.ReadOnly = True
         Me.Subcategory.Width = 400
         '
-        'btnFilter
+        'btnLoadAll
         '
-        Me.btnFilter.Enabled = False
-        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(789, 66)
-        Me.btnFilter.Margin = New System.Windows.Forms.Padding(5)
-        Me.btnFilter.Name = "btnFilter"
-        Me.btnFilter.Size = New System.Drawing.Size(105, 41)
-        Me.btnFilter.TabIndex = 25
-        Me.btnFilter.Text = "Filter"
-        Me.btnFilter.UseVisualStyleBackColor = True
+        Me.btnLoadAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoadAll.Location = New System.Drawing.Point(819, 68)
+        Me.btnLoadAll.Margin = New System.Windows.Forms.Padding(5)
+        Me.btnLoadAll.Name = "btnLoadAll"
+        Me.btnLoadAll.Size = New System.Drawing.Size(85, 36)
+        Me.btnLoadAll.TabIndex = 26
+        Me.btnLoadAll.Text = "All"
+        Me.btnLoadAll.UseVisualStyleBackColor = True
         '
         'CategoryList
         '
@@ -139,6 +149,7 @@ Partial Class CategoryList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(937, 718)
+        Me.Controls.Add(Me.btnLoadAll)
         Me.Controls.Add(Me.btnFilter)
         Me.Controls.Add(Me.dgvCat)
         Me.Controls.Add(Me.btnDelete)
@@ -163,7 +174,8 @@ Partial Class CategoryList
     Friend WithEvents btnAddNew As System.Windows.Forms.Button
     Friend WithEvents dgvCat As System.Windows.Forms.DataGridView
     Friend WithEvents btnFilter As System.Windows.Forms.Button
-    Friend WithEvents id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Subcategory As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents Category As DataGridViewTextBoxColumn
+    Friend WithEvents Subcategory As DataGridViewTextBoxColumn
+    Friend WithEvents btnLoadAll As Button
 End Class

@@ -26,11 +26,11 @@
 
     End Sub
 
-    Public Sub loadList(ByVal key As String)
+    Public Sub loadList(ByVal q As String)
         dgvCat.Rows.Clear()
         Dim db As New DatabaseConnect
-        If key = "" Then
-            db.selectByQuery("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id")
+        If q = "" Then
+            db.selectByQuery("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id order by sub.name")
         Else
 
         End If
@@ -164,10 +164,48 @@
         '    MsgBox("Please select category you want to delete", MsgBoxStyle.Exclamation)
         'End If
 
+        If dgvCat.SelectedRows.Count = 1 Then
+            Dim id As String = dgvCat.SelectedRows(0).Cells(0).Value
+            Dim cat As String = dgvCat.SelectedRows(0).Cells(1).Value
+            Dim subcat As String = dgvCat.SelectedRows(0).Cells(2).Value
+
+            Dim dbdelete As New DatabaseConnect
+            If subcat = "N/A" Then
+                ' delete category
+                Dim warning As Integer = MsgBox("Warning! Deleting this category will affect subcategories under (" & cat & ").", MsgBoxStyle.OkCancel)
+                If warning = MsgBoxResult.Ok Then
+                    Dim yesno As Integer = MsgBox("Are you sure you want to delete category : " & cat & " ?", MsgBoxStyle.YesNo)
+                    If yesno = MsgBoxResult.Yes Then
+                        dbdelete.delete_permanent("categories", "id", id)
+                        dbdelete.delete_permanent("categories", "parent_id", id)
+                        MsgBox("Category Successfully deleted!", MsgBoxStyle.Information)
+                    End If
+                End If
+            Else
+                ' delete subcategory
+                Dim yesno As Integer = MsgBox("Are you sure you want to delete sub category : " & subcat & " ?", MsgBoxStyle.YesNo)
+                If yesno = MsgBoxResult.Yes Then
+                    dbdelete.delete_permanent("categories", "id", id)
+                    MsgBox("Sub Category Successfully deleted!", MsgBoxStyle.Information)
+                End If
+            End If
+        Else
+            MsgBox("Please select categories!", MsgBoxStyle.Critical)
+        End If
+        loadList("")
     End Sub
 
-    Private Sub dgvCat_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCat.CellContentClick
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        'validation 
+        If Trim(txtSearch.Text) = "" Then
+            MsgBox("Search field is required!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
+        loadList("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id where c.name like '%" & Trim(txtSearch.Text) & "%' or sub.name like '%" & Trim(txtSearch.Text) & "%' order by sub.name")
     End Sub
 
+    Private Sub btnLoadAll_Click(sender As Object, e As EventArgs) Handles btnLoadAll.Click
+        loadList("")
+    End Sub
 End Class

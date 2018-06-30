@@ -36,11 +36,11 @@
                 .con.Close()
             End With
 
-            If dgvMeasurement.Rows.Count > 0 Then
-                For Each row As DataGridViewRow In dgvMeasurement.Rows
+            If dgvMeasure.Rows.Count > 0 Then
+                For Each row As DataGridViewRow In dgvMeasure.Rows
                     Dim barcode As String = row.Cells("barcode").Value
-                    Dim brand As String = row.Cells("brand").Value
-                    Dim unit As String = row.Cells("unit").Value
+                    Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
+                    Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
                     Dim price As String = row.Cells("price").Value
 
                     If brand = "" And unit = "" Then
@@ -174,7 +174,6 @@
 
         If btnSave.Text = "Save" Then
             If validation() = False Then
-
                 Exit Sub
             End If
             saveData()
@@ -186,79 +185,103 @@
     End Sub
 
     Function validation() As Boolean
-        Dim res As Boolean = False
+        Dim res As Boolean = True
+
+        If Trim(txtProduct.Text) = "" Then
+            res = False
+            MsgBox("Product description field is required!", MsgBoxStyle.Critical)
+            txtProduct.Focus()
+            Return res
+        End If
 
         Dim dbvalidate As New DatabaseConnect
         With dbvalidate
             If (.isExist("products", "description", txtProduct.Text)) Then
                 res = False
                 MsgBox("Product description already exist!", MsgBoxStyle.Critical)
-            Else
-                res = True
+                txtProduct.Focus()
+                Return res
             End If
             .dr.Close()
             .cmd.Dispose()
             .con.Close()
         End With
 
+        If selectedCategory = 0 Then
+            res = False
+            MsgBox("Category field is required!", MsgBoxStyle.Critical)
+            cbCategory.Focus()
+            Return res
+        End If
+
+        If selectedSubcategory = 0 Then
+            res = False
+            MsgBox("Sub Category field is required!", MsgBoxStyle.Critical)
+            cbCategory.Focus()
+            Return res
+        End If
+
+        If dgvMeasure.Rows.Count = 0 Or dgvMeasure.Rows.Count = 1 Then
+            res = False
+            MsgBox("Please add measurement for this product!", MsgBoxStyle.Critical)
+            dgvMeasure.Focus()
+            Return res
+        End If
+
         Return res
     End Function
 
-    Private Sub ProductForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+    'Public Sub initializeMeasure()
 
-    End Sub
+    '    If dgvMeasurement.Rows.Count = 1 Then
+    '        Try
+    '            Dim dtgCol As DataGridViewComboBoxCell
+    '            dgvMeasurement.Rows(0).Cells(0).Value = ""
+    '            dtgCol = dgvMeasurement.Rows(0).Cells(1)
 
-    Public Sub initializeMeasure()
+    '            Dim comboSource As New Dictionary(Of String, String)()
+    '            'comboSource.Add(0, "Select Brand")
+    '            Dim dbbrand As New DatabaseConnect
+    '            With dbbrand
+    '                .selectByQuery("Select id,name from brand where status = 1")
+    '                If .dr.HasRows Then
+    '                    While .dr.Read
+    '                        comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
+    '                    End While
+    '                End If
+    '                .cmd.Dispose()
+    '                .dr.Close()
+    '                .con.Close()
+    '                dtgCol.DataSource = New BindingSource(comboSource, Nothing)
+    '                dtgCol.DisplayMember = "Value"
+    '                dtgCol.ValueMember = "Key"
+    '            End With
 
-        If dgvMeasurement.Rows.Count = 1 Then
-            Try
-                Dim dtgCol As DataGridViewComboBoxCell
-                dgvMeasurement.Rows(0).Cells(0).Value = ""
-                dtgCol = dgvMeasurement.Rows(0).Cells(1)
+    '            Dim comboSourceUnit As New Dictionary(Of String, String)()
+    '            dtgCol = dgvMeasurement.Rows(0).Cells(2)
 
-                Dim comboSource As New Dictionary(Of String, String)()
-                'comboSource.Add(0, "Select Brand")
-                Dim dbbrand As New DatabaseConnect
-                With dbbrand
-                    .selectByQuery("Select id,name from brand where status = 1")
-                    If .dr.HasRows Then
-                        While .dr.Read
-                            comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
-                        End While
-                    End If
-                    .cmd.Dispose()
-                    .dr.Close()
-                    .con.Close()
-                    dtgCol.DataSource = New BindingSource(comboSource, Nothing)
-                    dtgCol.DisplayMember = "Value"
-                    dtgCol.ValueMember = "Key"
-                End With
+    '            Dim dbUnit As New DatabaseConnect
+    '            With dbUnit
+    '                .selectByQuery("Select id,name from unit where status = 1")
+    '                If .dr.HasRows Then
+    '                    While .dr.Read
+    '                        comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
 
-                Dim comboSourceUnit As New Dictionary(Of String, String)()
-                dtgCol = dgvMeasurement.Rows(0).Cells(2)
+    '                    End While
+    '                End If
+    '                dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
+    '                dtgCol.DisplayMember = "Value"
+    '                dtgCol.ValueMember = "Key"
+    '            End With
 
-                Dim dbUnit As New DatabaseConnect
-                With dbUnit
-                    .selectByQuery("Select id,name from unit where status = 1")
-                    If .dr.HasRows Then
-                        While .dr.Read
-                            comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
-
-                        End While
-                    End If
-                    dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
-                    dtgCol.DisplayMember = "Value"
-                    dtgCol.ValueMember = "Key"
-                End With
-
-                dgvMeasurement.Rows(0).Cells(3).Value = "0.00"
-                dgvMeasurement.Rows(0).Cells(4).Value = "Remove -"
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
+    '            dgvMeasurement.Rows(0).Cells(3).Value = "0.00"
+    '            dgvMeasurement.Rows(0).Cells(4).Value = "Remove -"
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    End If
+    'End Sub
 
     Private Sub cbCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCategory.SelectedIndexChanged
 
@@ -284,74 +307,63 @@
 
     Private Sub btnAddMoreUnit_Click(sxxender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
         'dgvMeasurement.Rows.Add(1)
+        ProductAddUnitForm.btnAdd.Text = "Add(+)"
         ProductAddUnitForm.ShowDialog()
     End Sub
 
-    Private Sub dgvMeasurement_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasurement.CellClick
-        '// **  remove column function ** //
-        If (e.RowIndex = dgvMeasurement.NewRowIndex Or e.RowIndex < 0) Then
-            Exit Sub
-        End If
 
-        'Check if click Is on specific column 
-        If (e.ColumnIndex = dgvMeasurement.Columns("remove_column").Index) Then
-            dgvMeasurement.Rows.RemoveAt(e.RowIndex)
-        End If
+    'Private Sub dgvMeasurement_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs)
+    '    If dgvMeasurement.Rows.Count <> 1 Then
+    '        Try
+    '            Dim dtgCol As DataGridViewComboBoxCell
+    '            Dim comboColumn As New DataGridViewComboBoxColumn
 
-    End Sub
+    '            dgvMeasurement.Rows(e.RowIndex).Cells(0).Value = ""
+    '            dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(1)
 
-    Private Sub dgvMeasurement_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvMeasurement.RowsAdded
-        If dgvMeasurement.Rows.Count <> 1 Then
-            Try
-                Dim dtgCol As DataGridViewComboBoxCell
-                Dim comboColumn As New DataGridViewComboBoxColumn
+    '            comboColumn = dgvMeasurement.Columns("brand")
+    '            Dim comboSource As New Dictionary(Of String, String)()
 
-                dgvMeasurement.Rows(e.RowIndex).Cells(0).Value = ""
-                dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(1)
+    '            Dim dbbrand As New DatabaseConnect
+    '            With dbbrand
+    '                .selectByQuery("Select id,name from brand where status = 1")
+    '                If .dr.HasRows Then
+    '                    While .dr.Read
+    '                        comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
 
-                comboColumn = dgvMeasurement.Columns("brand")
-                Dim comboSource As New Dictionary(Of String, String)()
+    '                    End While
+    '                End If
+    '                .cmd.Dispose()
+    '                .dr.Close()
+    '                .con.Close()
+    '                'dtgCol.DataSource = New BindingSource(comboSource, Nothing)
+    '                'dtgCol.DisplayMember = "Value"
+    '                'dtgCol.ValueMember = "Key"
+    '                comboColumn.DataSource = New BindingSource(comboSource, Nothing)
+    '                comboColumn.DisplayMember = "Value"
+    '                comboColumn.ValueMember = "Key"
+    '            End With
 
-                Dim dbbrand As New DatabaseConnect
-                With dbbrand
-                    .selectByQuery("Select id,name from brand where status = 1")
-                    If .dr.HasRows Then
-                        While .dr.Read
-                            comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
-
-                        End While
-                    End If
-                    .cmd.Dispose()
-                    .dr.Close()
-                    .con.Close()
-                    'dtgCol.DataSource = New BindingSource(comboSource, Nothing)
-                    'dtgCol.DisplayMember = "Value"
-                    'dtgCol.ValueMember = "Key"
-                    comboColumn.DataSource = New BindingSource(comboSource, Nothing)
-                    comboColumn.DisplayMember = "Value"
-                    comboColumn.ValueMember = "Key"
-                End With
-
-                Dim comboSourceUnit As New Dictionary(Of String, String)()
-                dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(2)
-                Dim dbUnit As New DatabaseConnect
-                With dbUnit
-                    .selectByQuery("Select id,name from unit where status = 1")
-                    If .dr.HasRows Then
-                        While .dr.Read
-                            comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
-                        End While
-                    End If
-                    dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
-                    dtgCol.DisplayMember = "Value"
-                    dtgCol.ValueMember = "Key"
-                End With
-                dgvMeasurement.Rows(e.RowIndex).Cells(4).Value = "Remove -"
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
+    '            Dim comboSourceUnit As New Dictionary(Of String, String)()
+    '            dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(2)
+    '            Dim dbUnit As New DatabaseConnect
+    '            With dbUnit
+    '                .selectByQuery("Select id,name from unit where status = 1")
+    '                If .dr.HasRows Then
+    '                    While .dr.Read
+    '                        comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
+    '                    End While
+    '                End If
+    '                dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
+    '                dtgCol.DisplayMember = "Value"
+    '                dtgCol.ValueMember = "Key"
+    '            End With
+    '            dgvMeasurement.Rows(e.RowIndex).Cells(4).Value = "Remove -"
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    End If
+    'End Sub
 
     Public Sub toUpdateInfo(ByVal id As Integer)
         If id > 0 Then
@@ -402,7 +414,7 @@
 
             Dim measure As New DatabaseConnect
             With measure
-                dgvMeasurement.Rows.Clear()
+                dgvMeasure.Rows.Clear()
                 .selectByQuery("select pu.barcode,b.name as brand, u.name as unit, pu.price from ((product_unit as pu 
                                 INNER JOIN brand as b ON b.id = pu.brand) 
                                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -414,8 +426,8 @@
                         Dim unit As String = .dr.GetValue(2)
                         Dim price As String = .dr.GetValue(3)
 
-                        dgvMeasurement.Rows.Add(1)
-                        dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(0).Value = barcode
+                        dgvMeasure.Rows.Add(1)
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = barcode
 
                         'Dim dtgCol As DataGridViewComboBoxColumn
                         'dtgCol = dgvMeasurement.Columns(1)
@@ -444,7 +456,7 @@
                         '    dtgCol.DisplayMember = "Value"
                         '    dtgCol.ValueMember = "Key"
                         'End With
-                        dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(3).Value = price
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = price
                     End While
                 End If
                 .cmd.Dispose()
@@ -452,8 +464,51 @@
                 .con.Close()
             End With
 
-
         End If
+    End Sub
+
+    Private Sub btnEditUnit_Click(sender As Object, e As EventArgs) Handles btnEditUnit.Click
+        If dgvMeasure.SelectedRows.Count = 1 Then
+            ProductAddUnitForm.btnAdd.Text = "Edit(->)"
+            ProductAddUnitForm.ShowDialog()
+        Else
+            MsgBox("Please select one unit of measurement!", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub dgvMeasure_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasure.CellContentClick
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvMeasure.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+        'Check if click Is on specific column 
+        If (e.ColumnIndex = dgvMeasure.Columns("col_remove").Index) Then
+            dgvMeasure.Rows.RemoveAt(e.RowIndex)
+        End If
+    End Sub
+
+    Private Sub txtProduct_MouseLeave(sender As Object, e As EventArgs) Handles txtProduct.MouseLeave
+        If Trim(txtProduct.Text).Length > 0 Then
+            txtProduct.Text = Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txtProduct.Text.ToLower)
+        End If
+    End Sub
+
+    Public Sub clearFields()
+        txtBarcode.Clear()
+        txtProduct.Clear()
+
+        selectedCategory = 0
+        If cbCategory.Items.Count > 0 Then
+            cbCategory.SelectedIndex = 0
+        End If
+
+        selectedSubcategory = 0
+        If cbSubcategory.Items.Count > 0 Then
+            cbSubcategory.SelectedIndex = 0
+        End If
+
+        dgvMeasure.Rows.Clear()
     End Sub
 
 End Class

@@ -8,7 +8,7 @@
         Dim db As New DatabaseConnect
         With db
             If q = "" Then
-                .selectByQuery("select id,name from brand where status = 1")
+                .selectByQuery("select id,name from brand where status = 1 order by name")
             End If
 
             If .dr.HasRows Then

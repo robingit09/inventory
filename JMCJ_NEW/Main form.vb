@@ -59,4 +59,8 @@
         Dim cp As New CustomerPriceList
         CustomerPriceList.ShowDialog()
     End Sub
+
+    Private Sub ColorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColorToolStripMenuItem.Click
+
+    End Sub
 End Class

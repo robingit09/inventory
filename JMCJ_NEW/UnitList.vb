@@ -18,7 +18,7 @@
         Dim db As New DatabaseConnect
         With db
             If q = "" Then
-                .selectByQuery("Select id,name from unit where status = 1")
+                .selectByQuery("Select id,name from unit where status = 1 order by name")
             Else
                 .selectByQuery(q)
             End If

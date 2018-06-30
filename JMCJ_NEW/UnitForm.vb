@@ -1,12 +1,30 @@
 ﻿Public Class UnitForm
     Public selectedUnit As Integer = 0
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+
         If btnSave.Text = "Save" Then
             saveData()
         ElseIf btnSave.Text = "Update" Then
             updateData()
         End If
     End Sub
+
+    Private Function validation() As Boolean
+        Dim res As Boolean = True
+        If Trim(txtUnit.Text) = "" Then
+            res = False
+            MsgBox("Unit name field is required!", MsgBoxStyle.Critical)
+            txtUnit.Focus()
+        End If
+
+        If New DatabaseConnect().isExist("unit", "name", txtUnit.Text.ToUpper) Then
+            res = False
+            MsgBox("Unit name is already exist!", MsgBoxStyle.Critical)
+            txtUnit.Focus()
+            txtUnit.SelectAll()
+        End If
+        Return res
+    End Function
 
     Public Sub toUpdateInfo(ByVal id As Integer)
         If id > 0 Then
@@ -31,7 +49,7 @@
         database.cmd.CommandText = "INSERT INTO Unit([name],[status],[created_at],[updated_at])" &
         "VALUES(@name,@status,@created_at,@updated_at)"
 
-        database.cmd.Parameters.AddWithValue("@name", txtUnit.Text)
+        database.cmd.Parameters.AddWithValue("@name", toCapitalFirst(txtUnit.Text))
         database.cmd.Parameters.AddWithValue("@st", 1)
         database.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.Date.ToString)
         database.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.Date.ToString)
@@ -64,4 +82,16 @@
     Private Sub UnitForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtUnit.Focus()
     End Sub
+
+    Private Sub txtUnit_MouseLeave(sender As Object, e As EventArgs) Handles txtUnit.MouseLeave
+        If Trim(txtUnit.Text).Length > 0 Then
+            txtUnit.Text = toCapitalFirst(txtUnit.Text)
+        End If
+    End Sub
+
+    Private Function toCapitalFirst(ByVal str As String) As String
+        Dim result As String
+        result = str.Substring(0, 1).ToUpper() + str.Substring(1)
+        Return result
+    End Function
 End Class

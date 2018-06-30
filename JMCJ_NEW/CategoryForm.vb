@@ -1,6 +1,6 @@
 ﻿Public Class CategoryForm
 
-
+    Public selectedParent As Integer
     Public SelectedID As Integer = 0
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
@@ -52,8 +52,8 @@
         database.cmd.CommandText = "INSERT INTO categories([parent_id],[name],[status],[created_at],[updated_at])" &
         "VALUES(@parent_id,@name,@status,@created_at,@updated_at)"
 
-        database.cmd.Parameters.AddWithValue("@parent_id", If((SelectedID > 0), SelectedID, 0))
-        database.cmd.Parameters.AddWithValue("@name", txtName.Text)
+        database.cmd.Parameters.AddWithValue("@parent_id", selectedParent)
+        database.cmd.Parameters.AddWithValue("@name", txtName.Text.ToUpper)
         database.cmd.Parameters.AddWithValue("@st", 1)
         database.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
         database.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -70,7 +70,13 @@
         Try
             Dim db As New DatabaseConnect
             db.cmd.CommandType = CommandType.Text
-            db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
+
+            If SelectedID > 0 Then
+                db.cmd.CommandText = "UPDATE categories set [parent_id] = '" & selectedParent & "',[name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
+            Else
+                db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
+            End If
+
             db.cmd.Connection = db.con
             db.cmd.ExecuteNonQuery()
             db.cmd.Dispose()
@@ -96,7 +102,7 @@
         comboSource.Add(0, "Select Category")
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
+            .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0 order by name")
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
@@ -118,9 +124,14 @@
         If cbParent.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbParent.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbParent.SelectedItem, KeyValuePair(Of String, String)).Value
-            SelectedID = CInt(key)
+            selectedParent = CInt(key)
+        Else
+            selectedParent = 0
         End If
 
+    End Sub
 
+    Private Sub txtName_MouseLeave(sender As Object, e As EventArgs) Handles txtName.MouseLeave
+        txtName.Text = txtName.Text.ToUpper
     End Sub
 End Class

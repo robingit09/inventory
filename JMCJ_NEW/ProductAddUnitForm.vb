@@ -53,21 +53,62 @@
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         'validation
-        If Trim(txtBarcode.Text).Length = 0 Then
-            MsgBox("Barcode fields required!", MsgBoxStyle.Critical)
-            txtBarcode.Focus()
-            Exit Sub
-        End If
 
         If Not selectedUnit > 0 Then
-            MsgBox("Unit fields required!", MsgBoxStyle.Critical)
+            MsgBox("Unit field required!", MsgBoxStyle.Critical)
             cbUnit.Focus()
             Exit Sub
         End If
 
-        Dim row As String() = New String() {txtBarcode.Text, cbBrand.Text, cbUnit.Text, txtPrice.Text, "Remove"}
-        ProductForm.dgvMeasure.Rows.Add(row)
+        If Trim(txtPrice.Text).Length = 0 Then
+            MsgBox("Price field required!", MsgBoxStyle.Critical)
+            txtPrice.Focus()
+            Exit Sub
+        End If
 
+        If Not IsNumeric(txtPrice.Text) Then
+            MsgBox("Price field! Invalid number format.", MsgBoxStyle.Critical)
+            txtPrice.Focus()
+            Exit Sub
+        End If
+
+        If Val(txtPrice.Text) <= 0 Then
+            MsgBox("Price must be greater than 0", MsgBoxStyle.Critical)
+            txtPrice.Focus()
+            Exit Sub
+        End If
+
+        ' check if exist
+        For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
+            If item.Cells(1).Value <> "" Then
+                Dim barcode As String = item.Cells(0).Value
+                Dim brand As String = item.Cells(1).Value.ToString.ToUpper
+                Dim unit As String = item.Cells(2).Value.ToString.ToUpper
+                Dim price As Double = CDbl(item.Cells(3).Value)
+
+                If barcode = Trim(txtBarcode.Text) And brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) Then
+                    MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
+            End If
+        Next
+
+        If btnAdd.Text = "Add(+)" Then
+            Dim row As String() = New String() {txtBarcode.Text, cbBrand.Text, cbUnit.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
+            ProductForm.dgvMeasure.Rows.Add(row)
+
+        ElseIf btnAdd.Text = "Edit(->)" Then
+            ProductForm.dgvMeasure.SelectedRows(0).Cells("barcode").Value = txtBarcode.Text
+            ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text
+            ProductForm.dgvMeasure.SelectedRows(0).Cells("unit").Value = cbUnit.Text
+            ProductForm.dgvMeasure.SelectedRows(0).Cells("price").Value = txtPrice.Text
+        End If
+
+        txtBarcode.Clear()
+        cbBrand.SelectedIndex = 0
+        cbUnit.SelectedIndex = 0
+        txtPrice.Clear()
+        txtBarcode.Focus()
     End Sub
 
     Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged

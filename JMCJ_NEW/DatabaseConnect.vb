@@ -81,7 +81,6 @@ Public Class DatabaseConnect
         cmd.CommandType = CommandType.Text
         cmd.CommandText = "DELETE FROM " & table & " WHERE " & column & " = " & id
         cmd.ExecuteNonQuery()
-
     End Sub
 
     Function isExist(ByVal table As String, ByVal column As String, ByVal val As String) As Boolean

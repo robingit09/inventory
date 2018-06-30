@@ -166,7 +166,7 @@ Partial Class ProductList
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(411, 18)
+        Me.Label3.Location = New System.Drawing.Point(430, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(41, 15)
         Me.Label3.TabIndex = 5
@@ -191,7 +191,7 @@ Partial Class ProductList
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(458, 15)
+        Me.TextBox2.Location = New System.Drawing.Point(477, 15)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(130, 22)
         Me.TextBox2.TabIndex = 4
@@ -201,9 +201,9 @@ Partial Class ProductList
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(84, 15)
+        Me.Label1.Size = New System.Drawing.Size(117, 15)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Product Name"
+        Me.Label1.Text = "Product Description"
         '
         'TextBox1
         '
@@ -216,15 +216,15 @@ Partial Class ProductList
         '
         Me.btnAdd.Location = New System.Drawing.Point(23, 12)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(103, 34)
         Me.btnAdd.TabIndex = 22
-        Me.btnAdd.Text = "Add"
+        Me.btnAdd.Text = "Add New(+)"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(132, 12)
+        Me.btnUpdate.Location = New System.Drawing.Point(152, 12)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(94, 34)
         Me.btnUpdate.TabIndex = 23
@@ -234,9 +234,9 @@ Partial Class ProductList
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(252, 12)
+        Me.Button4.Location = New System.Drawing.Point(280, 12)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 34)
+        Me.Button4.Size = New System.Drawing.Size(90, 34)
         Me.Button4.TabIndex = 24
         Me.Button4.Text = "Delete"
         Me.Button4.UseVisualStyleBackColor = True

@@ -22,33 +22,33 @@ Partial Class CustomerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.cbCompanyStatus = New System.Windows.Forms.ComboBox
-        Me.txtOwnerAddress = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.txtOwner = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.txtEmail = New System.Windows.Forms.TextBox
-        Me.txtCity = New System.Windows.Forms.TextBox
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.txtTin = New System.Windows.Forms.TextBox
-        Me.txtFax = New System.Windows.Forms.TextBox
-        Me.txtContact2 = New System.Windows.Forms.TextBox
-        Me.txtContact1 = New System.Windows.Forms.TextBox
-        Me.txtAddress = New System.Windows.Forms.TextBox
-        Me.txtContactPerson = New System.Windows.Forms.TextBox
-        Me.txtCompany = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.cbLedgerType = New System.Windows.Forms.ComboBox
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbCompanyStatus = New System.Windows.Forms.ComboBox()
+        Me.txtOwnerAddress = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtOwner = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.txtTin = New System.Windows.Forms.TextBox()
+        Me.txtFax = New System.Windows.Forms.TextBox()
+        Me.txtContact2 = New System.Windows.Forms.TextBox()
+        Me.txtContact1 = New System.Windows.Forms.TextBox()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.txtContactPerson = New System.Windows.Forms.TextBox()
+        Me.txtCompany = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.cbLedgerType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Label12

@@ -40,13 +40,14 @@ Partial Class Main_form
         Me.lblTime = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem, Me.ColorToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(926, 29)
@@ -171,6 +172,12 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
+        'ColorToolStripMenuItem
+        '
+        Me.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem"
+        Me.ColorToolStripMenuItem.Size = New System.Drawing.Size(48, 25)
+        Me.ColorToolStripMenuItem.Text = "Color"
+        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -210,4 +217,5 @@ Partial Class Main_form
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents PriceListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BrandToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColorToolStripMenuItem As ToolStripMenuItem
 End Class
