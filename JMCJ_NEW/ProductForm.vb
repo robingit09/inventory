@@ -2,6 +2,7 @@
     Public selectedProduct As Integer = 0
     Private selectedCategory As Integer = 0
     Private selectedSubcategory As Integer = 0
+    Private selectedColor As Integer = 0
     Private Sub saveData()
 
         Dim prod_id = 0
@@ -25,6 +26,9 @@
 
                 .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id) VALUES(" & prod_id & "," & selectedSubcategory & ")"
                 .cmd.ExecuteNonQuery()
+
+                .cmd.CommandText = "INSERT INTO product_color (product_id,color) VALUES(" & prod_id & "," & selectedColor & ")"
+                .cmd.ExecuteNonQuery()
                 .cmd.Dispose()
                 .con.Close()
             End With
@@ -38,14 +42,12 @@
 
             If dgvMeasure.Rows.Count > 0 Then
                 For Each row As DataGridViewRow In dgvMeasure.Rows
-                    Dim barcode As String = row.Cells("barcode").Value
-                    Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
-                    Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
-                    Dim price As String = row.Cells("price").Value
+                    If row.Cells("unit").Value <> "" Then
+                        Dim barcode As String = row.Cells("barcode").Value
+                        Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
+                        Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
+                        Dim price As String = row.Cells("price").Value
 
-                    If brand = "" And unit = "" Then
-                        Continue For
-                    Else
                         Dim dbinsertUnit As New DatabaseConnect
                         With dbinsertUnit
                             dbinsertUnit.cmd.Connection = dbinsertUnit.con
@@ -124,16 +126,16 @@
         Dim db As New DatabaseConnect
         With db
             .selectByQuery("Select id,name from CATEGORIES where status = 1 and parent_id = 0")
-            If .dr.Read Then
+            If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
                     Dim name As String = .dr.GetValue(1)
                     comboSource.Add(id, name)
                 End While
-                cbCategory.DataSource = New BindingSource(comboSource, Nothing)
-                cbCategory.DisplayMember = "Value"
-                cbCategory.ValueMember = "Key"
             End If
+            cbCategory.DataSource = New BindingSource(comboSource, Nothing)
+            cbCategory.DisplayMember = "Value"
+            cbCategory.ValueMember = "Key"
             .dr.Close()
             .cmd.Dispose()
             .con.Close()
@@ -167,6 +169,30 @@
             cbSubcategory.DataSource = New BindingSource(comboSource, Nothing)
             cbSubcategory.DisplayMember = "Value"
             cbSubcategory.ValueMember = "Key"
+        End With
+    End Sub
+
+    Public Sub populateColor()
+        cbColor.DataSource = Nothing
+        cbColor.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "No Color")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from color where status <> 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbColor.DataSource = New BindingSource(comboSource, Nothing)
+            cbColor.DisplayMember = "Value"
+            cbColor.ValueMember = "Key"
         End With
     End Sub
 
@@ -292,6 +318,7 @@
             populateSubcategory(selectedCategory)
 
         ElseIf cbCategory.SelectedIndex = 0 Then
+            selectedCategory = 0
             populateSubcategory(0)
         End If
 
@@ -302,6 +329,8 @@
             Dim key As String = DirectCast(cbSubcategory.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbSubcategory.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedSubcategory = CInt(key)
+        Else
+            selectedSubcategory = 0
         End If
     End Sub
 
@@ -373,8 +402,8 @@
                 .selectByQuery("Select id,barcode,description from products where status = 1 and id = " & id)
                 If .dr.HasRows Then
                     If .dr.Read Then
-                        txtBarcode.Text = .dr.GetValue(1)
-                        txtProduct.Text = .dr.GetValue(2)
+                        txtBarcode.Text = .dr("barcode")
+                        txtProduct.Text = .dr("description")
 
                         Dim dbcategory As New DatabaseConnect
                         With dbcategory
@@ -405,6 +434,21 @@
                             .dr.Close()
                             .con.Close()
                         End With
+
+                        Dim dbcolor As New DatabaseConnect
+                        With dbcolor
+                            .selectByQuery("SELECT c.id,c.name from color as c inner join product_color as pc on pc.color = c.id where pc.product_id =  " & id)
+                            If .dr.HasRows Then
+                                If .dr.Read Then
+                                    Dim colorid As String = .dr.GetValue(0)
+                                    Dim name As String = .dr.GetValue(1)
+                                    cbColor.SelectedIndex = cbColor.FindStringExact(name)
+                                End If
+                            End If
+                            .cmd.Dispose()
+                            .dr.Close()
+                            .con.Close()
+                        End With
                     End If
                 End If
                 .cmd.Dispose()
@@ -428,6 +472,8 @@
 
                         dgvMeasure.Rows.Add(1)
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = barcode
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = brand
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = unit
 
                         'Dim dtgCol As DataGridViewComboBoxColumn
                         'dtgCol = dgvMeasurement.Columns(1)
@@ -457,6 +503,7 @@
                         '    dtgCol.ValueMember = "Key"
                         'End With
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = price
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = "Remove"
                     End While
                 End If
                 .cmd.Dispose()
@@ -509,5 +556,15 @@
         End If
 
         dgvMeasure.Rows.Clear()
+    End Sub
+
+    Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
+        If cbColor.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedColor = CInt(key)
+        Else
+            selectedColor = 0
+        End If
     End Sub
 End Class

@@ -92,6 +92,7 @@
         ProductForm.selectedProduct = 0
         ProductForm.populateCategory()
         ProductForm.populateSubcategory(0)
+        ProductForm.populateColor()
         ProductForm.clearFields()
         ProductForm.ShowDialog()
 
@@ -148,6 +149,7 @@
             ProductForm.btnSave.Text = "Update"
             ProductForm.populateCategory()
             ProductForm.populateSubcategory(0)
+            ProductForm.populateColor()
             ProductForm.toUpdateInfo(product_id)
             ProductForm.ShowDialog()
         Else

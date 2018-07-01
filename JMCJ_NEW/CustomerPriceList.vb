@@ -108,7 +108,7 @@
                     Dim unit As String = .dr.GetValue(4)
                     Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
                     Dim sell_price As String = If(.dr("sell_price") = 0, price, Val(.dr("sell_price")).ToString("N2"))
-                    Dim cat As String = .dr.GetValue(7)
+                    Dim cat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
                     Dim subcat As String = If(IsDBNull(.dr.GetValue(8)), "", .dr.GetValue(8))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)

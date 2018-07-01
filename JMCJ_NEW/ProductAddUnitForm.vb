@@ -86,7 +86,7 @@
                 Dim unit As String = item.Cells(2).Value.ToString.ToUpper
                 Dim price As Double = CDbl(item.Cells(3).Value)
 
-                If barcode = Trim(txtBarcode.Text) And brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) Then
+                If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) Then
                     MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
                     Exit Sub
                 End If

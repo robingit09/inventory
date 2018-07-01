@@ -44,6 +44,9 @@ Partial Class ProductForm
         Me.tbSupplier = New System.Windows.Forms.TabPage()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbColor = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasurement.SuspendLayout()
         CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -252,12 +255,45 @@ Partial Class ProductForm
         Me.cbColor.Size = New System.Drawing.Size(449, 23)
         Me.cbColor.TabIndex = 22
         '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(621, 132)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(59, 23)
+        Me.Button1.TabIndex = 23
+        Me.Button1.Text = "Add (+)"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(621, 176)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(59, 23)
+        Me.Button2.TabIndex = 24
+        Me.Button2.Text = "Add (+)"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(621, 221)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(59, 23)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Add (+)"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'ProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(910, 566)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cbColor)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TabControl1)
@@ -301,4 +337,7 @@ Partial Class ProductForm
     Friend WithEvents tbSupplier As TabPage
     Friend WithEvents Label3 As Label
     Friend WithEvents cbColor As ComboBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class
