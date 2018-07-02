@@ -94,6 +94,48 @@
     End Function
 
     Private Sub updateData()
+        Dim dbupdate As New DatabaseConnect
+        With dbupdate
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "Update products set barcode=?,description=?,updated_at=? where id = " & selectedProduct
+            .cmd.Parameters.AddWithValue("@barcode", txtBarcode.Text)
+            .cmd.Parameters.AddWithValue("@description", txtProduct.Text)
+            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.ExecuteNonQuery()
+
+            .delete_permanent("product_unit", "product_id", selectedProduct)
+            Dim cmd2 As New System.Data.OleDb.OleDbCommand
+            cmd2.Connection = .con
+            cmd2.CommandType = CommandType.Text
+            For Each item As DataGridViewRow In Me.dgvMeasure.Rows
+                Dim barcode As String = dgvMeasure.Rows(item.Index).Cells("barcode").Value
+                Dim brand As Integer = .get_id("brand", "name", dgvMeasure.Rows(item.Index).Cells("brand").Value)
+                Dim unit As Integer = .get_id("unit", "name", dgvMeasure.Rows(item.Index).Cells("unit").Value)
+                Dim price As String = dgvMeasure.Rows(item.Index).Cells("price").Value
+
+                If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("unit").Value)) Then
+                    cmd2.CommandText = "INSERT INTO product_unit(product_id,brand,unit,barcode,price,created_at,updated_at)
+                    VALUES(?,?,?,?,?,?,?)"
+                    cmd2.Parameters.AddWithValue("@product_id", selectedProduct)
+                    cmd2.Parameters.AddWithValue("@brand", brand)
+                    cmd2.Parameters.AddWithValue("@unit", unit)
+                    cmd2.Parameters.AddWithValue("@barcode", barcode)
+                    cmd2.Parameters.AddWithValue("@price", price)
+                    cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                    cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                    cmd2.ExecuteNonQuery()
+                    cmd2.Parameters.Clear()
+                End If
+            Next
+            cmd2.Dispose()
+            .cmd.Dispose()
+            .con.Close()
+            MsgBox("Product Order Successfully Update.", MsgBoxStyle.Information)
+            clearFields()
+            Me.Close()
+            ProductList.loadList("")
+        End With
 
         '        Dim database As New DatabaseConnect
         '        database.dbConnect()
@@ -474,35 +516,7 @@
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = barcode
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = brand
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = unit
-
-                        'Dim dtgCol As DataGridViewComboBoxColumn
-                        'dtgCol = dgvMeasurement.Columns(1)
-
-                        ''dtgCol = dgvMeasurement.Rows(dgvMeasurement.Rows.Count - 2).Cells(1)
-
-                        'dtgCol.DisplayMember = "Value"
-                        'dtgCol.ValueMember = "Key"
-
-
-
-                        'Dim comboSource As New Dictionary(Of String, String)()
-                        ''comboSource.Add(0, "Select Brand")
-                        'Dim dbbrand As New DatabaseConnect
-                        'With dbbrand
-                        '    .selectByQuery("Select id,name from brand where status = 1")
-                        '    If .dr.HasRows Then
-                        '        While .dr.Read
-                        '            comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
-                        '        End While
-                        '    End If
-                        '    .cmd.Dispose()
-                        '    .dr.Close()
-                        '    .con.Close()
-                        '    dtgCol.DataSource = New BindingSource(comboSource, Nothing)
-                        '    dtgCol.DisplayMember = "Value"
-                        '    dtgCol.ValueMember = "Key"
-                        'End With
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = price
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = Val(price).ToString("N2")
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = "Remove"
                     End While
                 End If

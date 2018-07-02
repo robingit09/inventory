@@ -66,7 +66,7 @@
                     Dim desc As String = .dr.GetValue(2)
                     Dim brand As String = .dr.GetValue(3)
                     Dim unit As String = .dr.GetValue(4)
-                    Dim price As String = .dr.GetValue(5)
+                    Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
                     Dim cat As String = .dr.GetValue(6)
                     Dim subcat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
                     Dim row As String() = New String() {id, barcode, desc, brand, unit, price, "", cat, subcat}
@@ -146,6 +146,7 @@
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If dgvProducts.SelectedRows.Count = 1 Then
             Dim product_id As Integer = CInt(dgvProducts.SelectedRows(0).Cells(0).Value)
+            ProductForm.selectedProduct = product_id
             ProductForm.btnSave.Text = "Update"
             ProductForm.populateCategory()
             ProductForm.populateSubcategory(0)
@@ -153,9 +154,8 @@
             ProductForm.toUpdateInfo(product_id)
             ProductForm.ShowDialog()
         Else
+            ProductForm.selectedProduct = 0
             MsgBox("Please select one record!", MsgBoxStyle.Critical)
         End If
     End Sub
-
-
 End Class
