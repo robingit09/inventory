@@ -33,9 +33,28 @@
                     Dim price As String = .dr.GetValue(5)
                     Dim cat As String = .dr.GetValue(6)
                     Dim subcat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
-                    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, "0.00", cat, subcat}
-                    dgvProducts.Rows.Add(row)
+
+                    Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
+                    Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
+                    Dim cmd2 As New System.Data.OleDb.OleDbCommand
+                    Dim dr2 As System.Data.OleDb.OleDbDataReader
+                    cmd2.Connection = .con
+                    cmd2.CommandType = CommandType.Text
+                    cmd2.CommandText = "Select * from customer_product_prices where product_id = " & id & " 
+                    and brand = " & b_id & " and unit = " & u_id
+                    dr2 = cmd2.ExecuteReader
+
+                    If dr2.Read Then
+
+                    Else
+                        Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, "0.00", cat, subcat}
+                        dgvProducts.Rows.Add(row)
+                    End If
+                    dr2.Close()
+                    cmd2.Dispose()
                 End While
+            Else
+                MsgBox("No product found")
             End If
             .dr.Close()
             .cmd.Dispose()

@@ -76,6 +76,8 @@
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
             getList("", selectedCustomer)
+        Else
+            selectedCustomer = 0
         End If
     End Sub
 
@@ -84,16 +86,16 @@
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                .selectByQuery("Select distinct pu.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,pu.price as price,cpp.sell_price, c.name, sub.name
-                from ((((((((product_unit as pu
-                INNER JOIN products as p on p.id = pu.product_id)
-                INNER JOIN customer_product_prices as cpp on cpp.product_id = p.id)
-                LEFT JOIN brand as b on b.id = cpp.brand)
+                .selectByQuery("Select distinct cpp.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,cpp.sell_price,c.name as cat, subc.name as subcat
+                from ((((((((customer_product_prices as cpp
+                INNER JOIN products as p ON p.id = cpp.product_id)
+                INNER JOIN brand as b on b.id = cpp.brand)
                 INNER JOIN unit as u on u.id = cpp.unit)
-                LEFT JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
-                LEFT JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
-                LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id) 
+                INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id)
+                INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
+                INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
+                INNER JOIN categories as c ON c.id = pc.category_id)
+                INNER JOIN categories as subc ON subc.id = psc.subcategory_id)
                 where cpp.customer_id = " & customer_id)
             End If
 
@@ -101,15 +103,30 @@
             If .dr.HasRows Then
                 recordfound = True
                 While .dr.Read
-                    Dim id As String = .dr.GetValue(0)
-                    Dim barcode As String = .dr.GetValue(1)
-                    Dim desc As String = .dr.GetValue(2)
-                    Dim brand As String = If(IsDBNull(.dr.GetValue(3)), "", .dr.GetValue(3))
-                    Dim unit As String = .dr.GetValue(4)
-                    Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
+                    Dim id As String = .dr("product_id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim price As String = "0.00"
+
+                    Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
+                    Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
+                    Dim db2 As New DatabaseConnect
+                    With db2
+                        .selectByQuery("Select price from product_unit where product_id = " & id &
+                            " and unit = " & u_id & " and brand = " & b_id)
+                        If .dr.Read Then
+                            price = CInt(.dr("price")).ToString("N2")
+                        End If
+                        .cmd.Dispose()
+                        .dr.Close()
+                        .con.Close()
+                    End With
+
                     Dim sell_price As String = If(.dr("sell_price") = 0, price, Val(.dr("sell_price")).ToString("N2"))
-                    Dim cat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
-                    Dim subcat As String = If(IsDBNull(.dr.GetValue(8)), "", .dr.GetValue(8))
+                    Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
+                    Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
@@ -203,13 +220,13 @@
         If dgvPriceList.Rows.Count > 0 Then
             If ckSelectAll.Checked = True Then
                 For Each item As DataGridViewRow In Me.dgvPriceList.Rows
-                    If dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value <> "" Then
+                    If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
                         dgvPriceList.Rows(item.Index).Cells(1).Value = True
                     End If
                 Next
             Else
                 For Each item As DataGridViewRow In Me.dgvPriceList.Rows
-                    If dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value <> "" Then
+                    If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
                         dgvPriceList.Rows(item.Index).Cells(1).Value = False
                     End If
                 Next
@@ -220,5 +237,53 @@
 
     Private Sub CustomerPriceList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getCustomer()
+    End Sub
+
+    Private Sub btnDeleteProduct_Click(sender As Object, e As EventArgs) Handles btnDeleteProduct.Click
+
+        'validation
+        Dim valid As Boolean = False
+        For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+            Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
+            If selectedproduct Then
+                valid = True
+            End If
+        Next
+
+        If valid = False Then
+            MsgBox("Please select a product you want to delete!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Dim yesno = MsgBox("Are you sure you want to delete selected products ? ", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
+        If yesno = MsgBoxResult.Yes Then
+            For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+                Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
+                If selectedproduct Then
+                    Dim prod_id As String = dgvPriceList.Rows(item.Index).Cells("id").Value
+                    Dim brand As String = dgvPriceList.Rows(item.Index).Cells("Brand").Value
+                    Dim unit As String = dgvPriceList.Rows(item.Index).Cells("Unit").Value
+
+                    Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
+                    Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
+
+                    Dim dbdelete As New DatabaseConnect
+                    With dbdelete
+                        .cmd.Connection = .con
+                        .cmd.CommandType = CommandType.Text
+                        .cmd.CommandText = "delete from customer_product_prices where customer_id = " & selectedCustomer & " and 
+                        product_id = " & prod_id & " and brand = " & b_id & " and unit = " & u_id
+                        .cmd.ExecuteNonQuery()
+                        .cmd.Dispose()
+                        .con.Close()
+                    End With
+                    'Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", sell_price, "0.00", "", "Remove"}
+                    'LedgerForm.dgvProd.Rows.Add(row)
+                End If
+            Next
+            getList("", selectedCustomer)
+        End If
+
+
     End Sub
 End Class

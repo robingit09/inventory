@@ -23,16 +23,6 @@ Partial Class CustomerPriceList
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgvPriceList = New System.Windows.Forms.DataGridView()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selectproduct = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.btnAdd = New System.Windows.Forms.Button()
@@ -40,85 +30,27 @@ Partial Class CustomerPriceList
         Me.btnUpdatePrice = New System.Windows.Forms.Button()
         Me.btnDeleteProduct = New System.Windows.Forms.Button()
         Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selectproduct = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgvPriceList
         '
         Me.dgvPriceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.sell_price, Me.Category, Me.Subcategory})
+        Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.desc, Me.Brand, Me.Unit, Me.UnitPrice, Me.sell_price, Me.Category, Me.Subcategory})
         Me.dgvPriceList.Location = New System.Drawing.Point(12, 156)
         Me.dgvPriceList.Name = "dgvPriceList"
-        Me.dgvPriceList.Size = New System.Drawing.Size(1057, 358)
+        Me.dgvPriceList.Size = New System.Drawing.Size(1109, 358)
         Me.dgvPriceList.TabIndex = 21
-        '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'selectproduct
-        '
-        Me.selectproduct.HeaderText = "Select"
-        Me.selectproduct.Name = "selectproduct"
-        Me.selectproduct.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.selectproduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.selectproduct.Width = 50
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        Me.Barcode.Width = 150
-        '
-        'ProductDescription
-        '
-        Me.ProductDescription.HeaderText = "Product Description"
-        Me.ProductDescription.Name = "ProductDescription"
-        Me.ProductDescription.ReadOnly = True
-        Me.ProductDescription.Width = 200
-        '
-        'Brand
-        '
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'UnitPrice
-        '
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        '
-        'sell_price
-        '
-        Me.sell_price.HeaderText = "Sell Price"
-        Me.sell_price.Name = "sell_price"
-        Me.sell_price.ReadOnly = True
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
         '
         'Label1
         '
@@ -191,6 +123,75 @@ Partial Class CustomerPriceList
         Me.ckSelectAll.Text = "Select All"
         Me.ckSelectAll.UseVisualStyleBackColor = True
         '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'selectproduct
+        '
+        Me.selectproduct.HeaderText = "Select"
+        Me.selectproduct.Name = "selectproduct"
+        Me.selectproduct.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.selectproduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.selectproduct.Width = 50
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        Me.Barcode.Width = 150
+        '
+        'desc
+        '
+        Me.desc.HeaderText = "Product Description"
+        Me.desc.Name = "desc"
+        Me.desc.ReadOnly = True
+        Me.desc.Width = 200
+        '
+        'Brand
+        '
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'UnitPrice
+        '
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        '
+        'sell_price
+        '
+        Me.sell_price.HeaderText = "Sell Price"
+        Me.sell_price.Name = "sell_price"
+        Me.sell_price.ReadOnly = True
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 150
+        '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -218,16 +219,16 @@ Partial Class CustomerPriceList
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnCreateOrder As Button
     Friend WithEvents btnUpdatePrice As Button
+    Friend WithEvents btnDeleteProduct As Button
+    Friend WithEvents ckSelectAll As CheckBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents selectproduct As DataGridViewCheckBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
-    Friend WithEvents ProductDescription As DataGridViewTextBoxColumn
+    Friend WithEvents desc As DataGridViewTextBoxColumn
     Friend WithEvents Brand As DataGridViewTextBoxColumn
     Friend WithEvents Unit As DataGridViewTextBoxColumn
     Friend WithEvents UnitPrice As DataGridViewTextBoxColumn
     Friend WithEvents sell_price As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
-    Friend WithEvents btnDeleteProduct As Button
-    Friend WithEvents ckSelectAll As CheckBox
 End Class
