@@ -41,7 +41,7 @@
                     cmd2.Connection = .con
                     cmd2.CommandType = CommandType.Text
                     cmd2.CommandText = "Select * from customer_product_prices where product_id = " & id & " 
-                    and brand = " & b_id & " and unit = " & u_id
+                    and brand = " & b_id & " and unit = " & u_id & " and customer_id = " & selectedCustomer
                     dr2 = cmd2.ExecuteReader
 
                     If dr2.Read Then
