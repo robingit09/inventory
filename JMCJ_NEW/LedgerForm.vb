@@ -995,7 +995,6 @@
             SelectedProdID = key
             populateBrand(SelectedProdID)
             populateUnit(SelectedProdID)
-
         End If
     End Sub
 
@@ -1004,6 +1003,8 @@
             Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
             SelectedBrand = key
+        Else
+            SelectedBrand = 0
         End If
     End Sub
 
@@ -1012,6 +1013,8 @@
             Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
             SelectedUnit = key
+        Else
+            SelectedUnit = 0
         End If
     End Sub
 

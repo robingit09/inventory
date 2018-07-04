@@ -1,12 +1,20 @@
 ﻿Public Class ProductAddUnitForm
-    Private selectedBrand As Integer
-    Private selectedUnit As Integer
+    Private selectedBrand As Integer = 0
+    Private selectedUnit As Integer = 0
     Private Sub ProductAddUnitForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadBrand()
-        loadUnit()
+
     End Sub
 
-    Private Sub loadBrand()
+    Public Sub resetFields()
+        txtBarcode.Clear()
+        cbBrand.SelectedIndex = 0
+        cbUnit.SelectedIndex = 0
+        txtPrice.Clear()
+        selectedBrand = 0
+        selectedUnit = 0
+    End Sub
+
+    Public Sub loadBrand()
 
         cbBrand.DataSource = Nothing
         cbBrand.Items.Clear()
@@ -30,7 +38,7 @@
         End With
     End Sub
 
-    Private Sub loadUnit()
+    Public Sub loadUnit()
 
         cbUnit.DataSource = Nothing
         cbUnit.Items.Clear()
@@ -78,22 +86,23 @@
             Exit Sub
         End If
 
-        ' check if exist
-        For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
-            If item.Cells(1).Value <> "" Then
-                Dim barcode As String = item.Cells(0).Value
-                Dim brand As String = item.Cells(1).Value.ToString.ToUpper
-                Dim unit As String = item.Cells(2).Value.ToString.ToUpper
-                Dim price As Double = CDbl(item.Cells(3).Value)
 
-                If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) Then
-                    MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
-                    Exit Sub
-                End If
-            End If
-        Next
 
         If btnAdd.Text = "Add(+)" Then
+            ' check if exist
+            For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
+                If item.Cells(1).Value <> "" Then
+                    Dim barcode As String = item.Cells(0).Value
+                    Dim brand As String = item.Cells(1).Value.ToString.ToUpper
+                    Dim unit As String = item.Cells(2).Value.ToString.ToUpper
+                    Dim price As Double = CDbl(item.Cells(3).Value)
+
+                    If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) Then
+                        MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+                        Exit Sub
+                    End If
+                End If
+            Next
             Dim row As String() = New String() {txtBarcode.Text, cbBrand.Text, cbUnit.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
             ProductForm.dgvMeasure.Rows.Add(row)
 
@@ -102,6 +111,7 @@
             ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("unit").Value = cbUnit.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("price").Value = txtPrice.Text
+            Me.Close()
         End If
 
         txtBarcode.Clear()
@@ -112,18 +122,23 @@
     End Sub
 
     Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
-        If cbBrand.SelectedIndex > -1 Then
+        If cbBrand.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedBrand = key
+        Else
+            selectedBrand = 0
         End If
     End Sub
 
     Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
-        If cbUnit.SelectedIndex > -1 Then
+        If cbUnit.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedUnit = key
+        Else
+            selectedUnit = 0
         End If
     End Sub
+
 End Class

@@ -1,8 +1,8 @@
 ﻿Public Class ProductForm
     Public selectedProduct As Integer = 0
-    Private selectedCategory As Integer = 0
-    Private selectedSubcategory As Integer = 0
-    Private selectedColor As Integer = 0
+    Public selectedCategory As Integer = 0
+    Public selectedSubcategory As Integer = 0
+    Public selectedColor As Integer = 0
     Private Sub saveData()
 
         Dim prod_id = 0
@@ -376,65 +376,13 @@
         End If
     End Sub
 
-    Private Sub btnAddMoreUnit_Click(sxxender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
-        'dgvMeasurement.Rows.Add(1)
+    Private Sub btnAddMoreUnit_Click(sender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
         ProductAddUnitForm.btnAdd.Text = "Add(+)"
+        ProductAddUnitForm.loadBrand()
+        ProductAddUnitForm.loadUnit()
+        ProductAddUnitForm.resetFields()
         ProductAddUnitForm.ShowDialog()
     End Sub
-
-
-    'Private Sub dgvMeasurement_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs)
-    '    If dgvMeasurement.Rows.Count <> 1 Then
-    '        Try
-    '            Dim dtgCol As DataGridViewComboBoxCell
-    '            Dim comboColumn As New DataGridViewComboBoxColumn
-
-    '            dgvMeasurement.Rows(e.RowIndex).Cells(0).Value = ""
-    '            dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(1)
-
-    '            comboColumn = dgvMeasurement.Columns("brand")
-    '            Dim comboSource As New Dictionary(Of String, String)()
-
-    '            Dim dbbrand As New DatabaseConnect
-    '            With dbbrand
-    '                .selectByQuery("Select id,name from brand where status = 1")
-    '                If .dr.HasRows Then
-    '                    While .dr.Read
-    '                        comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
-
-    '                    End While
-    '                End If
-    '                .cmd.Dispose()
-    '                .dr.Close()
-    '                .con.Close()
-    '                'dtgCol.DataSource = New BindingSource(comboSource, Nothing)
-    '                'dtgCol.DisplayMember = "Value"
-    '                'dtgCol.ValueMember = "Key"
-    '                comboColumn.DataSource = New BindingSource(comboSource, Nothing)
-    '                comboColumn.DisplayMember = "Value"
-    '                comboColumn.ValueMember = "Key"
-    '            End With
-
-    '            Dim comboSourceUnit As New Dictionary(Of String, String)()
-    '            dtgCol = dgvMeasurement.Rows(e.RowIndex).Cells(2)
-    '            Dim dbUnit As New DatabaseConnect
-    '            With dbUnit
-    '                .selectByQuery("Select id,name from unit where status = 1")
-    '                If .dr.HasRows Then
-    '                    While .dr.Read
-    '                        comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
-    '                    End While
-    '                End If
-    '                dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
-    '                dtgCol.DisplayMember = "Value"
-    '                dtgCol.ValueMember = "Key"
-    '            End With
-    '            dgvMeasurement.Rows(e.RowIndex).Cells(4).Value = "Remove -"
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-    '    End If
-    'End Sub
 
     Public Sub toUpdateInfo(ByVal id As Integer)
         If id > 0 Then
@@ -529,11 +477,22 @@
     End Sub
 
     Private Sub btnEditUnit_Click(sender As Object, e As EventArgs) Handles btnEditUnit.Click
+        If dgvMeasure.Rows.Count = 1 Then
+            MsgBox("No measurement list found", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
         If dgvMeasure.SelectedRows.Count = 1 Then
+
+            ProductAddUnitForm.loadBrand()
+            ProductAddUnitForm.loadUnit()
             ProductAddUnitForm.btnAdd.Text = "Edit(->)"
+            ProductAddUnitForm.txtBarcode.Text = dgvMeasure.SelectedRows(0).Cells("barcode").Value
+            ProductAddUnitForm.cbBrand.SelectedIndex = ProductAddUnitForm.cbBrand.FindString(dgvMeasure.SelectedRows(0).Cells("brand").Value)
+            ProductAddUnitForm.cbUnit.SelectedIndex = ProductAddUnitForm.cbUnit.FindString(dgvMeasure.SelectedRows(0).Cells("unit").Value)
+            ProductAddUnitForm.txtPrice.Text = dgvMeasure.SelectedRows(0).Cells("price").Value
             ProductAddUnitForm.ShowDialog()
         Else
-            MsgBox("Please select one unit of measurement!", MsgBoxStyle.Critical)
+            MsgBox("Please select unit of measurement!", MsgBoxStyle.Critical)
         End If
     End Sub
 
@@ -580,5 +539,40 @@
         Else
             selectedColor = 0
         End If
+    End Sub
+
+    Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
+        CategoryForm.selectedParent = 0
+        CategoryForm.txtName.Text = ""
+        CategoryForm.cbParent.Enabled = False
+        CategoryForm.btnSave.Text = "Save"
+        CategoryForm.ShowDialog()
+    End Sub
+
+    Private Sub btnSubCat_Click(sender As Object, e As EventArgs) Handles btnSubCat.Click
+        'validation
+        If selectedCategory <= 0 Then
+            MsgBox("Please select Category before you add Sub Category", MsgBoxStyle.Critical)
+            cbCategory.Focus()
+            Exit Sub
+        End If
+
+        CategoryForm.selectedParent = selectedCategory
+        CategoryForm.SelectedID = 0
+        CategoryForm.populateCategory()
+        CategoryForm.cbParent.SelectedIndex = CategoryForm.cbParent.FindString(cbCategory.Text)
+        CategoryForm.txtName.Text = ""
+        CategoryForm.cbParent.Enabled = False
+        CategoryForm.btnSave.Text = "Save"
+        CategoryForm.ShowDialog()
+    End Sub
+
+    Private Sub ProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub btnAddColor_Click(sender As Object, e As EventArgs) Handles btnAddColor.Click
+        ColorForm.selectedColor = 0
+        ColorForm.ShowDialog()
     End Sub
 End Class

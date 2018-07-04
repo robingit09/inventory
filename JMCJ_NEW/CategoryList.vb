@@ -1,9 +1,11 @@
 ﻿Public Class CategoryList
 
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
-
+        CategoryForm.populateCategory()
         CategoryForm.SelectedID = 0
+        CategoryForm.selectedParent = 0
         CategoryForm.txtName.Text = ""
+        CategoryForm.cbParent.Enabled = True
         CategoryForm.btnSave.Text = "Save"
         CategoryForm.ShowDialog()
 
@@ -12,6 +14,7 @@
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If dgvCat.SelectedRows.Count = 1 Then
+            CategoryForm.populateCategory()
             CategoryForm.SelectedID = CInt(dgvCat.SelectedRows(0).Cells(0).Value)
             CategoryForm.toUpdateInfo(CategoryForm.SelectedID)
             CategoryForm.btnSave.Text = "Update"

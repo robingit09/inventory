@@ -3,16 +3,25 @@
     Public selectedParent As Integer
     Public SelectedID As Integer = 0
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If New DatabaseConnect().isExist("categories", "name", txtName.Text) Then
+            MsgBox("Already Exist!", MsgBoxStyle.Critical)
+            txtName.Focus()
+            txtName.SelectAll()
+            Exit Sub
+        End If
 
         If btnSave.Text = "Save" Then
             btnSave.Enabled = False
             saveData()
             btnSave.Enabled = True
+            ProductForm.populateCategory()
+            ProductForm.populateSubcategory(ProductForm.selectedSubcategory)
         ElseIf btnSave.Text = "Update" Then
             btnSave.Enabled = False
             UpdateData()
             btnSave.Enabled = True
         End If
+
     End Sub
 
     Public Sub toUpdateInfo(ByVal id As Integer)
@@ -29,21 +38,6 @@
             .con.Close()
         End With
     End Sub
-
-    'Public Function getParent(ByVal parent_id As Integer) As String
-    '    Dim result As String = ""
-    '    Dim db As New DatabaseConnect
-    '    With db
-    '        .selectByQuery("Select name from categories where id = " & parent_id)
-    '        If .dr.Read Then
-    '            result = .dr.GetValue(0)
-    '        End If
-    '        .cmd.Dispose()
-    '        .dr.Close()
-    '        .con.Close()
-    '    End With
-    '    Return result
-    'End Function
 
     Private Sub saveData()
 
@@ -92,7 +86,7 @@
     End Sub
 
     Private Sub CategoryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        populateCategory()
+
     End Sub
 
     Public Sub populateCategory()

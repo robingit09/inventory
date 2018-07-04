@@ -9,6 +9,7 @@
                 Exit Sub
             End If
             save()
+            ProductForm.populateColor()
         ElseIf btnSave.Text = "Update" Then
             If Validation() = False Then
                 Exit Sub
@@ -64,6 +65,11 @@
             Return result
         End If
 
+        If New DatabaseConnect().isExist("color", "name", txtColor.Text) Then
+            MsgBox("Already Exist!", MsgBoxStyle.Critical)
+            result = False
+            Return result
+        End If
         Return result
     End Function
 
