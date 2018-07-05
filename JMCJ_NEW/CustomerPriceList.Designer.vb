@@ -23,13 +23,6 @@ Partial Class CustomerPriceList
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgvPriceList = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbCustomer = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnCreateOrder = New System.Windows.Forms.Button()
-        Me.btnUpdatePrice = New System.Windows.Forms.Button()
-        Me.btnDeleteProduct = New System.Windows.Forms.Button()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selectproduct = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,6 +33,14 @@ Partial Class CustomerPriceList
         Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbCustomer = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnCreateOrder = New System.Windows.Forms.Button()
+        Me.btnUpdatePrice = New System.Windows.Forms.Button()
+        Me.btnDeleteProduct = New System.Windows.Forms.Button()
+        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.btnPrint = New System.Windows.Forms.Button()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,77 +52,6 @@ Partial Class CustomerPriceList
         Me.dgvPriceList.Name = "dgvPriceList"
         Me.dgvPriceList.Size = New System.Drawing.Size(1109, 358)
         Me.dgvPriceList.TabIndex = 21
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 26)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 15)
-        Me.Label1.TabIndex = 22
-        Me.Label1.Text = "Customer"
-        '
-        'cbCustomer
-        '
-        Me.cbCustomer.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCustomer.FormattingEnabled = True
-        Me.cbCustomer.Location = New System.Drawing.Point(90, 23)
-        Me.cbCustomer.Name = "cbCustomer"
-        Me.cbCustomer.Size = New System.Drawing.Size(223, 23)
-        Me.cbCustomer.TabIndex = 23
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(12, 61)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(115, 41)
-        Me.btnAdd.TabIndex = 24
-        Me.btnAdd.Text = "Add Product"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'btnCreateOrder
-        '
-        Me.btnCreateOrder.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreateOrder.Location = New System.Drawing.Point(929, 12)
-        Me.btnCreateOrder.Name = "btnCreateOrder"
-        Me.btnCreateOrder.Size = New System.Drawing.Size(140, 42)
-        Me.btnCreateOrder.TabIndex = 25
-        Me.btnCreateOrder.Text = "Create Customer Order"
-        Me.btnCreateOrder.UseVisualStyleBackColor = True
-        '
-        'btnUpdatePrice
-        '
-        Me.btnUpdatePrice.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdatePrice.Location = New System.Drawing.Point(144, 61)
-        Me.btnUpdatePrice.Name = "btnUpdatePrice"
-        Me.btnUpdatePrice.Size = New System.Drawing.Size(117, 41)
-        Me.btnUpdatePrice.TabIndex = 26
-        Me.btnUpdatePrice.Text = "Update Price"
-        Me.btnUpdatePrice.UseVisualStyleBackColor = True
-        '
-        'btnDeleteProduct
-        '
-        Me.btnDeleteProduct.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteProduct.Location = New System.Drawing.Point(281, 61)
-        Me.btnDeleteProduct.Name = "btnDeleteProduct"
-        Me.btnDeleteProduct.Size = New System.Drawing.Size(117, 41)
-        Me.btnDeleteProduct.TabIndex = 27
-        Me.btnDeleteProduct.Text = "Delete Product"
-        Me.btnDeleteProduct.UseVisualStyleBackColor = True
-        '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(12, 133)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 28
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -192,11 +122,93 @@ Partial Class CustomerPriceList
         Me.Subcategory.ReadOnly = True
         Me.Subcategory.Width = 150
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 26)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(58, 15)
+        Me.Label1.TabIndex = 22
+        Me.Label1.Text = "Customer"
+        '
+        'cbCustomer
+        '
+        Me.cbCustomer.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCustomer.FormattingEnabled = True
+        Me.cbCustomer.Location = New System.Drawing.Point(90, 23)
+        Me.cbCustomer.Name = "cbCustomer"
+        Me.cbCustomer.Size = New System.Drawing.Size(223, 23)
+        Me.cbCustomer.TabIndex = 23
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Location = New System.Drawing.Point(12, 61)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(115, 41)
+        Me.btnAdd.TabIndex = 24
+        Me.btnAdd.Text = "Add Product"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'btnCreateOrder
+        '
+        Me.btnCreateOrder.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreateOrder.Location = New System.Drawing.Point(981, 4)
+        Me.btnCreateOrder.Name = "btnCreateOrder"
+        Me.btnCreateOrder.Size = New System.Drawing.Size(140, 42)
+        Me.btnCreateOrder.TabIndex = 25
+        Me.btnCreateOrder.Text = "Create Customer Order"
+        Me.btnCreateOrder.UseVisualStyleBackColor = True
+        '
+        'btnUpdatePrice
+        '
+        Me.btnUpdatePrice.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdatePrice.Location = New System.Drawing.Point(144, 61)
+        Me.btnUpdatePrice.Name = "btnUpdatePrice"
+        Me.btnUpdatePrice.Size = New System.Drawing.Size(117, 41)
+        Me.btnUpdatePrice.TabIndex = 26
+        Me.btnUpdatePrice.Text = "Update Price"
+        Me.btnUpdatePrice.UseVisualStyleBackColor = True
+        '
+        'btnDeleteProduct
+        '
+        Me.btnDeleteProduct.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteProduct.Location = New System.Drawing.Point(281, 61)
+        Me.btnDeleteProduct.Name = "btnDeleteProduct"
+        Me.btnDeleteProduct.Size = New System.Drawing.Size(117, 41)
+        Me.btnDeleteProduct.TabIndex = 27
+        Me.btnDeleteProduct.Text = "Delete Product"
+        Me.btnDeleteProduct.UseVisualStyleBackColor = True
+        '
+        'ckSelectAll
+        '
+        Me.ckSelectAll.AutoSize = True
+        Me.ckSelectAll.Checked = True
+        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSelectAll.Location = New System.Drawing.Point(12, 133)
+        Me.ckSelectAll.Name = "ckSelectAll"
+        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
+        Me.ckSelectAll.TabIndex = 28
+        Me.ckSelectAll.Text = "Select All"
+        Me.ckSelectAll.UseVisualStyleBackColor = True
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(853, 4)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(122, 42)
+        Me.btnPrint.TabIndex = 29
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1213, 551)
+        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnDeleteProduct)
         Me.Controls.Add(Me.btnUpdatePrice)
@@ -231,4 +243,5 @@ Partial Class CustomerPriceList
     Friend WithEvents sell_price As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
+    Friend WithEvents btnPrint As Button
 End Class

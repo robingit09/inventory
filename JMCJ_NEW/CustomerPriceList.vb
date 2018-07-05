@@ -89,9 +89,9 @@
                 .selectByQuery("Select distinct cpp.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,cpp.sell_price,c.name as cat, subc.name as subcat
                 from ((((((((customer_product_prices as cpp
                 INNER JOIN products as p ON p.id = cpp.product_id)
+                INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id and pu.brand = cpp.brand and pu.unit = cpp.unit)
                 INNER JOIN brand as b on b.id = cpp.brand)
                 INNER JOIN unit as u on u.id = cpp.unit)
-                INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id)
                 INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
                 INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
                 INNER JOIN categories as c ON c.id = pc.category_id)
@@ -124,9 +124,9 @@
                         .con.Close()
                     End With
 
-                    Dim sell_price As String = If(.dr("sell_price") = 0, price, Val(.dr("sell_price")).ToString("N2"))
+                    Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
-                    Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
+                    Dim subcat As String = If(IsDBNull(.dr("subcat")), barcode, .dr("subcat"))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
@@ -193,7 +193,7 @@
         If dgvPriceList.SelectedRows.Count = 1 Then
             Dim customer As String = cbCustomer.Text
             Dim barcode As String = dgvPriceList.SelectedRows(0).Cells("Barcode").Value
-            Dim prod_desc As String = dgvPriceList.SelectedRows(0).Cells("ProductDescription").Value
+            Dim prod_desc As String = dgvPriceList.SelectedRows(0).Cells(3).Value
             Dim brand As String = dgvPriceList.SelectedRows(0).Cells("Brand").Value
             Dim unit As String = dgvPriceList.SelectedRows(0).Cells("Unit").Value
             Dim unit_price As String = dgvPriceList.SelectedRows(0).Cells("UnitPrice").Value
@@ -284,6 +284,22 @@
             getList("", selectedCustomer)
         End If
 
+
+    End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        If cbCustomer.SelectedIndex > 0 Then
+            Dim cpr As New CustomerPriceReport
+            cpr.RecordSelectionFormula = "{customer_product_prices.customer_id} = " & selectedCustomer
+            ReportViewer.Enabled = True
+            ReportViewer.CrystalReportViewer1.ReportSource = cpr
+            ReportViewer.CrystalReportViewer1.Refresh()
+            ReportViewer.CrystalReportViewer1.RefreshReport()
+            ReportViewer.ShowDialog()
+        Else
+            MsgBox("Please select customer!", MsgBoxStyle.Critical)
+            selectedCustomer = 0
+        End If
 
     End Sub
 End Class

@@ -56,7 +56,7 @@ Public Class DatabaseConnect
         Dim res As Integer = 0
         cmd.Connection = con
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "Select id from " & table & " Where " & col & " = '" & val & "'"
+        cmd.CommandText = "Select id from " & table & " Where " & col & " = '" & val.ToUpper & "'"
         dr = cmd.ExecuteReader
         If dr.Read Then
             res = dr.GetValue(0)
