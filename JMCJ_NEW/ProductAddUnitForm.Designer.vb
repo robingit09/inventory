@@ -31,6 +31,8 @@ Partial Class ProductAddUnitForm
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbColor = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'txtBarcode
@@ -72,9 +74,9 @@ Partial Class ProductAddUnitForm
         'txtPrice
         '
         Me.txtPrice.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrice.Location = New System.Drawing.Point(437, 44)
+        Me.txtPrice.Location = New System.Drawing.Point(583, 43)
         Me.txtPrice.Name = "txtPrice"
-        Me.txtPrice.Size = New System.Drawing.Size(114, 21)
+        Me.txtPrice.Size = New System.Drawing.Size(121, 21)
         Me.txtPrice.TabIndex = 4
         '
         'Label2
@@ -101,7 +103,7 @@ Partial Class ProductAddUnitForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(434, 24)
+        Me.Label4.Location = New System.Drawing.Point(580, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(31, 15)
         Me.Label4.TabIndex = 7
@@ -110,18 +112,39 @@ Partial Class ProductAddUnitForm
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(585, 31)
+        Me.btnAdd.Location = New System.Drawing.Point(750, 30)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(84, 45)
         Me.btnAdd.TabIndex = 8
         Me.btnAdd.Text = "Add (+)"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(433, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(34, 15)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Color"
+        '
+        'cbColor
+        '
+        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbColor.FormattingEnabled = True
+        Me.cbColor.Location = New System.Drawing.Point(436, 42)
+        Me.cbColor.Name = "cbColor"
+        Me.cbColor.Size = New System.Drawing.Size(121, 23)
+        Me.cbColor.TabIndex = 9
+        '
         'ProductAddUnitForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(706, 98)
+        Me.ClientSize = New System.Drawing.Size(876, 96)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.cbColor)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -149,4 +172,6 @@ Partial Class ProductAddUnitForm
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents btnAdd As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents cbColor As ComboBox
 End Class

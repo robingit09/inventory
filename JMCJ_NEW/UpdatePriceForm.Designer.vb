@@ -37,6 +37,8 @@ Partial Class UpdatePriceForm
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtUnitPrice = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtColor = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtCustomer
@@ -138,7 +140,7 @@ Partial Class UpdatePriceForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(26, 281)
+        Me.Label6.Location = New System.Drawing.Point(26, 326)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(55, 15)
         Me.Label6.TabIndex = 11
@@ -147,7 +149,7 @@ Partial Class UpdatePriceForm
         'txtSellPrice
         '
         Me.txtSellPrice.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSellPrice.Location = New System.Drawing.Point(150, 274)
+        Me.txtSellPrice.Location = New System.Drawing.Point(150, 319)
         Me.txtSellPrice.Name = "txtSellPrice"
         Me.txtSellPrice.Size = New System.Drawing.Size(222, 22)
         Me.txtSellPrice.TabIndex = 10
@@ -157,7 +159,7 @@ Partial Class UpdatePriceForm
         'btnUpdate
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(261, 327)
+        Me.btnUpdate.Location = New System.Drawing.Point(261, 372)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(111, 36)
         Me.btnUpdate.TabIndex = 12
@@ -168,7 +170,7 @@ Partial Class UpdatePriceForm
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(26, 246)
+        Me.Label7.Location = New System.Drawing.Point(26, 291)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(59, 15)
         Me.Label7.TabIndex = 14
@@ -177,17 +179,38 @@ Partial Class UpdatePriceForm
         'txtUnitPrice
         '
         Me.txtUnitPrice.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnitPrice.Location = New System.Drawing.Point(150, 243)
+        Me.txtUnitPrice.Location = New System.Drawing.Point(150, 288)
         Me.txtUnitPrice.Name = "txtUnitPrice"
         Me.txtUnitPrice.ReadOnly = True
         Me.txtUnitPrice.Size = New System.Drawing.Size(222, 22)
         Me.txtUnitPrice.TabIndex = 13
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(26, 252)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(36, 15)
+        Me.Label8.TabIndex = 16
+        Me.Label8.Text = "Color"
+        '
+        'txtColor
+        '
+        Me.txtColor.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtColor.Location = New System.Drawing.Point(150, 252)
+        Me.txtColor.Name = "txtColor"
+        Me.txtColor.ReadOnly = True
+        Me.txtColor.Size = New System.Drawing.Size(222, 22)
+        Me.txtColor.TabIndex = 15
+        '
         'UpdatePriceForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 387)
+        Me.ClientSize = New System.Drawing.Size(418, 465)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.txtColor)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.txtUnitPrice)
         Me.Controls.Add(Me.btnUpdate)
@@ -226,4 +249,6 @@ Partial Class UpdatePriceForm
     Friend WithEvents btnUpdate As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents txtUnitPrice As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtColor As TextBox
 End Class

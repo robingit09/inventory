@@ -64,6 +64,7 @@ Partial Class LedgerForm
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.less = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.add_less = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -77,15 +78,20 @@ Partial Class LedgerForm
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cbColor = New System.Windows.Forms.ComboBox()
+        Me.txtProductDesc = New System.Windows.Forms.TextBox()
         Me.btnAddToCart = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cbUnit = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.cbProducts = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
+        Me.txtReceivedBy = New System.Windows.Forms.TextBox()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
@@ -177,7 +183,7 @@ Partial Class LedgerForm
         Me.txtRemarks.Location = New System.Drawing.Point(756, 42)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(215, 120)
+        Me.txtRemarks.Size = New System.Drawing.Size(168, 155)
         Me.txtRemarks.TabIndex = 47
         '
         'Label11
@@ -217,9 +223,9 @@ Partial Class LedgerForm
         '
         'btnSaveAndPrint
         '
-        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1005, 71)
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1097, 65)
         Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
-        Me.btnSaveAndPrint.Size = New System.Drawing.Size(97, 37)
+        Me.btnSaveAndPrint.Size = New System.Drawing.Size(101, 37)
         Me.btnSaveAndPrint.TabIndex = 50
         Me.btnSaveAndPrint.Text = "Save and Print"
         Me.btnSaveAndPrint.UseVisualStyleBackColor = True
@@ -261,9 +267,9 @@ Partial Class LedgerForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1005, 20)
+        Me.btnSave.Location = New System.Drawing.Point(1097, 16)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(97, 37)
+        Me.btnSave.Size = New System.Drawing.Size(101, 37)
         Me.btnSave.TabIndex = 48
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -417,10 +423,10 @@ Partial Class LedgerForm
         'dgvProd
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.price, Me.less, Me.add_less, Me.Column2, Me.sell_price, Me.amount, Me.stock, Me.action})
+        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.price, Me.less, Me.add_less, Me.Column2, Me.sell_price, Me.amount, Me.stock, Me.action})
         Me.dgvProd.Location = New System.Drawing.Point(12, 367)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1347, 259)
+        Me.dgvProd.Size = New System.Drawing.Size(1452, 259)
         Me.dgvProd.TabIndex = 53
         '
         'id
@@ -459,6 +465,12 @@ Partial Class LedgerForm
         Me.unit.HeaderText = "Unit"
         Me.unit.Name = "unit"
         Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
         '
         'price
         '
@@ -551,49 +563,68 @@ Partial Class LedgerForm
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 303)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(325, 58)
+        Me.GroupBox1.Size = New System.Drawing.Size(249, 58)
         Me.GroupBox1.TabIndex = 58
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Add product using barcode"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(237, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 59
-        Me.Button1.Text = "Add to cart"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label20)
+        Me.GroupBox3.Controls.Add(Me.cbColor)
+        Me.GroupBox3.Controls.Add(Me.txtProductDesc)
         Me.GroupBox3.Controls.Add(Me.btnAddToCart)
         Me.GroupBox3.Controls.Add(Me.Label15)
         Me.GroupBox3.Controls.Add(Me.cbUnit)
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cbBrand)
         Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Controls.Add(Me.cbProducts)
         Me.GroupBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(343, 303)
+        Me.GroupBox3.Location = New System.Drawing.Point(267, 303)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(759, 58)
+        Me.GroupBox3.Size = New System.Drawing.Size(1003, 58)
         Me.GroupBox3.TabIndex = 59
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Add product by measure"
+        Me.GroupBox3.Text = "Add product"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(533, 22)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(36, 15)
+        Me.Label20.TabIndex = 66
+        Me.Label20.Text = "Color"
+        '
+        'cbColor
+        '
+        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbColor.FormattingEnabled = True
+        Me.cbColor.Location = New System.Drawing.Point(575, 21)
+        Me.cbColor.Name = "cbColor"
+        Me.cbColor.Size = New System.Drawing.Size(149, 23)
+        Me.cbColor.TabIndex = 65
+        '
+        'txtProductDesc
+        '
+        Me.txtProductDesc.Location = New System.Drawing.Point(84, 20)
+        Me.txtProductDesc.MaxLength = 32000
+        Me.txtProductDesc.Name = "txtProductDesc"
+        Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
+        Me.txtProductDesc.TabIndex = 64
         '
         'btnAddToCart
         '
         Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToCart.Location = New System.Drawing.Point(659, 12)
+        Me.btnAddToCart.Location = New System.Drawing.Point(920, 13)
         Me.btnAddToCart.Name = "btnAddToCart"
-        Me.btnAddToCart.Size = New System.Drawing.Size(90, 37)
+        Me.btnAddToCart.Size = New System.Drawing.Size(77, 37)
         Me.btnAddToCart.TabIndex = 39
         Me.btnAddToCart.Text = "Add to Cart"
         Me.btnAddToCart.UseVisualStyleBackColor = True
@@ -602,7 +633,7 @@ Partial Class LedgerForm
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(487, 24)
+        Me.Label15.Location = New System.Drawing.Point(730, 22)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(30, 15)
         Me.Label15.TabIndex = 38
@@ -612,7 +643,7 @@ Partial Class LedgerForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(523, 20)
+        Me.cbUnit.Location = New System.Drawing.Point(784, 19)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(130, 23)
         Me.cbUnit.TabIndex = 37
@@ -621,7 +652,7 @@ Partial Class LedgerForm
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(306, 24)
+        Me.Label16.Location = New System.Drawing.Point(331, 24)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(36, 15)
         Me.Label16.TabIndex = 36
@@ -631,9 +662,9 @@ Partial Class LedgerForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(351, 20)
+        Me.cbBrand.Location = New System.Drawing.Point(373, 19)
         Me.cbBrand.Name = "cbBrand"
-        Me.cbBrand.Size = New System.Drawing.Size(130, 23)
+        Me.cbBrand.Size = New System.Drawing.Size(143, 23)
         Me.cbBrand.TabIndex = 35
         '
         'Label17
@@ -646,20 +677,47 @@ Partial Class LedgerForm
         Me.Label17.TabIndex = 34
         Me.Label17.Text = "Product Desc"
         '
-        'cbProducts
+        'Label18
         '
-        Me.cbProducts.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbProducts.FormattingEnabled = True
-        Me.cbProducts.Location = New System.Drawing.Point(91, 20)
-        Me.cbProducts.Name = "cbProducts"
-        Me.cbProducts.Size = New System.Drawing.Size(199, 23)
-        Me.cbProducts.TabIndex = 33
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(947, 119)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(66, 13)
+        Me.Label18.TabIndex = 60
+        Me.Label18.Text = "Delivered by"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(947, 159)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(67, 13)
+        Me.Label19.TabIndex = 62
+        Me.Label19.Text = "Received by"
+        '
+        'txtDeliveredBy
+        '
+        Me.txtDeliveredBy.Location = New System.Drawing.Point(950, 135)
+        Me.txtDeliveredBy.Name = "txtDeliveredBy"
+        Me.txtDeliveredBy.Size = New System.Drawing.Size(241, 20)
+        Me.txtDeliveredBy.TabIndex = 67
+        '
+        'txtReceivedBy
+        '
+        Me.txtReceivedBy.Location = New System.Drawing.Point(950, 177)
+        Me.txtReceivedBy.Name = "txtReceivedBy"
+        Me.txtReceivedBy.Size = New System.Drawing.Size(241, 20)
+        Me.txtReceivedBy.TabIndex = 68
         '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1114, 543)
+        Me.ClientSize = New System.Drawing.Size(1423, 543)
+        Me.Controls.Add(Me.txtReceivedBy)
+        Me.Controls.Add(Me.txtDeliveredBy)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lblTotalAmount)
@@ -747,12 +805,28 @@ Partial Class LedgerForm
     Friend WithEvents cbCustomer As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents dgvProd As DataGridView
+    Friend WithEvents lblTotalAmount As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents cbUnit As ComboBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents cbBrand As ComboBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents btnAddToCart As Button
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents txtProductDesc As TextBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
     Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents Color As DataGridViewTextBoxColumn
     Friend WithEvents price As DataGridViewTextBoxColumn
     Friend WithEvents less As DataGridViewTextBoxColumn
     Friend WithEvents add_less As DataGridViewButtonColumn
@@ -761,18 +835,8 @@ Partial Class LedgerForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents lblTotalAmount As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents Label15 As Label
-    Friend WithEvents cbUnit As ComboBox
-    Friend WithEvents Label16 As Label
-    Friend WithEvents cbBrand As ComboBox
-    Friend WithEvents Label17 As Label
-    Friend WithEvents cbProducts As ComboBox
-    Friend WithEvents btnAddToCart As Button
+    Friend WithEvents Label20 As Label
+    Friend WithEvents cbColor As ComboBox
+    Friend WithEvents txtDeliveredBy As TextBox
+    Friend WithEvents txtReceivedBy As TextBox
 End Class

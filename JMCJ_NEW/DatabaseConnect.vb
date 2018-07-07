@@ -56,12 +56,14 @@ Public Class DatabaseConnect
         Dim res As Integer = 0
         cmd.Connection = con
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "Select id from " & table & " WHERE UCASE(" & col & ") = '" & val.ToUpper & "'"
+        cmd.CommandText = "Select id from " & table & " WHERE UCASE(" & col & ") = UCASE('" & val & "')"
         dr = cmd.ExecuteReader
         If dr.Read Then
             res = dr.GetValue(0)
         End If
         dr.Close()
+        cmd.Dispose()
+        con.Close()
         Return res
     End Function
 

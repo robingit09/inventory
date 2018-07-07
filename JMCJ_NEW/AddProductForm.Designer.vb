@@ -37,17 +37,18 @@ Partial Class AddProductForm
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SellPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.column_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.column_barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_unit_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -55,10 +56,10 @@ Partial Class AddProductForm
         'dgvProducts
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectp, Me.Barcode, Me.ProductDescription, Me.Brand, Me.Unit, Me.UnitPrice, Me.SellPrice, Me.Category, Me.Subcategory})
+        Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_unit_price, Me.column_sell_price, Me.column_cat, Me.column_subcat})
         Me.dgvProducts.Location = New System.Drawing.Point(12, 184)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1143, 372)
+        Me.dgvProducts.Size = New System.Drawing.Size(1258, 372)
         Me.dgvProducts.TabIndex = 21
         '
         'Button1
@@ -193,74 +194,6 @@ Partial Class AddProductForm
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'selectp
-        '
-        Me.selectp.HeaderText = ""
-        Me.selectp.Name = "selectp"
-        Me.selectp.Width = 50
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        Me.Barcode.Width = 140
-        '
-        'ProductDescription
-        '
-        Me.ProductDescription.HeaderText = "Product Description"
-        Me.ProductDescription.Name = "ProductDescription"
-        Me.ProductDescription.ReadOnly = True
-        Me.ProductDescription.Width = 190
-        '
-        'Brand
-        '
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'UnitPrice
-        '
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        Me.UnitPrice.Width = 120
-        '
-        'SellPrice
-        '
-        Me.SellPrice.HeaderText = "Sell Price"
-        Me.SellPrice.Name = "SellPrice"
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        Me.Category.Width = 150
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
-        Me.Subcategory.Width = 150
-        '
         'ckSelectAll
         '
         Me.ckSelectAll.AutoSize = True
@@ -273,11 +206,85 @@ Partial Class AddProductForm
         Me.ckSelectAll.Text = "Select All"
         Me.ckSelectAll.UseVisualStyleBackColor = True
         '
+        'column_id
+        '
+        Me.column_id.HeaderText = "id"
+        Me.column_id.Name = "column_id"
+        Me.column_id.ReadOnly = True
+        Me.column_id.Width = 5
+        '
+        'selectp
+        '
+        Me.selectp.HeaderText = ""
+        Me.selectp.Name = "selectp"
+        Me.selectp.Width = 50
+        '
+        'column_barcode
+        '
+        Me.column_barcode.HeaderText = "Barcode"
+        Me.column_barcode.Name = "column_barcode"
+        Me.column_barcode.ReadOnly = True
+        Me.column_barcode.Width = 140
+        '
+        'column_description
+        '
+        Me.column_description.HeaderText = "Product Description"
+        Me.column_description.Name = "column_description"
+        Me.column_description.ReadOnly = True
+        Me.column_description.Width = 190
+        '
+        'column_brand
+        '
+        Me.column_brand.HeaderText = "Brand"
+        Me.column_brand.Name = "column_brand"
+        Me.column_brand.ReadOnly = True
+        Me.column_brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.column_brand.Width = 110
+        '
+        'column_unit
+        '
+        Me.column_unit.HeaderText = "Unit"
+        Me.column_unit.Name = "column_unit"
+        Me.column_unit.ReadOnly = True
+        Me.column_unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'column_color
+        '
+        Me.column_color.HeaderText = "Color"
+        Me.column_color.Name = "column_color"
+        Me.column_color.ReadOnly = True
+        '
+        'column_unit_price
+        '
+        Me.column_unit_price.HeaderText = "Unit Price"
+        Me.column_unit_price.Name = "column_unit_price"
+        Me.column_unit_price.ReadOnly = True
+        Me.column_unit_price.Width = 120
+        '
+        'column_sell_price
+        '
+        Me.column_sell_price.HeaderText = "Sell Price"
+        Me.column_sell_price.Name = "column_sell_price"
+        '
+        'column_cat
+        '
+        Me.column_cat.HeaderText = "Category"
+        Me.column_cat.Name = "column_cat"
+        Me.column_cat.ReadOnly = True
+        Me.column_cat.Width = 150
+        '
+        'column_subcat
+        '
+        Me.column_subcat.HeaderText = "Subcategory"
+        Me.column_subcat.Name = "column_subcat"
+        Me.column_subcat.ReadOnly = True
+        Me.column_subcat.Width = 150
+        '
         'AddProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1167, 579)
+        Me.ClientSize = New System.Drawing.Size(1301, 579)
         Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -308,15 +315,16 @@ Partial Class AddProductForm
     Friend WithEvents cbSubcategory As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents btnCancel As Button
-    Friend WithEvents id As DataGridViewTextBoxColumn
-    Friend WithEvents selectp As DataGridViewCheckBoxColumn
-    Friend WithEvents Barcode As DataGridViewTextBoxColumn
-    Friend WithEvents ProductDescription As DataGridViewTextBoxColumn
-    Friend WithEvents Brand As DataGridViewTextBoxColumn
-    Friend WithEvents Unit As DataGridViewTextBoxColumn
-    Friend WithEvents UnitPrice As DataGridViewTextBoxColumn
-    Friend WithEvents SellPrice As DataGridViewTextBoxColumn
-    Friend WithEvents Category As DataGridViewTextBoxColumn
-    Friend WithEvents Subcategory As DataGridViewTextBoxColumn
     Friend WithEvents ckSelectAll As CheckBox
+    Friend WithEvents column_id As DataGridViewTextBoxColumn
+    Friend WithEvents selectp As DataGridViewCheckBoxColumn
+    Friend WithEvents column_barcode As DataGridViewTextBoxColumn
+    Friend WithEvents column_description As DataGridViewTextBoxColumn
+    Friend WithEvents column_brand As DataGridViewTextBoxColumn
+    Friend WithEvents column_unit As DataGridViewTextBoxColumn
+    Friend WithEvents column_color As DataGridViewTextBoxColumn
+    Friend WithEvents column_unit_price As DataGridViewTextBoxColumn
+    Friend WithEvents column_sell_price As DataGridViewTextBoxColumn
+    Friend WithEvents column_cat As DataGridViewTextBoxColumn
+    Friend WithEvents column_subcat As DataGridViewTextBoxColumn
 End Class

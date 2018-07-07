@@ -9,6 +9,7 @@
     Public SelectedProdID As Integer = 0
     Public SelectedBrand As Integer = 0
     Public SelectedUnit As Integer = 0
+    Public SelectedColor As Integer = 0
 
     Public Sub loadTerm()
         cbTerms.Items.Clear()
@@ -108,17 +109,10 @@
             Try
                 .cmd.CommandType = CommandType.Text
                 .cmd.Connection = .con
-                .cmd.CommandText = "INSERT INTO ledger([customer],[date_issue],[counter_no],[invoice_no],[amount],[payment_type],[date_paid],[paid],[check_date],[bank_details],[floating],[ledger],[status],[created_at],[updated_at],[payment_due_date],[payment_terms],[remarks])" &
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                .cmd.CommandText = "INSERT INTO ledger([customer],[date_issue],[counter_no],[invoice_no],[amount],[payment_type],[date_paid],[paid],[check_date],[bank_details],[floating],[ledger],[status],[created_at],[updated_at],[payment_due_date],[payment_terms],[remarks],[delivered_by],[received_by])" &
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                 .cmd.Parameters.AddWithValue("@customer", selectedCustomer)
                 .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.ToString)
-
-                'Dim ctr_no_result As String = ""
-                'If txtCounterNo.Text.Length > 0 Then
-                '    ctr_no_result = txtCounterNo.Text
-                'Else
-                '    ctr_no_result = "0"
-                'End If
 
                 If Trim(txtCounterNo.Text).Length = 0 Then
                     txtCounterNo.Text = "N/A"
@@ -164,15 +158,18 @@
                 .cmd.Parameters.AddWithValue("@payment_due_date", payment_date.ToString)
                 .cmd.Parameters.AddWithValue("@payment_terms", term)
                 .cmd.Parameters.AddWithValue("@remarks", txtRemarks.Text)
+                .cmd.Parameters.AddWithValue("@delivered_by", Trim(txtDeliveredBy.Text))
+                .cmd.Parameters.AddWithValue("@received_by", Trim(txtReceivedBy.Text))
                 .cmd.ExecuteNonQuery()
 
                 Dim cmd2 As New System.Data.OleDb.OleDbCommand
                 cmd2.Connection = .con
                 cmd2.CommandType = CommandType.Text
                 For Each item As DataGridViewRow In Me.dgvProd.Rows
-                    Dim product As Integer = .get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
-                    Dim brand As Integer = .get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
-                    Dim unit As Integer = .get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
+                    Dim product As Integer = New DatabaseConnect().get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
+                    Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
+                    Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
+                    Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvProd.Rows(item.Index).Cells("Color").Value)
                     Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
                     Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
                     Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
@@ -181,12 +178,13 @@
 
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                        cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,quantity,unit_price,sell_price,less,
-                total_amount)VALUES(?,?,?,?,?,?,?,?,?)"
+                        cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,color,quantity,unit_price,sell_price,less,
+                total_amount)VALUES(?,?,?,?,?,?,?,?,?,?)"
                         cmd2.Parameters.AddWithValue("@customer_order_ledger_id", getLastID("ledger"))
                         cmd2.Parameters.AddWithValue("@product_id", product)
                         cmd2.Parameters.AddWithValue("@brand", brand)
                         cmd2.Parameters.AddWithValue("@unit", unit)
+                        cmd2.Parameters.AddWithValue("@color", color)
                         cmd2.Parameters.AddWithValue("@quantity", qty)
                         cmd2.Parameters.AddWithValue("@unit_price", price)
                         cmd2.Parameters.AddWithValue("@sell_price", sell_price)
@@ -278,7 +276,7 @@
 
     Private Sub cbCustomer_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbCustomer.SelectedIndexChanged
         If cbCustomer.SelectedIndex > 0 Then
-            cbCustomer.BackColor = Color.White
+            cbCustomer.BackColor = Drawing.Color.White
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
@@ -323,7 +321,7 @@
     Private Sub cbLedgerType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbLedgerType.SelectedIndexChanged
 
         If cbLedgerType.SelectedIndex > 0 Then
-            cbLedgerType.BackColor = Color.White
+            cbLedgerType.BackColor = Drawing.Color.White
             Dim key As String = CInt(DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedLedgerType = key
@@ -333,7 +331,7 @@
 
     Private Sub cbPaymentType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPaymentType.SelectedIndexChanged
         If cbPaymentType.SelectedIndex > 0 Then
-            cbPaymentType.BackColor = Color.White
+            cbPaymentType.BackColor = Drawing.Color.White
 
             Select Case cbPaymentType.Text
                 Case "Cash"
@@ -363,7 +361,7 @@
             If Trim(cbPaymentType.Text) = "C.O.D" Then
                 txtCounterNo.Enabled = False
                 txtCounterNo.Text = "N/A"
-                txtCounterNo.BackColor = Color.White
+                txtCounterNo.BackColor = Drawing.Color.White
                 rPaidYes.Checked = True
                 rbFloatingYes.Checked = True
                 gpPaid.Enabled = False
@@ -377,7 +375,7 @@
             If Trim(cbPaymentType.Text) = "Cash" Then
                 txtCounterNo.Enabled = False
                 txtCounterNo.Text = "N/A"
-                txtCounterNo.BackColor = Color.White
+                txtCounterNo.BackColor = Drawing.Color.White
                 rPaidYes.Checked = True
                 rbFloatingYes.Checked = True
                 gpPaid.Enabled = False
@@ -410,9 +408,9 @@
     Private Function validator() As Boolean
 
         Dim err_ As Boolean = False
-        If cbCustomer.SelectedIndex <= 0 Then
+        If selectedCustomer <= 0 Then
             MsgBox("Please select customer!", MsgBoxStyle.Critical)
-            cbCustomer.BackColor = Color.Red
+            cbCustomer.BackColor = Drawing.Color.Red
             cbCustomer.Focus()
             err_ = True
             Return err_
@@ -441,7 +439,7 @@
 
         If cbPaymentType.SelectedIndex <= 0 Then
             MsgBox("Please select payment type!", MsgBoxStyle.Critical)
-            cbPaymentType.BackColor = Color.Red
+            cbPaymentType.BackColor = Drawing.Color.Red
             cbPaymentType.Focus()
             err_ = True
             Return err_
@@ -449,7 +447,7 @@
 
         If rPaidYes.Checked = False And rPaidNo.Checked = False Then
             MsgBox("Please check if paid!", MsgBoxStyle.Critical)
-            gpPaid.BackColor = Color.Red
+            gpPaid.BackColor = Drawing.Color.Red
             gpPaid.Focus()
             err_ = True
             Return err_
@@ -457,7 +455,7 @@
 
         If Trim(txtBankDetails.Text).Length = 0 And (cbPaymentType.Text = "Post Dated" Or cbPaymentType.Text = "C.O.D") Then
             MsgBox("Please input bank details!", MsgBoxStyle.Critical)
-            txtBankDetails.BackColor = Color.Red
+            txtBankDetails.BackColor = Drawing.Color.Red
             txtBankDetails.Focus()
             err_ = True
             Return err_
@@ -465,7 +463,7 @@
 
         If gpCheck.Enabled = True And rPaidYes.Checked And (rbFloatingYes.Checked = False And rbFloatingNo.Checked = False) Then
             MsgBox("Please check floating!", MsgBoxStyle.Critical)
-            gpCheck.BackColor = Color.Red
+            gpCheck.BackColor = Drawing.Color.Red
             gpCheck.Focus()
             err_ = True
             Return err_
@@ -473,7 +471,7 @@
 
         If selectedPaymentType = 2 And term = 0 Then
             MsgBox("Please select terms!", MsgBoxStyle.Critical)
-            cbTerms.BackColor = Color.Red
+            cbTerms.BackColor = Drawing.Color.Red
             cbTerms.Focus()
             err_ = True
             Return err_
@@ -483,8 +481,22 @@
 
         If cbLedgerType.SelectedIndex <= 0 Then
             MsgBox("Please select ledger type!", MsgBoxStyle.Critical)
-            cbLedgerType.BackColor = Color.Red
+            cbLedgerType.BackColor = Drawing.Color.Red
             cbLedgerType.Focus()
+            err_ = True
+            Return err_
+        End If
+
+        If Trim(txtDeliveredBy.Text).Length = 0 Then
+            MsgBox("Please input delivered by!", MsgBoxStyle.Critical)
+            txtDeliveredBy.Focus()
+            err_ = True
+            Return err_
+        End If
+
+        If Trim(txtReceivedBy.Text).Length = 0 Then
+            MsgBox("Please input received by!", MsgBoxStyle.Critical)
+            txtReceivedBy.Focus()
             err_ = True
             Return err_
         End If
@@ -492,7 +504,7 @@
         'input format validation
         If Not IsNumeric(txtAmount.Text) Then
             MsgBox("Invalid input type for amount!", MsgBoxStyle.Critical)
-            txtAmount.BackColor = Color.Red
+            txtAmount.BackColor = Drawing.Color.Red
             txtAmount.Focus()
             err_ = True
             Return err_
@@ -500,7 +512,7 @@
 
         If Not IsNumeric(txtCounterNo.Text) And txtCounterNo.Enabled = True Then
             MsgBox("Invalid input for counter no!", MsgBoxStyle.Critical)
-            txtCounterNo.BackColor = Color.Red
+            txtCounterNo.BackColor = Drawing.Color.Red
             txtCounterNo.Focus()
             err_ = True
             Return err_
@@ -508,7 +520,7 @@
 
         If Not IsNumeric(txtInvoiceNo.Text) Then
             MsgBox("Invalid input for invoice no!", MsgBoxStyle.Critical)
-            txtInvoiceNo.BackColor = Color.Red
+            txtInvoiceNo.BackColor = Drawing.Color.Red
             txtInvoiceNo.Focus()
             err_ = True
             Return err_
@@ -519,7 +531,7 @@
         If dgvProd.Rows.Count = 0 Or dgvProd.Rows.Count = 1 Then
             err_ = True
             MsgBox("Please add a product!", MsgBoxStyle.Critical)
-            dgvProd.BackgroundColor = Color.Red
+            dgvProd.BackgroundColor = Drawing.Color.Red
             dgvProd.Focus()
             Return err_
         End If
@@ -529,7 +541,7 @@
             Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
             If qty <= 0 And prod <> "" Then
-                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Color.Red
+                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
                 validate = True
             End If
         Next
@@ -538,7 +550,7 @@
             Dim sell_price As Double = dgvProd.Rows(item.Index).Cells("sell_price").Value
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
             If sell_price <= 0.00 And prod <> "" Then
-                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Color.Red
+                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.Red
                 validate = True
             End If
         Next
@@ -628,10 +640,10 @@
     Private Sub txtCounterNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCounterNo.TextChanged
         If txtCounterNo.TextLength > 0 Then
             If Not IsNumeric(txtCounterNo.Text) Then
-                txtCounterNo.BackColor = Color.Red
+                txtCounterNo.BackColor = Drawing.Color.Red
                 txtCounterNo.SelectAll()
             Else
-                txtCounterNo.BackColor = Color.White
+                txtCounterNo.BackColor = Drawing.Color.White
             End If
         End If
     End Sub
@@ -639,10 +651,10 @@
     Private Sub txtInvoiceNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtInvoiceNo.TextChanged
         If txtInvoiceNo.TextLength > 0 Then
             If Not IsNumeric(txtInvoiceNo.Text) Then
-                txtInvoiceNo.BackColor = Color.Red
+                txtInvoiceNo.BackColor = Drawing.Color.Red
                 txtInvoiceNo.SelectAll()
             Else
-                txtInvoiceNo.BackColor = Color.White
+                txtInvoiceNo.BackColor = Drawing.Color.White
             End If
         End If
     End Sub
@@ -650,10 +662,10 @@
     Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
         If txtAmount.TextLength > 0 Then
             If Not IsNumeric(txtAmount.Text) Then
-                txtAmount.BackColor = Color.Red
+                txtAmount.BackColor = Drawing.Color.Red
                 txtAmount.SelectAll()
             Else
-                txtAmount.BackColor = Color.White
+                txtAmount.BackColor = Drawing.Color.White
             End If
         End If
     End Sub
@@ -678,7 +690,7 @@
                 term = 0
         End Select
         If cbTerms.SelectedIndex > 0 Then
-            cbTerms.BackColor = Color.White
+            cbTerms.BackColor = Drawing.Color.White
         End If
     End Sub
 
@@ -696,7 +708,7 @@
 
     Private Sub txtBankDetails_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBankDetails.TextChanged
         If Trim(txtBankDetails.Text).Length > 0 Then
-            txtBankDetails.BackColor = Color.White
+            txtBankDetails.BackColor = Drawing.Color.White
         End If
     End Sub
 
@@ -707,33 +719,26 @@
     End Sub
 
     Private Sub LedgerForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        populateProducts(0, 0)
+        autocompleteProduct()
         populateBrand(0)
-        populateUnit(0)
+        populateColor(0, 0)
+        populateUnit(0, 0, 0)
     End Sub
 
     Private Sub cbDisable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisable.CheckedChanged
         If cbDisable.Checked = True Then
             txtCounterNo.Text = "N/A"
             txtCounterNo.Enabled = False
-            txtCounterNo.BackColor = Color.White
+            txtCounterNo.BackColor = Drawing.Color.White
         Else
             txtCounterNo.Text = ""
             txtCounterNo.Enabled = True
         End If
     End Sub
 
-    Private Sub rPaidYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rPaidYes.CheckedChanged
-
-    End Sub
-
-    Private Sub rPaidNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rPaidNo.CheckedChanged
-
-    End Sub
-
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
         ' clicking add less
-        If e.ColumnIndex = 8 Then
+        If e.ColumnIndex = 9 Then
             Dim less As String = ""
             less = InputBox("Add less", "Enter the additional less(Numbers Only)", "0")
 
@@ -757,12 +762,12 @@
             End If
         End If
         'reset less
-        If e.ColumnIndex = 9 Then
+        If e.ColumnIndex = 10 Then
             dgvProd.Rows(e.RowIndex).Cells("less").Value = "0"
         End If
 
         'remove product
-        If e.ColumnIndex = 13 And dgvProd.Rows.Count > 1 Then
+        If e.ColumnIndex = 14 And dgvProd.Rows.Count > 1 Then
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
@@ -774,10 +779,12 @@
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
+                Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
-                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
-                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+
+
+                amount = qty * CDbl(sellprice)
 
                 If less.Contains(",") Then
                     Dim split = less.Split(",")
@@ -793,24 +800,24 @@
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
                 End If
 
                 'change color
                 If qty > 0 Then
-                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.White
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.White
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Color.Red
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.Red
                 End If
             End If
 
             If e.ColumnIndex = 7 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value)
+                Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
-                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
-                amount = qty * Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value)
+                Dim sellprice As Double = Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+                amount = qty * Val(sellprice)
 
                 If less.Contains(",") Then
                     Dim split = less.Split(",")
@@ -826,7 +833,7 @@
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = amount * (1.0 - (Val(less) / 100))
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
                 End If
             End If
             computeTotalAmount()
@@ -834,55 +841,53 @@
     End Sub
 
     Public Sub computeTotalAmount()
-        Dim totalamount = 0.0
+        Dim totalamount As Double = 0.0
         If dgvProd.Rows.Count > 1 Then
-
             For Each item As DataGridViewRow In Me.dgvProd.Rows
                 Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
                 totalamount += amount
             Next
-
         End If
-        lblTotalAmount.Text = totalamount.ToString("f2")
-        txtAmount.Text = totalamount.ToString("f2")
+        lblTotalAmount.Text = totalamount.ToString("N2")
+        txtAmount.Text = totalamount.ToString("N2")
     End Sub
 
-    Public Sub populateProducts(ByVal catid As Integer, ByVal subcatid As Integer)
-        Dim dbproduct As New DatabaseConnect
-        With dbproduct
-            cbProducts.DataSource = Nothing
-            cbProducts.Items.Clear()
-            Dim comboSource As New Dictionary(Of String, String)()
-            comboSource.Add(0, "Select Product")
-            Dim query As String = ""
-            query = "Select distinct p.id, p.description,c.name,sub.name FROM ((((products As p 
-                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
-                LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1"
-            ' if filter by category
-            If catid > 0 Then
-                query = query & " And c.id = " & catid
-            End If
-            If subcatid > 0 Then
-                query = query & " And Sub() .id = " & subcatid
-            End If
-            .selectByQuery(query)
-            If .dr.HasRows Then
-                While .dr.Read
-                    Dim id As String = .dr.GetValue(0)
-                    Dim product_desc As String = .dr.GetValue(1)
-                    comboSource.Add(id, product_desc)
-                End While
-            End If
-            cbProducts.DataSource = New BindingSource(comboSource, Nothing)
-            cbProducts.DisplayMember = "Value"
-            cbProducts.ValueMember = "Key"
-            .dr.Close()
-            .cmd.Dispose()
-            .con.Close()
-        End With
-    End Sub
+    'Public Sub populateProducts(ByVal catid As Integer, ByVal subcatid As Integer)
+    '    Dim dbproduct As New DatabaseConnect
+    '    With dbproduct
+    '        cbProducts.DataSource = Nothing
+    '        cbProducts.Items.Clear()
+    '        Dim comboSource As New Dictionary(Of String, String)()
+    '        comboSource.Add(0, "Select Product")
+    '        Dim query As String = ""
+    '        query = "Select distinct p.id, p.description,c.name,sub.name FROM ((((products As p 
+    '            INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+    '            LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+    '            LEFT JOIN categories as c ON c.id = pc.category_id)
+    '            LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1"
+    '        ' if filter by category
+    '        If catid > 0 Then
+    '            query = query & " And c.id = " & catid
+    '        End If
+    '        If subcatid > 0 Then
+    '            query = query & " And Sub() .id = " & subcatid
+    '        End If
+    '        .selectByQuery(query)
+    '        If .dr.HasRows Then
+    '            While .dr.Read
+    '                Dim id As String = .dr.GetValue(0)
+    '                Dim product_desc As String = .dr.GetValue(1)
+    '                comboSource.Add(id, product_desc)
+    '            End While
+    '        End If
+    '        cbProducts.DataSource = New BindingSource(comboSource, Nothing)
+    '        cbProducts.DisplayMember = "Value"
+    '        cbProducts.ValueMember = "Key"
+    '        .dr.Close()
+    '        .cmd.Dispose()
+    '        .con.Close()
+    '    End With
+    'End Sub
 
     Public Sub populateBrand(ByVal prodid As Integer)
         Dim dbbrand As New DatabaseConnect
@@ -891,7 +896,7 @@
             cbBrand.Items.Clear()
             Dim comboSource As New Dictionary(Of String, String)()
             comboSource.Add(0, "Select Brand")
-            Dim query As String = "Select b.id, b.name from (product_unit as pu LEFT JOIN brand as b on b.id = pu.brand) 
+            Dim query As String = "Select distinct b.id, b.name from (product_unit as pu LEFT JOIN brand as b on b.id = pu.brand) 
             where pu.product_id = " & prodid
             .selectByQuery(query)
             If .dr.HasRows Then
@@ -910,7 +915,7 @@
         End With
     End Sub
 
-    Public Sub populateUnit(ByVal prodid As Integer)
+    Public Sub populateUnit(ByVal prodid As Integer, ByVal brandid As Integer, ByVal colorid As Integer)
         Dim dbunit As New DatabaseConnect
         With dbunit
             cbUnit.DataSource = Nothing
@@ -918,7 +923,7 @@
             Dim comboSource As New Dictionary(Of String, String)()
             comboSource.Add(0, "Select Unit")
             Dim query As String = "Select distinct u.id, u.name from (product_unit as pu LEFT JOIN unit as u on u.id = pu.unit) 
-            where pu.product_id = " & prodid
+            where pu.product_id = " & prodid & " and pu.brand = " & brandid & " and pu.color = " & colorid
             .selectByQuery(query)
             If .dr.HasRows Then
                 While .dr.Read
@@ -936,20 +941,47 @@
         End With
     End Sub
 
+    Public Sub populateColor(ByVal prodid As Integer, ByVal brandid As Integer)
+        Dim dbunit As New DatabaseConnect
+        With dbunit
+            cbColor.DataSource = Nothing
+            cbColor.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "No Color")
+            Dim query As String = "Select distinct c.id, c.name from (product_unit as pu LEFT JOIN color as c on c.id = pu.color) 
+            where pu.product_id = " & prodid & " and pu.brand = " & brandid
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim unit As String = .dr.GetValue(1)
+                    comboSource.Add(id, unit)
+                End While
+            End If
+            cbColor.DataSource = New BindingSource(comboSource, Nothing)
+            cbColor.DisplayMember = "Value"
+            cbColor.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
     Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
         If selectedCustomer = 0 Then
             MsgBox("Please select customer before adding product!", MsgBoxStyle.Critical)
             cbCustomer.Focus()
-            cbCustomer.BackColor = Color.Red
+            cbCustomer.BackColor = Drawing.Color.Red
             Exit Sub
         End If
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,pu.price from (((products as p 
+            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price from ((((products as p 
                 left join product_unit as pu on pu.product_id = p.id)
                 left join brand as b on b.id = pu.brand)
                 left join unit as u on u.id = pu.unit)
-                where pu.brand = " & SelectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & SelectedUnit)
+                left join color as cc on cc.id = pu.color)
+                where pu.brand = " & SelectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & SelectedUnit & " and color = " & SelectedColor)
 
             If .dr.HasRows Then
                 If .dr.Read Then
@@ -958,13 +990,14 @@
                     Dim desc As String = .dr("description").ToString
                     Dim brand As String = .dr("brand").ToString
                     Dim unit As String = .dr("unit").ToString
+                    Dim color As String = .dr("color").ToString
                     Dim unitprice As String = Val(.dr("price")).ToString("N2")
                     Dim sellprice As String = unitprice
                     'get sell price
                     Dim dbsellprice As New DatabaseConnect
                     With dbsellprice
                         .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & selectedCustomer & " and product_id = " & SelectedProdID & "
-                        and brand = " & SelectedBrand & " and unit = " & SelectedUnit)
+                        and brand = " & SelectedBrand & " and unit = " & SelectedUnit & " abd color = " & SelectedColor)
                         If .dr.HasRows Then
                             If .dr.Read Then
                                 If (Val(.dr("sell_price") > 0)) Then
@@ -979,32 +1012,36 @@
                         .cmd.Dispose()
                     End With
 
-                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, unitprice, "", "Add less", "Reset", sellprice, "0.00", "", "Remove"}
+                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, color, unitprice, "", "Add less", "Reset", sellprice, "0.00", "", "Remove"}
                     dgvProd.Rows.Add(row)
 
                 End If
+            Else
+                MsgBox("No Product Found!", MsgBoxStyle.Critical)
             End If
         End With
         computeTotalAmount()
     End Sub
 
-    Private Sub cbProducts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProducts.SelectedIndexChanged
-        If cbProducts.SelectedIndex > 0 Then
-            Dim key As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Key
-            Dim value As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Value
-            SelectedProdID = key
-            populateBrand(SelectedProdID)
-            populateUnit(SelectedProdID)
-        End If
-    End Sub
+    'Private Sub cbProducts_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    If cbProducts.SelectedIndex > 0 Then
+    '        Dim key As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Key
+    '        Dim value As String = DirectCast(cbProducts.SelectedItem, KeyValuePair(Of String, String)).Value
+    '        SelectedProdID = key
+    '        populateBrand(SelectedProdID)
+    '        populateUnit(SelectedProdID)
+    '    End If
+    'End Sub
 
     Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
         If cbBrand.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
             SelectedBrand = key
+            populateColor(SelectedProdID, SelectedBrand)
         Else
             SelectedBrand = 0
+            populateColor(SelectedProdID, SelectedBrand)
         End If
     End Sub
 
@@ -1015,6 +1052,18 @@
             SelectedUnit = key
         Else
             SelectedUnit = 0
+        End If
+    End Sub
+
+    Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
+        If cbColor.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedColor = key
+            populateUnit(SelectedProdID, SelectedBrand, SelectedColor)
+        Else
+            SelectedColor = 0
+            populateUnit(SelectedProdID, SelectedBrand, SelectedColor)
         End If
     End Sub
 
@@ -1090,8 +1139,41 @@
         End With
     End Sub
 
+    Public Sub autocompleteProduct()
+        Dim MySource As New AutoCompleteStringCollection()
+
+        With txtProductDesc
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim product As New DatabaseConnect
+        With product
+            .selectByQuery("Select description from products  where status <> 0")
+            While .dr.Read
+                MySource.Add(.dr("description"))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
     Public Sub enableControl(ByVal flag As Boolean)
         btnAddToCart.Enabled = flag
         dgvProd.Enabled = flag
     End Sub
+
+    Private Sub txtProductDesc_TextChanged(sender As Object, e As EventArgs) Handles txtProductDesc.TextChanged
+        If Trim(txtProductDesc.Text).Length > 0 Then
+            SelectedProdID = New DatabaseConnect().get_id("products", "description", Trim(txtProductDesc.Text))
+            populateBrand(SelectedProdID)
+        Else
+            SelectedProdID = 0
+            populateBrand(SelectedProdID)
+        End If
+    End Sub
+
+
 End Class

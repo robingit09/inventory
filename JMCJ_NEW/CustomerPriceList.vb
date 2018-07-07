@@ -86,12 +86,13 @@
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                .selectByQuery("Select distinct cpp.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,cpp.sell_price,c.name as cat, subc.name as subcat
-                from ((((((((customer_product_prices as cpp
+                .selectByQuery("Select distinct cpp.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,cpp.sell_price,c.name as cat, subc.name as subcat
+                from (((((((((customer_product_prices as cpp
                 INNER JOIN products as p ON p.id = cpp.product_id)
                 INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id and pu.brand = cpp.brand and pu.unit = cpp.unit)
                 INNER JOIN brand as b on b.id = cpp.brand)
                 INNER JOIN unit as u on u.id = cpp.unit)
+                INNER JOIN color as cc ON cc.id = cpp.color)
                 INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
                 INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
                 INNER JOIN categories as c ON c.id = pc.category_id)
@@ -108,14 +109,17 @@
                     Dim desc As String = .dr("description")
                     Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = "0.00"
 
                     Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
                     Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
+                    Dim c_id As Integer = New DatabaseConnect().get_id("color", "name", color)
+
                     Dim db2 As New DatabaseConnect
                     With db2
                         .selectByQuery("Select price from product_unit where product_id = " & id &
-                            " and unit = " & u_id & " and brand = " & b_id)
+                            " and unit = " & u_id & " and brand = " & b_id & " and color = " & c_id)
                         If .dr.Read Then
                             price = CInt(.dr("price")).ToString("N2")
                         End If
@@ -127,7 +131,7 @@
                     Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), barcode, .dr("subcat"))
-                    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, price, sell_price, cat, subcat}
+                    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
             Else
@@ -160,6 +164,7 @@
             LedgerForm.loadLedgerType()
             LedgerForm.selectedCustomer = Me.selectedCustomer
             LedgerForm.cbCustomer.Text = Me.cbCustomer.Text
+            LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
             LedgerForm.dgvProd.Rows.Clear()
 
             For Each item As DataGridViewRow In Me.dgvPriceList.Rows
@@ -167,13 +172,14 @@
                 If selectedproduct Then
                     Dim prod_id As String = dgvPriceList.Rows(item.Index).Cells("id").Value
                     Dim barcode As String = dgvPriceList.Rows(item.Index).Cells("barcode").Value
-                    Dim desc As String = dgvPriceList.Rows(item.Index).Cells("ProductDescription").Value
+                    Dim desc As String = dgvPriceList.Rows(item.Index).Cells(3).Value
                     Dim brand As String = dgvPriceList.Rows(item.Index).Cells("Brand").Value
                     Dim unit As String = dgvPriceList.Rows(item.Index).Cells("Unit").Value
+                    Dim color As String = dgvPriceList.Rows(item.Index).Cells("Color").Value
                     Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
                     Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
 
-                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, unit_price, "", "Add less", "Reset", sell_price, "0.00", "", "Remove"}
+                    Dim row As String() = New String() {prod_id, barcode, "0", desc, brand, unit, color, unit_price, "", "Add less", "Reset", sell_price, "0.00", "", "Remove"}
                     LedgerForm.dgvProd.Rows.Add(row)
                 End If
             Next
@@ -196,17 +202,21 @@
             Dim prod_desc As String = dgvPriceList.SelectedRows(0).Cells(3).Value
             Dim brand As String = dgvPriceList.SelectedRows(0).Cells("Brand").Value
             Dim unit As String = dgvPriceList.SelectedRows(0).Cells("Unit").Value
-            Dim unit_price As String = dgvPriceList.SelectedRows(0).Cells("UnitPrice").Value
-            Dim sellprice As String = dgvPriceList.SelectedRows(0).Cells("sell_price").Value
+            Dim color As String = dgvPriceList.SelectedRows(0).Cells("Color").Value
+            Dim unit_price As String = dgvPriceList.SelectedRows(0).Cells("UnitPrice").Value.ToString.Replace(",", "")
+            Dim sellprice As String = dgvPriceList.SelectedRows(0).Cells("sell_price").Value.ToString.Replace(",", "")
 
             UpdatePriceForm.txtCustomer.Text = customer
             UpdatePriceForm.txtBarcode.Text = barcode
             UpdatePriceForm.txtProductDesc.Text = prod_desc
             UpdatePriceForm.txtBrand.Text = brand
             UpdatePriceForm.txtUnit.Text = unit
+            UpdatePriceForm.txtColor.Text = color
             UpdatePriceForm.txtUnitPrice.Text = unit_price
             UpdatePriceForm.txtSellPrice.Text = sellprice
             UpdatePriceForm.ShowDialog()
+            UpdatePriceForm.txtSellPrice.Focus()
+            UpdatePriceForm.txtSellPrice.SelectAll()
             Exit Sub
         End If
 
@@ -240,7 +250,6 @@
     End Sub
 
     Private Sub btnDeleteProduct_Click(sender As Object, e As EventArgs) Handles btnDeleteProduct.Click
-
         'validation
         Dim valid As Boolean = False
         For Each item As DataGridViewRow In Me.dgvPriceList.Rows
@@ -263,16 +272,18 @@
                     Dim prod_id As String = dgvPriceList.Rows(item.Index).Cells("id").Value
                     Dim brand As String = dgvPriceList.Rows(item.Index).Cells("Brand").Value
                     Dim unit As String = dgvPriceList.Rows(item.Index).Cells("Unit").Value
+                    Dim color As String = dgvPriceList.Rows(item.Index).Cells("Color").Value
 
                     Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
                     Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
+                    Dim c_id As Integer = New DatabaseConnect().get_id("color", "name", unit)
 
                     Dim dbdelete As New DatabaseConnect
                     With dbdelete
                         .cmd.Connection = .con
                         .cmd.CommandType = CommandType.Text
                         .cmd.CommandText = "delete from customer_product_prices where customer_id = " & selectedCustomer & " and 
-                        product_id = " & prod_id & " and brand = " & b_id & " and unit = " & u_id
+                        product_id = " & prod_id & " and brand = " & b_id & " and unit = " & u_id & " and color = " & c_id
                         .cmd.ExecuteNonQuery()
                         .cmd.Dispose()
                         .con.Close()
@@ -284,10 +295,11 @@
             getList("", selectedCustomer)
         End If
 
-
     End Sub
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        btnPrint.Enabled = False
+        btnPrint.Text = "loading.."
         If cbCustomer.SelectedIndex > 0 Then
             Dim cpr As New CustomerPriceReport
             cpr.RecordSelectionFormula = "{customer_product_prices.customer_id} = " & selectedCustomer
@@ -300,6 +312,7 @@
             MsgBox("Please select customer!", MsgBoxStyle.Critical)
             selectedCustomer = 0
         End If
-
+        btnPrint.Text = "Print"
+        btnPrint.Enabled = True
     End Sub
 End Class

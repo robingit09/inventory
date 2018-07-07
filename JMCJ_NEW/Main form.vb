@@ -57,7 +57,10 @@
 
     Private Sub PriceListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PriceListToolStripMenuItem.Click
         Dim cp As New CustomerPriceList
+        CustomerPriceList.dgvPriceList.Rows.Clear()
+        CustomerPriceList.selectedCustomer = 0
         CustomerPriceList.ShowDialog()
+        CustomerPriceList.cbCustomer.SelectedIndex = 0
     End Sub
 
     Private Sub ColorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColorToolStripMenuItem.Click

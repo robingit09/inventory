@@ -9,7 +9,6 @@
                 Exit Sub
             End If
             save()
-            ProductForm.populateColor()
         ElseIf btnSave.Text = "Update" Then
             If Validation() = False Then
                 Exit Sub

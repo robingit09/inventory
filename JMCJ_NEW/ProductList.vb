@@ -48,10 +48,11 @@
         With db
             dgvProducts.Rows.Clear()
             If q = "" Then
-                .selectByQuery("Select distinct p.id,pu.barcode, p.description,b.name as brand, u.name as unit,pu.price,c.name,sub.name FROM (((((((products as p 
+                .selectByQuery("Select distinct p.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
+                INNER JOIN color as cc ON cc.id = pu.color)
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
@@ -61,15 +62,16 @@
 
             If .dr.HasRows Then
                 While .dr.Read
-                    Dim id As String = .dr.GetValue(0)
-                    Dim barcode As String = .dr.GetValue(1)
-                    Dim desc As String = .dr.GetValue(2)
-                    Dim brand As String = .dr.GetValue(3)
-                    Dim unit As String = .dr.GetValue(4)
-                    Dim price As String = Val(.dr.GetValue(5)).ToString("N2")
-                    Dim cat As String = .dr.GetValue(6)
-                    Dim subcat As String = If(IsDBNull(.dr.GetValue(7)), "", .dr.GetValue(7))
-                    Dim row As String() = New String() {id, barcode, desc, brand, unit, price, "", cat, subcat}
+                    Dim id As String = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = .dr("brand")
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = .dr("color")
+                    Dim price As String = Val(.dr("price")).ToString("N2")
+                    Dim cat As String = .dr("cat")
+                    Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
+                    Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, "", cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If
@@ -92,7 +94,6 @@
         ProductForm.selectedProduct = 0
         ProductForm.populateCategory()
         ProductForm.populateSubcategory(0)
-        ProductForm.populateColor()
         ProductForm.clearFields()
         ProductForm.ShowDialog()
 
@@ -150,7 +151,6 @@
             ProductForm.btnSave.Text = "Update"
             ProductForm.populateCategory()
             ProductForm.populateSubcategory(0)
-            ProductForm.populateColor()
             ProductForm.toUpdateInfo(product_id)
             ProductForm.ShowDialog()
         Else
