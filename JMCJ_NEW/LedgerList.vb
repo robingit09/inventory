@@ -309,6 +309,10 @@
                     LedgerForm.rbFloatingNo.Checked = False
                 End If
                 LedgerForm.txtRemarks.Text = remarks
+
+                LedgerForm.txtDeliveredBy.Text = .dr("delivered_by")
+                LedgerForm.txtReceivedBy.Text = .dr("received_by")
+
             End If
         End With
 

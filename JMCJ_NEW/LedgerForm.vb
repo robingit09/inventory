@@ -783,7 +783,6 @@
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
                 Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
 
-
                 amount = qty * CDbl(sellprice)
 
                 If less.Contains(",") Then
@@ -1108,11 +1107,12 @@
 
         Dim dbOrderProduct As New DatabaseConnect
         With dbOrderProduct
-            .selectByQuery("Select distinct p.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,pu.price,cop.less,cop.sell_price,cop.total_amount from ((((customer_order_products as cop
+            .selectByQuery("Select distinct p.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount from (((((customer_order_products as cop
                 left join products as p on p.id = cop.product_id)
                 left join brand as b on b.id = cop.brand)
                 left join unit as u on u.id = cop.unit)
-                left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit)
+                left join color as c on c.id = cop.color)
+                left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit and pu.color = cop.color)
                 where cop.customer_order_ledger_id = " & id)
 
             dgvProd.Rows.Clear()
@@ -1124,12 +1124,13 @@
                     Dim desc As String = .dr("description")
                     Dim brand As String = .dr("brand")
                     Dim unit As String = .dr("unit")
+                    Dim color As String = .dr("color")
                     Dim price As String = Math.Round(Val(.dr("price")), 2).ToString("N2")
                     Dim less As String = .dr("less")
                     Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")
                     Dim total_amount As String = Math.Round(Val(.dr("total_amount")), 2).ToString("N2")
 
-                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, price, less, "Add less", "Reset", sell_price, total_amount, "", "Remove"}
+                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, color, price, less, "Add less", "Reset", sell_price, total_amount, "", "Remove"}
                     Me.dgvProd.Rows.Add(row)
                 End While
             End If

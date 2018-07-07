@@ -337,6 +337,7 @@ Partial Class LedgerForm
         '
         'txtAmount
         '
+        Me.txtAmount.Enabled = False
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
         Me.txtAmount.Location = New System.Drawing.Point(124, 125)
         Me.txtAmount.Name = "txtAmount"
