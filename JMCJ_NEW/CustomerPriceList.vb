@@ -162,8 +162,9 @@
             LedgerForm.loadTerm()
             LedgerForm.loadPaymentType()
             LedgerForm.loadLedgerType()
+            LedgerForm.getCustomerList("")
             LedgerForm.selectedCustomer = Me.selectedCustomer
-            LedgerForm.cbCustomer.Text = Me.cbCustomer.Text
+            LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindString(cbCustomer.Text)
             LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
             LedgerForm.dgvProd.Rows.Clear()
 

@@ -80,7 +80,6 @@
     End Sub
 
     Public Sub clearfields()
-        cbCustomer.Text = ""
         txtCounterNo.Text = ""
         txtInvoiceNo.Text = ""
         txtAmount.Text = ""
@@ -280,6 +279,8 @@
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
+        Else
+            selectedCustomer = 0
         End If
     End Sub
 
@@ -570,21 +571,19 @@
             If (validator()) Then
                 Exit Sub
             End If
-
             insertData()
             clearfields()
             LedgerList.loadLedger("")
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
-            Me.Close()
 
-            'Dim cr As New crLedgerByCustomer
-            'cr.RecordSelectionFormula = "{ledger.ID} = " & getLastID()
-            'ReportViewer.Enabled = True
-            'ReportViewer.CrystalReportViewer1.ReportSource = cr
-            'ReportViewer.CrystalReportViewer1.Refresh()
-            'ReportViewer.CrystalReportViewer1.RefreshReport()
-            'ReportViewer.ShowDialog()
+            Dim cr As New COReport
+            cr.RecordSelectionFormula = "{customer_order_products.customer_order_ledger_id} = " & (getLastID("ledger"))
+            ReportViewer.Enabled = True
+            ReportViewer.CrystalReportViewer1.ReportSource = cr
+            ReportViewer.CrystalReportViewer1.Refresh()
+            ReportViewer.CrystalReportViewer1.RefreshReport()
+            ReportViewer.ShowDialog()
 
         ElseIf btnSaveAndPrint.Text = "Update and Print" Then
 
@@ -709,12 +708,6 @@
     Private Sub txtBankDetails_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBankDetails.TextChanged
         If Trim(txtBankDetails.Text).Length > 0 Then
             txtBankDetails.BackColor = Drawing.Color.White
-        End If
-    End Sub
-
-    Private Sub cbCustomer_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbCustomer.TextChanged
-        If cbCustomer.Text.Length > 0 Then
-            'getCustomerList("select distinct company,ID from company where company like '%" & Trim(cbCustomer.Text) & "%' status <> 0")
         End If
     End Sub
 
@@ -1151,7 +1144,7 @@
 
         Dim product As New DatabaseConnect
         With product
-            .selectByQuery("Select description from products  where status <> 0")
+            .selectByQuery("Select top 50 description from products  where status <> 0  order by description")
             While .dr.Read
                 MySource.Add(.dr("description"))
             End While

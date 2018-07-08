@@ -4,15 +4,42 @@
     Public selectedPaymentType As Integer = 0
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
 
-        LedgerForm.getCustomerList("")
-        LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
+        LedgerForm.enableControl(True)
+        LedgerForm.loadTerm()
         LedgerForm.loadPaymentType()
         LedgerForm.loadLedgerType()
-        LedgerForm.loadTerm()
+        LedgerForm.getCustomerList("")
+        LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
+        LedgerForm.dgvProd.Rows.Clear()
+
+        'reset this fields
+        LedgerForm.dtpDateIssue.Value = DateTime.Now
+        LedgerForm.txtCounterNo.Text = ""
+        LedgerForm.cbDisable.Checked = False
+        LedgerForm.txtAmount.Text = "0.00"
+        LedgerForm.cbPaymentType.SelectedIndex = 0
+        LedgerForm.selectedPaymentType = 0
+        LedgerForm.rPaidYes.Checked = False
+        LedgerForm.rPaidNo.Checked = False
+        LedgerForm.dtpPaid.Value = DateTime.Now
+        LedgerForm.txtBankDetails.Text = ""
+        LedgerForm.dtpCheckDate.Value = DateTime.Now
+        LedgerForm.rbFloatingYes.Checked = False
+        LedgerForm.rbFloatingNo.Checked = False
+
+        LedgerForm.cbTerms.SelectedIndex = 0
+        LedgerForm.cbLedgerType.SelectedIndex = 0
+        LedgerForm.txtRemarks.Text = ""
+        LedgerForm.txtDeliveredBy.Text = ""
+        LedgerForm.txtReceivedBy.Text = ""
+        LedgerForm.lblTotalAmount.Text = "0.00"
+
+
         LedgerForm.enableControl(True)
         LedgerForm.btnSave.Text = "Save"
         LedgerForm.btnSaveAndPrint.Text = "Save and Print"
         LedgerForm.ShowDialog()
+
         autocompleteCustomer()
 
     End Sub
