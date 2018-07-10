@@ -2,6 +2,7 @@
 
     Public selectedID As Integer = 0
     Public selectedPaymentType As Integer = 0
+    Public filterQuery As String = ""
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
 
         LedgerForm.enableControl(True)
@@ -44,14 +45,18 @@
 
     End Sub
 
-    Public Sub loadLedger(ByVal query As String)
+    Public Sub loadLedger(ByVal query As String, ByVal show As String)
         Loading.Show()
         dgvLedger.Rows.Clear()
 
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                .selectByQuery("SELECT * from ledger order by id desc")
+                If show <> "All" Then
+                    .selectByQuery("SELECT TOP " & show & " * from ledger order by id desc")
+                Else
+                    .selectByQuery("SELECT * from ledger order by id desc")
+                End If
             Else
                 .selectByQuery(query)
             End If
@@ -61,12 +66,13 @@
                 .dr.Close()
                 .con.Close()
                 MsgBox("No record found!", MsgBoxStyle.Critical)
+                Loading.Hide()
                 Exit Sub
             End If
             While .dr.Read
                 Dim ID As Integer = CInt(.dr.GetValue(0))
                 Dim counter_no As String = .dr.GetValue(1)
-                Dim date_issue As String = .dr.GetValue(2)
+                Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yy")
                 Dim invoice_no As String = .dr.GetValue(3)
                 Dim amount As String = .dr.GetValue(4)
                 Dim paid As Boolean = CBool(.dr.GetValue(5))
@@ -203,17 +209,21 @@
                     .con.Close()
                 End With
                 MsgBox(invoice & " has been deleted!", MsgBoxStyle.Critical)
-                Me.loadLedger("")
+                Me.loadLedger("", cbShow.SelectedItem)
             End If
 
         End If
     End Sub
 
     Private Sub LedgerList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        cbShow.SelectedIndex = cbShow.FindString("100")
+        cbShowFilter.SelectedIndex = cbShowFilter.FindString("All")
         Loading.Show()
-        loadLedger("")
+        loadLedger("", cbShow.Text)
         loadledgertype()
         getPaymentMode()
+        getMonth()
+        getYear()
         autocompleteCustomer()
         Loading.Hide()
     End Sub
@@ -381,34 +391,39 @@
                 ledgertype_val = -1
         End Select
 
-        Dim queryValidator As String = "SELECT * FROM ledger l inner join company c on c.id = l.customer WHERE l.status <> 0"
+        Dim top As String = ""
+        If cbShowFilter.Text <> "All" Then
+            top = " TOP " & cbShowFilter.Text
+        Else
+            top = ""
+        End If
+        filterQuery = "SELECT " & top & " * FROM ledger l inner join company c on c.id = l.customer WHERE l.status <> 0"
 
-        Dim filters As New Dictionary(Of String, String)
-        filters.Add("customer", txtCustomer.Text)
-        filters.Add("ledger_type", ledgertype_val)
-        filters.Add("payment_type", selectedPaymentType)
+        If txtCustomer.Text.Length > 0 Then
+            'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.customer} = " & selectedCustomer
+            filterQuery = filterQuery & " and c.company = '" & txtCustomer.Text & "'"
+        End If
 
-        For Each k In filters.Keys
-            Select Case k
-                Case "customer"
-                    If txtCustomer.Text.Length > 0 Then
-                        'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.customer} = " & selectedCustomer
-                        queryValidator = queryValidator & " and c.company = '" & txtCustomer.Text & "'"
-                    End If
-                Case "ledger_type"
-                    If cbLedgerType.Text <> "All" Then
-                        'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.payment_type} = " & selectedModeOfPayment
-                        queryValidator = queryValidator & " and l.ledger = " & ledgertype_val
-                    End If
-                Case "payment_type"
-                    If cbpayment_mode.Text <> "All" Then
-                        'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.payment_type} = " & selectedModeOfPayment
-                        queryValidator = queryValidator & " and l.payment_type = " & selectedPaymentType
-                    End If
+        If cbLedgerType.Text <> "All" Then
+            'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.payment_type} = " & selectedModeOfPayment
+            filterQuery = filterQuery & " and l.ledger = " & ledgertype_val
+        End If
 
-            End Select
-        Next
-        loadLedger(queryValidator)
+        If cbpayment_mode.Text <> "All" Then
+            'cr.RecordSelectionFormula = cr.RecordSelectionFormula & " AND {ledger.payment_type} = " & selectedModeOfPayment
+            filterQuery = filterQuery & " and l.payment_type = " & selectedPaymentType
+        End If
+
+        If cbMonth.Text <> "All" Then
+            filterQuery = filterQuery & " and MONTH(l.date_issue) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            filterQuery = filterQuery & " and YEAR(l.date_issue) = " & cbYear.Text
+        End If
+
+
+        loadLedger(filterQuery, "")
 
     End Sub
 
@@ -478,9 +493,69 @@
         btnFilter.Enabled = True
     End Sub
 
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "01"
+            Case "FEBRUARY"
+                result = "02"
+            Case "MARCH"
+                result = "03"
+            Case "APRIL"
+                result = "04"
+            Case "MAY"
+                result = "05"
+            Case "JUNE"
+                result = "06"
+            Case "JULY"
+                result = "07"
+            Case "AUGUST"
+                result = "08"
+            Case "SEPTEMBER"
+                result = "09"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+
+        Return result
+    End Function
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(date_issue) FROM ledger where status <> 0 order by YEAR(date_issue) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
     Private Sub btnBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoad.Click
         btnLoad.Enabled = False
-        Me.loadLedger("")
+        Me.loadLedger("", cbShow.Text)
         btnLoad.Enabled = True
     End Sub
 
@@ -509,19 +584,70 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If Trim(txtSearch.Text).Length > 0 Then
-            loadLedger("select * from ledger where counter_no like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' or invoice_no like '%" & txtSearch.Text & "%' or amount like '%" & txtSearch.Text & "%' or date_paid like '%" & txtSearch.Text & "%' or bank_details like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' and status <> 0")
+            Dim top As String = ""
+            If cbShow.Text <> "All" Then
+                top = " TOP " & cbShow.Text
+            Else
+                top = ""
+            End If
+            loadLedger("select " & top & " * from ledger where counter_no like '%" & txtSearch.Text & "%' 
+            or date_issue like '%" & txtSearch.Text & "%' 
+            or invoice_no like '%" & txtSearch.Text & "%' 
+            or amount like '%" & txtSearch.Text & "%' or date_paid like '%" & txtSearch.Text & "%' or bank_details like '%" & txtSearch.Text & "%' 
+            or date_issue like '%" & txtSearch.Text & "%' and status <> 0", "")
         End If
     End Sub
 
     Private Sub txtSearch_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyUp
         If e.KeyCode = Keys.Enter Then
             If Trim(txtSearch.Text).Length > 0 Then
-                loadLedger("select * from ledger where counter_no like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' or invoice_no like '%" & txtSearch.Text & "%' or amount like '%" & txtSearch.Text & "%' or date_paid like '%" & txtSearch.Text & "%' or bank_details like '%" & txtSearch.Text & "%' or date_issue like '%" & txtSearch.Text & "%' and status <> 0")
+                If cbShow.Text <> "All" Then
+                    Top = " TOP " & cbShow.Text
+                Else
+                    Top = ""
+                End If
+                loadLedger("select " & Top & " * from ledger where counter_no like '%" & txtSearch.Text & "%' 
+            or date_issue like '%" & txtSearch.Text & "%' 
+            or invoice_no like '%" & txtSearch.Text & "%' 
+            or amount like '%" & txtSearch.Text & "%' or date_paid like '%" & txtSearch.Text & "%' or bank_details like '%" & txtSearch.Text & "%' 
+            or date_issue like '%" & txtSearch.Text & "%' and status <> 0", "")
             End If
         End If
     End Sub
 
-    Private Sub btnViewLoad_Click(sender As Object, e As EventArgs) Handles btnViewLoad.Click
-        loadLedger("")
+    Private Sub cbShow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbShow.SelectedIndexChanged
+        loadLedger("", cbShow.Text)
+
+    End Sub
+
+    Private Sub cbShowFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbShowFilter.SelectedIndexChanged
+        btnFilter.Enabled = True
+    End Sub
+
+    Private Sub cbMonth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonth.SelectedIndexChanged
+        btnFilter.Enabled = True
+    End Sub
+
+    Private Sub cbYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbYear.SelectedIndexChanged
+        btnFilter.Enabled = True
+    End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        btnPrint.Enabled = False
+        btnPrint.Text = "loading.."
+        If dgvLedger.SelectedRows.Count = 1 Then
+            Dim id As Integer = dgvLedger.SelectedRows(0).Cells("id").Value
+            Dim cr As New COReport
+            cr.RecordSelectionFormula = "{ledger.id} = " & id
+            ReportViewer.Enabled = True
+            ReportViewer.CrystalReportViewer1.ReportSource = cr
+            ReportViewer.CrystalReportViewer1.Refresh()
+            ReportViewer.CrystalReportViewer1.RefreshReport()
+            ReportViewer.ShowDialog()
+        Else
+            MsgBox("Please select one record before you print.", MsgBoxStyle.Critical)
+        End If
+        btnPrint.Enabled = True
+        btnPrint.Text = "Print"
     End Sub
 End Class

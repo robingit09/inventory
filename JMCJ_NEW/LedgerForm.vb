@@ -59,7 +59,7 @@
             End If
             insertData()
             clearfields()
-            LedgerList.loadLedger("")
+            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
 
@@ -71,7 +71,7 @@
             End If
             updateData()
             clearfields()
-            LedgerList.loadLedger("")
+            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
             Me.Close()
@@ -573,7 +573,7 @@
             End If
             insertData()
             clearfields()
-            LedgerList.loadLedger("")
+            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
 
@@ -593,7 +593,7 @@
 
             updateData()
             clearfields()
-            LedgerList.loadLedger("")
+            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
             Me.Close()

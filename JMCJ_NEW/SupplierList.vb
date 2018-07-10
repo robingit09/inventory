@@ -8,14 +8,13 @@
 
         Dim db As New DatabaseConnect
         With db
-            .dbConnect()
             .cmd.CommandType = CommandType.Text
 
             If Trim(key) = "" Then
                 .cmd.CommandText = "SELECT * FROM suppliers WHERE status <> 0"
             ElseIf Trim(key).Length > 0 Then
-                .cmd.CommandText = "SELECT * FROM suppliers WHERE status <> 0 and supplier like '%" & key & "%' or supplier_code like '%" & key & "%' " & _
-                "or address like '%" & key & "%' or contact_person like '%" & key & "%' or  contact_number1 like '%" & key & "%' or contact_number2 like '%" & key & "%'" & _
+                .cmd.CommandText = "SELECT * FROM suppliers WHERE status <> 0 and supplier like '%" & key & "%' or supplier_code like '%" & key & "%' " &
+                "or address like '%" & key & "%' or contact_person like '%" & key & "%' or  contact_number1 like '%" & key & "%' or contact_number2 like '%" & key & "%'" &
                 "or fax_tel like '%" & key & "%' or email_address like '%" & key & "%'"
             End If
             .cmd.Connection = .con

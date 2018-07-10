@@ -33,15 +33,13 @@ Partial Class LedgerList
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbShowFilter = New System.Windows.Forms.ComboBox()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnLoad = New System.Windows.Forms.Button()
-        Me.btnViewLoad = New System.Windows.Forms.Button()
         Me.dgvLedger = New System.Windows.Forms.DataGridView()
-        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -57,6 +55,16 @@ Partial Class LedgerList
         Me.PaymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ledger = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cbShow = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbMonth = New System.Windows.Forms.ComboBox()
+        Me.cbYear = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvLedger, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,7 +73,7 @@ Partial Class LedgerList
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(220, 30)
+        Me.btnDelete.Location = New System.Drawing.Point(220, 12)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 5
@@ -74,7 +82,7 @@ Partial Class LedgerList
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(123, 30)
+        Me.btnUpdate.Location = New System.Drawing.Point(120, 12)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 4
@@ -83,7 +91,7 @@ Partial Class LedgerList
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(24, 30)
+        Me.btnAddNew.Location = New System.Drawing.Point(24, 12)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 3
@@ -93,23 +101,23 @@ Partial Class LedgerList
         'cbpayment_mode
         '
         Me.cbpayment_mode.FormattingEnabled = True
-        Me.cbpayment_mode.Location = New System.Drawing.Point(477, 23)
+        Me.cbpayment_mode.Location = New System.Drawing.Point(95, 86)
         Me.cbpayment_mode.Name = "cbpayment_mode"
-        Me.cbpayment_mode.Size = New System.Drawing.Size(204, 21)
+        Me.cbpayment_mode.Size = New System.Drawing.Size(189, 21)
         Me.cbpayment_mode.TabIndex = 12
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(393, 26)
+        Me.Label4.Location = New System.Drawing.Point(7, 89)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.Size = New System.Drawing.Size(75, 13)
         Me.Label4.TabIndex = 13
-        Me.Label4.Text = "Payment Type:"
+        Me.Label4.Text = "Payment Type"
         '
         'txtCustomer
         '
-        Me.txtCustomer.Location = New System.Drawing.Point(80, 23)
+        Me.txtCustomer.Location = New System.Drawing.Point(94, 19)
         Me.txtCustomer.Name = "txtCustomer"
         Me.txtCustomer.Size = New System.Drawing.Size(190, 20)
         Me.txtCustomer.TabIndex = 9
@@ -117,7 +125,7 @@ Partial Class LedgerList
         'cbLedgerType
         '
         Me.cbLedgerType.FormattingEnabled = True
-        Me.cbLedgerType.Location = New System.Drawing.Point(80, 56)
+        Me.cbLedgerType.Location = New System.Drawing.Point(94, 52)
         Me.cbLedgerType.Name = "cbLedgerType"
         Me.cbLedgerType.Size = New System.Drawing.Size(190, 21)
         Me.cbLedgerType.TabIndex = 8
@@ -142,6 +150,12 @@ Partial Class LedgerList
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.cbYear)
+        Me.GroupBox1.Controls.Add(Me.cbMonth)
+        Me.GroupBox1.Controls.Add(Me.cbShowFilter)
         Me.GroupBox1.Controls.Add(Me.cbpayment_mode)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtCustomer)
@@ -151,17 +165,26 @@ Partial Class LedgerList
         Me.GroupBox1.Controls.Add(Me.btnFilter)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.GroupBox1.Location = New System.Drawing.Point(25, 66)
+        Me.GroupBox1.Location = New System.Drawing.Point(25, 41)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(702, 100)
+        Me.GroupBox1.Size = New System.Drawing.Size(719, 125)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTER"
         '
+        'cbShowFilter
+        '
+        Me.cbShowFilter.FormattingEnabled = True
+        Me.cbShowFilter.Items.AddRange(New Object() {"20", "50", "100", "1000", "All"})
+        Me.cbShowFilter.Location = New System.Drawing.Point(563, 86)
+        Me.cbShowFilter.Name = "cbShowFilter"
+        Me.cbShowFilter.Size = New System.Drawing.Size(59, 21)
+        Me.cbShowFilter.TabIndex = 14
+        '
         'btnFilter
         '
         Me.btnFilter.BackColor = System.Drawing.Color.Transparent
-        Me.btnFilter.Location = New System.Drawing.Point(606, 56)
+        Me.btnFilter.Location = New System.Drawing.Point(628, 84)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(75, 23)
         Me.btnFilter.TabIndex = 4
@@ -172,16 +195,16 @@ Partial Class LedgerList
         '
         Me.GroupBox2.Controls.Add(Me.btnSearch)
         Me.GroupBox2.Controls.Add(Me.txtSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(751, 66)
+        Me.GroupBox2.Location = New System.Drawing.Point(813, 66)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(418, 100)
+        Me.GroupBox2.Size = New System.Drawing.Size(356, 100)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search Information"
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(283, 59)
+        Me.btnSearch.Location = New System.Drawing.Point(221, 61)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(118, 23)
         Me.btnSearch.TabIndex = 1
@@ -190,9 +213,9 @@ Partial Class LedgerList
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(32, 26)
+        Me.txtSearch.Location = New System.Drawing.Point(24, 26)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(369, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(315, 20)
         Me.txtSearch.TabIndex = 0
         '
         'btnLoad
@@ -205,16 +228,6 @@ Partial Class LedgerList
         Me.btnLoad.Text = "Show All"
         Me.btnLoad.UseVisualStyleBackColor = True
         '
-        'btnViewLoad
-        '
-        Me.btnViewLoad.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnViewLoad.Location = New System.Drawing.Point(1077, 23)
-        Me.btnViewLoad.Name = "btnViewLoad"
-        Me.btnViewLoad.Size = New System.Drawing.Size(92, 35)
-        Me.btnViewLoad.TabIndex = 12
-        Me.btnViewLoad.Text = "Show All"
-        Me.btnViewLoad.UseVisualStyleBackColor = True
-        '
         'dgvLedger
         '
         Me.dgvLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -224,18 +237,6 @@ Partial Class LedgerList
         Me.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvLedger.Size = New System.Drawing.Size(1431, 502)
         Me.dgvLedger.TabIndex = 13
-        '
-        'View
-        '
-        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.View.Name = "View"
-        Me.View.Size = New System.Drawing.Size(155, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.ViewToolStripMenuItem.Text = "View or Update"
         '
         'ID
         '
@@ -338,13 +339,97 @@ Partial Class LedgerList
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
         '
+        'View
+        '
+        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.View.Name = "View"
+        Me.View.Size = New System.Drawing.Size(155, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ViewToolStripMenuItem.Text = "View or Update"
+        '
+        'cbShow
+        '
+        Me.cbShow.FormattingEnabled = True
+        Me.cbShow.Items.AddRange(New Object() {"20", "50", "100", "1000", "All"})
+        Me.cbShow.Location = New System.Drawing.Point(1083, 39)
+        Me.cbShow.Name = "cbShow"
+        Me.cbShow.Size = New System.Drawing.Size(86, 21)
+        Me.cbShow.TabIndex = 14
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(1040, 42)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(37, 13)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "Show:"
+        '
+        'cbMonth
+        '
+        Me.cbMonth.FormattingEnabled = True
+        Me.cbMonth.Location = New System.Drawing.Point(563, 18)
+        Me.cbMonth.Name = "cbMonth"
+        Me.cbMonth.Size = New System.Drawing.Size(140, 21)
+        Me.cbMonth.TabIndex = 15
+        '
+        'cbYear
+        '
+        Me.cbYear.FormattingEnabled = True
+        Me.cbYear.Location = New System.Drawing.Point(563, 50)
+        Me.cbYear.Name = "cbYear"
+        Me.cbYear.Size = New System.Drawing.Size(140, 21)
+        Me.cbYear.TabIndex = 16
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(509, 21)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.TabIndex = 17
+        Me.Label5.Text = "Month"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(509, 53)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(29, 13)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Year"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(509, 89)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(34, 13)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Show"
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Location = New System.Drawing.Point(321, 12)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(84, 23)
+        Me.btnPrint.TabIndex = 2
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
         'LedgerList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1198, 569)
+        Me.Controls.Add(Me.btnPrint)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.cbShow)
         Me.Controls.Add(Me.dgvLedger)
-        Me.Controls.Add(Me.btnViewLoad)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnLoad)
@@ -362,6 +447,7 @@ Partial Class LedgerList
         CType(Me.dgvLedger, System.ComponentModel.ISupportInitialize).EndInit()
         Me.View.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -380,7 +466,6 @@ Partial Class LedgerList
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnLoad As Button
-    Friend WithEvents btnViewLoad As Button
     Friend WithEvents dgvLedger As DataGridView
     Friend WithEvents View As ContextMenuStrip
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
@@ -399,4 +484,13 @@ Partial Class LedgerList
     Friend WithEvents PaymentType As DataGridViewTextBoxColumn
     Friend WithEvents Ledger As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents cbShow As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cbShowFilter As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents cbYear As ComboBox
+    Friend WithEvents cbMonth As ComboBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents btnPrint As Button
 End Class
