@@ -2,7 +2,7 @@
 
     Public selectedCustomer As Integer = 0
 
-    Private Sub getCustomer()
+    Public Sub getCustomer()
         cbCustomer.DataSource = Nothing
         cbCustomer.Items.Clear()
 
@@ -340,5 +340,11 @@
         End If
         btnPrint.Text = "Print"
         btnPrint.Enabled = True
+    End Sub
+
+    Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnAddCustomer.Click
+        CustomerForm.btnSave.Text = "Save"
+        CustomerForm.loadCompanyStatus()
+        CustomerForm.ShowDialog()
     End Sub
 End Class

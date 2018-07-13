@@ -36,18 +36,19 @@ Partial Class Main_form
         Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem, Me.ColorToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem, Me.ColorToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(926, 29)
@@ -130,6 +131,12 @@ Partial Class Main_form
         Me.CustomerOrderToolStripMenuItem.Size = New System.Drawing.Size(142, 25)
         Me.CustomerOrderToolStripMenuItem.Text = "Customer Order"
         '
+        'ColorToolStripMenuItem
+        '
+        Me.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem"
+        Me.ColorToolStripMenuItem.Size = New System.Drawing.Size(48, 25)
+        Me.ColorToolStripMenuItem.Text = "Color"
+        '
         'lblDate
         '
         Me.lblDate.AutoSize = True
@@ -172,11 +179,11 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
-        'ColorToolStripMenuItem
+        'ToolStripMenuItem1
         '
-        Me.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem"
-        Me.ColorToolStripMenuItem.Size = New System.Drawing.Size(48, 25)
-        Me.ColorToolStripMenuItem.Text = "Color"
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(71, 25)
+        Me.ToolStripMenuItem1.Text = "Customer"
         '
         'Main_form
         '
@@ -218,4 +225,5 @@ Partial Class Main_form
     Friend WithEvents PriceListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BrandToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
 End Class

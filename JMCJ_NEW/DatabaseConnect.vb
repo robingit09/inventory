@@ -78,6 +78,17 @@ Public Class DatabaseConnect
         End Try
     End Sub
 
+    Public Sub update_where(ByVal table As String, ByVal colname As String, ByVal ID As String, ByVal col As String, ByVal val As String)
+        Try
+            cmd.Connection = con
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "UPDATE " & table & " SET [" & col & "] = " & val & " WHERE " & colname & " = " & ID
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
     Public Sub delete_permanent(ByVal table As String, ByVal column As String, ByVal id As Integer)
         cmd.Connection = con
         cmd.CommandType = CommandType.Text

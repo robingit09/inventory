@@ -23,14 +23,6 @@ Partial Class CustomerPriceList
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgvPriceList = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbCustomer = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnCreateOrder = New System.Windows.Forms.Button()
-        Me.btnUpdatePrice = New System.Windows.Forms.Button()
-        Me.btnDeleteProduct = New System.Windows.Forms.Button()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
-        Me.btnPrint = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selectproduct = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,6 +34,15 @@ Partial Class CustomerPriceList
         Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbCustomer = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnCreateOrder = New System.Windows.Forms.Button()
+        Me.btnUpdatePrice = New System.Windows.Forms.Button()
+        Me.btnDeleteProduct = New System.Windows.Forms.Button()
+        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.btnPrint = New System.Windows.Forms.Button()
+        Me.btnAddCustomer = New System.Windows.Forms.Button()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,6 +54,81 @@ Partial Class CustomerPriceList
         Me.dgvPriceList.Name = "dgvPriceList"
         Me.dgvPriceList.Size = New System.Drawing.Size(1207, 358)
         Me.dgvPriceList.TabIndex = 21
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'selectproduct
+        '
+        Me.selectproduct.HeaderText = "Select"
+        Me.selectproduct.Name = "selectproduct"
+        Me.selectproduct.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.selectproduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.selectproduct.Width = 50
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        Me.Barcode.Width = 150
+        '
+        'desc
+        '
+        Me.desc.HeaderText = "Product Description"
+        Me.desc.Name = "desc"
+        Me.desc.ReadOnly = True
+        Me.desc.Width = 200
+        '
+        'Brand
+        '
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'UnitPrice
+        '
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        '
+        'sell_price
+        '
+        Me.sell_price.HeaderText = "Sell Price"
+        Me.sell_price.Name = "sell_price"
+        Me.sell_price.ReadOnly = True
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 150
         '
         'Label1
         '
@@ -135,86 +211,21 @@ Partial Class CustomerPriceList
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
-        'id
+        'btnAddCustomer
         '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'selectproduct
-        '
-        Me.selectproduct.HeaderText = "Select"
-        Me.selectproduct.Name = "selectproduct"
-        Me.selectproduct.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.selectproduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.selectproduct.Width = 50
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        Me.Barcode.Width = 150
-        '
-        'desc
-        '
-        Me.desc.HeaderText = "Product Description"
-        Me.desc.Name = "desc"
-        Me.desc.ReadOnly = True
-        Me.desc.Width = 200
-        '
-        'Brand
-        '
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'UnitPrice
-        '
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        '
-        'sell_price
-        '
-        Me.sell_price.HeaderText = "Sell Price"
-        Me.sell_price.Name = "sell_price"
-        Me.sell_price.ReadOnly = True
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
-        Me.Subcategory.Width = 150
+        Me.btnAddCustomer.Location = New System.Drawing.Point(404, 23)
+        Me.btnAddCustomer.Name = "btnAddCustomer"
+        Me.btnAddCustomer.Size = New System.Drawing.Size(89, 23)
+        Me.btnAddCustomer.TabIndex = 30
+        Me.btnAddCustomer.Text = "Add Customer"
+        Me.btnAddCustomer.UseVisualStyleBackColor = True
         '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1246, 551)
+        Me.Controls.Add(Me.btnAddCustomer)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnDeleteProduct)
@@ -252,4 +263,5 @@ Partial Class CustomerPriceList
     Friend WithEvents sell_price As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
+    Friend WithEvents btnAddCustomer As Button
 End Class

@@ -37,6 +37,7 @@ Partial Class ProductForm
         Me.tbSupplier = New System.Windows.Forms.TabPage()
         Me.btnAddCategory = New System.Windows.Forms.Button()
         Me.btnSubCat = New System.Windows.Forms.Button()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -145,7 +146,7 @@ Partial Class ProductForm
         'dgvMeasure
         '
         Me.dgvMeasure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.barcode, Me.brand, Me.unit, Me.color, Me.price, Me.col_remove})
+        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.barcode, Me.brand, Me.unit, Me.color, Me.price, Me.col_remove})
         Me.dgvMeasure.Location = New System.Drawing.Point(6, 57)
         Me.dgvMeasure.Name = "dgvMeasure"
         Me.dgvMeasure.Size = New System.Drawing.Size(839, 166)
@@ -197,6 +198,13 @@ Partial Class ProductForm
         Me.btnSubCat.TabIndex = 24
         Me.btnSubCat.Text = "Add (+)"
         Me.btnSubCat.UseVisualStyleBackColor = True
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
         '
         'barcode
         '
@@ -277,6 +285,7 @@ Partial Class ProductForm
     Friend WithEvents tbSupplier As TabPage
     Friend WithEvents btnAddCategory As Button
     Friend WithEvents btnSubCat As Button
+    Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents barcode As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
     Friend WithEvents unit As DataGridViewTextBoxColumn

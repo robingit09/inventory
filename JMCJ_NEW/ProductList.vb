@@ -56,7 +56,7 @@
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1")
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0")
 
             End If
 
@@ -69,7 +69,7 @@
                     Dim unit As String = .dr("unit")
                     Dim color As String = .dr("color")
                     Dim price As String = Val(.dr("price")).ToString("N2")
-                    Dim cat As String = .dr("cat")
+                    Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
                     Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, "", cat, subcat}
                     dgvProducts.Rows.Add(row)

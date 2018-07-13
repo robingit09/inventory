@@ -27,18 +27,16 @@
                 .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id) VALUES(" & prod_id & "," & selectedSubcategory & ")"
                 .cmd.ExecuteNonQuery()
 
-                '.cmd.CommandText = "INSERT INTO product_color (product_id,color) VALUES(" & prod_id & "," & selectedColor & ")"
-                '.cmd.ExecuteNonQuery()
                 .cmd.Dispose()
                 .con.Close()
             End With
 
-            Dim dbdelete As New DatabaseConnect
-            With dbdelete
-                .delete_permanent("product_unit", "product_id", prod_id)
-                .cmd.Dispose()
-                .con.Close()
-            End With
+            'Dim dbdelete As New DatabaseConnect
+            'With dbdelete
+            '    .delete_permanent("product_unit", "product_id", prod_id)
+            '    .cmd.Dispose()
+            '    .con.Close()
+            'End With
 
             If dgvMeasure.Rows.Count > 0 Then
                 For Each row As DataGridViewRow In dgvMeasure.Rows
@@ -53,13 +51,14 @@
                         With dbinsertUnit
                             dbinsertUnit.cmd.Connection = dbinsertUnit.con
                             dbinsertUnit.cmd.CommandType = CommandType.Text
-                            dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,price,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?)"
+                            dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?)"
                             dbinsertUnit.cmd.Parameters.AddWithValue("@product_id", prod_id)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@brand", brand)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@unit", unit)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@color", color)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@barcode", barcode)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@price", price)
+                            dbinsertUnit.cmd.Parameters.AddWithValue("@status", 1)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                             dbinsertUnit.cmd.ExecuteNonQuery()
@@ -105,11 +104,12 @@
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
             .cmd.ExecuteNonQuery()
 
-            .delete_permanent("product_unit", "product_id", selectedProduct)
+            .update_where("product_unit", "product_id", selectedProduct, "status", 0)
             Dim cmd2 As New System.Data.OleDb.OleDbCommand
             cmd2.Connection = .con
             cmd2.CommandType = CommandType.Text
             For Each item As DataGridViewRow In Me.dgvMeasure.Rows
+                Dim id As String = dgvMeasure.Rows(item.Index).Cells("id").Value
                 Dim barcode As String = dgvMeasure.Rows(item.Index).Cells("barcode").Value
                 Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvMeasure.Rows(item.Index).Cells("brand").Value)
                 Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvMeasure.Rows(item.Index).Cells("unit").Value)
@@ -117,15 +117,15 @@
                 Dim price As String = dgvMeasure.Rows(item.Index).Cells("price").Value
 
                 If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("unit").Value)) Then
-                    cmd2.CommandText = "INSERT INTO product_unit(product_id,brand,unit,color,barcode,price,created_at,updated_at)
-                    VALUES(?,?,?,?,?,?,?,?)"
-                    cmd2.Parameters.AddWithValue("@product_id", selectedProduct)
+                    cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? , price = ?,status = ?, updated_at = ?
+                    where id = " & id
                     cmd2.Parameters.AddWithValue("@brand", brand)
                     cmd2.Parameters.AddWithValue("@unit", unit)
                     cmd2.Parameters.AddWithValue("@color", color)
                     cmd2.Parameters.AddWithValue("@barcode", barcode)
                     cmd2.Parameters.AddWithValue("@price", price)
-                    cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                    cmd2.Parameters.AddWithValue("@status", 1)
+
                     cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                     cmd2.ExecuteNonQuery()
                     cmd2.Parameters.Clear()
@@ -143,7 +143,7 @@
         '        Dim database As New DatabaseConnect
         '        database.dbConnect()
         '        database.cmd.CommandType = CommandType.Text
-        '        database.cmd.CommandText = "UPDATE products SET [name]='" & txtProduct.Text & "',[category]='" & cbCat.Text & "',[brand]='" & txtBrand.Text & "',[unit]='" & cbUnit.Text & "', " & _
+        '        database.cmd.CommandText = "UPDATE products Set [name]='" & txtProduct.Text & "',[category]='" & cbCat.Text & "',[brand]='" & txtBrand.Text & "',[unit]='" & cbUnit.Text & "', " & _
         '"[quantity]='" & txtQty.Text & "',[price]='" & txtPrice.Text & "', [updated_at]='" & DateTime.Now.Date & "' WHERE [ID] = " & ProductList.selectedID
 
 
@@ -220,12 +220,27 @@
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
         If btnSave.Text = "Save" Then
+            Dim dbvalidate As New DatabaseConnect
+            With dbvalidate
+                If (.isExist("products", "description", txtProduct.Text)) Then
+
+                    MsgBox("Product description already exist!", MsgBoxStyle.Critical)
+                    txtProduct.Focus()
+                    Exit Sub
+                End If
+                .dr.Close()
+                .cmd.Dispose()
+                .con.Close()
+            End With
             If validation() = False Then
                 Exit Sub
             End If
             saveData()
             ProductList.loadList("")
         ElseIf btnSave.Text = "Update" Then
+            If validation() = False Then
+                Exit Sub
+            End If
             updateData()
         End If
 
@@ -240,19 +255,6 @@
             txtProduct.Focus()
             Return res
         End If
-
-        Dim dbvalidate As New DatabaseConnect
-        With dbvalidate
-            If (.isExist("products", "description", txtProduct.Text)) Then
-                res = False
-                MsgBox("Product description already exist!", MsgBoxStyle.Critical)
-                txtProduct.Focus()
-                Return res
-            End If
-            .dr.Close()
-            .cmd.Dispose()
-            .con.Close()
-        End With
 
         'If selectedCategory = 0 Then
         '    res = False
@@ -414,26 +416,28 @@
             Dim measure As New DatabaseConnect
             With measure
                 dgvMeasure.Rows.Clear()
-                .selectByQuery("select pu.barcode,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
+                .selectByQuery("select pu.id,pu.barcode,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
                                 INNER JOIN brand as b ON b.id = pu.brand) 
                                 INNER JOIN unit as u ON u.id = pu.unit)
                                 INNER JOIN color as c ON c.id = pu.color)
-                                where pu.product_id = " & id)
+                                where pu.product_id = " & id & " and pu.status <> 0")
                 If .dr.HasRows Then
                     While .dr.Read
-                        Dim barcode As String = .dr.GetValue(0)
-                        Dim brand As String = .dr.GetValue(1)
-                        Dim unit As String = .dr.GetValue(2)
-                        Dim color As String = .dr.GetValue(3)
-                        Dim price As String = .dr.GetValue(4)
+                        Dim pu_id As String = .dr("id")
+                        Dim barcode As String = .dr("barcode")
+                        Dim brand As String = .dr("brand")
+                        Dim unit As String = .dr("unit")
+                        Dim color As String = .dr("color")
+                        Dim price As String = .dr("price")
 
                         dgvMeasure.Rows.Add(1)
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = barcode
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = brand
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = unit
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = color
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = Val(price).ToString("N2")
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = "Remove"
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = pu_id
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = barcode
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = brand
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = unit
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = color
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = Val(price).ToString("N2")
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(6).Value = "Remove"
                     End While
                 End If
                 .cmd.Dispose()
@@ -524,9 +528,7 @@
         CategoryForm.ShowDialog()
     End Sub
 
-    Private Sub ProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 
     Private Sub btnAddColor_Click(sender As Object, e As EventArgs)
         ColorForm.selectedColor = 0

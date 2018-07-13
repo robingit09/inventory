@@ -113,7 +113,7 @@
         If btnAdd.Text = "Add(+)" Then
             ' check if exist
             For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
-                If item.Cells(1).Value <> "" Then
+                If item.Cells("brand").Value <> "" Then
                     Dim barcode As String = item.Cells("barcode").Value
                     Dim brand As String = item.Cells("brand").Value.ToString.ToUpper
                     Dim unit As String = item.Cells("unit").Value.ToString.ToUpper
@@ -127,7 +127,7 @@
                     End If
                 End If
             Next
-            Dim row As String() = New String() {txtBarcode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
+            Dim row As String() = New String() {"", txtBarcode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
             ProductForm.dgvMeasure.Rows.Add(row)
 
         ElseIf btnAdd.Text = "Edit(->)" Then

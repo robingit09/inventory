@@ -3,7 +3,6 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.pdb
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.xml
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryList.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrderForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
@@ -55,3 +54,4 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductAddUnitForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorList.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ReportViewer.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
