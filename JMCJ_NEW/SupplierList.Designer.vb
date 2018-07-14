@@ -22,23 +22,24 @@ Partial Class SupplierList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnAdd = New System.Windows.Forms.Button
-        Me.btnEdit = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.dgvSupplier = New System.Windows.Forms.DataGridView
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.SupplierCode = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.FaxTel = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Added = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.txtSearch = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.dgvSupplier = New System.Windows.Forms.DataGridView()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SupplierCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.city = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FaxTel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvSupplier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,19 +52,17 @@ Partial Class SupplierList
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'btnEdit
+        'btnUpdate
         '
-        Me.btnEdit.Enabled = False
-        Me.btnEdit.Location = New System.Drawing.Point(109, 26)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(75, 23)
-        Me.btnEdit.TabIndex = 1
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(109, 26)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 1
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Enabled = False
         Me.btnDelete.Location = New System.Drawing.Point(202, 26)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
@@ -74,22 +73,40 @@ Partial Class SupplierList
         'dgvSupplier
         '
         Me.dgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Supplier, Me.SupplierCode, Me.Address, Me.ContactPerson, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.EmailAddress, Me.Added, Me.Status})
+        Me.dgvSupplier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Supplier, Me.SupplierCode, Me.Address, Me.city, Me.ContactPerson, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.EmailAddress, Me.date_created, Me.Status})
         Me.dgvSupplier.Location = New System.Drawing.Point(18, 110)
         Me.dgvSupplier.Name = "dgvSupplier"
         Me.dgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSupplier.Size = New System.Drawing.Size(1005, 290)
+        Me.dgvSupplier.Size = New System.Drawing.Size(1248, 290)
         Me.dgvSupplier.TabIndex = 3
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(1001, 84)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(265, 20)
+        Me.txtSearch.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(954, 87)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(41, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Search"
         '
         'ID
         '
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
+        Me.ID.Width = 5
         '
         'Supplier
         '
         Me.Supplier.HeaderText = "Supplier"
         Me.Supplier.Name = "Supplier"
+        Me.Supplier.Width = 200
         '
         'SupplierCode
         '
@@ -101,6 +118,12 @@ Partial Class SupplierList
         Me.Address.HeaderText = "Address"
         Me.Address.Name = "Address"
         Me.Address.ReadOnly = True
+        '
+        'city
+        '
+        Me.city.HeaderText = "City"
+        Me.city.Name = "city"
+        Me.city.ReadOnly = True
         '
         'ContactPerson
         '
@@ -132,11 +155,11 @@ Partial Class SupplierList
         Me.EmailAddress.Name = "EmailAddress"
         Me.EmailAddress.ReadOnly = True
         '
-        'Added
+        'date_created
         '
-        Me.Added.HeaderText = "Added"
-        Me.Added.Name = "Added"
-        Me.Added.ReadOnly = True
+        Me.date_created.HeaderText = "Date Created"
+        Me.date_created.Name = "date_created"
+        Me.date_created.ReadOnly = True
         '
         'Status
         '
@@ -144,32 +167,16 @@ Partial Class SupplierList
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
         '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(679, 84)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(265, 20)
-        Me.txtSearch.TabIndex = 4
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(632, 87)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 13)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Search"
-        '
         'SupplierList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(956, 429)
+        Me.ClientSize = New System.Drawing.Size(1278, 429)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.dgvSupplier)
         Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.btnEdit)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "SupplierList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -181,20 +188,21 @@ Partial Class SupplierList
 
     End Sub
     Friend WithEvents btnAdd As System.Windows.Forms.Button
-    Friend WithEvents btnEdit As System.Windows.Forms.Button
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents dgvSupplier As System.Windows.Forms.DataGridView
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Supplier As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SupplierCode As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Address As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ContactPerson As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ContactNumber1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ContactNumber2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FaxTel As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EmailAddress As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Added As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Supplier As DataGridViewTextBoxColumn
+    Friend WithEvents SupplierCode As DataGridViewTextBoxColumn
+    Friend WithEvents Address As DataGridViewTextBoxColumn
+    Friend WithEvents city As DataGridViewTextBoxColumn
+    Friend WithEvents ContactPerson As DataGridViewTextBoxColumn
+    Friend WithEvents ContactNumber1 As DataGridViewTextBoxColumn
+    Friend WithEvents ContactNumber2 As DataGridViewTextBoxColumn
+    Friend WithEvents FaxTel As DataGridViewTextBoxColumn
+    Friend WithEvents EmailAddress As DataGridViewTextBoxColumn
+    Friend WithEvents date_created As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class

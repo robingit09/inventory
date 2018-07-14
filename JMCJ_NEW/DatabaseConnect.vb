@@ -117,4 +117,26 @@ Public Class DatabaseConnect
         End Try
         Return False
     End Function
+
+    Function isExist(ByVal table As String, ByVal column As String, ByVal val As String, ByVal id As Integer) As Boolean
+        Try
+            cmd.Connection = con
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT " & column & " FROM " & table & " WHERE " & column & " = '" & val & "' and id <> " & id
+            dr = cmd.ExecuteReader
+            If dr.HasRows Then
+                cmd.Dispose()
+                dr.Close()
+                con.Close()
+                Return True
+            Else
+                cmd.Dispose()
+                dr.Close()
+                con.Close()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+        Return False
+    End Function
 End Class
