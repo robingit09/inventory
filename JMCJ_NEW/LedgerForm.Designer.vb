@@ -586,7 +586,7 @@ Partial Class LedgerForm
         Me.GroupBox3.Controls.Add(Me.cbBrand)
         Me.GroupBox3.Controls.Add(Me.Label17)
         Me.GroupBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(267, 303)
+        Me.GroupBox3.Location = New System.Drawing.Point(281, 303)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(1003, 58)
         Me.GroupBox3.TabIndex = 59

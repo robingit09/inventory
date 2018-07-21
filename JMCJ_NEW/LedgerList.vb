@@ -49,11 +49,17 @@
         Loading.Show()
         dgvLedger.Rows.Clear()
 
+        If show <> "" And IsNumeric(show) Then
+            show = "TOP " & show
+        Else
+            show = ""
+        End If
+
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
                 If show <> "All" Then
-                    .selectByQuery("SELECT TOP " & show & " * from ledger order by id desc")
+                    .selectByQuery("SELECT " & show & " * from ledger order by id desc")
                 Else
                     .selectByQuery("SELECT * from ledger order by id desc")
                 End If
@@ -317,6 +323,7 @@
                 LedgerForm.txtCounterNo.Text = counter_no
                 LedgerForm.txtInvoiceNo.Text = invoice_no
                 LedgerForm.txtAmount.Text = amount
+                LedgerForm.lblTotalAmount.Text = Val(amount).ToString("N2")
 
                 If paid = True Then
                     LedgerForm.rPaidYes.Checked = True

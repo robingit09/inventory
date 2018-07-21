@@ -160,11 +160,17 @@
                 .cmd.Parameters.AddWithValue("@delivered_by", Trim(txtDeliveredBy.Text))
                 .cmd.Parameters.AddWithValue("@received_by", Trim(txtReceivedBy.Text))
                 .cmd.ExecuteNonQuery()
+                .cmd.Dispose()
+                .con.Close()
+
+
+                Dim saveproduct As New DatabaseConnect
 
                 Dim cmd2 As New System.Data.OleDb.OleDbCommand
-                cmd2.Connection = .con
+                cmd2.Connection = saveproduct.con
                 cmd2.CommandType = CommandType.Text
                 For Each item As DataGridViewRow In Me.dgvProd.Rows
+                    Dim ledger_id As Integer = getLastID("ledger")
                     Dim product As Integer = New DatabaseConnect().get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
                     Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
                     Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
@@ -178,8 +184,8 @@
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
                         cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,color,quantity,unit_price,sell_price,less,
-                total_amount)VALUES(?,?,?,?,?,?,?,?,?,?)"
-                        cmd2.Parameters.AddWithValue("@customer_order_ledger_id", getLastID("ledger"))
+                total_amount,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+                        cmd2.Parameters.AddWithValue("@customer_order_ledger_id", ledger_id)
                         cmd2.Parameters.AddWithValue("@product_id", product)
                         cmd2.Parameters.AddWithValue("@brand", brand)
                         cmd2.Parameters.AddWithValue("@unit", unit)
@@ -189,14 +195,15 @@
                         cmd2.Parameters.AddWithValue("@sell_price", sell_price)
                         cmd2.Parameters.AddWithValue("@less", less)
                         cmd2.Parameters.AddWithValue("@total_amount", total_amount)
+                        cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                        cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                         cmd2.ExecuteNonQuery()
                         cmd2.Parameters.Clear()
 
                     End If
                 Next
                 cmd2.Dispose()
-                .cmd.Dispose()
-                .con.Close()
+                saveproduct.con.Close()
 
                 MsgBox("Customer Order Save Successfully", MsgBoxStyle.Information)
                 clearfields()
@@ -571,6 +578,7 @@
             If (validator()) Then
                 Exit Sub
             End If
+
             insertData()
             clearfields()
             LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
@@ -1117,7 +1125,7 @@
                     Dim desc As String = .dr("description")
                     Dim brand As String = .dr("brand")
                     Dim unit As String = .dr("unit")
-                    Dim color As String = .dr("color")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Math.Round(Val(.dr("price")), 2).ToString("N2")
                     Dim less As String = .dr("less")
                     Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")

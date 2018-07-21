@@ -15,11 +15,11 @@
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
-                INNER JOIN color as cc ON cc.id = pu.color)
+                LEFT JOIN color as cc ON cc.id = pu.color)
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where p.status = 1 order by p.description")
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.description")
             Else
 
             End If
@@ -31,7 +31,7 @@
                     Dim desc As String = .dr("description")
                     Dim brand As String = .dr("brand")
                     Dim unit As String = .dr("unit")
-                    Dim color As String = .dr("color")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = .dr("price")
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))

@@ -29,36 +29,6 @@
         End With
     End Sub
 
-    Private Sub loadproduct(ByVal category As String)
-        'cbProduct.DataSource = Nothing
-        'cbProduct.Items.Clear()
-
-        'Dim db As New DatabaseConnect
-        'With db
-        '    .dbConnect()
-        '    .cmd.Connection = .con
-        '    .cmd.CommandType = CommandType.Text
-        '    .cmd.CommandText = "SELECT distinct id,name from products where status <> 0 and category like '%" & category & "%'"
-        '    .dr = .cmd.ExecuteReader
-
-        '    Dim comboSource As New Dictionary(Of String, String)()
-        '    comboSource.Add(0, "Select Product")
-        '    While .dr.Read
-        '        Dim id As Integer = CInt(.dr.GetValue(0))
-        '        Dim prod As String = .dr.GetValue(1)
-        '        comboSource.Add(id, prod)
-        '    End While
-        '    cbProduct.DataSource = New BindingSource(comboSource, Nothing)
-        '    cbProduct.DisplayMember = "Value"
-        '    cbProduct.ValueMember = "Key"
-
-        '    .dr.Close()
-        '    .cmd.Dispose()
-        '    .con.Close()
-
-        'End With
-    End Sub
-
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If cbCustomer.SelectedIndex > 0 Then
             AddProductForm.selectedCustomer = Me.selectedCustomer
@@ -90,13 +60,13 @@
                 from (((((((((customer_product_prices as cpp
                 INNER JOIN products as p ON p.id = cpp.product_id)
                 INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id and pu.brand = cpp.brand and pu.unit = cpp.unit)
-                INNER JOIN brand as b on b.id = cpp.brand)
+                LEFT JOIN brand as b on b.id = cpp.brand)
                 INNER JOIN unit as u on u.id = cpp.unit)
-                INNER JOIN color as cc ON cc.id = cpp.color)
-                INNER JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
-                INNER JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
-                INNER JOIN categories as c ON c.id = pc.category_id)
-                INNER JOIN categories as subc ON subc.id = psc.subcategory_id)
+                LEFT JOIN color as cc ON cc.id = cpp.color)
+                LEFT JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
                 where cpp.customer_id = " & customer_id)
             End If
 
@@ -130,7 +100,7 @@
 
                     Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
-                    Dim subcat As String = If(IsDBNull(.dr("subcat")), barcode, .dr("subcat"))
+                    Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
