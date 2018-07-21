@@ -312,12 +312,10 @@
         cbPaymentType.Items.Clear()
 
         Dim comboSource As New Dictionary(Of String, String)()
-
         comboSource.Add(-1, "Select Payment Type")
         comboSource.Add(0, "Cash")
         comboSource.Add(1, "C.O.D")
         comboSource.Add(2, "Credit")
-        comboSource.Add(3, "Post Dated")
 
         cbPaymentType.DataSource = New BindingSource(comboSource, Nothing)
         cbPaymentType.DisplayMember = "Value"

@@ -409,10 +409,10 @@ Partial Class PurchaseOrderForm
         '
         'txtAmount
         '
-        Me.txtAmount.Enabled = False
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
         Me.txtAmount.Location = New System.Drawing.Point(731, 78)
         Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.ReadOnly = True
         Me.txtAmount.Size = New System.Drawing.Size(208, 20)
         Me.txtAmount.TabIndex = 58
         '
@@ -420,7 +420,7 @@ Partial Class PurchaseOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1444, 638)
+        Me.ClientSize = New System.Drawing.Size(1370, 638)
         Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox1)

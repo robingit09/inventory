@@ -280,6 +280,9 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         If btnSave.Text = "Save" Then
+            If validation() = False Then
+                Exit Sub
+            End If
             insertData()
             clearFields()
         Else
@@ -295,8 +298,46 @@
             Return False
         End If
 
+        If txtPONO.Text = "" Then
+            MsgBox("PO no. field is required!", MsgBoxStyle.Critical)
+            txtPONO.Focus()
+            Return False
+        End If
 
+        If cbTerms.SelectedIndex = 0 Then
+            MsgBox("Term field is required!", MsgBoxStyle.Critical)
+            cbTerms.Focus()
+            Return False
+        End If
 
+        If dgvProd.Rows.Count = 1 Then
+            MsgBox("Please add product!", MsgBoxStyle.Critical)
+            dgvProd.Focus()
+            Return False
+        End If
+
+        'qty validation
+        Dim validate As Boolean = False
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If prod <> "" Then
+                If qty = "" Then
+                    dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                    validate = True
+                End If
+
+                If IsNumeric(qty) And Val(qty) <= 0 Then
+                    dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                    validate = True
+                End If
+            End If
+
+        Next
+
+        If validate = True Then
+            Return False
+        End If
         Return True
     End Function
 
@@ -390,4 +431,12 @@
         End With
         Return id
     End Function
+
+    Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
+        'remove product
+        If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
+            dgvProd.Rows.RemoveAt(e.RowIndex)
+            computeTotalAmount()
+        End If
+    End Sub
 End Class
