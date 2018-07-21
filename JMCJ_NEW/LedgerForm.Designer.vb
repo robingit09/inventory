@@ -572,7 +572,7 @@ Partial Class LedgerForm
         Me.GroupBox1.Size = New System.Drawing.Size(249, 58)
         Me.GroupBox1.TabIndex = 58
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Add product using barcode"
+        Me.GroupBox1.Text = "Enter Barcode"
         '
         'GroupBox3
         '
@@ -591,7 +591,7 @@ Partial Class LedgerForm
         Me.GroupBox3.Size = New System.Drawing.Size(1003, 58)
         Me.GroupBox3.TabIndex = 59
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Add product"
+        Me.GroupBox3.Text = "Enter Product"
         '
         'Label20
         '
@@ -672,7 +672,7 @@ Partial Class LedgerForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(6, 27)
+        Me.Label17.Location = New System.Drawing.Point(6, 21)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(72, 15)
         Me.Label17.TabIndex = 34

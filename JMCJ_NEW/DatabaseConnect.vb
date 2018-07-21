@@ -139,4 +139,26 @@ Public Class DatabaseConnect
         End Try
         Return False
     End Function
+
+    Function get_by_id(ByVal table As String, ByVal id As Integer, ByVal col As String)
+        Dim res As String = ""
+        Try
+            cmd.Connection = con
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "Select " & col & " from " & table & " where id = " & id
+            dr = cmd.ExecuteReader
+            If dr.HasRows Then
+                If dr.Read Then
+                    res = dr.GetValue(0)
+                End If
+
+            End If
+            cmd.Dispose()
+            con.Close()
+        Catch ex As Exception
+
+        End Try
+
+        Return res
+    End Function
 End Class

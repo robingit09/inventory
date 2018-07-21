@@ -30,12 +30,12 @@ Partial Class PurchaseOrderForm
         Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.txtPONO = New System.Windows.Forms.TextBox()
         Me.cbTerms = New System.Windows.Forms.ComboBox()
-        Me.dtpDateCreated = New System.Windows.Forms.DateTimePicker()
+        Me.dtp_po_date = New System.Windows.Forms.DateTimePicker()
         Me.dtpETA = New System.Windows.Forms.DateTimePicker()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -61,6 +61,8 @@ Partial Class PurchaseOrderForm
         Me.cbUnit = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbBrand = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -135,16 +137,16 @@ Partial Class PurchaseOrderForm
         Me.cbTerms.Size = New System.Drawing.Size(360, 21)
         Me.cbTerms.TabIndex = 7
         '
-        'dtpDateCreated
+        'dtp_po_date
         '
-        Me.dtpDateCreated.Location = New System.Drawing.Point(687, 17)
-        Me.dtpDateCreated.Name = "dtpDateCreated"
-        Me.dtpDateCreated.Size = New System.Drawing.Size(208, 20)
-        Me.dtpDateCreated.TabIndex = 8
+        Me.dtp_po_date.Location = New System.Drawing.Point(731, 14)
+        Me.dtp_po_date.Name = "dtp_po_date"
+        Me.dtp_po_date.Size = New System.Drawing.Size(208, 20)
+        Me.dtp_po_date.TabIndex = 8
         '
         'dtpETA
         '
-        Me.dtpETA.Location = New System.Drawing.Point(687, 49)
+        Me.dtpETA.Location = New System.Drawing.Point(731, 46)
         Me.dtpETA.Name = "dtpETA"
         Me.dtpETA.Size = New System.Drawing.Size(208, 20)
         Me.dtpETA.TabIndex = 9
@@ -153,40 +155,41 @@ Partial Class PurchaseOrderForm
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(1198, 515)
+        Me.Label8.Location = New System.Drawing.Point(956, 541)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(154, 30)
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "Total Amount:"
         '
-        'lblTotal
+        'lblTotalAmount
         '
-        Me.lblTotal.AutoSize = True
-        Me.lblTotal.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.ForeColor = System.Drawing.Color.Red
-        Me.lblTotal.Location = New System.Drawing.Point(1358, 515)
-        Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(55, 30)
-        Me.lblTotal.TabIndex = 17
-        Me.lblTotal.Text = "0.00"
+        Me.lblTotalAmount.AutoSize = True
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.lblTotalAmount.Location = New System.Drawing.Point(1116, 541)
+        Me.lblTotalAmount.Name = "lblTotalAmount"
+        Me.lblTotalAmount.Size = New System.Drawing.Size(55, 30)
+        Me.lblTotalAmount.TabIndex = 17
+        Me.lblTotalAmount.Text = "0.00"
+        Me.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1201, 13)
+        Me.btnSave.Location = New System.Drawing.Point(1209, 13)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(102, 38)
         Me.btnSave.TabIndex = 18
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnSaveAndPrint
         '
-        Me.Button2.Location = New System.Drawing.Point(1201, 52)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(102, 38)
-        Me.Button2.TabIndex = 19
-        Me.Button2.Text = "Save and Print"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1209, 57)
+        Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
+        Me.btnSaveAndPrint.Size = New System.Drawing.Size(102, 38)
+        Me.btnSaveAndPrint.TabIndex = 19
+        Me.btnSaveAndPrint.Text = "Save and Print"
+        Me.btnSaveAndPrint.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -326,7 +329,7 @@ Partial Class PurchaseOrderForm
         Me.GroupBox3.Size = New System.Drawing.Size(1003, 58)
         Me.GroupBox3.TabIndex = 62
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Add product"
+        Me.GroupBox3.Text = "Enter Product"
         '
         'Label20
         '
@@ -395,20 +398,40 @@ Partial Class PurchaseOrderForm
         Me.cbBrand.Size = New System.Drawing.Size(143, 23)
         Me.cbBrand.TabIndex = 35
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(637, 82)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(73, 13)
+        Me.Label6.TabIndex = 63
+        Me.Label6.Text = "Total Amount:"
+        '
+        'txtAmount
+        '
+        Me.txtAmount.Enabled = False
+        Me.txtAmount.ForeColor = System.Drawing.Color.Red
+        Me.txtAmount.Location = New System.Drawing.Point(731, 78)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.Size = New System.Drawing.Size(208, 20)
+        Me.txtAmount.TabIndex = 58
+        '
         'PurchaseOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1444, 564)
+        Me.ClientSize = New System.Drawing.Size(1444, 638)
+        Me.Controls.Add(Me.txtAmount)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnSaveAndPrint)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.lblTotal)
+        Me.Controls.Add(Me.lblTotalAmount)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.dtpETA)
-        Me.Controls.Add(Me.dtpDateCreated)
+        Me.Controls.Add(Me.dtp_po_date)
         Me.Controls.Add(Me.cbTerms)
         Me.Controls.Add(Me.txtPONO)
         Me.Controls.Add(Me.cbSupplier)
@@ -438,12 +461,12 @@ Partial Class PurchaseOrderForm
     Friend WithEvents cbSupplier As System.Windows.Forms.ComboBox
     Friend WithEvents txtPONO As System.Windows.Forms.TextBox
     Friend WithEvents cbTerms As System.Windows.Forms.ComboBox
-    Friend WithEvents dtpDateCreated As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtp_po_date As System.Windows.Forms.DateTimePicker
     Friend WithEvents dtpETA As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents lblTotal As System.Windows.Forms.Label
+    Friend WithEvents lblTotalAmount As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnSaveAndPrint As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtEnterBarcode As TextBox
     Friend WithEvents Label14 As Label
@@ -469,4 +492,6 @@ Partial Class PurchaseOrderForm
     Friend WithEvents cbUnit As ComboBox
     Friend WithEvents Label16 As Label
     Friend WithEvents cbBrand As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtAmount As TextBox
 End Class

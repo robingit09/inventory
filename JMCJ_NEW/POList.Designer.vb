@@ -24,12 +24,14 @@ Partial Class POList
     Private Sub InitializeComponent()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvPO = New System.Windows.Forms.DataGridView()
-        Me.DateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnVoid = New System.Windows.Forms.Button()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PONumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupplierName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.delivery_status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,29 +48,48 @@ Partial Class POList
         'dgvPO
         '
         Me.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DateCreated, Me.PONumber, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.Status})
+        Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.DateIssue, Me.PONumber, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.delivery_status})
         Me.dgvPO.Location = New System.Drawing.Point(26, 108)
         Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(643, 335)
+        Me.dgvPO.Size = New System.Drawing.Size(769, 335)
         Me.dgvPO.TabIndex = 1
         '
-        'DateCreated
+        'btnVoid
         '
-        Me.DateCreated.HeaderText = "Date Created"
-        Me.DateCreated.Name = "DateCreated"
-        Me.DateCreated.ReadOnly = True
+        Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVoid.Location = New System.Drawing.Point(134, 29)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(83, 29)
+        Me.btnVoid.TabIndex = 2
+        Me.btnVoid.Text = "Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'DateIssue
+        '
+        Me.DateIssue.HeaderText = "Date Issue"
+        Me.DateIssue.Name = "DateIssue"
+        Me.DateIssue.ReadOnly = True
         '
         'PONumber
         '
         Me.PONumber.HeaderText = "PO Number"
         Me.PONumber.Name = "PONumber"
         Me.PONumber.ReadOnly = True
+        Me.PONumber.Width = 120
         '
         'SupplierName
         '
         Me.SupplierName.HeaderText = "Supplier Name"
         Me.SupplierName.Name = "SupplierName"
         Me.SupplierName.ReadOnly = True
+        Me.SupplierName.Width = 200
         '
         'TotalAmount
         '
@@ -82,17 +103,18 @@ Partial Class POList
         Me.ProcessedBy.Name = "ProcessedBy"
         Me.ProcessedBy.ReadOnly = True
         '
-        'Status
+        'delivery_status
         '
-        Me.Status.HeaderText = "Status"
-        Me.Status.Name = "Status"
-        Me.Status.ReadOnly = True
+        Me.delivery_status.HeaderText = "Delivery Status"
+        Me.delivery_status.Name = "delivery_status"
+        Me.delivery_status.ReadOnly = True
         '
         'POList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(922, 485)
+        Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.dgvPO)
         Me.Controls.Add(Me.btnAddNew)
         Me.Name = "POList"
@@ -104,10 +126,12 @@ Partial Class POList
     End Sub
     Friend WithEvents btnAddNew As System.Windows.Forms.Button
     Friend WithEvents dgvPO As System.Windows.Forms.DataGridView
-    Friend WithEvents DateCreated As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PONumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SupplierName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TotalAmount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProcessedBy As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnVoid As Button
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents DateIssue As DataGridViewTextBoxColumn
+    Friend WithEvents PONumber As DataGridViewTextBoxColumn
+    Friend WithEvents SupplierName As DataGridViewTextBoxColumn
+    Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
+    Friend WithEvents ProcessedBy As DataGridViewTextBoxColumn
+    Friend WithEvents delivery_status As DataGridViewTextBoxColumn
 End Class
