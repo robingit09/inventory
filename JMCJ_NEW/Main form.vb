@@ -62,4 +62,7 @@
         ColorList.ShowDialog()
     End Sub
 
+    Private Sub PurchaseReceiveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseReceiveToolStripMenuItem.Click
+        PurchaseReceive.ShowDialog()
+    End Sub
 End Class

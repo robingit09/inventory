@@ -34,14 +34,14 @@ Partial Class Main_form
         Me.UnitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseReceiveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -106,7 +106,7 @@ Partial Class Main_form
         '
         'PurchaseOrderToolStripMenuItem
         '
-        Me.PurchaseOrderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem1, Me.PurchaseInvoiceToolStripMenuItem})
+        Me.PurchaseOrderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem1, Me.PurchaseReceiveToolStripMenuItem})
         Me.PurchaseOrderToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PurchaseOrderToolStripMenuItem.Name = "PurchaseOrderToolStripMenuItem"
         Me.PurchaseOrderToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
@@ -115,14 +115,14 @@ Partial Class Main_form
         'PurchaseOrderToolStripMenuItem1
         '
         Me.PurchaseOrderToolStripMenuItem1.Name = "PurchaseOrderToolStripMenuItem1"
-        Me.PurchaseOrderToolStripMenuItem1.Size = New System.Drawing.Size(209, 26)
+        Me.PurchaseOrderToolStripMenuItem1.Size = New System.Drawing.Size(212, 26)
         Me.PurchaseOrderToolStripMenuItem1.Text = "Purchase Order"
         '
-        'PurchaseInvoiceToolStripMenuItem
+        'PurchaseReceiveToolStripMenuItem
         '
-        Me.PurchaseInvoiceToolStripMenuItem.Name = "PurchaseInvoiceToolStripMenuItem"
-        Me.PurchaseInvoiceToolStripMenuItem.Size = New System.Drawing.Size(209, 26)
-        Me.PurchaseInvoiceToolStripMenuItem.Text = "Purchase Invoice"
+        Me.PurchaseReceiveToolStripMenuItem.Name = "PurchaseReceiveToolStripMenuItem"
+        Me.PurchaseReceiveToolStripMenuItem.Size = New System.Drawing.Size(212, 26)
+        Me.PurchaseReceiveToolStripMenuItem.Text = "Purchase Receive"
         '
         'CustomerOrderToolStripMenuItem
         '
@@ -136,6 +136,12 @@ Partial Class Main_form
         Me.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem"
         Me.ColorToolStripMenuItem.Size = New System.Drawing.Size(48, 25)
         Me.ColorToolStripMenuItem.Text = "Color"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(71, 25)
+        Me.ToolStripMenuItem1.Text = "Customer"
         '
         'lblDate
         '
@@ -179,12 +185,6 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(71, 25)
-        Me.ToolStripMenuItem1.Text = "Customer"
-        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -220,7 +220,7 @@ Partial Class Main_form
     Friend WithEvents PurchaseOrderToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SupplierToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PurchaseOrderToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PurchaseInvoiceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PurchaseReceiveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents PriceListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BrandToolStripMenuItem As ToolStripMenuItem

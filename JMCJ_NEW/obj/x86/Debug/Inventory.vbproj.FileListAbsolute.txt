@@ -3,7 +3,6 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.pdb
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\JMCJ_NEW.xml
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CategoryList.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrderForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.frmReportViewer.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Main_form.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Resources.resources
@@ -41,7 +40,6 @@ C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\FlashControlV71.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\ShockwaveFlashObjects.dll
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UpdatePriceForm.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerOrder.resources
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.ReportSource.dll
 C:\Users\inventory\JMCJ_NEW\bin\x86\Debug\CrystalDecisions.Shared.dll
@@ -55,3 +53,4 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorList.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ReportViewer.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceive.resources

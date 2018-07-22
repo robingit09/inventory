@@ -4,15 +4,16 @@
 
     Public selectedSupplier As Integer = 0
     Public selectedTerm As Integer = 0
+    Public selectedPaymentType As Integer = 0
     Private Sub PurchaseOrderForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadSupplier()
         loadTerms()
+        loadPaymentType()
     End Sub
 
     Public Sub loadSupplier()
         cbSupplier.DataSource = Nothing
         cbSupplier.Items.Clear()
-
         Dim db As New DatabaseConnect
         With db
             .selectByQuery("SELECT id,supplier_name from suppliers where status <> 0 order by supplier_name")
@@ -33,13 +34,27 @@
             .cmd.Dispose()
             .con.Close()
         End With
+    End Sub
 
+    Public Sub loadPaymentType()
+        cbPaymentType.DataSource = Nothing
+        cbPaymentType.Items.Clear()
+
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Payment Type")
+        comboSource.Add(1, "Cash")
+        comboSource.Add(2, "C.O.D")
+        comboSource.Add(3, "Credit")
+
+        cbPaymentType.DataSource = New BindingSource(comboSource, Nothing)
+        cbPaymentType.DisplayMember = "Value"
+        cbPaymentType.ValueMember = "Key"
+        cbPaymentType.SelectedIndex = 0
     End Sub
 
     Private Function generatePONo() As String
         Dim result As String = ""
         Try
-
             Dim db As New DatabaseConnect
             With db
                 .selectByQuery("SELECT COUNT(id) from purchase_orders where supplier = " & selectedSupplier)
@@ -81,8 +96,6 @@
     End Function
 
     Private Sub cbSupplier_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbSupplier.SelectedIndexChanged
-
-
         If cbSupplier.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbSupplier.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbSupplier.SelectedItem, KeyValuePair(Of String, String)).Value
@@ -310,6 +323,12 @@
             Return False
         End If
 
+        If cbPaymentType.SelectedIndex = 0 Then
+            MsgBox("Payment Type field is required!", MsgBoxStyle.Critical)
+            cbPaymentType.Focus()
+            Return False
+        End If
+
         If dgvProd.Rows.Count = 1 Then
             MsgBox("Please add product!", MsgBoxStyle.Critical)
             dgvProd.Focus()
@@ -361,13 +380,14 @@
         With insertPO
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,total_amount,delivery_status,payment_status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@po_no", generatePONo())
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
             .cmd.Parameters.AddWithValue("@po_date", dtp_po_date.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@eta", dtpETA.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@terms", selectedTerm)
+            .cmd.Parameters.AddWithValue("@payment_type", selectedPaymentType)
             .cmd.Parameters.AddWithValue("@total_amount", txtAmount.Text)
             .cmd.Parameters.AddWithValue("@delivery_status", 1)
             .cmd.Parameters.AddWithValue("@payment_status", 1)
@@ -437,6 +457,16 @@
         If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
+        End If
+    End Sub
+
+    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
+        If cbPaymentType.SelectedIndex > 0 Then
+            Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
+            Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedPaymentType = key
+        Else
+            selectedPaymentType = 0
         End If
     End Sub
 End Class
