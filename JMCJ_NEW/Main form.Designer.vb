@@ -24,124 +24,31 @@ Partial Class Main_form
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main_form))
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.ProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SupplierToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BrandToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UnitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseReceiveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.MenuStrip1.SuspendLayout()
+        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
+        Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProductMasterInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BrandToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseOrderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SupplierToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PricingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CategoriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductToolStripMenuItem, Me.SupplierToolStripMenuItem, Me.PriceListToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.BrandToolStripMenuItem, Me.UnitToolStripMenuItem, Me.PurchaseOrderToolStripMenuItem, Me.CustomerOrderToolStripMenuItem, Me.ColorToolStripMenuItem, Me.ToolStripMenuItem1})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(926, 29)
-        Me.MenuStrip1.TabIndex = 0
-        Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'ProductToolStripMenuItem
-        '
-        Me.ProductToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProductToolStripMenuItem.Name = "ProductToolStripMenuItem"
-        Me.ProductToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
-        Me.ProductToolStripMenuItem.Text = "Product"
-        '
-        'SupplierToolStripMenuItem
-        '
-        Me.SupplierToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SupplierToolStripMenuItem.Name = "SupplierToolStripMenuItem"
-        Me.SupplierToolStripMenuItem.Size = New System.Drawing.Size(86, 25)
-        Me.SupplierToolStripMenuItem.Text = "Supplier"
-        '
-        'PriceListToolStripMenuItem
-        '
-        Me.PriceListToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PriceListToolStripMenuItem.Name = "PriceListToolStripMenuItem"
-        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(76, 25)
-        Me.PriceListToolStripMenuItem.Text = "Pricing"
-        '
-        'CustomerToolStripMenuItem
-        '
-        Me.CustomerToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
-        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(95, 25)
-        Me.CustomerToolStripMenuItem.Text = "Customer"
-        '
-        'CategoriesToolStripMenuItem
-        '
-        Me.CategoriesToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CategoriesToolStripMenuItem.Name = "CategoriesToolStripMenuItem"
-        Me.CategoriesToolStripMenuItem.Size = New System.Drawing.Size(103, 25)
-        Me.CategoriesToolStripMenuItem.Text = "Categories"
-        '
-        'BrandToolStripMenuItem
-        '
-        Me.BrandToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BrandToolStripMenuItem.Name = "BrandToolStripMenuItem"
-        Me.BrandToolStripMenuItem.Size = New System.Drawing.Size(67, 25)
-        Me.BrandToolStripMenuItem.Text = "Brand"
-        '
-        'UnitToolStripMenuItem
-        '
-        Me.UnitToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.UnitToolStripMenuItem.Name = "UnitToolStripMenuItem"
-        Me.UnitToolStripMenuItem.Size = New System.Drawing.Size(55, 25)
-        Me.UnitToolStripMenuItem.Text = "Unit"
-        '
-        'PurchaseOrderToolStripMenuItem
-        '
-        Me.PurchaseOrderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem1, Me.PurchaseReceiveToolStripMenuItem})
-        Me.PurchaseOrderToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PurchaseOrderToolStripMenuItem.Name = "PurchaseOrderToolStripMenuItem"
-        Me.PurchaseOrderToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
-        Me.PurchaseOrderToolStripMenuItem.Text = "Purchase"
-        '
-        'PurchaseOrderToolStripMenuItem1
-        '
-        Me.PurchaseOrderToolStripMenuItem1.Name = "PurchaseOrderToolStripMenuItem1"
-        Me.PurchaseOrderToolStripMenuItem1.Size = New System.Drawing.Size(212, 26)
-        Me.PurchaseOrderToolStripMenuItem1.Text = "Purchase Order"
-        '
-        'PurchaseReceiveToolStripMenuItem
-        '
-        Me.PurchaseReceiveToolStripMenuItem.Name = "PurchaseReceiveToolStripMenuItem"
-        Me.PurchaseReceiveToolStripMenuItem.Size = New System.Drawing.Size(212, 26)
-        Me.PurchaseReceiveToolStripMenuItem.Text = "Purchase Receive"
-        '
-        'CustomerOrderToolStripMenuItem
-        '
-        Me.CustomerOrderToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CustomerOrderToolStripMenuItem.Name = "CustomerOrderToolStripMenuItem"
-        Me.CustomerOrderToolStripMenuItem.Size = New System.Drawing.Size(142, 25)
-        Me.CustomerOrderToolStripMenuItem.Text = "Customer Order"
-        '
-        'ColorToolStripMenuItem
-        '
-        Me.ColorToolStripMenuItem.Name = "ColorToolStripMenuItem"
-        Me.ColorToolStripMenuItem.Size = New System.Drawing.Size(48, 25)
-        Me.ColorToolStripMenuItem.Text = "Color"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(71, 25)
-        Me.ToolStripMenuItem1.Text = "Customer"
         '
         'lblDate
         '
@@ -185,6 +92,121 @@ Partial Class Main_form
         '
         Me.Timer1.Interval = 1000
         '
+        'MenuStrip2
+        '
+        Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.PurchaseToolStripMenuItem, Me.SalesToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.SystemToolStripMenuItem})
+        Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.Size = New System.Drawing.Size(926, 29)
+        Me.MenuStrip2.TabIndex = 4
+        Me.MenuStrip2.Text = "MenuStrip2"
+        '
+        'InventoryToolStripMenuItem
+        '
+        Me.InventoryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductsToolStripMenuItem, Me.ProductMasterInformationToolStripMenuItem, Me.BrandToolStripMenuItem1, Me.UnitToolStripMenuItem1, Me.ColorToolStripMenuItem1, Me.CategoriesToolStripMenuItem1})
+        Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
+        Me.InventoryToolStripMenuItem.Size = New System.Drawing.Size(69, 20)
+        Me.InventoryToolStripMenuItem.Text = "Inventory"
+        '
+        'ProductsToolStripMenuItem
+        '
+        Me.ProductsToolStripMenuItem.Name = "ProductsToolStripMenuItem"
+        Me.ProductsToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
+        Me.ProductsToolStripMenuItem.Text = "Products"
+        '
+        'ProductMasterInformationToolStripMenuItem
+        '
+        Me.ProductMasterInformationToolStripMenuItem.Name = "ProductMasterInformationToolStripMenuItem"
+        Me.ProductMasterInformationToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
+        Me.ProductMasterInformationToolStripMenuItem.Text = "Product Master Information"
+        '
+        'BrandToolStripMenuItem1
+        '
+        Me.BrandToolStripMenuItem1.Name = "BrandToolStripMenuItem1"
+        Me.BrandToolStripMenuItem1.Size = New System.Drawing.Size(221, 22)
+        Me.BrandToolStripMenuItem1.Text = "Brand"
+        '
+        'UnitToolStripMenuItem1
+        '
+        Me.UnitToolStripMenuItem1.Name = "UnitToolStripMenuItem1"
+        Me.UnitToolStripMenuItem1.Size = New System.Drawing.Size(221, 22)
+        Me.UnitToolStripMenuItem1.Text = "Unit"
+        '
+        'ColorToolStripMenuItem1
+        '
+        Me.ColorToolStripMenuItem1.Name = "ColorToolStripMenuItem1"
+        Me.ColorToolStripMenuItem1.Size = New System.Drawing.Size(221, 22)
+        Me.ColorToolStripMenuItem1.Text = "Color"
+        '
+        'PurchaseToolStripMenuItem
+        '
+        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1})
+        Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
+        Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.PurchaseToolStripMenuItem.Text = "Purchase"
+        '
+        'PurchaseOrderToolStripMenuItem2
+        '
+        Me.PurchaseOrderToolStripMenuItem2.Name = "PurchaseOrderToolStripMenuItem2"
+        Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(165, 22)
+        Me.PurchaseOrderToolStripMenuItem2.Text = "Purchase Order"
+        '
+        'PurchaseReceiveToolStripMenuItem1
+        '
+        Me.PurchaseReceiveToolStripMenuItem1.Name = "PurchaseReceiveToolStripMenuItem1"
+        Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
+        Me.PurchaseReceiveToolStripMenuItem1.Text = "Purchase Receive"
+        '
+        'SupplierToolStripMenuItem1
+        '
+        Me.SupplierToolStripMenuItem1.Name = "SupplierToolStripMenuItem1"
+        Me.SupplierToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
+        Me.SupplierToolStripMenuItem1.Text = "Supplier"
+        '
+        'SalesToolStripMenuItem
+        '
+        Me.SalesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomerToolStripMenuItem1, Me.PricingToolStripMenuItem, Me.CustomerToolStripMenuItem2})
+        Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
+        Me.SalesToolStripMenuItem.Text = "Sales"
+        '
+        'CustomerToolStripMenuItem1
+        '
+        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
+        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(159, 22)
+        Me.CustomerToolStripMenuItem1.Text = "Customer Order"
+        '
+        'PricingToolStripMenuItem
+        '
+        Me.PricingToolStripMenuItem.Name = "PricingToolStripMenuItem"
+        Me.PricingToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.PricingToolStripMenuItem.Text = "Pricing"
+        '
+        'CustomerToolStripMenuItem2
+        '
+        Me.CustomerToolStripMenuItem2.Name = "CustomerToolStripMenuItem2"
+        Me.CustomerToolStripMenuItem2.Size = New System.Drawing.Size(159, 22)
+        Me.CustomerToolStripMenuItem2.Text = "Customer"
+        '
+        'CategoriesToolStripMenuItem1
+        '
+        Me.CategoriesToolStripMenuItem1.Name = "CategoriesToolStripMenuItem1"
+        Me.CategoriesToolStripMenuItem1.Size = New System.Drawing.Size(221, 22)
+        Me.CategoriesToolStripMenuItem1.Text = "Categories"
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
+        Me.ReportsToolStripMenuItem.Text = "Reports"
+        '
+        'SystemToolStripMenuItem
+        '
+        Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
+        Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
+        Me.SystemToolStripMenuItem.Text = "System"
+        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -195,35 +217,38 @@ Partial Class Main_form
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblTime)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.MenuStrip1)
-        Me.MainMenuStrip = Me.MenuStrip1
+        Me.Controls.Add(Me.MenuStrip2)
         Me.Name = "Main_form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Main Form"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Friend WithEvents CustomerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CustomerOrderToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ProductToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CategoriesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UnitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblDate As System.Windows.Forms.Label
     Friend WithEvents lblTime As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents PurchaseOrderToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SupplierToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PurchaseOrderToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PurchaseReceiveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents PriceListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents BrandToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ColorToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents MenuStrip2 As MenuStrip
+    Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProductsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProductMasterInformationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BrandToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents UnitToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ColorToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PurchaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PurchaseOrderToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents PurchaseReceiveToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents SupplierToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents SalesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CustomerToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PricingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CustomerToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents CategoriesToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SystemToolStripMenuItem As ToolStripMenuItem
 End Class

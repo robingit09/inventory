@@ -203,7 +203,7 @@
 
                 Dim db As New DatabaseConnect
                 With db
-                    .selectByQuery("Select distinct pu.id, pu.barcode, p.description, b.name As brand, u.name As unit, cc.name As color, pu.price, c.name As cat,sub.name as subcat FROM ((((((((products as p 
+                    .selectByQuery("Select distinct pu.id, pu.barcode, p.description, b.name As brand, u.name As unit, cc.name As color, c.name As cat,sub.name as subcat FROM ((((((((products as p 
                     INNER Join product_unit as pu ON p.id = pu.product_id) 
                     Left Join brand as b ON b.id = pu.brand)
                     INNER Join unit as u ON u.id = pu.unit)
@@ -220,9 +220,9 @@
                         Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                         Dim unit As String = .dr("unit")
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
-                        Dim price As String = Val(.dr("price")).ToString("N2")
+                        'Dim cost As String = Val(.dr("cost")).ToString("N2")
 
-                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, price, "", "", "Remove"}
+                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, "0.00", "", "", "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
                     End If
@@ -242,7 +242,7 @@
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value.ToString.Replace(",", ""))
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
 
                 amount = qty * CDbl(price)
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
@@ -419,7 +419,7 @@
                     .cmd.Parameters.AddWithValue("@purchase_order_id", getLastID("purchase_orders"))
                     .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
                     .cmd.Parameters.AddWithValue("@quantity", qty)
-                    .cmd.Parameters.AddWithValue("@unit_price", price)
+                    .cmd.Parameters.AddWithValue("@unit_cost", price)
                     .cmd.Parameters.AddWithValue("@amount", amount)
                     .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                     .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -469,4 +469,5 @@
             selectedPaymentType = 0
         End If
     End Sub
+
 End Class

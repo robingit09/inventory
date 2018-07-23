@@ -63,7 +63,7 @@ Partial Class PurchaseReceive
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -377,7 +377,7 @@ Partial Class PurchaseReceive
         'dgvProd
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.price, Me.amount, Me.stock, Me.action})
+        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
         Me.dgvProd.Location = New System.Drawing.Point(15, 249)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1296, 306)
@@ -426,11 +426,10 @@ Partial Class PurchaseReceive
         Me.Color.Name = "Color"
         Me.Color.ReadOnly = True
         '
-        'price
+        'cost
         '
-        Me.price.HeaderText = "Unit Price"
-        Me.price.Name = "price"
-        Me.price.ReadOnly = True
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
         '
         'amount
         '
@@ -531,7 +530,7 @@ Partial Class PurchaseReceive
     Friend WithEvents brand As DataGridViewTextBoxColumn
     Friend WithEvents unit As DataGridViewTextBoxColumn
     Friend WithEvents Color As DataGridViewTextBoxColumn
-    Friend WithEvents price As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
