@@ -50,6 +50,23 @@
                 Case "0"
                     cbTerms.SelectedIndex = 0
             End Select
+
+            Dim payment_type As Integer = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "payment_type")
+            Select Case payment_type
+                Case 1
+                    cbPaymentType.SelectedIndex = cbPaymentType.FindString("Cash")
+                Case 2
+                    cbPaymentType.SelectedIndex = cbPaymentType.FindString("C.O.D")
+                Case 3
+                    cbPaymentType.SelectedIndex = cbPaymentType.FindString("Credit")
+                Case Else
+                    cbPaymentType.SelectedIndex = 0
+            End Select
+
+            Dim eta As String = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "eta")
+            dtpETA.Value = eta
+
+            'load product info
         Else
             selectedPO = 0
         End If

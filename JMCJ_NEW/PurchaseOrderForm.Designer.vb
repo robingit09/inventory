@@ -36,24 +36,10 @@ Partial Class PurchaseOrderForm
         Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gpEnterBarcode = New System.Windows.Forms.GroupBox()
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtProductDesc = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.cbColor = New System.Windows.Forms.ComboBox()
-        Me.btnAddToCart = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.cbUnit = New System.Windows.Forms.ComboBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.cbBrand = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtAmount = New System.Windows.Forms.TextBox()
-        Me.cbPaymentType = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,9 +51,23 @@ Partial Class PurchaseOrderForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.GroupBox1.SuspendLayout()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtProductDesc = New System.Windows.Forms.TextBox()
+        Me.gpEnterProduct = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cbColor = New System.Windows.Forms.ComboBox()
+        Me.btnAddToCart = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cbUnit = New System.Windows.Forms.ComboBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.cbBrand = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
+        Me.cbPaymentType = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.gpEnterBarcode.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
+        Me.gpEnterProduct.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -193,17 +193,17 @@ Partial Class PurchaseOrderForm
         Me.btnSaveAndPrint.Text = "Save and Print"
         Me.btnSaveAndPrint.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'gpEnterBarcode
         '
-        Me.GroupBox1.Controls.Add(Me.txtEnterBarcode)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(15, 169)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(249, 58)
-        Me.GroupBox1.TabIndex = 61
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Enter Barcode"
+        Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
+        Me.gpEnterBarcode.Controls.Add(Me.Label14)
+        Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 169)
+        Me.gpEnterBarcode.Name = "gpEnterBarcode"
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(249, 58)
+        Me.gpEnterBarcode.TabIndex = 61
+        Me.gpEnterBarcode.TabStop = False
+        Me.gpEnterBarcode.Text = "Enter Barcode"
         '
         'txtEnterBarcode
         '
@@ -230,6 +230,71 @@ Partial Class PurchaseOrderForm
         Me.dgvProd.Size = New System.Drawing.Size(1296, 363)
         Me.dgvProd.TabIndex = 60
         '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 150
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
         'Label17
         '
         Me.Label17.AutoSize = True
@@ -248,24 +313,24 @@ Partial Class PurchaseOrderForm
         Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
         Me.txtProductDesc.TabIndex = 64
         '
-        'GroupBox3
+        'gpEnterProduct
         '
-        Me.GroupBox3.Controls.Add(Me.Label20)
-        Me.GroupBox3.Controls.Add(Me.cbColor)
-        Me.GroupBox3.Controls.Add(Me.txtProductDesc)
-        Me.GroupBox3.Controls.Add(Me.btnAddToCart)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.cbUnit)
-        Me.GroupBox3.Controls.Add(Me.Label16)
-        Me.GroupBox3.Controls.Add(Me.cbBrand)
-        Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(308, 169)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(1003, 58)
-        Me.GroupBox3.TabIndex = 62
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Enter Product"
+        Me.gpEnterProduct.Controls.Add(Me.Label20)
+        Me.gpEnterProduct.Controls.Add(Me.cbColor)
+        Me.gpEnterProduct.Controls.Add(Me.txtProductDesc)
+        Me.gpEnterProduct.Controls.Add(Me.btnAddToCart)
+        Me.gpEnterProduct.Controls.Add(Me.Label15)
+        Me.gpEnterProduct.Controls.Add(Me.cbUnit)
+        Me.gpEnterProduct.Controls.Add(Me.Label16)
+        Me.gpEnterProduct.Controls.Add(Me.cbBrand)
+        Me.gpEnterProduct.Controls.Add(Me.Label17)
+        Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 169)
+        Me.gpEnterProduct.Name = "gpEnterProduct"
+        Me.gpEnterProduct.Size = New System.Drawing.Size(1003, 58)
+        Me.gpEnterProduct.TabIndex = 62
+        Me.gpEnterProduct.TabStop = False
+        Me.gpEnterProduct.Text = "Enter Product"
         '
         'Label20
         '
@@ -369,71 +434,6 @@ Partial Class PurchaseOrderForm
         Me.Label7.TabIndex = 64
         Me.Label7.Text = "Select Payment Type"
         '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.Name = "quantity"
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 150
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Unit Cost"
-        Me.cost.Name = "cost"
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
-        '
         'PurchaseOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -443,9 +443,9 @@ Partial Class PurchaseOrderForm
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.dgvProd)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.btnSaveAndPrint)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lblTotalAmount)
@@ -464,11 +464,11 @@ Partial Class PurchaseOrderForm
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " "
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gpEnterBarcode.ResumeLayout(False)
+        Me.gpEnterBarcode.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.gpEnterProduct.ResumeLayout(False)
+        Me.gpEnterProduct.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -487,13 +487,13 @@ Partial Class PurchaseOrderForm
     Friend WithEvents lblTotalAmount As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnSaveAndPrint As System.Windows.Forms.Button
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gpEnterBarcode As GroupBox
     Friend WithEvents txtEnterBarcode As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents dgvProd As DataGridView
     Friend WithEvents Label17 As Label
     Friend WithEvents txtProductDesc As TextBox
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents gpEnterProduct As GroupBox
     Friend WithEvents Label20 As Label
     Friend WithEvents cbColor As ComboBox
     Friend WithEvents btnAddToCart As Button

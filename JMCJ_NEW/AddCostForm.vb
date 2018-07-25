@@ -30,7 +30,8 @@
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If cbSupplier.SelectedIndex = cbSupplier.FindString("Select Supplier") Then
+        'validation
+        If cbSupplier.SelectedIndex = 0 Then
             MsgBox("Please select supplier!", MsgBoxStyle.Critical)
             cbSupplier.Focus()
             Exit Sub
@@ -42,8 +43,29 @@
             Exit Sub
         End If
 
-        Dim row As String() = New String() {cbSupplier.Text, txtCost.Text, "Remove"}
-        ProductMasterForm.dgvCost.Rows.Add(row)
+        If Not IsNumeric(txtCost.Text) Then
+            MsgBox("Invalid number format for cost!", MsgBoxStyle.Critical)
+            txtCost.Focus()
+            txtCost.SelectAll()
+            Exit Sub
+        End If
+        If btnAdd.Text = "Add(+)" Then
+            ' check if exist
+            For Each item As DataGridViewRow In ProductMasterForm.dgvCost.Rows
+                If item.Cells("Supplier").Value <> "" Then
+                    Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
+                    If supplier = cbSupplier.Text.ToUpper Then
+                        MsgBox("The supplier is already added!", MsgBoxStyle.Critical)
+                        Exit Sub
+                    End If
+                End If
+            Next
+        End If
 
+        Dim row As String() = New String() {cbSupplier.Text, Val(txtCost.Text).ToString("N2"), "Remove"}
+        ProductMasterForm.dgvCost.Rows.Add(row)
+        cbSupplier.SelectedIndex = 0
+        txtCost.Text = ""
+        cbSupplier.Focus()
     End Sub
 End Class

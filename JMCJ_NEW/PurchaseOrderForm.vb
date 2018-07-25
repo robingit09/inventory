@@ -9,6 +9,9 @@
         loadSupplier()
         loadTerms()
         loadPaymentType()
+        gpEnterBarcode.Enabled = False
+        gpEnterProduct.Enabled = False
+        dgvProd.Enabled = False
     End Sub
 
     Public Sub loadSupplier()
@@ -100,14 +103,20 @@
             Dim key As String = DirectCast(cbSupplier.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbSupplier.SelectedItem, KeyValuePair(Of String, String)).Value
             Me.selectedSupplier = key
-
             cbSupplier.BackColor = Drawing.Color.White
             txtPONO.Text = generatePONo()
+
+            gpEnterBarcode.Enabled = True
+            gpEnterProduct.Enabled = True
+            dgvProd.Enabled = True
 
         Else
             selectedSupplier = 0
             cbSupplier.SelectedIndex = 0
             txtPONO.Text = ""
+            gpEnterBarcode.Enabled = False
+            gpEnterProduct.Enabled = False
+            dgvProd.Enabled = False
         End If
 
     End Sub
@@ -220,9 +229,9 @@
                         Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                         Dim unit As String = .dr("unit")
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
-                        'Dim cost As String = Val(.dr("cost")).ToString("N2")
+                        Dim cost As String = Val(getCost(selectedSupplier, id)).ToString("N2")
 
-                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, "0.00", "", "", "Remove"}
+                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, cost, "", "", "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
                     End If
@@ -298,6 +307,7 @@
             End If
             insertData()
             clearFields()
+            POList.loadPO("")
         Else
 
         End If
@@ -384,7 +394,7 @@
                 VALUES(?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@po_no", generatePONo())
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
-            .cmd.Parameters.AddWithValue("@po_date", dtp_po_date.Value.Date.ToString)
+            .cmd.Parameters.AddWithValue("@po_date", dtp_po_date.Value.ToString)
             .cmd.Parameters.AddWithValue("@eta", dtpETA.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@terms", selectedTerm)
             .cmd.Parameters.AddWithValue("@payment_type", selectedPaymentType)
@@ -408,18 +418,18 @@
 
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
-                Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
+                Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
 
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                    .cmd.CommandText = "INSERT INTO purchase_order_products(purchase_order_id,product_unit_id,quantity,unit_price,total_amount,created_at,updated_at)
+                    .cmd.CommandText = "INSERT INTO purchase_order_products(purchase_order_id,product_unit_id,quantity,unit_cost,total_amount,created_at,updated_at)
                         VALUES(?,?,?,?,?,?,?)"
 
                     .cmd.Parameters.AddWithValue("@purchase_order_id", getLastID("purchase_orders"))
                     .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
                     .cmd.Parameters.AddWithValue("@quantity", qty)
-                    .cmd.Parameters.AddWithValue("@unit_cost", price)
+                    .cmd.Parameters.AddWithValue("@unit_cost", cost)
                     .cmd.Parameters.AddWithValue("@amount", amount)
                     .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                     .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -470,4 +480,16 @@
         End If
     End Sub
 
+    Private Function getCost(ByVal supplier As Integer, ByVal p_u_id As Integer) As Double
+        Dim result As Double = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("select unit_cost from product_suppliers where supplier = " & supplier & " and product_unit_id = " & p_u_id)
+            If .dr.Read Then
+                result = CDbl(Val(.dr("unit_cost")).ToString("N2"))
+            End If
+        End With
+
+        Return result
+    End Function
 End Class

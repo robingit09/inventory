@@ -9,7 +9,7 @@
         dgvPO.Rows.Clear()
         Dim dbPO As New DatabaseConnect
         With dbPO
-            .selectByQuery("Select * from purchase_orders")
+            .selectByQuery("Select * from purchase_orders order by id desc")
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -17,7 +17,7 @@
                     Dim po_no As String = .dr("po_no")
                     Dim supplier_id As Integer = CInt(.dr("supplier"))
                     Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")
-                    Dim total_amount As String = .dr("total_amount")
+                    Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
                     Dim delivery_status As String = ""
 
                     Select Case .dr("delivery_status")
