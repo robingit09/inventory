@@ -63,7 +63,7 @@
     End Sub
 
     Private Sub PurchaseReceiveToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        PurchaseReceive.ShowDialog()
+        PurchaseReceiveForm.ShowDialog()
     End Sub
 
     Private Sub ProductMasterInformationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProductMasterInformationToolStripMenuItem.Click

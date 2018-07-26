@@ -53,7 +53,8 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ColorList.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ReportViewer.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerForm.resources
-C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceive.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductMaster.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductMasterForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddCostForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceiveForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceive.resources

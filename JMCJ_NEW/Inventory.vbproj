@@ -296,6 +296,12 @@
     <Compile Include="PurchaseReceive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PurchaseReceiveForm.Designer.vb">
+      <DependentUpon>PurchaseReceiveForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseReceiveForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
     </Compile>
@@ -433,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PurchaseReceive.resx">
       <DependentUpon>PurchaseReceive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseReceiveForm.resx">
+      <DependentUpon>PurchaseReceiveForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>
