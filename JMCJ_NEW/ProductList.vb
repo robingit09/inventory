@@ -8,39 +8,7 @@
 
     Private Sub ProductList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadList("")
-        populateCategory()
 
-    End Sub
-
-    Public Sub populateCategory()
-
-        'Dim database As New DatabaseConnect
-        'database.dbConnect()
-        'database.cmd.CommandType = CommandType.Text
-        'database.cmd.CommandText = "SELECT category FROM products where status = 1"
-        'database.cmd.Connection = database.con
-
-        'Try
-        '    database.dr = database.cmd.ExecuteReader
-
-        '    If database.dr.HasRows Then
-        '        cbCat.Items.Clear()
-        '        cbCat.Items.Add("All")
-        '        While database.dr.Read
-        '            Dim arr(1) As String
-        '            Dim category As String = database.dr.GetValue(0)
-
-        '            arr(0) = category
-        '            cbCat.Items.Add(category)
-
-        '        End While
-
-        '    End If
-
-        '    database.con.Close()
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        'End Try
     End Sub
 
     Public Sub loadList(ByVal q As String)
@@ -48,7 +16,7 @@
         With db
             dgvProducts.Rows.Clear()
             If q = "" Then
-                .selectByQuery("Select distinct p.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+                .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -63,15 +31,35 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
+                    Dim p_u_id As String = .dr("p_u_id")
                     Dim barcode As String = .dr("barcode")
                     Dim desc As String = .dr("description")
                     Dim brand As String = .dr("brand")
                     Dim unit As String = .dr("unit")
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
+
+                    Dim stock As String = ""
+                    Try
+                        Dim dbstock As New DatabaseConnect
+                        With dbstock
+                            .selectByQuery("select qty from product_stocks where product_unit_id = " & p_u_id)
+                            If .dr.Read Then
+                                stock = Val(.dr("qty")).ToString
+                            Else
+                                stock = ""
+                            End If
+                            .cmd.Dispose()
+                            .dr.Close()
+                            .con.Close()
+                        End With
+                    Catch ex As Exception
+                        stock = ""
+                    End Try
+
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
-                    Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, "", cat, subcat}
+                    Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, stock, cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If

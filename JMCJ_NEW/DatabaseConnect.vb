@@ -161,4 +161,41 @@ Public Class DatabaseConnect
 
         Return res
     End Function
+
+    Function get_by_id(ByVal table As String, ByVal id As Integer, ByVal wherecol As String, ByVal col As String)
+        Dim res As String = ""
+        Try
+            cmd.Connection = con
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "Select " & col & " from " & table & " where " & wherecol & " = " & id
+            dr = cmd.ExecuteReader
+            If dr.HasRows Then
+                If dr.Read Then
+                    res = dr.GetValue(0)
+                End If
+
+            End If
+            cmd.Dispose()
+            con.Close()
+        Catch ex As Exception
+
+        End Try
+
+        Return res
+    End Function
+
+    Public Function getLastID(ByVal table As String) As Integer
+        Dim id As Integer = 0
+        cmd.Connection = con
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAX(ID) from " & table
+        dr = cmd.ExecuteReader
+        If dr.HasRows Then
+            dr.Read()
+            id = If(IsDBNull(dr.GetValue(0)), 1, dr.GetValue(0))
+        Else
+            id = 1
+        End If
+        Return id
+    End Function
 End Class

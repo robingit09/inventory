@@ -22,6 +22,7 @@ Partial Class LedgerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
@@ -58,24 +59,9 @@ Partial Class LedgerForm
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.less = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.add_less = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -92,6 +78,21 @@ Partial Class LedgerForm
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
         Me.txtReceivedBy = New System.Windows.Forms.TextBox()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.less = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.add_less = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.sell_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
@@ -430,101 +431,6 @@ Partial Class LedgerForm
         Me.dgvProd.Size = New System.Drawing.Size(1452, 259)
         Me.dgvProd.TabIndex = 53
         '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.Name = "quantity"
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 150
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'price
-        '
-        Me.price.HeaderText = "Unit Price"
-        Me.price.Name = "price"
-        Me.price.ReadOnly = True
-        '
-        'less
-        '
-        Me.less.HeaderText = "Less"
-        Me.less.Name = "less"
-        Me.less.ReadOnly = True
-        '
-        'add_less
-        '
-        Me.add_less.HeaderText = "Add less"
-        Me.add_less.Name = "add_less"
-        Me.add_less.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.add_less.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.add_less.Text = "ADD"
-        Me.add_less.Width = 70
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Set less to 0"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column2.Width = 80
-        '
-        'sell_price
-        '
-        Me.sell_price.HeaderText = "Sell Price"
-        Me.sell_price.Name = "sell_price"
-        Me.sell_price.ReadOnly = True
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
-        '
         'lblTotalAmount
         '
         Me.lblTotalAmount.AutoSize = True
@@ -546,12 +452,12 @@ Partial Class LedgerForm
         Me.Label13.TabIndex = 54
         Me.Label13.Text = "Total Amount"
         '
-        'TextBox1
+        'txtEnterBarcode
         '
-        Me.TextBox1.Location = New System.Drawing.Point(61, 19)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(170, 21)
-        Me.TextBox1.TabIndex = 56
+        Me.txtEnterBarcode.Location = New System.Drawing.Point(61, 19)
+        Me.txtEnterBarcode.Name = "txtEnterBarcode"
+        Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
+        Me.txtEnterBarcode.TabIndex = 56
         '
         'Label14
         '
@@ -564,7 +470,7 @@ Partial Class LedgerForm
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtEnterBarcode)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 303)
@@ -710,6 +616,104 @@ Partial Class LedgerForm
         Me.txtReceivedBy.Size = New System.Drawing.Size(241, 20)
         Me.txtReceivedBy.TabIndex = 68
         '
+        'id
+        '
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 50
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 150
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'price
+        '
+        Me.price.HeaderText = "Unit Price"
+        Me.price.Name = "price"
+        Me.price.ReadOnly = True
+        '
+        'less
+        '
+        Me.less.HeaderText = "Less"
+        Me.less.Name = "less"
+        Me.less.ReadOnly = True
+        '
+        'add_less
+        '
+        Me.add_less.HeaderText = "Add less"
+        Me.add_less.Name = "add_less"
+        Me.add_less.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.add_less.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.add_less.Text = "ADD"
+        Me.add_less.Width = 70
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Set less to 0"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column2.Width = 80
+        '
+        'sell_price
+        '
+        Me.sell_price.HeaderText = "Sell Price"
+        Me.sell_price.Name = "sell_price"
+        Me.sell_price.ReadOnly = True
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -808,7 +812,7 @@ Partial Class LedgerForm
     Friend WithEvents dgvProd As DataGridView
     Friend WithEvents lblTotalAmount As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtEnterBarcode As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
@@ -821,6 +825,10 @@ Partial Class LedgerForm
     Friend WithEvents Label18 As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents txtProductDesc As TextBox
+    Friend WithEvents Label20 As Label
+    Friend WithEvents cbColor As ComboBox
+    Friend WithEvents txtDeliveredBy As TextBox
+    Friend WithEvents txtReceivedBy As TextBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
@@ -836,8 +844,4 @@ Partial Class LedgerForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents Label20 As Label
-    Friend WithEvents cbColor As ComboBox
-    Friend WithEvents txtDeliveredBy As TextBox
-    Friend WithEvents txtReceivedBy As TextBox
 End Class

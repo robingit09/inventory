@@ -252,15 +252,11 @@
         With insertProduct
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-
             For Each item As DataGridViewRow In Me.dgvProd.Rows
-
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
                 Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
-
-
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
                     .cmd.CommandText = "INSERT INTO purchase_receive_products(purchase_receive_id,product_unit_id,quantity,unit_cost,total_amount,created_at,updated_at)
                         VALUES(?,?,?,?,?,?,?)"
@@ -275,8 +271,22 @@
                     .cmd.ExecuteNonQuery()
                     .cmd.Parameters.Clear()
 
-                End If
+                    'increase stock
+                    Dim increasestock As New DatabaseConnect
+                    With increasestock
+                        Dim temp As String = New DatabaseConnect().get_by_id("product_stocks", product_unit_id, "product_unit_id", "qty")
+                        Dim cur_stock As Integer = Val(temp)
+                        cur_stock = cur_stock + CInt(qty)
 
+                        .cmd.Connection = .con
+                        .cmd.CommandType = CommandType.Text
+                        .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                        .cmd.ExecuteNonQuery()
+                        .cmd.Dispose()
+                        .con.Close()
+                    End With
+
+                End If
             Next
             .cmd.Dispose()
             .con.Close()

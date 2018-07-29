@@ -181,6 +181,20 @@
                     Dim less As String = dgvProd.Rows(item.Index).Cells("less").Value
                     Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
+                    Dim product_unit_id As Integer = 0
+                    Dim getp_u_id As New DatabaseConnect
+                    With getp_u_id
+                        .selectByQuery("select id from product_unit where product_id = " & product & "  and brand = " & brand & " and unit = " & unit & " and color = " & color)
+                        If .dr.Read Then
+                            product_unit_id = CInt(.dr("id"))
+                        Else
+                            product_unit_id = 0
+                        End If
+                        .dr.Close()
+                        .cmd.Dispose()
+                        .con.Close()
+                    End With
+
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
                         cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,color,quantity,unit_price,sell_price,less,
@@ -199,6 +213,21 @@
                         cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                         cmd2.ExecuteNonQuery()
                         cmd2.Parameters.Clear()
+
+                        'decrease stock
+                        Dim decreasestock As New DatabaseConnect
+                        With decreasestock
+                            Dim temp As String = New DatabaseConnect().get_by_id("product_stocks", product_unit_id, "product_unit_id", "qty")
+                            Dim cur_stock As Integer = Val(temp)
+                            cur_stock = cur_stock - Val(qty)
+
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Dispose()
+                            .con.Close()
+                        End With
 
                     End If
                 Next
@@ -974,11 +1003,12 @@
         End If
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price from ((((products as p 
+            .selectByQuery("SELECT pu.barcode,p.id,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price, ps.qty as stock from (((((products as p 
                 left join product_unit as pu on pu.product_id = p.id)
                 left join brand as b on b.id = pu.brand)
                 left join unit as u on u.id = pu.unit)
                 left join color as cc on cc.id = pu.color)
+                left join product_stocks as ps ON ps.product_unit_id = pu.id)
                 where pu.brand = " & SelectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & SelectedUnit & " and color = " & SelectedColor)
 
             If .dr.HasRows Then
@@ -994,8 +1024,7 @@
                     'get sell price
                     Dim dbsellprice As New DatabaseConnect
                     With dbsellprice
-                        .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & selectedCustomer & " and product_id = " & SelectedProdID & "
-                        and brand = " & SelectedBrand & " and unit = " & SelectedUnit & " abd color = " & SelectedColor)
+                        .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & selectedCustomer & " and product_id = " & SelectedProdID & " and brand = " & SelectedBrand & " and unit = " & SelectedUnit & " and color = " & SelectedColor)
                         If .dr.HasRows Then
                             If .dr.Read Then
                                 If (Val(.dr("sell_price") > 0)) Then
@@ -1010,7 +1039,9 @@
                         .cmd.Dispose()
                     End With
 
-                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, color, unitprice, "", "Add less", "Reset", sellprice, "0.00", "", "Remove"}
+                    Dim stock As Integer = Val(.dr("stock"))
+
+                    Dim row As String() = New String() {product_id, barcode, "0", desc, brand, unit, color, unitprice, "", "Add less", "Reset", sellprice, "0.00", stock, "Remove"}
                     dgvProd.Rows.Add(row)
 
                 End If

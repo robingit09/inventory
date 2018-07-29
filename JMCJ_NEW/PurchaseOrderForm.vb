@@ -212,11 +212,12 @@
 
                 Dim db As New DatabaseConnect
                 With db
-                    .selectByQuery("Select distinct pu.id, pu.barcode, p.description, b.name As brand, u.name As unit, cc.name As color, c.name As cat,sub.name as subcat FROM ((((((((products as p 
+                    .selectByQuery("Select distinct pu.id, pu.barcode, p.description, b.name As brand, u.name As unit, cc.name As color,ps.qty as stock, c.name As cat,sub.name as subcat FROM (((((((((products as p 
                     INNER Join product_unit as pu ON p.id = pu.product_id) 
                     Left Join brand as b ON b.id = pu.brand)
                     INNER Join unit as u ON u.id = pu.unit)
                     Left Join color as cc ON cc.id = pu.color)
+                    LEFT JOIN product_stocks as ps on ps.product_unit_id = pu.id)
                     INNER Join product_categories as pc ON pc.product_id = p.id) 
                     Left Join product_subcategories as psc ON psc.product_id = p.id)
                     Left Join categories as c ON c.id = pc.category_id)
@@ -230,8 +231,8 @@
                         Dim unit As String = .dr("unit")
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                         Dim cost As String = Val(getCost(selectedSupplier, id)).ToString("N2")
-
-                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, cost, "", "", "Remove"}
+                        Dim stock As Integer = Val(.dr("stock"))
+                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, cost, "", stock, "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
                     End If
@@ -268,7 +269,7 @@
             If e.ColumnIndex = 7 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("price").Value.ToString.Replace(",", ""))
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
 
                 amount = qty * CDbl(price)
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
@@ -492,4 +493,5 @@
 
         Return result
     End Function
+
 End Class

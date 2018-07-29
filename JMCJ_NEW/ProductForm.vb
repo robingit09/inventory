@@ -4,7 +4,6 @@
     Public selectedSubcategory As Integer = 0
     Public selectedColor As Integer = 0
     Private Sub saveData()
-
         Dim prod_id = 0
         Dim db As New DatabaseConnect
         With db
@@ -16,17 +15,14 @@
             .cmd.Dispose()
             .con.Close()
             prod_id = getLatestID("products")
-
             Dim dbinsertcategory As New DatabaseConnect
             With dbinsertcategory
                 .cmd.Connection = .con
                 .cmd.CommandType = CommandType.Text
                 .cmd.CommandText = "INSERT INTO product_categories (product_id,category_id) VALUES(" & prod_id & "," & selectedCategory & ")"
                 .cmd.ExecuteNonQuery()
-
                 .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id) VALUES(" & prod_id & "," & selectedSubcategory & ")"
                 .cmd.ExecuteNonQuery()
-
                 .cmd.Dispose()
                 .con.Close()
             End With
@@ -45,7 +41,6 @@
                         Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
                         Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
                         Dim color As Integer = If(row.Cells("color").Value = "No Color", 0, New DatabaseConnect().get_id("color", "name", row.Cells("color").Value))
-
                         Dim price As String = row.Cells("price").Value
                         Dim dbinsertUnit As New DatabaseConnect
                         With dbinsertUnit
@@ -64,6 +59,23 @@
                             dbinsertUnit.cmd.ExecuteNonQuery()
                             dbinsertUnit.cmd.Dispose()
                             dbinsertUnit.con.Close()
+                        End With
+
+                        'insert stock
+                        Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
+                        Dim insertstock As New DatabaseConnect
+                        With insertstock
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
+                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                            .cmd.Parameters.AddWithValue("@qty", 0)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Dispose()
+                            .con.Close()
+
                         End With
                     End If
                 Next
@@ -276,64 +288,10 @@
             dgvMeasure.Focus()
             Return res
         End If
-
         Return res
     End Function
 
-
-    'Public Sub initializeMeasure()
-
-    '    If dgvMeasurement.Rows.Count = 1 Then
-    '        Try
-    '            Dim dtgCol As DataGridViewComboBoxCell
-    '            dgvMeasurement.Rows(0).Cells(0).Value = ""
-    '            dtgCol = dgvMeasurement.Rows(0).Cells(1)
-
-    '            Dim comboSource As New Dictionary(Of String, String)()
-    '            'comboSource.Add(0, "Select Brand")
-    '            Dim dbbrand As New DatabaseConnect
-    '            With dbbrand
-    '                .selectByQuery("Select id,name from brand where status = 1")
-    '                If .dr.HasRows Then
-    '                    While .dr.Read
-    '                        comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
-    '                    End While
-    '                End If
-    '                .cmd.Dispose()
-    '                .dr.Close()
-    '                .con.Close()
-    '                dtgCol.DataSource = New BindingSource(comboSource, Nothing)
-    '                dtgCol.DisplayMember = "Value"
-    '                dtgCol.ValueMember = "Key"
-    '            End With
-
-    '            Dim comboSourceUnit As New Dictionary(Of String, String)()
-    '            dtgCol = dgvMeasurement.Rows(0).Cells(2)
-
-    '            Dim dbUnit As New DatabaseConnect
-    '            With dbUnit
-    '                .selectByQuery("Select id,name from unit where status = 1")
-    '                If .dr.HasRows Then
-    '                    While .dr.Read
-    '                        comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
-
-    '                    End While
-    '                End If
-    '                dtgCol.DataSource = New BindingSource(comboSourceUnit, Nothing)
-    '                dtgCol.DisplayMember = "Value"
-    '                dtgCol.ValueMember = "Key"
-    '            End With
-
-    '            dgvMeasurement.Rows(0).Cells(3).Value = "0.00"
-    '            dgvMeasurement.Rows(0).Cells(4).Value = "Remove -"
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-    '    End If
-    'End Sub
-
     Private Sub cbCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCategory.SelectedIndexChanged
-
         If cbCategory.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCategory.SelectedItem, KeyValuePair(Of String, String)).Value
@@ -344,7 +302,6 @@
             selectedCategory = 0
             populateSubcategory(0)
         End If
-
     End Sub
 
     Private Sub cbSubcategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubcategory.SelectedIndexChanged
