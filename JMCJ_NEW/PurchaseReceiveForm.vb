@@ -274,7 +274,7 @@
                     'increase stock
                     Dim increasestock As New DatabaseConnect
                     With increasestock
-                        Dim temp As String = New DatabaseConnect().get_by_id("product_stocks", product_unit_id, "product_unit_id", "qty")
+                        Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
                         Dim cur_stock As Integer = Val(temp)
                         cur_stock = cur_stock + CInt(qty)
 

@@ -8,7 +8,6 @@
         LedgerForm.enableControl(True)
         LedgerForm.loadTerm()
         LedgerForm.loadPaymentType()
-        LedgerForm.loadLedgerType()
         LedgerForm.getCustomerList("")
         LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
         LedgerForm.dgvProd.Rows.Clear()
@@ -29,7 +28,6 @@
         LedgerForm.rbFloatingNo.Checked = False
 
         LedgerForm.cbTerms.SelectedIndex = 0
-        LedgerForm.cbLedgerType.SelectedIndex = 0
         LedgerForm.txtRemarks.Text = ""
         LedgerForm.txtDeliveredBy.Text = ""
         LedgerForm.txtReceivedBy.Text = ""
@@ -187,7 +185,6 @@
             LedgerForm.btnSaveAndPrint.Text = "Update and Print"
             LedgerForm.getCustomerList("")
             LedgerForm.loadPaymentType()
-            LedgerForm.loadLedgerType()
             LedgerForm.loadTerm()
             loadToUpdateInfo(selectedID)
             LedgerForm.toloadproductinfo(selectedID)
@@ -286,8 +283,7 @@
                     Case 1
                         ledger_type_val = "Delivery"
                 End Select
-                LedgerForm.cbLedgerType.SelectedIndex = LedgerForm.cbLedgerType.FindStringExact(ledger_type_val)
-                LedgerForm.cbLedgerType.Text = ledger_type_val
+
 
                 Dim payment_type As Integer = CInt(.dr.GetValue(13))
                 Dim payment_type_val As String = ""

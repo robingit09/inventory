@@ -34,6 +34,8 @@ Partial Class CustomerList
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvCustomer = New System.Windows.Forms.DataGridView()
+        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,8 +49,7 @@ Partial Class CustomerList
         Me.TIN = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CompanyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ledger = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VIew.SuspendLayout()
@@ -149,12 +150,24 @@ Partial Class CustomerList
         'dgvCustomer
         '
         Me.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner1, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus})
+        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner1, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus, Me.ledger})
         Me.dgvCustomer.Location = New System.Drawing.Point(12, 122)
         Me.dgvCustomer.Name = "dgvCustomer"
         Me.dgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvCustomer.Size = New System.Drawing.Size(1344, 323)
         Me.dgvCustomer.TabIndex = 9
+        '
+        'VIew
+        '
+        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.VIew.Name = "VIew"
+        Me.VIew.Size = New System.Drawing.Size(100, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.ViewToolStripMenuItem.Text = "View"
         '
         'ID
         '
@@ -235,17 +248,11 @@ Partial Class CustomerList
         Me.CompanyStatus.Name = "CompanyStatus"
         Me.CompanyStatus.ReadOnly = True
         '
-        'VIew
+        'ledger
         '
-        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.VIew.Name = "VIew"
-        Me.VIew.Size = New System.Drawing.Size(153, 48)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ViewToolStripMenuItem.Text = "View"
+        Me.ledger.HeaderText = "Ledger Type"
+        Me.ledger.Name = "ledger"
+        Me.ledger.ReadOnly = True
         '
         'CustomerList
         '
@@ -280,6 +287,8 @@ Partial Class CustomerList
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents dgvCustomer As DataGridView
+    Friend WithEvents VIew As ContextMenuStrip
+    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Customer As DataGridViewTextBoxColumn
     Friend WithEvents ContactPerson As DataGridViewTextBoxColumn
@@ -293,6 +302,5 @@ Partial Class CustomerList
     Friend WithEvents TIN As DataGridViewTextBoxColumn
     Friend WithEvents Email As DataGridViewTextBoxColumn
     Friend WithEvents CompanyStatus As DataGridViewTextBoxColumn
-    Friend WithEvents VIew As ContextMenuStrip
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ledger As DataGridViewTextBoxColumn
 End Class

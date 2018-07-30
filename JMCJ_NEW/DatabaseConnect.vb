@@ -141,7 +141,7 @@ Public Class DatabaseConnect
     End Function
 
     Function get_by_id(ByVal table As String, ByVal id As Integer, ByVal col As String)
-        Dim res As String = ""
+        Dim res As String = "0"
         Try
             cmd.Connection = con
             cmd.CommandType = CommandType.Text
@@ -162,7 +162,7 @@ Public Class DatabaseConnect
         Return res
     End Function
 
-    Function get_by_id(ByVal table As String, ByVal id As Integer, ByVal wherecol As String, ByVal col As String)
+    Function get_by_val(ByVal table As String, ByVal id As Integer, ByVal wherecol As String, ByVal col As String)
         Dim res As String = ""
         Try
             cmd.Connection = con
@@ -180,7 +180,6 @@ Public Class DatabaseConnect
         Catch ex As Exception
 
         End Try
-
         Return res
     End Function
 

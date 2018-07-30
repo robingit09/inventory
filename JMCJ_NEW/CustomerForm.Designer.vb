@@ -47,6 +47,8 @@ Partial Class CustomerForm
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.cbLedgerType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Label12
@@ -287,11 +289,32 @@ Partial Class CustomerForm
         Me.Label1.TabIndex = 55
         Me.Label1.Text = "Customer"
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.Color.Black
+        Me.Label13.Location = New System.Drawing.Point(13, 432)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(75, 15)
+        Me.Label13.TabIndex = 68
+        Me.Label13.Text = "Ledger Type"
+        '
+        'cbLedgerType
+        '
+        Me.cbLedgerType.FormattingEnabled = True
+        Me.cbLedgerType.Location = New System.Drawing.Point(122, 431)
+        Me.cbLedgerType.Name = "cbLedgerType"
+        Me.cbLedgerType.Size = New System.Drawing.Size(121, 21)
+        Me.cbLedgerType.TabIndex = 67
+        '
         'CustomerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 480)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.cbLedgerType)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.cbCompanyStatus)
         Me.Controls.Add(Me.txtOwnerAddress)
@@ -350,4 +373,6 @@ Partial Class CustomerForm
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents cbLedgerType As ComboBox
 End Class

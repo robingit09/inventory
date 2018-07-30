@@ -462,7 +462,7 @@ Partial Class PurchaseOrderForm
         Me.Controls.Add(Me.Label1)
         Me.Name = "PurchaseOrderForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = " "
+        Me.Text = " Purchase Order Form"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gpEnterBarcode.ResumeLayout(False)
         Me.gpEnterBarcode.PerformLayout()

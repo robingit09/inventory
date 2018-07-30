@@ -2,6 +2,7 @@
 
     Public selectedCustomer As Integer = 0
     Public selectedCompanyStatus As Integer = 0
+    Public selectedLedgerType As Integer = 0
     Private Sub CustomerForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         autocompleteCity()
@@ -72,6 +73,20 @@
         cbCompanyStatus.DataSource = New BindingSource(comboSource, Nothing)
         cbCompanyStatus.DisplayMember = "Value"
         cbCompanyStatus.ValueMember = "Key"
+
+
+    End Sub
+
+    Public Sub loadLedgerType()
+        cbLedgerType.DataSource = Nothing
+        cbLedgerType.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(-1, "Select Ledger Type")
+        comboSource.Add(0, "Charge")
+        comboSource.Add(1, "Delivery")
+        cbLedgerType.DataSource = New BindingSource(comboSource, Nothing)
+        cbLedgerType.DisplayMember = "Value"
+        cbLedgerType.ValueMember = "Key"
 
 
     End Sub
@@ -245,8 +260,8 @@
         Try
             With database
                 .cmd.CommandType = CommandType.Text
-                .cmd.CommandText = "INSERT INTO company([company],[contact_person],[address],[owner_name],[owner_address],[contact_number1],[contact_number2],[fax_tel],[tin],[email],[city],status,[created_at],[updated_at],[company_status])" &
-                "VALUES(@company,@contact_person,@address,@owner_name,@owner_address,@contact_number1,@contact_number2,@fax_tel,@tin,@email,@city,@st,@created_at,@updated_at,@company_status)"
+                .cmd.CommandText = "INSERT INTO company([company],[contact_person],[address],[owner_name],[owner_address],[contact_number1],[contact_number2],[fax_tel],[tin],[email],[city],status,[created_at],[updated_at],[company_status],[ledger_type])" &
+                "VALUES(@company,@contact_person,@address,@owner_name,@owner_address,@contact_number1,@contact_number2,@fax_tel,@tin,@email,@city,@st,@created_at,@updated_at,@company_status,@ledger_type)"
 
                 .cmd.Parameters.AddWithValue("@company", txtCompany.Text)
                 .cmd.Parameters.AddWithValue("@contact_person", txtContactPerson.Text)
@@ -263,6 +278,7 @@
                 .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.Date)
                 .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.Date)
                 .cmd.Parameters.AddWithValue("@company_status", selectedCompanyStatus)
+                .cmd.Parameters.AddWithValue("@ledger_type", selectedLedgerType)
                 .cmd.Connection = database.con
                 .cmd.ExecuteNonQuery()
                 .con.Close()
@@ -463,6 +479,8 @@
             Dim value As String = DirectCast(cbCompanyStatus.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCompanyStatus = key
             cbCompanyStatus.BackColor = Color.White
+        Else
+            selectedCompanyStatus = 0
 
         End If
 
@@ -574,6 +592,19 @@
     Private Sub txtEmail_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Leave
         If txtEmail.Text.Length > 0 Then
             txtEmail.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtEmail.Text.ToLower())
+        End If
+    End Sub
+
+    Private Sub cbLedgerType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLedgerType.SelectedIndexChanged
+        If cbLedgerType.SelectedIndex > -1 Then
+
+            Dim key As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedLedgerType = key
+            cbLedgerType.BackColor = Color.White
+        Else
+            selectedLedgerType = -1
+
         End If
     End Sub
 End Class

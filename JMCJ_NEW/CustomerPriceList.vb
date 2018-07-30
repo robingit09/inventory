@@ -131,7 +131,6 @@
             LedgerForm.enableControl(True)
             LedgerForm.loadTerm()
             LedgerForm.loadPaymentType()
-            LedgerForm.loadLedgerType()
             LedgerForm.getCustomerList("")
             LedgerForm.selectedCustomer = Me.selectedCustomer
             LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindString(cbCustomer.Text)
@@ -154,7 +153,6 @@
             LedgerForm.rbFloatingNo.Checked = False
 
             LedgerForm.cbTerms.SelectedIndex = 0
-            LedgerForm.cbLedgerType.SelectedIndex = 0
             LedgerForm.txtRemarks.Text = ""
             LedgerForm.txtDeliveredBy.Text = ""
             LedgerForm.txtReceivedBy.Text = ""

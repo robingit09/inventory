@@ -22,7 +22,7 @@ Partial Class LedgerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
@@ -41,8 +41,6 @@ Partial Class LedgerForm
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.cbLedgerType = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.dtpPaid = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.gpPaid = New System.Windows.Forms.GroupBox()
@@ -275,23 +273,6 @@ Partial Class LedgerForm
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'cbLedgerType
-        '
-        Me.cbLedgerType.FormattingEnabled = True
-        Me.cbLedgerType.Location = New System.Drawing.Point(531, 240)
-        Me.cbLedgerType.Name = "cbLedgerType"
-        Me.cbLedgerType.Size = New System.Drawing.Size(200, 21)
-        Me.cbLedgerType.TabIndex = 45
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(447, 243)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(67, 13)
-        Me.Label10.TabIndex = 42
-        Me.Label10.Text = "Ledger Type"
-        '
         'dtpPaid
         '
         Me.dtpPaid.Location = New System.Drawing.Point(196, 210)
@@ -503,7 +484,7 @@ Partial Class LedgerForm
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(533, 22)
+        Me.Label20.Location = New System.Drawing.Point(533, 24)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(36, 15)
         Me.Label20.TabIndex = 66
@@ -540,7 +521,7 @@ Partial Class LedgerForm
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(730, 22)
+        Me.Label15.Location = New System.Drawing.Point(748, 22)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(30, 15)
         Me.Label15.TabIndex = 38
@@ -618,8 +599,8 @@ Partial Class LedgerForm
         '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle2
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -695,7 +676,6 @@ Partial Class LedgerForm
         '
         Me.sell_price.HeaderText = "Sell Price"
         Me.sell_price.Name = "sell_price"
-        Me.sell_price.ReadOnly = True
         '
         'amount
         '
@@ -737,8 +717,6 @@ Partial Class LedgerForm
         Me.Controls.Add(Me.btnSaveAndPrint)
         Me.Controls.Add(Me.gpCheck)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.cbLedgerType)
-        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.dtpPaid)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.gpPaid)
@@ -792,8 +770,6 @@ Partial Class LedgerForm
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label8 As Label
     Friend WithEvents btnSave As Button
-    Friend WithEvents cbLedgerType As ComboBox
-    Friend WithEvents Label10 As Label
     Friend WithEvents dtpPaid As DateTimePicker
     Friend WithEvents Label7 As Label
     Friend WithEvents gpPaid As GroupBox

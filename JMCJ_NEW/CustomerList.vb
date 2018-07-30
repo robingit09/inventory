@@ -216,7 +216,7 @@
                 Dim owner_name As String = If(IsDBNull(.dr("owner_name")), "", .dr("owner_name"))
                 Dim owner_address As String = If(IsDBNull(.dr.GetValue(5)), " ", .dr.GetValue(5))
 
-                    Dim contact_number1 As String = If(.dr.GetValue(6) = "", " ", .dr.GetValue(6))
+                Dim contact_number1 As String = If(.dr.GetValue(6) = "", " ", .dr.GetValue(6))
                     Dim contact_number2 As String = If(Trim(.dr.GetValue(7)) = "", " ", .dr.GetValue(7))
                     Dim fax_tel As String = If(Trim(.dr.GetValue(8)) = "", " ", .dr.GetValue(8))
                     'Dim status As Integer = CInt(.dr.GetValue(9))
@@ -227,18 +227,30 @@
                     Dim email As String = If(Trim(.dr.GetValue(14)) = "", " ", .dr.GetValue(14))
                     Dim company_status As Integer = CInt(.dr.GetValue(15))
 
-                    Dim company_status_result As String = ""
+                Dim company_status_result As String = ""
 
-                    Select Case company_status
-                        Case 0
-                            company_status_result = ""
-                        Case 1
-                            company_status_result = "Rented"
-                        Case 2
-                            company_status_result = "Owned"
-                    End Select
-                    Dim row As String() = New String() {ID, customer, contact_person, address, city, owner_name, owner_address, contact_number1, contact_number2, fax_tel, tin, email, company_status_result}
-                    dgvCustomer.Rows.Add(row)
+
+                Select Case company_status
+                    Case 0
+                        company_status_result = ""
+                    Case 1
+                        company_status_result = "Rented"
+                    Case 2
+                        company_status_result = "Owned"
+                End Select
+
+                Dim ledgertype As String = ""
+                Select Case CInt(.dr("ledger_type"))
+                    Case -1
+                        ledgertype = ""
+                    Case 0
+                        ledgertype = "Charge"
+                    Case 1
+                        ledgertype = "Delivery"
+                End Select
+
+                Dim row As String() = New String() {ID, customer, contact_person, address, city, owner_name, owner_address, contact_number1, contact_number2, fax_tel, tin, email, company_status_result, ledgertype}
+                dgvCustomer.Rows.Add(row)
 
                 End While
 
@@ -255,6 +267,7 @@
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
         CustomerForm.btnSave.Text = "Save"
         CustomerForm.loadCompanyStatus()
+        CustomerForm.loadLedgerType()
         CustomerForm.clearFields()
         CustomerForm.ShowDialog()
 

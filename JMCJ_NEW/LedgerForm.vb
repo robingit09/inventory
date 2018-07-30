@@ -2,7 +2,6 @@
 
     Public selectedCustomer As Integer = 0
     Public selectedPaymentType As Integer = 0
-    Public selectedLedgerType As Integer = 0
     Public term As Integer = 0
     Public isfloating As Boolean = False
 
@@ -90,7 +89,6 @@
         rbFloatingNo.Checked = False
 
         txtBankDetails.Text = ""
-        cbLedgerType.SelectedIndex = 0
         cbCustomer.SelectedIndex = 0
         cbPaymentType.SelectedIndex = 0
         cbTerms.SelectedIndex = 0
@@ -142,12 +140,7 @@
                 .cmd.Parameters.AddWithValue("@bank_details", txtBankDetails.Text)
                 .cmd.Parameters.AddWithValue("@floating", Me.isfloating)
 
-                If Trim(cbLedgerType.Text) = "charge" Then
-                    selectedLedgerType = 0
-                ElseIf Trim(cbLedgerType.Text) = "delivery" Then
-                    selectedLedgerType = 1
-                End If
-                .cmd.Parameters.AddWithValue("@ledger", selectedLedgerType)
+                .cmd.Parameters.AddWithValue("@ledger", getLedgerType(selectedCustomer))
                 .cmd.Parameters.AddWithValue("@status", 1)
                 .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                 .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -217,7 +210,7 @@
                         'decrease stock
                         Dim decreasestock As New DatabaseConnect
                         With decreasestock
-                            Dim temp As String = New DatabaseConnect().get_by_id("product_stocks", product_unit_id, "product_unit_id", "qty")
+                            Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
                             Dim cur_stock As Integer = Val(temp)
                             cur_stock = cur_stock - Val(qty)
 
@@ -279,7 +272,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "UPDATE ledger SET [counter_no]='" & txtCounterNo.Text & "',[date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[invoice_no]='" & txtInvoiceNo.Text & "',[amount]=" & format_amount & ", " &
-            "[paid]=" & ispaid & ",[date_paid]='" & dtpPaid.Value.Date.ToString & "', [floating]=" & isfloating & ",[bank_details]='" & txtBankDetails.Text & "',[check_date]='" & dtpCheckDate.Value.Date.ToString & "',[customer]=" & Me.selectedCustomer & ",[ledger]=" & Me.selectedLedgerType & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
+            "[paid]=" & ispaid & ",[date_paid]='" & dtpPaid.Value.Date.ToString & "', [floating]=" & isfloating & ",[bank_details]='" & txtBankDetails.Text & "',[check_date]='" & dtpCheckDate.Value.Date.ToString & "',[customer]=" & Me.selectedCustomer & ",[ledger]=" & getLedgerType(selectedCustomer) & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
             "[payment_due_date]='" & dtp_payment_due.ToString & "',[payment_terms]= " & Me.term & ",[remarks]='" & txtRemarks.Text & "' WHERE [ID] = " & LedgerList.selectedID
 
             '.cmd.Parameters.AddWithValue("@counter_no", Convert.ToInt32(txtCounterNo.Text))
@@ -320,22 +313,6 @@
         End If
     End Sub
 
-    Public Sub loadLedgerType()
-        cbLedgerType.DataSource = Nothing
-        cbLedgerType.Items.Clear()
-
-        Dim comboSource As New Dictionary(Of String, String)()
-
-        comboSource.Add(-1, "Select Ledger Type")
-        comboSource.Add(0, "Charge")
-        comboSource.Add(1, "Delivery")
-
-        cbLedgerType.DataSource = New BindingSource(comboSource, Nothing)
-        cbLedgerType.DisplayMember = "Value"
-        cbLedgerType.ValueMember = "Key"
-
-        cbLedgerType.SelectedIndex = 0
-    End Sub
     Public Sub loadPaymentType()
         cbPaymentType.DataSource = Nothing
         cbPaymentType.Items.Clear()
@@ -351,17 +328,6 @@
         cbPaymentType.ValueMember = "Key"
 
         cbPaymentType.SelectedIndex = 0
-    End Sub
-
-    Private Sub cbLedgerType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbLedgerType.SelectedIndexChanged
-
-        If cbLedgerType.SelectedIndex > 0 Then
-            cbLedgerType.BackColor = Drawing.Color.White
-            Dim key As String = CInt(DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Key)
-            Dim value As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Value
-            selectedLedgerType = key
-
-        End If
     End Sub
 
     Private Sub cbPaymentType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPaymentType.SelectedIndexChanged
@@ -508,16 +474,6 @@
             MsgBox("Please select terms!", MsgBoxStyle.Critical)
             cbTerms.BackColor = Drawing.Color.Red
             cbTerms.Focus()
-            err_ = True
-            Return err_
-        End If
-
-
-
-        If cbLedgerType.SelectedIndex <= 0 Then
-            MsgBox("Please select ledger type!", MsgBoxStyle.Critical)
-            cbLedgerType.BackColor = Drawing.Color.Red
-            cbLedgerType.Focus()
             err_ = True
             Return err_
         End If
@@ -1137,18 +1093,20 @@
 
         Dim dbOrderProduct As New DatabaseConnect
         With dbOrderProduct
-            .selectByQuery("Select distinct p.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount from (((((customer_order_products as cop
+            .selectByQuery("Select distinct pu.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount,ps.qty as stock from ((((((customer_order_products as cop
                 left join products as p on p.id = cop.product_id)
                 left join brand as b on b.id = cop.brand)
                 left join unit as u on u.id = cop.unit)
                 left join color as c on c.id = cop.color)
                 left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit and pu.color = cop.color)
+                left join product_stocks as ps on ps.product_unit_id = p.id)
                 where cop.customer_order_ledger_id = " & id)
 
             dgvProd.Rows.Clear()
             If .dr.HasRows Then
                 While .dr.Read
                     Dim p_id As String = .dr("id")
+
                     Dim barcode As String = .dr("barcode")
                     Dim qty As String = .dr("quantity")
                     Dim desc As String = .dr("description")
@@ -1159,8 +1117,9 @@
                     Dim less As String = .dr("less")
                     Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")
                     Dim total_amount As String = Math.Round(Val(.dr("total_amount")), 2).ToString("N2")
+                    Dim stock As String = Val(.dr("stock"))
 
-                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, color, price, less, "Add less", "Reset", sell_price, total_amount, "", "Remove"}
+                    Dim row As String() = New String() {p_id, barcode, qty, desc, brand, unit, color, price, less, "Add less", "Reset", sell_price, total_amount, stock, "Remove"}
                     Me.dgvProd.Rows.Add(row)
                 End While
             End If
@@ -1206,5 +1165,84 @@
         End If
     End Sub
 
+    Private Sub txtEnterBarcode_KeyUp(sender As Object, e As KeyEventArgs) Handles txtEnterBarcode.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            If Trim(txtEnterBarcode.Text).Length > 0 Then
+                'validation
+                ' check if exist
+                For Each item As DataGridViewRow In dgvProd.Rows
+                    If item.Cells("product").Value <> "" Then
+                        Dim barcode As String = item.Cells("barcode").Value
 
+                        If barcode = Trim(txtEnterBarcode.Text) Then
+                            MsgBox("Product (" & txtEnterBarcode.Text & ") already added!", MsgBoxStyle.Critical)
+                            txtEnterBarcode.Text = ""
+                            Exit Sub
+                        End If
+                    End If
+                Next
+
+                Dim db As New DatabaseConnect
+                With db
+                    .selectByQuery("Select distinct pu.product_id, pu.id, pu.barcode, p.description, b.name As brand, u.name As unit, cc.name As color,pu.price as price,
+                        pu.brand as brand_id,pu.unit as unit_id,pu.color as color_id,ps.qty as stock, c.name As cat,sub.name as subcat FROM (((((((((products as p 
+                    INNER Join product_unit as pu ON p.id = pu.product_id) 
+                    Left Join brand as b ON b.id = pu.brand)
+                    INNER Join unit as u ON u.id = pu.unit)
+                    Left Join color as cc ON cc.id = pu.color)
+                    LEFT JOIN product_stocks as ps on ps.product_unit_id = pu.id)
+                    INNER Join product_categories as pc ON pc.product_id = p.id) 
+                    Left Join product_subcategories as psc ON psc.product_id = p.id)
+                    Left Join categories as c ON c.id = pc.category_id)
+                    Left Join categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and pu.barcode = '" & Trim(txtEnterBarcode.Text) & "'")
+
+                    If .dr.Read Then
+                        Dim p_id As Integer = CInt(.dr("product_id"))
+                        Dim brand_id As Integer = CInt(.dr("brand_id"))
+                        Dim unit_id As Integer = CInt(.dr("unit_id"))
+                        Dim color_id As Integer = CInt(.dr("color_id"))
+
+                        Dim id As Integer = CInt(.dr("id"))
+                        Dim barcode As String = .dr("barcode")
+                        Dim desc As String = .dr("description")
+                        Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                        Dim unit As String = .dr("unit")
+                        Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                        Dim price As String = Val(.dr("price")).ToString("N2")
+                        Dim sell_price As String = Val(getSellPrice(selectedCustomer, p_id, brand_id, unit_id, color_id)).ToString("N2")
+                        Dim stock As Integer = Val(.dr("stock"))
+                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
+                        dgvProd.Rows.Add(row)
+                        txtEnterBarcode.Text = ""
+                    End If
+
+                    .dr.Close()
+                    .cmd.Dispose()
+                    .con.Close()
+                End With
+            End If
+
+        End If
+    End Sub
+
+    Private Function getSellPrice(ByVal customer As Integer, ByVal p_id As Integer, ByVal brand As Integer, ByVal unit As Integer, ByVal color As Integer)
+        Dim res As String = ""
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & customer & " and product_id = " & p_id & " 
+                and brand = " & brand & " and unit = " & unit & " and color = " & color)
+            If .dr.Read Then
+                res = Val(.dr("sell_price")).ToString("N2")
+            Else
+                res = "0.00"
+            End If
+        End With
+        Return res
+    End Function
+
+    Private Function getLedgerType(ByVal customer As Integer)
+        Dim result As String = "0"
+        result = CInt(New DatabaseConnect().get_by_id("company", customer, "ledger_type"))
+        Return result
+    End Function
 End Class
