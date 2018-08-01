@@ -16,7 +16,6 @@
     End Sub
 
     Public Sub loadBrand()
-
         cbBrand.DataSource = Nothing
         cbBrand.Items.Clear()
         Dim comboSource As New Dictionary(Of String, String)()
@@ -118,7 +117,6 @@
                     Dim brand As String = item.Cells("brand").Value.ToString.ToUpper
                     Dim unit As String = item.Cells("unit").Value.ToString.ToUpper
                     Dim color As String = item.Cells("Color").Value.ToString.ToUpper
-
                     Dim price As Double = CDbl(item.Cells("Price").Value)
 
                     If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) And color = (cbColor.Text.ToUpper) Then
@@ -182,5 +180,25 @@
             txtPrice.Focus()
             txtPrice.SelectAll()
         End If
+    End Sub
+
+    Private Sub btnAddBrand_Click(sender As Object, e As EventArgs) Handles btnAddBrand.Click
+        BrandForm.btnSave.Text = "Save"
+        BrandForm.txtBrand.Text = ""
+        BrandForm.ShowDialog()
+    End Sub
+
+    Private Sub btnAddUnit_Click(sender As Object, e As EventArgs) Handles btnAddUnit.Click
+        UnitForm.txtUnit.Text = ""
+        UnitForm.btnSave.Text = "Save"
+        UnitForm.txtUnit.Focus()
+        UnitForm.ShowDialog()
+    End Sub
+
+    Private Sub btnAddColor_Click(sender As Object, e As EventArgs) Handles btnAddColor.Click
+        ColorForm.btnSave.Text = "Save"
+        ColorForm.txtColor.Clear()
+        ColorForm.txtColor.Focus()
+        ColorForm.ShowDialog()
     End Sub
 End Class

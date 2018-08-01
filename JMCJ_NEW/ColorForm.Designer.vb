@@ -39,9 +39,9 @@ Partial Class ColorForm
         'txtColor
         '
         Me.txtColor.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtColor.Location = New System.Drawing.Point(23, 47)
+        Me.txtColor.Location = New System.Drawing.Point(51, 47)
         Me.txtColor.Name = "txtColor"
-        Me.txtColor.Size = New System.Drawing.Size(271, 26)
+        Me.txtColor.Size = New System.Drawing.Size(243, 26)
         Me.txtColor.TabIndex = 6
         '
         'ColorForm

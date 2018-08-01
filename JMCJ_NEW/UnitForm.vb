@@ -4,6 +4,20 @@
 
         If btnSave.Text = "Save" Then
             saveData()
+
+            'after add unit function
+            For Each form In My.Application.OpenForms
+                If (form.name = ProductAddUnitForm.Name) Then
+                    'form is loaded so can do work 
+                    'if you need to check whether it is actually visible
+                    If form.Visible Then
+                        'do work when visible
+                        ProductAddUnitForm.loadUnit()
+                        ProductAddUnitForm.cbUnit.SelectedIndex = ProductAddUnitForm.cbUnit.FindString(Me.txtUnit.Text)
+                    End If
+                End If
+            Next
+            txtUnit.Text = ""
         ElseIf btnSave.Text = "Update" Then
             updateData()
         End If
@@ -56,7 +70,6 @@
         database.cmd.ExecuteNonQuery()
         database.con.Close()
         MsgBox("Unit Save Successfully", MsgBoxStyle.Information)
-        txtUnit.Text = ""
         UnitList.loadList("")
         Me.Close()
     End Sub

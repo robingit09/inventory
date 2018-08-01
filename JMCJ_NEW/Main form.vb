@@ -107,6 +107,7 @@
     End Sub
 
     Private Sub PricingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PricingToolStripMenuItem.Click
+        CustomerPriceList.dgvPriceList.Rows.Clear()
         CustomerPriceList.ShowDialog()
     End Sub
 

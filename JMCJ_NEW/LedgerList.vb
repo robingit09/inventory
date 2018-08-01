@@ -37,6 +37,7 @@
         LedgerForm.enableControl(True)
         LedgerForm.btnSave.Text = "Save"
         LedgerForm.btnSaveAndPrint.Text = "Save and Print"
+        LedgerForm.dgvProd.Visible = True
         LedgerForm.ShowDialog()
 
         autocompleteCustomer()

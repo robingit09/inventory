@@ -30,10 +30,10 @@ Partial Class UnitForm
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(378, 43)
+        Me.btnSave.Location = New System.Drawing.Point(363, 12)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(6)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(160, 50)
+        Me.btnSave.Size = New System.Drawing.Size(85, 45)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -42,7 +42,7 @@ Partial Class UnitForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(30, 57)
+        Me.Label1.Location = New System.Drawing.Point(15, 26)
         Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(44, 22)
@@ -52,7 +52,7 @@ Partial Class UnitForm
         'txtUnit
         '
         Me.txtUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.Location = New System.Drawing.Point(86, 51)
+        Me.txtUnit.Location = New System.Drawing.Point(71, 20)
         Me.txtUnit.Margin = New System.Windows.Forms.Padding(6)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.Size = New System.Drawing.Size(280, 31)
@@ -63,7 +63,7 @@ Partial Class UnitForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(550, 124)
+        Me.ClientSize = New System.Drawing.Size(469, 78)
         Me.Controls.Add(Me.txtUnit)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSave)
@@ -71,7 +71,7 @@ Partial Class UnitForm
         Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "UnitForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "UnitForm"
+        Me.Text = "Unit Form"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

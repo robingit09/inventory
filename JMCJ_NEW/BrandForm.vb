@@ -6,6 +6,20 @@
                 Exit Sub
             End If
             saveData()
+
+            For Each form In My.Application.OpenForms
+                If (form.name = ProductAddUnitForm.Name) Then
+                    'form is loaded so can do work 
+                    'if you need to check whether it is actually visible
+                    If form.Visible Then
+                        'do work when visible
+                        ProductAddUnitForm.loadBrand()
+                        ProductAddUnitForm.cbBrand.SelectedIndex = ProductAddUnitForm.cbBrand.FindString(Me.txtBrand.Text)
+                    End If
+                End If
+            Next
+
+
         ElseIf btnSave.Text = "Update" Then
             If validation() = False Then
                 Exit Sub

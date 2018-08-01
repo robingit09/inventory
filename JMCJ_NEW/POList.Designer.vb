@@ -24,7 +24,6 @@ Partial Class POList
     Private Sub InitializeComponent()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvPO = New System.Windows.Forms.DataGridView()
-        Me.btnVoid = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PONumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -32,6 +31,7 @@ Partial Class POList
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.delivery_status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,16 +54,6 @@ Partial Class POList
         Me.dgvPO.Name = "dgvPO"
         Me.dgvPO.Size = New System.Drawing.Size(921, 335)
         Me.dgvPO.TabIndex = 1
-        '
-        'btnVoid
-        '
-        Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(244, 29)
-        Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(83, 29)
-        Me.btnVoid.TabIndex = 2
-        Me.btnVoid.Text = "Void"
-        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -110,6 +100,16 @@ Partial Class POList
         Me.delivery_status.HeaderText = "Delivery Status"
         Me.delivery_status.Name = "delivery_status"
         Me.delivery_status.ReadOnly = True
+        '
+        'btnVoid
+        '
+        Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVoid.Location = New System.Drawing.Point(244, 29)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(83, 29)
+        Me.btnVoid.TabIndex = 2
+        Me.btnVoid.Text = "Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'btnView
         '

@@ -177,23 +177,10 @@
         MySource.Add("Vigan")
         MySource.Add("Zamboanga City")
 
-
-        'Dim customer As New DatabaseCon
-        'With customer
-        '    .selectByQuery("Select distinct company from company  where status <> 0")
-        '    While .dr.Read
-        '        MySource.Add(.dr.GetValue(0))
-
-        '    End While
-        '    .cmd.Dispose()
-        '    .dr.Close()
-        '    .con.Close()
-        'End With
     End Sub
 
     Public Sub loadCustomer(ByVal query As String)
         dgvCustomer.Rows.Clear()
-
         Dim db As New DatabaseConnect
             With db
                 If query = "" Then

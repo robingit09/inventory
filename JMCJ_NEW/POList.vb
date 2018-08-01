@@ -2,6 +2,10 @@
 
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
         PurchaseOrderForm.clearFields()
+        PurchaseOrderForm.initialize()
+        PurchaseOrderForm.btnSave.Enabled = True
+        PurchaseOrderForm.btnSaveAndPrint.Enabled = True
+        PurchaseOrderForm.dgvProd.Enabled = True
         PurchaseOrderForm.ShowDialog()
     End Sub
 
@@ -42,5 +46,18 @@
 
     Private Sub POList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadPO("")
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
+        If dgvPO.SelectedRows.Count = 0 Then
+            MsgBox("Please select one record!", MsgBoxStyle.Critical)
+        End If
+        PurchaseOrderForm.initialize()
+        PurchaseOrderForm.loadInfo(po_id)
+        PurchaseOrderForm.btnSave.Enabled = False
+        PurchaseOrderForm.btnSaveAndPrint.Enabled = False
+        PurchaseOrderForm.dgvProd.Enabled = False
+        PurchaseOrderForm.ShowDialog()
     End Sub
 End Class

@@ -9,6 +9,18 @@
                 Exit Sub
             End If
             save()
+            For Each form In My.Application.OpenForms
+                If (form.name = ProductAddUnitForm.Name) Then
+                    'form is loaded so can do work 
+                    'if you need to check whether it is actually visible
+                    If form.Visible Then
+                        'do work when visible
+                        ProductAddUnitForm.loadColor()
+                        ProductAddUnitForm.cbColor.SelectedIndex = ProductAddUnitForm.cbColor.FindString(Me.txtColor.Text)
+                    End If
+                End If
+            Next
+            txtColor.Text = ""
         ElseIf btnSave.Text = "Update" Then
             If Validation() = False Then
                 Exit Sub
@@ -35,6 +47,7 @@
         End With
     End Sub
     Private Sub save()
+        txtColor.Text = txtColor.Text.ToUpper
         Dim dbsave As New DatabaseConnect
         With dbsave
             .cmd.Connection = .con
@@ -49,7 +62,6 @@
             .con.Close()
 
             MsgBox("Color Successfully Save!", MsgBoxStyle.Information)
-            txtColor.Clear()
             Me.Close()
             ColorList.loadList("")
         End With

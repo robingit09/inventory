@@ -2,10 +2,15 @@
 
     Public isSupplierLoaded As Boolean = False
 
+    Public selectedPO As Integer = 0
     Public selectedSupplier As Integer = 0
     Public selectedTerm As Integer = 0
     Public selectedPaymentType As Integer = 0
     Private Sub PurchaseOrderForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Public Sub initialize()
         loadSupplier()
         loadTerms()
         loadPaymentType()
@@ -493,5 +498,86 @@
 
         Return result
     End Function
+
+
+    Private Function getSupplier(ByVal po_id As Integer) As Integer
+        Dim res As Integer = 0
+        Dim dbpo As New DatabaseConnect
+        With dbpo
+            .selectByQuery("Select supplier from purchase_orders where id = " & po_id)
+            If .dr.Read Then
+                res = CInt(.dr("supplier"))
+            End If
+        End With
+        Return res
+    End Function
+
+    Public Sub loadInfo(ByVal po_id As Integer)
+
+        Me.selectedPO = po_id
+        Me.selectedSupplier = getSupplier(po_id)
+
+        txtPONO.Text = New DatabaseConnect().get_by_id("purchase_order", po_id, "po_no")
+        cbSupplier.SelectedIndex = cbSupplier.FindString(New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name"))
+
+        Dim term As String = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "terms")
+        Select Case term
+            Case "15"
+                cbTerms.SelectedIndex = cbTerms.FindString("15 Days")
+            Case "30"
+                cbTerms.SelectedIndex = cbTerms.FindString("30 Days")
+            Case "0"
+                cbTerms.SelectedIndex = 0
+        End Select
+
+        Dim payment_type As Integer = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "payment_type")
+        Select Case payment_type
+            Case 1
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("Cash")
+            Case 2
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("C.O.D")
+            Case 3
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("Credit")
+            Case Else
+                cbPaymentType.SelectedIndex = 0
+        End Select
+
+        Dim eta As String = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "eta")
+        dtpETA.Value = eta
+
+        txtAmount.Text = Val(New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "total_amount")).ToString("N2")
+        lblTotalAmount.Text = txtAmount.Text
+        Dim dbprod As New DatabaseConnect()
+        dgvProd.Rows.Clear()
+        With dbprod
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount
+                        FROM (((((purchase_order_products as pop
+                        INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        where pop.purchase_order_id = " & selectedPO)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim total As String = Val(.dr("total_amount")).ToString("N2")
+
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, "", "Remove"}
+                    dgvProd.Rows.Add(row)
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
 
 End Class
