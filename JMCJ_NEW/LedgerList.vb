@@ -26,7 +26,6 @@
         LedgerForm.dtpCheckDate.Value = DateTime.Now
         LedgerForm.rbFloatingYes.Checked = False
         LedgerForm.rbFloatingNo.Checked = False
-
         LedgerForm.cbTerms.SelectedIndex = 0
         LedgerForm.txtRemarks.Text = ""
         LedgerForm.txtDeliveredBy.Text = ""
@@ -38,6 +37,9 @@
         LedgerForm.btnSave.Text = "Save"
         LedgerForm.btnSaveAndPrint.Text = "Save and Print"
         LedgerForm.dgvProd.Visible = True
+        LedgerForm.gpFields.Enabled = True
+        LedgerForm.btnSave.Visible = True
+        LedgerForm.btnSaveAndPrint.Visible = True
         LedgerForm.ShowDialog()
 
         autocompleteCustomer()
@@ -190,6 +192,9 @@
             loadToUpdateInfo(selectedID)
             LedgerForm.toloadproductinfo(selectedID)
             LedgerForm.enableControl(False)
+            LedgerForm.gpFields.Enabled = False
+            LedgerForm.btnSave.Visible = False
+            LedgerForm.btnSaveAndPrint.Visible = False
             LedgerForm.ShowDialog()
         Else
             MsgBox("Please select ledger!", MsgBoxStyle.Critical)

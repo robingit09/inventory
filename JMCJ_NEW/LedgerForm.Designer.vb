@@ -22,7 +22,7 @@ Partial Class LedgerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
@@ -57,25 +57,6 @@ Partial Class LedgerForm
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.lblTotalAmount = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.cbColor = New System.Windows.Forms.ComboBox()
-        Me.txtProductDesc = New System.Windows.Forms.TextBox()
-        Me.btnAddToCart = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.cbUnit = New System.Windows.Forms.ComboBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.cbBrand = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
-        Me.txtReceivedBy = New System.Windows.Forms.TextBox()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -91,12 +72,33 @@ Partial Class LedgerForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.gpEnterBarcode = New System.Windows.Forms.GroupBox()
+        Me.gpEnterProduct = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cbColor = New System.Windows.Forms.ComboBox()
+        Me.txtProductDesc = New System.Windows.Forms.TextBox()
+        Me.btnAddToCart = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cbUnit = New System.Windows.Forms.ComboBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.cbBrand = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
+        Me.txtReceivedBy = New System.Windows.Forms.TextBox()
+        Me.gpFields = New System.Windows.Forms.GroupBox()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.gpEnterBarcode.SuspendLayout()
+        Me.gpEnterProduct.SuspendLayout()
+        Me.gpFields.SuspendLayout()
         Me.SuspendLayout()
         '
         'rbFloatingNo
@@ -170,7 +172,7 @@ Partial Class LedgerForm
         'cbDisable
         '
         Me.cbDisable.AutoSize = True
-        Me.cbDisable.Location = New System.Drawing.Point(330, 76)
+        Me.cbDisable.Location = New System.Drawing.Point(305, 95)
         Me.cbDisable.Name = "cbDisable"
         Me.cbDisable.Size = New System.Drawing.Size(61, 17)
         Me.cbDisable.TabIndex = 52
@@ -179,7 +181,7 @@ Partial Class LedgerForm
         '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(756, 42)
+        Me.txtRemarks.Location = New System.Drawing.Point(731, 61)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
         Me.txtRemarks.Size = New System.Drawing.Size(168, 155)
@@ -188,7 +190,7 @@ Partial Class LedgerForm
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(447, 216)
+        Me.Label11.Location = New System.Drawing.Point(422, 235)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(36, 13)
         Me.Label11.TabIndex = 46
@@ -197,7 +199,7 @@ Partial Class LedgerForm
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(753, 18)
+        Me.Label12.Location = New System.Drawing.Point(728, 37)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(49, 13)
         Me.Label12.TabIndex = 44
@@ -206,14 +208,14 @@ Partial Class LedgerForm
         'cbTerms
         '
         Me.cbTerms.FormattingEnabled = True
-        Me.cbTerms.Location = New System.Drawing.Point(531, 213)
+        Me.cbTerms.Location = New System.Drawing.Point(506, 232)
         Me.cbTerms.Name = "cbTerms"
         Me.cbTerms.Size = New System.Drawing.Size(200, 21)
         Me.cbTerms.TabIndex = 43
         '
         'btnAddCustomer
         '
-        Me.btnAddCustomer.Location = New System.Drawing.Point(330, 18)
+        Me.btnAddCustomer.Location = New System.Drawing.Point(305, 37)
         Me.btnAddCustomer.Name = "btnAddCustomer"
         Me.btnAddCustomer.Size = New System.Drawing.Size(88, 23)
         Me.btnAddCustomer.TabIndex = 51
@@ -222,7 +224,7 @@ Partial Class LedgerForm
         '
         'btnSaveAndPrint
         '
-        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1097, 65)
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1065, 84)
         Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
         Me.btnSaveAndPrint.Size = New System.Drawing.Size(101, 37)
         Me.btnSaveAndPrint.TabIndex = 50
@@ -237,7 +239,7 @@ Partial Class LedgerForm
         Me.gpCheck.Controls.Add(Me.txtBankDetails)
         Me.gpCheck.Controls.Add(Me.Label8)
         Me.gpCheck.Enabled = False
-        Me.gpCheck.Location = New System.Drawing.Point(442, 11)
+        Me.gpCheck.Location = New System.Drawing.Point(417, 30)
         Me.gpCheck.Name = "gpCheck"
         Me.gpCheck.Size = New System.Drawing.Size(289, 196)
         Me.gpCheck.TabIndex = 49
@@ -266,7 +268,7 @@ Partial Class LedgerForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1097, 16)
+        Me.btnSave.Location = New System.Drawing.Point(1065, 37)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(101, 37)
         Me.btnSave.TabIndex = 48
@@ -275,7 +277,7 @@ Partial Class LedgerForm
         '
         'dtpPaid
         '
-        Me.dtpPaid.Location = New System.Drawing.Point(196, 210)
+        Me.dtpPaid.Location = New System.Drawing.Point(171, 229)
         Me.dtpPaid.Name = "dtpPaid"
         Me.dtpPaid.Size = New System.Drawing.Size(192, 20)
         Me.dtpPaid.TabIndex = 41
@@ -283,7 +285,7 @@ Partial Class LedgerForm
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(196, 194)
+        Me.Label7.Location = New System.Drawing.Point(171, 213)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 13)
         Me.Label7.TabIndex = 40
@@ -293,7 +295,7 @@ Partial Class LedgerForm
         '
         Me.gpPaid.Controls.Add(Me.rPaidNo)
         Me.gpPaid.Controls.Add(Me.rPaidYes)
-        Me.gpPaid.Location = New System.Drawing.Point(36, 188)
+        Me.gpPaid.Location = New System.Drawing.Point(11, 207)
         Me.gpPaid.Name = "gpPaid"
         Me.gpPaid.Size = New System.Drawing.Size(154, 52)
         Me.gpPaid.TabIndex = 39
@@ -303,7 +305,7 @@ Partial Class LedgerForm
         'cbPaymentType
         '
         Me.cbPaymentType.FormattingEnabled = True
-        Me.cbPaymentType.Location = New System.Drawing.Point(124, 151)
+        Me.cbPaymentType.Location = New System.Drawing.Point(99, 170)
         Me.cbPaymentType.Name = "cbPaymentType"
         Me.cbPaymentType.Size = New System.Drawing.Size(200, 21)
         Me.cbPaymentType.TabIndex = 38
@@ -311,7 +313,7 @@ Partial Class LedgerForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(33, 154)
+        Me.Label6.Location = New System.Drawing.Point(8, 173)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 13)
         Me.Label6.TabIndex = 37
@@ -321,7 +323,7 @@ Partial Class LedgerForm
         '
         Me.txtAmount.Enabled = False
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
-        Me.txtAmount.Location = New System.Drawing.Point(124, 125)
+        Me.txtAmount.Location = New System.Drawing.Point(99, 144)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(200, 20)
         Me.txtAmount.TabIndex = 36
@@ -329,7 +331,7 @@ Partial Class LedgerForm
         'txtInvoiceNo
         '
         Me.txtInvoiceNo.Enabled = False
-        Me.txtInvoiceNo.Location = New System.Drawing.Point(124, 99)
+        Me.txtInvoiceNo.Location = New System.Drawing.Point(99, 118)
         Me.txtInvoiceNo.MaxLength = 5
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.Size = New System.Drawing.Size(200, 20)
@@ -337,7 +339,7 @@ Partial Class LedgerForm
         '
         'txtCounterNo
         '
-        Me.txtCounterNo.Location = New System.Drawing.Point(124, 73)
+        Me.txtCounterNo.Location = New System.Drawing.Point(99, 92)
         Me.txtCounterNo.MaxLength = 5
         Me.txtCounterNo.Name = "txtCounterNo"
         Me.txtCounterNo.Size = New System.Drawing.Size(200, 20)
@@ -346,7 +348,7 @@ Partial Class LedgerForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(33, 129)
+        Me.Label5.Location = New System.Drawing.Point(8, 148)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(70, 13)
         Me.Label5.TabIndex = 33
@@ -355,7 +357,7 @@ Partial Class LedgerForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(33, 102)
+        Me.Label4.Location = New System.Drawing.Point(8, 121)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 13)
         Me.Label4.TabIndex = 32
@@ -364,7 +366,7 @@ Partial Class LedgerForm
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(33, 76)
+        Me.Label3.Location = New System.Drawing.Point(8, 95)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 13)
         Me.Label3.TabIndex = 31
@@ -372,7 +374,7 @@ Partial Class LedgerForm
         '
         'dtpDateIssue
         '
-        Me.dtpDateIssue.Location = New System.Drawing.Point(124, 47)
+        Me.dtpDateIssue.Location = New System.Drawing.Point(99, 66)
         Me.dtpDateIssue.Name = "dtpDateIssue"
         Me.dtpDateIssue.Size = New System.Drawing.Size(200, 20)
         Me.dtpDateIssue.TabIndex = 30
@@ -380,7 +382,7 @@ Partial Class LedgerForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(33, 51)
+        Me.Label2.Location = New System.Drawing.Point(8, 70)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 29
@@ -389,7 +391,7 @@ Partial Class LedgerForm
         'cbCustomer
         '
         Me.cbCustomer.FormattingEnabled = True
-        Me.cbCustomer.Location = New System.Drawing.Point(124, 20)
+        Me.cbCustomer.Location = New System.Drawing.Point(99, 39)
         Me.cbCustomer.Name = "cbCustomer"
         Me.cbCustomer.Size = New System.Drawing.Size(200, 21)
         Me.cbCustomer.TabIndex = 28
@@ -397,7 +399,7 @@ Partial Class LedgerForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(33, 23)
+        Me.Label1.Location = New System.Drawing.Point(8, 42)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 13)
         Me.Label1.TabIndex = 27
@@ -412,195 +414,10 @@ Partial Class LedgerForm
         Me.dgvProd.Size = New System.Drawing.Size(1452, 259)
         Me.dgvProd.TabIndex = 53
         '
-        'lblTotalAmount
-        '
-        Me.lblTotalAmount.AutoSize = True
-        Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
-        Me.lblTotalAmount.Location = New System.Drawing.Point(883, 219)
-        Me.lblTotalAmount.Name = "lblTotalAmount"
-        Me.lblTotalAmount.Size = New System.Drawing.Size(88, 39)
-        Me.lblTotalAmount.TabIndex = 55
-        Me.lblTotalAmount.Text = "0.00"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(766, 227)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(120, 22)
-        Me.Label13.TabIndex = 54
-        Me.Label13.Text = "Total Amount"
-        '
-        'txtEnterBarcode
-        '
-        Me.txtEnterBarcode.Location = New System.Drawing.Point(61, 19)
-        Me.txtEnterBarcode.Name = "txtEnterBarcode"
-        Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
-        Me.txtEnterBarcode.TabIndex = 56
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(8, 22)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(46, 15)
-        Me.Label14.TabIndex = 57
-        Me.Label14.Text = "Barcode"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.txtEnterBarcode)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 303)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(249, 58)
-        Me.GroupBox1.TabIndex = 58
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Enter Barcode"
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.Label20)
-        Me.GroupBox3.Controls.Add(Me.cbColor)
-        Me.GroupBox3.Controls.Add(Me.txtProductDesc)
-        Me.GroupBox3.Controls.Add(Me.btnAddToCart)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.cbUnit)
-        Me.GroupBox3.Controls.Add(Me.Label16)
-        Me.GroupBox3.Controls.Add(Me.cbBrand)
-        Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(281, 303)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(1009, 58)
-        Me.GroupBox3.TabIndex = 59
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Enter Product"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(533, 24)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(36, 15)
-        Me.Label20.TabIndex = 66
-        Me.Label20.Text = "Color"
-        '
-        'cbColor
-        '
-        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(575, 21)
-        Me.cbColor.Name = "cbColor"
-        Me.cbColor.Size = New System.Drawing.Size(149, 23)
-        Me.cbColor.TabIndex = 65
-        '
-        'txtProductDesc
-        '
-        Me.txtProductDesc.Location = New System.Drawing.Point(84, 20)
-        Me.txtProductDesc.MaxLength = 32000
-        Me.txtProductDesc.Name = "txtProductDesc"
-        Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
-        Me.txtProductDesc.TabIndex = 64
-        '
-        'btnAddToCart
-        '
-        Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToCart.Location = New System.Drawing.Point(920, 13)
-        Me.btnAddToCart.Name = "btnAddToCart"
-        Me.btnAddToCart.Size = New System.Drawing.Size(77, 37)
-        Me.btnAddToCart.TabIndex = 39
-        Me.btnAddToCart.Text = "Add to Cart"
-        Me.btnAddToCart.UseVisualStyleBackColor = True
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(748, 22)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(30, 15)
-        Me.Label15.TabIndex = 38
-        Me.Label15.Text = "Unit"
-        '
-        'cbUnit
-        '
-        Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(784, 19)
-        Me.cbUnit.Name = "cbUnit"
-        Me.cbUnit.Size = New System.Drawing.Size(130, 23)
-        Me.cbUnit.TabIndex = 37
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(331, 24)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(36, 15)
-        Me.Label16.TabIndex = 36
-        Me.Label16.Text = "Brand"
-        '
-        'cbBrand
-        '
-        Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(373, 19)
-        Me.cbBrand.Name = "cbBrand"
-        Me.cbBrand.Size = New System.Drawing.Size(143, 23)
-        Me.cbBrand.TabIndex = 35
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(6, 21)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(72, 15)
-        Me.Label17.TabIndex = 34
-        Me.Label17.Text = "Product Desc"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(947, 119)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(66, 13)
-        Me.Label18.TabIndex = 60
-        Me.Label18.Text = "Delivered by"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(947, 159)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(67, 13)
-        Me.Label19.TabIndex = 62
-        Me.Label19.Text = "Received by"
-        '
-        'txtDeliveredBy
-        '
-        Me.txtDeliveredBy.Location = New System.Drawing.Point(950, 135)
-        Me.txtDeliveredBy.Name = "txtDeliveredBy"
-        Me.txtDeliveredBy.Size = New System.Drawing.Size(241, 20)
-        Me.txtDeliveredBy.TabIndex = 67
-        '
-        'txtReceivedBy
-        '
-        Me.txtReceivedBy.Location = New System.Drawing.Point(950, 177)
-        Me.txtReceivedBy.Name = "txtReceivedBy"
-        Me.txtReceivedBy.Size = New System.Drawing.Size(241, 20)
-        Me.txtReceivedBy.TabIndex = 68
-        '
         'id
         '
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -694,44 +511,239 @@ Partial Class LedgerForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'lblTotalAmount
+        '
+        Me.lblTotalAmount.AutoSize = True
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.lblTotalAmount.Location = New System.Drawing.Point(858, 238)
+        Me.lblTotalAmount.Name = "lblTotalAmount"
+        Me.lblTotalAmount.Size = New System.Drawing.Size(88, 39)
+        Me.lblTotalAmount.TabIndex = 55
+        Me.lblTotalAmount.Text = "0.00"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(741, 246)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(120, 22)
+        Me.Label13.TabIndex = 54
+        Me.Label13.Text = "Total Amount"
+        '
+        'txtEnterBarcode
+        '
+        Me.txtEnterBarcode.Location = New System.Drawing.Point(61, 19)
+        Me.txtEnterBarcode.Name = "txtEnterBarcode"
+        Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
+        Me.txtEnterBarcode.TabIndex = 56
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(8, 22)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(46, 15)
+        Me.Label14.TabIndex = 57
+        Me.Label14.Text = "Barcode"
+        '
+        'gpEnterBarcode
+        '
+        Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
+        Me.gpEnterBarcode.Controls.Add(Me.Label14)
+        Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(12, 303)
+        Me.gpEnterBarcode.Name = "gpEnterBarcode"
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(249, 58)
+        Me.gpEnterBarcode.TabIndex = 58
+        Me.gpEnterBarcode.TabStop = False
+        Me.gpEnterBarcode.Text = "Enter Barcode"
+        '
+        'gpEnterProduct
+        '
+        Me.gpEnterProduct.Controls.Add(Me.Label20)
+        Me.gpEnterProduct.Controls.Add(Me.cbColor)
+        Me.gpEnterProduct.Controls.Add(Me.txtProductDesc)
+        Me.gpEnterProduct.Controls.Add(Me.btnAddToCart)
+        Me.gpEnterProduct.Controls.Add(Me.Label15)
+        Me.gpEnterProduct.Controls.Add(Me.cbUnit)
+        Me.gpEnterProduct.Controls.Add(Me.Label16)
+        Me.gpEnterProduct.Controls.Add(Me.cbBrand)
+        Me.gpEnterProduct.Controls.Add(Me.Label17)
+        Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpEnterProduct.Location = New System.Drawing.Point(281, 303)
+        Me.gpEnterProduct.Name = "gpEnterProduct"
+        Me.gpEnterProduct.Size = New System.Drawing.Size(1009, 58)
+        Me.gpEnterProduct.TabIndex = 59
+        Me.gpEnterProduct.TabStop = False
+        Me.gpEnterProduct.Text = "Enter Product"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(533, 24)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(36, 15)
+        Me.Label20.TabIndex = 66
+        Me.Label20.Text = "Color"
+        '
+        'cbColor
+        '
+        Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbColor.FormattingEnabled = True
+        Me.cbColor.Location = New System.Drawing.Point(575, 21)
+        Me.cbColor.Name = "cbColor"
+        Me.cbColor.Size = New System.Drawing.Size(149, 23)
+        Me.cbColor.TabIndex = 65
+        '
+        'txtProductDesc
+        '
+        Me.txtProductDesc.Location = New System.Drawing.Point(84, 20)
+        Me.txtProductDesc.MaxLength = 32000
+        Me.txtProductDesc.Name = "txtProductDesc"
+        Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
+        Me.txtProductDesc.TabIndex = 64
+        '
+        'btnAddToCart
+        '
+        Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddToCart.Location = New System.Drawing.Point(920, 13)
+        Me.btnAddToCart.Name = "btnAddToCart"
+        Me.btnAddToCart.Size = New System.Drawing.Size(77, 37)
+        Me.btnAddToCart.TabIndex = 39
+        Me.btnAddToCart.Text = "Add to Cart"
+        Me.btnAddToCart.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(748, 22)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(30, 15)
+        Me.Label15.TabIndex = 38
+        Me.Label15.Text = "Unit"
+        '
+        'cbUnit
+        '
+        Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbUnit.FormattingEnabled = True
+        Me.cbUnit.Location = New System.Drawing.Point(784, 19)
+        Me.cbUnit.Name = "cbUnit"
+        Me.cbUnit.Size = New System.Drawing.Size(130, 23)
+        Me.cbUnit.TabIndex = 37
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(331, 24)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(36, 15)
+        Me.Label16.TabIndex = 36
+        Me.Label16.Text = "Brand"
+        '
+        'cbBrand
+        '
+        Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbBrand.FormattingEnabled = True
+        Me.cbBrand.Location = New System.Drawing.Point(373, 19)
+        Me.cbBrand.Name = "cbBrand"
+        Me.cbBrand.Size = New System.Drawing.Size(143, 23)
+        Me.cbBrand.TabIndex = 35
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(6, 21)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(72, 15)
+        Me.Label17.TabIndex = 34
+        Me.Label17.Text = "Product Desc"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(922, 138)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(66, 13)
+        Me.Label18.TabIndex = 60
+        Me.Label18.Text = "Delivered by"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(922, 178)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(67, 13)
+        Me.Label19.TabIndex = 62
+        Me.Label19.Text = "Received by"
+        '
+        'txtDeliveredBy
+        '
+        Me.txtDeliveredBy.Location = New System.Drawing.Point(925, 154)
+        Me.txtDeliveredBy.Name = "txtDeliveredBy"
+        Me.txtDeliveredBy.Size = New System.Drawing.Size(241, 20)
+        Me.txtDeliveredBy.TabIndex = 67
+        '
+        'txtReceivedBy
+        '
+        Me.txtReceivedBy.Location = New System.Drawing.Point(925, 196)
+        Me.txtReceivedBy.Name = "txtReceivedBy"
+        Me.txtReceivedBy.Size = New System.Drawing.Size(241, 20)
+        Me.txtReceivedBy.TabIndex = 68
+        '
+        'gpFields
+        '
+        Me.gpFields.Controls.Add(Me.txtReceivedBy)
+        Me.gpFields.Controls.Add(Me.Label1)
+        Me.gpFields.Controls.Add(Me.txtDeliveredBy)
+        Me.gpFields.Controls.Add(Me.cbCustomer)
+        Me.gpFields.Controls.Add(Me.Label19)
+        Me.gpFields.Controls.Add(Me.Label2)
+        Me.gpFields.Controls.Add(Me.Label18)
+        Me.gpFields.Controls.Add(Me.dtpDateIssue)
+        Me.gpFields.Controls.Add(Me.Label3)
+        Me.gpFields.Controls.Add(Me.Label4)
+        Me.gpFields.Controls.Add(Me.lblTotalAmount)
+        Me.gpFields.Controls.Add(Me.Label5)
+        Me.gpFields.Controls.Add(Me.Label13)
+        Me.gpFields.Controls.Add(Me.txtCounterNo)
+        Me.gpFields.Controls.Add(Me.txtInvoiceNo)
+        Me.gpFields.Controls.Add(Me.cbDisable)
+        Me.gpFields.Controls.Add(Me.txtAmount)
+        Me.gpFields.Controls.Add(Me.txtRemarks)
+        Me.gpFields.Controls.Add(Me.Label6)
+        Me.gpFields.Controls.Add(Me.Label11)
+        Me.gpFields.Controls.Add(Me.cbPaymentType)
+        Me.gpFields.Controls.Add(Me.Label12)
+        Me.gpFields.Controls.Add(Me.gpPaid)
+        Me.gpFields.Controls.Add(Me.cbTerms)
+        Me.gpFields.Controls.Add(Me.Label7)
+        Me.gpFields.Controls.Add(Me.btnAddCustomer)
+        Me.gpFields.Controls.Add(Me.dtpPaid)
+        Me.gpFields.Controls.Add(Me.btnSaveAndPrint)
+        Me.gpFields.Controls.Add(Me.btnSave)
+        Me.gpFields.Controls.Add(Me.gpCheck)
+        Me.gpFields.Location = New System.Drawing.Point(12, 11)
+        Me.gpFields.Name = "gpFields"
+        Me.gpFields.Size = New System.Drawing.Size(1278, 286)
+        Me.gpFields.TabIndex = 69
+        Me.gpFields.TabStop = False
+        Me.gpFields.Text = "Customer Order Form"
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 543)
-        Me.Controls.Add(Me.txtReceivedBy)
-        Me.Controls.Add(Me.txtDeliveredBy)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.lblTotalAmount)
-        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.gpEnterProduct)
+        Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.dgvProd)
-        Me.Controls.Add(Me.cbDisable)
-        Me.Controls.Add(Me.txtRemarks)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.cbTerms)
-        Me.Controls.Add(Me.btnAddCustomer)
-        Me.Controls.Add(Me.btnSaveAndPrint)
-        Me.Controls.Add(Me.gpCheck)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.dtpPaid)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.gpPaid)
-        Me.Controls.Add(Me.cbPaymentType)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txtAmount)
-        Me.Controls.Add(Me.txtInvoiceNo)
-        Me.Controls.Add(Me.txtCounterNo)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.dtpDateIssue)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.cbCustomer)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.gpFields)
         Me.Name = "LedgerForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Order (Ledger Form)"
@@ -743,12 +755,13 @@ Partial Class LedgerForm
         Me.gpPaid.ResumeLayout(False)
         Me.gpPaid.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.gpEnterBarcode.ResumeLayout(False)
+        Me.gpEnterBarcode.PerformLayout()
+        Me.gpEnterProduct.ResumeLayout(False)
+        Me.gpEnterProduct.PerformLayout()
+        Me.gpFields.ResumeLayout(False)
+        Me.gpFields.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -790,8 +803,8 @@ Partial Class LedgerForm
     Friend WithEvents Label13 As Label
     Friend WithEvents txtEnterBarcode As TextBox
     Friend WithEvents Label14 As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents gpEnterBarcode As GroupBox
+    Friend WithEvents gpEnterProduct As GroupBox
     Friend WithEvents Label15 As Label
     Friend WithEvents cbUnit As ComboBox
     Friend WithEvents Label16 As Label
@@ -820,4 +833,5 @@ Partial Class LedgerForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents gpFields As GroupBox
 End Class

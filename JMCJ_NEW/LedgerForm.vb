@@ -1153,6 +1153,8 @@
     Public Sub enableControl(ByVal flag As Boolean)
         btnAddToCart.Enabled = flag
         dgvProd.Enabled = flag
+        gpEnterBarcode.Enabled = flag
+        gpEnterProduct.Enabled = flag
     End Sub
 
     Private Sub txtProductDesc_TextChanged(sender As Object, e As EventArgs) Handles txtProductDesc.TextChanged

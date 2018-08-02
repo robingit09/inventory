@@ -34,7 +34,7 @@
         cbPO.Items.Clear()
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("SELECT id,po_no from purchase_orders where delivery_status <> 2 order by po_date desc")
+            .selectByQuery("SELECT id,po_no from purchase_orders where delivery_status = 1 order by po_date desc")
             Dim comboSource As New Dictionary(Of String, String)()
             comboSource.Add(0, "Select PO Number")
             If .dr.HasRows Then

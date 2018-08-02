@@ -177,6 +177,9 @@
                     LedgerForm.dgvProd.Rows.Add(row)
                 End If
             Next
+            LedgerForm.gpFields.Enabled = True
+            LedgerForm.btnSave.Visible = True
+            LedgerForm.btnSaveAndPrint.Visible = True
             LedgerForm.ShowDialog()
         Else
             MsgBox("Please select customer", MsgBoxStyle.Critical)

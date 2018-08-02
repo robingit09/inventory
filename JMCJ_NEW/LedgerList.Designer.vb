@@ -33,6 +33,11 @@ Partial Class LedgerList
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbYear = New System.Windows.Forms.ComboBox()
+        Me.cbMonth = New System.Windows.Forms.ComboBox()
         Me.cbShowFilter = New System.Windows.Forms.ComboBox()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -59,11 +64,6 @@ Partial Class LedgerList
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbShow = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbMonth = New System.Windows.Forms.ComboBox()
-        Me.cbYear = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -86,7 +86,7 @@ Partial Class LedgerList
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 4
-        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.Text = "View"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnAddNew
@@ -171,6 +171,49 @@ Partial Class LedgerList
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTER"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(509, 89)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(34, 13)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Show"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(509, 53)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(29, 13)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Year"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(509, 21)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.TabIndex = 17
+        Me.Label5.Text = "Month"
+        '
+        'cbYear
+        '
+        Me.cbYear.FormattingEnabled = True
+        Me.cbYear.Location = New System.Drawing.Point(563, 50)
+        Me.cbYear.Name = "cbYear"
+        Me.cbYear.Size = New System.Drawing.Size(140, 21)
+        Me.cbYear.TabIndex = 16
+        '
+        'cbMonth
+        '
+        Me.cbMonth.FormattingEnabled = True
+        Me.cbMonth.Location = New System.Drawing.Point(563, 18)
+        Me.cbMonth.Name = "cbMonth"
+        Me.cbMonth.Size = New System.Drawing.Size(140, 21)
+        Me.cbMonth.TabIndex = 15
         '
         'cbShowFilter
         '
@@ -368,49 +411,6 @@ Partial Class LedgerList
         Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 15
         Me.Label3.Text = "Show:"
-        '
-        'cbMonth
-        '
-        Me.cbMonth.FormattingEnabled = True
-        Me.cbMonth.Location = New System.Drawing.Point(563, 18)
-        Me.cbMonth.Name = "cbMonth"
-        Me.cbMonth.Size = New System.Drawing.Size(140, 21)
-        Me.cbMonth.TabIndex = 15
-        '
-        'cbYear
-        '
-        Me.cbYear.FormattingEnabled = True
-        Me.cbYear.Location = New System.Drawing.Point(563, 50)
-        Me.cbYear.Name = "cbYear"
-        Me.cbYear.Size = New System.Drawing.Size(140, 21)
-        Me.cbYear.TabIndex = 16
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(509, 21)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(37, 13)
-        Me.Label5.TabIndex = 17
-        Me.Label5.Text = "Month"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(509, 53)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(29, 13)
-        Me.Label6.TabIndex = 18
-        Me.Label6.Text = "Year"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(509, 89)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(34, 13)
-        Me.Label7.TabIndex = 19
-        Me.Label7.Text = "Show"
         '
         'btnPrint
         '
