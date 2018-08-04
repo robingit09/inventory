@@ -98,7 +98,7 @@ Partial Class ProductMasterForm
         '
         'Cost
         '
-        Me.Cost.HeaderText = "Cost"
+        Me.Cost.HeaderText = "Unit Cost"
         Me.Cost.Name = "Cost"
         Me.Cost.ReadOnly = True
         '

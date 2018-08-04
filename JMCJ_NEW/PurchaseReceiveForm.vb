@@ -1,4 +1,5 @@
 ﻿Public Class PurchaseReceiveForm
+    Public selectedPR As Integer = 0
     Public selectedPO As Integer = 0
     Public selectedSupplier As Integer = 0
     Public selectedTerm As Integer = 0
@@ -22,11 +23,18 @@
         dtpETA.Value = DateTime.Now.Date
         dtpATA.Value = DateTime.Now.Date
         txtAmount.Text = ""
+        lblTotalAmount.Text = "0.00"
         dgvProd.Rows.Clear()
 
     End Sub
     Private Sub PurchaseReceive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Public Sub initialize()
+        loadPO()
+        loadTerms()
+        loadPaymentType()
     End Sub
 
     Public Sub loadPO()
@@ -49,6 +57,83 @@
             cbPO.ValueMember = "Key"
             .dr.Close()
             .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadInfo(ByVal pr_id As Integer)
+        Me.selectedPR = pr_id
+        Me.selectedPO = New DatabaseConnect().get_by_val("purchase_receive", Me.selectedPR, "id", "purchase_order_id")
+        Me.selectedSupplier = getSupplier(pr_id)
+        txtPRNO.Text = New DatabaseConnect().get_by_id("purchase_receive", pr_id, "pr_no")
+        txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
+
+        Dim term As String = New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "terms")
+        Select Case term
+            Case "15"
+                cbTerms.SelectedIndex = cbTerms.FindString("15 Days")
+            Case "30"
+                cbTerms.SelectedIndex = cbTerms.FindString("30 Days")
+            Case "0"
+                cbTerms.SelectedIndex = 0
+        End Select
+
+        Dim payment_type As Integer = New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "payment_type")
+        Select Case payment_type
+            Case 1
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("Cash")
+            Case 2
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("C.O.D")
+            Case 3
+                cbPaymentType.SelectedIndex = cbPaymentType.FindString("Credit")
+            Case Else
+                cbPaymentType.SelectedIndex = 0
+        End Select
+
+        Dim eta As String = New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "eta")
+        If eta <> "0" Then
+            dtpETA.Value = eta
+        Else
+            dtpETA.Text = ""
+        End If
+
+
+        Dim ata As String = New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "ata")
+        dtpATA.Value = ata
+
+        txtAmount.Text = Val(New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "total_amount")).ToString("N2")
+        lblTotalAmount.Text = txtAmount.Text
+
+        dgvProd.Rows.Clear()
+        Dim dbprod As New DatabaseConnect()
+        With dbprod
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+                        FROM ((((((purchase_receive_products as pop
+                        INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
+                        where pop.purchase_receive_id = " & Me.selectedPR)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim total As String = Val(.dr("total_amount")).ToString("N2")
+                    Dim stock As String = Val(.dr("stock"))
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                    dgvProd.Rows.Add(row)
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
             .con.Close()
         End With
     End Sub
@@ -93,6 +178,7 @@
             dtpETA.Value = eta
 
             txtAmount.Text = Val(New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "total_amount")).ToString("N2")
+            lblTotalAmount.Text = txtAmount.Text
 
             Dim dbprod As New DatabaseConnect()
             dgvProd.Rows.Clear()
@@ -173,7 +259,6 @@
             .con.Close()
 
         End With
-
         Return code
     End Function
 
@@ -228,12 +313,14 @@
         With insertPR
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_receive (purchase_order_id,pr_no,supplier,pr_date,ata,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_receive (purchase_order_id,pr_no,dr_no,supplier,pr_date,eta,ata,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@purchase_order_id", selectedPO)
             .cmd.Parameters.AddWithValue("@pr_no", generatePRNo)
+            .cmd.Parameters.AddWithValue("@dr_no", txtDrNo.Text)
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
             .cmd.Parameters.AddWithValue("@pr_date", dtp_pr_date.Value.ToString)
+            .cmd.Parameters.AddWithValue("@eta", dtpETA.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@ata", dtpATA.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@terms", selectedTerm)
             .cmd.Parameters.AddWithValue("@payment_type", selectedPaymentType)

@@ -67,23 +67,29 @@ Partial Class PurchaseReceiveForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtDrNo = New System.Windows.Forms.TextBox()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gpFields.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbPaymentType
         '
         Me.cbPaymentType.FormattingEnabled = True
-        Me.cbPaymentType.Location = New System.Drawing.Point(123, 138)
+        Me.cbPaymentType.Location = New System.Drawing.Point(491, 22)
         Me.cbPaymentType.Name = "cbPaymentType"
-        Me.cbPaymentType.Size = New System.Drawing.Size(315, 21)
+        Me.cbPaymentType.Size = New System.Drawing.Size(209, 21)
         Me.cbPaymentType.TabIndex = 73
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 141)
+        Me.Label7.Location = New System.Drawing.Point(374, 25)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(111, 13)
         Me.Label7.TabIndex = 72
@@ -92,31 +98,31 @@ Partial Class PurchaseReceiveForm
         'cbTerms
         '
         Me.cbTerms.FormattingEnabled = True
-        Me.cbTerms.Location = New System.Drawing.Point(123, 111)
+        Me.cbTerms.Location = New System.Drawing.Point(491, 51)
         Me.cbTerms.Name = "cbTerms"
-        Me.cbTerms.Size = New System.Drawing.Size(315, 21)
+        Me.cbTerms.Size = New System.Drawing.Size(209, 21)
         Me.cbTerms.TabIndex = 71
         '
         'txtPRNO
         '
-        Me.txtPRNO.Location = New System.Drawing.Point(123, 56)
+        Me.txtPRNO.Location = New System.Drawing.Point(89, 54)
         Me.txtPRNO.Name = "txtPRNO"
         Me.txtPRNO.ReadOnly = True
-        Me.txtPRNO.Size = New System.Drawing.Size(315, 20)
+        Me.txtPRNO.Size = New System.Drawing.Size(249, 20)
         Me.txtPRNO.TabIndex = 70
         '
         'cbPO
         '
         Me.cbPO.FormattingEnabled = True
-        Me.cbPO.Location = New System.Drawing.Point(123, 24)
+        Me.cbPO.Location = New System.Drawing.Point(89, 22)
         Me.cbPO.Name = "cbPO"
-        Me.cbPO.Size = New System.Drawing.Size(315, 21)
+        Me.cbPO.Size = New System.Drawing.Size(249, 21)
         Me.cbPO.TabIndex = 69
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 114)
+        Me.Label3.Location = New System.Drawing.Point(374, 54)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(72, 13)
         Me.Label3.TabIndex = 68
@@ -125,7 +131,7 @@ Partial Class PurchaseReceiveForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 27)
+        Me.Label2.Location = New System.Drawing.Point(18, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 67
@@ -134,7 +140,7 @@ Partial Class PurchaseReceiveForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 59)
+        Me.Label1.Location = New System.Drawing.Point(18, 57)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(65, 13)
         Me.Label1.TabIndex = 66
@@ -143,7 +149,7 @@ Partial Class PurchaseReceiveForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 87)
+        Me.Label4.Location = New System.Drawing.Point(18, 118)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(48, 13)
         Me.Label4.TabIndex = 75
@@ -151,25 +157,25 @@ Partial Class PurchaseReceiveForm
         '
         'txtSupplier
         '
-        Me.txtSupplier.Location = New System.Drawing.Point(123, 84)
+        Me.txtSupplier.Location = New System.Drawing.Point(87, 116)
         Me.txtSupplier.Name = "txtSupplier"
         Me.txtSupplier.ReadOnly = True
-        Me.txtSupplier.Size = New System.Drawing.Size(315, 20)
+        Me.txtSupplier.Size = New System.Drawing.Size(251, 20)
         Me.txtSupplier.TabIndex = 76
         '
         'txtAmount
         '
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
-        Me.txtAmount.Location = New System.Drawing.Point(616, 107)
+        Me.txtAmount.Location = New System.Drawing.Point(901, 115)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ReadOnly = True
-        Me.txtAmount.Size = New System.Drawing.Size(208, 20)
+        Me.txtAmount.Size = New System.Drawing.Size(209, 20)
         Me.txtAmount.TabIndex = 81
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(522, 110)
+        Me.Label6.Location = New System.Drawing.Point(805, 119)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(73, 13)
         Me.Label6.TabIndex = 82
@@ -178,22 +184,22 @@ Partial Class PurchaseReceiveForm
         'dtpETA
         '
         Me.dtpETA.Enabled = False
-        Me.dtpETA.Location = New System.Drawing.Point(616, 53)
+        Me.dtpETA.Location = New System.Drawing.Point(901, 52)
         Me.dtpETA.Name = "dtpETA"
-        Me.dtpETA.Size = New System.Drawing.Size(208, 20)
+        Me.dtpETA.Size = New System.Drawing.Size(209, 20)
         Me.dtpETA.TabIndex = 80
         '
         'dtp_pr_date
         '
-        Me.dtp_pr_date.Location = New System.Drawing.Point(616, 21)
+        Me.dtp_pr_date.Location = New System.Drawing.Point(900, 22)
         Me.dtp_pr_date.Name = "dtp_pr_date"
-        Me.dtp_pr_date.Size = New System.Drawing.Size(208, 20)
+        Me.dtp_pr_date.Size = New System.Drawing.Size(210, 20)
         Me.dtp_pr_date.TabIndex = 79
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(522, 27)
+        Me.Label5.Location = New System.Drawing.Point(805, 25)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(33, 13)
         Me.Label5.TabIndex = 78
@@ -202,7 +208,7 @@ Partial Class PurchaseReceiveForm
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(522, 59)
+        Me.Label8.Location = New System.Drawing.Point(805, 54)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(31, 13)
         Me.Label8.TabIndex = 77
@@ -210,15 +216,15 @@ Partial Class PurchaseReceiveForm
         '
         'dtpATA
         '
-        Me.dtpATA.Location = New System.Drawing.Point(616, 81)
+        Me.dtpATA.Location = New System.Drawing.Point(901, 82)
         Me.dtpATA.Name = "dtpATA"
-        Me.dtpATA.Size = New System.Drawing.Size(208, 20)
+        Me.dtpATA.Size = New System.Drawing.Size(209, 20)
         Me.dtpATA.TabIndex = 84
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(522, 87)
+        Me.Label9.Location = New System.Drawing.Point(805, 88)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(31, 13)
         Me.Label9.TabIndex = 83
@@ -226,7 +232,7 @@ Partial Class PurchaseReceiveForm
         '
         'btnSaveAndPrint
         '
-        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1140, 56)
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1178, 67)
         Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
         Me.btnSaveAndPrint.Size = New System.Drawing.Size(102, 38)
         Me.btnSaveAndPrint.TabIndex = 86
@@ -235,7 +241,7 @@ Partial Class PurchaseReceiveForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1140, 12)
+        Me.btnSave.Location = New System.Drawing.Point(1178, 22)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(102, 38)
         Me.btnSave.TabIndex = 85
@@ -247,16 +253,16 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
         Me.gpEnterBarcode.Controls.Add(Me.Label14)
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 177)
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 205)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
-        Me.gpEnterBarcode.Size = New System.Drawing.Size(249, 58)
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(256, 49)
         Me.gpEnterBarcode.TabIndex = 87
         Me.gpEnterBarcode.TabStop = False
         Me.gpEnterBarcode.Text = "Enter Barcode"
         '
         'txtEnterBarcode
         '
-        Me.txtEnterBarcode.Location = New System.Drawing.Point(61, 19)
+        Me.txtEnterBarcode.Location = New System.Drawing.Point(73, 16)
         Me.txtEnterBarcode.Name = "txtEnterBarcode"
         Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
         Me.txtEnterBarcode.TabIndex = 56
@@ -264,7 +270,7 @@ Partial Class PurchaseReceiveForm
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(8, 22)
+        Me.Label14.Location = New System.Drawing.Point(6, 21)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(46, 15)
         Me.Label14.TabIndex = 57
@@ -282,9 +288,9 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label17)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 177)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 205)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(1003, 58)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(1003, 49)
         Me.gpEnterProduct.TabIndex = 88
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -303,14 +309,14 @@ Partial Class PurchaseReceiveForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(575, 21)
+        Me.cbColor.Location = New System.Drawing.Point(575, 18)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(149, 23)
         Me.cbColor.TabIndex = 65
         '
         'txtProductDesc
         '
-        Me.txtProductDesc.Location = New System.Drawing.Point(84, 20)
+        Me.txtProductDesc.Location = New System.Drawing.Point(84, 19)
         Me.txtProductDesc.MaxLength = 32000
         Me.txtProductDesc.Name = "txtProductDesc"
         Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
@@ -321,7 +327,7 @@ Partial Class PurchaseReceiveForm
         Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddToCart.Location = New System.Drawing.Point(920, 13)
         Me.btnAddToCart.Name = "btnAddToCart"
-        Me.btnAddToCart.Size = New System.Drawing.Size(77, 37)
+        Me.btnAddToCart.Size = New System.Drawing.Size(77, 26)
         Me.btnAddToCart.TabIndex = 39
         Me.btnAddToCart.Text = "Add to Cart"
         Me.btnAddToCart.UseVisualStyleBackColor = True
@@ -340,7 +346,7 @@ Partial Class PurchaseReceiveForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(784, 19)
+        Me.cbUnit.Location = New System.Drawing.Point(766, 16)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(130, 23)
         Me.cbUnit.TabIndex = 37
@@ -359,7 +365,7 @@ Partial Class PurchaseReceiveForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(373, 19)
+        Me.cbBrand.Location = New System.Drawing.Point(373, 18)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(143, 23)
         Me.cbBrand.TabIndex = 35
@@ -368,7 +374,7 @@ Partial Class PurchaseReceiveForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(6, 27)
+        Me.Label17.Location = New System.Drawing.Point(6, 22)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(72, 15)
         Me.Label17.TabIndex = 34
@@ -378,9 +384,9 @@ Partial Class PurchaseReceiveForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(15, 249)
+        Me.dgvProd.Location = New System.Drawing.Point(15, 277)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1296, 306)
+        Me.dgvProd.Size = New System.Drawing.Size(1296, 288)
         Me.dgvProd.TabIndex = 89
         '
         'id
@@ -448,34 +454,86 @@ Partial Class PurchaseReceiveForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'gpFields
+        '
+        Me.gpFields.Controls.Add(Me.txtDrNo)
+        Me.gpFields.Controls.Add(Me.Label11)
+        Me.gpFields.Controls.Add(Me.Label2)
+        Me.gpFields.Controls.Add(Me.Label1)
+        Me.gpFields.Controls.Add(Me.Label3)
+        Me.gpFields.Controls.Add(Me.cbPO)
+        Me.gpFields.Controls.Add(Me.txtPRNO)
+        Me.gpFields.Controls.Add(Me.btnSaveAndPrint)
+        Me.gpFields.Controls.Add(Me.cbTerms)
+        Me.gpFields.Controls.Add(Me.btnSave)
+        Me.gpFields.Controls.Add(Me.Label7)
+        Me.gpFields.Controls.Add(Me.dtpATA)
+        Me.gpFields.Controls.Add(Me.cbPaymentType)
+        Me.gpFields.Controls.Add(Me.Label9)
+        Me.gpFields.Controls.Add(Me.Label4)
+        Me.gpFields.Controls.Add(Me.txtAmount)
+        Me.gpFields.Controls.Add(Me.txtSupplier)
+        Me.gpFields.Controls.Add(Me.Label6)
+        Me.gpFields.Controls.Add(Me.Label8)
+        Me.gpFields.Controls.Add(Me.dtpETA)
+        Me.gpFields.Controls.Add(Me.Label5)
+        Me.gpFields.Controls.Add(Me.dtp_pr_date)
+        Me.gpFields.Location = New System.Drawing.Point(15, 14)
+        Me.gpFields.Name = "gpFields"
+        Me.gpFields.Size = New System.Drawing.Size(1296, 171)
+        Me.gpFields.TabIndex = 90
+        Me.gpFields.TabStop = False
+        Me.gpFields.Text = "Purchase Receive"
+        '
+        'lblTotalAmount
+        '
+        Me.lblTotalAmount.AutoSize = True
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.lblTotalAmount.Location = New System.Drawing.Point(1069, 568)
+        Me.lblTotalAmount.Name = "lblTotalAmount"
+        Me.lblTotalAmount.Size = New System.Drawing.Size(55, 30)
+        Me.lblTotalAmount.TabIndex = 92
+        Me.lblTotalAmount.Text = "0.00"
+        Me.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(909, 568)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(154, 30)
+        Me.Label10.TabIndex = 91
+        Me.Label10.Text = "Total Amount:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(18, 88)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(66, 13)
+        Me.Label11.TabIndex = 87
+        Me.Label11.Text = "DR Number:"
+        '
+        'txtDrNo
+        '
+        Me.txtDrNo.Location = New System.Drawing.Point(87, 85)
+        Me.txtDrNo.Name = "txtDrNo"
+        Me.txtDrNo.Size = New System.Drawing.Size(251, 20)
+        Me.txtDrNo.TabIndex = 88
+        '
         'PurchaseReceiveForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1327, 618)
+        Me.Controls.Add(Me.lblTotalAmount)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.gpEnterProduct)
-        Me.Controls.Add(Me.btnSaveAndPrint)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.dtpATA)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtAmount)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.dtpETA)
-        Me.Controls.Add(Me.dtp_pr_date)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.txtSupplier)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.cbPaymentType)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.cbTerms)
-        Me.Controls.Add(Me.txtPRNO)
-        Me.Controls.Add(Me.cbPO)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.gpFields)
         Me.Name = "PurchaseReceiveForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Receive Form"
@@ -484,6 +542,8 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterProduct.ResumeLayout(False)
         Me.gpEnterProduct.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gpFields.ResumeLayout(False)
+        Me.gpFields.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -534,4 +594,9 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents gpFields As GroupBox
+    Friend WithEvents lblTotalAmount As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtDrNo As TextBox
+    Friend WithEvents Label11 As Label
 End Class

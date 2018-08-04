@@ -84,7 +84,7 @@ Partial Class PurchaseOrderForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(18, 25)
+        Me.Label2.Location = New System.Drawing.Point(18, 26)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 13)
         Me.Label2.TabIndex = 1
@@ -202,14 +202,14 @@ Partial Class PurchaseOrderForm
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 169)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
-        Me.gpEnterBarcode.Size = New System.Drawing.Size(249, 58)
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 58)
         Me.gpEnterBarcode.TabIndex = 61
         Me.gpEnterBarcode.TabStop = False
         Me.gpEnterBarcode.Text = "Enter Barcode"
         '
         'txtEnterBarcode
         '
-        Me.txtEnterBarcode.Location = New System.Drawing.Point(61, 19)
+        Me.txtEnterBarcode.Location = New System.Drawing.Point(73, 19)
         Me.txtEnterBarcode.Name = "txtEnterBarcode"
         Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
         Me.txtEnterBarcode.TabIndex = 56

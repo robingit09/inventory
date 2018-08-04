@@ -15,17 +15,13 @@ Public Class DatabaseConnect
                 MsgBox(ex.Message, MsgBoxStyle.Critical)
             End If
         End Try
-
     End Sub
 
     Public Sub dbConnect()
-
         con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
-
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If
-
     End Sub
 
     Public Sub selectTableByColumn(ByVal table As String, ByVal col As String, ByVal oper As String, ByVal val As String)
@@ -44,12 +40,10 @@ Public Class DatabaseConnect
     End Sub
 
     Public Sub selectByQuery(ByVal q As String)
-
         cmd.Connection = con
         cmd.CommandType = CommandType.Text
         cmd.CommandText = q
         dr = cmd.ExecuteReader
-
     End Sub
 
     Public Function get_id(ByVal table As String, ByVal col As String, ByVal val As String) As Integer
@@ -158,16 +152,15 @@ Public Class DatabaseConnect
         Catch ex As Exception
 
         End Try
-
         Return res
     End Function
 
-    Function get_by_val(ByVal table As String, ByVal id As Integer, ByVal wherecol As String, ByVal col As String)
+    Function get_by_val(ByVal table As String, ByVal id As Integer, ByVal wherecol As String, ByVal return_val As String)
         Dim res As String = ""
         Try
             cmd.Connection = con
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "Select " & col & " from " & table & " where " & wherecol & " = " & id
+            cmd.CommandText = "Select " & return_val & " from " & table & " where " & wherecol & " = " & id
             dr = cmd.ExecuteReader
             If dr.HasRows Then
                 If dr.Read Then

@@ -33,6 +33,7 @@ Partial Class POList
         Me.delivery_status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.btnPrint = New System.Windows.Forms.Button()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,7 +53,7 @@ Partial Class POList
         Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.DateIssue, Me.PONumber, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.delivery_status})
         Me.dgvPO.Location = New System.Drawing.Point(26, 108)
         Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(921, 335)
+        Me.dgvPO.Size = New System.Drawing.Size(921, 424)
         Me.dgvPO.TabIndex = 1
         '
         'id
@@ -104,7 +105,7 @@ Partial Class POList
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(244, 29)
+        Me.btnVoid.Location = New System.Drawing.Point(341, 29)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(83, 29)
         Me.btnVoid.TabIndex = 2
@@ -121,18 +122,29 @@ Partial Class POList
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'btnPrint
+        '
+        Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(235, 29)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(83, 29)
+        Me.btnPrint.TabIndex = 4
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
         'POList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(982, 485)
+        Me.ClientSize = New System.Drawing.Size(983, 557)
+        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.dgvPO)
         Me.Controls.Add(Me.btnAddNew)
         Me.Name = "POList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Order"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -148,4 +160,5 @@ Partial Class POList
     Friend WithEvents ProcessedBy As DataGridViewTextBoxColumn
     Friend WithEvents delivery_status As DataGridViewTextBoxColumn
     Friend WithEvents btnView As Button
+    Friend WithEvents btnPrint As Button
 End Class

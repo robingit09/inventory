@@ -61,13 +61,16 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         'validation
         If dgvCost.Rows.Count = 1 Then
-            MsgBox("Please add cost!", MsgBoxStyle.Critical)
+            MsgBox("Please add unit cost!", MsgBoxStyle.Critical)
             dgvCost.Focus()
             Exit Sub
         End If
 
+        Dim dbdelete As New DatabaseConnect
+        dbdelete.delete_permanent("product_suppliers", "product_unit_id", Me.selected_prod_unit)
+        dbdelete.cmd.Dispose()
+        dbdelete.con.Close()
         Dim saveCost As New DatabaseConnect
-
         With saveCost
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
@@ -95,5 +98,10 @@
         MsgBox("Successfully Save", MsgBoxStyle.Information)
     End Sub
 
-
+    Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
+        'remove product
+        If e.ColumnIndex = 2 And dgvCost.Rows.Count > 1 Then
+            dgvCost.Rows.RemoveAt(e.RowIndex)
+        End If
+    End Sub
 End Class

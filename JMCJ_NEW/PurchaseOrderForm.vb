@@ -542,6 +542,9 @@
                 cbPaymentType.SelectedIndex = 0
         End Select
 
+        Dim po_date As String = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "po_date")
+        dtp_po_date.Value = po_date
+
         Dim eta As String = New DatabaseConnect().get_by_id("purchase_orders", Me.selectedPO, "eta")
         dtpETA.Value = eta
 
@@ -550,13 +553,14 @@
         Dim dbprod As New DatabaseConnect()
         dgvProd.Rows.Clear()
         With dbprod
-            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount
-                        FROM (((((purchase_order_products as pop
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+                        FROM ((((((purchase_order_products as pop
                         INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
                         INNER JOIN unit as u ON u.id = pu.unit)
                         LEFT JOIN color as c ON c.id = pu.color)
                         INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
                         where pop.purchase_order_id = " & selectedPO)
             If .dr.HasRows Then
                 While .dr.Read
@@ -569,8 +573,8 @@
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
                     Dim total As String = Val(.dr("total_amount")).ToString("N2")
-
-                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, "", "Remove"}
+                    Dim stock As String = Val(.dr("stock"))
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                     dgvProd.Rows.Add(row)
                 End While
             End If

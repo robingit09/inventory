@@ -1,6 +1,7 @@
 ﻿Public Class POList
 
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
+        btnAddNew.Enabled = False
         PurchaseOrderForm.clearFields()
         PurchaseOrderForm.initialize()
         PurchaseOrderForm.btnSave.Enabled = True
@@ -10,6 +11,7 @@
         PurchaseOrderForm.gpEnterBarcode.Enabled = True
         PurchaseOrderForm.gpEnterProduct.Enabled = True
         PurchaseOrderForm.ShowDialog()
+        btnAddNew.Enabled = True
     End Sub
 
     Public Sub loadPO(ByVal query As String)
@@ -57,11 +59,12 @@
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
-        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
+
         If dgvPO.SelectedRows.Count = 0 Then
             MsgBox("Please select one record!", MsgBoxStyle.Critical)
             Exit Sub
         End If
+        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
         PurchaseOrderForm.initialize()
         PurchaseOrderForm.loadInfo(po_id)
         PurchaseOrderForm.btnSave.Enabled = False
@@ -74,12 +77,13 @@
     End Sub
 
     Private Sub btnVoid_Click(sender As Object, e As EventArgs) Handles btnVoid.Click
-        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
-        Dim d_status As String = dgvPO.SelectedRows(0).Cells("delivery_status").Value
         If dgvPO.SelectedRows.Count = 0 Then
             MsgBox("Please select one record!", MsgBoxStyle.Critical)
             Exit Sub
         End If
+
+        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
+        Dim d_status As String = dgvPO.SelectedRows(0).Cells("delivery_status").Value
 
         If d_status = "Received" Then
             MsgBox("Already Received.This transaction cannot be voided!", MsgBoxStyle.Critical)
@@ -96,4 +100,202 @@
             loadPO("")
         End If
     End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+
+        If dgvPO.SelectedRows.Count = 0 Then
+            MsgBox("Please select one record!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        btnPrint.Enabled = False
+        Dim po_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
+        Dim path As String = Application.StartupPath & "\po_report.html"
+
+        Try
+            Dim code As String = generatePrint(po_id)
+            Dim myWrite As System.IO.StreamWriter
+            myWrite = IO.File.CreateText(path)
+            myWrite.WriteLine(code)
+            myWrite.Close()
+        Catch ex As Exception
+
+        End Try
+
+        Dim proc As New System.Diagnostics.Process()
+        proc = Process.Start(path, "")
+        btnPrint.Enabled = True
+    End Sub
+
+    Public Function generatePrint(ByVal po_id As Integer) As String
+        Dim result As String = ""
+
+        Dim supplier As String = getSupplier(po_id)
+        Dim po_no As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "po_no")
+        Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier, "supplier_name")
+        Dim term As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "terms")
+        Dim term_val As String = ""
+        Select Case term
+            Case "15"
+                term_val = "15 days"
+            Case "30"
+                term_val = "30 days"
+            Case "0"
+                term_val = ""
+            Case Else
+                term_val = ""
+        End Select
+
+        Dim payment_type As Integer = New DatabaseConnect().get_by_id("purchase_orders", po_id, "payment_type")
+        Dim payment_val As String = ""
+        Select Case payment_type
+            Case 1
+                payment_val = "Cash"
+            Case 2
+                payment_val = "C.O.D"
+            Case 3
+                payment_val = "Credit"
+            Case Else
+                payment_val = ""
+        End Select
+
+        Dim po_date As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "po_date")
+        Dim eta As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "eta")
+        Dim total_amount As String = Val(New DatabaseConnect().get_by_id("purchase_orders", po_id, "total_amount")).ToString("N2")
+
+        Dim table_content As String = ""
+        Dim dbprod As New DatabaseConnect()
+        With dbprod
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+                        FROM ((((((purchase_order_products as pop
+                        INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
+                        where pop.purchase_order_id = " & po_id)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim tr As String = "<tr>"
+                    Dim id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim total As String = Val(.dr("total_amount")).ToString("N2")
+                    'Dim stock As String = Val(.dr("stock"))
+                    tr = tr & "<td>" & barcode & "</td>"
+                    tr = tr & "<td>" & qty & "</td>"
+                    tr = tr & "<td>" & unit & "</td>"
+                    tr = tr & "<td>" & brand & "</td>"
+                    tr = tr & "<td>" & color & "</td>"
+                    tr = tr & "<td>" & desc & "</td>"
+                    tr = tr & "<td>" & cost & "</td>"
+                    tr = tr & "<td>" & total & "</td>"
+                    tr = tr & "</tr>"
+                    table_content = table_content & tr
+                    'Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+
+        result = "<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+	font-family:serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+
+}
+</style>
+</head>
+<body>
+
+<h2>Purchase Order</h2>
+<div id='fieldset'>
+	<table>
+		<tr>
+			<td width='150'><label><strong>Supplier: </strong></label></td>
+			<td><label>" & supplier_name & "</label></td>
+			<td width='150'><label><strong>Date Issue: </strong></label></td>
+			<td><label>" & po_date & "</label></td>
+		</tr>
+		<tr>
+			<td width='150'><label><strong>PO Number: </strong></label></td>
+			<td><label>" & po_no & "</label></td>
+			<td><label><strong>ETA:	</strong></label></td>
+			<td><label>" & eta & "</label></td>
+		</tr>
+		
+		<tr>
+			<td><label><strong>Terms: </strong></label></td>
+			<td><label>" & term_val & "</label></td>
+
+		</tr>
+		
+		<tr>
+			<td><label><strong>Payment Type: </strong></label></td>
+			<td><label>" & payment_val & "</label></td>
+			
+		</tr>
+	<table>
+</div>
+<br>
+<table>
+  <thead>
+  <tr>
+	<th>Barcode</th>
+	<th>Qty</th>
+	<th>Unit</th>
+	<th>Brand</th>
+	<th>Color</th>
+	<th>Description</th>
+	<th>Unit Cost</th>
+	<th>Total Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+    " & table_content & " 
+    <tr>
+		<td colspan='7' style='text-align:right;'><strong>Grand Total</strong></td>
+		<td style='color:red'><strong>" & total_amount & "</strong></td>
+	</tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+"
+        Return result
+    End Function
+
+    Private Function getSupplier(ByVal po_id As Integer) As Integer
+        Dim res As Integer = 0
+        Dim dbpo As New DatabaseConnect
+        With dbpo
+            .selectByQuery("Select supplier from purchase_orders where id = " & po_id)
+            If .dr.Read Then
+                res = CInt(.dr("supplier"))
+            End If
+        End With
+        Return res
+    End Function
 End Class

@@ -73,7 +73,7 @@ Partial Class LedgerList
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(220, 12)
+        Me.btnDelete.Location = New System.Drawing.Point(313, 12)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 5
@@ -414,7 +414,7 @@ Partial Class LedgerList
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(321, 12)
+        Me.btnPrint.Location = New System.Drawing.Point(212, 12)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(84, 23)
         Me.btnPrint.TabIndex = 2

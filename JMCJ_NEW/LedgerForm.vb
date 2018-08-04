@@ -156,9 +156,7 @@
                 .cmd.Dispose()
                 .con.Close()
 
-
                 Dim saveproduct As New DatabaseConnect
-
                 Dim cmd2 As New System.Data.OleDb.OleDbCommand
                 cmd2.Connection = saveproduct.con
                 cmd2.CommandType = CommandType.Text
@@ -1099,7 +1097,7 @@
                 left join unit as u on u.id = cop.unit)
                 left join color as c on c.id = cop.color)
                 left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit and pu.color = cop.color)
-                left join product_stocks as ps on ps.product_unit_id = p.id)
+                left join product_stocks as ps on ps.product_unit_id = pu.id)
                 where cop.customer_order_ledger_id = " & id)
 
             dgvProd.Rows.Clear()

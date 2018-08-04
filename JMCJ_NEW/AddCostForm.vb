@@ -37,30 +37,32 @@
             Exit Sub
         End If
 
-        If Trim(txtCost.Text) = "" Then
-            MsgBox("Please input cost!", MsgBoxStyle.Critical)
-            txtCost.Focus()
-            Exit Sub
-        End If
-
-        If Not IsNumeric(txtCost.Text) Then
-            MsgBox("Invalid number format for cost!", MsgBoxStyle.Critical)
-            txtCost.Focus()
-            txtCost.SelectAll()
-            Exit Sub
-        End If
         If btnAdd.Text = "Add(+)" Then
             ' check if exist
             For Each item As DataGridViewRow In ProductMasterForm.dgvCost.Rows
                 If item.Cells("Supplier").Value <> "" Then
                     Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
                     If supplier = cbSupplier.Text.ToUpper Then
-                        MsgBox("The supplier is already added!", MsgBoxStyle.Critical)
+                        MsgBox("Supplier is already added!", MsgBoxStyle.Critical)
                         Exit Sub
                     End If
                 End If
             Next
         End If
+
+        If Trim(txtCost.Text) = "" Then
+            MsgBox("Please input unit cost!", MsgBoxStyle.Critical)
+            txtCost.Focus()
+            Exit Sub
+        End If
+
+        If Not IsNumeric(txtCost.Text) Then
+            MsgBox("Invalid number format for unit cost!", MsgBoxStyle.Critical)
+            txtCost.Focus()
+            txtCost.SelectAll()
+            Exit Sub
+        End If
+
 
         Dim row As String() = New String() {cbSupplier.Text, Val(txtCost.Text).ToString("N2"), "Remove"}
         ProductMasterForm.dgvCost.Rows.Add(row)
