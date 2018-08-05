@@ -58,3 +58,4 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductMasterForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddCostForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceiveForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReceive.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.InventoryReport.resources

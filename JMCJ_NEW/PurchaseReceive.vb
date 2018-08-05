@@ -24,7 +24,7 @@
                     Dim date_issue As String = .dr("pr_date")
                     Dim pr_no As String = .dr("pr_no")
                     Dim po_no As String = New DatabaseConnect().get_by_id("purchase_orders", Val(.dr("purchase_order_id")), "po_no")
-                    Dim dr_no As String = ""
+                    Dim dr_no As String = If(IsDBNull(.dr("dr_no")), "", .dr("dr_no"))
                     Dim supplier_id As Integer = CInt(.dr("supplier"))
                     Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")
                     Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
