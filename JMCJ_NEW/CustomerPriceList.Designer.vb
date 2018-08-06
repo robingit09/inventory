@@ -184,9 +184,9 @@ Partial Class CustomerPriceList
         Me.btnDeleteProduct.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeleteProduct.Location = New System.Drawing.Point(281, 61)
         Me.btnDeleteProduct.Name = "btnDeleteProduct"
-        Me.btnDeleteProduct.Size = New System.Drawing.Size(117, 41)
+        Me.btnDeleteProduct.Size = New System.Drawing.Size(148, 41)
         Me.btnDeleteProduct.TabIndex = 27
-        Me.btnDeleteProduct.Text = "Delete Product"
+        Me.btnDeleteProduct.Text = "Delete Selected Product"
         Me.btnDeleteProduct.UseVisualStyleBackColor = True
         '
         'ckSelectAll

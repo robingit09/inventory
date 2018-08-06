@@ -162,39 +162,36 @@
                 cmd2.CommandType = CommandType.Text
                 For Each item As DataGridViewRow In Me.dgvProd.Rows
                     Dim ledger_id As Integer = getLastID("ledger")
-                    Dim product As Integer = New DatabaseConnect().get_id("products", "description", dgvProd.Rows(item.Index).Cells("product").Value)
-                    Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
-                    Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
-                    Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvProd.Rows(item.Index).Cells("Color").Value)
+                    Dim product_unit_id As Integer = dgvProd.Rows(item.Index).Cells("id").Value
+                    'Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
+                    'Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
+                    'Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvProd.Rows(item.Index).Cells("Color").Value)
                     Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
                     Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
                     Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
                     Dim less As String = dgvProd.Rows(item.Index).Cells("less").Value
                     Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
-                    Dim product_unit_id As Integer = 0
-                    Dim getp_u_id As New DatabaseConnect
-                    With getp_u_id
-                        .selectByQuery("select id from product_unit where product_id = " & product & "  and brand = " & brand & " and unit = " & unit & " and color = " & color)
-                        If .dr.Read Then
-                            product_unit_id = CInt(.dr("id"))
-                        Else
-                            product_unit_id = 0
-                        End If
-                        .dr.Close()
-                        .cmd.Dispose()
-                        .con.Close()
-                    End With
+                    'Dim product_unit_id As Integer = 0
+                    'Dim getp_u_id As New DatabaseConnect
+                    'With getp_u_id
+                    '    .selectByQuery("select id from product_unit where product_id = " & product & "  and brand = " & brand & " and unit = " & unit & " and color = " & color)
+                    '    If .dr.Read Then
+                    '        product_unit_id = CInt(.dr("id"))
+                    '    Else
+                    '        product_unit_id = 0
+                    '    End If
+                    '    .dr.Close()
+                    '    .cmd.Dispose()
+                    '    .con.Close()
+                    'End With
 
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                        cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_id,brand,unit,color,quantity,unit_price,sell_price,less,
-                total_amount,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+                        cmd2.CommandText = "insert into customer_order_products (customer_order_ledger_id,product_unit_id,quantity,unit_price,sell_price,less,
+                total_amount,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?)"
                         cmd2.Parameters.AddWithValue("@customer_order_ledger_id", ledger_id)
-                        cmd2.Parameters.AddWithValue("@product_id", product)
-                        cmd2.Parameters.AddWithValue("@brand", brand)
-                        cmd2.Parameters.AddWithValue("@unit", unit)
-                        cmd2.Parameters.AddWithValue("@color", color)
+                        cmd2.Parameters.AddWithValue("@product_unit_id", product_unit_id)
                         cmd2.Parameters.AddWithValue("@quantity", qty)
                         cmd2.Parameters.AddWithValue("@unit_price", price)
                         cmd2.Parameters.AddWithValue("@sell_price", sell_price)
@@ -817,6 +814,41 @@
                     dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
                 End If
             End If
+
+            'change if edit the sell price
+            If e.ColumnIndex = 11 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
+                Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
+                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+
+                amount = qty * CDbl(sellprice)
+
+                If less.Contains(",") Then
+                    Dim split = less.Split(",")
+                    Try
+                        Dim temp As Double = amount
+                        Dim res As Double = 0
+                        Dim x As Double = 0
+                        For i As Integer = 0 To split.Length - 1
+                            temp = temp * (1.0 - (Val(split(i)) / 100))
+                        Next
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
+                End If
+
+                'change color
+                If qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.Red
+                End If
+            End If
             computeTotalAmount()
         End If
     End Sub
@@ -1091,12 +1123,20 @@
 
         Dim dbOrderProduct As New DatabaseConnect
         With dbOrderProduct
+            '.selectByQuery("Select distinct pu.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount,ps.qty as stock from ((((((customer_order_products as cop
+            '    left join products as p on p.id = cop.product_id)
+            '    left join brand as b on b.id = cop.brand)
+            '    left join unit as u on u.id = cop.unit)
+            '    left join color as c on c.id = cop.color)
+            '    left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit and pu.color = cop.color)
+            '    left join product_stocks as ps on ps.product_unit_id = pu.id)
+            '    where cop.customer_order_ledger_id = " & id)
             .selectByQuery("Select distinct pu.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount,ps.qty as stock from ((((((customer_order_products as cop
-                left join products as p on p.id = cop.product_id)
-                left join brand as b on b.id = cop.brand)
-                left join unit as u on u.id = cop.unit)
-                left join color as c on c.id = cop.color)
-                left join product_unit as pu on pu.product_id = cop.product_id and pu.brand = cop.brand and pu.unit = cop.unit and pu.color = cop.color)
+                left join product_unit as pu ON pu.id = cop.product_unit_id)
+                left join products as p on p.id = pu.product_id)
+                left join brand as b on b.id = pu.brand)
+                left join unit as u on u.id = pu.unit)
+                left join color as c on c.id = pu.color)
                 left join product_stocks as ps on ps.product_unit_id = pu.id)
                 where cop.customer_order_ledger_id = " & id)
 
@@ -1104,7 +1144,6 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim p_id As String = .dr("id")
-
                     Dim barcode As String = .dr("barcode")
                     Dim qty As String = .dr("quantity")
                     Dim desc As String = .dr("description")
