@@ -646,17 +646,296 @@
         btnPrint.Text = "loading.."
         If dgvLedger.SelectedRows.Count = 1 Then
             Dim id As Integer = dgvLedger.SelectedRows(0).Cells("id").Value
-            Dim cr As New COReport
-            cr.RecordSelectionFormula = "{ledger.id} = " & id
-            ReportViewer.Enabled = True
-            ReportViewer.CrystalReportViewer1.ReportSource = cr
-            ReportViewer.CrystalReportViewer1.Refresh()
-            ReportViewer.CrystalReportViewer1.RefreshReport()
-            ReportViewer.ShowDialog()
+            'Dim cr As New COReport
+            'cr.RecordSelectionFormula = "{ledger.id} = " & id
+            'ReportViewer.Enabled = True
+            'ReportViewer.CrystalReportViewer1.ReportSource = cr
+            'ReportViewer.CrystalReportViewer1.Refresh()
+            'ReportViewer.CrystalReportViewer1.RefreshReport()
+            'ReportViewer.ShowDialog()
+            Dim path As String = Application.StartupPath & "\co.html"
+            'Dim filter() As String = {"sample1", "sample2"}
+            Try
+                Dim code As String = generatePrint(id)
+                Dim myWrite As System.IO.StreamWriter
+                myWrite = IO.File.CreateText(path)
+                myWrite.WriteLine(code)
+                myWrite.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Dim proc As New System.Diagnostics.Process()
+            proc = Process.Start(path, "")
+
         Else
             MsgBox("Please select one record before you print.", MsgBoxStyle.Critical)
         End If
         btnPrint.Enabled = True
         btnPrint.Text = "Print"
     End Sub
+
+    Public Function generatePrint(ByVal id As Integer)
+        Dim result As String = ""
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select * from ledger where status <> 0 and ID = " & id & " order by id desc")
+            If .dr.Read Then
+                Dim counter_no As String = .dr.GetValue(1)
+                Dim date_issue As String = .dr.GetValue(2)
+                Dim invoice_no As String = .dr.GetValue(3)
+                Dim amount As String = .dr.GetValue(4)
+                Dim paid As Boolean = CBool(.dr.GetValue(5))
+                Dim date_paid As String = .dr.GetValue(6)
+                Dim floating As Boolean = CBool(.dr.GetValue(7))
+                Dim bank_details As String = .dr.GetValue(8)
+                Dim check_date As String = .dr.GetValue(9)
+                Dim status As Integer = CInt(.dr.GetValue(10))
+                Dim status_val As String = ""
+                Select Case status
+                    Case 1
+                        status_val = "Active"
+                    Case 2
+                        status_val = "Inactive"
+                End Select
+
+                Dim customer As Integer = CInt(.dr.GetValue(11))
+                Dim customer_val As String = ""
+                Dim customer_address As String = ""
+                Dim customer_city As String = ""
+                Dim fax_tel As String = ""
+                Dim db2 As New DatabaseConnect
+                With db2
+                    .selectByQuery("Select company,address,city,fax_tel from company where ID = " & customer)
+                    If .dr.Read Then
+                        customer_val = .dr.GetValue(0)
+                        customer_address = .dr.GetValue(1)
+                        customer_city = .dr.GetValue(2)
+                        fax_tel = .dr.GetValue(3)
+                        'LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindStringExact(customer_val)
+                        'LedgerForm.cbCustomer.Text = customer_val
+                    End If
+                    .cmd.Dispose()
+                    .dr.Close()
+                    .con.Close()
+                End With
+
+                Dim ledger_type As Integer = CInt(.dr.GetValue(12))
+                Dim ledger_type_val As String = ""
+                Select Case ledger_type
+                    Case 0
+                        ledger_type_val = "Charge"
+                    Case 1
+                        ledger_type_val = "Delivery"
+                End Select
+
+
+                Dim payment_type As Integer = CInt(.dr.GetValue(13))
+                Dim payment_type_val As String = ""
+                Select Case payment_type
+                    Case 0
+                        payment_type_val = "Cash"
+                    Case 1
+                        payment_type_val = "C.O.D"
+                    Case 2
+                        payment_type_val = "Credit"
+                    Case 3
+                        payment_type_val = "Post Dated"
+                End Select
+
+                Dim term_ As Integer = CInt(.dr.GetValue(17))
+                'Select Case term_
+                '    Case 30
+                '        LedgerForm.cbTerms.SelectedIndex = 1
+                '    Case 60
+                '        LedgerForm.cbTerms.SelectedIndex = 2
+                '    Case 90
+                '        LedgerForm.cbTerms.SelectedIndex = 3
+                '    Case 120
+                '        LedgerForm.cbTerms.SelectedIndex = 4
+                '    Case Else
+                '        LedgerForm.cbTerms.SelectedIndex = 0
+                'End Select
+                Dim remarks As String = .dr.GetValue(18)
+
+                'LedgerForm.cbPaymentType.SelectedIndex = LedgerForm.cbPaymentType.FindStringExact(ledger_type_val)
+                'LedgerForm.cbPaymentType.Text = payment_type_val
+                'LedgerForm.dtpDateIssue.Value = date_issue
+                'LedgerForm.txtCounterNo.Text = counter_no
+                'LedgerForm.txtInvoiceNo.Text = invoice_no
+                'LedgerForm.txtAmount.Text = amount
+                'LedgerForm.lblTotalAmount.Text = Val(amount).ToString("N2")
+
+                Dim paid_val As String = ""
+                If paid = True Then
+                    paid_val = "Yes"
+                Else
+                    paid_val = "No"
+                End If
+
+                'LedgerForm.dtpPaid.Value = date_paid
+                'LedgerForm.txtBankDetails.Text = bank_details
+                'LedgerForm.dtpCheckDate.Value = check_date
+
+                Dim floating_val As String
+                If floating = True Then
+                    floating_val = "Yes"
+                Else
+                    floating_val = "No"
+                End If
+                'LedgerForm.txtRemarks.Text = remarks
+                'LedgerForm.txtDeliveredBy.Text = .dr("delivered_by")
+                'LedgerForm.txtReceivedBy.Text = .dr("received_by")
+                Dim grand_total As Double = 0
+                Dim table_content As String = ""
+                Dim dbprod As New DatabaseConnect()
+                With dbprod
+                    .selectByQuery("Select distinct pu.id,pu.barcode,p.description,cop.quantity,b.name as brand, u.name as unit,c.name as color,pu.price,cop.less,cop.sell_price,cop.total_amount,ps.qty as stock from ((((((customer_order_products as cop
+                    Left Join product_unit as pu ON pu.id = cop.product_unit_id)
+                    Left Join products as p on p.id = pu.product_id)
+                    Left Join brand as b on b.id = pu.brand)
+                    Left Join unit as u on u.id = pu.unit)
+                    Left Join color as c on c.id = pu.color)
+                    Left Join product_stocks as ps on ps.product_unit_id = pu.id)
+                    where cop.customer_order_ledger_id = " & id)
+                    If .dr.HasRows Then
+                        While .dr.Read
+                            Dim tr As String = "<tr>"
+                            Dim p_id As String = .dr("id")
+                            Dim barcode As String = .dr("barcode")
+                            Dim qty As String = .dr("quantity")
+                            Dim desc As String = .dr("description")
+                            Dim brand As String = .dr("brand")
+                            Dim unit As String = .dr("unit")
+                            Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                            Dim price As String = Math.Round(Val(.dr("price")), 2).ToString("N2")
+                            Dim less As String = .dr("less")
+                            Dim sell_price As String = Math.Round(Val(.dr("sell_price")), 2).ToString("N2")
+                            Dim total_amount As String = Math.Round(Val(.dr("total_amount")), 2).ToString("N2")
+                            Dim stock As String = Val(.dr("stock"))
+
+                            grand_total += CDbl(total_amount)
+                            tr = tr & "<td>" & barcode & "</td>"
+                            tr = tr & "<td>" & qty & "</td>"
+                            tr = tr & "<td>" & unit & "</td>"
+                            tr = tr & "<td>" & brand & "</td>"
+                            tr = tr & "<td>" & color & "</td>"
+                            tr = tr & "<td>" & desc & "</td>"
+                            tr = tr & "<td>" & sell_price & "</td>"
+                            tr = tr & "<td>" & total_amount & "</td>"
+                            tr = tr & "</tr>"
+                            table_content = table_content & tr
+                        End While
+                    End If
+                    .cmd.Dispose()
+                    .dr.Close()
+                    .con.Close()
+                End With
+                result = "<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+	font-family:serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+
+}
+</style>
+</head>
+<body>
+
+<h2>Customer Order</h2>
+<div id='fieldset'>
+	<table>
+		<tr>
+			<td width='120'><label><strong>Date Invoice: </strong></label></td>
+			<td><label> " & date_issue & " </label></td>
+			
+			<td width='80'><label><strong>Invoice No: </strong></label></td>
+			<td><label>" & invoice_no & "</label></td>
+		</tr>
+	<table>
+	<br>
+	<table>
+		<tr>
+			<th colspan='2' style='background-color:blue;color:white;'>Payment Details</th>
+			<th colspan='4' style='background-color:blue;color:white;'>Ship To</th>
+		</tr>
+		<tr>
+			<td width='120'><label><strong>Payment type: </strong></label></td>
+			<td><label> " & payment_type_val & " </label></td>
+			
+			<td width='120'><label><strong>Customer: </strong></label></td>
+			<td colspan='3'><label>" & customer_val & " </label></td>
+		</tr>
+		
+		<tr>
+			<td width='80'><label><strong>Bank details: </strong></label></td>
+			<td><label>" & bank_details & "</label></td>
+			
+			<td width='120'><label><strong>Address: </strong></label></td>
+			<td colspan='3'><label> " & customer_address & " " & customer_city & " </label></td>
+		</tr>
+		
+		<tr>
+			<td width='120'><label><strong>Check Date: </strong></label></td>
+			<td><label>" & check_date & " </label></td>
+			
+			<td width='120'><label><strong>Fax/Tel: </strong></label></td>
+			<td colspan='3'><label>" & fax_tel & "</label></td>
+		</tr>
+		
+		<tr>
+			<td width='80'><label><strong>Due Date: </strong></label></td>
+			<td><label>" & New DatabaseConnect().get_by_val("ledger", id, "id", "payment_due_date") & "</label></td>
+			
+			<td width='120'><label><strong>Delivery By: </strong></label></td>
+			<td><label>" & .dr("delivered_by") & "</label></td>
+			<td width='120'><label><strong>Received By: </strong></label></td>
+			<td><label>" & .dr("received_by") & "</label></td>
+		</tr>
+	<table>
+</div>
+<br>
+<table>
+  <thead>
+  <tr>
+	<th>Barcode</th>
+	<th>Qty</th>
+	<th>Unit</th>
+	<th>Brand</th>
+	<th>Color</th>
+	<th>Description</th>
+	<th>Unit Price</th>
+	<th>Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+    " & table_content & "
+    <tr>
+		<td colspan='7' style='text-align:right;'><strong>Total Amount</strong></td>
+		<td style='color:red'><strong>" & Format(grand_total, "0.00") & "</strong></td>
+	</tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+
+"
+                Return result
+            End If
+        End With
+        Return result
+    End Function
 End Class

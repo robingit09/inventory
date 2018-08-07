@@ -114,4 +114,8 @@
     Private Sub CategoriesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CategoriesToolStripMenuItem1.Click
         CategoryList.ShowDialog()
     End Sub
+
+    Private Sub InventoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryReportsToolStripMenuItem.Click
+        InventoryReport.ShowDialog()
+    End Sub
 End Class

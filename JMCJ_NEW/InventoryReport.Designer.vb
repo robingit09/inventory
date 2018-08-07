@@ -52,6 +52,7 @@ Partial Class InventoryReport
         Me.Controls.Add(Me.gpFilter)
         Me.Controls.Add(Me.btnPrint)
         Me.Name = "InventoryReport"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Inventory Report"
         Me.ResumeLayout(False)
 

@@ -563,13 +563,27 @@
             LedgerList.loadledgertype()
             LedgerList.getPaymentMode()
 
-            Dim cr As New COReport
-            cr.RecordSelectionFormula = "{customer_order_products.customer_order_ledger_id} = " & (getLastID("ledger"))
-            ReportViewer.Enabled = True
-            ReportViewer.CrystalReportViewer1.ReportSource = cr
-            ReportViewer.CrystalReportViewer1.Refresh()
-            ReportViewer.CrystalReportViewer1.RefreshReport()
-            ReportViewer.ShowDialog()
+            'Dim cr As New COReport
+            'cr.RecordSelectionFormula = "{customer_order_products.customer_order_ledger_id} = " & (getLastID("ledger"))
+            'ReportViewer.Enabled = True
+            'ReportViewer.CrystalReportViewer1.ReportSource = cr
+            'ReportViewer.CrystalReportViewer1.Refresh()
+            'ReportViewer.CrystalReportViewer1.RefreshReport()
+            'ReportViewer.ShowDialog()
+            Dim path As String = Application.StartupPath & "\co.html"
+            'Dim filter() As String = {"sample1", "sample2"}
+            Try
+                Dim code As String = LedgerList.generatePrint(getLastID("ledger"))
+                Dim myWrite As System.IO.StreamWriter
+                myWrite = IO.File.CreateText(path)
+                myWrite.WriteLine(code)
+                myWrite.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+
+            Dim proc As New System.Diagnostics.Process()
+            proc = Process.Start(path, "")
 
         ElseIf btnSaveAndPrint.Text = "Update and Print" Then
 

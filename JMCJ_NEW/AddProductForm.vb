@@ -33,7 +33,7 @@
                 LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
                 LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
-                where pu.status <> 0 and p.status <> 0 order by p.description")
+                where pu.status = 1 order by p.description")
             Else
 
             End If

@@ -45,8 +45,8 @@ Partial Class Main_form
         Me.PricingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -203,17 +203,17 @@ Partial Class Main_form
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
-        'SystemToolStripMenuItem
-        '
-        Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
-        Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
-        Me.SystemToolStripMenuItem.Text = "System"
-        '
         'InventoryReportsToolStripMenuItem
         '
         Me.InventoryReportsToolStripMenuItem.Name = "InventoryReportsToolStripMenuItem"
         Me.InventoryReportsToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.InventoryReportsToolStripMenuItem.Text = "Inventory Report"
+        '
+        'SystemToolStripMenuItem
+        '
+        Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
+        Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
+        Me.SystemToolStripMenuItem.Text = "System"
         '
         'Main_form
         '

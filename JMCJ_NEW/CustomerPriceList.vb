@@ -289,22 +289,165 @@
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         btnPrint.Enabled = False
-        btnPrint.Text = "loading.."
-        If cbCustomer.SelectedIndex > 0 Then
-            Dim cpr As New CustomerPriceReport
-            cpr.RecordSelectionFormula = "{customer_product_prices.customer_id} = " & selectedCustomer
-            ReportViewer.Enabled = True
-            ReportViewer.CrystalReportViewer1.ReportSource = cpr
-            ReportViewer.CrystalReportViewer1.Refresh()
-            ReportViewer.CrystalReportViewer1.RefreshReport()
-            ReportViewer.ShowDialog()
-        Else
+        'btnPrint.Text = "loading.."
+        'If cbCustomer.SelectedIndex > 0 Then
+        '    Dim cpr As New CustomerPriceReport
+        '    cpr.RecordSelectionFormula = "{customer_product_prices.customer_id} = " & selectedCustomer
+        '    ReportViewer.Enabled = True
+        '    ReportViewer.CrystalReportViewer1.ReportSource = cpr
+        '    ReportViewer.CrystalReportViewer1.Refresh()
+        '    ReportViewer.CrystalReportViewer1.RefreshReport()
+        '    ReportViewer.ShowDialog()
+        'Else
+        '    MsgBox("Please select customer!", MsgBoxStyle.Critical)
+        '    selectedCustomer = 0
+        'End If
+        'btnPrint.Text = "Print"
+
+        If cbCustomer.SelectedIndex = 0 Then
             MsgBox("Please select customer!", MsgBoxStyle.Critical)
+            cbCustomer.Focus()
             selectedCustomer = 0
+            Exit Sub
         End If
-        btnPrint.Text = "Print"
+
+        Dim path As String = Application.StartupPath & "\prices_report.html"
+        Dim filter() As String = {"sample1", "sample2"}
+        Try
+            Dim code As String = generatePrint(filter)
+            Dim myWrite As System.IO.StreamWriter
+            myWrite = IO.File.CreateText(path)
+            myWrite.WriteLine(code)
+            myWrite.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Dim proc As New System.Diagnostics.Process()
+        proc = Process.Start(path, "")
         btnPrint.Enabled = True
     End Sub
+
+    Private Function generatePrint(ByVal filter() As String)
+        Dim result As String
+
+        Dim customer As String = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
+        Dim address As String = New DatabaseConnect().get_by_id("company", selectedCustomer, "address")
+        Dim city As String = New DatabaseConnect().get_by_id("company", selectedCustomer, "city")
+
+        Dim total_price As Double = 0
+        Dim total_sell_price As Double = 0
+        Dim table_content As String = ""
+        Dim dbprod As New DatabaseConnect()
+        With dbprod
+            .selectByQuery("Select distinct pu.id,pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,cpp.sell_price,c.name as cat, subc.name as subcat from (((((((((product_unit as pu
+                INNER JOIN customer_product_prices as cpp ON cpp.product_unit_id = pu.id)
+                LEFT JOIN brand as b on b.id = pu.brand)
+                INNER JOIN unit as u on u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN products as p ON p.id = pu.product_id)
+                LEFT JOIN product_categories as pc ON pc.product_id = pu.product_id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
+                where cpp.customer_id = " & selectedCustomer)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim tr As String = "<tr>"
+                    Dim id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim price As String = Val(.dr("price")).ToString("N2")
+                    Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
+
+                    total_price += CDbl(price)
+                    total_sell_price += CDbl(sell_price)
+                    tr = tr & "<td>" & barcode & "</td>"
+                    tr = tr & "<td>" & desc & "</td>"
+                    tr = tr & "<td>" & brand & "</td>"
+                    tr = tr & "<td>" & unit & "</td>"
+                    tr = tr & "<td>" & color & "</td>"
+                    tr = tr & "<td>" & price & "</td>"
+                    tr = tr & "<td>" & sell_price & "</td>"
+                    tr = tr & "</tr>"
+                    table_content = table_content & tr
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+        result = "<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+	font-family:serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+
+}
+</style>
+</head>
+<body>
+
+<h2>Customer product and prices</h2>
+<div id='fieldset'>
+	<table>
+		<tr>
+			<td width='90'><label><strong>Customer: </strong></label></td>
+			<td><label>" & customer & "</label></td>
+			
+			<td width='80'><label><strong>Address: </strong></label></td>
+			<td><label>" & address & "</label></td>
+			
+			<td width='100'><label><strong>City/Municipality: </strong></label></td>
+			<td><label>" & city & " </label></td>
+		</tr>
+	
+	<table>
+</div>
+<br>
+<table>
+  <thead>
+  <tr>
+	<th>Barcode</th>
+	<th>Description</th>
+	<th>Brand</th>
+	<th>Unit</th>
+	<th>Color</th>
+	<th>Unit Price</th>
+	<th>Sell Price</th>
+  </tr>
+  </thead>
+  <tbody>
+    " & table_content & "
+    <tr>
+		<td colspan='5' style='text-align:right;'><strong>Total</strong></td>
+		<td style='color:red'><strong>" & Format(total_price, "0.00") & "</strong></td>
+		<td style='color:red'><strong>" & Format(total_sell_price, "0.00") & "</strong></td>
+	</tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+"
+
+        Return result
+    End Function
 
     Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnAddCustomer.Click
         CustomerForm.btnSave.Text = "Save"
