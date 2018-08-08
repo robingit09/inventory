@@ -1,5 +1,6 @@
 ﻿Public Class LedgerForm
 
+    Public selectedID As Integer = 0
     Public selectedCustomer As Integer = 0
     Public selectedPaymentType As Integer = 0
     Public term As Integer = 0
@@ -559,9 +560,6 @@
 
             insertData()
             clearfields()
-            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
-            LedgerList.loadledgertype()
-            LedgerList.getPaymentMode()
 
             'Dim cr As New COReport
             'cr.RecordSelectionFormula = "{customer_order_products.customer_order_ledger_id} = " & (getLastID("ledger"))
@@ -584,7 +582,9 @@
 
             Dim proc As New System.Diagnostics.Process()
             proc = Process.Start(path, "")
-
+            LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
+            LedgerList.loadledgertype()
+            LedgerList.getPaymentMode()
         ElseIf btnSaveAndPrint.Text = "Update and Print" Then
 
             If (validator()) Then
@@ -716,6 +716,15 @@
         populateBrand(0)
         populateColor(0, 0)
         populateUnit(0, 0, 0)
+        Dim checked_by As Integer = New DatabaseConnect().get_by_id("ledger", selectedID, "checked_by")
+        Dim approved_by As Integer = New DatabaseConnect().get_by_id("ledger", selectedID, "approved_by")
+
+        If checked_by > 0 Then
+            btnCheck.Enabled = False
+        End If
+        If approved_by > 0 Then
+            btnApprove.Enabled = False
+        End If
     End Sub
 
     Private Sub cbDisable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisable.CheckedChanged
@@ -1206,6 +1215,21 @@
         dgvProd.Enabled = flag
         gpEnterBarcode.Enabled = flag
         gpEnterProduct.Enabled = flag
+
+        cbCustomer.Enabled = flag
+        btnAddCustomer.Enabled = flag
+        dtpDateIssue.Enabled = flag
+        txtCounterNo.Enabled = flag
+        cbDisable.Enabled = flag
+        txtInvoiceNo.Enabled = flag
+        txtAmount.Enabled = flag
+        cbPaymentType.Enabled = flag
+        gpPaid.Enabled = flag
+        dtpPaid.Enabled = flag
+        cbTerms.Enabled = flag
+        txtRemarks.Enabled = flag
+        txtDeliveredBy.Enabled = flag
+        txtReceivedBy.Enabled = flag
     End Sub
 
     Private Sub txtProductDesc_TextChanged(sender As Object, e As EventArgs) Handles txtProductDesc.TextChanged
@@ -1298,4 +1322,30 @@
         result = CInt(New DatabaseConnect().get_by_id("company", customer, "ledger_type"))
         Return result
     End Function
+
+    Private Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
+        Dim yesno As Integer = MsgBox("Are you sure you want this transaction as checked ?", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "Ledger")
+        If yesno = MsgBoxResult.Yes Then
+            'update to checked
+            Dim dbupdate As New DatabaseConnect
+            dbupdate.update_where("ledger", selectedID, "checked_by", Main_form.auth_login)
+            dbupdate.cmd.Dispose()
+            dbupdate.con.Close()
+            btnCheck.Enabled = False
+            MsgBox("Ledger has been successfully checked.", MsgBoxStyle.Information)
+        End If
+    End Sub
+
+    Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
+        Dim yesno As Integer = MsgBox("Are you sure you want to approve this transaction ?", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "Ledger")
+        If yesno = MsgBoxResult.Yes Then
+            'update to approved
+            Dim dbupdate As New DatabaseConnect
+            dbupdate.update_where("ledger", selectedID, "approved_by", Main_form.auth_login)
+            dbupdate.cmd.Dispose()
+            dbupdate.con.Close()
+            btnApprove.Enabled = False
+            MsgBox("Ledger has been successfully approved.", MsgBoxStyle.Information)
+        End If
+    End Sub
 End Class

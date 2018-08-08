@@ -22,7 +22,7 @@ Partial Class LedgerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
@@ -92,6 +92,8 @@ Partial Class LedgerForm
         Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
         Me.txtReceivedBy = New System.Windows.Forms.TextBox()
         Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.btnCheck = New System.Windows.Forms.Button()
+        Me.btnApprove = New System.Windows.Forms.Button()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
@@ -224,9 +226,9 @@ Partial Class LedgerForm
         '
         'btnSaveAndPrint
         '
-        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1065, 84)
+        Me.btnSaveAndPrint.Location = New System.Drawing.Point(1013, 19)
         Me.btnSaveAndPrint.Name = "btnSaveAndPrint"
-        Me.btnSaveAndPrint.Size = New System.Drawing.Size(101, 37)
+        Me.btnSaveAndPrint.Size = New System.Drawing.Size(93, 31)
         Me.btnSaveAndPrint.TabIndex = 50
         Me.btnSaveAndPrint.Text = "Save and Print"
         Me.btnSaveAndPrint.UseVisualStyleBackColor = True
@@ -268,9 +270,9 @@ Partial Class LedgerForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1065, 37)
+        Me.btnSave.Location = New System.Drawing.Point(925, 18)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(101, 37)
+        Me.btnSave.Size = New System.Drawing.Size(82, 32)
         Me.btnSave.TabIndex = 48
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -416,8 +418,8 @@ Partial Class LedgerForm
         '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle4
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -698,6 +700,8 @@ Partial Class LedgerForm
         '
         'gpFields
         '
+        Me.gpFields.Controls.Add(Me.btnApprove)
+        Me.gpFields.Controls.Add(Me.btnCheck)
         Me.gpFields.Controls.Add(Me.txtReceivedBy)
         Me.gpFields.Controls.Add(Me.Label1)
         Me.gpFields.Controls.Add(Me.txtDeliveredBy)
@@ -734,6 +738,26 @@ Partial Class LedgerForm
         Me.gpFields.TabIndex = 69
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Customer Order Form"
+        '
+        'btnCheck
+        '
+        Me.btnCheck.ForeColor = System.Drawing.Color.Green
+        Me.btnCheck.Location = New System.Drawing.Point(1112, 19)
+        Me.btnCheck.Name = "btnCheck"
+        Me.btnCheck.Size = New System.Drawing.Size(71, 31)
+        Me.btnCheck.TabIndex = 69
+        Me.btnCheck.Text = "Check"
+        Me.btnCheck.UseVisualStyleBackColor = True
+        '
+        'btnApprove
+        '
+        Me.btnApprove.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.btnApprove.Location = New System.Drawing.Point(1189, 19)
+        Me.btnApprove.Name = "btnApprove"
+        Me.btnApprove.Size = New System.Drawing.Size(71, 31)
+        Me.btnApprove.TabIndex = 70
+        Me.btnApprove.Text = "Approve"
+        Me.btnApprove.UseVisualStyleBackColor = True
         '
         'LedgerForm
         '
@@ -834,4 +858,6 @@ Partial Class LedgerForm
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
     Friend WithEvents gpFields As GroupBox
+    Friend WithEvents btnApprove As Button
+    Friend WithEvents btnCheck As Button
 End Class

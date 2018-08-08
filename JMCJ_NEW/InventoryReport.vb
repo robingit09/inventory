@@ -123,7 +123,7 @@ tr:nth-child(even) {
 <div id='fieldset'>
 	<table>
 		<tr>
-			<td width='150'><label><strong>Total Stock: </strong></label></td>
+			<td width='150'><label><strong>Total Quantity: </strong></label></td>
 			<td style='color:red;'><label>" & total_stock & "</label></td>
 			
 			<td width='150'><label><strong>Total Price: </strong></label></td>
@@ -142,7 +142,7 @@ tr:nth-child(even) {
 	<th>Color</th>
 	<th>Description</th>
 	<th>Unit Price</th>
-	<th>Stock</th>
+	<th>Quantity</th>
   </tr>
   </thead>
   <tbody>

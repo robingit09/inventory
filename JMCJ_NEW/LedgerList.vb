@@ -4,7 +4,7 @@
     Public selectedPaymentType As Integer = 0
     Public filterQuery As String = ""
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
-
+        LedgerForm.selectedID = 0
         LedgerForm.enableControl(True)
         LedgerForm.loadTerm()
         LedgerForm.loadPaymentType()
@@ -40,6 +40,8 @@
         LedgerForm.gpFields.Enabled = True
         LedgerForm.btnSave.Visible = True
         LedgerForm.btnSaveAndPrint.Visible = True
+        LedgerForm.btnCheck.Visible = False
+        LedgerForm.btnApprove.Visible = False
         LedgerForm.ShowDialog()
 
         autocompleteCustomer()
@@ -184,6 +186,7 @@
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If dgvLedger.SelectedRows.Count = 1 Then
             selectedID = CInt(dgvLedger.SelectedRows(0).Cells(0).Value)
+            LedgerForm.selectedID = CInt(dgvLedger.SelectedRows(0).Cells(0).Value)
             LedgerForm.btnSave.Text = "Update"
             LedgerForm.btnSaveAndPrint.Text = "Update and Print"
             LedgerForm.getCustomerList("")
@@ -192,11 +195,15 @@
             loadToUpdateInfo(selectedID)
             LedgerForm.toloadproductinfo(selectedID)
             LedgerForm.enableControl(False)
-            LedgerForm.gpFields.Enabled = False
+            'LedgerForm.gpFields.Enabled = False
             LedgerForm.btnSave.Visible = False
             LedgerForm.btnSaveAndPrint.Visible = False
+            LedgerForm.btnCheck.Visible = True
+            LedgerForm.btnApprove.Visible = True
             LedgerForm.ShowDialog()
         Else
+            selectedID = 0
+            LedgerForm.selectedID = 0
             MsgBox("Please select ledger!", MsgBoxStyle.Critical)
         End If
     End Sub
@@ -676,10 +683,28 @@
     End Sub
 
     Public Function generatePrint(ByVal id As Integer)
+        Dim checked_by As Integer = New DatabaseConnect().get_by_id("ledger", id, "checked_by")
+        Dim checked_by_val As String = ""
+        If checked_by > 0 Then
+            checked_by_val = New DatabaseConnect().get_by_id("users", checked_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", checked_by, "middle_initial") &
+        " " & New DatabaseConnect().get_by_id("users", checked_by, "surname")
+        Else
+            checked_by_val = ""
+        End If
+
+        Dim approve_by As Integer = New DatabaseConnect().get_by_id("ledger", id, "approved_by")
+        Dim approve_by_val As String = ""
+        If approve_by > 0 Then
+            approve_by_val = New DatabaseConnect().get_by_id("users", approve_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", approve_by, "middle_initial") &
+        " " & New DatabaseConnect().get_by_id("users", approve_by, "surname")
+        Else
+            approve_by_val = ""
+        End If
+
         Dim result As String = ""
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select * from ledger where status <> 0 and ID = " & id & " order by id desc")
+            .selectByQuery("Select * from ledger where ID = " & id & " order by id desc")
             If .dr.Read Then
                 Dim counter_no As String = .dr.GetValue(1)
                 Dim date_issue As String = .dr.GetValue(2)
@@ -924,9 +949,20 @@ tr:nth-child(even) {
     " & table_content & "
     <tr>
 		<td colspan='7' style='text-align:right;'><strong>Total Amount</strong></td>
-		<td style='color:red'><strong>" & Format(grand_total, "0.00") & "</strong></td>
+		<td style='color:red'><strong>" & Val(grand_total).ToString("N2") & "</strong></td>
 	</tr>
   </tbody>
+</table>
+<br><br>
+<table>
+	<tr>
+		<td style='text-align:right;' valign='bottom'><strong>Checked by:</strong></td>
+		<td height='40' valign='bottom'>" & checked_by_val & "</td>
+	</tr>
+	<tr>
+		<td style='text-align:right;' valign='bottom'><strong>Approved by:</strong></td>
+		<td height='40' valign='bottom'>" & approve_by_val & "</td>
+	</tr>
 </table>
 
 </body>

@@ -178,6 +178,9 @@
             LedgerForm.gpFields.Enabled = True
             LedgerForm.btnSave.Visible = True
             LedgerForm.btnSaveAndPrint.Visible = True
+            LedgerForm.txtInvoiceNo.Enabled = False
+            LedgerForm.btnCheck.Visible = False
+            LedgerForm.btnApprove.Visible = False
             LedgerForm.ShowDialog()
         Else
             MsgBox("Please select customer", MsgBoxStyle.Critical)
