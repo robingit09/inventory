@@ -117,4 +117,12 @@
     Private Sub InventoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryReportsToolStripMenuItem.Click
         InventoryReport.ShowDialog()
     End Sub
+
+    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
+        DailySalesReports.ShowDialog()
+    End Sub
+
+    Private Sub TopSalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TopSalesToolStripMenuItem.Click
+        TopSalesReports.ShowDialog()
+    End Sub
 End Class

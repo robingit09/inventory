@@ -46,7 +46,10 @@ Partial Class Main_form
         Me.CustomerToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TopSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -198,7 +201,7 @@ Partial Class Main_form
         '
         'ReportsToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryReportsToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryReportsToolStripMenuItem, Me.SalesReportToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
         Me.ReportsToolStripMenuItem.Text = "Reports"
@@ -209,11 +212,30 @@ Partial Class Main_form
         Me.InventoryReportsToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.InventoryReportsToolStripMenuItem.Text = "Inventory Report"
         '
+        'SalesReportToolStripMenuItem
+        '
+        Me.SalesReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem, Me.TopSalesToolStripMenuItem})
+        Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
+        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.SalesReportToolStripMenuItem.Text = "Sales Report"
+        '
+        'DailyToolStripMenuItem
+        '
+        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.DailyToolStripMenuItem.Text = "Daily"
+        '
         'SystemToolStripMenuItem
         '
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
         Me.SystemToolStripMenuItem.Text = "System"
+        '
+        'TopSalesToolStripMenuItem
+        '
+        Me.TopSalesToolStripMenuItem.Name = "TopSalesToolStripMenuItem"
+        Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.TopSalesToolStripMenuItem.Text = "Top Sales"
         '
         'Main_form
         '
@@ -260,4 +282,7 @@ Partial Class Main_form
     Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SystemToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InventoryReportsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SalesReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DailyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TopSalesToolStripMenuItem As ToolStripMenuItem
 End Class

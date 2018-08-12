@@ -190,6 +190,12 @@
       <DependentUpon>CustomerPriceReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DailySalesReports.Designer.vb">
+      <DependentUpon>DailySalesReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DailySalesReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DatabaseConnect.vb" />
     <Compile Include="frmReportViewer.Designer.vb">
       <DependentUpon>frmReportViewer.vb</DependentUpon>
@@ -326,6 +332,12 @@
     <Compile Include="SupplierList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TopSalesReports.Designer.vb">
+      <DependentUpon>TopSalesReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TopSalesReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UnitForm.Designer.vb">
       <DependentUpon>UnitForm.vb</DependentUpon>
     </Compile>
@@ -386,6 +398,9 @@
     <EmbeddedResource Include="CustomerPriceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPriceReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DailySalesReports.resx">
+      <DependentUpon>DailySalesReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportViewer.resx">
       <DependentUpon>frmReportViewer.vb</DependentUpon>
@@ -462,6 +477,9 @@
     <EmbeddedResource Include="SupplierList.resx">
       <DependentUpon>SupplierList.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopSalesReports.resx">
+      <DependentUpon>TopSalesReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnitForm.resx">
       <DependentUpon>UnitForm.vb</DependentUpon>

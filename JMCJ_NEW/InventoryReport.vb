@@ -156,7 +156,8 @@ tr:nth-child(even) {
 </table>
 
 </body>
-</html>"
+</html>
+"
 
         Return result
     End Function
