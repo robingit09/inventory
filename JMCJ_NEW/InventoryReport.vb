@@ -118,14 +118,19 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-
-<h2>Inventory Report</h2>
+<div id='header' style='text-align:center;'>
+	<br>
+	<h3	 style='color:blue;margin:1px;'><strong>JMCJ</strong></h3>
+	<p style='color:red;;margin:1px;'>Perfect Colors Solution Inc.</p>
+	<p style='margin:1px;font-size:10pt;'>42 K Roosevelt Ave, Brgy. Sta. Cruz, Lungsod Quezon, 1104 Kalakhang Maynila</p>
+	<p style='margin:1px;font-size:10pt;'>Fax: 411-5274 Tel: 371-5448</p>
+</div>
+<h4 style='text-align:center;'>Inventory Report</h4>
 <div id='fieldset'>
 	<table>
 		<tr>
 			<td width='150'><label><strong>Total Quantity: </strong></label></td>
 			<td style='color:red;'><label>" & total_stock & "</label></td>
-			
 			<td width='150'><label><strong>Total Price: </strong></label></td>
 			<td style='color:red;'><label>" & total_price & "</label></td>
 		</tr>

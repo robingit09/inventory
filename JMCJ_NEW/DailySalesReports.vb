@@ -2,7 +2,10 @@
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         btnPrint.Enabled = False
         Dim path As String = Application.StartupPath & "\daily_sales_reports.html"
-        Dim filter() As String = {"brand", "unit"}
+        Dim filter As New Dictionary(Of String, String)
+        filter.Add("month", cbMonth.Text)
+        filter.Add("year", cbYear.Text)
+
         Try
             Dim code As String = generatePrint(filter)
             Dim myWrite As System.IO.StreamWriter
@@ -19,15 +22,32 @@
         btnPrint.Enabled = True
     End Sub
 
-    Private Function generatePrint(ByVal filter() As String)
+    Private Function generatePrint(ByVal filter As Dictionary(Of String, String))
         Dim result As String = ""
 
-
         'get total sales
+        Dim query_total_sales As String = "Select SUM(cop.total_amount) as sale from customer_order_products as cop 
+        INNER JOIN ledger as l ON l.id = cop.customer_order_ledger_id 
+        where cop.total_amount > 0"
+        If filter.ContainsKey("month") Then
+            Dim month As String = filter.Item("month")
+            If month <> "All" Then
+                query_total_sales = query_total_sales & " and MONTH(l.date_issue) = " & monthToNumber(month)
+            End If
+        End If
+
+        If filter.ContainsKey("year") Then
+            Dim year As String = filter.Item("year")
+            If year <> "All" Then
+                query_total_sales = query_total_sales & " and YEAR(l.date_issue) = " & year
+            End If
+        End If
+
+
         Dim total_sales As String
         Dim dbprice As New DatabaseConnect
         With dbprice
-            .selectByQuery("Select SUM(total_amount) as sale from customer_order_products")
+            .selectByQuery(query_total_sales)
             If .dr.Read Then
                 total_sales = Val(.dr("sale")).ToString("N2")
             Else
@@ -38,11 +58,29 @@
             .con.Close()
         End With
 
+        Dim query As String = "Select Format(cop.created_at,'mm-dd-yyyy') as daily,count(l.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
+                    inner join ledger as l ON l.id = cop.customer_order_ledger_id 
+                    where l.status <> 0"
+
+        If filter.ContainsKey("month") Then
+            Dim month As String = filter.Item("month")
+            If month <> "All" Then
+                query = query & " and MONTH(date_issue) = " & monthToNumber(month)
+            End If
+        End If
+
+        If filter.ContainsKey("year") Then
+            Dim year As String = filter.Item("year")
+            If year <> "All" Then
+                query = query & " and YEAR(date_issue) = " & year
+            End If
+        End If
+        query = query & " group by Format(cop.created_at,'mm-dd-yyyy') order by Format(cop.created_at,'mm-dd-yyyy') desc"
+
         Dim table_content As String = ""
         Dim dbprod As New DatabaseConnect()
         With dbprod
-            .selectByQuery("Select Format(cop.created_at,'mm-dd-yyyy') as daily,count(l.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
-                    inner join ledger as l ON l.id = cop.customer_order_ledger_id where l.status <> 0 group by Format(cop.created_at,'mm-dd-yyyy') order by Format(cop.created_at,'mm-dd-yyyy') desc")
+            .selectByQuery(query)
             If .dr.HasRows Then
                 While .dr.Read
                     Dim tr As String = "<tr>"
@@ -58,44 +96,7 @@
                     table_content = table_content & tr
                 End While
             End If
-            '.selectByQuery("Select distinct pu.id, pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat, subc.name as subcat from (((((((((product_unit as pu     
-            '    LEFT JOIN brand as b on b.id = pu.brand)
-            '    INNER JOIN unit as u on u.id = pu.unit)
-            '    LEFT JOIN color as cc ON cc.id = pu.color)
-            '    INNER JOIN product_stocks as ps ON ps.product_unit_id = pu.id)
-            '    INNER JOIN products as p ON p.id = pu.product_id)
-            '    LEFT JOIN product_categories as pc ON pc.product_id = pu.product_id) 
-            '    LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
-            '    LEFT JOIN categories as c ON c.id = pc.category_id)
-            '    LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
-            '    where pu.status = 1 order by p.description")
-            'If .dr.HasRows Then
-            '    While .dr.Read
-            '        Dim tr As String = "<tr>"
-            '        Dim id As Integer = .dr("id")
-            '        Dim barcode As String = .dr("barcode")
-            '        Dim desc As String = .dr("description")
-            '        Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
-            '        Dim unit As String = .dr("unit")
-            '        Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
-            '        Dim price As String = Val(.dr("price")).ToString("N2")
-            '        Dim stock As Integer = Val(.dr("stock"))
 
-            '        tr = tr & "<td>" & barcode & "</td>"
-            '        tr = tr & "<td>" & unit & "</td>"
-            '        tr = tr & "<td>" & brand & "</td>"
-            '        tr = tr & "<td>" & color & "</td>"
-            '        tr = tr & "<td>" & desc & "</td>"
-            '        tr = tr & "<td>" & price & "</td>"
-            '        tr = tr & "<td>" & stock & "</td>"
-            '        tr = tr & "</tr>"
-            '        table_content = table_content & tr
-
-            '    End While
-            'End If
-            '.cmd.Dispose()
-            '.dr.Close()
-            '.con.Close()
         End With
 
         result = "
@@ -121,8 +122,14 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-
-<h2>Daily Sales Reports</h2>
+<div id='header' style='text-align:center;'>
+	<br>
+	<h3	 style='color:blue;margin:1px;'><strong>JMCJ</strong></h3>
+	<p style='color:red;;margin:1px;'>Perfect Colors Solution Inc.</p>
+	<p style='margin:1px;font-size:10pt;'>42 K Roosevelt Ave, Brgy. Sta. Cruz, Lungsod Quezon, 1104 Kalakhang Maynila</p>
+	<p style='margin:1px;font-size:10pt;'>Fax: 411-5274 Tel: 371-5448</p>
+</div>
+<h4 style='text-align:center;'>Daily Sales Reports</h4>
 <div id='fieldset'>
 	<table>
 		<tr>
@@ -156,6 +163,70 @@ tr:nth-child(even) {
 </body>
 </html>
 "
+
+        Return result
+    End Function
+
+    Private Sub DailySalesReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        getMonth()
+        getYear()
+    End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(date_issue) FROM ledger where status <> 0 order by YEAR(date_issue) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "01"
+            Case "FEBRUARY"
+                result = "02"
+            Case "MARCH"
+                result = "03"
+            Case "APRIL"
+                result = "04"
+            Case "MAY"
+                result = "05"
+            Case "JUNE"
+                result = "06"
+            Case "JULY"
+                result = "07"
+            Case "AUGUST"
+                result = "08"
+            Case "SEPTEMBER"
+                result = "09"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
 
         Return result
     End Function
