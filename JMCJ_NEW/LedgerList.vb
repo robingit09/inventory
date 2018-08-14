@@ -715,6 +715,9 @@
                 Dim floating As Boolean = CBool(.dr.GetValue(7))
                 Dim bank_details As String = .dr.GetValue(8)
                 Dim check_date As String = .dr.GetValue(9)
+                Dim check_date_label As String = "Check Date:"
+                Dim due_date As String = .dr("payment_due_date")
+                Dim due_date_label As String = "Due Date:"
                 Dim status As Integer = CInt(.dr.GetValue(10))
                 Dim status_val As String = ""
                 Select Case status
@@ -760,36 +763,27 @@
                 Select Case payment_type
                     Case 0
                         payment_type_val = "Cash"
+                        check_date = ""
+                        due_date = ""
+                        check_date_label = ""
+                        due_date_label = ""
                     Case 1
                         payment_type_val = "C.O.D"
                     Case 2
                         payment_type_val = "Credit"
+                        check_date = ""
+                        due_date = ""
+                        check_date_label = ""
+                        due_date_label = ""
                     Case 3
                         payment_type_val = "Post Dated"
                 End Select
 
                 Dim term_ As Integer = CInt(.dr.GetValue(17))
-                'Select Case term_
-                '    Case 30
-                '        LedgerForm.cbTerms.SelectedIndex = 1
-                '    Case 60
-                '        LedgerForm.cbTerms.SelectedIndex = 2
-                '    Case 90
-                '        LedgerForm.cbTerms.SelectedIndex = 3
-                '    Case 120
-                '        LedgerForm.cbTerms.SelectedIndex = 4
-                '    Case Else
-                '        LedgerForm.cbTerms.SelectedIndex = 0
-                'End Select
+
                 Dim remarks As String = .dr.GetValue(18)
 
-                'LedgerForm.cbPaymentType.SelectedIndex = LedgerForm.cbPaymentType.FindStringExact(ledger_type_val)
-                'LedgerForm.cbPaymentType.Text = payment_type_val
-                'LedgerForm.dtpDateIssue.Value = date_issue
-                'LedgerForm.txtCounterNo.Text = counter_no
-                'LedgerForm.txtInvoiceNo.Text = invoice_no
-                'LedgerForm.txtAmount.Text = amount
-                'LedgerForm.lblTotalAmount.Text = Val(amount).ToString("N2")
+
 
                 Dim paid_val As String = ""
                 If paid = True Then
@@ -919,7 +913,7 @@ tr:nth-child(even) {
 		</tr>
 		
 		<tr>
-			<td width='120'><label><strong>Check Date: </strong></label></td>
+			<td width='120'><label><strong>" & check_date_label & " </strong></label></td>
 			<td><label>" & check_date & " </label></td>
 			
 			<td width='120'><label><strong>Fax/Tel: </strong></label></td>
@@ -927,8 +921,8 @@ tr:nth-child(even) {
 		</tr>
 		
 		<tr>
-			<td width='80'><label><strong>Due Date: </strong></label></td>
-			<td><label>" & New DatabaseConnect().get_by_val("ledger", id, "id", "payment_due_date") & "</label></td>
+			<td width='80'><label><strong>" & due_date_label & " </strong></label></td>
+			<td><label>" & due_date & "</label></td>
 			
 			<td width='120'><label><strong>Delivery By: </strong></label></td>
 			<td><label>" & .dr("delivered_by") & "</label></td>

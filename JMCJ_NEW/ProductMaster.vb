@@ -46,6 +46,7 @@
             Dim id As Integer = dgvProducts.SelectedRows(0).Cells("id").Value
             ProductMasterForm.toLoadInfo(id)
             ProductMasterForm.ShowDialog()
+            ProductMasterForm.TabControl1.SelectedTab = ProductMasterForm.TabPage1
         Else
             MsgBox("Please select one product!", MsgBoxStyle.Critical)
         End If

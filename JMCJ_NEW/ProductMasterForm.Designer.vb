@@ -30,6 +30,11 @@ Partial Class ProductMasterForm
         Me.Cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnAddCPrice = New System.Windows.Forms.Button()
+        Me.dgvCPrices = New System.Windows.Forms.DataGridView()
+        Me.customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.prices_remove = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
@@ -46,6 +51,8 @@ Partial Class ProductMasterForm
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.dgvCPrices, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -68,7 +75,7 @@ Partial Class ProductMasterForm
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(687, 187)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Cost"
+        Me.TabPage1.Text = "Costing"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'btnAddCost
@@ -110,13 +117,52 @@ Partial Class ProductMasterForm
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnAddCPrice)
+        Me.TabPage2.Controls.Add(Me.dgvCPrices)
         Me.TabPage2.Location = New System.Drawing.Point(4, 23)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(687, 187)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "Customer Pricing"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnAddCPrice
+        '
+        Me.btnAddCPrice.Location = New System.Drawing.Point(606, 10)
+        Me.btnAddCPrice.Name = "btnAddCPrice"
+        Me.btnAddCPrice.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCPrice.TabIndex = 2
+        Me.btnAddCPrice.Text = "Add"
+        Me.btnAddCPrice.UseVisualStyleBackColor = True
+        '
+        'dgvCPrices
+        '
+        Me.dgvCPrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvCPrices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.customer, Me.price, Me.prices_remove})
+        Me.dgvCPrices.Location = New System.Drawing.Point(6, 39)
+        Me.dgvCPrices.Name = "dgvCPrices"
+        Me.dgvCPrices.Size = New System.Drawing.Size(675, 142)
+        Me.dgvCPrices.TabIndex = 1
+        '
+        'customer
+        '
+        Me.customer.HeaderText = "Customer"
+        Me.customer.Name = "customer"
+        Me.customer.ReadOnly = True
+        Me.customer.Width = 300
+        '
+        'price
+        '
+        Me.price.HeaderText = "Unit Price"
+        Me.price.Name = "price"
+        Me.price.ReadOnly = True
+        '
+        'prices_remove
+        '
+        Me.prices_remove.HeaderText = "Action"
+        Me.prices_remove.Name = "prices_remove"
+        Me.prices_remove.ReadOnly = True
         '
         'Label1
         '
@@ -267,6 +313,8 @@ Partial Class ProductMasterForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.dgvCPrices, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -293,4 +341,9 @@ Partial Class ProductMasterForm
     Friend WithEvents Supplier As DataGridViewTextBoxColumn
     Friend WithEvents Cost As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewButtonColumn
+    Friend WithEvents btnAddCPrice As Button
+    Friend WithEvents dgvCPrices As DataGridView
+    Friend WithEvents customer As DataGridViewTextBoxColumn
+    Friend WithEvents price As DataGridViewTextBoxColumn
+    Friend WithEvents prices_remove As DataGridViewButtonColumn
 End Class

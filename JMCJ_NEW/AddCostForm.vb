@@ -69,5 +69,6 @@
         cbSupplier.SelectedIndex = 0
         txtCost.Text = ""
         cbSupplier.Focus()
+        Me.Close()
     End Sub
 End Class

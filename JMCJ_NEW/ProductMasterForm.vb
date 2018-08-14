@@ -52,6 +52,25 @@
             .dr.Close()
             .con.Close()
         End With
+
+        Dim dbprice As New DatabaseConnect
+        With dbprice
+            dgvCPrices.Rows.Clear()
+            .selectByQuery("Select c.company,cop.sell_price from customer_product_prices as cop
+            left join company as c ON c.id = cop.customer_id where cop.product_unit_id = " & selected_prod_unit)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim c_name As String = .dr("company")
+                    Dim price As String = Val(.dr("sell_price")).ToString("N2")
+
+                    Dim row As String() = New String() {c_name, price, "Remove"}
+                    dgvCPrices.Rows.Add(row)
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
     End Sub
 
     Private Sub btnAddCost_Click(sender As Object, e As EventArgs) Handles btnAddCost.Click
@@ -61,11 +80,12 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         'validation
         If dgvCost.Rows.Count = 1 Then
-            MsgBox("Please add unit cost!", MsgBoxStyle.Critical)
+            MsgBox("Costing table field is required!", MsgBoxStyle.Critical)
             dgvCost.Focus()
             Exit Sub
         End If
 
+        'insert supplier and their cost
         Dim dbdelete As New DatabaseConnect
         dbdelete.delete_permanent("product_suppliers", "product_unit_id", Me.selected_prod_unit)
         dbdelete.cmd.Dispose()
@@ -95,7 +115,37 @@
             .con.Close()
         End With
 
-        MsgBox("Successfully Save", MsgBoxStyle.Information)
+        'insert customer and their price
+        Dim dbdelete2 As New DatabaseConnect
+        dbdelete2.delete_permanent("customer_product_prices", "product_unit_id", Me.selected_prod_unit)
+        dbdelete2.cmd.Dispose()
+        dbdelete2.con.Close()
+        Dim savePrice As New DatabaseConnect
+        With savePrice
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+
+            For Each item As DataGridViewRow In dgvCPrices.Rows
+                If item.Cells("customer").Value <> "" Then
+                    Dim customer As String = item.Cells("customer").Value
+                    Dim price As Double = Val(item.Cells("price").Value)
+
+                    .cmd.CommandText = "INSERT INTO customer_product_prices (product_unit_id,customer_id,sell_price,created_at,updated_at)
+            VALUES(?,?,?,?,?)"
+                    .cmd.Parameters.AddWithValue("@product_unit_id", selected_prod_unit)
+                    .cmd.Parameters.AddWithValue("@customer_id", New DatabaseConnect().get_id("company", "company", customer))
+                    .cmd.Parameters.AddWithValue("@sell_price", price)
+                    .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                    .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                    .cmd.ExecuteNonQuery()
+                    .cmd.Parameters.Clear()
+                End If
+            Next
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        MsgBox("Product Information Successfully Save", MsgBoxStyle.Information)
     End Sub
 
     Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
@@ -103,5 +153,9 @@
         If e.ColumnIndex = 2 And dgvCost.Rows.Count > 1 Then
             dgvCost.Rows.RemoveAt(e.RowIndex)
         End If
+    End Sub
+
+    Private Sub btnAddCPrice_Click(sender As Object, e As EventArgs) Handles btnAddCPrice.Click
+        AddCustomerPrices.ShowDialog()
     End Sub
 End Class
