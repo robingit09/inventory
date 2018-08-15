@@ -713,7 +713,8 @@
                 Dim paid As Boolean = CBool(.dr.GetValue(5))
                 Dim date_paid As String = .dr.GetValue(6)
                 Dim floating As Boolean = CBool(.dr.GetValue(7))
-                Dim bank_details As String = .dr.GetValue(8)
+                Dim bank_details As String = .dr("bank_details")
+                Dim bank_details_label As String = "Bank Details:"
                 Dim check_date As String = .dr.GetValue(9)
                 Dim check_date_label As String = "Check Date:"
                 Dim due_date As String = .dr("payment_due_date")
@@ -763,16 +764,20 @@
                 Select Case payment_type
                     Case 0
                         payment_type_val = "Cash"
+                        bank_details = ""
                         check_date = ""
                         due_date = ""
+                        bank_details_label = ""
                         check_date_label = ""
                         due_date_label = ""
                     Case 1
                         payment_type_val = "C.O.D"
                     Case 2
                         payment_type_val = "Credit"
+                        bank_details = ""
                         check_date = ""
                         due_date = ""
+                        bank_details_label = ""
                         check_date_label = ""
                         due_date_label = ""
                     Case 3
@@ -905,7 +910,7 @@ tr:nth-child(even) {
 		</tr>
 		
 		<tr>
-			<td width='80'><label><strong>Bank details: </strong></label></td>
+			<td width='80'><label><strong> " & bank_details_label & " </strong></label></td>
 			<td><label>" & bank_details & "</label></td>
 			
 			<td width='120'><label><strong>Address: </strong></label></td>
