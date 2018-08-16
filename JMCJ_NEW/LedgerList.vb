@@ -840,11 +840,11 @@
 
                             grand_total += CDbl(total_amount)
                             tr = tr & "<td>" & barcode & "</td>"
-                            tr = tr & "<td>" & qty & "</td>"
                             tr = tr & "<td>" & unit & "</td>"
                             tr = tr & "<td>" & brand & "</td>"
                             tr = tr & "<td>" & color & "</td>"
                             tr = tr & "<td>" & desc & "</td>"
+                            tr = tr & "<td>" & qty & "</td>"
                             tr = tr & "<td>" & sell_price & "</td>"
                             tr = tr & "<td>" & total_amount & "</td>"
                             tr = tr & "</tr>"
@@ -863,12 +863,13 @@ table {
 	font-family:serif;
 	border-collapse: collapse;
 	width: 100%;
+	font-size:8pt;
 }
 
 td, th {
 	border: 1px solid #dddddd;
 	text-align: left;
-	padding: 8px;
+	padding: 6px;
 }
 
 tr:nth-child(even) {
@@ -884,7 +885,7 @@ tr:nth-child(even) {
 	<p style='margin:1px;font-size:10pt;'>42 K Roosevelt Ave, Brgy. Sta. Cruz, Lungsod Quezon, 1104 Kalakhang Maynila</p>
 	<p style='margin:1px;font-size:10pt;'>Fax: 411-5274 Tel: 371-5448</p>
 </div>
-<h4 style='text-align:center;'>Customer Order</h4>
+<h4 style='text-align:center;margin-top:5px;margin-bottom:5px;'>Customer Order</h4>
 <div id='fieldset'>
 	<table>
 		<tr>
@@ -941,11 +942,11 @@ tr:nth-child(even) {
   <thead>
   <tr>
 	<th>Barcode</th>
-	<th>Qty</th>
 	<th>Unit</th>
 	<th>Brand</th>
 	<th>Color</th>
 	<th>Description</th>
+    <th>Qty</th>
 	<th>Unit Price</th>
 	<th>Amount</th>
   </tr>
@@ -958,22 +959,22 @@ tr:nth-child(even) {
 	</tr>
   </tbody>
 </table>
-<br><br>
+<br>
 <table>
 	<tr>
 		<td style='text-align:right;' valign='bottom'><strong>Checked by:</strong></td>
-		<td height='40' valign='bottom'>" & checked_by_val & "</td>
+		<td height='25' valign='bottom'>" & checked_by_val & "</td>
 	</tr>
 	<tr>
 		<td style='text-align:right;' valign='bottom'><strong>Approved by:</strong></td>
-		<td height='40' valign='bottom'>" & approve_by_val & "</td>
+		<td height='25' valign='bottom'>" & approve_by_val & "</td>
 	</tr>
 </table>
 
 </body>
 </html>
-
 "
+                result = result & result
                 Return result
             End If
         End With
