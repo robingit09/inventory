@@ -1221,8 +1221,8 @@
         dtpDateIssue.Enabled = flag
         txtCounterNo.Enabled = flag
         cbDisable.Enabled = flag
-        txtInvoiceNo.Enabled = flag
-        txtAmount.Enabled = flag
+        'txtInvoiceNo.Enabled = flag
+        'txtAmount.Enabled = flag
         cbPaymentType.Enabled = flag
         gpPaid.Enabled = flag
         dtpPaid.Enabled = flag

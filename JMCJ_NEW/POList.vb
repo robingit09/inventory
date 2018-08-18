@@ -133,6 +133,11 @@
         Dim supplier As String = getSupplier(po_id)
         Dim po_no As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "po_no")
         Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier, "supplier_name")
+        Dim address As String = New DatabaseConnect().get_by_id("suppliers", supplier, "address") & " " & New DatabaseConnect().get_by_id("suppliers", supplier, "city")
+        Dim contact_person As String = New DatabaseConnect().get_by_id("suppliers", supplier, "contact_person")
+        Dim delivered_to As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "delivered_to")
+        Dim delivered_by As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "delivered_by")
+
         Dim term As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "terms")
         Dim term_val As String = ""
         Select Case term
@@ -160,6 +165,9 @@
         End Select
 
         Dim po_date As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "po_date")
+        Dim pdate As DateTime = Convert.ToDateTime(po_date)
+        po_date = pdate.ToString("MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture)
+
         Dim eta As String = New DatabaseConnect().get_by_id("purchase_orders", po_id, "eta")
         Dim total_amount As String = Val(New DatabaseConnect().get_by_id("purchase_orders", po_id, "total_amount")).ToString("N2")
 
@@ -206,84 +214,196 @@
             .con.Close()
         End With
 
-        result = "<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-	font-family:serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-
-}
-</style>
-</head>
-<body>
-
-<h2>Purchase Order</h2>
-<div id='fieldset'>
-	<table>
-		<tr>
-			<td width='150'><label><strong>Supplier: </strong></label></td>
-			<td><label>" & supplier_name & "</label></td>
-			<td width='150'><label><strong>Date Issue: </strong></label></td>
-			<td><label>" & po_date & "</label></td>
-		</tr>
-		<tr>
-			<td width='150'><label><strong>PO Number: </strong></label></td>
-			<td><label>" & po_no & "</label></td>
-			<td><label><strong>ETA:	</strong></label></td>
-			<td><label>" & eta & "</label></td>
-		</tr>
-		
-		<tr>
-			<td><label><strong>Terms: </strong></label></td>
-			<td><label>" & term_val & "</label></td>
-
-		</tr>
-		
-		<tr>
-			<td><label><strong>Payment Type: </strong></label></td>
-			<td><label>" & payment_val & "</label></td>
+        Dim page As String = "<div id='header' style='text-align:center;'>
+				<img src='header.png' width='180'>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>
+				<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>PURCHASE ORDER</p>
+			</div>
+			<div id='fieldset'>
+				<table class='table_fieldset'>
+					<tr>
+						<td><label><strong> Supplier: </strong></label></td>
+						<td><label>" & supplier_name & "</label></td>
+						<td><label><strong> PO #: " & po_no & " </strong></label></td>
+						<td>Date: " & po_date & " </td>
+					</tr>
+					<tr>
+						<td><label><strong> Address </strong></label></td>
+						<td><label> " & address & "  </label></td>
+						<td colspan='2'><label><strong> ATTN: " & contact_person & "</strong></label></td>
+						
+					</tr>
+					<tr>
+						<td colspan='2'><label><strong> Delivered To: " & delivered_to & " </strong></label></td>
+						<td colspan='2'><label><strong> Delivered By: " & delivered_by & " </strong></label></td>
+						
+					</tr>
+					
+				<table>
+			</div>
 			
-		</tr>
-	<table>
-</div>
-<br>
-<table>
-  <thead>
-  <tr>
-	<th>Barcode</th>
-	<th>Qty</th>
-	<th>Unit</th>
-	<th>Brand</th>
-	<th>Color</th>
-	<th>Description</th>
-	<th>Unit Cost</th>
-	<th>Total Amount</th>
-  </tr>
-  </thead>
-  <tbody>
-    " & table_content & " 
-    <tr>
-		<td colspan='7' style='text-align:right;'><strong>Grand Total</strong></td>
-		<td style='color:red'><strong>" & total_amount & "</strong></td>
-	</tr>
-  </tbody>
-</table>
+			<br>
+			<table class='table_fieldset'>
+			  <thead>
+			  <tr>
+				<th>Barcode</th>
+				<th>Qty</th>
+				<th>Description</th>
+				<th>Brand</th>
+				<th>Unit</th>
+				<th>Color</th>
+				<th>Unit Price</th>
+				<th>Total Amount</th>
+			  </tr>
+			  </thead>
+			  <tbody>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td>1023234</td>
+					<td>20</td>
+					<td>Thinner</td>
+					<td>Boysen</td>
+					<td>Gals</td>
+					<td>White</td>
+					<td>500.50</td>
+					<td>10,010.00</td>
+				</tr>
+				<tr>
+					<td colspan='7' style='text-align:right;'><strong>Grand Total</strong></td>
+					<td style='color:red'><strong>80,080.00</strong></td>
+				</tr>
+			  </tbody>
+			</table>
+			<br><br><br><br><br><br><br><br><br><br><br><br>
+			<table id='footer' class='table_fieldset'>
+				<tbody>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> DELIVER </td>
+						<td style='width:150px;' colspan='2'> <input type='checkbox'>PICK UP _______________________________</td>
+					</tr>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> FAXED </td>
+						<td rowspan='2'>CHECKED BY</td>
+						<td rowspan='2'>APPROVED BY</td>
+					</tr>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> EMAILED </td>
+					</tr>
+				</tbody>
+			</table>"
 
-</body>
-</html>
-"
+        result = " <style>
+    .table_pager {
+		Font-family: Arial;
+		border-collapse: collapse;
+		width: 100%;
+		
+	}
+
+	.table_pager td, .table_pager th {
+        border: 0px solid #dddddd;
+		Text-align: Left;
+		
+		Font-Size: 8pt;
+	}
+	
+	.table_fieldset {
+        Font - family: Arial;
+		border-collapse: collapse;
+		width: 100%;
+		
+	}
+
+	.table_fieldset td, .table_fieldset th {
+        border: 1px solid #dddddd;
+		Text-align: Left;
+		padding: 8px;
+		Font-Size: 8pt;
+	}
+
+	tr: nth-child(even) {
+
+	}
+</style>
+<body style ='margin:0;'>
+<br>
+    <table class='table_pager'>
+        <tr>
+            <td>" & page & "</td><td>" & page & "</td>
+</tr>
+</table>
+</body>"
         Return result
     End Function
 

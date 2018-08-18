@@ -129,8 +129,9 @@
     Private Sub loadTerms()
         cbTerms.Items.Clear()
         cbTerms.Items.Add("Select Terms")
-        cbTerms.Items.Add("15 Days")
         cbTerms.Items.Add("30 Days")
+        cbTerms.Items.Add("60 Days")
+        cbTerms.Items.Add("90 Days")
         cbTerms.Items.Add("Immediate")
         cbTerms.SelectedIndex = 0
 
@@ -185,17 +186,18 @@
     Private Sub cbTerms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTerms.SelectedIndexChanged
         If cbTerms.SelectedIndex > 0 Then
             Select Case cbTerms.Text
-                Case "15 Days"
-                    selectedTerm = 15
                 Case "30 Days"
                     selectedTerm = 30
+                Case "60 Days"
+                    selectedTerm = 60
+                Case "90 Days"
+                    selectedTerm = 90
                 Case "Immediate"
                     selectedTerm = 0
             End Select
         Else
             selectedTerm = 0
         End If
-
     End Sub
 
     Private Sub txtEnterBarcode_KeyUp(sender As Object, e As KeyEventArgs) Handles txtEnterBarcode.KeyUp
@@ -396,8 +398,8 @@
         With insertPO
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,payment_type,total_amount,delivery_status,payment_status,delivered_to,delivered_by,created_at,updated_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@po_no", generatePONo())
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
             .cmd.Parameters.AddWithValue("@po_date", dtp_po_date.Value.ToString)
@@ -407,6 +409,8 @@
             .cmd.Parameters.AddWithValue("@total_amount", txtAmount.Text)
             .cmd.Parameters.AddWithValue("@delivery_status", 1)
             .cmd.Parameters.AddWithValue("@payment_status", 1)
+            .cmd.Parameters.AddWithValue("@delivered_to", txtDeliverTo.Text)
+            .cmd.Parameters.AddWithValue("@delivered_to", txtDeliverBy.Text)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
             .cmd.ExecuteNonQuery()

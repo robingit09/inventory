@@ -66,6 +66,10 @@ Partial Class PurchaseOrderForm
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtDeliverTo = New System.Windows.Forms.TextBox()
+        Me.txtDeliverBy = New System.Windows.Forms.TextBox()
         Me.gpEnterBarcode.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpEnterProduct.SuspendLayout()
@@ -102,7 +106,7 @@ Partial Class PurchaseOrderForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(722, 58)
+        Me.Label4.Location = New System.Drawing.Point(459, 58)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(31, 13)
         Me.Label4.TabIndex = 3
@@ -111,7 +115,7 @@ Partial Class PurchaseOrderForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(720, 26)
+        Me.Label5.Location = New System.Drawing.Point(457, 26)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(33, 13)
         Me.Label5.TabIndex = 4
@@ -143,14 +147,14 @@ Partial Class PurchaseOrderForm
         '
         'dtp_po_date
         '
-        Me.dtp_po_date.Location = New System.Drawing.Point(799, 20)
+        Me.dtp_po_date.Location = New System.Drawing.Point(536, 20)
         Me.dtp_po_date.Name = "dtp_po_date"
         Me.dtp_po_date.Size = New System.Drawing.Size(208, 20)
         Me.dtp_po_date.TabIndex = 8
         '
         'dtpETA
         '
-        Me.dtpETA.Location = New System.Drawing.Point(799, 52)
+        Me.dtpETA.Location = New System.Drawing.Point(536, 52)
         Me.dtpETA.Name = "dtpETA"
         Me.dtpETA.Size = New System.Drawing.Size(208, 20)
         Me.dtpETA.TabIndex = 9
@@ -179,7 +183,7 @@ Partial Class PurchaseOrderForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(1170, 28)
+        Me.btnSave.Location = New System.Drawing.Point(1170, 23)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(102, 38)
         Me.btnSave.TabIndex = 18
@@ -404,7 +408,7 @@ Partial Class PurchaseOrderForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(720, 85)
+        Me.Label6.Location = New System.Drawing.Point(457, 85)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(73, 13)
         Me.Label6.TabIndex = 63
@@ -413,7 +417,7 @@ Partial Class PurchaseOrderForm
         'txtAmount
         '
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
-        Me.txtAmount.Location = New System.Drawing.Point(799, 82)
+        Me.txtAmount.Location = New System.Drawing.Point(536, 82)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ReadOnly = True
         Me.txtAmount.Size = New System.Drawing.Size(208, 20)
@@ -438,6 +442,10 @@ Partial Class PurchaseOrderForm
         '
         'gpFields
         '
+        Me.gpFields.Controls.Add(Me.txtDeliverBy)
+        Me.gpFields.Controls.Add(Me.txtDeliverTo)
+        Me.gpFields.Controls.Add(Me.Label10)
+        Me.gpFields.Controls.Add(Me.Label9)
         Me.gpFields.Controls.Add(Me.txtAmount)
         Me.gpFields.Controls.Add(Me.Label7)
         Me.gpFields.Controls.Add(Me.Label6)
@@ -460,6 +468,38 @@ Partial Class PurchaseOrderForm
         Me.gpFields.TabIndex = 66
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Order"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(829, 26)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(67, 13)
+        Me.Label9.TabIndex = 66
+        Me.Label9.Text = "Delivered to:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(829, 58)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(69, 13)
+        Me.Label10.TabIndex = 67
+        Me.Label10.Text = "Delivered by:"
+        '
+        'txtDeliverTo
+        '
+        Me.txtDeliverTo.Location = New System.Drawing.Point(911, 23)
+        Me.txtDeliverTo.Name = "txtDeliverTo"
+        Me.txtDeliverTo.Size = New System.Drawing.Size(161, 20)
+        Me.txtDeliverTo.TabIndex = 68
+        '
+        'txtDeliverBy
+        '
+        Me.txtDeliverBy.Location = New System.Drawing.Point(911, 55)
+        Me.txtDeliverBy.Name = "txtDeliverBy"
+        Me.txtDeliverBy.Size = New System.Drawing.Size(161, 20)
+        Me.txtDeliverBy.TabIndex = 69
         '
         'PurchaseOrderForm
         '
@@ -531,4 +571,8 @@ Partial Class PurchaseOrderForm
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
     Friend WithEvents gpFields As GroupBox
+    Friend WithEvents txtDeliverBy As TextBox
+    Friend WithEvents txtDeliverTo As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
 End Class

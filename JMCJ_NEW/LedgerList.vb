@@ -731,16 +731,18 @@
                 Dim customer As Integer = CInt(.dr.GetValue(11))
                 Dim customer_val As String = ""
                 Dim customer_address As String = ""
+                Dim contact_person As String = ""
                 Dim customer_city As String = ""
                 Dim fax_tel As String = ""
                 Dim db2 As New DatabaseConnect
                 With db2
-                    .selectByQuery("Select company,address,city,fax_tel from company where ID = " & customer)
+                    .selectByQuery("Select company,address,city,fax_tel,contact_person from company where ID = " & customer)
                     If .dr.Read Then
                         customer_val = .dr.GetValue(0)
                         customer_address = .dr.GetValue(1)
                         customer_city = .dr.GetValue(2)
                         fax_tel = .dr.GetValue(3)
+                        contact_person = .dr.GetValue(4)
                         'LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindStringExact(customer_val)
                         'LedgerForm.cbCustomer.Text = customer_val
                     End If
@@ -758,6 +760,25 @@
                         ledger_type_val = "Delivery"
                 End Select
 
+                Dim term_ As Integer = CInt(.dr.GetValue(17))
+                Dim remarks As String = .dr.GetValue(18)
+                Dim paid_val As String = ""
+                If paid = True Then
+                    paid_val = "Yes"
+                Else
+                    paid_val = "No"
+                End If
+
+                'LedgerForm.dtpPaid.Value = date_paid
+                'LedgerForm.txtBankDetails.Text = bank_details
+                'LedgerForm.dtpCheckDate.Value = check_date
+
+                Dim floating_val As String
+                If floating = True Then
+                    floating_val = "Yes"
+                Else
+                    floating_val = "No"
+                End If
 
                 Dim payment_type As Integer = CInt(.dr.GetValue(13))
                 Dim payment_type_val As String = ""
@@ -783,33 +804,9 @@
                     Case 3
                         payment_type_val = "Post Dated"
                 End Select
-
-                Dim term_ As Integer = CInt(.dr.GetValue(17))
-
-                Dim remarks As String = .dr.GetValue(18)
-
-
-
-                Dim paid_val As String = ""
-                If paid = True Then
-                    paid_val = "Yes"
-                Else
-                    paid_val = "No"
-                End If
-
-                'LedgerForm.dtpPaid.Value = date_paid
-                'LedgerForm.txtBankDetails.Text = bank_details
-                'LedgerForm.dtpCheckDate.Value = check_date
-
-                Dim floating_val As String
-                If floating = True Then
-                    floating_val = "Yes"
-                Else
-                    floating_val = "No"
-                End If
                 'LedgerForm.txtRemarks.Text = remarks
-                'LedgerForm.txtDeliveredBy.Text = .dr("delivered_by")
-                'LedgerForm.txtReceivedBy.Text = .dr("received_by")
+                Dim deliverby As String = .dr("delivered_by")
+                Dim receiveby As String = .dr("received_by")
                 Dim grand_total As Double = 0
                 Dim table_content As String = ""
                 Dim dbprod As New DatabaseConnect()
@@ -840,11 +837,11 @@
 
                             grand_total += CDbl(total_amount)
                             tr = tr & "<td>" & barcode & "</td>"
-                            tr = tr & "<td>" & unit & "</td>"
-                            tr = tr & "<td>" & brand & "</td>"
-                            tr = tr & "<td>" & color & "</td>"
-                            tr = tr & "<td>" & desc & "</td>"
                             tr = tr & "<td>" & qty & "</td>"
+                            tr = tr & "<td>" & desc & "</td>"
+                            tr = tr & "<td>" & brand & "</td>"
+                            tr = tr & "<td>" & unit & "</td>"
+                            tr = tr & "<td>" & color & "</td>"
                             tr = tr & "<td>" & sell_price & "</td>"
                             tr = tr & "<td>" & total_amount & "</td>"
                             tr = tr & "</tr>"
@@ -855,126 +852,127 @@
                     .dr.Close()
                     .con.Close()
                 End With
-                result = "<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-	font-family:serif;
-	border-collapse: collapse;
-	width: 100%;
-	font-size:8pt;
-}
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 6px;
-}
+                Dim page As String = "<div id='header' style='text-align:center;'>
+				<!-- <img src='header.png' width='180'>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
+				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>-->
+				<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>CUSTOMER ORDER</p>
+			</div>
+			<div id='fieldset'>
+				<table class='table_fieldset'>
+					<tr>
+						<td><label><strong> Customer: </strong></label></td>
+						<td><label>" & customer_val & " </label></td>
+						<td><label><strong> Invoice #: " & invoice_no & " </strong></label></td>
+						<td>Date: " & date_issue & "</td>
+					</tr>
+					<tr>
+						<td><label><strong> Address </strong></label></td>
+						<td><label> " & customer_address & " </label></td>
+						<td colspan='2'><label><strong> ATTN: " & contact_person & "</strong></label></td>
+					</tr>
+					<tr>
+						<td colspan='2'><label><strong> Delivered To: " & receiveby & " </strong></label></td>
+						<td colspan='2'><label><strong> Delivered By: " & deliverby & "</strong></label></td>
+					</tr>
+				<table>
+				<br>
+				<table class='table_fieldset'>
+					<tr>
+						<td><strong>Payment Type:</strong></td>
+						<td>" & payment_type_val & "</td>
+						<td><strong>Terms:</strong></td>
+						<td>" & term_ & " Days </td>
+					</tr>
+					
+				<table>
+			</div>
+			
+			<br>
+			<table class='table_fieldset'>
+			  <thead>
+			  <tr>
+				<th>Barcode</th>
+				<th>Qty</th>
+				<th>Description</th>
+				<th>Brand</th>
+				<th>Unit</th>
+				<th>Color</th>
+				<th>Unit Price</th>
+				<th>Total Amount</th>
+			  </tr>
+			  </thead>
+			  <tbody>
+				" & table_content & "
+				<tr>
+					<td colspan='7' style='text-align:right;'><strong>Grand Total</strong></td>
+					<td style='color:red'><strong>" & grand_total & "</strong></td>
+				</tr>
+			  </tbody>
+			</table>
+			<br><br><br><br><br><br><br><br><br><br><br><br>
+			<table id='footer' class='table_fieldset'>
+				<tbody>
+					<tr>
+						<td width='120' colspan='1' style='text-align:right;'><strong>Remaining Balance:</strong></td>
+						<td colspan='2' style='color:red'><strong>0.00</strong></td>
+					</tr>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> DELIVER </td>
+						<td style='width:150px;' colspan='2'> <input type='checkbox'>PICK UP _______________________________</td>
+					</tr>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> FAXED </td>
+						<td rowspan='2'>CHECKED BY</td>
+						<td rowspan='2'>APPROVED BY</td>
+					</tr>
+					<tr>
+						<td style='width:100px;'> <input type='checkbox'> EMAILED </td>
+					</tr>
+				</tbody>
+			</table>"
 
-tr:nth-child(even) {
+                result = "<style>
+    .table_pager {
+		Font-family: Arial;
+		border-collapse: collapse;
+		width: 100%;
+		
+	}
 
-}
+	.table_pager td, .table_pager th {
+        border: 0px solid #dddddd;
+		Text-align: Left;
+		
+		Font-Size:  8pt;
+	}
+	
+	.table_fieldset {
+        Font - family: Arial;
+		border-collapse: collapse;
+		width: 100%;
+		
+	}
+
+	.table_fieldset td, .table_fieldset th {
+        border: 1px solid #dddddd;
+		Text-align: Left;
+		padding: 8px;
+		Font-Size:  8pt;
+	}
+
 </style>
-</head>
-<body>
-<div id='header' style='text-align:center;'>
-	<br>
-	<h3	 style='color:blue;margin:1px;'><strong>JMCJ</strong></h3>
-	<p style='color:red;;margin:1px;'>Perfect Colors Solution Inc.</p>
-	<p style='margin:1px;font-size:10pt;'>42 K Roosevelt Ave, Brgy. Sta. Cruz, Lungsod Quezon, 1104 Kalakhang Maynila</p>
-	<p style='margin:1px;font-size:10pt;'>Fax: 411-5274 Tel: 371-5448</p>
-</div>
-<h4 style='text-align:center;margin-top:5px;margin-bottom:5px;'>Customer Order</h4>
-<div id='fieldset'>
-	<table>
-		<tr>
-			<td width='120'><label><strong>Date Invoice: </strong></label></td>
-			<td><label> " & date_issue & " </label></td>
-			
-			<td width='80'><label><strong>Invoice No: </strong></label></td>
-			<td><label>" & invoice_no & "</label></td>
-		</tr>
-	<table>
-	<br>
-	<table>
-		<tr>
-			<th colspan='2' style='background-color:blue;color:white;'>Payment Details</th>
-			<th colspan='4' style='background-color:blue;color:white;'>Ship To</th>
-		</tr>
-		<tr>
-			<td width='120'><label><strong>Payment type: </strong></label></td>
-			<td><label> " & payment_type_val & " </label></td>
-			
-			<td width='120'><label><strong>Customer: </strong></label></td>
-			<td colspan='3'><label>" & customer_val & " </label></td>
-		</tr>
-		
-		<tr>
-			<td width='80'><label><strong> " & bank_details_label & " </strong></label></td>
-			<td><label>" & bank_details & "</label></td>
-			
-			<td width='120'><label><strong>Address: </strong></label></td>
-			<td colspan='3'><label> " & customer_address & " " & customer_city & " </label></td>
-		</tr>
-		
-		<tr>
-			<td width='120'><label><strong>" & check_date_label & " </strong></label></td>
-			<td><label>" & check_date & " </label></td>
-			
-			<td width='120'><label><strong>Fax/Tel: </strong></label></td>
-			<td colspan='3'><label>" & fax_tel & "</label></td>
-		</tr>
-		
-		<tr>
-			<td width='80'><label><strong>" & due_date_label & " </strong></label></td>
-			<td><label>" & due_date & "</label></td>
-			
-			<td width='120'><label><strong>Delivery By: </strong></label></td>
-			<td><label>" & .dr("delivered_by") & "</label></td>
-			<td width='120'><label><strong>Received By: </strong></label></td>
-			<td><label>" & .dr("received_by") & "</label></td>
-		</tr>
-	<table>
-</div>
+<body style ='margin:0;'>
 <br>
-<table>
-  <thead>
-  <tr>
-	<th>Barcode</th>
-	<th>Unit</th>
-	<th>Brand</th>
-	<th>Color</th>
-	<th>Description</th>
-    <th>Qty</th>
-	<th>Unit Price</th>
-	<th>Amount</th>
-  </tr>
-  </thead>
-  <tbody>
-    " & table_content & "
-    <tr>
-		<td colspan='7' style='text-align:right;'><strong>Total Amount</strong></td>
-		<td style='color:red'><strong>" & Val(grand_total).ToString("N2") & "</strong></td>
-	</tr>
-  </tbody>
-</table>
-<br>
-<table>
-	<tr>
-		<td style='text-align:right;' valign='bottom'><strong>Checked by:</strong></td>
-		<td height='25' valign='bottom'>" & checked_by_val & "</td>
-	</tr>
-	<tr>
-		<td style='text-align:right;' valign='bottom'><strong>Approved by:</strong></td>
-		<td height='25' valign='bottom'>" & approve_by_val & "</td>
-	</tr>
-</table>
+    <table class='table_pager'>
+        <tr>
+            <td>" & page & "</td><td>" & page & "</td>
+        </tr>
+    </table>
+</body>"
 
-</body>
-</html>
-"
-                result = result & result
                 Return result
             End If
         End With
