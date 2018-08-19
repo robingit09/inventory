@@ -166,6 +166,12 @@
     <Compile Include="ColorList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="COMasterList.Designer.vb">
+      <DependentUpon>COMasterList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="COMasterList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="COReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -389,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ColorList.resx">
       <DependentUpon>ColorList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMasterList.resx">
+      <DependentUpon>COMasterList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="COReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

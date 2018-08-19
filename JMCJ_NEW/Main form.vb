@@ -125,4 +125,8 @@
     Private Sub TopSalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TopSalesToolStripMenuItem.Click
         TopSalesReports.ShowDialog()
     End Sub
+
+    Private Sub CustomerOrderToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CustomerOrderToolStripMenuItem.Click
+        COMasterList.ShowDialog()
+    End Sub
 End Class

@@ -62,3 +62,4 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.InventoryReport.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.DailySalesReports.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.TopSalesReports.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddCustomerPrices.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.COMasterList.resources
