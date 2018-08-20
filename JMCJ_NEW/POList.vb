@@ -119,7 +119,7 @@
             myWrite.WriteLine(code)
             myWrite.Close()
         Catch ex As Exception
-
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
 
         Dim proc As New System.Diagnostics.Process()
@@ -198,15 +198,14 @@
                     'Dim stock As String = Val(.dr("stock"))
                     tr = tr & "<td>" & barcode & "</td>"
                     tr = tr & "<td>" & qty & "</td>"
-                    tr = tr & "<td>" & unit & "</td>"
-                    tr = tr & "<td>" & brand & "</td>"
-                    tr = tr & "<td>" & color & "</td>"
                     tr = tr & "<td>" & desc & "</td>"
+                    tr = tr & "<td>" & brand & "</td>"
+                    tr = tr & "<td>" & unit & "</td>"
+                    tr = tr & "<td>" & color & "</td>"
                     tr = tr & "<td>" & cost & "</td>"
                     tr = tr & "<td>" & total & "</td>"
                     tr = tr & "</tr>"
                     table_content = table_content & tr
-                    'Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                 End While
             End If
             .cmd.Dispose()
@@ -236,8 +235,8 @@
 						
 					</tr>
 					<tr>
-						<td colspan='2'><label><strong> Delivered To: " & delivered_to & " </strong></label></td>
-						<td colspan='2'><label><strong> Delivered By: " & delivered_by & " </strong></label></td>
+						<td colspan='2'><label><strong> Delivered To: <span style='color:blue;'>" & delivered_to & "</span> </strong></label></td>
+						<td colspan='2'><label><strong> Delivered By:  <span style='color:blue;'>" & delivered_by & "</span> </strong></label></td>
 						
 					</tr>
 					
@@ -259,89 +258,10 @@
 			  </tr>
 			  </thead>
 			  <tbody>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
-				<tr>
-					<td>1023234</td>
-					<td>20</td>
-					<td>Thinner</td>
-					<td>Boysen</td>
-					<td>Gals</td>
-					<td>White</td>
-					<td>500.50</td>
-					<td>10,010.00</td>
-				</tr>
+				" & table_content & "
 				<tr>
 					<td colspan='7' style='text-align:right;'><strong>Grand Total</strong></td>
-					<td style='color:red'><strong>80,080.00</strong></td>
+					<td style='color:red'><strong>" & total_amount & "</strong></td>
 				</tr>
 			  </tbody>
 			</table>
