@@ -195,7 +195,6 @@
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
                     Dim total As String = Val(.dr("total_amount")).ToString("N2")
-                    'Dim stock As String = Val(.dr("stock"))
                     tr = tr & "<td>" & barcode & "</td>"
                     tr = tr & "<td>" & qty & "</td>"
                     tr = tr & "<td>" & desc & "</td>"

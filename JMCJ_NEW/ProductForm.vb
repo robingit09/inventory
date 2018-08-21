@@ -19,9 +19,9 @@
             With dbinsertcategory
                 .cmd.Connection = .con
                 .cmd.CommandType = CommandType.Text
-                .cmd.CommandText = "INSERT INTO product_categories (product_id,category_id) VALUES(" & prod_id & "," & selectedCategory & ")"
+                .cmd.CommandText = "INSERT INTO product_categories (product_id,category_id,created_at,updated_at) VALUES(" & prod_id & "," & selectedCategory & ",'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
                 .cmd.ExecuteNonQuery()
-                .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id) VALUES(" & prod_id & "," & selectedSubcategory & ")"
+                .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id,created_at,updated_at) VALUES(" & prod_id & "," & selectedSubcategory & ",'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
                 .cmd.ExecuteNonQuery()
                 .cmd.Dispose()
                 .con.Close()
@@ -114,6 +114,13 @@
             .cmd.CommandText = "Update products set description=?,updated_at=? where id = " & selectedProduct
             .cmd.Parameters.AddWithValue("@description", txtProduct.Text)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.ExecuteNonQuery()
+
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Update product_categories set category_id = " & selectedCategory & " where product_id = " & selectedProduct
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Update product_subcategories set subcategory_id = " & selectedSubcategory & " where product_id = " & selectedProduct
             .cmd.ExecuteNonQuery()
 
             .update_where("product_unit", "product_id", selectedProduct, "status", 0)
