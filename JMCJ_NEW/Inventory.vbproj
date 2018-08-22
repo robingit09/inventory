@@ -332,6 +332,18 @@
     <Compile Include="PurchaseReceiveForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PurchaseReturn.Designer.vb">
+      <DependentUpon>PurchaseReturn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseReturn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseReturnForm.Designer.vb">
+      <DependentUpon>PurchaseReturnForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseReturnForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
     </Compile>
@@ -493,6 +505,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PurchaseReceiveForm.resx">
       <DependentUpon>PurchaseReceiveForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseReturn.resx">
+      <DependentUpon>PurchaseReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseReturnForm.resx">
+      <DependentUpon>PurchaseReturnForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>

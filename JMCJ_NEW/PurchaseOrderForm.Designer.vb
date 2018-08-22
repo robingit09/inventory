@@ -66,10 +66,10 @@ Partial Class PurchaseOrderForm
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtDeliverTo = New System.Windows.Forms.TextBox()
         Me.txtDeliverBy = New System.Windows.Forms.TextBox()
+        Me.txtDeliverTo = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.gpEnterBarcode.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpEnterProduct.SuspendLayout()
@@ -469,14 +469,19 @@ Partial Class PurchaseOrderForm
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Order"
         '
-        'Label9
+        'txtDeliverBy
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(829, 26)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(67, 13)
-        Me.Label9.TabIndex = 66
-        Me.Label9.Text = "Delivered to:"
+        Me.txtDeliverBy.Location = New System.Drawing.Point(911, 55)
+        Me.txtDeliverBy.Name = "txtDeliverBy"
+        Me.txtDeliverBy.Size = New System.Drawing.Size(161, 20)
+        Me.txtDeliverBy.TabIndex = 69
+        '
+        'txtDeliverTo
+        '
+        Me.txtDeliverTo.Location = New System.Drawing.Point(911, 23)
+        Me.txtDeliverTo.Name = "txtDeliverTo"
+        Me.txtDeliverTo.Size = New System.Drawing.Size(161, 20)
+        Me.txtDeliverTo.TabIndex = 68
         '
         'Label10
         '
@@ -487,19 +492,14 @@ Partial Class PurchaseOrderForm
         Me.Label10.TabIndex = 67
         Me.Label10.Text = "Delivered by:"
         '
-        'txtDeliverTo
+        'Label9
         '
-        Me.txtDeliverTo.Location = New System.Drawing.Point(911, 23)
-        Me.txtDeliverTo.Name = "txtDeliverTo"
-        Me.txtDeliverTo.Size = New System.Drawing.Size(161, 20)
-        Me.txtDeliverTo.TabIndex = 68
-        '
-        'txtDeliverBy
-        '
-        Me.txtDeliverBy.Location = New System.Drawing.Point(911, 55)
-        Me.txtDeliverBy.Name = "txtDeliverBy"
-        Me.txtDeliverBy.Size = New System.Drawing.Size(161, 20)
-        Me.txtDeliverBy.TabIndex = 69
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(829, 26)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(67, 13)
+        Me.Label9.TabIndex = 66
+        Me.Label9.Text = "Delivered to:"
         '
         'PurchaseOrderForm
         '
@@ -514,7 +514,7 @@ Partial Class PurchaseOrderForm
         Me.Controls.Add(Me.gpFields)
         Me.Name = "PurchaseOrderForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = " Purchase Order Form"
+        Me.Text = " Purchase Order Form (Add New)"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gpEnterBarcode.ResumeLayout(False)
         Me.gpEnterBarcode.PerformLayout()

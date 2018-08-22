@@ -252,6 +252,7 @@ Partial Class ProductForm
         Me.Controls.Add(Me.Label1)
         Me.Name = "ProductForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Product Form (Add New)"
         Me.TabControl1.ResumeLayout(False)
         Me.tbMeasurement.ResumeLayout(False)
         CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).EndInit()

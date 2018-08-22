@@ -68,10 +68,10 @@ Partial Class PurchaseReceiveForm
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.txtDrNo = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtDrNo = New System.Windows.Forms.TextBox()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -485,6 +485,22 @@ Partial Class PurchaseReceiveForm
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Receive"
         '
+        'txtDrNo
+        '
+        Me.txtDrNo.Location = New System.Drawing.Point(87, 85)
+        Me.txtDrNo.Name = "txtDrNo"
+        Me.txtDrNo.Size = New System.Drawing.Size(251, 20)
+        Me.txtDrNo.TabIndex = 88
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(18, 88)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(66, 13)
+        Me.Label11.TabIndex = 87
+        Me.Label11.Text = "DR Number:"
+        '
         'lblTotalAmount
         '
         Me.lblTotalAmount.AutoSize = True
@@ -507,22 +523,6 @@ Partial Class PurchaseReceiveForm
         Me.Label10.TabIndex = 91
         Me.Label10.Text = "Total Amount:"
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(18, 88)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(66, 13)
-        Me.Label11.TabIndex = 87
-        Me.Label11.Text = "DR Number:"
-        '
-        'txtDrNo
-        '
-        Me.txtDrNo.Location = New System.Drawing.Point(87, 85)
-        Me.txtDrNo.Name = "txtDrNo"
-        Me.txtDrNo.Size = New System.Drawing.Size(251, 20)
-        Me.txtDrNo.TabIndex = 88
-        '
         'PurchaseReceiveForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -536,7 +536,7 @@ Partial Class PurchaseReceiveForm
         Me.Controls.Add(Me.gpFields)
         Me.Name = "PurchaseReceiveForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Purchase Receive Form"
+        Me.Text = "Purchase Receive Form (Add New)"
         Me.gpEnterBarcode.ResumeLayout(False)
         Me.gpEnterBarcode.PerformLayout()
         Me.gpEnterProduct.ResumeLayout(False)

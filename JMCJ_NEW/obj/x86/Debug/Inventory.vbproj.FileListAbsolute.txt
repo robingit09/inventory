@@ -64,3 +64,5 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.TopSalesReports.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddCustomerPrices.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.COMasterList.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.ProductReports.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReturn.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseReturnForm.resources

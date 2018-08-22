@@ -46,13 +46,14 @@ Partial Class Main_form
         Me.CustomerToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MasterListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProductsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProductsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -154,7 +155,7 @@ Partial Class Main_form
         '
         'PurchaseToolStripMenuItem
         '
-        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1})
+        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SupplierToolStripMenuItem1, Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReceiveToolStripMenuItem1, Me.PurchaseReturnToolStripMenuItem})
         Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
         Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
         Me.PurchaseToolStripMenuItem.Text = "Purchase"
@@ -175,7 +176,7 @@ Partial Class Main_form
         '
         Me.SupplierToolStripMenuItem1.Name = "SupplierToolStripMenuItem1"
         Me.SupplierToolStripMenuItem1.Size = New System.Drawing.Size(212, 26)
-        Me.SupplierToolStripMenuItem1.Text = "Supplier"
+        Me.SupplierToolStripMenuItem1.Text = "Suppliers"
         '
         'SalesToolStripMenuItem
         '
@@ -216,6 +217,12 @@ Partial Class Main_form
         Me.MasterListToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.MasterListToolStripMenuItem.Text = "Master List"
         '
+        'ProductsToolStripMenuItem1
+        '
+        Me.ProductsToolStripMenuItem1.Name = "ProductsToolStripMenuItem1"
+        Me.ProductsToolStripMenuItem1.Size = New System.Drawing.Size(200, 26)
+        Me.ProductsToolStripMenuItem1.Text = "Products"
+        '
         'CustomerOrderToolStripMenuItem
         '
         Me.CustomerOrderToolStripMenuItem.Name = "CustomerOrderToolStripMenuItem"
@@ -238,13 +245,13 @@ Partial Class Main_form
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.DailyToolStripMenuItem.Text = "Daily"
         '
         'TopSalesToolStripMenuItem
         '
         Me.TopSalesToolStripMenuItem.Name = "TopSalesToolStripMenuItem"
-        Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.TopSalesToolStripMenuItem.Text = "Top Sales"
         '
         'SystemToolStripMenuItem
@@ -253,11 +260,11 @@ Partial Class Main_form
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
         Me.SystemToolStripMenuItem.Text = "System"
         '
-        'ProductsToolStripMenuItem1
+        'PurchaseReturnToolStripMenuItem
         '
-        Me.ProductsToolStripMenuItem1.Name = "ProductsToolStripMenuItem1"
-        Me.ProductsToolStripMenuItem1.Size = New System.Drawing.Size(200, 26)
-        Me.ProductsToolStripMenuItem1.Text = "Products"
+        Me.PurchaseReturnToolStripMenuItem.Name = "PurchaseReturnToolStripMenuItem"
+        Me.PurchaseReturnToolStripMenuItem.Size = New System.Drawing.Size(212, 26)
+        Me.PurchaseReturnToolStripMenuItem.Text = "Purchase Return"
         '
         'Main_form
         '
@@ -310,4 +317,5 @@ Partial Class Main_form
     Friend WithEvents MasterListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CustomerOrderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProductsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PurchaseReturnToolStripMenuItem As ToolStripMenuItem
 End Class
