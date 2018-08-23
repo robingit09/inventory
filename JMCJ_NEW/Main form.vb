@@ -137,4 +137,8 @@
     Private Sub PurchaseReturnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseReturnToolStripMenuItem.Click
         PurchaseReturn.ShowDialog()
     End Sub
+
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+        MonthlySalesReports.ShowDialog()
+    End Sub
 End Class

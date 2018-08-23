@@ -1,6 +1,7 @@
 ﻿Public Class PurchaseReturnForm
 
     Public selectedSupplier As Integer = 0
+    Public SelectedProdID As Integer = 0
 
     Public Sub loadSupplier()
         cbSupplier.DataSource = Nothing
@@ -81,7 +82,7 @@
     End Sub
 
     Private Sub PurchaseReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        autocompleteProduct()
     End Sub
 
     Public Sub initialize()
@@ -95,14 +96,15 @@
             Dim value As String = DirectCast(cbSupplier.SelectedItem, KeyValuePair(Of String, String)).Value
             Me.selectedSupplier = key
             cbSupplier.BackColor = Drawing.Color.White
-
-
+            gpEnterBarcode.Enabled = True
+            gpEnterProduct.Enabled = True
             dgvProd.Enabled = True
 
         Else
             selectedSupplier = 0
             cbSupplier.SelectedIndex = 0
-
+            gpEnterBarcode.Enabled = False
+            gpEnterProduct.Enabled = False
             dgvProd.Enabled = False
         End If
     End Sub
@@ -116,7 +118,66 @@
                 result = CDbl(Val(.dr("unit_cost")).ToString("N2"))
             End If
         End With
-
         Return result
     End Function
+
+    Public Sub autocompleteProduct()
+        Dim MySource As New AutoCompleteStringCollection()
+
+        With txtProductDesc
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim product As New DatabaseConnect
+        With product
+            .selectByQuery("Select description from products  where status <> 0  order by description")
+            While .dr.Read
+                MySource.Add(.dr("description"))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+    Public Sub populateBrand(ByVal prodid As Integer)
+        Dim dbbrand As New DatabaseConnect
+        With dbbrand
+            cbBrand.DataSource = Nothing
+            cbBrand.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Brand")
+            Dim query As String = "Select distinct b.id, b.name from (product_unit as pu LEFT JOIN brand as b on b.id = pu.brand) 
+            where pu.product_id = " & prodid
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim brand As String = .dr.GetValue(1)
+                    comboSource.Add(id, brand)
+                End While
+            End If
+            cbBrand.DataSource = New BindingSource(comboSource, Nothing)
+            cbBrand.DisplayMember = "Value"
+            cbBrand.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub txtProductDesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProductDesc.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Trim(txtProductDesc.Text).Length > 0 Then
+                SelectedProdID = New DatabaseConnect().get_id("products", "description", Trim(txtProductDesc.Text))
+                populateBrand(SelectedProdID)
+                txtProductDesc.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtProductDesc.Text.ToLower())
+            Else
+                SelectedProdID = 0
+                populateBrand(SelectedProdID)
+            End If
+        End If
+
+    End Sub
 End Class

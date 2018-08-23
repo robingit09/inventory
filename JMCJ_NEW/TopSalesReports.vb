@@ -127,12 +127,12 @@ tr:nth-child(even) {
 </head>
 <body>
 <div id='header' style='text-align:center;'>
-				<img src='header.png' width='180'>
-				<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
-				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
-				<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>
-				<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>TOP SALES PRODUCT</p>
-			</div>
+	<img src='header.png' width='180'>
+	<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
+	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
+	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>
+	<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>TOP SALES PRODUCT</p>
+</div>
 <div id='fieldset'>
 	<table>
 		<tr>

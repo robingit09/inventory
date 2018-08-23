@@ -56,6 +56,8 @@ Partial Class PurchaseReturnForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbReason = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -64,6 +66,8 @@ Partial Class PurchaseReturnForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cbReason)
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.TextBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
@@ -114,7 +118,7 @@ Partial Class PurchaseReturnForm
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(370, 22)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(381, 22)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
         Me.DateTimePicker1.TabIndex = 3
@@ -122,7 +126,7 @@ Partial Class PurchaseReturnForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(281, 25)
+        Me.Label2.Location = New System.Drawing.Point(292, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(83, 13)
         Me.Label2.TabIndex = 2
@@ -131,7 +135,7 @@ Partial Class PurchaseReturnForm
         'cbSupplier
         '
         Me.cbSupplier.FormattingEnabled = True
-        Me.cbSupplier.Location = New System.Drawing.Point(84, 22)
+        Me.cbSupplier.Location = New System.Drawing.Point(93, 22)
         Me.cbSupplier.Name = "cbSupplier"
         Me.cbSupplier.Size = New System.Drawing.Size(191, 21)
         Me.cbSupplier.TabIndex = 1
@@ -351,6 +355,23 @@ Partial Class PurchaseReturnForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 57)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(47, 13)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "Reason:"
+        '
+        'cbReason
+        '
+        Me.cbReason.FormattingEnabled = True
+        Me.cbReason.Location = New System.Drawing.Point(93, 54)
+        Me.cbReason.Name = "cbReason"
+        Me.cbReason.Size = New System.Drawing.Size(191, 21)
+        Me.cbReason.TabIndex = 9
+        '
         'PurchaseReturnForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -408,4 +429,6 @@ Partial Class PurchaseReturnForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents cbReason As ComboBox
+    Friend WithEvents Label5 As Label
 End Class

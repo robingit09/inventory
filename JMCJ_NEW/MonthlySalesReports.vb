@@ -1,26 +1,4 @@
-﻿Public Class DailySalesReports
-    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        btnPrint.Enabled = False
-        Dim path As String = Application.StartupPath & "\daily_sales_reports.html"
-        Dim filter As New Dictionary(Of String, String)
-        filter.Add("month", cbMonth.Text)
-        filter.Add("year", cbYear.Text)
-
-        Try
-            Dim code As String = generatePrint(filter)
-            Dim myWrite As System.IO.StreamWriter
-            myWrite = IO.File.CreateText(path)
-            myWrite.WriteLine(code)
-            myWrite.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-            Exit Sub
-        End Try
-
-        Dim proc As New System.Diagnostics.Process()
-        proc = Process.Start(path, "")
-        btnPrint.Enabled = True
-    End Sub
+﻿Public Class MonthlySalesReports
 
     Private Function generatePrint(ByVal filter As Dictionary(Of String, String))
         Dim result As String = ""
@@ -58,7 +36,7 @@
             .con.Close()
         End With
 
-        Dim query As String = "Select Format(cop.created_at,'mm-dd-yyyy') as daily,count(l.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
+        Dim query As String = "Select Format(cop.created_at,'mm-yyyy') as monthly,count(l.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
                     inner join ledger as l ON l.id = cop.customer_order_ledger_id 
                     where l.status <> 0"
 
@@ -75,7 +53,7 @@
                 query = query & " and YEAR(date_issue) = " & year
             End If
         End If
-        query = query & " group by Format(cop.created_at,'mm-dd-yyyy') order by Format(cop.created_at,'mm-dd-yyyy') desc"
+        query = query & " group by Format(cop.created_at,'mm-yyyy') order by Format(cop.created_at,'mm-yyyy') desc"
 
         Dim table_content As String = ""
         Dim dbprod As New DatabaseConnect()
@@ -84,7 +62,7 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim tr As String = "<tr>"
-                    Dim daily As String = .dr("daily")
+                    Dim daily As String = .dr("monthly")
                     Dim orders As String = .dr("orders")
                     Dim qty As String = .dr("qty")
                     Dim total As String = .dr("total_sales")
@@ -127,7 +105,7 @@ tr:nth-child(even) {
 	<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
 	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
 	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>
-	<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>DAILY SALES</p>
+	<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>MONTHLY SALES</p>
 </div>
 <div id='fieldset'>
 	<table>
@@ -166,7 +144,7 @@ tr:nth-child(even) {
         Return result
     End Function
 
-    Private Sub DailySalesReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MonthlySalesReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getMonth()
         getYear()
     End Sub
@@ -229,4 +207,27 @@ tr:nth-child(even) {
 
         Return result
     End Function
+
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        btnPrint.Enabled = False
+        Dim path As String = Application.StartupPath & "\monthly_sales_reports.html"
+        Dim filter As New Dictionary(Of String, String)
+        filter.Add("month", cbMonth.Text)
+        filter.Add("year", cbYear.Text)
+
+        Try
+            Dim code As String = generatePrint(filter)
+            Dim myWrite As System.IO.StreamWriter
+            myWrite = IO.File.CreateText(path)
+            myWrite.WriteLine(code)
+            myWrite.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        Dim proc As New System.Diagnostics.Process()
+        proc = Process.Start(path, "")
+        btnPrint.Enabled = True
+    End Sub
 End Class
