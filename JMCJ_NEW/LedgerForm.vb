@@ -1083,16 +1083,6 @@
         End If
     End Sub
 
-    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
-        If cbUnit.SelectedIndex > 0 Then
-            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
-            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
-            SelectedUnit = key
-        Else
-            SelectedUnit = 0
-        End If
-    End Sub
-
     Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
         If cbColor.SelectedIndex > 0 Then
             Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
@@ -1102,6 +1092,16 @@
         Else
             SelectedColor = 0
             populateUnit(SelectedProdID, SelectedBrand, SelectedColor)
+        End If
+    End Sub
+
+    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
+        If cbUnit.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
+            SelectedUnit = key
+        Else
+            SelectedUnit = 0
         End If
     End Sub
 

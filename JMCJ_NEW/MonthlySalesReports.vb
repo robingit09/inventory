@@ -140,7 +140,6 @@ tr:nth-child(even) {
 </body>
 </html>
 "
-
         Return result
     End Function
 

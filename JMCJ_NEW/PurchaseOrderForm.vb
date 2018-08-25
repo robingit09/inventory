@@ -284,9 +284,9 @@
 
                 'change color
                 If qty > 0 Then
-                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.White
+                    dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.White
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                    dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.Red
                 End If
             End If
             computeTotalAmount()
@@ -588,4 +588,7 @@
         End With
     End Sub
 
+    Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
+
+    End Sub
 End Class

@@ -135,19 +135,37 @@
                 Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvMeasure.Rows(item.Index).Cells("color").Value)
                 Dim price As String = dgvMeasure.Rows(item.Index).Cells("price").Value
 
-                If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("unit").Value)) Then
-                    cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? , price = ?,status = ?, updated_at = ?
+                ' check if not blank
+                If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("col_remove").Value)) Then
+                    If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("id").Value)) Then
+                        'update if exist
+                        cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? , price = ?,status = ?, updated_at = ?
                     where id = " & id
-                    cmd2.Parameters.AddWithValue("@brand", brand)
-                    cmd2.Parameters.AddWithValue("@unit", unit)
-                    cmd2.Parameters.AddWithValue("@color", color)
-                    cmd2.Parameters.AddWithValue("@barcode", barcode)
-                    cmd2.Parameters.AddWithValue("@price", price)
-                    cmd2.Parameters.AddWithValue("@status", 1)
+                        cmd2.Parameters.AddWithValue("@brand", brand)
+                        cmd2.Parameters.AddWithValue("@unit", unit)
+                        cmd2.Parameters.AddWithValue("@color", color)
+                        cmd2.Parameters.AddWithValue("@barcode", barcode)
+                        cmd2.Parameters.AddWithValue("@price", price)
+                        cmd2.Parameters.AddWithValue("@status", 1)
 
-                    cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                    cmd2.ExecuteNonQuery()
-                    cmd2.Parameters.Clear()
+                        cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                        cmd2.ExecuteNonQuery()
+                        cmd2.Parameters.Clear()
+                    Else
+                        'save if not exist
+                        cmd2.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,price,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)"
+                        cmd2.Parameters.AddWithValue("@product_id", selectedProduct)
+                        cmd2.Parameters.AddWithValue("@brand", brand)
+                        cmd2.Parameters.AddWithValue("@unit", unit)
+                        cmd2.Parameters.AddWithValue("@color", color)
+                        cmd2.Parameters.AddWithValue("@barcode", barcode)
+                        cmd2.Parameters.AddWithValue("@price", price)
+                        cmd2.Parameters.AddWithValue("@status", 1)
+                        cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                        cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                        cmd2.ExecuteNonQuery()
+                        cmd2.Parameters.Clear()
+                    End If
                 End If
             Next
             cmd2.Dispose()
@@ -237,7 +255,6 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
         If btnSave.Text = "Save" Then
             Dim dbvalidate As New DatabaseConnect
             With dbvalidate
@@ -381,17 +398,17 @@
             With measure
                 dgvMeasure.Rows.Clear()
                 .selectByQuery("select pu.id,pu.barcode,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
-                                INNER JOIN brand as b ON b.id = pu.brand) 
+                                LEFT JOIN brand as b ON b.id = pu.brand) 
                                 INNER JOIN unit as u ON u.id = pu.unit)
-                                INNER JOIN color as c ON c.id = pu.color)
+                                LEFT JOIN color as c ON c.id = pu.color)
                                 where pu.product_id = " & id & " and pu.status <> 0")
                 If .dr.HasRows Then
                     While .dr.Read
                         Dim pu_id As String = .dr("id")
                         Dim barcode As String = .dr("barcode")
-                        Dim brand As String = .dr("brand")
+                        Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                         Dim unit As String = .dr("unit")
-                        Dim color As String = .dr("color")
+                        Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                         Dim price As String = .dr("price")
 
                         dgvMeasure.Rows.Add(1)
