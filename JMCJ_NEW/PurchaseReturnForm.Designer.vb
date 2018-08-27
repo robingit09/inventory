@@ -22,7 +22,9 @@ Partial Class PurchaseReturnForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gpField = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtPRNo = New System.Windows.Forms.TextBox()
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtReason = New System.Windows.Forms.TextBox()
@@ -61,37 +63,52 @@ Partial Class PurchaseReturnForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.txtPRNo = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.GroupBox1.SuspendLayout()
+        Me.gpField.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'gpField
         '
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.txtPRNo)
-        Me.GroupBox1.Controls.Add(Me.btnSaveAndPrint)
-        Me.GroupBox1.Controls.Add(Me.btnSave)
-        Me.GroupBox1.Controls.Add(Me.txtReason)
-        Me.GroupBox1.Controls.Add(Me.cbReason)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.txtTotalAmount)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.txtIssueBy)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.dtpRecorded)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbSupplier)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 28)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1216, 157)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Purchase Return"
+        Me.gpField.Controls.Add(Me.Label4)
+        Me.gpField.Controls.Add(Me.txtPRNo)
+        Me.gpField.Controls.Add(Me.btnSaveAndPrint)
+        Me.gpField.Controls.Add(Me.btnSave)
+        Me.gpField.Controls.Add(Me.txtReason)
+        Me.gpField.Controls.Add(Me.cbReason)
+        Me.gpField.Controls.Add(Me.Label6)
+        Me.gpField.Controls.Add(Me.txtTotalAmount)
+        Me.gpField.Controls.Add(Me.Label5)
+        Me.gpField.Controls.Add(Me.txtIssueBy)
+        Me.gpField.Controls.Add(Me.Label3)
+        Me.gpField.Controls.Add(Me.dtpRecorded)
+        Me.gpField.Controls.Add(Me.Label2)
+        Me.gpField.Controls.Add(Me.cbSupplier)
+        Me.gpField.Controls.Add(Me.Label1)
+        Me.gpField.Location = New System.Drawing.Point(13, 28)
+        Me.gpField.Name = "gpField"
+        Me.gpField.Size = New System.Drawing.Size(1216, 157)
+        Me.gpField.TabIndex = 0
+        Me.gpField.TabStop = False
+        Me.gpField.Text = "Purchase Return"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(301, 25)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(65, 13)
+        Me.Label4.TabIndex = 54
+        Me.Label4.Text = "PR Number:"
+        '
+        'txtPRNo
+        '
+        Me.txtPRNo.Location = New System.Drawing.Point(390, 22)
+        Me.txtPRNo.Name = "txtPRNo"
+        Me.txtPRNo.ReadOnly = True
+        Me.txtPRNo.Size = New System.Drawing.Size(200, 20)
+        Me.txtPRNo.TabIndex = 53
         '
         'btnSaveAndPrint
         '
@@ -415,23 +432,6 @@ Partial Class PurchaseReturnForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
-        'txtPRNo
-        '
-        Me.txtPRNo.Location = New System.Drawing.Point(390, 22)
-        Me.txtPRNo.Name = "txtPRNo"
-        Me.txtPRNo.ReadOnly = True
-        Me.txtPRNo.Size = New System.Drawing.Size(200, 20)
-        Me.txtPRNo.TabIndex = 53
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(301, 25)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(65, 13)
-        Me.Label4.TabIndex = 54
-        Me.Label4.Text = "PR Number:"
-        '
         'PurchaseReturnForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -440,12 +440,12 @@ Partial Class PurchaseReturnForm
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.gpEnterBarcode)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gpField)
         Me.Name = "PurchaseReturnForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Return (Add New)"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gpField.ResumeLayout(False)
+        Me.gpField.PerformLayout()
         Me.gpEnterBarcode.ResumeLayout(False)
         Me.gpEnterBarcode.PerformLayout()
         Me.gpEnterProduct.ResumeLayout(False)
@@ -455,7 +455,7 @@ Partial Class PurchaseReturnForm
 
     End Sub
 
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gpField As GroupBox
     Friend WithEvents dtpRecorded As DateTimePicker
     Friend WithEvents Label2 As Label
     Friend WithEvents cbSupplier As ComboBox

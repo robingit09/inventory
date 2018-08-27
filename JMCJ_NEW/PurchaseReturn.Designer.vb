@@ -23,14 +23,17 @@ Partial Class PurchaseReturn
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.dgvPO = New System.Windows.Forms.DataGridView()
+        Me.dgvPReturn = New System.Windows.Forms.DataGridView()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pr_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pr_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupplierName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IssuedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnVoid = New System.Windows.Forms.Button()
+        CType(Me.dgvPReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnAddNew
@@ -42,14 +45,23 @@ Partial Class PurchaseReturn
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'dgvPO
+        'dgvPReturn
         '
-        Me.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.pr_date, Me.SupplierName, Me.TotalAmount, Me.IssuedBy, Me.status})
-        Me.dgvPO.Location = New System.Drawing.Point(29, 74)
-        Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(803, 424)
-        Me.dgvPO.TabIndex = 2
+        Me.dgvPReturn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPReturn.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.pr_date, Me.pr_no, Me.SupplierName, Me.TotalAmount, Me.IssuedBy, Me.status})
+        Me.dgvPReturn.Location = New System.Drawing.Point(29, 74)
+        Me.dgvPReturn.Name = "dgvPReturn"
+        Me.dgvPReturn.Size = New System.Drawing.Size(1004, 424)
+        Me.dgvPReturn.TabIndex = 2
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(126, 33)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 3
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -64,6 +76,12 @@ Partial Class PurchaseReturn
         Me.pr_date.Name = "pr_date"
         Me.pr_date.ReadOnly = True
         Me.pr_date.Width = 200
+        '
+        'pr_no
+        '
+        Me.pr_no.HeaderText = "PR NO"
+        Me.pr_no.Name = "pr_no"
+        Me.pr_no.ReadOnly = True
         '
         'SupplierName
         '
@@ -83,6 +101,7 @@ Partial Class PurchaseReturn
         Me.IssuedBy.HeaderText = "Issued By"
         Me.IssuedBy.Name = "IssuedBy"
         Me.IssuedBy.ReadOnly = True
+        Me.IssuedBy.Width = 200
         '
         'status
         '
@@ -90,27 +109,41 @@ Partial Class PurchaseReturn
         Me.status.Name = "status"
         Me.status.ReadOnly = True
         '
+        'btnVoid
+        '
+        Me.btnVoid.Location = New System.Drawing.Point(223, 33)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(75, 23)
+        Me.btnVoid.TabIndex = 4
+        Me.btnVoid.Text = "Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
+        '
         'PurchaseReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(982, 531)
-        Me.Controls.Add(Me.dgvPO)
+        Me.ClientSize = New System.Drawing.Size(1045, 531)
+        Me.Controls.Add(Me.btnVoid)
+        Me.Controls.Add(Me.btnView)
+        Me.Controls.Add(Me.dgvPReturn)
         Me.Controls.Add(Me.btnAddNew)
         Me.Name = "PurchaseReturn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Return"
-        CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvPReturn, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents btnAddNew As Button
-    Friend WithEvents dgvPO As DataGridView
+    Friend WithEvents dgvPReturn As DataGridView
+    Friend WithEvents btnView As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents pr_date As DataGridViewTextBoxColumn
+    Friend WithEvents pr_no As DataGridViewTextBoxColumn
     Friend WithEvents SupplierName As DataGridViewTextBoxColumn
     Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
     Friend WithEvents IssuedBy As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents btnVoid As Button
 End Class

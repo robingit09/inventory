@@ -1,5 +1,6 @@
 ﻿Public Class PurchaseReturnForm
 
+    Public selectedID As Integer = 0
     Public selectedSupplier As Integer = 0
     Public SelectedProdID As Integer = 0
     Public selectedBrand As Integer = 0
@@ -667,11 +668,84 @@
         Return True
     End Function
 
-    Private Sub txtReason_TextChanged(sender As Object, e As EventArgs) Handles txtReason.TextChanged
+    Private Sub txtReason_TextChanged(sensder As Object, e As EventArgs) Handles txtReason.TextChanged
         If txtReason.TextLength > 0 Then
             cbReason.BackColor = Drawing.Color.White
             txtReason.BackColor = Drawing.Color.White
         End If
     End Sub
 
+    Public Sub enableControl(ByVal flag As Boolean)
+        gpField.Enabled = flag
+        gpEnterBarcode.Enabled = flag
+        gpEnterProduct.Enabled = flag
+        dgvProd.Enabled = flag
+    End Sub
+
+    Public Sub toLoadInfo(ByVal id As Integer)
+        selectedID = id
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("select * from purchase_return where id = " & id)
+            If .dr.Read Then
+                selectedSupplier = .dr("supplier_id")
+                Dim supplier As String = New DatabaseConnect().get_by_id("suppliers", selectedSupplier, "supplier_name")
+                cbSupplier.SelectedIndex = cbSupplier.FindString(supplier)
+
+                txtPRNo.Text = .dr("pr_no")
+
+                Dim issue_by As String = .dr("issued_by")
+                txtIssueBy.Text = New DatabaseConnect().get_by_id("users", issue_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", issue_by, "surname")
+
+                Dim reason As String = .dr("reason")
+                cbReason.SelectedIndex = cbReason.FindString(reason)
+                If cbReason.Text = "Select" Then
+                    txtReason.Text = reason
+                    cbReason.Text = "Other"
+                End If
+
+                dtpRecorded.Value = .dr("pr_date")
+                txtTotalAmount.Text = Val(.dr("total_amount")).ToString("N2")
+
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        'loadProduct
+        Dim dbprod As New DatabaseConnect
+        With dbprod
+
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,prp.qty as quantity,prp.unit_cost,prp.total_cost,ps.qty as stock
+                        FROM ((((((purchase_return_products as prp
+                        INNER JOIN product_unit as pu ON pu.id = prp.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
+                        where prp.purchase_return_id = " & id)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim p_u_id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim total As String = Val(.dr("total_cost")).ToString("N2")
+                    Dim stock As String = Val(.dr("stock"))
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                    dgvProd.Rows.Add(row)
+                End While
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End If
+        End With
+
+    End Sub
 End Class
