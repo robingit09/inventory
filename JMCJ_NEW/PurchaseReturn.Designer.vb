@@ -24,7 +24,6 @@ Partial Class PurchaseReturn
     Private Sub InitializeComponent()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvPReturn = New System.Windows.Forms.DataGridView()
-        Me.btnView = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pr_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pr_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -32,7 +31,9 @@ Partial Class PurchaseReturn
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IssuedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
+        Me.btnPrint = New System.Windows.Forms.Button()
         CType(Me.dgvPReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,15 +54,6 @@ Partial Class PurchaseReturn
         Me.dgvPReturn.Name = "dgvPReturn"
         Me.dgvPReturn.Size = New System.Drawing.Size(1004, 424)
         Me.dgvPReturn.TabIndex = 2
-        '
-        'btnView
-        '
-        Me.btnView.Location = New System.Drawing.Point(126, 33)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 3
-        Me.btnView.Text = "View"
-        Me.btnView.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -109,20 +101,39 @@ Partial Class PurchaseReturn
         Me.status.Name = "status"
         Me.status.ReadOnly = True
         '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(126, 33)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 3
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'btnVoid
         '
-        Me.btnVoid.Location = New System.Drawing.Point(223, 33)
+        Me.btnVoid.Location = New System.Drawing.Point(322, 33)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(75, 23)
         Me.btnVoid.TabIndex = 4
         Me.btnVoid.Text = "Void"
         Me.btnVoid.UseVisualStyleBackColor = True
         '
+        'btnPrint
+        '
+        Me.btnPrint.Location = New System.Drawing.Point(225, 33)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(75, 23)
+        Me.btnPrint.TabIndex = 5
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
         'PurchaseReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1045, 531)
+        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.dgvPReturn)
@@ -146,4 +157,5 @@ Partial Class PurchaseReturn
     Friend WithEvents IssuedBy As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
     Friend WithEvents btnVoid As Button
+    Friend WithEvents btnPrint As Button
 End Class
