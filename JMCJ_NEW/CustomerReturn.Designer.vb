@@ -52,6 +52,17 @@ Partial Class CustomerReturn
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbCustomer = New System.Windows.Forms.ComboBox()
+        Me.cbInvoiceNo = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtReason = New System.Windows.Forms.TextBox()
+        Me.cbReason = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,22 +306,130 @@ Partial Class CustomerReturn
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(14, 47)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(54, 13)
+        Me.Label1.TabIndex = 67
+        Me.Label1.Text = "Customer:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(14, 73)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(62, 13)
+        Me.Label2.TabIndex = 69
+        Me.Label2.Text = "Invoice No:"
+        '
+        'cbCustomer
+        '
+        Me.cbCustomer.FormattingEnabled = True
+        Me.cbCustomer.Location = New System.Drawing.Point(125, 44)
+        Me.cbCustomer.Name = "cbCustomer"
+        Me.cbCustomer.Size = New System.Drawing.Size(212, 21)
+        Me.cbCustomer.TabIndex = 70
+        '
+        'cbInvoiceNo
+        '
+        Me.cbInvoiceNo.FormattingEnabled = True
+        Me.cbInvoiceNo.Location = New System.Drawing.Point(125, 70)
+        Me.cbInvoiceNo.Name = "cbInvoiceNo"
+        Me.cbInvoiceNo.Size = New System.Drawing.Size(212, 21)
+        Me.cbInvoiceNo.TabIndex = 71
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(14, 20)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(42, 13)
+        Me.Label3.TabIndex = 72
+        Me.Label3.Text = "CR No:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(125, 17)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(212, 20)
+        Me.TextBox1.TabIndex = 73
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(474, 17)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.TabIndex = 74
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(385, 20)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(83, 13)
+        Me.Label4.TabIndex = 75
+        Me.Label4.Text = "Date Recorded:"
+        '
+        'txtReason
+        '
+        Me.txtReason.Enabled = False
+        Me.txtReason.Location = New System.Drawing.Point(474, 71)
+        Me.txtReason.Multiline = True
+        Me.txtReason.Name = "txtReason"
+        Me.txtReason.Size = New System.Drawing.Size(200, 44)
+        Me.txtReason.TabIndex = 79
+        '
+        'cbReason
+        '
+        Me.cbReason.FormattingEnabled = True
+        Me.cbReason.Items.AddRange(New Object() {"Excess Product", "Wrong Product", "Other"})
+        Me.cbReason.Location = New System.Drawing.Point(474, 43)
+        Me.cbReason.Name = "cbReason"
+        Me.cbReason.Size = New System.Drawing.Size(200, 21)
+        Me.cbReason.TabIndex = 78
+        Me.cbReason.Text = "Select"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(385, 46)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(47, 13)
+        Me.Label6.TabIndex = 77
+        Me.Label6.Text = "Reason:"
+        '
         'CustomerReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1231, 539)
+        Me.Controls.Add(Me.txtReason)
+        Me.Controls.Add(Me.cbReason)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.DateTimePicker1)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.cbInvoiceNo)
+        Me.Controls.Add(Me.cbCustomer)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Name = "CustomerReturn"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Return"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gpEnterBarcode.ResumeLayout(False)
         Me.gpEnterBarcode.PerformLayout()
         Me.gpEnterProduct.ResumeLayout(False)
         Me.gpEnterProduct.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -343,4 +462,15 @@ Partial Class CustomerReturn
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents cbCustomer As ComboBox
+    Friend WithEvents cbInvoiceNo As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtReason As TextBox
+    Friend WithEvents cbReason As ComboBox
+    Friend WithEvents Label6 As Label
 End Class

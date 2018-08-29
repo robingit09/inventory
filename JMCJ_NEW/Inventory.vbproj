@@ -251,6 +251,7 @@
     <Compile Include="Main form.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ModelFunction.vb" />
     <Compile Include="MonthlySalesReports.Designer.vb">
       <DependentUpon>MonthlySalesReports.vb</DependentUpon>
     </Compile>

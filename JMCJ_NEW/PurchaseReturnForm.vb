@@ -506,8 +506,8 @@
         With insertPR
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_return (pr_no,supplier_id,pr_date,total_amount,issued_by,reason,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_return (pr_no,supplier_id,pr_date,total_amount,issued_by,reason,created_at,updated_at,status)
+                VALUES(?,?,?,?,?,?,?,?,?)"
 
             .cmd.Parameters.AddWithValue("@pr_no", generatePRNo())
             .cmd.Parameters.AddWithValue("@supplier_id", selectedSupplier)
@@ -521,6 +521,7 @@
             End If
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -553,7 +554,7 @@
                     .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                     .cmd.ExecuteNonQuery()
                     .cmd.Parameters.Clear()
-
+                    ModelFunction.update_stock(product_unit_id, qty, "-")
                 End If
 
             Next
@@ -562,6 +563,7 @@
         End With
 
         MsgBox("Purchase Return Successfully Save.", MsgBoxStyle.Information)
+        PurchaseReturn.loadList("")
     End Sub
 
     Private Function getLastID(ByVal table As String) As Integer

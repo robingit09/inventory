@@ -22,7 +22,7 @@ Partial Class LedgerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
@@ -92,8 +92,8 @@ Partial Class LedgerForm
         Me.txtDeliveredBy = New System.Windows.Forms.TextBox()
         Me.txtReceivedBy = New System.Windows.Forms.TextBox()
         Me.gpFields = New System.Windows.Forms.GroupBox()
-        Me.btnCheck = New System.Windows.Forms.Button()
         Me.btnApprove = New System.Windows.Forms.Button()
+        Me.btnCheck = New System.Windows.Forms.Button()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.gpPaid.SuspendLayout()
@@ -418,8 +418,8 @@ Partial Class LedgerForm
         '
         'id
         '
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -662,9 +662,9 @@ Partial Class LedgerForm
         Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(6, 21)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(72, 15)
+        Me.Label17.Size = New System.Drawing.Size(64, 15)
         Me.Label17.TabIndex = 34
-        Me.Label17.Text = "Product Desc"
+        Me.Label17.Text = "Description"
         '
         'Label18
         '
@@ -739,16 +739,6 @@ Partial Class LedgerForm
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Customer Order Form"
         '
-        'btnCheck
-        '
-        Me.btnCheck.ForeColor = System.Drawing.Color.Green
-        Me.btnCheck.Location = New System.Drawing.Point(1112, 19)
-        Me.btnCheck.Name = "btnCheck"
-        Me.btnCheck.Size = New System.Drawing.Size(71, 31)
-        Me.btnCheck.TabIndex = 69
-        Me.btnCheck.Text = "Check"
-        Me.btnCheck.UseVisualStyleBackColor = True
-        '
         'btnApprove
         '
         Me.btnApprove.ForeColor = System.Drawing.SystemColors.HotTrack
@@ -758,6 +748,16 @@ Partial Class LedgerForm
         Me.btnApprove.TabIndex = 70
         Me.btnApprove.Text = "Approve"
         Me.btnApprove.UseVisualStyleBackColor = True
+        '
+        'btnCheck
+        '
+        Me.btnCheck.ForeColor = System.Drawing.Color.Green
+        Me.btnCheck.Location = New System.Drawing.Point(1112, 19)
+        Me.btnCheck.Name = "btnCheck"
+        Me.btnCheck.Size = New System.Drawing.Size(71, 31)
+        Me.btnCheck.TabIndex = 69
+        Me.btnCheck.Text = "Check"
+        Me.btnCheck.UseVisualStyleBackColor = True
         '
         'LedgerForm
         '
