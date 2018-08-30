@@ -10,7 +10,7 @@
         Dim db As New DatabaseConnect
         With db
             If q = "" Then
-                .selectByQuery("Select id,name from color where status <> 0 order by name")
+                .selectByQuery("Select id,name,created_at from color where status <> 0 order by name")
             Else
 
             End If
@@ -19,7 +19,8 @@
                 While .dr.Read
                     Dim id As Integer = .dr("id")
                     Dim name As String = .dr("name")
-                    Dim row As String() = New String() {id, name}
+                    Dim created_at As String = Convert.ToDateTime(.dr("created_at")).ToString("MM-dd-yy")
+                    Dim row As String() = New String() {id, name, created_at}
                     dgvColor.Rows.Add(row)
                 End While
             End If

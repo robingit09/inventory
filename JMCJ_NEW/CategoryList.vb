@@ -33,7 +33,7 @@
         dgvCat.Rows.Clear()
         Dim db As New DatabaseConnect
         If q = "" Then
-            db.selectByQuery("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id order by sub.name")
+            db.selectByQuery("Select distinct sub.id, c.name,sub.name,sub.created_at  from categories c right join categories sub on sub.parent_id = c.id order by sub.name")
         Else
 
         End If
@@ -43,6 +43,7 @@
                     Dim id As Integer = .dr.GetValue(0)
                     Dim category As String = If(IsDBNull(.dr.GetValue(1)), "N/A", .dr.GetValue(1))
                     Dim subcat As String = If(IsDBNull(.dr.GetValue(2)), "N/A", .dr.GetValue(2))
+                    Dim created_at As String = Convert.ToDateTime(.dr("created_at")).ToString("MM-dd-yy")
                     If category = "N/A" Then
                         Dim temp As String
                         temp = subcat
@@ -50,7 +51,7 @@
                         category = temp
                     End If
 
-                    Dim row As String() = New String() {id, category, subcat}
+                    Dim row As String() = New String() {id, category, subcat, created_at}
                     dgvCat.Rows.Add(row)
                 End While
             End If

@@ -18,20 +18,20 @@
         Dim db As New DatabaseConnect
         With db
             If q = "" Then
-                .selectByQuery("Select id,name from unit where status = 1 order by name")
+                .selectByQuery("Select id,name,created_at from unit where status = 1 order by name")
             Else
                 .selectByQuery(q)
             End If
 
             If .dr.HasRows Then
-                    While .dr.Read
-                        Dim id As Integer = .dr.GetValue(0)
-                        Dim name As String = .dr.GetValue(1)
-                        Dim row As String() = New String() {id, name}
-                        dgvUnit.Rows.Add(row)
-                    End While
-                End If
-
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    Dim created_at As String = Convert.ToDateTime(.dr("created_at")).ToString("MM-dd-yy")
+                    Dim row As String() = New String() {id, name, created_at}
+                    dgvUnit.Rows.Add(row)
+                End While
+            End If
         End With
     End Sub
 

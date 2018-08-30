@@ -1274,7 +1274,7 @@
                     Left Join categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and pu.barcode = '" & Trim(txtEnterBarcode.Text) & "'")
 
                     If .dr.Read Then
-                        Dim p_id As Integer = CInt(.dr("product_id"))
+                        Dim p_u_id As Integer = CInt(.dr("id"))
                         Dim brand_id As Integer = CInt(.dr("brand_id"))
                         Dim unit_id As Integer = CInt(.dr("unit_id"))
                         Dim color_id As Integer = CInt(.dr("color_id"))
@@ -1286,7 +1286,7 @@
                         Dim unit As String = .dr("unit")
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                         Dim price As String = Val(.dr("price")).ToString("N2")
-                        Dim sell_price As String = Val(getSellPrice(selectedCustomer, p_id, brand_id, unit_id, color_id)).ToString("N2")
+                        Dim sell_price As String = Val(getSellPrice(selectedCustomer, p_u_id)).ToString("N2")
                         Dim stock As Integer = Val(.dr("stock"))
                         Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
                         dgvProd.Rows.Add(row)
@@ -1302,12 +1302,11 @@
         End If
     End Sub
 
-    Private Function getSellPrice(ByVal customer As Integer, ByVal p_id As Integer, ByVal brand As Integer, ByVal unit As Integer, ByVal color As Integer)
+    Private Function getSellPrice(ByVal customer As Integer, ByVal p_u_id As Integer)
         Dim res As String = ""
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & customer & " and product_id = " & p_id & " 
-                and brand = " & brand & " and unit = " & unit & " and color = " & color)
+            .selectByQuery("Select sell_price from customer_product_prices where customer_id = " & customer & " and product_unit_id = " & p_u_id)
             If .dr.Read Then
                 res = Val(.dr("sell_price")).ToString("N2")
             Else

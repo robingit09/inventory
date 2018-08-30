@@ -24,18 +24,19 @@ Partial Class BrandList
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvBrand = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_created = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvBrand, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgvBrand
         '
         Me.dgvBrand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvBrand.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Brand})
+        Me.dgvBrand.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Brand, Me.date_created})
         Me.dgvBrand.Location = New System.Drawing.Point(50, 134)
         Me.dgvBrand.Name = "dgvBrand"
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -49,19 +50,6 @@ Partial Class BrandList
         Me.dgvBrand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvBrand.Size = New System.Drawing.Size(310, 244)
         Me.dgvBrand.TabIndex = 0
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Width = 5
-        '
-        'Brand
-        '
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
         '
         'btnAdd
         '
@@ -93,6 +81,25 @@ Partial Class BrandList
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 5
+        '
+        'Brand
+        '
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        '
+        'date_created
+        '
+        Me.date_created.HeaderText = "Date Created"
+        Me.date_created.Name = "date_created"
+        Me.date_created.ReadOnly = True
+        '
         'BrandList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -116,4 +123,5 @@ Partial Class BrandList
     Friend WithEvents btnDelete As Button
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Brand As DataGridViewTextBoxColumn
+    Friend WithEvents date_created As DataGridViewTextBoxColumn
 End Class

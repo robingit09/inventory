@@ -8,14 +8,15 @@
         Dim db As New DatabaseConnect
         With db
             If q = "" Then
-                .selectByQuery("select id,name from brand where status = 1 order by name")
+                .selectByQuery("select id,name,created_at from brand where status = 1 order by name")
             End If
 
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr.GetValue(0)
                     Dim name As String = .dr.GetValue(1)
-                    Dim row As String() = New String() {id, name}
+                    Dim created_at As String = Convert.ToDateTime(.dr("created_at")).ToString("MM-dd-yy")
+                    Dim row As String() = New String() {id, name,created_at}
                     dgvBrand.Rows.Add(row)
                 End While
             End If
