@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class CustomerReturn
+Partial Class CustomerReturnForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class CustomerReturn
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gpEnterBarcode = New System.Windows.Forms.GroupBox()
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -37,17 +37,6 @@ Partial Class CustomerReturn
         Me.btnAddToCart = New System.Windows.Forms.Button()
         Me.cbUnit = New System.Windows.Forms.ComboBox()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.cbCustomer = New System.Windows.Forms.ComboBox()
-        Me.cbInvoiceNo = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtReason = New System.Windows.Forms.TextBox()
-        Me.cbReason = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,6 +49,21 @@ Partial Class CustomerReturn
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbCustomer = New System.Windows.Forms.ComboBox()
+        Me.cbInvoiceNo = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtCRNo = New System.Windows.Forms.TextBox()
+        Me.dtpDateRecorded = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtReason = New System.Windows.Forms.TextBox()
+        Me.cbReason = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtTotalAmount = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,7 +74,7 @@ Partial Class CustomerReturn
         Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
         Me.gpEnterBarcode.Controls.Add(Me.Label14)
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterBarcode.Location = New System.Drawing.Point(6, 206)
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(6, 236)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
         Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 58)
         Me.gpEnterBarcode.TabIndex = 64
@@ -152,9 +156,9 @@ Partial Class CustomerReturn
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label17)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(267, 206)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(267, 236)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(912, 58)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(916, 58)
         Me.gpEnterProduct.TabIndex = 65
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -201,109 +205,15 @@ Partial Class CustomerReturn
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.price, Me.sell_price, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(6, 270)
+        Me.dgvProd.Location = New System.Drawing.Point(6, 316)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1452, 257)
         Me.dgvProd.TabIndex = 66
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(14, 47)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 13)
-        Me.Label1.TabIndex = 67
-        Me.Label1.Text = "Customer:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(14, 73)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(62, 13)
-        Me.Label2.TabIndex = 69
-        Me.Label2.Text = "Invoice No:"
-        '
-        'cbCustomer
-        '
-        Me.cbCustomer.FormattingEnabled = True
-        Me.cbCustomer.Location = New System.Drawing.Point(125, 44)
-        Me.cbCustomer.Name = "cbCustomer"
-        Me.cbCustomer.Size = New System.Drawing.Size(212, 21)
-        Me.cbCustomer.TabIndex = 70
-        '
-        'cbInvoiceNo
-        '
-        Me.cbInvoiceNo.FormattingEnabled = True
-        Me.cbInvoiceNo.Location = New System.Drawing.Point(125, 70)
-        Me.cbInvoiceNo.Name = "cbInvoiceNo"
-        Me.cbInvoiceNo.Size = New System.Drawing.Size(212, 21)
-        Me.cbInvoiceNo.TabIndex = 71
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 20)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(42, 13)
-        Me.Label3.TabIndex = 72
-        Me.Label3.Text = "CR No:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(125, 17)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(212, 20)
-        Me.TextBox1.TabIndex = 73
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(474, 17)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
-        Me.DateTimePicker1.TabIndex = 74
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(385, 20)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(83, 13)
-        Me.Label4.TabIndex = 75
-        Me.Label4.Text = "Date Recorded:"
-        '
-        'txtReason
-        '
-        Me.txtReason.Enabled = False
-        Me.txtReason.Location = New System.Drawing.Point(474, 71)
-        Me.txtReason.Multiline = True
-        Me.txtReason.Name = "txtReason"
-        Me.txtReason.Size = New System.Drawing.Size(200, 44)
-        Me.txtReason.TabIndex = 79
-        '
-        'cbReason
-        '
-        Me.cbReason.FormattingEnabled = True
-        Me.cbReason.Items.AddRange(New Object() {"Excess Product", "Wrong Product", "Other"})
-        Me.cbReason.Location = New System.Drawing.Point(474, 43)
-        Me.cbReason.Name = "cbReason"
-        Me.cbReason.Size = New System.Drawing.Size(200, 21)
-        Me.cbReason.TabIndex = 78
-        Me.cbReason.Text = "Select"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(385, 46)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 13)
-        Me.Label6.TabIndex = 77
-        Me.Label6.Text = "Reason:"
-        '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle10
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -374,17 +284,152 @@ Partial Class CustomerReturn
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
-        'CustomerReturn
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(34, 68)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(54, 13)
+        Me.Label1.TabIndex = 67
+        Me.Label1.Text = "Customer:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(415, 38)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(62, 13)
+        Me.Label2.TabIndex = 69
+        Me.Label2.Text = "Invoice No:"
+        '
+        'cbCustomer
+        '
+        Me.cbCustomer.FormattingEnabled = True
+        Me.cbCustomer.Location = New System.Drawing.Point(145, 65)
+        Me.cbCustomer.Name = "cbCustomer"
+        Me.cbCustomer.Size = New System.Drawing.Size(212, 21)
+        Me.cbCustomer.TabIndex = 70
+        '
+        'cbInvoiceNo
+        '
+        Me.cbInvoiceNo.FormattingEnabled = True
+        Me.cbInvoiceNo.Location = New System.Drawing.Point(494, 35)
+        Me.cbInvoiceNo.Name = "cbInvoiceNo"
+        Me.cbInvoiceNo.Size = New System.Drawing.Size(201, 21)
+        Me.cbInvoiceNo.TabIndex = 71
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(34, 38)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(42, 13)
+        Me.Label3.TabIndex = 72
+        Me.Label3.Text = "CR No:"
+        '
+        'txtCRNo
+        '
+        Me.txtCRNo.Enabled = False
+        Me.txtCRNo.Location = New System.Drawing.Point(145, 35)
+        Me.txtCRNo.Name = "txtCRNo"
+        Me.txtCRNo.Size = New System.Drawing.Size(212, 20)
+        Me.txtCRNo.TabIndex = 73
+        '
+        'dtpDateRecorded
+        '
+        Me.dtpDateRecorded.Location = New System.Drawing.Point(803, 34)
+        Me.dtpDateRecorded.Name = "dtpDateRecorded"
+        Me.dtpDateRecorded.Size = New System.Drawing.Size(200, 20)
+        Me.dtpDateRecorded.TabIndex = 74
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(714, 38)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(83, 13)
+        Me.Label4.TabIndex = 75
+        Me.Label4.Text = "Date Recorded:"
+        '
+        'txtReason
+        '
+        Me.txtReason.Enabled = False
+        Me.txtReason.Location = New System.Drawing.Point(145, 130)
+        Me.txtReason.Multiline = True
+        Me.txtReason.Name = "txtReason"
+        Me.txtReason.Size = New System.Drawing.Size(212, 53)
+        Me.txtReason.TabIndex = 79
+        '
+        'cbReason
+        '
+        Me.cbReason.FormattingEnabled = True
+        Me.cbReason.Items.AddRange(New Object() {"Select", "Excess Product", "Wrong Product", "Other"})
+        Me.cbReason.Location = New System.Drawing.Point(145, 98)
+        Me.cbReason.Name = "cbReason"
+        Me.cbReason.Size = New System.Drawing.Size(212, 21)
+        Me.cbReason.TabIndex = 78
+        Me.cbReason.Text = "Select"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(34, 101)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(47, 13)
+        Me.Label6.TabIndex = 77
+        Me.Label6.Text = "Reason:"
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(1081, 31)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(92, 30)
+        Me.btnSave.TabIndex = 80
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(415, 68)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(73, 13)
+        Me.Label5.TabIndex = 82
+        Me.Label5.Text = "Total Amount:"
+        '
+        'txtTotalAmount
+        '
+        Me.txtTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalAmount.ForeColor = System.Drawing.Color.Red
+        Me.txtTotalAmount.Location = New System.Drawing.Point(495, 65)
+        Me.txtTotalAmount.Name = "txtTotalAmount"
+        Me.txtTotalAmount.Size = New System.Drawing.Size(200, 20)
+        Me.txtTotalAmount.TabIndex = 81
+        Me.txtTotalAmount.Text = "0.00"
+        Me.txtTotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Location = New System.Drawing.Point(17, 13)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1166, 217)
+        Me.GroupBox1.TabIndex = 83
+        Me.GroupBox1.TabStop = False
+        '
+        'CustomerReturnForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1231, 539)
+        Me.ClientSize = New System.Drawing.Size(1231, 585)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.txtTotalAmount)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.txtReason)
         Me.Controls.Add(Me.cbReason)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.DateTimePicker1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.dtpDateRecorded)
+        Me.Controls.Add(Me.txtCRNo)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cbInvoiceNo)
         Me.Controls.Add(Me.cbCustomer)
@@ -393,7 +438,8 @@ Partial Class CustomerReturn
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.gpEnterProduct)
-        Me.Name = "CustomerReturn"
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Name = "CustomerReturnForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Return"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -426,8 +472,8 @@ Partial Class CustomerReturn
     Friend WithEvents cbCustomer As ComboBox
     Friend WithEvents cbInvoiceNo As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents txtCRNo As TextBox
+    Friend WithEvents dtpDateRecorded As DateTimePicker
     Friend WithEvents Label4 As Label
     Friend WithEvents txtReason As TextBox
     Friend WithEvents cbReason As ComboBox
@@ -444,4 +490,8 @@ Partial Class CustomerReturn
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents btnSave As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtTotalAmount As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

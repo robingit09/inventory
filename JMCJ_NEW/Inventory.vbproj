@@ -202,10 +202,10 @@
       <DependentUpon>CustomerPriceReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomerReturn.Designer.vb">
-      <DependentUpon>CustomerReturn.vb</DependentUpon>
+    <Compile Include="CustomerReturnForm.Designer.vb">
+      <DependentUpon>CustomerReturnForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CustomerReturn.vb">
+    <Compile Include="CustomerReturnForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DailySalesReports.Designer.vb">
@@ -448,8 +448,8 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPriceReport.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomerReturn.resx">
-      <DependentUpon>CustomerReturn.vb</DependentUpon>
+    <EmbeddedResource Include="CustomerReturnForm.resx">
+      <DependentUpon>CustomerReturnForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DailySalesReports.resx">
       <DependentUpon>DailySalesReports.vb</DependentUpon>

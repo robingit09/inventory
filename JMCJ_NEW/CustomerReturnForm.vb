@@ -1,4 +1,4 @@
-﻿Public Class CustomerReturn
+﻿Public Class CustomerReturnForm
     Public selectedCustomer As Integer = 0
     Public SelectedProdID As Integer = 0
     Public selectedBrand As Integer = 0
@@ -6,6 +6,32 @@
     Public selectedColor As Integer = 0
     Private Sub CustomerReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         initialize()
+        clearFields()
+
+    End Sub
+
+    Private Sub clearFields()
+        txtCRNo.Clear()
+        cbCustomer.SelectedIndex = 0
+        selectedCustomer = 0
+        cbInvoiceNo.SelectedIndex = 0
+        dtpDateRecorded.Value = Date.Now
+        cbReason.Text = "Select"
+        txtReason.Text = ""
+
+        txtEnterBarcode.Text = ""
+        txtProductDesc.Text = ""
+        SelectedProdID = 0
+
+        cbBrand.SelectedIndex = 0
+        selectedBrand = 0
+
+        cbUnit.SelectedIndex = 0
+        selectedUnit = 0
+
+        cbColor.SelectedIndex = 0
+        selectedColor = 0
+
     End Sub
 
     Public Sub initialize()
@@ -15,7 +41,12 @@
         populateBrand(0)
         populateUnit(0, 0)
         populateColor(0, 0, 0)
+        gpEnterBarcode.Enabled = False
+        gpEnterProduct.Enabled = False
+        dgvProd.Enabled = False
+
     End Sub
+
 
     Public Sub autocompleteProduct()
         Dim MySource As New AutoCompleteStringCollection()
@@ -272,8 +303,28 @@
             Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
+            gpEnterBarcode.Enabled = True
+            gpEnterProduct.Enabled = True
+            dgvProd.Enabled = True
+
+            'change sell price
+            If dgvProd.Rows.Count > 1 Then
+                For Each item As DataGridViewRow In Me.dgvProd.Rows
+                    If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("id").Value)) Then
+                        Dim p_u_id As Integer = dgvProd.Rows(item.Index).Cells("id").Value
+                        dgvProd.Rows(item.Index).Cells("sell_price").Value = getSellPrice(selectedCustomer, p_u_id)
+                    End If
+
+                Next
+                computeTotalAmount()
+            End If
         Else
             selectedCustomer = 0
+            gpEnterBarcode.Enabled = False
+            gpEnterProduct.Enabled = False
+            dgvProd.Enabled = False
+            dgvProd.Rows.Clear()
+            txtTotalAmount.Text = 0.00
         End If
     End Sub
 
@@ -376,24 +427,7 @@
                     Dim color As String = .dr("color").ToString
                     Dim unitprice As String = Val(.dr("price")).ToString("N2")
                     Dim sell_price As String = Val(getSellPrice(selectedCustomer, product_unit_id)).ToString("N2")
-                    'get sell price
 
-                    'Dim dbcost As New DatabaseConnect
-                    'With dbcost
-                    '    .selectByQuery("Select unit_cost from product_suppliers where product_unit_id = " & product_unit_id)
-                    '    If .dr.HasRows Then
-                    '        If .dr.Read Then
-                    '            If (Val(.dr("unit_cost") > 0)) Then
-                    '                unitcost = Val(.dr("unit_cost")).ToString("N2")
-                    '            Else
-                    '                unitcost = "0.00"
-                    '            End If
-                    '        End If
-                    '    End If
-                    '    .con.Close()
-                    '    .dr.Close()
-                    '    .cmd.Dispose()
-                    'End With
 
                     Dim stock As String = If(IsDBNull(.dr("stock")), "0", .dr("stock"))
 
@@ -405,5 +439,77 @@
                 MsgBox("No Product Found!", MsgBoxStyle.Critical)
             End If
         End With
+    End Sub
+
+    Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
+        If dgvProd.Rows.Count > 1 Then
+            'change if edit qty
+            If e.ColumnIndex = 2 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+
+                amount = qty * CDbl(price)
+                dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
+
+
+                'change color
+                If qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                End If
+            End If
+
+            'change sell price
+            If e.ColumnIndex = 8 Then
+                Dim cost As Double = 0
+                Dim amount As Double = 0
+                Dim qty As Integer = 0
+
+                If Not IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = 0
+                Else
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                End If
+
+                If Not IsNumeric(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value) Then
+                    cost = 0
+                Else
+                    cost = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+                End If
+
+                amount = qty * CDbl(cost)
+                dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
+
+
+                'change color
+                If cost > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
+                End If
+            End If
+            computeTotalAmount()
+        End If
+    End Sub
+
+    Public Sub computeTotalAmount()
+        Dim totalamount As Double = 0.0
+        If dgvProd.Rows.Count > 1 Then
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+                Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
+                totalamount += amount
+            Next
+        End If
+        txtTotalAmount.Text = totalamount.ToString("N2")
+    End Sub
+
+    Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
+        'remove product
+        If e.ColumnIndex = 11 And dgvProd.Rows.Count > 1 Then
+            dgvProd.Rows.RemoveAt(e.RowIndex)
+            computeTotalAmount()
+        End If
     End Sub
 End Class

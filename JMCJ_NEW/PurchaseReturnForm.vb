@@ -396,6 +396,7 @@
 
                     Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
                     dgvProd.Rows.Add(row)
+                    computeTotalAmount()
 
                 End If
             Else
@@ -436,6 +437,7 @@
                 End If
             End If
 
+            'change unit cost
             If e.ColumnIndex = 7 Then
                 Dim cost As Double = 0
                 Dim amount As Double = 0

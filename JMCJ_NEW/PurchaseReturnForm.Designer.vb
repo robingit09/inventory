@@ -287,7 +287,7 @@ Partial Class PurchaseReturnForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(668, 27)
+        Me.cbColor.Location = New System.Drawing.Point(668, 24)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(149, 23)
         Me.cbColor.TabIndex = 65
@@ -362,7 +362,7 @@ Partial Class PurchaseReturnForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(13, 255)
+        Me.dgvProd.Location = New System.Drawing.Point(13, 271)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1216, 229)
         Me.dgvProd.TabIndex = 64

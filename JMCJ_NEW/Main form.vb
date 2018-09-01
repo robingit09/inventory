@@ -143,6 +143,6 @@
     End Sub
 
     Private Sub CustomerReturnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerReturnToolStripMenuItem.Click
-        CustomerReturn.ShowDialog()
+        CustomerReturnForm.ShowDialog()
     End Sub
 End Class
