@@ -1,17 +1,17 @@
 ﻿Public Class CustomerReturnForm
+    Public selectedID As Integer = 0
     Public selectedCustomer As Integer = 0
+    Public selectedLedger As Integer = 0
     Public SelectedProdID As Integer = 0
     Public selectedBrand As Integer = 0
     Public selectedUnit As Integer = 0
     Public selectedColor As Integer = 0
     Private Sub CustomerReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        initialize()
-        clearFields()
 
     End Sub
 
     Private Sub clearFields()
-        txtCRNo.Clear()
+
         cbCustomer.SelectedIndex = 0
         selectedCustomer = 0
         cbInvoiceNo.SelectedIndex = 0
@@ -32,6 +32,8 @@
         cbColor.SelectedIndex = 0
         selectedColor = 0
 
+
+
     End Sub
 
     Public Sub initialize()
@@ -44,6 +46,10 @@
         gpEnterBarcode.Enabled = False
         gpEnterProduct.Enabled = False
         dgvProd.Enabled = False
+        clearFields()
+
+        txtCRNo.Text = generateCRNo()
+        txtIssueBy.Text = New DatabaseConnect().get_by_id("users", 1, "first_name") & " " & New DatabaseConnect().get_by_id("users", 1, "surname")
 
     End Sub
 
@@ -370,10 +376,8 @@
             Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedColor = key
-            'populateUnit(SelectedProdID, selectedBrand)
         Else
             selectedColor = 0
-            'populateUnit(SelectedProdID, selectedBrand)
         End If
     End Sub
 
@@ -511,5 +515,272 @@
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
+    End Sub
+
+    Private Function generateCRNo() As String
+        Dim result As String = ""
+        Try
+            Dim db As New DatabaseConnect
+            With db
+                .selectByQuery("SELECT COUNT(id) from customer_return")
+                If .dr.Read Then
+                    Dim count_supplier As Integer = CInt(.dr.GetValue(0))
+                    result = "CR-" & (count_supplier + 1).ToString("D7")
+                End If
+
+                .dr.Close()
+                .cmd.Dispose()
+                .con.Close()
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+        Return result
+    End Function
+
+    Private Sub cbReason_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReason.SelectedIndexChanged
+        If cbReason.Text = "Other" Then
+            txtReason.Enabled = True
+            txtReason.Focus()
+        Else
+            txtReason.Clear()
+            txtReason.Enabled = False
+        End If
+        cbReason.BackColor = Drawing.Color.White
+        txtReason.BackColor = Drawing.Color.White
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If btnSave.Text = "Save" Then
+            If validation() = False Then
+                Exit Sub
+            End If
+
+            insertData()
+            clearFields()
+        Else
+
+        End If
+    End Sub
+
+    Private Sub insertData()
+        Dim insertPR As New DatabaseConnect
+        With insertPR
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "INSERT INTO customer_return (cr_no,customer_id,ledger_id,cr_date,total_amount,issued_by,created_at,updated_at,reason,status)
+                VALUES(?,?,?,?,?,?,?,?,?,?)"
+
+            .cmd.Parameters.AddWithValue("@cr_no", generateCRNo())
+            .cmd.Parameters.AddWithValue("@customer_id", selectedCustomer)
+            .cmd.Parameters.AddWithValue("@ledger_id", selectedLedger)
+            .cmd.Parameters.AddWithValue("@cr_date", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@total_amount", txtTotalAmount.Text)
+            .cmd.Parameters.AddWithValue("@issued_by", 1)
+            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            If txtReason.Enabled = True Then
+                .cmd.Parameters.AddWithValue("@reason", txtReason.Text)
+            Else
+                .cmd.Parameters.AddWithValue("@reason", cbReason.Text)
+            End If
+
+            .cmd.Parameters.AddWithValue("@status", 1)
+            .cmd.ExecuteNonQuery()
+            .cmd.Dispose()
+            .con.Close()
+
+        End With
+
+        Dim insertProduct As New DatabaseConnect
+        With insertProduct
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+
+                Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
+                Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
+
+
+                If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
+                    .cmd.CommandText = "INSERT INTO customer_return_products(customer_return_id,product_unit_id,qty,created_at,updated_at)
+                        VALUES(?,?,?,?,?)"
+
+                    .cmd.Parameters.AddWithValue("@customer_return_id", getLastID("customer_return"))
+                    .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
+                    .cmd.Parameters.AddWithValue("@qty", qty)
+                    .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                    .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                    .cmd.ExecuteNonQuery()
+                    .cmd.Parameters.Clear()
+                    ModelFunction.update_stock(product_unit_id, qty, "+")
+                End If
+
+            Next
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        MsgBox("Customer Return Successfully Save.", MsgBoxStyle.Information)
+        CustomerReturn.loadList("")
+    End Sub
+
+    Private Function getLastID(ByVal table As String) As Integer
+        Dim id As Integer = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT MAX(ID) from " & table)
+            If .dr.HasRows Then
+                .dr.Read()
+                id = If(IsDBNull(.dr.GetValue(0)), 1, .dr.GetValue(0))
+            Else
+                id = 1
+            End If
+        End With
+        Return id
+    End Function
+
+    Private Function validation() As Boolean
+
+        If cbCustomer.SelectedIndex = 0 Then
+            MsgBox("Customer field is required!", MsgBoxStyle.Critical)
+            cbCustomer.BackColor = Drawing.Color.OrangeRed
+            cbCustomer.Focus()
+            Return False
+        End If
+
+        If cbReason.Text <> "Other" Then
+            If Trim(cbReason.Text) = "Select" Or Trim(cbReason.Text) = "" Then
+                MsgBox("Reason field is required!", MsgBoxStyle.Critical)
+                cbReason.BackColor = Drawing.Color.OrangeRed
+                cbReason.Focus()
+                Return False
+            End If
+        Else
+            If Trim(txtReason.Text) = "" Then
+                MsgBox("Reason field is required!.", MsgBoxStyle.Critical)
+                txtReason.BackColor = Drawing.Color.OrangeRed
+                txtReason.Focus()
+                Return False
+            End If
+        End If
+
+        If dgvProd.Rows.Count = 1 Then
+            MsgBox("Please add product!", MsgBoxStyle.Critical)
+            dgvProd.Focus()
+            Return False
+        End If
+
+        'qty and cost validation
+        Dim validate As Boolean = False
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If prod <> "" Then
+                If qty = "" Then
+                    dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.OrangeRed
+                    validate = True
+                End If
+
+                If IsNumeric(qty) And Val(qty) <= 0 Then
+                    dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.OrangeRed
+                    validate = True
+                End If
+
+                If sell_price = "" Then
+                    dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.OrangeRed
+                    validate = True
+                End If
+
+                If Val(sell_price) <= 0 Then
+                    dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.OrangeRed
+                    validate = True
+                End If
+
+            End If
+        Next
+
+        If validate = True Then
+            MsgBox("Please check all product information!", MsgBoxStyle.Critical)
+            Return False
+        End If
+        Return True
+    End Function
+
+    Public Sub toLoadInfo(ByVal id As Integer)
+        selectedID = id
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("select * from customer_return where id = " & id)
+            If .dr.Read Then
+                selectedCustomer = .dr("customer_id")
+                Dim customer As String = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
+                cbCustomer.SelectedIndex = cbCustomer.FindString(customer)
+
+                txtCRNo.Text = .dr("cr_no")
+
+                Dim issue_by As String = .dr("issued_by")
+                txtIssueBy.Text = New DatabaseConnect().get_by_id("users", issue_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", issue_by, "surname")
+
+                Dim reason As String = .dr("reason")
+                cbReason.SelectedIndex = cbReason.FindString(reason)
+                If cbReason.Text = "Select" Then
+                    txtReason.Text = reason
+                    cbReason.Text = "Other"
+                End If
+
+                dtpDateRecorded.Value = .dr("cr_date")
+                txtTotalAmount.Text = Val(.dr("total_amount")).ToString("N2")
+
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        'loadProduct
+        Dim dbprod As New DatabaseConnect
+        With dbprod
+
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,prp.qty as quantity,pu.price,ps.qty as stock
+                        FROM ((((((customer_return_products as prp
+                        INNER JOIN product_unit as pu ON pu.id = prp.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
+                        where prp.customer_return_id = " & id)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim p_u_id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim unit_price As String = Val(.dr("price")).ToString("N2")
+                    Dim sell_price As String = getSellPrice(selectedCustomer, p_u_id)
+                    Dim total As String = (Val(qty) * Val(sell_price)).ToString("N2")
+                    Dim stock As String = Val(.dr("stock"))
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, unit_price, sell_price, total, stock, "Remove"}
+                    dgvProd.Rows.Add(row)
+                End While
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End If
+        End With
+
+    End Sub
+
+    Public Sub enableControl(ByVal flag As Boolean)
+        gpField.Enabled = flag
+        gpEnterBarcode.Enabled = flag
+        gpEnterProduct.Enabled = flag
+        dgvProd.Enabled = flag
     End Sub
 End Class

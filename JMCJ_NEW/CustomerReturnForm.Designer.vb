@@ -22,7 +22,7 @@ Partial Class CustomerReturnForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gpEnterBarcode = New System.Windows.Forms.GroupBox()
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -63,10 +63,13 @@ Partial Class CustomerReturnForm
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtTotalAmount = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gpField = New System.Windows.Forms.GroupBox()
+        Me.txtIssueBy = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gpField.SuspendLayout()
         Me.SuspendLayout()
         '
         'gpEnterBarcode
@@ -83,7 +86,7 @@ Partial Class CustomerReturnForm
         '
         'txtEnterBarcode
         '
-        Me.txtEnterBarcode.Location = New System.Drawing.Point(73, 19)
+        Me.txtEnterBarcode.Location = New System.Drawing.Point(79, 24)
         Me.txtEnterBarcode.Name = "txtEnterBarcode"
         Me.txtEnterBarcode.Size = New System.Drawing.Size(170, 21)
         Me.txtEnterBarcode.TabIndex = 56
@@ -91,7 +94,7 @@ Partial Class CustomerReturnForm
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(8, 22)
+        Me.Label14.Location = New System.Drawing.Point(6, 27)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(46, 15)
         Me.Label14.TabIndex = 57
@@ -167,7 +170,7 @@ Partial Class CustomerReturnForm
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(626, 30)
+        Me.Label20.Location = New System.Drawing.Point(626, 27)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(36, 15)
         Me.Label20.TabIndex = 66
@@ -177,7 +180,7 @@ Partial Class CustomerReturnForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(668, 27)
+        Me.cbColor.Location = New System.Drawing.Point(668, 22)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(149, 23)
         Me.cbColor.TabIndex = 65
@@ -212,8 +215,8 @@ Partial Class CustomerReturnForm
         '
         'id
         '
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle4
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -408,13 +411,33 @@ Partial Class CustomerReturnForm
         Me.txtTotalAmount.Text = "0.00"
         Me.txtTotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'GroupBox1
+        'gpField
         '
-        Me.GroupBox1.Location = New System.Drawing.Point(17, 13)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1166, 217)
-        Me.GroupBox1.TabIndex = 83
-        Me.GroupBox1.TabStop = False
+        Me.gpField.Controls.Add(Me.txtIssueBy)
+        Me.gpField.Controls.Add(Me.Label7)
+        Me.gpField.Location = New System.Drawing.Point(6, 13)
+        Me.gpField.Name = "gpField"
+        Me.gpField.Size = New System.Drawing.Size(1177, 217)
+        Me.gpField.TabIndex = 83
+        Me.gpField.TabStop = False
+        '
+        'txtIssueBy
+        '
+        Me.txtIssueBy.Enabled = False
+        Me.txtIssueBy.Location = New System.Drawing.Point(786, 52)
+        Me.txtIssueBy.Name = "txtIssueBy"
+        Me.txtIssueBy.ReadOnly = True
+        Me.txtIssueBy.Size = New System.Drawing.Size(200, 20)
+        Me.txtIssueBy.TabIndex = 84
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(697, 55)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(56, 13)
+        Me.Label7.TabIndex = 84
+        Me.Label7.Text = "Issued By:"
         '
         'CustomerReturnForm
         '
@@ -438,7 +461,7 @@ Partial Class CustomerReturnForm
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.gpEnterProduct)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gpField)
         Me.Name = "CustomerReturnForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Return"
@@ -448,6 +471,8 @@ Partial Class CustomerReturnForm
         Me.gpEnterProduct.ResumeLayout(False)
         Me.gpEnterProduct.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gpField.ResumeLayout(False)
+        Me.gpField.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -493,5 +518,7 @@ Partial Class CustomerReturnForm
     Friend WithEvents btnSave As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents txtTotalAmount As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gpField As GroupBox
+    Friend WithEvents txtIssueBy As TextBox
+    Friend WithEvents Label7 As Label
 End Class
