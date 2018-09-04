@@ -26,7 +26,6 @@ Partial Class CustomerReturn
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.dgvCReturn = New System.Windows.Forms.DataGridView()
-        Me.btnAddNew = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pr_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cr_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -34,6 +33,7 @@ Partial Class CustomerReturn
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IssuedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAddNew = New System.Windows.Forms.Button()
         CType(Me.dgvCReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,15 +72,6 @@ Partial Class CustomerReturn
         Me.dgvCReturn.Name = "dgvCReturn"
         Me.dgvCReturn.Size = New System.Drawing.Size(1004, 424)
         Me.dgvCReturn.TabIndex = 7
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Location = New System.Drawing.Point(21, 26)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 6
-        Me.btnAddNew.Text = "Add New"
-        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -127,6 +118,15 @@ Partial Class CustomerReturn
         Me.status.HeaderText = "Status"
         Me.status.Name = "status"
         Me.status.ReadOnly = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(21, 26)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 6
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'CustomerReturn
         '

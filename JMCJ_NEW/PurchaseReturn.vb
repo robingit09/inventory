@@ -290,7 +290,7 @@
         Return result
     End Function
 
-    Private Function getSupplier(ByVal po_id As Integer) As Integer
+    Public Function getSupplier(ByVal po_id As Integer) As Integer
         Dim res As Integer = 0
         Dim dbpo As New DatabaseConnect
         With dbpo

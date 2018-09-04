@@ -289,7 +289,7 @@
     End Sub
 
 
-    Private Function getSellPrice(ByVal customer As Integer, ByVal p_u_id As Integer)
+    Public Function getSellPrice(ByVal customer As Integer, ByVal p_u_id As Integer)
         Dim res As String = ""
         Dim db As New DatabaseConnect
         With db
@@ -783,4 +783,6 @@
         gpEnterProduct.Enabled = flag
         dgvProd.Enabled = flag
     End Sub
+
+
 End Class
