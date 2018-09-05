@@ -1,4 +1,5 @@
 ﻿Public Class TopSalesReports
+    Public selectedCustomer As Integer = 0
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         btnPrint.Enabled = False
         Dim path As String = Application.StartupPath & "\top_sales_reports.html"
@@ -22,14 +23,34 @@
 
     Private Function generatePrint(ByVal filter() As String)
         Dim result As String = ""
+        Dim customer_name As String = ""
+        If selectedCustomer = 0 Then
+            customer_name = "All"
+        Else
+            customer_name = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
+        End If
 
         'get total sold
-        Dim total_sold As String
+        Dim query_sold As String = "Select SUM(quantity) as qty from customer_order_products as cop
+                inner join ledger as l on l.id = cop.customer_order_ledger_id
+                where l.status <> 0"
+        If cbCustomer.SelectedIndex > 0 Then
+            query_sold = query_sold & " and l.customer = " & selectedCustomer
+        End If
+
+        Dim total_sold As String = "0"
         Dim dbsold As New DatabaseConnect
         With dbsold
-            .selectByQuery("Select SUM(quantity) as qty from customer_order_products")
-            If .dr.Read Then
-                total_sold = Val(.dr("qty")).ToString("N0")
+            .selectByQuery(query_sold)
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    If Not IsDBNull(.dr("qty")) Then
+                        total_sold = Val(.dr("qty")).ToString("N0")
+                    End If
+
+                Else
+                    total_sold = 0
+                End If
             Else
                 total_sold = 0
             End If
@@ -40,37 +61,57 @@
 
 
         'get total amount
-        Dim grand_total As String
+        Dim query_amount As String = "Select SUM(sell_price) as amount from customer_order_products as cop
+                inner join ledger as l on l.id = cop.customer_order_ledger_id where l.status <> 0 "
+        If cbCustomer.SelectedIndex > 0 Then
+            query_amount = query_amount & " and l.customer = " & selectedCustomer
+        End If
+
+        Dim grand_total As String = "0"
         Dim dbamount As New DatabaseConnect
         With dbamount
-            .selectByQuery("Select SUM(sell_price) as amount from customer_order_products")
-            If .dr.Read Then
-                grand_total = Val(.dr("amount")).ToString("N2")
+            .selectByQuery(query_amount)
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    If Not IsDBNull(.dr("amount")) Then
+                        grand_total = Val(.dr("amount")).ToString("N2")
+                    End If
+
+                Else
+                        grand_total = 0
+                End If
             Else
                 grand_total = 0
             End If
+
             .cmd.Dispose()
             .dr.Close()
             .con.Close()
         End With
 
-        Dim table_content As String = ""
-        Dim dbprod As New DatabaseConnect()
-        With dbprod
-            '.selectByQuery("Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color, (select sum(quantity) from customer_order_products where product_unit_id = pu.id) as [total_qty] from (((((customer_order_products as cop
-            '        Left Join product_unit as pu ON pu.id = cop.product_unit_id)
-            '        Left Join products as p on p.id = pu.product_id)
-            '        Left Join brand as b on b.id = pu.brand)
-            '        Left Join unit as u on u.id = pu.unit)
-            '        Left Join color as c on c.id = pu.color)")
-            .selectByQuery("Select  pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from ((((((customer_order_products as cop
+
+        Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
                     Left Join product_unit as pu ON pu.id = cop.product_unit_id)
+                    INNER JOIN ledger as l on l.id = cop.customer_order_ledger_id)
                     Left Join products as p on p.id = pu.product_id)
                     Left Join brand as b on b.id = pu.brand)
                     Left Join unit as u on u.id = pu.unit)
                     Left Join color as c on c.id = pu.color)
                     Left Join (Select product_unit_id,SUM(quantity) as total_qty,SUM(sell_price) as total_amount from customer_order_products group by product_unit_id) as total ON  pu.id = total.product_unit_id)
-                    order by total_qty desc")
+                    where l.status <> 0 "
+
+        If cbCustomer.SelectedIndex > 0 Then
+            query = query & " and l.customer = " & selectedCustomer
+        End If
+        query = query & " order by total_qty desc"
+
+
+
+
+        Dim table_content As String = ""
+        Dim dbprod As New DatabaseConnect()
+        With dbprod
+            .selectByQuery(query)
 
             If .dr.HasRows Then
                 Dim dict = New Dictionary(Of String, String)
@@ -136,6 +177,8 @@ tr:nth-child(even) {
 <div id='fieldset'>
 	<table>
 		<tr>
+            <td width='160'><span><strong>Customer: </strong></span></td>
+			<td><label>" & customer_name & " </label></td>
 			<td width='160'><span><strong>Total Quantity Sold: </strong></span></td>
 			<td style='color:red;'><label>" & total_sold & " </label></td>
             <td width='160'><span><strong>Total Amount Sold: </strong></span></td>
@@ -174,4 +217,45 @@ tr:nth-child(even) {
 
         Return result
     End Function
+
+    Public Sub loadCustomer()
+        cbCustomer.DataSource = Nothing
+        cbCustomer.Items.Clear()
+
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Customer")
+        Dim dbcustomer As New DatabaseConnect
+        With dbcustomer
+            .selectByQuery("Select id,company from company where status = 1 order by company")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim customer As String = .dr.GetValue(1)
+                    comboSource.Add(id, customer)
+                End While
+
+                cbCustomer.DataSource = New BindingSource(comboSource, Nothing)
+                cbCustomer.DisplayMember = "Value"
+                cbCustomer.ValueMember = "Key"
+            End If
+
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub TopSalesReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadCustomer()
+    End Sub
+
+    Private Sub cbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomer.SelectedIndexChanged
+        If cbCustomer.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedCustomer = key
+        Else
+            selectedCustomer = 0
+        End If
+    End Sub
 End Class

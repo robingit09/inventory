@@ -168,7 +168,7 @@
                     Dim color As String = dgvPriceList.Rows(item.Index).Cells("Color").Value
                     Dim unit_price As String = dgvPriceList.Rows(item.Index).Cells("UnitPrice").Value
                     Dim sell_price As String = dgvPriceList.Rows(item.Index).Cells("sell_price").Value
-                    Dim stock As Integer = New DatabaseConnect().get_by_val("product_stocks", prod_unit_id, "product_unit_id", "qty")
+                    Dim stock As String = New DatabaseConnect().get_by_val("product_stocks", prod_unit_id, "product_unit_id", "qty")
 
 
                     Dim row As String() = New String() {prod_unit_id, barcode, "0", desc, brand, unit, color, unit_price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}

@@ -164,28 +164,14 @@
                 For Each item As DataGridViewRow In Me.dgvProd.Rows
                     Dim ledger_id As Integer = getLastID("ledger")
                     Dim product_unit_id As Integer = dgvProd.Rows(item.Index).Cells("id").Value
-                    'Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvProd.Rows(item.Index).Cells("brand").Value)
-                    'Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
-                    'Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvProd.Rows(item.Index).Cells("Color").Value)
+
                     Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
                     Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
                     Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
                     Dim less As String = dgvProd.Rows(item.Index).Cells("less").Value
                     Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
-                    'Dim product_unit_id As Integer = 0
-                    'Dim getp_u_id As New DatabaseConnect
-                    'With getp_u_id
-                    '    .selectByQuery("select id from product_unit where product_id = " & product & "  and brand = " & brand & " and unit = " & unit & " and color = " & color)
-                    '    If .dr.Read Then
-                    '        product_unit_id = CInt(.dr("id"))
-                    '    Else
-                    '        product_unit_id = 0
-                    '    End If
-                    '    .dr.Close()
-                    '    .cmd.Dispose()
-                    '    .con.Close()
-                    'End With
+
 
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
@@ -204,19 +190,22 @@
                         cmd2.Parameters.Clear()
 
                         'decrease stock
-                        Dim decreasestock As New DatabaseConnect
-                        With decreasestock
-                            Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
-                            Dim cur_stock As Integer = Val(temp)
-                            cur_stock = cur_stock - Val(qty)
+                        'Dim decreasestock As New DatabaseConnect
+                        'With decreasestock
+                        '    Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
+                        '    Dim cur_stock As Integer = Val(temp)
+                        '    cur_stock = cur_stock - Val(qty)
 
-                            .cmd.Connection = .con
-                            .cmd.CommandType = CommandType.Text
-                            .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
-                            .cmd.ExecuteNonQuery()
-                            .cmd.Dispose()
-                            .con.Close()
-                        End With
+                        '    .cmd.Connection = .con
+                        '    .cmd.CommandType = CommandType.Text
+                        '    .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                        '    .cmd.ExecuteNonQuery()
+                        '    .cmd.Dispose()
+                        '    .con.Close()
+                        'End With
+
+                        ModelFunction.update_stock(product_unit_id, qty, "-")
+                        ModelFunction.save_price_history(product_unit_id, sell_price, dtpDateIssue.Value.Date.ToString)
 
                     End If
                 Next
