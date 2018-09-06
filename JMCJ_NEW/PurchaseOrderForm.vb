@@ -275,7 +275,13 @@
 
             If e.ColumnIndex = 7 Then
                 Dim amount As Double = 0
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim qty As Integer = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
                 Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
 
                 amount = qty * CDbl(price)

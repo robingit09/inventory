@@ -23,8 +23,8 @@
                 'LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 'LEFT JOIN categories as c ON c.id = pc.category_id)
                 'LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.description")
-                .selectByQuery("Select distinct pu.id, pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat, subc.name as subcat from (((((((((product_unit as pu     
-                LEFT JOIN customer_product_prices as cpp ON cpp.product_unit_id = pu.id)
+                .selectByQuery("Select distinct pu.id, pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat, subc.name as subcat from ((((((((product_unit as pu     
+                
                 LEFT JOIN brand as b on b.id = pu.brand)
                 INNER JOIN unit as u on u.id = pu.unit)
                 LEFT JOIN color as cc ON cc.id = pu.color)

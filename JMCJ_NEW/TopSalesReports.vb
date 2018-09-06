@@ -76,7 +76,6 @@
                     If Not IsDBNull(.dr("amount")) Then
                         grand_total = Val(.dr("amount")).ToString("N2")
                     End If
-
                 Else
                         grand_total = 0
                 End If
@@ -88,7 +87,6 @@
             .dr.Close()
             .con.Close()
         End With
-
 
         Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
                     Left Join product_unit as pu ON pu.id = cop.product_unit_id)
@@ -104,9 +102,6 @@
             query = query & " and l.customer = " & selectedCustomer
         End If
         query = query & " order by total_qty desc"
-
-
-
 
         Dim table_content As String = ""
         Dim dbprod As New DatabaseConnect()

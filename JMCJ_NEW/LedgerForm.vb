@@ -205,7 +205,7 @@
                         'End With
 
                         ModelFunction.update_stock(product_unit_id, qty, "-")
-                        ModelFunction.save_price_history(product_unit_id, sell_price, dtpDateIssue.Value.Date.ToString)
+                        ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
 
                     End If
                 Next

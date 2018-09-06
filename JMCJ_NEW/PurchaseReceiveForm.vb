@@ -359,20 +359,21 @@
                     .cmd.Parameters.Clear()
 
                     'increase stock
-                    Dim increasestock As New DatabaseConnect
-                    With increasestock
-                        Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
-                        Dim cur_stock As Integer = Val(temp)
-                        cur_stock = cur_stock + CInt(qty)
+                    'Dim increasestock As New DatabaseConnect
+                    'With increasestock
+                    '    Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
+                    '    Dim cur_stock As Integer = Val(temp)
+                    '    cur_stock = cur_stock + CInt(qty)
 
-                        .cmd.Connection = .con
-                        .cmd.CommandType = CommandType.Text
-                        .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
-                        .cmd.ExecuteNonQuery()
-                        .cmd.Dispose()
-                        .con.Close()
-                    End With
-
+                    '    .cmd.Connection = .con
+                    '    .cmd.CommandType = CommandType.Text
+                    '    .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                    '    .cmd.ExecuteNonQuery()
+                    '    .cmd.Dispose()
+                    '    .con.Close()
+                    'End With
+                    ModelFunction.update_stock(product_unit_id, qty, "+")
+                    ModelFunction.save_cost_history(product_unit_id, cost, dtp_pr_date.Value.ToString)
                 End If
             Next
             .cmd.Dispose()

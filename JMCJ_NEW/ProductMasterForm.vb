@@ -158,4 +158,41 @@
     Private Sub btnAddCPrice_Click(sender As Object, e As EventArgs) Handles btnAddCPrice.Click
         AddCustomerPrices.ShowDialog()
     End Sub
+
+    Private Sub ProductMasterForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadCostHistory()
+        loadPriceHistory()
+    End Sub
+
+    Private Sub loadPriceHistory()
+        dgvPriceHistory.Rows.Clear()
+        Dim dbpricehis As New DatabaseConnect
+        With dbpricehis
+            .selectByQuery("select unit_price,created_at from price_history where product_unit_id = " & selected_prod_unit & " order by created_at DESC")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim price As String = Val(.dr("unit_price")).ToString("N2")
+                    Dim date_added As String = .dr("created_at")
+                    Dim row As String() = New String() {price, date_added}
+                    dgvPriceHistory.Rows.Add(row)
+                End While
+            End If
+        End With
+    End Sub
+
+    Private Sub loadCostHistory()
+        dgvcosthistory.Rows.Clear()
+        Dim dgvhis As New DatabaseConnect
+        With dgvhis
+            .selectByQuery("select unit_cost,created_at from cost_history where product_unit_id = " & selected_prod_unit & " order by created_at DESC")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim date_added As String = .dr("created_at")
+                    Dim row As String() = New String() {cost, date_added}
+                    dgvcosthistory.Rows.Add(row)
+                End While
+            End If
+        End With
+    End Sub
 End Class
