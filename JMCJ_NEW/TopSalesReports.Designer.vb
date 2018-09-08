@@ -31,7 +31,7 @@ Partial Class TopSalesReports
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(523, 180)
+        Me.btnPrint.Location = New System.Drawing.Point(612, 257)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(75, 23)
         Me.btnPrint.TabIndex = 3
@@ -44,7 +44,7 @@ Partial Class TopSalesReports
         Me.gpFilter.Controls.Add(Me.cbCustomer)
         Me.gpFilter.Location = New System.Drawing.Point(12, 23)
         Me.gpFilter.Name = "gpFilter"
-        Me.gpFilter.Size = New System.Drawing.Size(586, 138)
+        Me.gpFilter.Size = New System.Drawing.Size(675, 208)
         Me.gpFilter.TabIndex = 2
         Me.gpFilter.TabStop = False
         Me.gpFilter.Text = "Filter"
@@ -70,7 +70,7 @@ Partial Class TopSalesReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(613, 226)
+        Me.ClientSize = New System.Drawing.Size(709, 292)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.gpFilter)
         Me.Name = "TopSalesReports"

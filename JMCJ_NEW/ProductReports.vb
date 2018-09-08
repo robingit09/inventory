@@ -1,4 +1,12 @@
 ﻿Public Class ProductReports
+
+    Public selectedDesc As Integer = 0
+    Public selectedBrand As Integer = 0
+    Public selectedUnit As Integer = 0
+    Public selectedColor As Integer = 0
+    Public selectedCat As Integer = 0
+    Public selectedSubCat As Integer = 0
+
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         Dim path As String = Application.StartupPath & "\products.html"
         Try
@@ -17,11 +25,7 @@
     End Sub
 
     Public Function generatePrint() As String
-        Dim table_content As String = ""
-        Dim total_amount As Double = 0
-        Dim dbledger As New DatabaseConnect()
-        With dbledger
-            .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat,pu.status FROM ((((((((products as p 
+        Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat,pu.status FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -29,7 +33,15 @@
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0")
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
+
+        query = query & " order by p.description"
+
+        Dim table_content As String = ""
+        Dim total_amount As Double = 0
+        Dim dbledger As New DatabaseConnect()
+        With dbledger
+            .selectByQuery(query)
             Dim num As Integer = 0
             If .dr.HasRows Then
                 While .dr.Read
@@ -193,4 +205,220 @@
 </body>"
         Return result
     End Function
+
+    Private Sub ProductReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autocompleteDesc()
+        loadBrand()
+        loadUnit()
+        loadColor()
+        loadCat()
+        loadSubCat()
+    End Sub
+
+    Public Sub autocompleteDesc()
+        Dim MySource As New AutoCompleteStringCollection()
+
+        With txtProductDesc
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim product As New DatabaseConnect
+        With product
+            .selectByQuery("Select description from products  where status <> 0  order by description")
+            While .dr.Read
+                MySource.Add(.dr("description"))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadBrand()
+        cbBrand.DataSource = Nothing
+        cbBrand.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "All")
+        Dim dbdesc As New DatabaseConnect
+        With dbdesc
+            .selectByQuery("Select id,name from brand where status <> 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            cbBrand.DataSource = New BindingSource(comboSource, Nothing)
+            cbBrand.DisplayMember = "Value"
+            cbBrand.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadUnit()
+        cbUnit.DataSource = Nothing
+        cbUnit.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "All")
+        Dim dbdesc As New DatabaseConnect
+        With dbdesc
+            .selectByQuery("Select id,name from unit where status <> 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            cbUnit.DataSource = New BindingSource(comboSource, Nothing)
+            cbUnit.DisplayMember = "Value"
+            cbUnit.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadColor()
+        cbColor.DataSource = Nothing
+        cbColor.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "All")
+        Dim dbdesc As New DatabaseConnect
+        With dbdesc
+            .selectByQuery("Select id,name from color where status <> 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            cbColor.DataSource = New BindingSource(comboSource, Nothing)
+            cbColor.DisplayMember = "Value"
+            cbColor.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadCat()
+        cbCat.DataSource = Nothing
+        cbCat.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "All")
+        Dim dbdesc As New DatabaseConnect
+        With dbdesc
+            .selectByQuery("Select id,name from categories where status <> 0 and parent_id = 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            cbCat.DataSource = New BindingSource(comboSource, Nothing)
+            cbCat.DisplayMember = "Value"
+            cbCat.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadSubCat()
+        cbSubCat.DataSource = Nothing
+        cbSubCat.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "All")
+        Dim dbdesc As New DatabaseConnect
+        With dbdesc
+            .selectByQuery("Select id,name from  categories where status <> 0 and parent_id > 0 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr.GetValue(0)
+                    Dim name As String = .dr.GetValue(1)
+                    comboSource.Add(id, name)
+                End While
+            End If
+            cbSubCat.DataSource = New BindingSource(comboSource, Nothing)
+            cbSubCat.DisplayMember = "Value"
+            cbSubCat.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub txtProductDesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProductDesc.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If txtProductDesc.TextLength > 0 Then
+                selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+            End If
+        End If
+    End Sub
+
+    Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
+        If cbBrand.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedBrand = key
+            'populateColor(SelectedProdID, selectedBrand)
+        Else
+            selectedBrand = 0
+            'populateColor(SelectedProdID, selectedBrand)
+        End If
+    End Sub
+
+    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
+        If cbUnit.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedUnit = key
+        Else
+            selectedUnit = 0
+        End If
+    End Sub
+
+    Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
+        If cbColor.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedColor = key
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        Else
+            selectedColor = 0
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        End If
+    End Sub
+
+    Private Sub cbCat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCat.SelectedIndexChanged
+        If cbCat.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbCat.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbCat.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedCat = key
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        Else
+            selectedCat = 0
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        End If
+    End Sub
+
+    Private Sub cbSubCat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubCat.SelectedIndexChanged
+        If cbSubCat.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbSubCat.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbSubCat.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedSubCat = key
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        Else
+            selectedSubCat = 0
+            'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        End If
+    End Sub
 End Class

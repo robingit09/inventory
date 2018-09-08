@@ -1,6 +1,11 @@
 ﻿Public Class ColorForm
 
     Public selectedColor As Integer = 0
+    Private Function toCapitalFirst(ByVal str As String) As String
+        Dim result As String
+        result = str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower
+        Return result
+    End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
@@ -35,7 +40,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "UPDATE color set [name] = ? where id = " & selectedColor
-            .cmd.Parameters.AddWithValue("@name", txtColor.Text.ToUpper)
+            .cmd.Parameters.AddWithValue("@name", toCapitalFirst(txtColor.Text))
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -53,7 +58,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "INSERT INTO color(name,status,created_at,updated_at)VALUES(?,?,?,?)"
-            .cmd.Parameters.AddWithValue("@name", txtColor.Text.ToUpper)
+            .cmd.Parameters.AddWithValue("@name", toCapitalFirst(txtColor.Text))
             .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)

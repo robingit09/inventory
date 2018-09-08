@@ -1189,7 +1189,7 @@
 
         Dim product As New DatabaseConnect
         With product
-            .selectByQuery("Select top 50 description from products  where status <> 0  order by description")
+            .selectByQuery("Select description from products  where status <> 0  order by description")
             While .dr.Read
                 MySource.Add(.dr("description"))
             End While

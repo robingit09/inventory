@@ -107,6 +107,13 @@
             Exit Sub
         End If
 
+        Dim existbarcode As Boolean = New DatabaseConnect().isExist("product_unit", "barcode", Trim(txtBarcode.Text))
+        If existbarcode = True Then
+            MsgBox("product (" & txtBarcode.Text & ") is already exist", MsgBoxStyle.Critical)
+            txtBarcode.SelectAll()
+            txtBarcode.Focus()
+            Exit Sub
+        End If
 
 
         If btnAdd.Text = "Add(+)" Then

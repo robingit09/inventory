@@ -3,6 +3,11 @@
     Public selectedCategory As Integer = 0
     Public selectedSubcategory As Integer = 0
     Public selectedColor As Integer = 0
+    'Private Function toCapitalFirst(ByVal str As String) As String
+    '    Dim result As String
+    '    result = str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower
+    '    Return result
+    'End Function
     Private Sub saveData()
         Dim prod_id = 0
         Dim db As New DatabaseConnect
@@ -10,7 +15,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "INSERT INTO PRODUCTS (description,status,created_at,updated_at)
-        VALUES ('" & txtProduct.Text & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
+        VALUES ('" & toFormatLetter(txtProduct.Text) & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -112,7 +117,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "Update products set description=?,updated_at=? where id = " & selectedProduct
-            .cmd.Parameters.AddWithValue("@description", txtProduct.Text)
+            .cmd.Parameters.AddWithValue("@description", toFormatLetter(txtProduct.Text))
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
             .cmd.ExecuteNonQuery()
 
@@ -467,6 +472,12 @@
         End If
     End Sub
 
+    Private Function toFormatLetter(ByVal str As String)
+        Dim res As String = ""
+        res = Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str)
+        Return res
+    End Function
+
     Public Sub clearFields()
         txtProduct.Clear()
 
@@ -515,4 +526,6 @@
         ColorForm.selectedColor = 0
         ColorForm.ShowDialog()
     End Sub
+
+
 End Class

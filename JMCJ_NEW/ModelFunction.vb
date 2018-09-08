@@ -126,4 +126,70 @@
             End If
         End With
     End Sub
+
+    Public Sub deleteData()
+        Dim dbdelete As New DatabaseConnect
+        With dbdelete
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "DELETE FROM products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM product_categories"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM product_subcategories"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM brand"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM unit"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM color"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM product_unit"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_orders"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_order_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_return"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_return_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM customer_return"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM customer_return_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM ledger"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM customer_order_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_receive"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM purchase_receive_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM price_history"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "DELETE FROM cost_history"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.Dispose()
+        End With
+    End Sub
 End Module

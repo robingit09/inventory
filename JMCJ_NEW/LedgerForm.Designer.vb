@@ -763,7 +763,7 @@ Partial Class LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1370, 543)
+        Me.ClientSize = New System.Drawing.Size(1370, 620)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.dgvProd)

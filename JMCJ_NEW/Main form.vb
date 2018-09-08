@@ -19,6 +19,7 @@
     End Sub
 
     Private Sub Main_form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'ModelFunction.deleteData()
         lblDate.Text = DateTime.Now.ToLongDateString
         lblTime.Text = DateTime.Now.ToLongTimeString
         PictureBox1.BorderStyle = BorderStyle.None

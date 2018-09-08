@@ -104,7 +104,7 @@
 
     Private Function toCapitalFirst(ByVal str As String) As String
         Dim result As String
-        result = str.Substring(0, 1).ToUpper() + str.Substring(1)
+        result = str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower
         Return result
     End Function
 End Class

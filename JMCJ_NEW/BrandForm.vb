@@ -1,6 +1,7 @@
 ﻿Public Class BrandForm
     Public selectedBrand As Integer = 0
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
         If btnSave.Text = "Save" Then
             If validation() = False Then
                 Exit Sub
@@ -52,7 +53,7 @@
         With save
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO brand (name,status,created_at,updated_at)VALUES('" & toCapitalFirst(txtBrand.Text) & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
+            .cmd.CommandText = "INSERT INTO brand (name,status,created_at,updated_at)VALUES('" & toCapital(txtBrand.Text) & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -68,7 +69,7 @@
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "UPDATE brand set name =?, updated_at = '" & DateTime.Now.ToString & "' where id = " & selectedBrand
-            .cmd.Parameters.AddWithValue("@name", txtBrand.Text.ToUpper)
+            .cmd.Parameters.AddWithValue("@name", toCapital(txtBrand.Text))
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -101,13 +102,14 @@
 
     Private Sub txtBrand_MouseLeave(sender As Object, e As EventArgs) Handles txtBrand.MouseLeave
         If Trim(txtBrand.Text).Length > 0 Then
-            txtBrand.Text = toCapitalFirst(txtBrand.Text)
+            txtBrand.Text = toCapital(txtBrand.Text)
         End If
     End Sub
 
-    Private Function toCapitalFirst(ByVal str As String) As String
+    Private Function toCapital(ByVal str As String) As String
         Dim result As String
-        result = str.Substring(0, 1).ToUpper() + str.Substring(1)
+        'result = str.Substring(0, 1).ToUpper() + str.Substring(1)
+        result = str.ToUpper
         Return result
     End Function
 End Class
