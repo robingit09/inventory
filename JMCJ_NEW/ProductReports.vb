@@ -35,6 +35,34 @@
                 LEFT JOIN categories as c ON c.id = pc.category_id)
                 LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
 
+        If Trim(txtBarcode.Text) <> "" Then
+            query = query & " and pu.barcode = '" & Trim(txtBarcode.Text) & "'"
+        End If
+
+        If selectedDesc > 0 And Trim(txtProductDesc.Text) <> "" Then
+            query = query & " and p.id = " & selectedDesc
+        End If
+
+        If selectedBrand > 0 Then
+            query = query & " and b.id = " & selectedBrand
+        End If
+
+        If selectedUnit > 0 Then
+            query = query & " and u.id = " & selectedUnit
+        End If
+
+        If selectedColor > 0 Then
+            query = query & " and cc.id = " & selectedColor
+        End If
+
+        If selectedCat > 0 Then
+            query = query & " and c.id = " & selectedCat
+        End If
+
+        If selectedSubCat > 0 Then
+            query = query & " and sub.id = " & selectedSubCat
+        End If
+
         query = query & " order by p.description"
 
         Dim table_content As String = ""

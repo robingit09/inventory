@@ -34,8 +34,6 @@ Partial Class CustomerList
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvCustomer = New System.Windows.Forms.DataGridView()
-        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,6 +48,8 @@ Partial Class CustomerList
         Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CompanyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ledger = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VIew.SuspendLayout()
@@ -154,20 +154,8 @@ Partial Class CustomerList
         Me.dgvCustomer.Location = New System.Drawing.Point(12, 122)
         Me.dgvCustomer.Name = "dgvCustomer"
         Me.dgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCustomer.Size = New System.Drawing.Size(1344, 323)
+        Me.dgvCustomer.Size = New System.Drawing.Size(1344, 645)
         Me.dgvCustomer.TabIndex = 9
-        '
-        'VIew
-        '
-        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.VIew.Name = "VIew"
-        Me.VIew.Size = New System.Drawing.Size(100, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
-        Me.ViewToolStripMenuItem.Text = "View"
         '
         'ID
         '
@@ -254,11 +242,23 @@ Partial Class CustomerList
         Me.ledger.Name = "ledger"
         Me.ledger.ReadOnly = True
         '
+        'VIew
+        '
+        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.VIew.Name = "VIew"
+        Me.VIew.Size = New System.Drawing.Size(100, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
         'CustomerList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1192, 457)
+        Me.ClientSize = New System.Drawing.Size(1192, 779)
         Me.Controls.Add(Me.dgvCustomer)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnDelete)

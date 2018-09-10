@@ -23,23 +23,12 @@ Partial Class LedgerForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.rbFloatingNo = New System.Windows.Forms.RadioButton()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
-        Me.txtBankDetails = New System.Windows.Forms.TextBox()
         Me.rPaidNo = New System.Windows.Forms.RadioButton()
         Me.rPaidYes = New System.Windows.Forms.RadioButton()
-        Me.rbFloatingYes = New System.Windows.Forms.RadioButton()
-        Me.cbDisable = New System.Windows.Forms.CheckBox()
         Me.txtRemarks = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.cbTerms = New System.Windows.Forms.ComboBox()
         Me.btnAddCustomer = New System.Windows.Forms.Button()
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
-        Me.gpCheck = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.dtpPaid = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -48,10 +37,8 @@ Partial Class LedgerForm
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
-        Me.txtCounterNo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.dtpDateIssue = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
@@ -94,8 +81,12 @@ Partial Class LedgerForm
         Me.gpFields = New System.Windows.Forms.GroupBox()
         Me.btnApprove = New System.Windows.Forms.Button()
         Me.btnCheck = New System.Windows.Forms.Button()
-        Me.gpCheck.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbTerms = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtTotalAmountPaid = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.gpPaid.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpEnterBarcode.SuspendLayout()
@@ -103,45 +94,10 @@ Partial Class LedgerForm
         Me.gpFields.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rbFloatingNo
-        '
-        Me.rbFloatingNo.AutoSize = True
-        Me.rbFloatingNo.Location = New System.Drawing.Point(97, 22)
-        Me.rbFloatingNo.Name = "rbFloatingNo"
-        Me.rbFloatingNo.Size = New System.Drawing.Size(39, 17)
-        Me.rbFloatingNo.TabIndex = 0
-        Me.rbFloatingNo.TabStop = True
-        Me.rbFloatingNo.Text = "No"
-        Me.rbFloatingNo.UseVisualStyleBackColor = True
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(11, 114)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(62, 13)
-        Me.Label9.TabIndex = 18
-        Me.Label9.Text = "Check date"
-        '
-        'dtpCheckDate
-        '
-        Me.dtpCheckDate.Location = New System.Drawing.Point(78, 108)
-        Me.dtpCheckDate.Name = "dtpCheckDate"
-        Me.dtpCheckDate.Size = New System.Drawing.Size(200, 20)
-        Me.dtpCheckDate.TabIndex = 19
-        '
-        'txtBankDetails
-        '
-        Me.txtBankDetails.Location = New System.Drawing.Point(10, 31)
-        Me.txtBankDetails.Multiline = True
-        Me.txtBankDetails.Name = "txtBankDetails"
-        Me.txtBankDetails.Size = New System.Drawing.Size(268, 71)
-        Me.txtBankDetails.TabIndex = 17
-        '
         'rPaidNo
         '
         Me.rPaidNo.AutoSize = True
-        Me.rPaidNo.Location = New System.Drawing.Point(88, 19)
+        Me.rPaidNo.Location = New System.Drawing.Point(70, 19)
         Me.rPaidNo.Name = "rPaidNo"
         Me.rPaidNo.Size = New System.Drawing.Size(39, 17)
         Me.rPaidNo.TabIndex = 1
@@ -160,64 +116,26 @@ Partial Class LedgerForm
         Me.rPaidYes.Text = "Yes"
         Me.rPaidYes.UseVisualStyleBackColor = True
         '
-        'rbFloatingYes
-        '
-        Me.rbFloatingYes.AutoSize = True
-        Me.rbFloatingYes.Location = New System.Drawing.Point(20, 22)
-        Me.rbFloatingYes.Name = "rbFloatingYes"
-        Me.rbFloatingYes.Size = New System.Drawing.Size(43, 17)
-        Me.rbFloatingYes.TabIndex = 1
-        Me.rbFloatingYes.TabStop = True
-        Me.rbFloatingYes.Text = "Yes"
-        Me.rbFloatingYes.UseVisualStyleBackColor = True
-        '
-        'cbDisable
-        '
-        Me.cbDisable.AutoSize = True
-        Me.cbDisable.Location = New System.Drawing.Point(305, 95)
-        Me.cbDisable.Name = "cbDisable"
-        Me.cbDisable.Size = New System.Drawing.Size(61, 17)
-        Me.cbDisable.TabIndex = 52
-        Me.cbDisable.Text = "Disable"
-        Me.cbDisable.UseVisualStyleBackColor = True
-        '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(731, 61)
+        Me.txtRemarks.Location = New System.Drawing.Point(494, 128)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(168, 155)
+        Me.txtRemarks.Size = New System.Drawing.Size(232, 95)
         Me.txtRemarks.TabIndex = 47
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(422, 235)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(36, 13)
-        Me.Label11.TabIndex = 46
-        Me.Label11.Text = "Terms"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(728, 37)
+        Me.Label12.Location = New System.Drawing.Point(426, 131)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(49, 13)
         Me.Label12.TabIndex = 44
         Me.Label12.Text = "Remarks"
         '
-        'cbTerms
-        '
-        Me.cbTerms.FormattingEnabled = True
-        Me.cbTerms.Location = New System.Drawing.Point(506, 232)
-        Me.cbTerms.Name = "cbTerms"
-        Me.cbTerms.Size = New System.Drawing.Size(200, 21)
-        Me.cbTerms.TabIndex = 43
-        '
         'btnAddCustomer
         '
-        Me.btnAddCustomer.Location = New System.Drawing.Point(305, 37)
+        Me.btnAddCustomer.Location = New System.Drawing.Point(314, 37)
         Me.btnAddCustomer.Name = "btnAddCustomer"
         Me.btnAddCustomer.Size = New System.Drawing.Size(88, 23)
         Me.btnAddCustomer.TabIndex = 51
@@ -233,41 +151,6 @@ Partial Class LedgerForm
         Me.btnSaveAndPrint.Text = "Save and Print"
         Me.btnSaveAndPrint.UseVisualStyleBackColor = True
         '
-        'gpCheck
-        '
-        Me.gpCheck.Controls.Add(Me.Label9)
-        Me.gpCheck.Controls.Add(Me.dtpCheckDate)
-        Me.gpCheck.Controls.Add(Me.GroupBox2)
-        Me.gpCheck.Controls.Add(Me.txtBankDetails)
-        Me.gpCheck.Controls.Add(Me.Label8)
-        Me.gpCheck.Enabled = False
-        Me.gpCheck.Location = New System.Drawing.Point(417, 30)
-        Me.gpCheck.Name = "gpCheck"
-        Me.gpCheck.Size = New System.Drawing.Size(289, 196)
-        Me.gpCheck.TabIndex = 49
-        Me.gpCheck.TabStop = False
-        Me.gpCheck.Text = "Check"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.rbFloatingYes)
-        Me.GroupBox2.Controls.Add(Me.rbFloatingNo)
-        Me.GroupBox2.Location = New System.Drawing.Point(14, 134)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(154, 52)
-        Me.GroupBox2.TabIndex = 14
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Is floating ?"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(11, 17)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(65, 13)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Bank details"
-        '
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(925, 18)
@@ -279,15 +162,15 @@ Partial Class LedgerForm
         '
         'dtpPaid
         '
-        Me.dtpPaid.Location = New System.Drawing.Point(171, 229)
+        Me.dtpPaid.Location = New System.Drawing.Point(555, 95)
         Me.dtpPaid.Name = "dtpPaid"
-        Me.dtpPaid.Size = New System.Drawing.Size(192, 20)
+        Me.dtpPaid.Size = New System.Drawing.Size(171, 20)
         Me.dtpPaid.TabIndex = 41
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(171, 213)
+        Me.Label7.Location = New System.Drawing.Point(555, 71)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 13)
         Me.Label7.TabIndex = 40
@@ -297,9 +180,9 @@ Partial Class LedgerForm
         '
         Me.gpPaid.Controls.Add(Me.rPaidNo)
         Me.gpPaid.Controls.Add(Me.rPaidYes)
-        Me.gpPaid.Location = New System.Drawing.Point(11, 207)
+        Me.gpPaid.Location = New System.Drawing.Point(429, 66)
         Me.gpPaid.Name = "gpPaid"
-        Me.gpPaid.Size = New System.Drawing.Size(154, 52)
+        Me.gpPaid.Size = New System.Drawing.Size(120, 52)
         Me.gpPaid.TabIndex = 39
         Me.gpPaid.TabStop = False
         Me.gpPaid.Text = "Is paid ?"
@@ -307,7 +190,7 @@ Partial Class LedgerForm
         'cbPaymentType
         '
         Me.cbPaymentType.FormattingEnabled = True
-        Me.cbPaymentType.Location = New System.Drawing.Point(99, 170)
+        Me.cbPaymentType.Location = New System.Drawing.Point(526, 39)
         Me.cbPaymentType.Name = "cbPaymentType"
         Me.cbPaymentType.Size = New System.Drawing.Size(200, 21)
         Me.cbPaymentType.TabIndex = 38
@@ -315,7 +198,7 @@ Partial Class LedgerForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(8, 173)
+        Me.Label6.Location = New System.Drawing.Point(426, 42)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 13)
         Me.Label6.TabIndex = 37
@@ -325,7 +208,7 @@ Partial Class LedgerForm
         '
         Me.txtAmount.Enabled = False
         Me.txtAmount.ForeColor = System.Drawing.Color.Red
-        Me.txtAmount.Location = New System.Drawing.Point(99, 144)
+        Me.txtAmount.Location = New System.Drawing.Point(108, 150)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(200, 20)
         Me.txtAmount.TabIndex = 36
@@ -333,24 +216,16 @@ Partial Class LedgerForm
         'txtInvoiceNo
         '
         Me.txtInvoiceNo.Enabled = False
-        Me.txtInvoiceNo.Location = New System.Drawing.Point(99, 118)
+        Me.txtInvoiceNo.Location = New System.Drawing.Point(108, 124)
         Me.txtInvoiceNo.MaxLength = 5
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.Size = New System.Drawing.Size(200, 20)
         Me.txtInvoiceNo.TabIndex = 35
         '
-        'txtCounterNo
-        '
-        Me.txtCounterNo.Location = New System.Drawing.Point(99, 92)
-        Me.txtCounterNo.MaxLength = 5
-        Me.txtCounterNo.Name = "txtCounterNo"
-        Me.txtCounterNo.Size = New System.Drawing.Size(200, 20)
-        Me.txtCounterNo.TabIndex = 34
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(8, 148)
+        Me.Label5.Location = New System.Drawing.Point(8, 153)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(70, 13)
         Me.Label5.TabIndex = 33
@@ -359,24 +234,15 @@ Partial Class LedgerForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(8, 121)
+        Me.Label4.Location = New System.Drawing.Point(8, 127)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 13)
         Me.Label4.TabIndex = 32
         Me.Label4.Text = "Invoice Number"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 95)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 13)
-        Me.Label3.TabIndex = 31
-        Me.Label3.Text = "Counter No"
-        '
         'dtpDateIssue
         '
-        Me.dtpDateIssue.Location = New System.Drawing.Point(99, 66)
+        Me.dtpDateIssue.Location = New System.Drawing.Point(108, 98)
         Me.dtpDateIssue.Name = "dtpDateIssue"
         Me.dtpDateIssue.Size = New System.Drawing.Size(200, 20)
         Me.dtpDateIssue.TabIndex = 30
@@ -384,7 +250,7 @@ Partial Class LedgerForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 70)
+        Me.Label2.Location = New System.Drawing.Point(8, 102)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 29
@@ -393,7 +259,7 @@ Partial Class LedgerForm
         'cbCustomer
         '
         Me.cbCustomer.FormattingEnabled = True
-        Me.cbCustomer.Location = New System.Drawing.Point(99, 39)
+        Me.cbCustomer.Location = New System.Drawing.Point(108, 39)
         Me.cbCustomer.Name = "cbCustomer"
         Me.cbCustomer.Size = New System.Drawing.Size(200, 21)
         Me.cbCustomer.TabIndex = 28
@@ -518,7 +384,7 @@ Partial Class LedgerForm
         Me.lblTotalAmount.AutoSize = True
         Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
-        Me.lblTotalAmount.Location = New System.Drawing.Point(858, 238)
+        Me.lblTotalAmount.Location = New System.Drawing.Point(1078, 231)
         Me.lblTotalAmount.Name = "lblTotalAmount"
         Me.lblTotalAmount.Size = New System.Drawing.Size(88, 39)
         Me.lblTotalAmount.TabIndex = 55
@@ -528,7 +394,7 @@ Partial Class LedgerForm
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(741, 246)
+        Me.Label13.Location = New System.Drawing.Point(921, 246)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(120, 22)
         Me.Label13.TabIndex = 54
@@ -669,7 +535,7 @@ Partial Class LedgerForm
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(922, 138)
+        Me.Label18.Location = New System.Drawing.Point(922, 83)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(66, 13)
         Me.Label18.TabIndex = 60
@@ -678,7 +544,7 @@ Partial Class LedgerForm
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(922, 178)
+        Me.Label19.Location = New System.Drawing.Point(922, 123)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(67, 13)
         Me.Label19.TabIndex = 62
@@ -686,20 +552,24 @@ Partial Class LedgerForm
         '
         'txtDeliveredBy
         '
-        Me.txtDeliveredBy.Location = New System.Drawing.Point(925, 154)
+        Me.txtDeliveredBy.Location = New System.Drawing.Point(925, 99)
         Me.txtDeliveredBy.Name = "txtDeliveredBy"
         Me.txtDeliveredBy.Size = New System.Drawing.Size(241, 20)
         Me.txtDeliveredBy.TabIndex = 67
         '
         'txtReceivedBy
         '
-        Me.txtReceivedBy.Location = New System.Drawing.Point(925, 196)
+        Me.txtReceivedBy.Location = New System.Drawing.Point(925, 141)
         Me.txtReceivedBy.Name = "txtReceivedBy"
         Me.txtReceivedBy.Size = New System.Drawing.Size(241, 20)
         Me.txtReceivedBy.TabIndex = 68
         '
         'gpFields
         '
+        Me.gpFields.Controls.Add(Me.Label8)
+        Me.gpFields.Controls.Add(Me.txtAddress)
+        Me.gpFields.Controls.Add(Me.Label3)
+        Me.gpFields.Controls.Add(Me.txtTotalAmountPaid)
         Me.gpFields.Controls.Add(Me.btnApprove)
         Me.gpFields.Controls.Add(Me.btnCheck)
         Me.gpFields.Controls.Add(Me.txtReceivedBy)
@@ -710,14 +580,11 @@ Partial Class LedgerForm
         Me.gpFields.Controls.Add(Me.Label2)
         Me.gpFields.Controls.Add(Me.Label18)
         Me.gpFields.Controls.Add(Me.dtpDateIssue)
-        Me.gpFields.Controls.Add(Me.Label3)
         Me.gpFields.Controls.Add(Me.Label4)
         Me.gpFields.Controls.Add(Me.lblTotalAmount)
         Me.gpFields.Controls.Add(Me.Label5)
         Me.gpFields.Controls.Add(Me.Label13)
-        Me.gpFields.Controls.Add(Me.txtCounterNo)
         Me.gpFields.Controls.Add(Me.txtInvoiceNo)
-        Me.gpFields.Controls.Add(Me.cbDisable)
         Me.gpFields.Controls.Add(Me.txtAmount)
         Me.gpFields.Controls.Add(Me.txtRemarks)
         Me.gpFields.Controls.Add(Me.Label6)
@@ -731,7 +598,6 @@ Partial Class LedgerForm
         Me.gpFields.Controls.Add(Me.dtpPaid)
         Me.gpFields.Controls.Add(Me.btnSaveAndPrint)
         Me.gpFields.Controls.Add(Me.btnSave)
-        Me.gpFields.Controls.Add(Me.gpCheck)
         Me.gpFields.Location = New System.Drawing.Point(12, 11)
         Me.gpFields.Name = "gpFields"
         Me.gpFields.Size = New System.Drawing.Size(1278, 286)
@@ -759,6 +625,59 @@ Partial Class LedgerForm
         Me.btnCheck.Text = "Check"
         Me.btnCheck.UseVisualStyleBackColor = True
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(426, 232)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(36, 13)
+        Me.Label11.TabIndex = 46
+        Me.Label11.Text = "Terms"
+        '
+        'cbTerms
+        '
+        Me.cbTerms.FormattingEnabled = True
+        Me.cbTerms.Location = New System.Drawing.Point(494, 229)
+        Me.cbTerms.Name = "cbTerms"
+        Me.cbTerms.Size = New System.Drawing.Size(232, 21)
+        Me.cbTerms.TabIndex = 43
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(8, 179)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 13)
+        Me.Label3.TabIndex = 71
+        Me.Label3.Text = "Total Amount Paid"
+        '
+        'txtTotalAmountPaid
+        '
+        Me.txtTotalAmountPaid.Enabled = False
+        Me.txtTotalAmountPaid.ForeColor = System.Drawing.Color.Red
+        Me.txtTotalAmountPaid.Location = New System.Drawing.Point(108, 176)
+        Me.txtTotalAmountPaid.Name = "txtTotalAmountPaid"
+        Me.txtTotalAmountPaid.Size = New System.Drawing.Size(200, 20)
+        Me.txtTotalAmountPaid.TabIndex = 72
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(8, 71)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(45, 13)
+        Me.Label8.TabIndex = 73
+        Me.Label8.Text = "Address"
+        '
+        'txtAddress
+        '
+        Me.txtAddress.Enabled = False
+        Me.txtAddress.ForeColor = System.Drawing.Color.Red
+        Me.txtAddress.Location = New System.Drawing.Point(108, 68)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Size = New System.Drawing.Size(200, 20)
+        Me.txtAddress.TabIndex = 74
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -772,10 +691,6 @@ Partial Class LedgerForm
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Order (Ledger Form)"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.gpCheck.ResumeLayout(False)
-        Me.gpCheck.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.gpPaid.ResumeLayout(False)
         Me.gpPaid.PerformLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
@@ -788,24 +703,12 @@ Partial Class LedgerForm
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents rbFloatingNo As RadioButton
-    Friend WithEvents Label9 As Label
-    Friend WithEvents dtpCheckDate As DateTimePicker
-    Friend WithEvents txtBankDetails As TextBox
     Friend WithEvents rPaidNo As RadioButton
     Friend WithEvents rPaidYes As RadioButton
-    Friend WithEvents rbFloatingYes As RadioButton
-    Friend WithEvents cbDisable As CheckBox
     Friend WithEvents txtRemarks As TextBox
-    Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents cbTerms As ComboBox
     Friend WithEvents btnAddCustomer As Button
     Friend WithEvents btnSaveAndPrint As Button
-    Friend WithEvents gpCheck As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label8 As Label
     Friend WithEvents btnSave As Button
     Friend WithEvents dtpPaid As DateTimePicker
     Friend WithEvents Label7 As Label
@@ -814,10 +717,8 @@ Partial Class LedgerForm
     Friend WithEvents Label6 As Label
     Friend WithEvents txtAmount As TextBox
     Friend WithEvents txtInvoiceNo As TextBox
-    Friend WithEvents txtCounterNo As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents dtpDateIssue As DateTimePicker
     Friend WithEvents Label2 As Label
     Friend WithEvents cbCustomer As ComboBox
@@ -860,4 +761,10 @@ Partial Class LedgerForm
     Friend WithEvents gpFields As GroupBox
     Friend WithEvents btnApprove As Button
     Friend WithEvents btnCheck As Button
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cbTerms As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtTotalAmountPaid As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtAddress As TextBox
 End Class

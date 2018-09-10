@@ -80,16 +80,15 @@
     End Sub
 
     Public Sub clearfields()
-        txtCounterNo.Text = ""
+
         txtInvoiceNo.Text = ""
         txtAmount.Text = ""
 
         rPaidYes.Checked = False
         rPaidNo.Checked = False
-        rbFloatingYes.Checked = False
-        rbFloatingNo.Checked = False
 
-        txtBankDetails.Text = ""
+
+
         cbCustomer.SelectedIndex = 0
         cbPaymentType.SelectedIndex = 0
         cbTerms.SelectedIndex = 0
@@ -107,26 +106,37 @@
             Try
                 .cmd.CommandType = CommandType.Text
                 .cmd.Connection = .con
-                .cmd.CommandText = "INSERT INTO ledger([customer],[date_issue],[counter_no],[invoice_no],[amount],[payment_type],[date_paid],[paid],[check_date],[bank_details],[floating],[ledger],[status],[created_at],[updated_at],[payment_due_date],[payment_terms],[remarks],[delivered_by],[received_by])" &
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-                .cmd.Parameters.AddWithValue("@customer", selectedCustomer)
-                .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.ToString)
+                .cmd.CommandText = "INSERT INTO customer_orders(invoice_no,customer_id,customer_address,date_issue,amount,amount_paid,payment_status,delivery_status,payment_due_date,payment_terms,remarks,paid,delivered_by,received_by,created_at,updated_at)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 
-                If Trim(txtCounterNo.Text).Length = 0 Then
-                    txtCounterNo.Text = "N/A"
-                End If
-
-                .cmd.Parameters.AddWithValue("@counter_no", txtCounterNo.Text)
                 .cmd.Parameters.AddWithValue("@invoice_no", txtInvoiceNo.Text)
+                .cmd.Parameters.AddWithValue("@customer_id", selectedCustomer)
+                .cmd.Parameters.AddWithValue("@customer_address", txtAddress.Text)
+                .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.ToString)
 
                 Dim format_amount As String = ""
                 If txtAmount.Text.Contains(",") Or txtAmount.Text.Contains(".") Then
                     format_amount = txtAmount.Text.Replace(",", "")
                 End If
 
+                Dim format_amount_paid As String = ""
+                If txtTotalAmountPaid.Text.Contains(",") Or txtTotalAmountPaid.Text.Contains(".") Then
+                    format_amount_paid = txtTotalAmountPaid.Text.Replace(",", "")
+                End If
+
                 .cmd.Parameters.AddWithValue("@amount", format_amount)
-                .cmd.Parameters.AddWithValue("@payment_type", selectedPaymentType)
-                .cmd.Parameters.AddWithValue("@date_paid", dtpPaid.Value.Date.ToString)
+                .cmd.Parameters.AddWithValue("@amount_paid", format_amount_paid)
+                .cmd.Parameters.AddWithValue("@payment_status", 1)
+                .cmd.Parameters.AddWithValue("@delivery_status", 1)
+                Dim payment_date As New Date
+                payment_date = dtpDateIssue.Value.AddDays(term)
+                .cmd.Parameters.AddWithValue("@payment_due_date", payment_date.ToString)
+                .cmd.Parameters.AddWithValue("@payment_terms", term)
+
+                .cmd.Parameters.AddWithValue("@remarks", txtRemarks.Text)
+                .cmd.Parameters.AddWithValue("@delivered_by", Trim(txtDeliveredBy.Text))
+                .cmd.Parameters.AddWithValue("@received_by", Trim(txtReceivedBy.Text))
+
 
                 Dim ispaid As Boolean
                 If rPaidYes.Checked Then
@@ -137,22 +147,10 @@
                     ispaid = False
                 End If
                 .cmd.Parameters.AddWithValue("@paid", ispaid)
-                .cmd.Parameters.AddWithValue("@check_date", dtpCheckDate.Value.Date.ToString)
-                .cmd.Parameters.AddWithValue("@bank_details", txtBankDetails.Text)
-                .cmd.Parameters.AddWithValue("@floating", Me.isfloating)
-
-                .cmd.Parameters.AddWithValue("@ledger", getLedgerType(selectedCustomer))
-                .cmd.Parameters.AddWithValue("@status", 1)
                 .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                 .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
 
-                Dim payment_date As New Date
-                payment_date = dtpDateIssue.Value.AddDays(term)
-                .cmd.Parameters.AddWithValue("@payment_due_date", payment_date.ToString)
-                .cmd.Parameters.AddWithValue("@payment_terms", term)
-                .cmd.Parameters.AddWithValue("@remarks", txtRemarks.Text)
-                .cmd.Parameters.AddWithValue("@delivered_by", Trim(txtDeliveredBy.Text))
-                .cmd.Parameters.AddWithValue("@received_by", Trim(txtReceivedBy.Text))
+
                 .cmd.ExecuteNonQuery()
                 .cmd.Dispose()
                 .con.Close()
@@ -223,9 +221,9 @@
 
     Private Sub updateData()
 
-        If Trim(txtCounterNo.Text).Length = 0 Then
-            txtCounterNo.Text = "N/A"
-        End If
+        'If Trim(txtCounterNo.Text).Length = 0 Then
+        '    txtCounterNo.Text = "N/A"
+        'End If
 
 
         Dim ispaid As Boolean = False
@@ -235,12 +233,12 @@
             ispaid = False
         End If
 
-        Dim isfloating As Boolean = False
-        If rbFloatingYes.Checked = True Then
-            isfloating = True
-        Else
-            isfloating = False
-        End If
+        'Dim isfloating As Boolean = False
+        'If rbFloatingYes.Checked = True Then
+        '    isfloating = True
+        'Else
+        '    isfloating = False
+        'End If
 
         Dim dtp_payment_due As New Date
         dtp_payment_due = dtpDateIssue.Value.AddDays(term)
@@ -256,8 +254,8 @@
         With db
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "UPDATE ledger SET [counter_no]='" & txtCounterNo.Text & "',[date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[invoice_no]='" & txtInvoiceNo.Text & "',[amount]=" & format_amount & ", " &
-            "[paid]=" & ispaid & ",[date_paid]='" & dtpPaid.Value.Date.ToString & "', [floating]=" & isfloating & ",[bank_details]='" & txtBankDetails.Text & "',[check_date]='" & dtpCheckDate.Value.Date.ToString & "',[customer]=" & Me.selectedCustomer & ",[ledger]=" & getLedgerType(selectedCustomer) & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
+            .cmd.CommandText = "UPDATE ledger SET [date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[invoice_no]='" & txtInvoiceNo.Text & "',[amount]=" & format_amount & ", " &
+            "[paid]=" & ispaid & ",[date_paid]='" & dtpPaid.Value.Date.ToString & "', [floating]=" & isfloating & ",[customer]=" & Me.selectedCustomer & ",[ledger]=" & getLedgerType(selectedCustomer) & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
             "[payment_due_date]='" & dtp_payment_due.ToString & "',[payment_terms]= " & Me.term & ",[remarks]='" & txtRemarks.Text & "' WHERE [ID] = " & LedgerList.selectedID
 
             '.cmd.Parameters.AddWithValue("@counter_no", Convert.ToInt32(txtCounterNo.Text))
@@ -319,69 +317,69 @@
         If cbPaymentType.SelectedIndex > 0 Then
             cbPaymentType.BackColor = Drawing.Color.White
 
-            Select Case cbPaymentType.Text
-                Case "Cash"
-                    gpCheck.Enabled = False
-                Case "C.O.D"
-                    gpCheck.Enabled = False
-                Case "Credit"
-                    gpCheck.Enabled = True
-                Case Else
-                    gpCheck.Enabled = False
-            End Select
+            'Select Case cbPaymentType.Text
+            '    Case "Cash"
+            '        gpCheck.Enabled = False
+            '    Case "C.O.D"
+            '        gpCheck.Enabled = False
+            '    Case "Credit"
+            '        gpCheck.Enabled = True
+            '    Case Else
+            '        gpCheck.Enabled = False
+            'End Select
 
             If Trim(cbPaymentType.Text) = "Credit" Then
-                txtCounterNo.Enabled = True
-                txtCounterNo.Text = ""
+                'txtCounterNo.Enabled = True
+                'txtCounterNo.Text = ""
                 rPaidNo.Checked = True
-                rbFloatingNo.Checked = True
+                'rbFloatingNo.Checked = True
                 gpPaid.Enabled = False
                 dtpPaid.Enabled = False
-                txtBankDetails.Enabled = False
-                txtBankDetails.Clear()
-                gpCheck.Enabled = False
+                'txtBankDetails.Enabled = False
+                'txtBankDetails.Clear()
+                'gpCheck.Enabled = False
                 cbTerms.Enabled = True
 
             End If
 
             If Trim(cbPaymentType.Text) = "C.O.D" Then
-                txtCounterNo.Enabled = False
-                txtCounterNo.Text = "N/A"
-                txtCounterNo.BackColor = Drawing.Color.White
+                'txtCounterNo.Enabled = False
+                'txtCounterNo.Text = "N/A"
+                'txtCounterNo.BackColor = Drawing.Color.White
                 rPaidYes.Checked = True
-                rbFloatingYes.Checked = True
+                'rbFloatingYes.Checked = True
                 gpPaid.Enabled = False
                 dtpPaid.Enabled = True
-                gpCheck.Enabled = True
-                txtBankDetails.Enabled = True
+                'gpCheck.Enabled = True
+                'txtBankDetails.Enabled = True
                 cbTerms.Enabled = False
 
             End If
 
             If Trim(cbPaymentType.Text) = "Cash" Then
-                txtCounterNo.Enabled = False
-                txtCounterNo.Text = "N/A"
-                txtCounterNo.BackColor = Drawing.Color.White
+                'txtCounterNo.Enabled = False
+                'txtCounterNo.Text = "N/A"
+                'txtCounterNo.BackColor = Drawing.Color.White
                 rPaidYes.Checked = True
-                rbFloatingYes.Checked = True
+                'rbFloatingYes.Checked = True
                 gpPaid.Enabled = False
                 dtpPaid.Enabled = True
-                txtBankDetails.Enabled = False
-                txtBankDetails.Clear()
-                gpCheck.Enabled = False
+                'txtBankDetails.Enabled = False
+                'txtBankDetails.Clear()
+                'gpCheck.Enabled = False
                 cbTerms.Enabled = False
 
             End If
 
             If Trim(cbPaymentType.Text) = "Post Dated" Then
-                txtCounterNo.Enabled = True
-                txtCounterNo.Text = ""
+                'txtCounterNo.Enabled = True
+                'txtCounterNo.Text = ""
                 rPaidYes.Checked = True
-                rbFloatingYes.Checked = True
+                'rbFloatingYes.Checked = True
                 gpPaid.Enabled = False
                 dtpPaid.Enabled = True
-                gpCheck.Enabled = True
-                txtBankDetails.Enabled = True
+                'gpCheck.Enabled = True
+                'txtBankDetails.Enabled = True
                 cbTerms.Enabled = False
 
             End If
@@ -402,26 +400,26 @@
             Return err_
         End If
 
-        If Trim(txtCounterNo.Text).Length = 0 And txtCounterNo.Enabled = True Then
-            MsgBox("Please input counter no!", MsgBoxStyle.Critical)
-            txtCounterNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Trim(txtCounterNo.Text).Length = 0 And txtCounterNo.Enabled = True Then
+        '    MsgBox("Please input counter no!", MsgBoxStyle.Critical)
+        '    txtCounterNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
-        If Trim(txtInvoiceNo.Text).Length = 0 Then
-            MsgBox("Please input invoice no!", MsgBoxStyle.Critical)
-            txtCounterNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Trim(txtInvoiceNo.Text).Length = 0 Then
+        '    MsgBox("Please input invoice no!", MsgBoxStyle.Critical)
+        '    txtCounterNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
-        If Trim(txtAmount.Text).Length = 0 Then
-            MsgBox("Please input amount no!", MsgBoxStyle.Critical)
-            txtCounterNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Trim(txtAmount.Text).Length = 0 Then
+        '    MsgBox("Please input amount no!", MsgBoxStyle.Critical)
+        '    txtCounterNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
         If cbPaymentType.SelectedIndex <= 0 Then
             MsgBox("Please select payment type!", MsgBoxStyle.Critical)
@@ -439,21 +437,21 @@
             Return err_
         End If
 
-        If Trim(txtBankDetails.Text).Length = 0 And (cbPaymentType.Text = "Post Dated" Or cbPaymentType.Text = "C.O.D") Then
-            MsgBox("Please input bank details!", MsgBoxStyle.Critical)
-            txtBankDetails.BackColor = Drawing.Color.Red
-            txtBankDetails.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Trim(txtBankDetails.Text).Length = 0 And (cbPaymentType.Text = "Post Dated" Or cbPaymentType.Text = "C.O.D") Then
+        '    MsgBox("Please input bank details!", MsgBoxStyle.Critical)
+        '    txtBankDetails.BackColor = Drawing.Color.Red
+        '    txtBankDetails.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
-        If gpCheck.Enabled = True And rPaidYes.Checked And (rbFloatingYes.Checked = False And rbFloatingNo.Checked = False) Then
-            MsgBox("Please check floating!", MsgBoxStyle.Critical)
-            gpCheck.BackColor = Drawing.Color.Red
-            gpCheck.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If gpCheck.Enabled = True And rPaidYes.Checked And (rbFloatingYes.Checked = False And rbFloatingNo.Checked = False) Then
+        '    MsgBox("Please check floating!", MsgBoxStyle.Critical)
+        '    gpCheck.BackColor = Drawing.Color.Red
+        '    gpCheck.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
         If selectedPaymentType = 2 And term = 0 Then
             MsgBox("Please select terms!", MsgBoxStyle.Critical)
@@ -486,13 +484,13 @@
             Return err_
         End If
 
-        If Not IsNumeric(txtCounterNo.Text) And txtCounterNo.Enabled = True Then
-            MsgBox("Invalid input for counter no!", MsgBoxStyle.Critical)
-            txtCounterNo.BackColor = Drawing.Color.Red
-            txtCounterNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Not IsNumeric(txtCounterNo.Text) And txtCounterNo.Enabled = True Then
+        '    MsgBox("Invalid input for counter no!", MsgBoxStyle.Critical)
+        '    txtCounterNo.BackColor = Drawing.Color.Red
+        '    txtCounterNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
         If Not IsNumeric(txtInvoiceNo.Text) Then
             MsgBox("Invalid input for invoice no!", MsgBoxStyle.Critical)
@@ -613,28 +611,28 @@
         Return id
     End Function
 
-    Private Sub rbFloatingYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbFloatingYes.CheckedChanged
-        If rbFloatingYes.Checked Then
-            Me.isfloating = True
-        End If
-    End Sub
+    'Private Sub rbFloatingYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If rbFloatingYes.Checked Then
+    '        Me.isfloating = True
+    '    End If
+    'End Sub
 
-    Private Sub rbFloatingNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbFloatingNo.CheckedChanged
-        If rbFloatingNo.Checked Then
-            Me.isfloating = False
-        End If
-    End Sub
+    'Private Sub rbFloatingNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If rbFloatingNo.Checked Then
+    '        Me.isfloating = False
+    '    End If
+    'End Sub
 
-    Private Sub txtCounterNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCounterNo.TextChanged
-        If txtCounterNo.TextLength > 0 Then
-            If Not IsNumeric(txtCounterNo.Text) Then
-                txtCounterNo.BackColor = Drawing.Color.Red
-                txtCounterNo.SelectAll()
-            Else
-                txtCounterNo.BackColor = Drawing.Color.White
-            End If
-        End If
-    End Sub
+    'Private Sub txtCounterNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If txtCounterNo.TextLength > 0 Then
+    '        If Not IsNumeric(txtCounterNo.Text) Then
+    '            txtCounterNo.BackColor = Drawing.Color.Red
+    '            txtCounterNo.SelectAll()
+    '        Else
+    '            txtCounterNo.BackColor = Drawing.Color.White
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub txtInvoiceNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtInvoiceNo.TextChanged
         If txtInvoiceNo.TextLength > 0 Then
@@ -694,11 +692,11 @@
         End If
     End Sub
 
-    Private Sub txtBankDetails_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBankDetails.TextChanged
-        If Trim(txtBankDetails.Text).Length > 0 Then
-            txtBankDetails.BackColor = Drawing.Color.White
-        End If
-    End Sub
+    'Private Sub txtBankDetails_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If Trim(txtBankDetails.Text).Length > 0 Then
+    '        txtBankDetails.BackColor = Drawing.Color.White
+    '    End If
+    'End Sub
 
     Private Sub LedgerForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         autocompleteProduct()
@@ -716,15 +714,15 @@
         End If
     End Sub
 
-    Private Sub cbDisable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisable.CheckedChanged
-        If cbDisable.Checked = True Then
-            txtCounterNo.Text = "N/A"
-            txtCounterNo.Enabled = False
-            txtCounterNo.BackColor = Drawing.Color.White
-        Else
-            txtCounterNo.Text = ""
-            txtCounterNo.Enabled = True
-        End If
+    Private Sub cbDisable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'If cbDisable.Checked = True Then
+        '    txtCounterNo.Text = "N/A"
+        '    txtCounterNo.Enabled = False
+        '    txtCounterNo.BackColor = Drawing.Color.White
+        'Else
+        '    txtCounterNo.Text = ""
+        '    txtCounterNo.Enabled = True
+        'End If
     End Sub
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
@@ -1208,8 +1206,8 @@
         cbCustomer.Enabled = flag
         btnAddCustomer.Enabled = flag
         dtpDateIssue.Enabled = flag
-        txtCounterNo.Enabled = flag
-        cbDisable.Enabled = flag
+        'txtCounterNo.Enabled = flag
+        'cbDisable.Enabled = flag
         'txtInvoiceNo.Enabled = flag
         'txtAmount.Enabled = flag
         cbPaymentType.Enabled = flag
