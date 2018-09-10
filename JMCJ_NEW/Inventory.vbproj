@@ -233,10 +233,10 @@
     <Compile Include="InventoryReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LedgerForm.Designer.vb">
-      <DependentUpon>LedgerForm.vb</DependentUpon>
+    <Compile Include="CustomerOrderForm.Designer.vb">
+      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="LedgerForm.vb">
+    <Compile Include="CustomerOrderForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LedgerList.Designer.vb">
@@ -470,8 +470,8 @@
     <EmbeddedResource Include="InventoryReport.resx">
       <DependentUpon>InventoryReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LedgerForm.resx">
-      <DependentUpon>LedgerForm.vb</DependentUpon>
+    <EmbeddedResource Include="CustomerOrderForm.resx">
+      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LedgerList.resx">
       <DependentUpon>LedgerList.vb</DependentUpon>

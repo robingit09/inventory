@@ -124,38 +124,38 @@
             Exit Sub
         End If
         If selectedCustomer > 0 Then
-            LedgerForm.enableControl(True)
-            LedgerForm.loadTerm()
-            LedgerForm.loadPaymentType()
-            LedgerForm.getCustomerList("")
-            LedgerForm.selectedCustomer = Me.selectedCustomer
-            LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindString(cbCustomer.Text)
-            LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
-            LedgerForm.dgvProd.Rows.Clear()
+            CustomerOrderForm.enableControl(True)
+            CustomerOrderForm.loadTerm()
+            CustomerOrderForm.loadPaymentType()
+            CustomerOrderForm.getCustomerList("")
+            CustomerOrderForm.selectedCustomer = Me.selectedCustomer
+            CustomerOrderForm.cbCustomer.SelectedIndex = CustomerOrderForm.cbCustomer.FindString(cbCustomer.Text)
+            CustomerOrderForm.txtInvoiceNo.Text = CustomerOrderForm.generateInvoice
+            CustomerOrderForm.dgvProd.Rows.Clear()
 
             'reset this fields
-            LedgerForm.dtpDateIssue.Value = DateTime.Now
-            LedgerForm.txtCounterNo.Text = ""
-            LedgerForm.cbDisable.Checked = False
-            LedgerForm.txtAmount.Text = "0.00"
-            LedgerForm.cbPaymentType.SelectedIndex = 0
-            LedgerForm.selectedPaymentType = 0
-            LedgerForm.rPaidYes.Checked = False
-            LedgerForm.rPaidNo.Checked = False
-            LedgerForm.dtpPaid.Value = DateTime.Now
-            LedgerForm.txtBankDetails.Text = ""
-            LedgerForm.dtpCheckDate.Value = DateTime.Now
-            LedgerForm.rbFloatingYes.Checked = False
-            LedgerForm.rbFloatingNo.Checked = False
+            CustomerOrderForm.dtpDateIssue.Value = DateTime.Now
+            'CustomerOrderForm.txtCounterNo.Text = ""
+            'CustomerOrderForm.cbDisable.Checked = False
+            CustomerOrderForm.txtAmount.Text = "0.00"
+            CustomerOrderForm.cbPaymentType.SelectedIndex = 0
+            CustomerOrderForm.selectedPaymentType = 0
+            CustomerOrderForm.rPaidYes.Checked = False
+            CustomerOrderForm.rPaidNo.Checked = False
+            CustomerOrderForm.dtpPaid.Value = DateTime.Now
+            'CustomerOrderForm.txtBankDetails.Text = ""
+            'CustomerOrderForm.dtpCheckDate.Value = DateTime.Now
+            'CustomerOrderForm.rbFloatingYes.Checked = False
+            'CustomerOrderForm.rbFloatingNo.Checked = False
 
-            LedgerForm.cbTerms.SelectedIndex = 0
-            LedgerForm.txtRemarks.Text = ""
-            LedgerForm.txtDeliveredBy.Text = ""
-            LedgerForm.txtReceivedBy.Text = ""
-            LedgerForm.lblTotalAmount.Text = "0.00"
+            CustomerOrderForm.cbTerms.SelectedIndex = 0
+            CustomerOrderForm.txtRemarks.Text = ""
+            CustomerOrderForm.txtDeliveredBy.Text = ""
+            CustomerOrderForm.txtReceivedBy.Text = ""
+            CustomerOrderForm.lblTotalAmount.Text = "0.00"
 
-            LedgerForm.btnSave.Text = "Save"
-            LedgerForm.btnSaveAndPrint.Text = "Save and Print"
+            CustomerOrderForm.btnSave.Text = "Save"
+            CustomerOrderForm.btnSaveAndPrint.Text = "Save and Print"
 
             For Each item As DataGridViewRow In Me.dgvPriceList.Rows
                 Dim selectedproduct As Boolean = dgvPriceList.Rows(item.Index).Cells("selectproduct").Value
@@ -172,16 +172,16 @@
 
 
                     Dim row As String() = New String() {prod_unit_id, barcode, "0", desc, brand, unit, color, unit_price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
-                    LedgerForm.dgvProd.Rows.Add(row)
+                    CustomerOrderForm.dgvProd.Rows.Add(row)
                 End If
             Next
-            LedgerForm.gpFields.Enabled = True
-            LedgerForm.btnSave.Visible = True
-            LedgerForm.btnSaveAndPrint.Visible = True
-            LedgerForm.txtInvoiceNo.Enabled = False
-            LedgerForm.btnCheck.Visible = False
-            LedgerForm.btnApprove.Visible = False
-            LedgerForm.ShowDialog()
+            CustomerOrderForm.gpFields.Enabled = True
+            CustomerOrderForm.btnSave.Visible = True
+            CustomerOrderForm.btnSaveAndPrint.Visible = True
+            CustomerOrderForm.txtInvoiceNo.Enabled = False
+            CustomerOrderForm.btnCheck.Visible = False
+            CustomerOrderForm.btnApprove.Visible = False
+            CustomerOrderForm.ShowDialog()
         Else
             MsgBox("Please select customer", MsgBoxStyle.Critical)
             cbCustomer.Focus()
