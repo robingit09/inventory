@@ -99,7 +99,7 @@
     End Sub
 
     Private Sub CustomerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CustomerToolStripMenuItem1.Click
-        LedgerList.ShowDialog()
+        CustomerOrder.ShowDialog()
     End Sub
 
     Private Sub CustomerToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles CustomerToolStripMenuItem2.Click

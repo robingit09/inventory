@@ -196,6 +196,18 @@
     <Compile Include="CustomerList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CustomerOrder.Designer.vb">
+      <DependentUpon>CustomerOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerOrderForm.Designer.vb">
+      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerOrderForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CustomerPriceReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -233,10 +245,10 @@
     <Compile Include="InventoryReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomerOrderForm.Designer.vb">
-      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
+    <Compile Include="LedgerForm.Designer.vb">
+      <DependentUpon>LedgerForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CustomerOrderForm.vb">
+    <Compile Include="LedgerForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LedgerList.Designer.vb">
@@ -450,6 +462,12 @@
     <EmbeddedResource Include="CustomerList.resx">
       <DependentUpon>CustomerList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomerOrder.resx">
+      <DependentUpon>CustomerOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerOrderForm.resx">
+      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerPriceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPriceReport.vb</LastGenOutput>
@@ -470,8 +488,8 @@
     <EmbeddedResource Include="InventoryReport.resx">
       <DependentUpon>InventoryReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomerOrderForm.resx">
-      <DependentUpon>CustomerOrderForm.vb</DependentUpon>
+    <EmbeddedResource Include="LedgerForm.resx">
+      <DependentUpon>LedgerForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LedgerList.resx">
       <DependentUpon>LedgerList.vb</DependentUpon>

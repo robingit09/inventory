@@ -4,45 +4,45 @@
     Public selectedPaymentType As Integer = 0
     Public filterQuery As String = ""
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
-        CustomerOrderForm.selectedID = 0
-        CustomerOrderForm.enableControl(True)
-        CustomerOrderForm.loadTerm()
-        CustomerOrderForm.loadPaymentType()
-        CustomerOrderForm.getCustomerList("")
-        CustomerOrderForm.txtInvoiceNo.Text = CustomerOrderForm.generateInvoice
-        CustomerOrderForm.dgvProd.Rows.Clear()
+        LedgerForm.selectedID = 0
+        LedgerForm.enableControl(True)
+        LedgerForm.loadTerm()
+        LedgerForm.loadPaymentType()
+        LedgerForm.getCustomerList("")
+        LedgerForm.txtInvoiceNo.Text = LedgerForm.generateInvoice
+        LedgerForm.dgvProd.Rows.Clear()
 
         'reset this fields
-        CustomerOrderForm.dtpDateIssue.Value = DateTime.Now
-        'CustomerOrderForm.txtCounterNo.Text = ""
-        'CustomerOrderForm.cbDisable.Checked = False
-        CustomerOrderForm.txtAmount.Text = "0.00"
-        CustomerOrderForm.cbPaymentType.SelectedIndex = 0
-        CustomerOrderForm.selectedPaymentType = 0
-        CustomerOrderForm.rPaidYes.Checked = False
-        CustomerOrderForm.rPaidNo.Checked = False
-        CustomerOrderForm.dtpPaid.Value = DateTime.Now
-        'CustomerOrderForm.txtBankDetails.Text = ""
-        'CustomerOrderForm.dtpCheckDate.Value = DateTime.Now
-        'CustomerOrderForm.rbFloatingYes.Checked = False
-        'CustomerOrderForm.rbFloatingNo.Checked = False
-        CustomerOrderForm.cbTerms.SelectedIndex = 0
-        CustomerOrderForm.txtRemarks.Text = ""
-        CustomerOrderForm.txtDeliveredBy.Text = ""
-        CustomerOrderForm.txtReceivedBy.Text = ""
-        CustomerOrderForm.lblTotalAmount.Text = "0.00"
+        LedgerForm.dtpDateIssue.Value = DateTime.Now
+        'LedgerForm.txtCounterNo.Text = ""
+        'LedgerForm.cbDisable.Checked = False
+        LedgerForm.txtAmount.Text = "0.00"
+        LedgerForm.cbPaymentType.SelectedIndex = 0
+        LedgerForm.selectedPaymentType = 0
+        LedgerForm.rPaidYes.Checked = False
+        LedgerForm.rPaidNo.Checked = False
+        LedgerForm.dtpPaid.Value = DateTime.Now
+        'LedgerForm.txtBankDetails.Text = ""
+        'LedgerForm.dtpCheckDate.Value = DateTime.Now
+        'LedgerForm.rbFloatingYes.Checked = False
+        'LedgerForm.rbFloatingNo.Checked = False
+        LedgerForm.cbTerms.SelectedIndex = 0
+        LedgerForm.txtRemarks.Text = ""
+        LedgerForm.txtDeliveredBy.Text = ""
+        LedgerForm.txtReceivedBy.Text = ""
+        LedgerForm.lblTotalAmount.Text = "0.00"
 
 
-        CustomerOrderForm.enableControl(True)
-        CustomerOrderForm.btnSave.Text = "Save"
-        CustomerOrderForm.btnSaveAndPrint.Text = "Save and Print"
-        CustomerOrderForm.dgvProd.Visible = True
-        CustomerOrderForm.gpFields.Enabled = True
-        CustomerOrderForm.btnSave.Visible = True
-        CustomerOrderForm.btnSaveAndPrint.Visible = True
-        CustomerOrderForm.btnCheck.Visible = False
-        CustomerOrderForm.btnApprove.Visible = False
-        CustomerOrderForm.ShowDialog()
+        LedgerForm.enableControl(True)
+        LedgerForm.btnSave.Text = "Save"
+        LedgerForm.btnSaveAndPrint.Text = "Save and Print"
+        LedgerForm.dgvProd.Visible = True
+        LedgerForm.gpFields.Enabled = True
+        LedgerForm.btnSave.Visible = True
+        LedgerForm.btnSaveAndPrint.Visible = True
+        LedgerForm.btnCheck.Visible = False
+        LedgerForm.btnApprove.Visible = False
+        LedgerForm.ShowDialog()
 
         autocompleteCustomer()
 
@@ -186,24 +186,24 @@
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If dgvLedger.SelectedRows.Count = 1 Then
             selectedID = CInt(dgvLedger.SelectedRows(0).Cells(0).Value)
-            CustomerOrderForm.selectedID = CInt(dgvLedger.SelectedRows(0).Cells(0).Value)
-            CustomerOrderForm.btnSave.Text = "Update"
-            CustomerOrderForm.btnSaveAndPrint.Text = "Update and Print"
-            CustomerOrderForm.getCustomerList("")
-            CustomerOrderForm.loadPaymentType()
-            CustomerOrderForm.loadTerm()
+            LedgerForm.selectedID = CInt(dgvLedger.SelectedRows(0).Cells(0).Value)
+            LedgerForm.btnSave.Text = "Update"
+            LedgerForm.btnSaveAndPrint.Text = "Update and Print"
+            LedgerForm.getCustomerList("")
+            LedgerForm.loadPaymentType()
+            LedgerForm.loadTerm()
             loadToUpdateInfo(selectedID)
-            CustomerOrderForm.toloadproductinfo(selectedID)
-            CustomerOrderForm.enableControl(False)
+            LedgerForm.toloadproductinfo(selectedID)
+            LedgerForm.enableControl(False)
             'LedgerForm.gpFields.Enabled = False
-            CustomerOrderForm.btnSave.Visible = False
-            CustomerOrderForm.btnSaveAndPrint.Visible = False
-            CustomerOrderForm.btnCheck.Visible = True
-            CustomerOrderForm.btnApprove.Visible = True
-            CustomerOrderForm.ShowDialog()
+            LedgerForm.btnSave.Visible = False
+            LedgerForm.btnSaveAndPrint.Visible = False
+            LedgerForm.btnCheck.Visible = True
+            LedgerForm.btnApprove.Visible = True
+            LedgerForm.ShowDialog()
         Else
             selectedID = 0
-            CustomerOrderForm.selectedID = 0
+            LedgerForm.selectedID = 0
             MsgBox("Please select ledger!", MsgBoxStyle.Critical)
         End If
     End Sub
@@ -232,16 +232,16 @@
     End Sub
 
     Private Sub LedgerList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'cbShow.SelectedIndex = cbShow.FindString("100")
-        'cbShowFilter.SelectedIndex = cbShowFilter.FindString("All")
-        'Loading.Show()
-        'loadLedger("", cbShow.Text)
-        'loadledgertype()
-        'getPaymentMode()
-        'getMonth()
-        'getYear()
-        'autocompleteCustomer()
-        'Loading.Hide()
+        cbShow.SelectedIndex = cbShow.FindString("100")
+        cbShowFilter.SelectedIndex = cbShowFilter.FindString("All")
+        Loading.Show()
+        loadLedger("", cbShow.Text)
+        loadledgertype()
+        getPaymentMode()
+        getMonth()
+        getYear()
+        autocompleteCustomer()
+        Loading.Hide()
     End Sub
 
     Private Sub dgvLedger_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvLedger.CellContentClick
@@ -280,8 +280,8 @@
                     .selectByQuery("Select company from company where ID = " & customer)
                     If .dr.Read Then
                         customer_val = .dr.GetValue(0)
-                        CustomerOrderForm.cbCustomer.SelectedIndex = CustomerOrderForm.cbCustomer.FindStringExact(customer_val)
-                        CustomerOrderForm.cbCustomer.Text = customer_val
+                        LedgerForm.cbCustomer.SelectedIndex = LedgerForm.cbCustomer.FindStringExact(customer_val)
+                        LedgerForm.cbCustomer.Text = customer_val
                     End If
                     .cmd.Dispose()
                     .dr.Close()
@@ -314,57 +314,57 @@
                 Dim term_ As Integer = CInt(.dr.GetValue(17))
                 Select Case term_
                     Case 30
-                        CustomerOrderForm.cbTerms.SelectedIndex = 1
+                        LedgerForm.cbTerms.SelectedIndex = 1
                     Case 60
-                        CustomerOrderForm.cbTerms.SelectedIndex = 2
+                        LedgerForm.cbTerms.SelectedIndex = 2
                     Case 90
-                        CustomerOrderForm.cbTerms.SelectedIndex = 3
+                        LedgerForm.cbTerms.SelectedIndex = 3
                     Case 120
-                        CustomerOrderForm.cbTerms.SelectedIndex = 4
+                        LedgerForm.cbTerms.SelectedIndex = 4
                     Case Else
-                        CustomerOrderForm.cbTerms.SelectedIndex = 0
+                        LedgerForm.cbTerms.SelectedIndex = 0
                 End Select
                 Dim remarks As String = .dr.GetValue(18)
 
-                CustomerOrderForm.cbPaymentType.SelectedIndex = CustomerOrderForm.cbPaymentType.FindStringExact(ledger_type_val)
-                CustomerOrderForm.cbPaymentType.Text = payment_type_val
-                CustomerOrderForm.dtpDateIssue.Value = date_issue
-                'CustomerOrderForm.txtCounterNo.Text = counter_no
-                CustomerOrderForm.txtInvoiceNo.Text = invoice_no
-                CustomerOrderForm.txtAmount.Text = amount
-                CustomerOrderForm.lblTotalAmount.Text = Val(amount).ToString("N2")
+                LedgerForm.cbPaymentType.SelectedIndex = LedgerForm.cbPaymentType.FindStringExact(ledger_type_val)
+                LedgerForm.cbPaymentType.Text = payment_type_val
+                LedgerForm.dtpDateIssue.Value = date_issue
+                'LedgerForm.txtCounterNo.Text = counter_no
+                LedgerForm.txtInvoiceNo.Text = invoice_no
+                LedgerForm.txtAmount.Text = amount
+                LedgerForm.lblTotalAmount.Text = Val(amount).ToString("N2")
 
                 If paid = True Then
-                    CustomerOrderForm.rPaidYes.Checked = True
+                    LedgerForm.rPaidYes.Checked = True
                 Else
-                    CustomerOrderForm.rPaidYes.Checked = False
+                    LedgerForm.rPaidYes.Checked = False
                 End If
 
                 If paid = False Then
-                    CustomerOrderForm.rPaidNo.Checked = True
+                    LedgerForm.rPaidNo.Checked = True
                 Else
-                    CustomerOrderForm.rPaidNo.Checked = False
+                    LedgerForm.rPaidNo.Checked = False
                 End If
 
-                CustomerOrderForm.dtpPaid.Value = date_paid
-                'CustomerOrderForm.txtBankDetails.Text = bank_details
-                'CustomerOrderForm.dtpCheckDate.Value = check_date
+                LedgerForm.dtpPaid.Value = date_paid
+                'LedgerForm.txtBankDetails.Text = bank_details
+                'LedgerForm.dtpCheckDate.Value = check_date
 
                 'If floating = True Then
-                '    CustomerOrderForm.rbFloatingYes.Checked = True
+                '    LedgerForm.rbFloatingYes.Checked = True
                 'Else
-                '    CustomerOrderForm.rbFloatingYes.Checked = False
+                '    LedgerForm.rbFloatingYes.Checked = False
                 'End If
 
                 'If floating = False Then
-                '    CustomerOrderForm.rbFloatingNo.Checked = True
+                '    LedgerForm.rbFloatingNo.Checked = True
                 'Else
-                '    CustomerOrderForm.rbFloatingNo.Checked = False
+                '    LedgerForm.rbFloatingNo.Checked = False
                 'End If
-                CustomerOrderForm.txtRemarks.Text = remarks
+                LedgerForm.txtRemarks.Text = remarks
 
-                CustomerOrderForm.txtDeliveredBy.Text = .dr("delivered_by")
-                CustomerOrderForm.txtReceivedBy.Text = .dr("received_by")
+                LedgerForm.txtDeliveredBy.Text = .dr("delivered_by")
+                LedgerForm.txtReceivedBy.Text = .dr("received_by")
 
             End If
         End With

@@ -347,7 +347,7 @@
                 Exit Sub
             End If
             saveData()
-            CustomerOrderForm.getCustomerList("")
+            LedgerForm.getCustomerList("")
             LedgerList.autocompleteCustomer()
             CustomerList.loadCustomer("")
             CustomerPriceList.getCustomer()
@@ -358,7 +358,7 @@
                 Exit Sub
             End If
             updateData()
-            CustomerOrderForm.getCustomerList("")
+            LedgerForm.getCustomerList("")
             LedgerList.autocompleteCustomer()
             CustomerList.loadCustomer("")
             clearFields()
