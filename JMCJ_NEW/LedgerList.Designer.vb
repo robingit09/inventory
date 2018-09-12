@@ -438,7 +438,7 @@ Partial Class LedgerList
         Me.Controls.Add(Me.btnAddNew)
         Me.Name = "LedgerList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Customer Order List (Ledger)"
+        Me.Text = "Ledger"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
