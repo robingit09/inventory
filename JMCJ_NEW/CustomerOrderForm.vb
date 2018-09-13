@@ -1215,7 +1215,7 @@
             .cmd.CommandType = CommandType.Text
             .cmd.CommandText = "UPDATE customer_orders SET [date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[invoice_no]='" & txtInvoiceNo.Text & "',[amount]=" & format_amount & ", " &
             "[paid]=" & ispaid & ",[customer]=" & Me.selectedCustomer & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
-            "[payment_due_date]='" & dtp_payment_due.ToString & "',[payment_terms]= " & Me.term & ",[remarks]='" & txtRemarks.Text & "' WHERE [ID] = " & LedgerList.selectedID
+            "[payment_due_date]='" & dtp_payment_due.ToString & "',[payment_terms]= " & Me.term & ",[remarks]='" & txtRemarks.Text & "' WHERE [ID] = " & selectedID
 
             '.cmd.Parameters.AddWithValue("@counter_no", Convert.ToInt32(txtCounterNo.Text))
             '.cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.ToString)

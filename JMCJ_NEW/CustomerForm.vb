@@ -347,22 +347,22 @@
                 Exit Sub
             End If
             saveData()
-            LedgerForm.getCustomerList("")
-            LedgerList.autocompleteCustomer()
+            CustomerOrderForm.getCustomerList("")
+            'CustomerOrder.autocompleteCustomer()
             CustomerList.loadCustomer("")
             CustomerPriceList.getCustomer()
             clearFields()
-            LedgerList.loadLedger("", LedgerList.cbShow.Text)
+            'LedgerList.loadLedger("", LedgerList.cbShow.Text)
         ElseIf btnSave.Text = "Update" Then
             If validation() Then
                 Exit Sub
             End If
             updateData()
-            LedgerForm.getCustomerList("")
-            LedgerList.autocompleteCustomer()
+            CustomerOrderForm.getCustomerList("")
+            'LedgerList.autocompleteCustomer()
             CustomerList.loadCustomer("")
             clearFields()
-            LedgerList.loadLedger("", LedgerList.cbShow.Text)
+            'LedgerList.loadLedger("", LedgerList.cbShow.Text)
         End If
     End Sub
 

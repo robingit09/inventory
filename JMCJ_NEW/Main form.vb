@@ -15,7 +15,7 @@
 
     Private Sub CustomerOrderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'CustomerOrder.ShowDialog()
-        LedgerList.ShowDialog()
+        CustomerOrder.ShowDialog()
     End Sub
 
     Private Sub Main_form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

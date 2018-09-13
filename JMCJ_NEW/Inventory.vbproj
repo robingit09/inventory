@@ -245,18 +245,6 @@
     <Compile Include="InventoryReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LedgerForm.Designer.vb">
-      <DependentUpon>LedgerForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="LedgerForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LedgerList.Designer.vb">
-      <DependentUpon>LedgerList.vb</DependentUpon>
-    </Compile>
-    <Compile Include="LedgerList.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Loading.Designer.vb">
       <DependentUpon>Loading.vb</DependentUpon>
     </Compile>
@@ -487,12 +475,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryReport.resx">
       <DependentUpon>InventoryReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LedgerForm.resx">
-      <DependentUpon>LedgerForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LedgerList.resx">
-      <DependentUpon>LedgerList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loading.resx">
       <DependentUpon>Loading.vb</DependentUpon>
