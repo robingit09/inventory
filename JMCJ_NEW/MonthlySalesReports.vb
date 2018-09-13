@@ -5,19 +5,19 @@
 
         'get total sales
         Dim query_total_sales As String = "Select SUM(cop.total_amount) as sale from customer_order_products as cop 
-        INNER JOIN ledger as l ON l.id = cop.customer_order_ledger_id 
-        where cop.total_amount > 0"
+        INNER JOIN customer_orders as co ON co.id = cop.customer_order_id 
+        where cop.total_amount > 0 and co.delivery_status <> 0"
         If filter.ContainsKey("month") Then
             Dim month As String = filter.Item("month")
             If month <> "All" Then
-                query_total_sales = query_total_sales & " and MONTH(l.date_issue) = " & monthToNumber(month)
+                query_total_sales = query_total_sales & " and MONTH(co.date_issue) = " & monthToNumber(month)
             End If
         End If
 
         If filter.ContainsKey("year") Then
             Dim year As String = filter.Item("year")
             If year <> "All" Then
-                query_total_sales = query_total_sales & " and YEAR(l.date_issue) = " & year
+                query_total_sales = query_total_sales & " and YEAR(co.date_issue) = " & year
             End If
         End If
 
@@ -36,21 +36,21 @@
             .con.Close()
         End With
 
-        Dim query As String = "Select Format(cop.created_at,'mm-yyyy') as monthly,count(l.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
-                    inner join ledger as l ON l.id = cop.customer_order_ledger_id 
-                    where l.status <> 0"
+        Dim query As String = "Select Format(cop.created_at,'mm-yyyy') as monthly,count(co.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
+                    inner join customer_orders as co ON co.id = cop.customer_order_id 
+                    where co.delivery_status <> 0"
 
         If filter.ContainsKey("month") Then
             Dim month As String = filter.Item("month")
             If month <> "All" Then
-                query = query & " and MONTH(date_issue) = " & monthToNumber(month)
+                query = query & " and MONTH(co.date_issue) = " & monthToNumber(month)
             End If
         End If
 
         If filter.ContainsKey("year") Then
             Dim year As String = filter.Item("year")
             If year <> "All" Then
-                query = query & " and YEAR(date_issue) = " & year
+                query = query & " and YEAR(co.date_issue) = " & year
             End If
         End If
         query = query & " group by Format(cop.created_at,'mm-yyyy') order by Format(cop.created_at,'mm-yyyy') desc"
@@ -69,7 +69,7 @@
                     tr = tr & "<td>" & daily & "</td>"
                     tr = tr & "<td>" & orders & "</td>"
                     tr = tr & "<td>" & qty & "</td>"
-                    tr = tr & "<td>" & total & "</td>"
+                    tr = tr & "<td>" & Val(total).ToString("N2") & "</td>"
                     tr = tr & "</tr>"
                     table_content = table_content & tr
                 End While

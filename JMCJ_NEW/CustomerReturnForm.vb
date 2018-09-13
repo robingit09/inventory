@@ -1,7 +1,7 @@
 ﻿Public Class CustomerReturnForm
     Public selectedID As Integer = 0
     Public selectedCustomer As Integer = 0
-    Public selectedLedger As Integer = 0
+    Public selected_co_id As Integer = 0
     Public SelectedProdID As Integer = 0
     Public selectedBrand As Integer = 0
     Public selectedUnit As Integer = 0
@@ -568,12 +568,12 @@
         With insertPR
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO customer_return (cr_no,customer_id,ledger_id,cr_date,total_amount,issued_by,created_at,updated_at,reason,status)
+            .cmd.CommandText = "INSERT INTO customer_return (cr_no,customer_id,customer_order_id,cr_date,total_amount,issued_by,created_at,updated_at,reason,status)
                 VALUES(?,?,?,?,?,?,?,?,?,?)"
 
             .cmd.Parameters.AddWithValue("@cr_no", generateCRNo())
             .cmd.Parameters.AddWithValue("@customer_id", selectedCustomer)
-            .cmd.Parameters.AddWithValue("@ledger_id", selectedLedger)
+            .cmd.Parameters.AddWithValue("@customer_order_id", selected_co_id)
             .cmd.Parameters.AddWithValue("@cr_date", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@total_amount", txtTotalAmount.Text)
             .cmd.Parameters.AddWithValue("@issued_by", 1)

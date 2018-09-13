@@ -32,10 +32,10 @@
 
         'get total sold
         Dim query_sold As String = "Select SUM(quantity) as qty from customer_order_products as cop
-                inner join ledger as l on l.id = cop.customer_order_ledger_id
-                where l.status <> 0"
+                inner join customer_orders as co on co.id = cop.customer_order_id
+                where co.delivery_status <> 0"
         If cbCustomer.SelectedIndex > 0 Then
-            query_sold = query_sold & " and l.customer = " & selectedCustomer
+            query_sold = query_sold & " and co.customer = " & selectedCustomer
         End If
 
         Dim total_sold As String = "0"
@@ -61,10 +61,10 @@
 
 
         'get total amount
-        Dim query_amount As String = "Select SUM(sell_price) as amount from customer_order_products as cop
-                inner join ledger as l on l.id = cop.customer_order_ledger_id where l.status <> 0 "
+        Dim query_amount As String = "Select SUM(cop.total_amount) as amount from customer_order_products as cop
+                inner join customer_orders as co on co.id = cop.customer_order_id where co.delivery_status <> 0 "
         If cbCustomer.SelectedIndex > 0 Then
-            query_amount = query_amount & " and l.customer = " & selectedCustomer
+            query_amount = query_amount & " and co.customer = " & selectedCustomer
         End If
 
         Dim grand_total As String = "0"
@@ -90,16 +90,16 @@
 
         Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
                     Left Join product_unit as pu ON pu.id = cop.product_unit_id)
-                    INNER JOIN ledger as l on l.id = cop.customer_order_ledger_id)
+                    INNER JOIN customer_orders as co on co.id = cop.customer_order_id)
                     Left Join products as p on p.id = pu.product_id)
                     Left Join brand as b on b.id = pu.brand)
                     Left Join unit as u on u.id = pu.unit)
                     Left Join color as c on c.id = pu.color)
-                    Left Join (Select product_unit_id,SUM(quantity) as total_qty,SUM(sell_price) as total_amount from customer_order_products group by product_unit_id) as total ON  pu.id = total.product_unit_id)
-                    where l.status <> 0 "
+                    Left Join (Select product_unit_id,SUM(quantity) as total_qty,SUM(total_amount) as total_amount from customer_order_products group by product_unit_id) as total ON  pu.id = total.product_unit_id)
+                    where co.delivery_status <> 0 "
 
         If cbCustomer.SelectedIndex > 0 Then
-            query = query & " and l.customer = " & selectedCustomer
+            query = query & " and co.customer = " & selectedCustomer
         End If
         query = query & " order by total_qty desc"
 
