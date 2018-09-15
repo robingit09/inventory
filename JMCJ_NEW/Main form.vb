@@ -146,4 +146,12 @@
     Private Sub CustomerReturnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerReturnToolStripMenuItem.Click
         CustomerReturn.ShowDialog()
     End Sub
+
+    Private Sub LedgerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LedgerToolStripMenuItem.Click
+        Ledger.ShowDialog()
+    End Sub
+
+    Private Sub LedgerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LedgerToolStripMenuItem1.Click
+        LedgerReports.ShowDialog()
+    End Sub
 End Class

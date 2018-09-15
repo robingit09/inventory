@@ -33,13 +33,15 @@ Partial Class CustomerList
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.dgvCustomer = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CityTown = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Owner1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Owner = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OwnerAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,12 +49,10 @@ Partial Class CustomerList
         Me.TIN = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CompanyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ledger = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VIew = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ledger_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VIew.SuspendLayout()
+        CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -147,14 +147,27 @@ Partial Class CustomerList
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
+        'VIew
+        '
+        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.VIew.Name = "VIew"
+        Me.VIew.Size = New System.Drawing.Size(100, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
         'dgvCustomer
         '
         Me.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner1, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus, Me.ledger})
-        Me.dgvCustomer.Location = New System.Drawing.Point(12, 122)
+        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus, Me.ledger_type})
+        Me.dgvCustomer.ContextMenuStrip = Me.VIew
+        Me.dgvCustomer.Location = New System.Drawing.Point(12, 121)
         Me.dgvCustomer.Name = "dgvCustomer"
         Me.dgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCustomer.Size = New System.Drawing.Size(1344, 645)
+        Me.dgvCustomer.Size = New System.Drawing.Size(1412, 683)
         Me.dgvCustomer.TabIndex = 9
         '
         'ID
@@ -188,11 +201,11 @@ Partial Class CustomerList
         Me.CityTown.Name = "CityTown"
         Me.CityTown.ReadOnly = True
         '
-        'Owner1
+        'Owner
         '
-        Me.Owner1.HeaderText = "Owner"
-        Me.Owner1.Name = "Owner1"
-        Me.Owner1.ReadOnly = True
+        Me.Owner.HeaderText = "Owner"
+        Me.Owner.Name = "Owner"
+        Me.Owner.ReadOnly = True
         '
         'OwnerAddress
         '
@@ -236,29 +249,17 @@ Partial Class CustomerList
         Me.CompanyStatus.Name = "CompanyStatus"
         Me.CompanyStatus.ReadOnly = True
         '
-        'ledger
+        'ledger_type
         '
-        Me.ledger.HeaderText = "Ledger Type"
-        Me.ledger.Name = "ledger"
-        Me.ledger.ReadOnly = True
-        '
-        'VIew
-        '
-        Me.VIew.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.VIew.Name = "VIew"
-        Me.VIew.Size = New System.Drawing.Size(100, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
-        Me.ViewToolStripMenuItem.Text = "View"
+        Me.ledger_type.HeaderText = "Ledger Type"
+        Me.ledger_type.Name = "ledger_type"
+        Me.ledger_type.ReadOnly = True
         '
         'CustomerList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1192, 779)
+        Me.ClientSize = New System.Drawing.Size(1192, 749)
         Me.Controls.Add(Me.dgvCustomer)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnDelete)
@@ -270,8 +271,8 @@ Partial Class CustomerList
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.VIew.ResumeLayout(False)
+        CType(Me.dgvCustomer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -286,15 +287,15 @@ Partial Class CustomerList
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnAddNew As Button
-    Friend WithEvents dgvCustomer As DataGridView
     Friend WithEvents VIew As ContextMenuStrip
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents dgvCustomer As DataGridView
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Customer As DataGridViewTextBoxColumn
     Friend WithEvents ContactPerson As DataGridViewTextBoxColumn
     Friend WithEvents Address As DataGridViewTextBoxColumn
     Friend WithEvents CityTown As DataGridViewTextBoxColumn
-    Friend WithEvents Owner1 As DataGridViewTextBoxColumn
+    Friend WithEvents Owner As DataGridViewTextBoxColumn
     Friend WithEvents OwnerAddress As DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber1 As DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber2 As DataGridViewTextBoxColumn
@@ -302,5 +303,5 @@ Partial Class CustomerList
     Friend WithEvents TIN As DataGridViewTextBoxColumn
     Friend WithEvents Email As DataGridViewTextBoxColumn
     Friend WithEvents CompanyStatus As DataGridViewTextBoxColumn
-    Friend WithEvents ledger As DataGridViewTextBoxColumn
+    Friend WithEvents ledger_type As DataGridViewTextBoxColumn
 End Class

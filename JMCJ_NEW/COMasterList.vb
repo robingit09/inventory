@@ -17,28 +17,27 @@
     End Sub
 
     Public Function generatePrint() As String
+        Dim query As String = "SELECT co.*,c.company from customer_orders as co
+            inner join company as c on c.id = co.customer_id"
+
+        query = query & " order by co.date_issue desc"
         Dim table_content As String = ""
         Dim total_amount As Double = 0
         Dim dbledger As New DatabaseConnect()
         With dbledger
-            .selectByQuery("SELECT c.company,l.date_issue,l.amount,l.paid,l.floating,l.date_paid,l.bank_details,l.check_date,
-                l.payment_type,l.ledger FROM ledger as l 
-                inner join company as c on c.id = l.customer")
+            '.selectByQuery("SELECT c.company,l.date_issue,l.amount,l.paid,l.floating,l.date_paid,l.bank_details,l.check_date,
+            '    l.payment_type,l.ledger FROM ledger as l 
+            '    inner join company as c on c.id = l.customer")
+            .selectByQuery(query)
             Dim num As Integer = 0
             If .dr.HasRows Then
                 While .dr.Read
-                    Dim tr As String = "<tr>"
+
                     Dim customer As String = .dr("company")
                     Dim date_issue As String = .dr("date_issue")
                     Dim amount As Double = Val(.dr("amount")).ToString("N2")
-                    Dim ispaid As String = If(.dr("paid") = True, "Yes", "No")
-                    Dim isfloating As String = If(.dr("floating") = True, "Yes", "No")
-                    Dim date_paid As String = .dr("date_paid")
-                    Dim bank_details As String = .dr("bank_details")
-                    Dim check_date As String = .dr("check_date")
+                    Dim amount_paid As Double = Val(.dr("amount_paid")).ToString("N2")
                     Dim payment_type As String = .dr("payment_type")
-                    Dim type As String = .dr("ledger")
-
                     Select Case payment_type
                         Case "0"
                             payment_type = "Cash"
@@ -52,25 +51,37 @@
                             payment_type = ""
                     End Select
 
-                    Select Case type
-                        Case "0"
-                            type = "Charge"
-                        Case "1"
-                            type = "Delivery"
-                        Case Else
-                            type = ""
-                    End Select
+                    Dim terms As Integer = Val(.dr("payment_terms"))
+                    Dim delivered_by As String = .dr("delivered_by")
+                    Dim received_by As String = .dr("received_by")
+                    Dim checked_by As String = .dr("checked_by")
+
+                    If checked_by <> "0" Then
+                        checked_by = New DatabaseConnect().get_by_id("users", checked_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", checked_by, "surname")
+                    Else
+                        checked_by = ""
+                    End If
+
+                    Dim approved_by As String = .dr("approved_by")
+                    If approved_by <> "0" Then
+                        approved_by = New DatabaseConnect().get_by_id("users", approved_by, "first_name") & " " & New DatabaseConnect().get_by_id("users", approved_by, "surname")
+                    Else
+                        approved_by = ""
+                    End If
+
+
+                    Dim tr As String = "<tr>"
                     tr = tr & "<td>" & (num + 1) & "</td>"
                     tr = tr & "<td>" & customer & "</td>"
                     tr = tr & "<td>" & date_issue & "</td>"
-                    tr = tr & "<td>" & Val(amount).ToString("N2") & "</td>"
-                    tr = tr & "<td>" & ispaid & "</td>"
-                    tr = tr & "<td>" & isfloating & "</td>"
-                    tr = tr & "<td>" & date_paid & "</td>"
-                    tr = tr & "<td>" & bank_details & "</td>"
-                    tr = tr & "<td>" & check_date & "</td>"
+                    tr = tr & "<td style='color:red;'>" & Val(amount).ToString("N2") & "</td>"
+                    tr = tr & "<td style='color:red;'>" & Val(amount_paid).ToString("N2") & "</td>"
                     tr = tr & "<td>" & payment_type & "</td>"
-                    tr = tr & "<td>" & type & "</td>"
+                    tr = tr & "<td>" & terms & " Days</td>"
+                    tr = tr & "<td>" & delivered_by & "</td>"
+                    tr = tr & "<td>" & received_by & "</td>"
+                    tr = tr & "<td>" & checked_by & "</td>"
+                    tr = tr & "<td>" & approved_by & "</td>"
                     tr = tr & "</tr>"
                     table_content = table_content & tr
 
@@ -126,26 +137,6 @@
                         <p style='font-family:Arial black;margin:1px;font-size:15pt;'><strong>CUSTOMER ORDER </strong></p><small>Master List</small>
                 </div>
                 <!--<div id='fieldset'>
-					<table class='table_fieldset'>
-						<tr>
-							<td><label><strong> Supplier: </strong></label></td>
-							<td><label>Patrick Pintados Maputi Si Terrence Shop</label></td>
-							<td><label><strong> PO #: PO-PPS1-000003 </strong></label></td>
-							<td>Date: 07-28-2018 </td>
-						</tr>
-						<tr>
-							<td><label><strong> Address </strong></label></td>
-							<td><label> Nakita ko na at di ko pa din matapuan street Quezon City  </label></td>
-							<td colspan='2'><label><strong> ATTN: Dao Ming Zhie</strong></label></td>
-							
-						</tr>
-						<tr>
-							<td colspan='2'><label><strong> Delivered To: Victor Magtanggol </strong></label></td>
-							<td colspan='2'><label><strong> Delivered By: Lee Gonzales </strong></label></td>
-							
-						</tr>
-						
-					<table>
 				</div>-->
 
                 <br>
@@ -156,13 +147,13 @@
                                 <th>Customer</th>
                                 <th>Date</th>
                                 <th>Amount</th>
-                                <th>Is Paid</th>
-                                <th>Is Floating</th>
-                                <th>Date Paid</th>
-                                <th>Bank Details</th>
-                                <th>Check Date</th>
-                                <th>Payment</th>
-                                <th>Ledger</th>
+                                <th>Amount paid</th>
+                                <th>Payment type</th>
+                                <th>Terms</th>
+                                <th>Delivered by</th>
+                                <th>Received by</th>
+                                <th>Checked by</th>
+                                <th>Approved by</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -170,7 +161,7 @@
                                 " & table_content & "
                             </tr>
                             <tr>
-                                <td colspan='10' style='text-align:right;'><strong>Grand Total</strong></td>
+                                <td colspan='10' style='text-align:right;'><strong>Total Amount</strong></td>
                                 <td style='color:red'><strong>" & Val(total_amount).ToString("N2") & "</strong></td>
                             </tr>
                         </tbody>

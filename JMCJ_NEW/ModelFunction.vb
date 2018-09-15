@@ -1,4 +1,22 @@
 ﻿Module ModelFunction
+    Public Sub updateFloating()
+        Dim db As New DatabaseConnect
+        With db
+            .cmd.Connection = db.con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "Update ledger set floating = 0 where check_date < Date()"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "Update ledger set floating = 1 where check_date >= Date()"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+    End Sub
+
     Public Sub update_stock(ByVal p_unit_id As Integer, ByVal qty As Integer, ByVal oper As String)
         Dim dbcheck As String = New DatabaseConnect().get_by_val("product_stocks", p_unit_id, "product_unit_id", "qty")
 

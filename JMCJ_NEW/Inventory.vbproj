@@ -154,6 +154,18 @@
     <Compile Include="CategoryList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CheckNotification.Designer.vb">
+      <DependentUpon>CheckNotification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckNotification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckReport.Designer.vb">
+      <DependentUpon>CheckReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ColorForm.Designer.vb">
       <DependentUpon>ColorForm.vb</DependentUpon>
     </Compile>
@@ -214,6 +226,12 @@
       <DependentUpon>CustomerPriceReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomerReports.Designer.vb">
+      <DependentUpon>CustomerReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CustomerReturn.Designer.vb">
       <DependentUpon>CustomerReturn.vb</DependentUpon>
     </Compile>
@@ -243,6 +261,24 @@
       <DependentUpon>InventoryReport.vb</DependentUpon>
     </Compile>
     <Compile Include="InventoryReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ledger.Designer.vb">
+      <DependentUpon>Ledger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LedgerForm.Designer.vb">
+      <DependentUpon>LedgerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LedgerReports.Designer.vb">
+      <DependentUpon>LedgerReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerReports.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Loading.Designer.vb">
@@ -381,6 +417,18 @@
     <Compile Include="SupplierList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TermNotification.Designer.vb">
+      <DependentUpon>TermNotification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TermNotification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TermReport.Designer.vb">
+      <DependentUpon>TermReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TermReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TopSalesReports.Designer.vb">
       <DependentUpon>TopSalesReports.vb</DependentUpon>
     </Compile>
@@ -427,6 +475,12 @@
       <DependentUpon>CategoryList.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CheckNotification.resx">
+      <DependentUpon>CheckNotification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckReport.resx">
+      <DependentUpon>CheckReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ColorForm.resx">
       <DependentUpon>ColorForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -460,6 +514,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPriceReport.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomerReports.resx">
+      <DependentUpon>CustomerReports.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerReturn.resx">
       <DependentUpon>CustomerReturn.vb</DependentUpon>
     </EmbeddedResource>
@@ -475,6 +532,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryReport.resx">
       <DependentUpon>InventoryReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ledger.resx">
+      <DependentUpon>Ledger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LedgerForm.resx">
+      <DependentUpon>LedgerForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LedgerReports.resx">
+      <DependentUpon>LedgerReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loading.resx">
       <DependentUpon>Loading.vb</DependentUpon>
@@ -550,6 +616,12 @@
     <EmbeddedResource Include="SupplierList.resx">
       <DependentUpon>SupplierList.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TermNotification.resx">
+      <DependentUpon>TermNotification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TermReport.resx">
+      <DependentUpon>TermReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TopSalesReports.resx">
       <DependentUpon>TopSalesReports.vb</DependentUpon>

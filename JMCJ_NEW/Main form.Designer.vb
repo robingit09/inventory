@@ -42,9 +42,11 @@ Partial Class Main_form
         Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PricingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PricingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MasterListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,7 +57,7 @@ Partial Class Main_form
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LedgerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -105,7 +107,7 @@ Partial Class Main_form
         'MenuStrip2
         '
         Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.PurchaseToolStripMenuItem, Me.SalesToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.SystemToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.PurchaseToolStripMenuItem, Me.SalesToolStripMenuItem, Me.LedgerToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.SystemToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(926, 29)
@@ -193,11 +195,11 @@ Partial Class Main_form
         Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(61, 25)
         Me.SalesToolStripMenuItem.Text = "Sales"
         '
-        'CustomerToolStripMenuItem1
+        'CustomerToolStripMenuItem2
         '
-        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
-        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(208, 26)
-        Me.CustomerToolStripMenuItem1.Text = "Customer Orders"
+        Me.CustomerToolStripMenuItem2.Name = "CustomerToolStripMenuItem2"
+        Me.CustomerToolStripMenuItem2.Size = New System.Drawing.Size(208, 26)
+        Me.CustomerToolStripMenuItem2.Text = "Customers"
         '
         'PricingToolStripMenuItem
         '
@@ -205,11 +207,23 @@ Partial Class Main_form
         Me.PricingToolStripMenuItem.Size = New System.Drawing.Size(208, 26)
         Me.PricingToolStripMenuItem.Text = "Pricing"
         '
-        'CustomerToolStripMenuItem2
+        'CustomerToolStripMenuItem1
         '
-        Me.CustomerToolStripMenuItem2.Name = "CustomerToolStripMenuItem2"
-        Me.CustomerToolStripMenuItem2.Size = New System.Drawing.Size(208, 26)
-        Me.CustomerToolStripMenuItem2.Text = "Customers"
+        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
+        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(208, 26)
+        Me.CustomerToolStripMenuItem1.Text = "Customer Orders"
+        '
+        'CustomerReturnToolStripMenuItem
+        '
+        Me.CustomerReturnToolStripMenuItem.Name = "CustomerReturnToolStripMenuItem"
+        Me.CustomerReturnToolStripMenuItem.Size = New System.Drawing.Size(208, 26)
+        Me.CustomerReturnToolStripMenuItem.Text = "Customer Return"
+        '
+        'LedgerToolStripMenuItem
+        '
+        Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
+        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(74, 25)
+        Me.LedgerToolStripMenuItem.Text = "Ledger"
         '
         'ReportsToolStripMenuItem
         '
@@ -220,7 +234,7 @@ Partial Class Main_form
         '
         'MasterListToolStripMenuItem
         '
-        Me.MasterListToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductsToolStripMenuItem1, Me.CustomerOrderToolStripMenuItem})
+        Me.MasterListToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProductsToolStripMenuItem1, Me.LedgerToolStripMenuItem1, Me.CustomerOrderToolStripMenuItem})
         Me.MasterListToolStripMenuItem.Name = "MasterListToolStripMenuItem"
         Me.MasterListToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.MasterListToolStripMenuItem.Text = "Master List"
@@ -274,11 +288,11 @@ Partial Class Main_form
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
         Me.SystemToolStripMenuItem.Text = "System"
         '
-        'CustomerReturnToolStripMenuItem
+        'LedgerToolStripMenuItem1
         '
-        Me.CustomerReturnToolStripMenuItem.Name = "CustomerReturnToolStripMenuItem"
-        Me.CustomerReturnToolStripMenuItem.Size = New System.Drawing.Size(208, 26)
-        Me.CustomerReturnToolStripMenuItem.Text = "Customer Return"
+        Me.LedgerToolStripMenuItem1.Name = "LedgerToolStripMenuItem1"
+        Me.LedgerToolStripMenuItem1.Size = New System.Drawing.Size(200, 26)
+        Me.LedgerToolStripMenuItem1.Text = "Ledger"
         '
         'Main_form
         '
@@ -334,4 +348,6 @@ Partial Class Main_form
     Friend WithEvents PurchaseReturnToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CustomerReturnToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LedgerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LedgerToolStripMenuItem1 As ToolStripMenuItem
 End Class

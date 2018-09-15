@@ -177,14 +177,27 @@
         MySource.Add("Vigan")
         MySource.Add("Zamboanga City")
 
+
+        'Dim customer As New DatabaseCon
+        'With customer
+        '    .selectByQuery("Select distinct company from company  where status <> 0")
+        '    While .dr.Read
+        '        MySource.Add(.dr.GetValue(0))
+
+        '    End While
+        '    .cmd.Dispose()
+        '    .dr.Close()
+        '    .con.Close()
+        'End With
     End Sub
 
     Public Sub loadCustomer(ByVal query As String)
         dgvCustomer.Rows.Clear()
-        Dim db As New DatabaseConnect
+        Try
+            Dim db As New DatabaseConnect
             With db
                 If query = "" Then
-                    .selectByQuery("SELECT * from company where status <> 0 order by id desc")
+                    .selectByQuery("SELECT * from company where status <> 0 order by company")
                 Else
                     .selectByQuery(query)
                 End If
@@ -200,10 +213,10 @@
                     Dim customer As String = .dr.GetValue(1)
                     Dim contact_person As String = If(.dr.GetValue(2) = "", " ", .dr.GetValue(2))
                     Dim address As String = If(.dr.GetValue(3) = "", " ", .dr.GetValue(3))
-                Dim owner_name As String = If(IsDBNull(.dr("owner_name")), "", .dr("owner_name"))
-                Dim owner_address As String = If(IsDBNull(.dr.GetValue(5)), " ", .dr.GetValue(5))
+                    Dim owner_name As String = If(.dr.GetValue(4) = "", " ", .dr.GetValue(4))
+                    Dim owner_address As String = If(IsDBNull(.dr.GetValue(5)), " ", .dr.GetValue(5))
 
-                Dim contact_number1 As String = If(.dr.GetValue(6) = "", " ", .dr.GetValue(6))
+                    Dim contact_number1 As String = If(.dr.GetValue(6) = "", " ", .dr.GetValue(6))
                     Dim contact_number2 As String = If(Trim(.dr.GetValue(7)) = "", " ", .dr.GetValue(7))
                     Dim fax_tel As String = If(Trim(.dr.GetValue(8)) = "", " ", .dr.GetValue(8))
                     'Dim status As Integer = CInt(.dr.GetValue(9))
@@ -213,39 +226,35 @@
                     Dim tin As String = If(Trim(.dr.GetValue(13)) = "", " ", .dr.GetValue(13))
                     Dim email As String = If(Trim(.dr.GetValue(14)) = "", " ", .dr.GetValue(14))
                     Dim company_status As Integer = CInt(.dr.GetValue(15))
+                    Dim ledger_type As String = If(IsDBNull(.dr("ledger_type")), "", .dr("ledger_type"))
 
-                Dim company_status_result As String = ""
+                    Dim company_status_result As String = ""
+                    Select Case company_status
+                        Case 0
+                            company_status_result = ""
+                        Case 1
+                            company_status_result = "Rented"
+                        Case 2
+                            company_status_result = "Owned"
+                    End Select
 
-
-                Select Case company_status
-                    Case 0
-                        company_status_result = ""
-                    Case 1
-                        company_status_result = "Rented"
-                    Case 2
-                        company_status_result = "Owned"
-                End Select
-
-                Dim ledgertype As String = ""
-                Select Case CInt(.dr("ledger_type"))
-                    Case -1
-                        ledgertype = ""
-                    Case 0
-                        ledgertype = "Charge"
-                    Case 1
-                        ledgertype = "Delivery"
-                End Select
-
-                Dim row As String() = New String() {ID, customer, contact_person, address, city, owner_name, owner_address, contact_number1, contact_number2, fax_tel, tin, email, company_status_result, ledgertype}
-                dgvCustomer.Rows.Add(row)
-
+                    Select Case ledger_type
+                        Case "0"
+                            ledger_type = "Charge"
+                        Case "1"
+                            ledger_type = "Delivery"
+                    End Select
+                    Dim row As String() = New String() {ID, customer, contact_person, address, city, owner_name, owner_address, contact_number1, contact_number2, fax_tel, tin, email, company_status_result, ledger_type}
+                    dgvCustomer.Rows.Add(row)
                 End While
 
                 .cmd.Dispose()
                 .dr.Close()
                 .con.Close()
             End With
-
+        Catch ex As Exception
+            MsgBox(ex.Message & " SIRA SIRA", MsgBoxStyle.Critical)
+        End Try
 
     End Sub
 
@@ -265,6 +274,7 @@
             CustomerForm.btnSave.Text = "Update"
             CustomerForm.selectedCustomer = Me.selectedID
             CustomerForm.loadCompanyStatus()
+            CustomerForm.loadLedgerType()
             CustomerForm.loadToUpdateInfo()
             CustomerForm.ShowDialog()
         Else
@@ -329,7 +339,7 @@
         If e.Button = Windows.Forms.MouseButtons.Right Then
             dgvCustomer.ClearSelection()
             dgvCustomer.Rows(e.RowIndex).Selected = True
-            View.Show(Cursor.Position)
+            VIew.Show(Cursor.Position)
         End If
     End Sub
 
