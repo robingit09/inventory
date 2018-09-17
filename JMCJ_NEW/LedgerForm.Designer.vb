@@ -57,9 +57,18 @@ Partial Class LedgerForm
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.invoice_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_invoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount_paid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
         Me.gpPaid.SuspendLayout()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gpInvoiceList.SuspendLayout()
         Me.SuspendLayout()
         '
         'rPaidNo
@@ -382,11 +391,64 @@ Partial Class LedgerForm
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.invoice_no, Me.date_invoice, Me.amount, Me.amount_paid})
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 42)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(470, 131)
+        Me.DataGridView1.TabIndex = 53
+        '
+        'invoice_no
+        '
+        Me.invoice_no.HeaderText = "Invoice No"
+        Me.invoice_no.Name = "invoice_no"
+        Me.invoice_no.ReadOnly = True
+        '
+        'date_invoice
+        '
+        Me.date_invoice.HeaderText = "Date Invoice"
+        Me.date_invoice.Name = "date_invoice"
+        Me.date_invoice.ReadOnly = True
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'amount_paid
+        '
+        Me.amount_paid.HeaderText = "Amount Paid"
+        Me.amount_paid.Name = "amount_paid"
+        Me.amount_paid.ReadOnly = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(401, 13)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.TabIndex = 54
+        Me.btnAdd.Text = "Add Receipt"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'gpInvoiceList
+        '
+        Me.gpInvoiceList.Controls.Add(Me.btnAdd)
+        Me.gpInvoiceList.Controls.Add(Me.DataGridView1)
+        Me.gpInvoiceList.Location = New System.Drawing.Point(15, 368)
+        Me.gpInvoiceList.Name = "gpInvoiceList"
+        Me.gpInvoiceList.Size = New System.Drawing.Size(490, 191)
+        Me.gpInvoiceList.TabIndex = 55
+        Me.gpInvoiceList.TabStop = False
+        Me.gpInvoiceList.Text = "Invoice List"
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1024, 387)
+        Me.ClientSize = New System.Drawing.Size(1024, 582)
         Me.Controls.Add(Me.txtRemarks)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btnSaveAndPrint)
@@ -413,6 +475,7 @@ Partial Class LedgerForm
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cbCustomer)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.gpInvoiceList)
         Me.Name = "LedgerForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ledger Form"
@@ -422,6 +485,8 @@ Partial Class LedgerForm
         Me.gpCheck.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gpInvoiceList.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -462,4 +527,11 @@ Partial Class LedgerForm
     Friend WithEvents Label12 As Label
     Friend WithEvents btnSaveAndPrint As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents invoice_no As DataGridViewTextBoxColumn
+    Friend WithEvents date_invoice As DataGridViewTextBoxColumn
+    Friend WithEvents amount As DataGridViewTextBoxColumn
+    Friend WithEvents amount_paid As DataGridViewTextBoxColumn
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents gpInvoiceList As GroupBox
 End Class

@@ -37,7 +37,7 @@ Partial Class LedgerReports
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(266, 175)
+        Me.btnPrint.Location = New System.Drawing.Point(266, 201)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(106, 23)
         Me.btnPrint.TabIndex = 26
@@ -147,7 +147,7 @@ Partial Class LedgerReports
         Me.Controls.Add(Me.cbCustomer)
         Me.Name = "LedgerReports"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "LedgerReports"
+        Me.Text = "Ledger Reports"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
