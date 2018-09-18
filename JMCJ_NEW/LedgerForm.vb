@@ -285,8 +285,12 @@
 
         Else
             selectedCustomer = 0
-            selectedLedgerType = -1
-            cbLedgerType.SelectedIndex = 0
+            cbCustomer.SelectedIndex = 0
+            If cbLedgerType.Items.Count > 0 Then
+                selectedLedgerType = -1
+                cbLedgerType.SelectedIndex = 0
+            End If
+
         End If
     End Sub
 
@@ -693,5 +697,11 @@
         Else
             rbFloatingNo.Checked = True
         End If
+    End Sub
+
+    Private Sub btnAddInvoice_Click(sender As Object, e As EventArgs) Handles btnAddInvoice.Click
+        AddInvoiceForm.selectedCustomer = Me.selectedCustomer
+        AddInvoiceForm.selectedLedger = Me.selectedID
+        AddInvoiceForm.ShowDialog()
     End Sub
 End Class

@@ -95,6 +95,23 @@
         'ReportViewer.CrystalReportViewer1.Refresh()
         'ReportViewer.CrystalReportViewer1.RefreshReport()
         'ReportViewer.ShowDialog()
+
+        btnPrintCheckDate.Enabled = False
+        Dim path As String = Application.StartupPath & "\check.html"
+        Try
+            Dim code As String = ""
+            code = generatePrintByCheckDate()
+            Dim myWrite As System.IO.StreamWriter
+            myWrite = IO.File.CreateText(path)
+            myWrite.WriteLine(code)
+            myWrite.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+
+        Dim proc As New System.Diagnostics.Process()
+        proc = Process.Start(path, "")
+        btnPrintCheckDate.Enabled = True
     End Sub
 
     Private Sub getMonth()
@@ -350,6 +367,22 @@
         'ReportViewer.CrystalReportViewer1.Refresh()
         'ReportViewer.CrystalReportViewer1.RefreshReport()
         'ReportViewer.ShowDialog()
+        btnPrintDateInvoice.Enabled = False
+        Dim path As String = Application.StartupPath & "\check.html"
+        Try
+            Dim code As String = ""
+            code = generatePrintByInvoiceDate()
+            Dim myWrite As System.IO.StreamWriter
+            myWrite = IO.File.CreateText(path)
+            myWrite.WriteLine(code)
+            myWrite.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+
+        Dim proc As New System.Diagnostics.Process()
+        proc = Process.Start(path, "")
+        btnPrintDateInvoice.Enabled = True
     End Sub
 
     Private Sub cbCustomer_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbCustomer.SelectedIndexChanged
@@ -438,4 +471,335 @@
             End Select
         End If
     End Sub
+
+    Private Function generatePrintByInvoiceDate()
+        Dim total_amount As Double = 0
+        Dim query As String = "Select l.*,c.company, DateDiff('d',NOW(),l.payment_due_date) as r from ledger as l 
+                    inner join company as c on c.id = l.customer  where l.status <> 0 and (l.payment_type = 1 or l.payment_type = 3)"
+
+        If invoice_customer > 0 And cbCustomer.Text <> "All" Then
+            query = query & " and c.id = " & invoice_customer
+        End If
+
+        If cbRemaining.Text <> "All" Then
+            query = query & " and DateDiff('d',NOW(),l.payment_due_date) " & invoice_remaining_query
+        End If
+
+        If cbLedgerType.Text <> "All" Then
+            query = query & " and l.ledger = " & invoice_LedgerType
+        End If
+
+        If cbInvoiceMonth.Text <> "All" Then
+            query = query & " and MONTH(l.date_issue) = " & monthToNumber(cbInvoiceMonth.Text)
+        End If
+
+        If cbInvoiceYear.Text <> "All" Then
+            query = query & " and YEAR(l.date_issue) = " & cbInvoiceYear.Text
+        End If
+
+        query = query & " order by c.company"
+        Dim result As String = ""
+        Dim table_content As String = ""
+        Dim dbprod As New DatabaseConnect
+        With dbprod
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim color_remaining As String = ""
+                    Dim tr As String = "<tr>"
+                    Dim id As Integer = .dr("id")
+                    Dim customer As String = .dr("company")
+                    Dim date_issue As String = .dr("date_issue")
+                    Dim amount As String = .dr("amount")
+                    Dim remaining As String = .dr("r")
+                    Dim paid As Boolean = CBool(.dr("paid"))
+                    Dim floating As Boolean = CBool(.dr("floating"))
+                    Dim invoice_no As String = .dr("invoice_no")
+                    Dim date_paid As String = .dr("date_paid")
+                    Dim bank_details As String = .dr("bank_details")
+                    Dim check_date As String = .dr("check_date")
+                    Dim payment_type As String = .dr("payment_type")
+
+                    Dim ledger_type As String = .dr("ledger")
+                    total_amount += Val(amount)
+
+                    'Dim edate = due_date
+                    'Dim pdate As DateTime = Convert.ToDateTime(edate)
+                    'edate = pdate.ToString("MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture)
+
+
+                    'remaining = pdate.Subtract(DateTime.Now).Days
+                    Dim remaining_val As String = remaining
+                    If CInt(remaining) < 0 Then
+                        remaining_val = "Over Due"
+                        color_remaining = "style='color:red;'"
+                    End If
+                    If CInt(remaining) = 0 Then
+                        remaining_val = "Due Date"
+                        color_remaining = "style='color:red;'"
+                    End If
+                    Select Case payment_type
+                        Case "0"
+                            payment_type = "Cash"
+                        Case "1"
+                            payment_type = "C.O.D"
+                        Case "2"
+                            payment_type = "Credit"
+                        Case "3"
+                            payment_type = "Post Dated"
+                    End Select
+
+                    Select Case ledger_type
+                        Case "0"
+                            ledger_type = "Charge"
+                        Case "1"
+                            ledger_type = "Delivery"
+                    End Select
+
+                    tr = tr & "<td>" & customer & "</td>"
+                    tr = tr & "<td>" & date_issue & "</td>"
+                    tr = tr & "<td style='color:red;'>" & Val(amount).ToString("N2") & "</td>"
+                    'tr = tr & "<td " & color_remaining & ">" & remaining_val & "</td>"
+                    tr = tr & "<td>" & If(paid, "Yes", "No") & "</td>"
+                    tr = tr & "<td>" & If(floating, "Yes", "No") & "</td>"
+                    tr = tr & "<td>" & date_paid & "</td>"
+                    tr = tr & "<td>" & bank_details & "</td>"
+                    tr = tr & "<td>" & check_date & "</td>"
+                    tr = tr & "<td>" & payment_type & "</td>"
+                    tr = tr & "<td>" & ledger_type & "</td>"
+                    tr = tr & "</tr>"
+                    table_content = table_content & tr
+
+                End While
+            Else
+                MsgBox("No Record found!", MsgBoxStyle.Critical)
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+
+        result = "
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    table {
+    	font-family:serif;
+    	border-collapse: collapse;
+    	width: 100%;
+        font-size:8pt;
+    }
+
+    td, th {
+    	border: 1px solid #dddddd;
+    	text-align: left;
+    	padding: 5px;
+    }
+
+    tr:nth-child(even) {
+
+    }
+    </style>
+    </head>
+    <body>
+    <h3><center>Check Reports</center></h3>
+    <table>
+      <thead>
+      <tr>
+    	<th>Customer</th>
+	    <th>Date Invoice</th>
+	    <th>Amount</th>
+    	<th>Paid</th>
+    	<th>Floating</th>
+    	<th>Date Paid</th>
+    	<th>Bank Details</th>
+        <th>Check Date</th>
+        <th>Payment Type</th>
+        <th>Ledger Type</th>
+      </tr>
+      </thead>
+      <tbody>
+        " & table_content & "
+        <tr>
+            <td colspan='2'><strong>TOTAL AMOUNT</strong></td><td style='color:red;''><strong>" & Val(total_amount).ToString("N2") & "</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    </body>
+    </html>
+    "
+        Return result
+    End Function
+
+    Private Function generatePrintByCheckDate()
+        Dim total_amount As Double = 0
+        Dim query As String = "Select l.*,c.company, DateDiff('d',NOW(),l.check_date) as r from ledger as l 
+                    inner join company as c on c.id = l.customer  where l.status <> 0 and (l.payment_type = 1 or l.payment_type = 3)"
+
+        If check_customer > 0 And cbCustomer2.Text <> "All" Then
+            query = query & " and c.id = " & check_customer
+        End If
+
+        If cbRemaining2.Text <> "All" Then
+            query = query & " and DateDiff('d',NOW(),l.check_date) " & check_remaining_query
+        End If
+
+        If cbLedgerType2.Text <> "All" Then
+            query = query & " and l.ledger = " & check_LedgerType
+        End If
+
+        If cbCheckFloating.Text <> "All" Then
+            If cbCheckFloating.Text = "Yes" Then
+                query = query & " and l.floating = True"
+            End If
+            If cbCheckFloating.Text = "No" Then
+                query = query & " and l.floating = False"
+            End If
+        End If
+
+        If cbCheckMonth.Text <> "All" Then
+            query = query & " and MONTH(l.check_date) = " & monthToNumber(cbCheckMonth.Text)
+        End If
+
+        If cbCheckYear.Text <> "All" Then
+            query = query & " and YEAR(l.check_date) = " & cbCheckYear.Text
+        End If
+
+        query = query & " order by c.company"
+        Dim result As String = ""
+        Dim table_content As String = ""
+        Dim dbprod As New DatabaseConnect
+        With dbprod
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim color_remaining As String = ""
+                    Dim tr As String = "<tr>"
+                    Dim id As Integer = .dr("id")
+                    Dim customer As String = .dr("company")
+                    Dim date_issue As String = .dr("date_issue")
+                    Dim amount As String = .dr("amount")
+                    Dim remaining As String = .dr("r")
+                    Dim paid As Boolean = CBool(.dr("paid"))
+                    Dim floating As Boolean = CBool(.dr("floating"))
+                    Dim invoice_no As String = .dr("invoice_no")
+                    Dim date_paid As String = .dr("date_paid")
+                    Dim bank_details As String = .dr("bank_details")
+                    Dim check_date As String = .dr("check_date")
+                    Dim payment_type As String = .dr("payment_type")
+
+                    Dim ledger_type As String = .dr("ledger")
+                    total_amount += Val(amount)
+
+                    'Dim edate = due_date
+                    'Dim pdate As DateTime = Convert.ToDateTime(edate)
+                    'edate = pdate.ToString("MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture)
+
+
+                    'remaining = pdate.Subtract(DateTime.Now).Days
+                    Dim remaining_val As String = remaining
+                    If CInt(remaining) < 0 Then
+                        remaining_val = "Over Due"
+                        color_remaining = "style='color:red;'"
+                    End If
+                    If CInt(remaining) = 0 Then
+                        remaining_val = "Due Date"
+                        color_remaining = "style='color:red;'"
+                    End If
+                    Select Case payment_type
+                        Case "0"
+                            payment_type = "Cash"
+                        Case "1"
+                            payment_type = "C.O.D"
+                        Case "2"
+                            payment_type = "Credit"
+                        Case "3"
+                            payment_type = "Post Dated"
+                    End Select
+
+                    Select Case ledger_type
+                        Case "0"
+                            ledger_type = "Charge"
+                        Case "1"
+                            ledger_type = "Delivery"
+                    End Select
+
+                    tr = tr & "<td>" & customer & "</td>"
+                    tr = tr & "<td>" & date_issue & "</td>"
+                    tr = tr & "<td style='color:red;'>" & Val(amount).ToString("N2") & "</td>"
+                    'tr = tr & "<td " & color_remaining & ">" & remaining_val & "</td>"
+                    tr = tr & "<td>" & If(paid, "Yes", "No") & "</td>"
+                    tr = tr & "<td>" & If(floating, "Yes", "No") & "</td>"
+                    tr = tr & "<td>" & date_paid & "</td>"
+                    tr = tr & "<td>" & bank_details & "</td>"
+                    tr = tr & "<td>" & check_date & "</td>"
+                    tr = tr & "<td>" & payment_type & "</td>"
+                    tr = tr & "<td>" & ledger_type & "</td>"
+                    tr = tr & "</tr>"
+                    table_content = table_content & tr
+
+                End While
+            Else
+                MsgBox("No Record found!", MsgBoxStyle.Critical)
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+
+        result = "
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    table {
+    	font-family:serif;
+    	border-collapse: collapse;
+    	width: 100%;
+        font-size:8pt;
+    }
+
+    td, th {
+    	border: 1px solid #dddddd;
+    	text-align: left;
+    	padding: 5px;
+    }
+
+    tr:nth-child(even) {
+
+    }
+    </style>
+    </head>
+    <body>
+    <h3><center>Check Reports</center></h3>
+    <table>
+      <thead>
+      <tr>
+    	<th>Customer</th>
+	    <th>Date Invoice</th>
+	    <th>Amount</th>
+    	<th>Paid</th>
+    	<th>Floating</th>
+    	<th>Date Paid</th>
+    	<th>Bank Details</th>
+        <th>Check Date</th>
+        <th>Payment Type</th>
+        <th>Ledger Type</th>
+      </tr>
+      </thead>
+      <tbody>
+        " & table_content & "
+        <tr>
+            <td colspan='2'><strong>TOTAL AMOUNT</strong></td><td style='color:red;''><strong>" & Val(total_amount).ToString("N2") & "</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    </body>
+    </html>
+    "
+        Return result
+    End Function
+
+
 End Class

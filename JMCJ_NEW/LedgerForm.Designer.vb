@@ -58,12 +58,13 @@ Partial Class LedgerForm
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.btnAddInvoice = New System.Windows.Forms.Button()
+        Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
         Me.invoice_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_invoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount_paid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
+        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.gpPaid.SuspendLayout()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -394,11 +395,31 @@ Partial Class LedgerForm
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.invoice_no, Me.date_invoice, Me.amount, Me.amount_paid})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.invoice_no, Me.date_invoice, Me.amount, Me.amount_paid, Me.action})
         Me.DataGridView1.Location = New System.Drawing.Point(6, 42)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(470, 131)
+        Me.DataGridView1.Size = New System.Drawing.Size(598, 131)
         Me.DataGridView1.TabIndex = 53
+        '
+        'btnAddInvoice
+        '
+        Me.btnAddInvoice.Location = New System.Drawing.Point(529, 13)
+        Me.btnAddInvoice.Name = "btnAddInvoice"
+        Me.btnAddInvoice.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddInvoice.TabIndex = 54
+        Me.btnAddInvoice.Text = "Add +"
+        Me.btnAddInvoice.UseVisualStyleBackColor = True
+        '
+        'gpInvoiceList
+        '
+        Me.gpInvoiceList.Controls.Add(Me.btnAddInvoice)
+        Me.gpInvoiceList.Controls.Add(Me.DataGridView1)
+        Me.gpInvoiceList.Location = New System.Drawing.Point(15, 368)
+        Me.gpInvoiceList.Name = "gpInvoiceList"
+        Me.gpInvoiceList.Size = New System.Drawing.Size(613, 191)
+        Me.gpInvoiceList.TabIndex = 55
+        Me.gpInvoiceList.TabStop = False
+        Me.gpInvoiceList.Text = "Invoice List"
         '
         'invoice_no
         '
@@ -424,25 +445,13 @@ Partial Class LedgerForm
         Me.amount_paid.Name = "amount_paid"
         Me.amount_paid.ReadOnly = True
         '
-        'btnAdd
+        'action
         '
-        Me.btnAdd.Location = New System.Drawing.Point(401, 13)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 54
-        Me.btnAdd.Text = "Add Receipt"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'gpInvoiceList
-        '
-        Me.gpInvoiceList.Controls.Add(Me.btnAdd)
-        Me.gpInvoiceList.Controls.Add(Me.DataGridView1)
-        Me.gpInvoiceList.Location = New System.Drawing.Point(15, 368)
-        Me.gpInvoiceList.Name = "gpInvoiceList"
-        Me.gpInvoiceList.Size = New System.Drawing.Size(490, 191)
-        Me.gpInvoiceList.TabIndex = 55
-        Me.gpInvoiceList.TabStop = False
-        Me.gpInvoiceList.Text = "Invoice List"
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        Me.action.ReadOnly = True
+        Me.action.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.action.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'LedgerForm
         '
@@ -528,10 +537,11 @@ Partial Class LedgerForm
     Friend WithEvents btnSaveAndPrint As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents btnAddInvoice As Button
+    Friend WithEvents gpInvoiceList As GroupBox
     Friend WithEvents invoice_no As DataGridViewTextBoxColumn
     Friend WithEvents date_invoice As DataGridViewTextBoxColumn
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents amount_paid As DataGridViewTextBoxColumn
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents gpInvoiceList As GroupBox
+    Friend WithEvents action As DataGridViewButtonColumn
 End Class

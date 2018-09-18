@@ -4,14 +4,14 @@
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
 
-        'LedgerForm.getCustomerList("")
-        'LedgerForm.loadPaymentType()
-        'LedgerForm.loadLedgerType()
-        'LedgerForm.loadTerm()
-        'LedgerForm.btnSave.Text = "Save"
-        'LedgerForm.btnSaveAndPrint.Text = "Save and Print"
-        'LedgerForm.ShowDialog()
-        'autocompleteCustomer()
+        LedgerForm.getCustomerList("")
+        LedgerForm.loadPaymentType()
+        LedgerForm.loadLedgerType()
+        LedgerForm.loadTerm()
+        LedgerForm.btnSave.Text = "Save"
+        LedgerForm.btnSaveAndPrint.Text = "Save and Print"
+        LedgerForm.ShowDialog()
+        autocompleteCustomer()
     End Sub
 
     Public Sub loadLedger(ByVal query As String)
