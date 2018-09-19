@@ -52,4 +52,71 @@
             .con.Close()
         End With
     End Sub
+
+    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
+        If dgvProd.Rows.Count > 0 Then
+            If ckSelectAll.Checked = True Then
+                For Each item As DataGridViewRow In Me.dgvProd.Rows
+                    If dgvProd.Rows(item.Index).Cells(3).Value <> "" Then
+                        dgvProd.Rows(item.Index).Cells(1).Value = True
+                    End If
+                Next
+            Else
+                For Each item As DataGridViewRow In Me.dgvProd.Rows
+                    If dgvProd.Rows(item.Index).Cells(3).Value <> "" Then
+                        dgvProd.Rows(item.Index).Cells(1).Value = False
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub btnAddToList_Click(sender As Object, e As EventArgs) Handles btnAddToList.Click
+        Dim has_selected As Boolean = False
+        If dgvProd.Rows.Count > 0 Then
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+                If dgvProd.Rows(item.Index).Cells(1).Value = True Then
+                    has_selected = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        If (has_selected) Then
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+                If dgvProd.Rows(item.Index).Cells(1).Value = True Then
+                    Dim co_id As String = dgvProd.Rows(item.Index).Cells("id").Value
+
+                    '// **validate
+                    Dim isInList As Boolean = False
+                    For Each item2 As DataGridViewRow In LedgerForm.dgvInvoiceList.Rows
+                        If LedgerForm.dgvInvoiceList.Rows(item.Index).Cells("id").Value = co_id Then
+                            isInList = True
+                        End If
+                    Next
+
+                    If isInList = False Then
+                        Dim dbco As New DatabaseConnect
+                        With dbco
+                            .selectByQuery("Select * from customer_orders where id = " & co_id)
+                            If .dr.Read Then
+                                Dim invoice As String = .dr("invoice_no")
+                                Dim date_issue As String = .dr("date_issue")
+                                Dim amount As String = Val(.dr("amount")).ToString("N2")
+                                Dim amount_paid As String = Val(.dr("amount_paid")).ToString("N2")
+                                Dim row As String() = New String() {co_id, invoice, date_issue, amount, amount_paid, "Remove"}
+                                LedgerForm.dgvInvoiceList.Rows.Add(row)
+                            End If
+                            .dr.Close()
+                            .cmd.Dispose()
+                            .con.Close()
+                        End With
+                    End If
+                End If
+            Next
+            Me.Close()
+        Else
+            MsgBox("Please select invoice!", MsgBoxStyle.Critical)
+        End If
+    End Sub
 End Class

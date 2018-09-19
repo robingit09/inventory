@@ -1039,6 +1039,7 @@
             End If
             insertData()
             clearfields()
+            CustomerOrder.loadList("")
             'LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             'LedgerList.loadledgertype()
             'LedgerList.getPaymentMode()

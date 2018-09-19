@@ -1,4 +1,7 @@
 ﻿Public Class COMasterList
+    Public selectedCustomer As Integer = 0
+    Public selectedPaymentType As Integer = -1
+    Public selectedLedgerType As Integer = -1
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         Dim path As String = Application.StartupPath & "\co_master.html"
 
@@ -17,8 +20,20 @@
     End Sub
 
     Public Function generatePrint() As String
-        Dim query As String = "SELECT co.*,c.company from customer_orders as co
-            inner join company as c on c.id = co.customer_id"
+        Dim query As String = "SELECT co.*,c.company,c.ledger_type from customer_orders as co
+            inner join company as c on c.id = co.customer_id where co.delivery_status <> 0"
+
+        If txtCustomer.Text.Length > 0 And selectedCustomer > 0 Then
+            query = query & " and co.customer_id = " & selectedCustomer
+        End If
+
+        If cbpayment_mode.Text <> "All" And selectedPaymentType > -1 Then
+            query = query & " and co.payment_type = " & selectedPaymentType
+        End If
+
+        If cbLedgerType.Text <> "All" And selectedLedgerType > -1 Then
+            query = query & " and co.c.ledger_type = " & selectedLedgerType
+        End If
 
         query = query & " order by co.date_issue desc"
         Dim table_content As String = ""
@@ -192,4 +207,109 @@
 </body>"
         Return result
     End Function
+
+    Public Sub autocompleteCustomer()
+        Dim MySource As New AutoCompleteStringCollection()
+
+        With txtCustomer
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim customer As New DatabaseConnect
+        With customer
+            .selectByQuery("Select distinct company from company  where status <> 0")
+            While .dr.Read
+                MySource.Add(.dr.GetValue(0))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub COMasterList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autocompleteCustomer()
+        getPaymentMode()
+        loadledgertype()
+    End Sub
+
+    Public Sub getPaymentMode()
+        cbpayment_mode.DataSource = Nothing
+        cbpayment_mode.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+
+        Dim db As New DatabaseConnect
+        With db
+            comboSource.Add(-1, "All")
+            .selectByQuery("SELECT distinct payment_type from customer_orders where delivery_status <> 0 order by payment_type")
+            While .dr.Read
+                Select Case .dr.GetValue(0)
+                    Case 0
+                        comboSource.Add(0, "Cash")
+                    Case 1
+                        comboSource.Add(1, "C.O.D")
+                    Case 2
+                        comboSource.Add(2, "Credit")
+                    Case 3
+                        comboSource.Add(3, "Post Dated")
+                End Select
+            End While
+        End With
+
+        cbpayment_mode.DataSource = New BindingSource(comboSource, Nothing)
+        cbpayment_mode.DisplayMember = "Value"
+        cbpayment_mode.ValueMember = "Key"
+    End Sub
+
+    Public Sub loadledgertype()
+        cbLedgerType.DataSource = Nothing
+        cbLedgerType.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(-1, "All")
+        comboSource.Add(0, "Charge")
+        comboSource.Add(1, "Delivery")
+
+        cbLedgerType.DataSource = New BindingSource(comboSource, Nothing)
+        cbLedgerType.DisplayMember = "Value"
+        cbLedgerType.ValueMember = "Key"
+
+    End Sub
+
+    Private Sub txtCustomer_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCustomer.KeyDown
+        If txtCustomer.Text.Length > 0 And e.KeyCode = Keys.Enter Then
+            txtCustomer.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtCustomer.Text.ToLower())
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        End If
+    End Sub
+
+    Private Sub txtCustomer_Leave(sender As Object, e As EventArgs) Handles txtCustomer.Leave
+        If txtCustomer.Text.Length > 0 Then
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        End If
+    End Sub
+
+    Private Sub cbpayment_mode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbpayment_mode.SelectedIndexChanged
+        If cbpayment_mode.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedPaymentType = key
+        Else
+            selectedPaymentType = 0
+        End If
+        'btnFilter.Enabled = True
+    End Sub
+
+    Private Sub cbLedgerType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLedgerType.SelectedIndexChanged
+        If cbLedgerType.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedLedgerType = key
+        Else
+            selectedLedgerType = -1
+        End If
+    End Sub
 End Class

@@ -428,6 +428,8 @@
             Dim key As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
+        Else
+            selectedPaymentType = -1
         End If
         btnFilter.Enabled = True
     End Sub

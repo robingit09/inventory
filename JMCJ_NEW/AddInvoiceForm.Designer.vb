@@ -151,6 +151,7 @@ Partial Class AddInvoiceForm
         Me.Controls.Add(Me.txtCustomer)
         Me.Controls.Add(Me.Label1)
         Me.Name = "AddInvoiceForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add Invoice"
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

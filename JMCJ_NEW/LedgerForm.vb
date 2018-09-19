@@ -236,9 +236,28 @@
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
-            MsgBox("Update Successful!", MsgBoxStyle.Information)
-
         End With
+
+        '' update the ledger of customer order(invoice list)
+        Dim dbcon2 As New DatabaseConnect
+        With dbcon2
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "Update customer_orders set ledger_id = 0 where ledger_id = " & Ledger.selectedID
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            For Each item As DataGridViewRow In Me.dgvInvoiceList.Rows
+                If dgvInvoiceList.Rows(item.Index).Cells("id").Value <> "" Then
+                    Dim co_id As String = dgvInvoiceList.Rows(item.Index).Cells("id").Value
+                    .cmd.CommandText = "update customer_orders set ledger_id = " & Ledger.selectedID & " where id = " & co_id
+                    .cmd.ExecuteNonQuery()
+                    .cmd.Parameters.Clear()
+                End If
+            Next
+            .cmd.Dispose()
+            .con.Close()
+        End With
+        MsgBox("Update Successful!", MsgBoxStyle.Information)
     End Sub
 
     Private Sub cbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomer.SelectedIndexChanged
@@ -703,5 +722,13 @@
         AddInvoiceForm.selectedCustomer = Me.selectedCustomer
         AddInvoiceForm.selectedLedger = Me.selectedID
         AddInvoiceForm.ShowDialog()
+    End Sub
+
+    Private Sub dgvInvoiceList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvInvoiceList.CellContentClick
+        'remove invoice
+        If e.ColumnIndex = 5 And dgvInvoiceList.Rows.Count > 1 Then
+            dgvInvoiceList.Rows.RemoveAt(e.RowIndex)
+
+        End If
     End Sub
 End Class

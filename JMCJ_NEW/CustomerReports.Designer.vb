@@ -41,6 +41,7 @@ Partial Class CustomerReports
         Me.ClientSize = New System.Drawing.Size(422, 221)
         Me.Controls.Add(Me.btnPrint)
         Me.Name = "CustomerReports"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer Reports"
         Me.ResumeLayout(False)
 
