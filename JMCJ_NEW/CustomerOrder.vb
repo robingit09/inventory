@@ -125,6 +125,34 @@
 
             Dim yesno As Integer = MsgBox("Are you sure you want to void this transaction ?", MsgBoxStyle.YesNo + MsgBoxStyle.Question)
             If yesno = MsgBoxResult.Yes Then
+                'void revert stock
+                Dim dbprod As New DatabaseConnect()
+                With dbprod
+                    .selectByQuery("Select product_unit_id from purchase_return_products where purchase_return_id = " & id)
+                    If .dr.HasRows Then
+                        While .dr.Read
+                            Dim product_unit_id As Integer = .dr("product_unit_id")
+                            'increase stock
+                            Dim increasestock As New DatabaseConnect
+                            With increasestock
+                                Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
+                                Dim cur_stock As Integer = Val(temp)
+                                Dim qty As Integer = New DatabaseConnect().get_by_val("customer_order_products", product_unit_id, "product_unit_id", "quantity")
+                                cur_stock = cur_stock + Val(qty)
+
+                                .cmd.Connection = .con
+                                .cmd.CommandType = CommandType.Text
+                                .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                                .cmd.ExecuteNonQuery()
+                                .cmd.Dispose()
+                                .con.Close()
+                            End With
+                        End While
+                    End If
+                    .cmd.Dispose()
+                    .dr.Close()
+                    .con.Close()
+                End With
                 Dim dbdelete As New DatabaseConnect
                 With dbdelete
                     .update_where("customer_orders", id, "delivery_status", 0)

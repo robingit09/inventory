@@ -11,7 +11,7 @@
         dgvPReturn.Rows.Clear()
         Dim dbPR As New DatabaseConnect
         With dbPR
-            .selectByQuery("Select * from purchase_return where status <> 0 order by id desc")
+            .selectByQuery("Select * from purchase_return order by id desc")
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -26,11 +26,11 @@
                     Dim status As String = ""
                     Select Case .dr("status")
                         Case "0"
-                            status = "Deleted"
+                            status = "Voided"
                         Case "1"
                             status = "Active"
-                        Case "2"
-                            status = "Voided"
+                        Case Else
+                            status = ""
                     End Select
                     Dim row As String() = New String() {id, date_issue, pr_no, supplier_name, total_amount, issue_by, status}
                     dgvPReturn.Rows.Add(row)
@@ -75,9 +75,27 @@
             End If
             Dim yesno As Integer = MsgBox("Are you sure you want to void this transaction ?", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
             If yesno = MsgBoxResult.Yes Then
+                'void revert stock
+                Dim dbprod As New DatabaseConnect()
+                With dbprod
+                    .selectByQuery("Select product_unit_id,qty from purchase_return_products where purchase_return_id = " & id)
+                    If .dr.HasRows Then
+                        While .dr.Read
+                            Dim product_unit_id As Integer = .dr("product_unit_id")
+                            Dim qty As Integer = CInt(.dr("qty"))
+                            'revert stock
+                            ModelFunction.update_stock(product_unit_id, qty, "+")
+
+
+                        End While
+                    End If
+                    .cmd.Dispose()
+                    .dr.Close()
+                    .con.Close()
+                End With
                 Dim dbvoid As New DatabaseConnect
                 With dbvoid
-                    .update_where("purchase_return", id, "status", 2)
+                    .update_where("purchase_return", id, "status", 0)
                     .cmd.Dispose()
                     .con.Close()
                     MsgBox("Purchase Return Successfully Voided.", MsgBoxStyle.Information)

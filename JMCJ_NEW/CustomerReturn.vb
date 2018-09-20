@@ -7,7 +7,7 @@
         dgvCReturn.Rows.Clear()
         Dim dbPR As New DatabaseConnect
         With dbPR
-            .selectByQuery("Select * from customer_return where status <> 0 order by id desc")
+            .selectByQuery("Select * from customer_return order by id desc")
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -22,11 +22,11 @@
                     Dim status As String = ""
                     Select Case .dr("status")
                         Case "0"
-                            status = "Deleted"
+                            status = "Voided"
                         Case "1"
                             status = "Active"
-                        Case "2"
-                            status = "Voided"
+                        Case Else
+                            status = ""
                     End Select
                     Dim row As String() = New String() {id, date_issue, cr_no, supplier_name, total_amount, issue_by, status}
                     dgvCReturn.Rows.Add(row)
@@ -74,9 +74,37 @@
             End If
             Dim yesno As Integer = MsgBox("Are you sure you want to void this transaction ?", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
             If yesno = MsgBoxResult.Yes Then
+                'void revert stock
+                Dim dbprod As New DatabaseConnect()
+                With dbprod
+                    .selectByQuery("Select product_unit_id from purchase_return_products where purchase_return_id = " & id)
+                    If .dr.HasRows Then
+                        While .dr.Read
+                            Dim product_unit_id As Integer = .dr("product_unit_id")
+                            'increase stock
+                            Dim decreasestock As New DatabaseConnect
+                            With decreasestock
+                                Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
+                                Dim cur_stock As Integer = Val(temp)
+                                Dim qty As Integer = New DatabaseConnect().get_by_val("customer_return_products", product_unit_id, "product_unit_id", "qty")
+                                cur_stock = cur_stock + Val(qty)
+
+                                .cmd.Connection = .con
+                                .cmd.CommandType = CommandType.Text
+                                .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                                .cmd.ExecuteNonQuery()
+                                .cmd.Dispose()
+                                .con.Close()
+                            End With
+                        End While
+                    End If
+                    .cmd.Dispose()
+                    .dr.Close()
+                    .con.Close()
+                End With
                 Dim dbvoid As New DatabaseConnect
                 With dbvoid
-                    .update_where("customer_return", id, "status", 2)
+                    .update_where("customer_return", id, "status", 0)
                     .cmd.Dispose()
                     .con.Close()
                     MsgBox("Customer Return Successfully Voided.", MsgBoxStyle.Information)

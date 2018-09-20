@@ -731,4 +731,34 @@
 
         End If
     End Sub
+
+    Private Sub LedgerForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Public Sub loadInvoice()
+        dgvInvoiceList.Rows.Clear()
+        Dim query As String = "select * from customer_orders where ledger_id = " & Ledger.selectedID
+        query = query & " order by id DESC"
+
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = CInt(.dr("id"))
+                    Dim invoice As String = .dr("invoice_no")
+                    Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yy")
+
+                    Dim amount As String = Val(.dr("amount")).ToString("N2")
+                    Dim amount_paid As String = Val(.dr("amount_paid")).ToString("N2")
+                    Dim row As String() = New String() {id, invoice, date_issue, amount, amount_paid, "Remove"}
+                    Me.dgvInvoiceList.Rows.Add(row)
+                End While
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
 End Class

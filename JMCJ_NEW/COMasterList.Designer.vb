@@ -23,13 +23,13 @@ Partial Class COMasterList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbLedgerType = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbpayment_mode = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCustomer = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnPrint = New System.Windows.Forms.Button()
-        Me.cbpayment_mode = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cbLedgerType = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,9 +48,43 @@ Partial Class COMasterList
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter"
         '
+        'cbLedgerType
+        '
+        Me.cbLedgerType.FormattingEnabled = True
+        Me.cbLedgerType.Location = New System.Drawing.Point(371, 56)
+        Me.cbLedgerType.Name = "cbLedgerType"
+        Me.cbLedgerType.Size = New System.Drawing.Size(204, 21)
+        Me.cbLedgerType.TabIndex = 10
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(287, 59)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 13)
+        Me.Label2.TabIndex = 9
+        Me.Label2.Text = "Ledger Type:"
+        '
+        'cbpayment_mode
+        '
+        Me.cbpayment_mode.FormattingEnabled = True
+        Me.cbpayment_mode.Location = New System.Drawing.Point(371, 23)
+        Me.cbpayment_mode.Name = "cbpayment_mode"
+        Me.cbpayment_mode.Size = New System.Drawing.Size(204, 21)
+        Me.cbpayment_mode.TabIndex = 14
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(287, 26)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.TabIndex = 15
+        Me.Label4.Text = "Payment Type:"
+        '
         'txtCustomer
         '
-        Me.txtCustomer.Location = New System.Drawing.Point(83, 23)
+        Me.txtCustomer.Location = New System.Drawing.Point(74, 23)
         Me.txtCustomer.Name = "txtCustomer"
         Me.txtCustomer.Size = New System.Drawing.Size(175, 20)
         Me.txtCustomer.TabIndex = 10
@@ -73,45 +107,11 @@ Partial Class COMasterList
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
-        'cbpayment_mode
-        '
-        Me.cbpayment_mode.FormattingEnabled = True
-        Me.cbpayment_mode.Location = New System.Drawing.Point(371, 23)
-        Me.cbpayment_mode.Name = "cbpayment_mode"
-        Me.cbpayment_mode.Size = New System.Drawing.Size(204, 21)
-        Me.cbpayment_mode.TabIndex = 14
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(287, 26)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(78, 13)
-        Me.Label4.TabIndex = 15
-        Me.Label4.Text = "Payment Type:"
-        '
-        'cbLedgerType
-        '
-        Me.cbLedgerType.FormattingEnabled = True
-        Me.cbLedgerType.Location = New System.Drawing.Point(371, 56)
-        Me.cbLedgerType.Name = "cbLedgerType"
-        Me.cbLedgerType.Size = New System.Drawing.Size(204, 21)
-        Me.cbLedgerType.TabIndex = 10
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(287, 59)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 13)
-        Me.Label2.TabIndex = 9
-        Me.Label2.Text = "Ledger Type:"
-        '
         'COMasterList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(695, 236)
+        Me.ClientSize = New System.Drawing.Size(694, 251)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "COMasterList"

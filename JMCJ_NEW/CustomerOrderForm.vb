@@ -518,11 +518,11 @@
                         dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
                     End If
 
-                    'change color
-                    If qty > 0 Then
-                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
-                    Else
-                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.Red
+                'change color
+                If sellprice > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.Red
                     End If
                 End If
                 computeTotalAmount()
@@ -1030,6 +1030,7 @@
 
     Private Sub btnExact_Click(sender As Object, e As EventArgs) Handles btnExact.Click
         txtTotalAmountPaid.Text = txtAmount.Text
+        rPaidYes.Checked = True
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -1242,5 +1243,13 @@
             MsgBox("Update Successful!", MsgBoxStyle.Information)
 
         End With
+    End Sub
+
+    Private Sub txtTotalAmountPaid_Leave(sender As Object, e As EventArgs) Handles txtTotalAmountPaid.Leave
+        If Val(txtAmount.Text) = Val(txtTotalAmountPaid.Text) Then
+            rPaidYes.Checked = True
+        Else
+            rPaidNo.Checked = False
+        End If
     End Sub
 End Class

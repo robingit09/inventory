@@ -110,7 +110,7 @@ Partial Class ProductMaster
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(154, 33)
+        Me.btnView.Location = New System.Drawing.Point(12, 38)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 22

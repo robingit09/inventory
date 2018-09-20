@@ -58,14 +58,14 @@ Partial Class LedgerForm
         Me.btnSaveAndPrint = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.dgvInvoiceList = New System.Windows.Forms.DataGridView()
-        Me.btnAddInvoice = New System.Windows.Forms.Button()
-        Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.invoice_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_invoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount_paid = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnAddInvoice = New System.Windows.Forms.Button()
+        Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
         Me.gpPaid.SuspendLayout()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -402,26 +402,6 @@ Partial Class LedgerForm
         Me.dgvInvoiceList.Size = New System.Drawing.Size(598, 131)
         Me.dgvInvoiceList.TabIndex = 53
         '
-        'btnAddInvoice
-        '
-        Me.btnAddInvoice.Location = New System.Drawing.Point(529, 13)
-        Me.btnAddInvoice.Name = "btnAddInvoice"
-        Me.btnAddInvoice.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddInvoice.TabIndex = 54
-        Me.btnAddInvoice.Text = "Add +"
-        Me.btnAddInvoice.UseVisualStyleBackColor = True
-        '
-        'gpInvoiceList
-        '
-        Me.gpInvoiceList.Controls.Add(Me.btnAddInvoice)
-        Me.gpInvoiceList.Controls.Add(Me.dgvInvoiceList)
-        Me.gpInvoiceList.Location = New System.Drawing.Point(15, 368)
-        Me.gpInvoiceList.Name = "gpInvoiceList"
-        Me.gpInvoiceList.Size = New System.Drawing.Size(613, 191)
-        Me.gpInvoiceList.TabIndex = 55
-        Me.gpInvoiceList.TabStop = False
-        Me.gpInvoiceList.Text = "Invoice List"
-        '
         'id
         '
         Me.id.HeaderText = "id"
@@ -460,6 +440,26 @@ Partial Class LedgerForm
         Me.action.ReadOnly = True
         Me.action.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.action.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'btnAddInvoice
+        '
+        Me.btnAddInvoice.Location = New System.Drawing.Point(529, 13)
+        Me.btnAddInvoice.Name = "btnAddInvoice"
+        Me.btnAddInvoice.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddInvoice.TabIndex = 54
+        Me.btnAddInvoice.Text = "Add +"
+        Me.btnAddInvoice.UseVisualStyleBackColor = True
+        '
+        'gpInvoiceList
+        '
+        Me.gpInvoiceList.Controls.Add(Me.btnAddInvoice)
+        Me.gpInvoiceList.Controls.Add(Me.dgvInvoiceList)
+        Me.gpInvoiceList.Location = New System.Drawing.Point(15, 368)
+        Me.gpInvoiceList.Name = "gpInvoiceList"
+        Me.gpInvoiceList.Size = New System.Drawing.Size(613, 191)
+        Me.gpInvoiceList.TabIndex = 55
+        Me.gpInvoiceList.TabStop = False
+        Me.gpInvoiceList.Text = "Invoice List"
         '
         'LedgerForm
         '

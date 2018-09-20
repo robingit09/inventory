@@ -140,6 +140,7 @@
             LedgerForm.loadLedgerType()
             LedgerForm.loadTerm()
             loadToUpdateInfo(selectedID)
+            LedgerForm.loadInvoice()
             LedgerForm.ShowDialog()
         Else
             LedgerForm.selectedID = 0
