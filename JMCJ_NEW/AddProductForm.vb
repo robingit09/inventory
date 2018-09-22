@@ -312,8 +312,10 @@
 
     Private Sub txtProductDesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProductDesc.KeyDown
         If e.KeyCode = Keys.Enter Then
-            If txtProductDesc.TextLength > 0 Then
+            If txtProductDesc.TextLength > 0 And selectedDesc > 0 Then
                 selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+            Else
+                selectedDesc = 0
             End If
         End If
     End Sub
@@ -386,7 +388,7 @@
                     LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
                     LEFT JOIN categories as c ON c.id = pc.category_id)
                     LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
-                    where pu.status = 1 order by p.description"
+                    where pu.status = 1 "
         If Trim(txtBarcode.Text) <> "" Then
             query = query & " and pu.barcode = '" & txtBarcode.Text & "'"
         End If
@@ -419,4 +421,6 @@
         query = query & " order by p.description"
         getProduct(query)
     End Sub
+
+
 End Class

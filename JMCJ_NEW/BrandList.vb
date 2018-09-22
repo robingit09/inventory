@@ -9,6 +9,8 @@
         With db
             If q = "" Then
                 .selectByQuery("select id,name,created_at from brand where status = 1 order by name")
+            Else
+                .selectByQuery(q)
             End If
 
             If .dr.HasRows Then
@@ -43,5 +45,16 @@
         Else
             MsgBox("Please select record", MsgBoxStyle.Critical)
         End If
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        btnSearch.Enabled = False
+        Dim query As String = "select id,name,created_at from brand where status = 1"
+        If Trim(txtSearch.Text) <> "" Then
+            query = query & " and name like '%" & txtSearch.Text & "%'"
+        End If
+        query = query & "  order by name"
+        loadBrand(query)
+        btnSearch.Enabled = True
     End Sub
 End Class

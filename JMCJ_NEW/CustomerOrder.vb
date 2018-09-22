@@ -1,4 +1,6 @@
 ﻿Public Class CustomerOrder
+    Public selectedCustomer As Integer = 0
+    Public selectedPaymentType As Integer = -1
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         CustomerOrderForm.selectedID = 0
         CustomerOrderForm.enableControl(True)
@@ -45,17 +47,27 @@
 
     Private Sub CustomerOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadList("")
+        autocompleteCustomer()
+        'getPaymentMode()
+        getMonth()
+        getYear()
+
     End Sub
 
     Public Sub loadList(ByVal query As String)
+
         dgvProd.Rows.Clear()
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select * from customer_orders order by id desc")
+            If query = "" Then
+                .selectByQuery("Select * from customer_orders order by id desc")
+            Else
+                .selectByQuery(query)
+            End If
+
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
-
                     Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yy")
                     Dim customer As String = New DatabaseConnect().get_by_id("company", .dr("customer_id"), "company")
                     Dim invoice As String = .dr("invoice_no")
@@ -64,9 +76,30 @@
                     Dim payment_status As String = .dr("payment_status")
                     Dim delivery_status As String = .dr("delivery_status")
                     Dim terms As String = .dr("payment_terms")
-                    Dim paid As String = .dr("paid")
+                    'Dim paid As String = .dr("paid")
                     Dim delivered_by As String = .dr("delivered_by")
                     Dim received_by As String = .dr("received_by")
+
+                    Select Case payment_status
+                        Case "0"
+                            payment_status = "Unpaid"
+                        Case "1"
+                            payment_status = "Complete"
+                        Case "2"
+                            payment_status = "Partial"
+                    End Select
+
+                    If Val(amount_paid) = Val(amount) Then
+                        payment_status = "Complete"
+                    End If
+
+                    If Val(amount_paid) > 0 And Val(amount_paid) < Val(amount) Then
+                        payment_status = "Partial"
+                    End If
+
+                    If Val(amount_paid) = 0 Then
+                        payment_status = "Unpaid"
+                    End If
 
                     Select Case delivery_status
                         Case "0"
@@ -75,8 +108,7 @@
                             delivery_status = "Delivered"
                     End Select
 
-
-                    Dim row As String() = New String() {id, date_issue, customer, invoice, amount, amount_paid, payment_status, delivery_status, paid, delivered_by, received_by}
+                    Dim row As String() = New String() {id, date_issue, customer, invoice, amount, amount_paid, payment_status, delivery_status, delivered_by, received_by}
                     dgvProd.Rows.Add(row)
                 End While
                 For Each row As DataGridViewRow In dgvProd.Rows
@@ -476,4 +508,164 @@
         End With
         Return result
     End Function
+
+    Public Sub autocompleteCustomer()
+        Dim MySource As New AutoCompleteStringCollection()
+        With txtCustomer
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim customer As New DatabaseConnect
+        With customer
+            .selectByQuery("Select distinct company from company  where status <> 0")
+            While .dr.Read
+                MySource.Add(.dr.GetValue(0))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    'Public Sub getPaymentMode()
+    '    cbpayment_mode.DataSource = Nothing
+    '    cbpayment_mode.Items.Clear()
+    '    Dim comboSource As New Dictionary(Of String, String)()
+
+    '    Dim db As New DatabaseConnect
+    '    With db
+    '        comboSource.Add(-1, "All")
+    '        .selectByQuery("SELECT distinct payment_type from customer_orders where delivery_status <> 0 order by payment_type")
+    '        While .dr.Read
+    '            Select Case .dr.GetValue(0)
+    '                Case 0
+    '                    comboSource.Add(0, "Cash")
+    '                Case 1
+    '                    comboSource.Add(1, "C.O.D")
+    '                Case 2
+    '                    comboSource.Add(2, "Credit")
+    '            End Select
+    '        End While
+    '    End With
+
+    '    cbpayment_mode.DataSource = New BindingSource(comboSource, Nothing)
+    '    cbpayment_mode.DisplayMember = "Value"
+    '    cbpayment_mode.ValueMember = "Key"
+    'End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(date_issue) FROM customer_orders where delivery_status <> 0 order by YEAR(date_issue) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
+    End Function
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+
+        btnFilter.Enabled = False
+        Dim query As String = "Select * from customer_orders where delivery_status <> -1"
+
+        If txtCustomer.Text <> "" And selectedCustomer > 0 Then
+            query = query & " and customer_id = " & selectedCustomer
+        End If
+
+        'If cbpayment_mode.Text <> "All" And selectedPaymentType > -1 Then
+        '    query = query & " and payment_type = " & selectedPaymentType
+        'End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(date_issue) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(date_issue) = " & cbYear.Text
+        End If
+        query = query & " order by id desc"
+        loadList(query)
+        btnFilter.Enabled = True
+    End Sub
+
+    Private Sub txtCustomer_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCustomer.KeyDown
+        If txtCustomer.Text.Length > 0 And e.KeyCode = Keys.Enter Then
+            txtCustomer.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtCustomer.Text.ToLower())
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedCustomer = 0
+        End If
+    End Sub
+
+    Private Sub txtCustomer_Leave(sender As Object, e As EventArgs) Handles txtCustomer.Leave
+        If txtCustomer.Text.Length > 0 Then
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedCustomer = 0
+        End If
+    End Sub
+
+    'Private Sub cbpayment_mode_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    If cbpayment_mode.SelectedIndex > 0 Then
+    '        Dim key As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Key
+    '        Dim value As String = DirectCast(cbpayment_mode.SelectedItem, KeyValuePair(Of String, String)).Value
+    '        selectedPaymentType = key
+    '    Else
+    '        selectedPaymentType = 0
+    '    End If
+    'End Sub
 End Class

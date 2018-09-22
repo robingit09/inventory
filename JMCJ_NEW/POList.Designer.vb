@@ -34,7 +34,16 @@ Partial Class POList
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
+        Me.gpFilter = New System.Windows.Forms.GroupBox()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.cbYear = New System.Windows.Forms.ComboBox()
+        Me.txtSupplier = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbMonth = New System.Windows.Forms.ComboBox()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gpFilter.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnAddNew
@@ -51,9 +60,9 @@ Partial Class POList
         '
         Me.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.DateIssue, Me.PONumber, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.delivery_status})
-        Me.dgvPO.Location = New System.Drawing.Point(26, 108)
+        Me.dgvPO.Location = New System.Drawing.Point(26, 203)
         Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(921, 424)
+        Me.dgvPO.Size = New System.Drawing.Size(921, 408)
         Me.dgvPO.TabIndex = 1
         '
         'id
@@ -132,11 +141,88 @@ Partial Class POList
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
+        'gpFilter
+        '
+        Me.gpFilter.Controls.Add(Me.btnFilter)
+        Me.gpFilter.Controls.Add(Me.cbYear)
+        Me.gpFilter.Controls.Add(Me.txtSupplier)
+        Me.gpFilter.Controls.Add(Me.Label3)
+        Me.gpFilter.Controls.Add(Me.Label2)
+        Me.gpFilter.Controls.Add(Me.Label1)
+        Me.gpFilter.Controls.Add(Me.cbMonth)
+        Me.gpFilter.Location = New System.Drawing.Point(26, 93)
+        Me.gpFilter.Name = "gpFilter"
+        Me.gpFilter.Size = New System.Drawing.Size(921, 91)
+        Me.gpFilter.TabIndex = 5
+        Me.gpFilter.TabStop = False
+        Me.gpFilter.Text = "Filter"
+        '
+        'btnFilter
+        '
+        Me.btnFilter.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(832, 49)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(83, 29)
+        Me.btnFilter.TabIndex = 6
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
+        '
+        'cbYear
+        '
+        Me.cbYear.FormattingEnabled = True
+        Me.cbYear.Location = New System.Drawing.Point(323, 53)
+        Me.cbYear.Name = "cbYear"
+        Me.cbYear.Size = New System.Drawing.Size(204, 21)
+        Me.cbYear.TabIndex = 30
+        '
+        'txtSupplier
+        '
+        Me.txtSupplier.Location = New System.Drawing.Point(67, 28)
+        Me.txtSupplier.Name = "txtSupplier"
+        Me.txtSupplier.Size = New System.Drawing.Size(212, 20)
+        Me.txtSupplier.TabIndex = 26
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(285, 56)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(32, 13)
+        Me.Label3.TabIndex = 31
+        Me.Label3.Text = "Year:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(10, 58)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(40, 13)
+        Me.Label2.TabIndex = 29
+        Me.Label2.Text = "Month:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(10, 31)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(45, 13)
+        Me.Label1.TabIndex = 27
+        Me.Label1.Text = "Supplier"
+        '
+        'cbMonth
+        '
+        Me.cbMonth.FormattingEnabled = True
+        Me.cbMonth.Location = New System.Drawing.Point(67, 55)
+        Me.cbMonth.Name = "cbMonth"
+        Me.cbMonth.Size = New System.Drawing.Size(212, 21)
+        Me.cbMonth.TabIndex = 28
+        '
         'POList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(983, 557)
+        Me.ClientSize = New System.Drawing.Size(983, 635)
+        Me.Controls.Add(Me.gpFilter)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnVoid)
@@ -146,6 +232,8 @@ Partial Class POList
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Order"
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gpFilter.ResumeLayout(False)
+        Me.gpFilter.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -161,4 +249,12 @@ Partial Class POList
     Friend WithEvents delivery_status As DataGridViewTextBoxColumn
     Friend WithEvents btnView As Button
     Friend WithEvents btnPrint As Button
+    Friend WithEvents gpFilter As GroupBox
+    Friend WithEvents btnFilter As Button
+    Friend WithEvents cbYear As ComboBox
+    Friend WithEvents txtSupplier As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cbMonth As ComboBox
 End Class

@@ -1,5 +1,5 @@
 ﻿Public Class PurchaseReturn
-
+    Public selectedSupplier As Integer = 0
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         btnAddNew.Enabled = False
         PurchaseReturnForm.initialize()
@@ -11,7 +11,12 @@
         dgvPReturn.Rows.Clear()
         Dim dbPR As New DatabaseConnect
         With dbPR
-            .selectByQuery("Select * from purchase_return order by id desc")
+            If query = "" Then
+                .selectByQuery("Select * from purchase_return order by id desc")
+            Else
+                .selectByQuery(query)
+            End If
+
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -50,6 +55,9 @@
 
     Private Sub PurchaseReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadList("")
+        autocompleteSupplier()
+        getMonth()
+        getYear()
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -319,4 +327,123 @@
         End With
         Return res
     End Function
+
+    Public Sub autocompleteSupplier()
+        Dim MySource As New AutoCompleteStringCollection()
+        With txtSupplier
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim customer As New DatabaseConnect
+        With customer
+            .selectByQuery("Select distinct supplier_name from suppliers  where status = 1")
+            While .dr.Read
+                MySource.Add(.dr.GetValue(0))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(pr_date) FROM purchase_return where status > -1 order by YEAR(pr_date) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
+    End Function
+
+    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown
+        If txtSupplier.Text.Length > 0 And e.KeyCode = Keys.Enter Then
+            txtSupplier.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtSupplier.Text.ToLower())
+            selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedSupplier = 0
+        End If
+    End Sub
+
+    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave
+        If txtSupplier.Text.Length > 0 Then
+            selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedSupplier = 0
+        End If
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        btnFilter.Enabled = False
+        Dim query As String = "Select * from purchase_return where status > -1 "
+        If txtSupplier.Text <> "" And selectedSupplier > 0 Then
+            query = query & " and supplier_id = " & selectedSupplier
+        End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(pr_date) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(pr_date) = " & cbYear.Text
+        End If
+
+        query = query & "  order by id desc"
+        loadList(query)
+        btnFilter.Enabled = True
+    End Sub
 End Class

@@ -228,7 +228,7 @@ Partial Class UpdatePriceForm
         Me.Controls.Add(Me.txtCustomer)
         Me.Name = "UpdatePriceForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "UpdatePriceForm"
+        Me.Text = "Update Price"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

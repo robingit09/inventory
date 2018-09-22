@@ -25,8 +25,6 @@ Partial Class PurchaseReceive
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.dgvPR = New System.Windows.Forms.DataGridView()
-        Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.btnPrint = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PRNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,6 +34,8 @@ Partial Class PurchaseReceive
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.delivery_status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnPrint = New System.Windows.Forms.Button()
         CType(Me.dgvPR, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,30 +63,10 @@ Partial Class PurchaseReceive
         '
         Me.dgvPR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPR.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.DateIssue, Me.PRNumber, Me.PONumber, Me.dr_no, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.delivery_status})
-        Me.dgvPR.Location = New System.Drawing.Point(12, 83)
+        Me.dgvPR.Location = New System.Drawing.Point(12, 143)
         Me.dgvPR.Name = "dgvPR"
-        Me.dgvPR.Size = New System.Drawing.Size(1121, 357)
+        Me.dgvPR.Size = New System.Drawing.Size(1121, 348)
         Me.dgvPR.TabIndex = 5
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 26)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(83, 29)
-        Me.btnAddNew.TabIndex = 4
-        Me.btnAddNew.Text = "Add New"
-        Me.btnAddNew.UseVisualStyleBackColor = True
-        '
-        'btnPrint
-        '
-        Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(221, 26)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(83, 29)
-        Me.btnPrint.TabIndex = 8
-        Me.btnPrint.Text = "Print"
-        Me.btnPrint.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -145,6 +125,26 @@ Partial Class PurchaseReceive
         Me.delivery_status.HeaderText = "Delivery Status"
         Me.delivery_status.Name = "delivery_status"
         Me.delivery_status.ReadOnly = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddNew.Location = New System.Drawing.Point(12, 26)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(83, 29)
+        Me.btnAddNew.TabIndex = 4
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(221, 26)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(83, 29)
+        Me.btnPrint.TabIndex = 8
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
         '
         'PurchaseReceive
         '

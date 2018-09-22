@@ -2,39 +2,39 @@
 
     Private Function generatePrint(ByVal filter As Dictionary(Of String, String))
         Dim result As String = ""
-
+        Dim total_sales2 As Double = 0
         'get total sales
-        Dim query_total_sales As String = "Select SUM(cop.total_amount) as sale from customer_order_products as cop 
-        INNER JOIN customer_orders as co ON co.id = cop.customer_order_id 
-        where cop.total_amount > 0 and co.delivery_status <> 0"
-        If filter.ContainsKey("month") Then
-            Dim month As String = filter.Item("month")
-            If month <> "All" Then
-                query_total_sales = query_total_sales & " and MONTH(co.date_issue) = " & monthToNumber(month)
-            End If
-        End If
+        'Dim query_total_sales As String = "Select SUM(cop.total_amount) as sale from customer_order_products as cop 
+        'INNER JOIN customer_orders as co ON co.id = cop.customer_order_id 
+        'where cop.total_amount > 0 and co.delivery_status <> 0"
+        'If filter.ContainsKey("month") Then
+        '    Dim month As String = filter.Item("month")
+        '    If month <> "All" Then
+        '        query_total_sales = query_total_sales & " and MONTH(co.date_issue) = " & monthToNumber(month)
+        '    End If
+        'End If
 
-        If filter.ContainsKey("year") Then
-            Dim year As String = filter.Item("year")
-            If year <> "All" Then
-                query_total_sales = query_total_sales & " and YEAR(co.date_issue) = " & year
-            End If
-        End If
+        'If filter.ContainsKey("year") Then
+        '    Dim year As String = filter.Item("year")
+        '    If year <> "All" Then
+        '        query_total_sales = query_total_sales & " and YEAR(co.date_issue) = " & year
+        '    End If
+        'End If
 
 
-        Dim total_sales As String
-        Dim dbprice As New DatabaseConnect
-        With dbprice
-            .selectByQuery(query_total_sales)
-            If .dr.Read Then
-                total_sales = Val(.dr("sale")).ToString("N2")
-            Else
-                total_sales = 0
-            End If
-            .cmd.Dispose()
-            .dr.Close()
-            .con.Close()
-        End With
+        'Dim total_sales As String
+        'Dim dbprice As New DatabaseConnect
+        'With dbprice
+        '    .selectByQuery(query_total_sales)
+        '    If .dr.Read Then
+        '        total_sales = Val(.dr("sale")).ToString("N2")
+        '    Else
+        '        total_sales = 0
+        '    End If
+        '    .cmd.Dispose()
+        '    .dr.Close()
+        '    .con.Close()
+        'End With
 
         Dim query As String = "Select Format(cop.created_at,'mm-yyyy') as monthly,count(co.id) as orders, sum(cop.quantity) as qty, sum(cop.total_amount) as total_sales from customer_order_products as cop
                     inner join customer_orders as co ON co.id = cop.customer_order_id 
@@ -62,11 +62,13 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim tr As String = "<tr>"
-                    Dim daily As String = .dr("monthly")
-                    Dim orders As String = .dr("orders")
-                    Dim qty As String = .dr("qty")
-                    Dim total As String = .dr("total_sales")
-                    tr = tr & "<td>" & daily & "</td>"
+                    Dim monthly As String = If(IsDBNull(.dr("monthly")), "", .dr("monthly"))
+                    Dim orders As String = If(IsDBNull(.dr("orders")), "", .dr("orders"))
+                    Dim qty As String = If(IsDBNull(.dr("qty")), "0", .dr("qty"))
+                    Dim total As String = If(IsDBNull(.dr("total_sales")), "0", .dr("total_sales"))
+
+                    total_sales2 += CDbl(total)
+                    tr = tr & "<td>" & monthly & "</td>"
                     tr = tr & "<td>" & orders & "</td>"
                     tr = tr & "<td>" & qty & "</td>"
                     tr = tr & "<td>" & Val(total).ToString("N2") & "</td>"
@@ -111,7 +113,7 @@ tr:nth-child(even) {
 	<table>
 		<tr>
 			<td style='text-align:right;'><strong><span>Total Sales: </span></strong></td>
-			<td width='80' style='color:red'><strong><span>" & total_sales & "</span></strong></td>
+			<td width='80' style='color:red'><strong><span>" & Val(total_sales2).ToString("N2") & "</span></strong></td>
 		</tr>
 	<table>
 	<br>
@@ -131,7 +133,7 @@ tr:nth-child(even) {
 	  " & table_content & "
     <tr>
 		<td colspan='3' style='text-align:right;'><strong>Total</strong></td>
-		<td style='color:red'><strong>" & total_sales & " </strong></td>
+		<td style='color:red'><strong>" & Val(total_sales2).ToString("N2") & " </strong></td>
 	</tr>
   </tbody>
 </table>
@@ -164,7 +166,7 @@ tr:nth-child(even) {
         cbYear.Items.Add("All")
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("SELECT distinct YEAR(date_issue) FROM ledger where status <> 0 order by YEAR(date_issue) DESC")
+            .selectByQuery("SELECT distinct YEAR(date_issue) FROM customer_orders where delivery_status <> 0 order by YEAR(date_issue) DESC")
             While .dr.Read
                 cbYear.Items.Add(.dr.GetValue(0))
             End While

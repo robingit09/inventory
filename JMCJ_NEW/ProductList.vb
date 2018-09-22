@@ -551,6 +551,8 @@
         If e.KeyCode = Keys.Enter Then
             If txtProductDesc.TextLength > 0 Then
                 selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+            Else
+                selectedDesc = 0
             End If
         End If
     End Sub

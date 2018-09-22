@@ -1,13 +1,22 @@
 ﻿Public Class CustomerReturn
+    Public selectedCustomer As Integer = 0
     Private Sub CustomerReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadList("")
+        autocompleteCustomer()
+        getMonth()
+        getYear()
     End Sub
 
     Public Sub loadList(ByVal query As String)
         dgvCReturn.Rows.Clear()
         Dim dbPR As New DatabaseConnect
         With dbPR
-            .selectByQuery("Select * from customer_return order by id desc")
+            If query = "" Then
+                .selectByQuery("Select * from customer_return order by id desc")
+            Else
+                .selectByQuery(query)
+            End If
+
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -315,4 +324,127 @@
         Return result
     End Function
 
+
+    Public Sub autocompleteCustomer()
+        Dim MySource As New AutoCompleteStringCollection()
+        With txtCustomer
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim customer As New DatabaseConnect
+        With customer
+            .selectByQuery("Select distinct company from company  where status <> 0")
+            While .dr.Read
+                MySource.Add(.dr.GetValue(0))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(cr_date) FROM customer_return where status > -1 order by YEAR(cr_date) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
+    End Function
+
+    Private Sub txtCustomer_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCustomer.KeyDown
+        If txtCustomer.Text.Length > 0 And e.KeyCode = Keys.Enter Then
+            txtCustomer.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtCustomer.Text.ToLower())
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedCustomer = 0
+        End If
+    End Sub
+
+    Private Sub txtCustomer_Leave(sender As Object, e As EventArgs) Handles txtCustomer.Leave
+        If txtCustomer.Text.Length > 0 Then
+            selectedCustomer = New DatabaseConnect().get_id("company", "company", txtCustomer.Text)
+            'MsgBox(selectedCustomer)
+        Else
+            selectedCustomer = 0
+        End If
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        btnFilter.Enabled = False
+        Dim query As String = "Select * from customer_return where status > -1"
+
+        If txtCustomer.Text <> "" And selectedCustomer > 0 Then
+            query = query & " and customer_id = " & selectedCustomer
+        End If
+
+        'If cbpayment_mode.Text <> "All" And selectedPaymentType > -1 Then
+        '    query = query & " and payment_type = " & selectedPaymentType
+        'End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(cr_date) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(cr_date) = " & cbYear.Text
+        End If
+        query = query & " order by id desc"
+        loadList(query)
+        btnFilter.Enabled = True
+    End Sub
 End Class

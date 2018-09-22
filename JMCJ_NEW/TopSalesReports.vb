@@ -24,69 +24,72 @@
     Private Function generatePrint(ByVal filter() As String)
         Dim result As String = ""
         Dim customer_name As String = ""
+        Dim total_sold2 As Integer = 0
+        Dim grand_total2 As Double = 0
+
         If selectedCustomer = 0 Then
             customer_name = "All"
         Else
             customer_name = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
         End If
 
-        'get total sold
-        Dim query_sold As String = "Select SUM(quantity) as qty from customer_order_products as cop
-                inner join customer_orders as co on co.id = cop.customer_order_id
-                where co.delivery_status <> 0"
-        If cbCustomer.SelectedIndex > 0 Then
-            query_sold = query_sold & " and co.customer = " & selectedCustomer
-        End If
+        ''get total sold
+        'Dim query_sold As String = "Select SUM(quantity) as qty from customer_order_products as cop
+        '        inner join customer_orders as co on co.id = cop.customer_order_id
+        '        where co.delivery_status <> 0"
+        'If cbCustomer.SelectedIndex > 0 Then
+        '    query_sold = query_sold & " and co.customer_id = " & selectedCustomer
+        'End If
 
-        Dim total_sold As String = "0"
-        Dim dbsold As New DatabaseConnect
-        With dbsold
-            .selectByQuery(query_sold)
-            If .dr.HasRows Then
-                If .dr.Read Then
-                    If Not IsDBNull(.dr("qty")) Then
-                        total_sold = Val(.dr("qty")).ToString("N0")
-                    End If
+        'Dim total_sold As String = "0"
+        'Dim dbsold As New DatabaseConnect
+        'With dbsold
+        '    .selectByQuery(query_sold)
+        '    If .dr.HasRows Then
+        '        If .dr.Read Then
+        '            If Not IsDBNull(.dr("qty")) Then
+        '                total_sold = Val(.dr("qty")).ToString("N0")
+        '            End If
 
-                Else
-                    total_sold = 0
-                End If
-            Else
-                total_sold = 0
-            End If
-            .cmd.Dispose()
-            .dr.Close()
-            .con.Close()
-        End With
+        '        Else
+        '            total_sold = 0
+        '        End If
+        '    Else
+        '        total_sold = 0
+        '    End If
+        '    .cmd.Dispose()
+        '    .dr.Close()
+        '    .con.Close()
+        'End With
 
 
-        'get total amount
-        Dim query_amount As String = "Select SUM(cop.total_amount) as amount from customer_order_products as cop
-                inner join customer_orders as co on co.id = cop.customer_order_id where co.delivery_status <> 0 "
-        If cbCustomer.SelectedIndex > 0 Then
-            query_amount = query_amount & " and co.customer = " & selectedCustomer
-        End If
+        ''get total amount
+        'Dim query_amount As String = "Select SUM(cop.total_amount) as amount from customer_order_products as cop
+        '        inner join customer_orders as co on co.id = cop.customer_order_id where co.delivery_status <> 0 "
+        'If cbCustomer.SelectedIndex > 0 Then
+        '    query_amount = query_amount & " and co.customer_id = " & selectedCustomer
+        'End If
 
-        Dim grand_total As String = "0"
-        Dim dbamount As New DatabaseConnect
-        With dbamount
-            .selectByQuery(query_amount)
-            If .dr.HasRows Then
-                If .dr.Read Then
-                    If Not IsDBNull(.dr("amount")) Then
-                        grand_total = Val(.dr("amount")).ToString("N2")
-                    End If
-                Else
-                        grand_total = 0
-                End If
-            Else
-                grand_total = 0
-            End If
+        'Dim grand_total As String = "0"
+        'Dim dbamount As New DatabaseConnect
+        'With dbamount
+        '    .selectByQuery(query_amount)
+        '    If .dr.HasRows Then
+        '        If .dr.Read Then
+        '            If Not IsDBNull(.dr("amount")) Then
+        '                grand_total = Val(.dr("amount")).ToString("N2")
+        '            End If
+        '        Else
+        '                grand_total = 0
+        '        End If
+        '    Else
+        '        grand_total = 0
+        '    End If
 
-            .cmd.Dispose()
-            .dr.Close()
-            .con.Close()
-        End With
+        '    .cmd.Dispose()
+        '    .dr.Close()
+        '    .con.Close()
+        'End With
 
         Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
                     Left Join product_unit as pu ON pu.id = cop.product_unit_id)
@@ -99,7 +102,15 @@
                     where co.delivery_status <> 0 "
 
         If cbCustomer.SelectedIndex > 0 Then
-            query = query & " and co.customer = " & selectedCustomer
+            query = query & " and co.customer_id = " & selectedCustomer
+        End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(co.date_issue) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(co.date_issue) = " & cbYear.Text
         End If
         query = query & " order by total_qty desc"
 
@@ -120,7 +131,10 @@
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim total_qty As String = .dr("total_qty")
                     Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
-                    Dim percent As String = Val(Val(total_qty) / Val(total_sold)).ToString("#0.##%")
+                    Dim percent As String = Val(Val(total_qty) / Val(total_sold2)).ToString("#0.##%")
+
+                    total_sold2 += Val(total_qty)
+                    grand_total2 += CDbl(total_amount)
 
                     tr = tr & "<td>" & barcode & "</td>"
                     tr = tr & "<td>" & unit & "</td>"
@@ -175,9 +189,9 @@ tr:nth-child(even) {
             <td width='160'><span><strong>Customer: </strong></span></td>
 			<td><label>" & customer_name & " </label></td>
 			<td width='160'><span><strong>Total Quantity Sold: </strong></span></td>
-			<td style='color:red;'><label>" & total_sold & " </label></td>
+			<td style='color:red;'><label>" & total_sold2 & " </label></td>
             <td width='160'><span><strong>Total Amount Sold: </strong></span></td>
-			<td style='color:red;'><label>" & grand_total & " </label></td>
+			<td style='color:red;'><label>" & Val(grand_total2).ToString("N2") & " </label></td>
 		</tr>
 	<table>
 </div>
@@ -200,9 +214,9 @@ tr:nth-child(even) {
     " & table_content & "
     <tr>
 		<td colspan='5' style='text-align:right;'><strong>Total</strong></td>
-		<td style='color:red'><strong>" & total_sold & "</strong></td>
+		<td style='color:red'><strong>" & total_sold2 & "</strong></td>
 		<td>100%</td>
-        <td style='color:red'><strong>" & grand_total & "</strong></td>
+        <td style='color:red'><strong>" & Val(grand_total2).ToString("N2") & "</strong></td>
 	</tr>
   </tbody>
 </table>
@@ -242,6 +256,8 @@ tr:nth-child(even) {
 
     Private Sub TopSalesReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadCustomer()
+        getMonth()
+        getYear()
     End Sub
 
     Private Sub cbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomer.SelectedIndexChanged
@@ -253,4 +269,65 @@ tr:nth-child(even) {
             selectedCustomer = 0
         End If
     End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Private Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(date_issue) FROM customer_orders where delivery_status <> 0 order by YEAR(date_issue) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
+    End Function
+
 End Class

@@ -35,11 +35,13 @@ Partial Class AddProductForm
         Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.cbSubCat = New System.Windows.Forms.ComboBox()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.cbColor = New System.Windows.Forms.ComboBox()
+        Me.cbCat = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cbUnit = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -48,11 +50,9 @@ Partial Class AddProductForm
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbSubCat = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.cbCat = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -63,7 +63,7 @@ Partial Class AddProductForm
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_unit_price, Me.column_sell_price, Me.column_cat, Me.column_subcat})
         Me.dgvProducts.Location = New System.Drawing.Point(12, 197)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1258, 359)
+        Me.dgvProducts.Size = New System.Drawing.Size(1258, 429)
         Me.dgvProducts.TabIndex = 21
         '
         'column_id
@@ -165,37 +165,24 @@ Partial Class AddProductForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter"
         '
-        'btnSave
+        'btnFilter
         '
-        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(1011, 12)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(120, 31)
-        Me.btnSave.TabIndex = 9
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(989, 62)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(85, 28)
+        Me.btnFilter.TabIndex = 29
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
-        'btnCancel
+        'cbSubCat
         '
-        Me.btnCancel.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(1150, 12)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 31)
-        Me.btnCancel.TabIndex = 23
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(12, 174)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 24
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
+        Me.cbSubCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbSubCat.FormattingEnabled = True
+        Me.cbSubCat.Location = New System.Drawing.Point(344, 59)
+        Me.cbSubCat.Name = "cbSubCat"
+        Me.cbSubCat.Size = New System.Drawing.Size(190, 23)
+        Me.cbSubCat.TabIndex = 28
         '
         'txtProductDesc
         '
@@ -205,6 +192,16 @@ Partial Class AddProductForm
         Me.txtProductDesc.Size = New System.Drawing.Size(190, 21)
         Me.txtProductDesc.TabIndex = 27
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(236, 62)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 15)
+        Me.Label7.TabIndex = 27
+        Me.Label7.Text = "Sub Category"
+        '
         'cbColor
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -213,6 +210,25 @@ Partial Class AddProductForm
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(117, 23)
         Me.cbColor.TabIndex = 26
+        '
+        'cbCat
+        '
+        Me.cbCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCat.FormattingEnabled = True
+        Me.cbCat.Location = New System.Drawing.Point(82, 59)
+        Me.cbCat.Name = "cbCat"
+        Me.cbCat.Size = New System.Drawing.Size(145, 23)
+        Me.cbCat.TabIndex = 26
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(15, 62)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(51, 15)
+        Me.Label2.TabIndex = 25
+        Me.Label2.Text = "Category"
         '
         'Label6
         '
@@ -290,59 +306,43 @@ Partial Class AddProductForm
         Me.Label1.TabIndex = 18
         Me.Label1.Text = "Product Description"
         '
-        'cbSubCat
+        'btnSave
         '
-        Me.cbSubCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSubCat.FormattingEnabled = True
-        Me.cbSubCat.Location = New System.Drawing.Point(344, 59)
-        Me.cbSubCat.Name = "cbSubCat"
-        Me.cbSubCat.Size = New System.Drawing.Size(190, 23)
-        Me.cbSubCat.TabIndex = 28
+        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(1011, 12)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(120, 31)
+        Me.btnSave.TabIndex = 9
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'Label7
+        'btnCancel
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(236, 62)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 15)
-        Me.Label7.TabIndex = 27
-        Me.Label7.Text = "Sub Category"
+        Me.btnCancel.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(1150, 12)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(120, 31)
+        Me.btnCancel.TabIndex = 23
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'cbCat
+        'ckSelectAll
         '
-        Me.cbCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCat.FormattingEnabled = True
-        Me.cbCat.Location = New System.Drawing.Point(82, 59)
-        Me.cbCat.Name = "cbCat"
-        Me.cbCat.Size = New System.Drawing.Size(145, 23)
-        Me.cbCat.TabIndex = 26
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(15, 62)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(51, 15)
-        Me.Label2.TabIndex = 25
-        Me.Label2.Text = "Category"
-        '
-        'btnFilter
-        '
-        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(989, 62)
-        Me.btnFilter.Name = "btnFilter"
-        Me.btnFilter.Size = New System.Drawing.Size(85, 28)
-        Me.btnFilter.TabIndex = 29
-        Me.btnFilter.Text = "Filter"
-        Me.btnFilter.UseVisualStyleBackColor = True
+        Me.ckSelectAll.AutoSize = True
+        Me.ckSelectAll.Checked = True
+        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSelectAll.Location = New System.Drawing.Point(12, 174)
+        Me.ckSelectAll.Name = "ckSelectAll"
+        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
+        Me.ckSelectAll.TabIndex = 24
+        Me.ckSelectAll.Text = "Select All"
+        Me.ckSelectAll.UseVisualStyleBackColor = True
         '
         'AddProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1301, 579)
+        Me.ClientSize = New System.Drawing.Size(1301, 638)
         Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)

@@ -74,7 +74,7 @@ Partial Class Ledger
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(210, 27)
+        Me.btnDelete.Location = New System.Drawing.Point(210, 32)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 5
@@ -83,7 +83,7 @@ Partial Class Ledger
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(113, 27)
+        Me.btnUpdate.Location = New System.Drawing.Point(113, 32)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 4
@@ -92,7 +92,7 @@ Partial Class Ledger
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(14, 27)
+        Me.btnAddNew.Location = New System.Drawing.Point(14, 32)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 3
@@ -207,7 +207,7 @@ Partial Class Ledger
         'btnLoad
         '
         Me.btnLoad.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoad.Location = New System.Drawing.Point(1068, 25)
+        Me.btnLoad.Location = New System.Drawing.Point(1068, 32)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(92, 35)
         Me.btnLoad.TabIndex = 10
@@ -356,25 +356,25 @@ Partial Class Ledger
         'CustomerToolStripMenuItem1
         '
         Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
-        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
         Me.CustomerToolStripMenuItem1.Text = "Customer"
         '
         'LedgerToolStripMenuItem
         '
         Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
-        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.LedgerToolStripMenuItem.Text = "Ledger"
         '
         'TermsToolStripMenuItem
         '
         Me.TermsToolStripMenuItem.Name = "TermsToolStripMenuItem"
-        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.TermsToolStripMenuItem.Text = "Terms"
         '
         'CheckToolStripMenuItem
         '
         Me.CheckToolStripMenuItem.Name = "CheckToolStripMenuItem"
-        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.CheckToolStripMenuItem.Text = "Check"
         '
         'CustomerToolStripMenuItem

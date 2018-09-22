@@ -6,8 +6,18 @@
     Public selectedSupplier As Integer = 0
     Public selectedTerm As Integer = 0
     Public selectedPaymentType As Integer = 0
-    Private Sub PurchaseOrderForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+    Public SelectedProdID As Integer = 0
+    Public selectedBrand As Integer = 0
+    Public selectedColor As Integer = 0
+    Public selectedUnit As Integer = 0
+    Private Sub PurchaseOrderForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        autocompleteProduct()
+        populateBrand(0)
+        populateUnit(0, 0)
+        populateColor(0, 0, 0)
+
+        lblTotalAmount.Text = "₱ 0.00"
     End Sub
 
     Public Sub initialize()
@@ -17,6 +27,169 @@
         gpEnterBarcode.Enabled = False
         gpEnterProduct.Enabled = False
         dgvProd.Enabled = False
+    End Sub
+
+    Public Sub autocompleteProduct()
+        Dim MySource As New AutoCompleteStringCollection()
+
+        With txtProductDesc
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim product As New DatabaseConnect
+        With product
+            .selectByQuery("Select description from products  where status <> 0  order by description")
+            While .dr.Read
+                MySource.Add(.dr("description"))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub populateBrand(ByVal prodid As Integer)
+        Dim dbbrand As New DatabaseConnect
+        With dbbrand
+            cbBrand.DataSource = Nothing
+            cbBrand.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Brand")
+            Dim query As String = "Select distinct b.id, b.name from (product_unit as pu INNER JOIN brand as b on b.id = pu.brand) 
+            where pu.product_id = " & prodid
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim brand As String = .dr.GetValue(1)
+                    comboSource.Add(id, brand)
+                End While
+            End If
+            cbBrand.DataSource = New BindingSource(comboSource, Nothing)
+            cbBrand.DisplayMember = "Value"
+            cbBrand.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub populateColor(ByVal prodid As Integer, ByVal brandid As Integer, ByVal unitid As Integer)
+        Dim dbunit As New DatabaseConnect
+        With dbunit
+            cbColor.DataSource = Nothing
+            cbColor.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "No Color")
+
+            Dim query As String = "Select distinct c.id, c.name from (product_unit as pu INNER JOIN color as c on c.id = pu.color) 
+            where pu.product_id = " & prodid
+            If brandid > 0 Then
+                query = query & " and pu.brand = " & brandid
+            End If
+
+            If unitid > 0 Then
+                query = query & " and pu.unit = " & unitid
+            End If
+
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim color As String = .dr.GetValue(1)
+                    comboSource.Add(id, color)
+                End While
+            End If
+            cbColor.DataSource = New BindingSource(comboSource, Nothing)
+            cbColor.DisplayMember = "Value"
+            cbColor.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub populateUnit(ByVal prodid As Integer, ByVal brandid As Integer)
+        Dim dbunit As New DatabaseConnect
+        With dbunit
+            cbUnit.DataSource = Nothing
+            cbUnit.Items.Clear()
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Unit")
+            Dim query As String = "Select distinct u.id, u.name from (product_unit as pu LEFT JOIN unit as u on u.id = pu.unit) 
+            where pu.product_id = " & prodid
+
+            If brandid > 0 Then
+                query = query & " and pu.brand = " & brandid
+            End If
+
+            .selectByQuery(query)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As String = .dr.GetValue(0)
+                    Dim unit As String = .dr.GetValue(1)
+                    comboSource.Add(id, unit)
+                End While
+            End If
+            cbUnit.DataSource = New BindingSource(comboSource, Nothing)
+            cbUnit.DisplayMember = "Value"
+            cbUnit.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub txtProductDesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProductDesc.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Trim(txtProductDesc.Text).Length > 0 Then
+                SelectedProdID = New DatabaseConnect().get_id("products", "description", Trim(txtProductDesc.Text))
+                populateBrand(SelectedProdID)
+                txtProductDesc.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtProductDesc.Text.ToLower())
+            Else
+                SelectedProdID = 0
+                populateBrand(selectedBrand)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
+        If cbBrand.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedBrand = key
+            populateUnit(SelectedProdID, selectedBrand)
+        Else
+            SelectedBrand = 0
+            populateUnit(SelectedProdID, selectedBrand)
+        End If
+    End Sub
+
+    Private Sub cbUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnit.SelectedIndexChanged
+        If cbUnit.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbUnit.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedUnit = key
+            populateColor(SelectedProdID, selectedBrand, selectedUnit)
+        Else
+            selectedUnit = 0
+            populateColor(SelectedProdID, selectedBrand, selectedUnit)
+        End If
+    End Sub
+
+    Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
+        If cbColor.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedColor = key
+            'populateUnit(SelectedProdID, selectedBrand)
+        Else
+            selectedColor = 0
+            'populateUnit(SelectedProdID, selectedBrand)
+        End If
     End Sub
 
     Public Sub loadSupplier()
@@ -132,7 +305,7 @@
         cbTerms.Items.Add("30 Days")
         cbTerms.Items.Add("60 Days")
         cbTerms.Items.Add("90 Days")
-        cbTerms.Items.Add("Immediate")
+        cbTerms.Items.Add("120 Days")
         cbTerms.SelectedIndex = 0
 
     End Sub
@@ -192,7 +365,9 @@
                     selectedTerm = 60
                 Case "90 Days"
                     selectedTerm = 90
-                Case "Immediate"
+                Case "120 Days"
+                    selectedTerm = 120
+                Case Else
                     selectedTerm = 0
             End Select
         Else
@@ -309,7 +484,7 @@
                 End If
             Next
         End If
-        lblTotalAmount.Text = totalamount.ToString("N2")
+        lblTotalAmount.Text = "₱ " & totalamount.ToString("N2")
         txtAmount.Text = totalamount.ToString("N2")
     End Sub
 
@@ -491,6 +666,23 @@
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
+            MsgBox(selectedPaymentType)
+            Select Case selectedPaymentType
+                Case 1
+                    ' cash
+                    cbTerms.SelectedIndex = 0
+                    selectedTerm = 0
+                    cbTerms.Enabled = False
+                Case 2
+                    ' c.o.d
+                    cbTerms.SelectedIndex = 0
+                    selectedTerm = 0
+                    cbTerms.Enabled = False
+                Case 3
+                    ' credit
+                    cbTerms.Enabled = True
+
+            End Select
         Else
             selectedPaymentType = 0
         End If
@@ -594,7 +786,5 @@
         End With
     End Sub
 
-    Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
 
-    End Sub
 End Class

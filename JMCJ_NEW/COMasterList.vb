@@ -252,8 +252,7 @@
                         comboSource.Add(1, "C.O.D")
                     Case 2
                         comboSource.Add(2, "Credit")
-                    Case 3
-                        comboSource.Add(3, "Post Dated")
+
                 End Select
             End While
         End With
