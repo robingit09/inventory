@@ -8,6 +8,7 @@
         LedgerForm.loadPaymentType()
         LedgerForm.loadLedgerType()
         LedgerForm.loadTerm()
+        LedgerForm.txtLedgerNo.Text = LedgerForm.generateLedgerNo()
         LedgerForm.btnSave.Text = "Save"
         LedgerForm.btnSaveAndPrint.Text = "Save and Print"
         LedgerForm.ShowDialog()
@@ -34,22 +35,22 @@
                 Exit Sub
             End If
             While .dr.Read
-                Dim ID As Integer = CInt(.dr.GetValue(0))
-                Dim counter_no As String = .dr.GetValue(1)
-                Dim date_issue As String = .dr.GetValue(2)
-                Dim invoice_no As String = .dr.GetValue(3)
-                Dim amount As String = .dr.GetValue(4)
-                Dim paid As Boolean = CBool(.dr.GetValue(5))
+                Dim ID As Integer = CInt(.dr("id"))
+                Dim counter_no As String = .dr("counter_no")
+                Dim date_issue As String = .dr("date_issue")
+                Dim ledger_no As String = If(IsDBNull(.dr("ledger_no")), "", .dr("ledger_no"))
+                Dim amount As String = .dr("amount")
+                Dim paid As Boolean = CBool(.dr("paid"))
                 Dim paid_val As String = If(paid, "Yes", "No")
 
-                Dim date_paid As String = .dr.GetValue(6)
+                Dim date_paid As String = .dr("date_paid")
 
-                Dim floating As Boolean = CBool(.dr.GetValue(7))
+                Dim floating As Boolean = CBool(.dr("floating"))
                 Dim floating_val As String = If(floating, "Yes", "No")
 
-                Dim bank_details As String = .dr.GetValue(8)
-                Dim check_date As String = .dr.GetValue(9)
-                Dim status As Integer = CInt(.dr.GetValue(10))
+                Dim bank_details As String = .dr("bank_details")
+                Dim check_date As String = .dr("check_date")
+                Dim status As Integer = CInt(.dr("status"))
                 Dim status_val As String = ""
                 Select Case status
                     Case 1
@@ -58,7 +59,7 @@
                         status_val = "Inactive"
                 End Select
 
-                Dim customer As Integer = CInt(.dr.GetValue(11))
+                Dim customer As Integer = CInt(.dr("customer"))
                 Dim customer_val As String = ""
                 Dim db2 As New DatabaseConnect
                 With db2
@@ -72,7 +73,7 @@
 
                 End With
 
-                Dim ledger_type As Integer = CInt(.dr.GetValue(12))
+                Dim ledger_type As Integer = CInt(.dr("ledger"))
                 Dim ledger_type_val As String = ""
                 Select Case ledger_type
                     Case 0
@@ -82,7 +83,7 @@
                 End Select
 
 
-                Dim term_ As Integer = CInt(.dr.GetValue(17))
+                Dim term_ As Integer = CInt(.dr("payment_terms"))
                 Dim term_val As String
                 If term_ = 0 Then
                     term_val = "N/A"
@@ -90,7 +91,7 @@
                     term_val = CStr(term_) & " Days"
                 End If
 
-                Dim payment_type As Integer = CInt(.dr.GetValue(13))
+                Dim payment_type As Integer = CInt(.dr("payment_type"))
                 Dim payment_type_val As String = ""
                 Select Case payment_type
                     Case 0
@@ -118,7 +119,7 @@
 
                 End Select
 
-                Dim row As String() = New String() {ID, date_issue, customer_val, invoice_no, FormatCurrency(amount).Replace("$", ""), paid_val, date_paid, floating_val, bank_details, check_date, counter_no, term_val, payment_type_val, ledger_type_val, status_val}
+                Dim row As String() = New String() {ID, date_issue, customer_val, ledger_no, FormatCurrency(amount).Replace("$", ""), paid_val, date_paid, floating_val, bank_details, check_date, counter_no, term_val, payment_type_val, ledger_type_val, status_val}
                 dgvLedger.Rows.Add(row)
 
             End While
@@ -267,7 +268,7 @@
                 LedgerForm.cbPaymentType.Text = payment_type_val
                 LedgerForm.dtpDateIssue.Value = date_issue
                 LedgerForm.txtCounterNo.Text = counter_no
-                LedgerForm.txtInvoiceNo.Text = invoice_no
+                'LedgerForm.txtInvoiceNo.Text = invoice_no
                 LedgerForm.txtAmount.Text = amount
 
                 If paid = True Then
@@ -298,6 +299,7 @@
                     LedgerForm.rbFloatingNo.Checked = False
                 End If
                 LedgerForm.txtRemarks.Text = remarks
+                LedgerForm.txtLedgerNo.Text = If(IsDBNull(.dr("ledger_no")), "", .dr("ledger_no"))
             End If
         End With
     End Sub

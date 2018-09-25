@@ -42,8 +42,26 @@ Partial Class POList
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbMonth = New System.Windows.Forms.ComboBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpFilter.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnAddNew
@@ -143,6 +161,7 @@ Partial Class POList
         '
         'gpFilter
         '
+        Me.gpFilter.Controls.Add(Me.GroupBox2)
         Me.gpFilter.Controls.Add(Me.btnFilter)
         Me.gpFilter.Controls.Add(Me.cbYear)
         Me.gpFilter.Controls.Add(Me.txtSupplier)
@@ -217,11 +236,164 @@ Partial Class POList
         Me.cbMonth.Size = New System.Drawing.Size(212, 21)
         Me.cbMonth.TabIndex = 28
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.ComboBox2)
+        Me.GroupBox1.Location = New System.Drawing.Point(26, 93)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(921, 91)
+        Me.GroupBox1.TabIndex = 5
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filter"
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(832, 49)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(83, 29)
+        Me.Button1.TabIndex = 6
+        Me.Button1.Text = "Filter"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(323, 53)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(204, 21)
+        Me.ComboBox1.TabIndex = 30
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(67, 28)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(212, 20)
+        Me.TextBox1.TabIndex = 26
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(285, 56)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(32, 13)
+        Me.Label4.TabIndex = 31
+        Me.Label4.Text = "Year:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(10, 58)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(40, 13)
+        Me.Label5.TabIndex = 29
+        Me.Label5.Text = "Month:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(10, 31)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(45, 13)
+        Me.Label6.TabIndex = 27
+        Me.Label6.Text = "Supplier"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(67, 55)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(212, 21)
+        Me.ComboBox2.TabIndex = 28
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.ComboBox3)
+        Me.GroupBox2.Controls.Add(Me.TextBox2)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.ComboBox4)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(921, 91)
+        Me.GroupBox2.TabIndex = 5
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Filter"
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(832, 49)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(83, 29)
+        Me.Button2.TabIndex = 6
+        Me.Button2.Text = "Filter"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(323, 53)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(204, 21)
+        Me.ComboBox3.TabIndex = 30
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(67, 28)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(212, 20)
+        Me.TextBox2.TabIndex = 26
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(285, 56)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(32, 13)
+        Me.Label7.TabIndex = 31
+        Me.Label7.Text = "Year:"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(10, 58)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(40, 13)
+        Me.Label8.TabIndex = 29
+        Me.Label8.Text = "Month:"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(10, 31)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(45, 13)
+        Me.Label9.TabIndex = 27
+        Me.Label9.Text = "Supplier"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(67, 55)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(212, 21)
+        Me.ComboBox4.TabIndex = 28
+        '
         'POList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(983, 635)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.gpFilter)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnView)
@@ -234,6 +406,10 @@ Partial Class POList
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gpFilter.ResumeLayout(False)
         Me.gpFilter.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -257,4 +433,20 @@ Partial Class POList
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents cbMonth As ComboBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents ComboBox2 As ComboBox
 End Class

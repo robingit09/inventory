@@ -426,7 +426,7 @@
         Return result
     End Function
 
-    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown
+    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown, TextBox2.KeyDown, TextBox1.KeyDown
         If txtSupplier.Text.Length > 0 And e.KeyCode = Keys.Enter Then
             txtSupplier.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtSupplier.Text.ToLower())
             selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
@@ -436,7 +436,7 @@
         End If
     End Sub
 
-    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave
+    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave, TextBox2.Leave, TextBox1.Leave
         If txtSupplier.Text.Length > 0 Then
             selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
             'MsgBox(selectedCustomer)
@@ -445,7 +445,7 @@
         End If
     End Sub
 
-    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click, Button2.Click, Button1.Click
         btnFilter.Enabled = False
         Dim query As String = "Select * from purchase_orders where delivery_status > -1 "
         If txtSupplier.Text <> "" And selectedSupplier > 0 Then
@@ -464,4 +464,6 @@
         loadPO(query)
         btnFilter.Enabled = True
     End Sub
+
+
 End Class

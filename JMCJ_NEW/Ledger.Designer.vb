@@ -39,21 +39,6 @@ Partial Class Ledger
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.dgvLedger = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InvoiceNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DatePaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IsFloating = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BankDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CheckDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CounterNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Terms = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -65,6 +50,21 @@ Partial Class Ledger
         Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckNotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ledger_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DatePaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsFloating = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BankDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CounterNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Terms = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvLedger, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -217,12 +217,82 @@ Partial Class Ledger
         'dgvLedger
         '
         Me.dgvLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvLedger.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.DateIssue, Me.Customer, Me.InvoiceNo, Me.Amount, Me.IsPaid, Me.DatePaid, Me.IsFloating, Me.BankDetails, Me.CheckDate, Me.CounterNo, Me.Terms, Me.PaymentType, Me.DataGridViewTextBoxColumn1, Me.Status})
+        Me.dgvLedger.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.DateIssue, Me.Customer, Me.ledger_no, Me.Amount, Me.IsPaid, Me.DatePaid, Me.IsFloating, Me.BankDetails, Me.CheckDate, Me.CounterNo, Me.Terms, Me.PaymentType, Me.DataGridViewTextBoxColumn1, Me.Status})
         Me.dgvLedger.Location = New System.Drawing.Point(14, 172)
         Me.dgvLedger.Name = "dgvLedger"
         Me.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvLedger.Size = New System.Drawing.Size(1431, 578)
         Me.dgvLedger.TabIndex = 11
+        '
+        'View
+        '
+        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.View.Name = "View"
+        Me.View.Size = New System.Drawing.Size(155, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ViewToolStripMenuItem.Text = "View or Update"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.NotificationToolStripMenuItem, Me.CheckNotificationToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1247, 24)
+        Me.MenuStrip1.TabIndex = 12
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomerToolStripMenuItem1, Me.LedgerToolStripMenuItem, Me.TermsToolStripMenuItem, Me.CheckToolStripMenuItem})
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
+        Me.PrintToolStripMenuItem.Text = "Reports"
+        '
+        'CustomerToolStripMenuItem1
+        '
+        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
+        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
+        Me.CustomerToolStripMenuItem1.Text = "Customer"
+        '
+        'LedgerToolStripMenuItem
+        '
+        Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
+        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.LedgerToolStripMenuItem.Text = "Ledger"
+        '
+        'TermsToolStripMenuItem
+        '
+        Me.TermsToolStripMenuItem.Name = "TermsToolStripMenuItem"
+        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.TermsToolStripMenuItem.Text = "Terms"
+        '
+        'CheckToolStripMenuItem
+        '
+        Me.CheckToolStripMenuItem.Name = "CheckToolStripMenuItem"
+        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.CheckToolStripMenuItem.Text = "Check"
+        '
+        'CustomerToolStripMenuItem
+        '
+        Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
+        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
+        Me.CustomerToolStripMenuItem.Text = "Customer"
+        '
+        'NotificationToolStripMenuItem
+        '
+        Me.NotificationToolStripMenuItem.Name = "NotificationToolStripMenuItem"
+        Me.NotificationToolStripMenuItem.Size = New System.Drawing.Size(117, 20)
+        Me.NotificationToolStripMenuItem.Text = "Terms Notification"
+        '
+        'CheckNotificationToolStripMenuItem
+        '
+        Me.CheckNotificationToolStripMenuItem.Name = "CheckNotificationToolStripMenuItem"
+        Me.CheckNotificationToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
+        Me.CheckNotificationToolStripMenuItem.Text = "Check Notification"
         '
         'ID
         '
@@ -244,11 +314,11 @@ Partial Class Ledger
         Me.Customer.ReadOnly = True
         Me.Customer.Width = 170
         '
-        'InvoiceNo
+        'ledger_no
         '
-        Me.InvoiceNo.HeaderText = "Invoice No"
-        Me.InvoiceNo.Name = "InvoiceNo"
-        Me.InvoiceNo.ReadOnly = True
+        Me.ledger_no.HeaderText = "Ledger No"
+        Me.ledger_no.Name = "ledger_no"
+        Me.ledger_no.ReadOnly = True
         '
         'Amount
         '
@@ -325,76 +395,6 @@ Partial Class Ledger
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
         '
-        'View
-        '
-        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.View.Name = "View"
-        Me.View.Size = New System.Drawing.Size(155, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.ViewToolStripMenuItem.Text = "View or Update"
-        '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.NotificationToolStripMenuItem, Me.CheckNotificationToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1247, 24)
-        Me.MenuStrip1.TabIndex = 12
-        Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomerToolStripMenuItem1, Me.LedgerToolStripMenuItem, Me.TermsToolStripMenuItem, Me.CheckToolStripMenuItem})
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
-        Me.PrintToolStripMenuItem.Text = "Reports"
-        '
-        'CustomerToolStripMenuItem1
-        '
-        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
-        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
-        Me.CustomerToolStripMenuItem1.Text = "Customer"
-        '
-        'LedgerToolStripMenuItem
-        '
-        Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
-        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.LedgerToolStripMenuItem.Text = "Ledger"
-        '
-        'TermsToolStripMenuItem
-        '
-        Me.TermsToolStripMenuItem.Name = "TermsToolStripMenuItem"
-        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.TermsToolStripMenuItem.Text = "Terms"
-        '
-        'CheckToolStripMenuItem
-        '
-        Me.CheckToolStripMenuItem.Name = "CheckToolStripMenuItem"
-        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.CheckToolStripMenuItem.Text = "Check"
-        '
-        'CustomerToolStripMenuItem
-        '
-        Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
-        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
-        Me.CustomerToolStripMenuItem.Text = "Customer"
-        '
-        'NotificationToolStripMenuItem
-        '
-        Me.NotificationToolStripMenuItem.Name = "NotificationToolStripMenuItem"
-        Me.NotificationToolStripMenuItem.Size = New System.Drawing.Size(117, 20)
-        Me.NotificationToolStripMenuItem.Text = "Terms Notification"
-        '
-        'CheckNotificationToolStripMenuItem
-        '
-        Me.CheckNotificationToolStripMenuItem.Name = "CheckNotificationToolStripMenuItem"
-        Me.CheckNotificationToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
-        Me.CheckNotificationToolStripMenuItem.Text = "Check Notification"
-        '
         'Ledger
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -441,21 +441,6 @@ Partial Class Ledger
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnLoad As Button
     Friend WithEvents dgvLedger As DataGridView
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents DateIssue As DataGridViewTextBoxColumn
-    Friend WithEvents Customer As DataGridViewTextBoxColumn
-    Friend WithEvents InvoiceNo As DataGridViewTextBoxColumn
-    Friend WithEvents Amount As DataGridViewTextBoxColumn
-    Friend WithEvents IsPaid As DataGridViewTextBoxColumn
-    Friend WithEvents DatePaid As DataGridViewTextBoxColumn
-    Friend WithEvents IsFloating As DataGridViewTextBoxColumn
-    Friend WithEvents BankDetails As DataGridViewTextBoxColumn
-    Friend WithEvents CheckDate As DataGridViewTextBoxColumn
-    Friend WithEvents CounterNo As DataGridViewTextBoxColumn
-    Friend WithEvents Terms As DataGridViewTextBoxColumn
-    Friend WithEvents PaymentType As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
     Friend WithEvents View As ContextMenuStrip
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MenuStrip1 As MenuStrip
@@ -467,4 +452,19 @@ Partial Class Ledger
     Friend WithEvents CustomerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NotificationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckNotificationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents DateIssue As DataGridViewTextBoxColumn
+    Friend WithEvents Customer As DataGridViewTextBoxColumn
+    Friend WithEvents ledger_no As DataGridViewTextBoxColumn
+    Friend WithEvents Amount As DataGridViewTextBoxColumn
+    Friend WithEvents IsPaid As DataGridViewTextBoxColumn
+    Friend WithEvents DatePaid As DataGridViewTextBoxColumn
+    Friend WithEvents IsFloating As DataGridViewTextBoxColumn
+    Friend WithEvents BankDetails As DataGridViewTextBoxColumn
+    Friend WithEvents CheckDate As DataGridViewTextBoxColumn
+    Friend WithEvents CounterNo As DataGridViewTextBoxColumn
+    Friend WithEvents Terms As DataGridViewTextBoxColumn
+    Friend WithEvents PaymentType As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class

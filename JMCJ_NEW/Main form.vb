@@ -154,4 +154,8 @@
     Private Sub LedgerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LedgerToolStripMenuItem1.Click
         LedgerReports.ShowDialog()
     End Sub
+
+    Private Sub PurchaseOrderRequestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseOrderRequestToolStripMenuItem.Click
+        PurchaseOrderRequest.ShowDialog()
+    End Sub
 End Class

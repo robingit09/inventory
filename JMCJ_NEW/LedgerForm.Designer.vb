@@ -32,10 +32,8 @@ Partial Class LedgerForm
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
-        Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
         Me.txtCounterNo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.dtpDateIssue = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -66,6 +64,8 @@ Partial Class LedgerForm
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btnAddInvoice = New System.Windows.Forms.Button()
         Me.gpInvoiceList = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtLedgerNo = New System.Windows.Forms.TextBox()
         Me.gpPaid.SuspendLayout()
         Me.gpCheck.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -165,14 +165,6 @@ Partial Class LedgerForm
         Me.txtAmount.Size = New System.Drawing.Size(200, 20)
         Me.txtAmount.TabIndex = 36
         '
-        'txtInvoiceNo
-        '
-        Me.txtInvoiceNo.Location = New System.Drawing.Point(103, 137)
-        Me.txtInvoiceNo.MaxLength = 5
-        Me.txtInvoiceNo.Name = "txtInvoiceNo"
-        Me.txtInvoiceNo.Size = New System.Drawing.Size(200, 20)
-        Me.txtInvoiceNo.TabIndex = 35
-        '
         'txtCounterNo
         '
         Me.txtCounterNo.Location = New System.Drawing.Point(103, 103)
@@ -189,15 +181,6 @@ Partial Class LedgerForm
         Me.Label5.Size = New System.Drawing.Size(43, 13)
         Me.Label5.TabIndex = 33
         Me.Label5.Text = "Amount"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 140)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 13)
-        Me.Label4.TabIndex = 32
-        Me.Label4.Text = "Invoice Number"
         '
         'Label3
         '
@@ -461,11 +444,30 @@ Partial Class LedgerForm
         Me.gpInvoiceList.TabStop = False
         Me.gpInvoiceList.Text = "Invoice List"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(12, 139)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(57, 13)
+        Me.Label4.TabIndex = 56
+        Me.Label4.Text = "Ledger No"
+        '
+        'txtLedgerNo
+        '
+        Me.txtLedgerNo.Location = New System.Drawing.Point(103, 136)
+        Me.txtLedgerNo.Name = "txtLedgerNo"
+        Me.txtLedgerNo.ReadOnly = True
+        Me.txtLedgerNo.Size = New System.Drawing.Size(200, 20)
+        Me.txtLedgerNo.TabIndex = 57
+        '
         'LedgerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 582)
+        Me.Controls.Add(Me.txtLedgerNo)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtRemarks)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btnSaveAndPrint)
@@ -483,10 +485,8 @@ Partial Class LedgerForm
         Me.Controls.Add(Me.cbPaymentType)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txtAmount)
-        Me.Controls.Add(Me.txtInvoiceNo)
         Me.Controls.Add(Me.txtCounterNo)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.dtpDateIssue)
         Me.Controls.Add(Me.Label2)
@@ -519,10 +519,8 @@ Partial Class LedgerForm
     Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents txtAmount As TextBox
-    Friend WithEvents txtInvoiceNo As TextBox
     Friend WithEvents txtCounterNo As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents dtpDateIssue As DateTimePicker
     Friend WithEvents Label2 As Label
@@ -553,4 +551,6 @@ Partial Class LedgerForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents amount_paid As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtLedgerNo As TextBox
 End Class

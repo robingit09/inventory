@@ -79,3 +79,5 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CheckReport.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.TermReport.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.AddInvoiceForm.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Login.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseOrderRequestForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PurchaseOrderRequest.resources

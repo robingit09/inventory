@@ -457,20 +457,25 @@
                     qty = 0
                 End If
 
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Dim cost As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value) Then
+                    cost = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Else
+                    cost = 0
+                End If
 
-                amount = qty * CDbl(price)
+                amount = qty * CDbl(cost)
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
 
 
                 'change color
-                If qty > 0 Then
+                If cost > 0 Then
                     dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.White
                 Else
                     dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.Red
+                    End If
                 End If
-            End If
-            computeTotalAmount()
+                computeTotalAmount()
         End If
     End Sub
 
@@ -574,7 +579,6 @@
     End Sub
 
     Private Sub insertData()
-
         Dim insertPO As New DatabaseConnect
         With insertPO
             .cmd.Connection = .con
@@ -604,14 +608,12 @@
         With insertProduct
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-
             For Each item As DataGridViewRow In Me.dgvProd.Rows
 
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
                 Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
-
 
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
                     .cmd.CommandText = "INSERT INTO purchase_order_products(purchase_order_id,product_unit_id,quantity,unit_cost,total_amount,created_at,updated_at)
@@ -633,9 +635,7 @@
             .cmd.Dispose()
             .con.Close()
         End With
-
         MsgBox("Purchase Order Successfully Save.", MsgBoxStyle.Information)
-
     End Sub
 
     Private Function getLastID(ByVal table As String) As Integer
@@ -666,7 +666,7 @@
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
-            MsgBox(selectedPaymentType)
+            'MsgBox(selectedPaymentType)
             Select Case selectedPaymentType
                 Case 1
                     ' cash
@@ -786,5 +786,83 @@
         End With
     End Sub
 
+    Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
+        If selectedSupplier = 0 Then
+            MsgBox("Please select supplier!", MsgBoxStyle.Critical)
+            'cbSupplier.BackColor = Drawing.Color.Red
+            Exit Sub
+        End If
 
+        'validation
+        'check if already in list
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            If Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("action").Value) Then
+                Dim desc As String = dgvProd.Rows(item.Index).Cells("product").Value
+                Dim brand As String = dgvProd.Rows(item.Index).Cells("brand").Value
+                Dim unit As String = dgvProd.Rows(item.Index).Cells("unit").Value
+                Dim color As String = dgvProd.Rows(item.Index).Cells("Color").Value
+
+                Dim prod_id As String = New DatabaseConnect().get_id("products", "description", desc)
+                Dim brand_id As String = New DatabaseConnect().get_id("brand", "name", brand)
+                Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", unit)
+                Dim color_id As String = New DatabaseConnect().get_id("color", "name", color)
+
+                If prod_id = SelectedProdID And brand_id = selectedBrand And unit_id = selectedUnit And color_id = selectedColor Then
+                    MsgBox(brand & " " & desc & " already in list!", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
+            End If
+        Next
+
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT pu.barcode,pu.id,p.description,b.name as brand, u.name as unit,cc.name as color, ps.qty as stock from (((((products as p 
+                left join product_unit as pu on pu.product_id = p.id)
+                left join brand as b on b.id = pu.brand)
+                left join unit as u on u.id = pu.unit)
+                left join color as cc on cc.id = pu.color)
+                left join product_stocks as ps ON ps.product_unit_id = pu.id)
+                where pu.brand = " & selectedBrand & " and pu.product_id = " & SelectedProdID & " and pu.unit = " & selectedUnit & " and color = " & selectedColor)
+
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    Dim product_unit_id As String = .dr("id").ToString
+                    Dim barcode As String = .dr("barcode").ToString
+                    Dim desc As String = .dr("description").ToString
+                    Dim brand As String = .dr("brand").ToString
+                    Dim unit As String = .dr("unit").ToString
+                    Dim color As String = .dr("color").ToString
+                    Dim unitcost As String = "0.00"
+                    'Dim sellprice As String = unitprice
+                    'get sell price
+
+                    Dim dbcost As New DatabaseConnect
+                    With dbcost
+                        .selectByQuery("Select unit_cost from product_suppliers where product_unit_id = " & product_unit_id & " and supplier = " & selectedSupplier)
+                        If .dr.HasRows Then
+                            If .dr.Read Then
+                                If (Val(.dr("unit_cost") > 0)) Then
+                                    unitcost = Val(.dr("unit_cost")).ToString("N2")
+                                Else
+                                    unitcost = "0.00"
+                                End If
+                            End If
+                        End If
+                        .con.Close()
+                        .dr.Close()
+                        .cmd.Dispose()
+                    End With
+
+                    Dim stock As String = If(IsDBNull(.dr("stock")), "0", .dr("stock"))
+
+                    Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                    dgvProd.Rows.Add(row)
+                    computeTotalAmount()
+
+                End If
+            Else
+                MsgBox("No Product Found!", MsgBoxStyle.Critical)
+            End If
+        End With
+    End Sub
 End Class

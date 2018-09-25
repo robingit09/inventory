@@ -83,7 +83,7 @@
     Public Sub clearfields()
         cbCustomer.Text = ""
         txtCounterNo.Text = ""
-        txtInvoiceNo.Text = ""
+        'txtInvoiceNo.Text = ""
         txtAmount.Text = ""
 
         rPaidYes.Checked = False
@@ -107,7 +107,7 @@
             Try
                 .cmd.CommandType = CommandType.Text
                 .cmd.Connection = .con
-                .cmd.CommandText = "INSERT INTO ledger([customer],[date_issue],[counter_no],[invoice_no],[amount],[payment_type],[date_paid],[paid],[check_date],[bank_details],[floating],[ledger],[status],[created_at],[updated_at],[payment_due_date],[payment_terms],[remarks])" &
+                .cmd.CommandText = "INSERT INTO ledger([customer],[date_issue],[counter_no],[ledger_no],[amount],[payment_type],[date_paid],[paid],[check_date],[bank_details],[floating],[ledger],[status],[created_at],[updated_at],[payment_due_date],[payment_terms],[remarks])" &
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                 .cmd.Parameters.AddWithValue("@customer", selectedCustomer)
                 .cmd.Parameters.AddWithValue("@date_issue", dtpDateIssue.Value.Date.ToString)
@@ -124,7 +124,7 @@
                 End If
 
                 .cmd.Parameters.AddWithValue("@counter_no", txtCounterNo.Text)
-                .cmd.Parameters.AddWithValue("@invoice_no", txtInvoiceNo.Text)
+                .cmd.Parameters.AddWithValue("@ledger_no", generateLedgerNo())
 
                 Dim format_amount As String = ""
                 If txtAmount.Text.Contains(",") Or txtAmount.Text.Contains(".") Then
@@ -182,7 +182,6 @@
             txtCounterNo.Text = "N/A"
         End If
 
-
         Dim ispaid As Boolean = False
         If rPaidYes.Checked = True Then
             ispaid = True
@@ -211,7 +210,7 @@
         With db
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "UPDATE ledger SET [counter_no]='" & txtCounterNo.Text & "',[date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[invoice_no]='" & txtInvoiceNo.Text & "',[amount]=" & format_amount & ", " &
+            .cmd.CommandText = "UPDATE ledger SET [counter_no]='" & txtCounterNo.Text & "',[date_issue]='" & dtpDateIssue.Value.Date.ToString & "',[ledger_no]='" & txtLedgerNo.Text & "',[amount]=" & format_amount & ", " &
             "[paid]=" & ispaid & ",[date_paid]='" & dtpPaid.Value.Date.ToString & "', [floating]=" & isfloating & ",[bank_details]='" & txtBankDetails.Text & "',[check_date]='" & dtpCheckDate.Value.Date.ToString & "',[customer]=" & Me.selectedCustomer & ",[ledger]=" & Me.selectedLedgerType & ",[payment_type]=" & CInt(Me.selectedPaymentType) & ",[updated_at]='" & DateTime.Now.ToString & "'," &
             "[payment_due_date]='" & dtp_payment_due.ToString & "',[payment_terms]= " & Me.term & ",[remarks]='" & txtRemarks.Text & "' WHERE [ID] = " & Ledger.selectedID
 
@@ -460,12 +459,12 @@
             Return err_
         End If
 
-        If Trim(txtInvoiceNo.Text).Length = 0 Then
-            MsgBox("Please input invoice no!", MsgBoxStyle.Critical)
-            txtCounterNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Trim(txtInvoiceNo.Text).Length = 0 Then
+        '    MsgBox("Please input invoice no!", MsgBoxStyle.Critical)
+        '    txtCounterNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
         If Trim(txtAmount.Text).Length = 0 Then
             MsgBox("Please input amount no!", MsgBoxStyle.Critical)
@@ -541,13 +540,13 @@
             Return err_
         End If
 
-        If Not IsNumeric(txtInvoiceNo.Text) Then
-            MsgBox("Invalid input for invoice no!", MsgBoxStyle.Critical)
-            txtInvoiceNo.BackColor = Color.Red
-            txtInvoiceNo.Focus()
-            err_ = True
-            Return err_
-        End If
+        'If Not IsNumeric(txtInvoiceNo.Text) Then
+        '    MsgBox("Invalid input for invoice no!", MsgBoxStyle.Critical)
+        '    txtInvoiceNo.BackColor = Color.Red
+        '    txtInvoiceNo.Focus()
+        '    err_ = True
+        '    Return err_
+        'End If
 
         Return err_
     End Function
@@ -634,16 +633,16 @@
         End If
     End Sub
 
-    Private Sub txtInvoiceNo_TextChanged(sender As Object, e As EventArgs) Handles txtInvoiceNo.TextChanged
-        If txtInvoiceNo.TextLength > 0 Then
-            If Not IsNumeric(txtInvoiceNo.Text) Then
-                txtInvoiceNo.BackColor = Color.Red
-                txtInvoiceNo.SelectAll()
-            Else
-                txtInvoiceNo.BackColor = Color.White
-            End If
-        End If
-    End Sub
+    'Private Sub txtInvoiceNo_TextChanged(sender As Object, e As EventArgs)
+    '    If txtInvoiceNo.TextLength > 0 Then
+    '        If Not IsNumeric(txtInvoiceNo.Text) Then
+    '            txtInvoiceNo.BackColor = Color.Red
+    '            txtInvoiceNo.SelectAll()
+    '        Else
+    '            txtInvoiceNo.BackColor = Color.White
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
         If txtAmount.TextLength > 0 Then
@@ -732,9 +731,7 @@
         End If
     End Sub
 
-    Private Sub LedgerForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 
     Public Sub loadInvoice()
         dgvInvoiceList.Rows.Clear()
@@ -761,4 +758,25 @@
             .con.Close()
         End With
     End Sub
+
+    Public Function generateLedgerNo() As String
+        Dim res As String = ""
+        Dim id As Integer = 0
+
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select max(id) from ledger")
+            If .dr.HasRows Then
+                .dr.Read()
+                id = If(IsDBNull(.dr.GetValue(0)), 0, .dr.GetValue(0))
+                res = (id + 1).ToString("D7")
+            Else
+                res = (id + 1).ToString("D7")
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+        Return "L-" & res
+    End Function
 End Class
