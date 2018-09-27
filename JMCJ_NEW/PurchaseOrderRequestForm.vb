@@ -40,7 +40,7 @@
     End Sub
 
     Private Sub PurchaseOrderRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        initialize()
+
     End Sub
 
     Private Function generatePORNo() As String
@@ -499,7 +499,7 @@
             .cmd.Parameters.AddWithValue("@por_no", generatePORNo())
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
             .cmd.Parameters.AddWithValue("@por_date", dtp_por_date.Value.ToString)
-            .cmd.Parameters.AddWithValue("@total_amount", Val(txtAmount.Text))
+            .cmd.Parameters.AddWithValue("@total_amount", Val(txtAmount.Text.Replace(",", "")))
             .cmd.Parameters.AddWithValue("@processed_by", 1)
             .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
@@ -614,7 +614,7 @@
             End If
             insertData()
             clearFields()
-            'POList.loadPO("")
+            PurchaseOrderRequest.loadPOR("")
         Else
 
         End If
@@ -624,8 +624,9 @@
 
         Me.selectedID = por_id
         Me.selectedSupplier = getSupplier(por_id)
-
+        'MsgBox(Me.selectedSupplier)
         txtPORNo.Text = New DatabaseConnect().get_by_id("purchase_orders_request", por_id, "po_no")
+        'MsgBox(New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name"))
         cbSupplier.SelectedIndex = cbSupplier.FindString(New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name"))
 
         Dim por_date As String = New DatabaseConnect().get_by_id("purchase_orders_request", Me.selectedID, "por_date")
@@ -638,14 +639,14 @@
         dgvProd.Rows.Clear()
         With dbprod
             .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
-                        FROM ((((((purchase_order_products as pop
+                        FROM ((((((por_products as pop
                         INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
                         INNER JOIN unit as u ON u.id = pu.unit)
                         LEFT JOIN color as c ON c.id = pu.color)
                         INNER JOIN products as p ON p.id = pu.product_id)
                         left join product_stocks as ps on ps.product_unit_id = pu.id)
-                        where pop.purchase_order_id = " & selectedID)
+                        where pop.por_id = " & selectedID)
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As Integer = .dr("id")

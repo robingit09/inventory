@@ -22,13 +22,12 @@ Partial Class PurchaseOrderRequest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.txtSupplier = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dgvPO = New System.Windows.Forms.DataGridView()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,19 +37,10 @@ Partial Class PurchaseOrderRequest
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.create_po = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'btnPrint
-        '
-        Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(221, 22)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(83, 29)
-        Me.btnPrint.TabIndex = 8
-        Me.btnPrint.Text = "Print"
-        Me.btnPrint.UseVisualStyleBackColor = True
         '
         'btnView
         '
@@ -65,7 +55,7 @@ Partial Class PurchaseOrderRequest
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(327, 22)
+        Me.btnVoid.Location = New System.Drawing.Point(222, 22)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(83, 29)
         Me.btnVoid.TabIndex = 6
@@ -84,8 +74,8 @@ Partial Class PurchaseOrderRequest
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Button2)
-        Me.GroupBox2.Controls.Add(Me.TextBox2)
+        Me.GroupBox2.Controls.Add(Me.btnFilter)
+        Me.GroupBox2.Controls.Add(Me.txtSupplier)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 73)
         Me.GroupBox2.Name = "GroupBox2"
@@ -94,22 +84,22 @@ Partial Class PurchaseOrderRequest
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Filter"
         '
-        'Button2
+        'btnFilter
         '
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(832, 22)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(83, 29)
-        Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Filter"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnFilter.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(832, 22)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(83, 29)
+        Me.btnFilter.TabIndex = 6
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'txtSupplier
         '
-        Me.TextBox2.Location = New System.Drawing.Point(67, 28)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(212, 20)
-        Me.TextBox2.TabIndex = 26
+        Me.txtSupplier.Location = New System.Drawing.Point(67, 28)
+        Me.txtSupplier.Name = "txtSupplier"
+        Me.txtSupplier.Size = New System.Drawing.Size(212, 20)
+        Me.txtSupplier.TabIndex = 26
         '
         'Label9
         '
@@ -123,10 +113,10 @@ Partial Class PurchaseOrderRequest
         'dgvPO
         '
         Me.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.recorded_date, Me.por_no, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.status})
+        Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.recorded_date, Me.por_no, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.status, Me.create_po})
         Me.dgvPO.Location = New System.Drawing.Point(20, 148)
         Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(921, 408)
+        Me.dgvPO.Size = New System.Drawing.Size(1022, 408)
         Me.dgvPO.TabIndex = 33
         '
         'id
@@ -175,14 +165,18 @@ Partial Class PurchaseOrderRequest
         Me.status.Name = "status"
         Me.status.ReadOnly = True
         '
+        'create_po
+        '
+        Me.create_po.HeaderText = "Action"
+        Me.create_po.Name = "create_po"
+        '
         'PurchaseOrderRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(953, 583)
+        Me.ClientSize = New System.Drawing.Size(1082, 683)
         Me.Controls.Add(Me.dgvPO)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnAddNew)
@@ -195,14 +189,12 @@ Partial Class PurchaseOrderRequest
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents btnPrint As Button
     Friend WithEvents btnView As Button
     Friend WithEvents btnVoid As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents btnFilter As Button
+    Friend WithEvents txtSupplier As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents dgvPO As DataGridView
     Friend WithEvents id As DataGridViewTextBoxColumn
@@ -212,4 +204,5 @@ Partial Class PurchaseOrderRequest
     Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
     Friend WithEvents ProcessedBy As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents create_po As DataGridViewButtonColumn
 End Class

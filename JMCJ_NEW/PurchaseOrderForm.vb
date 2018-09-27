@@ -865,4 +865,61 @@
             End If
         End With
     End Sub
+
+    Public Sub createPO(ByVal por_id As Integer)
+        Dim supplier_id As Integer = 0
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("select * from purchase_orders_request where status = 1 and id = " & por_id)
+            If .dr.HasRows Then
+                If .dr.Read Then
+                    supplier_id = CInt(.dr("supplier"))
+                    Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")
+                    cbSupplier.SelectedIndex = cbSupplier.FindString(supplier_name)
+                    Me.selectedSupplier = supplier_id
+                    txtPONO.Text = generatePONo()
+                    txtAmount.Text = Val(.dr("total_amount")).ToString("N2")
+                    lblTotalAmount.Text = "₱ " & Val(.dr("total_amount")).ToString("N2")
+                End If
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+        ' get selected products
+        Dim dbprod As New DatabaseConnect()
+        dgvProd.Rows.Clear()
+        With dbprod
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+                        FROM ((((((por_products as pop
+                        INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as c ON c.id = pu.color)
+                        INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
+                        where pop.por_id = " & por_id)
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim qty As Integer = .dr("quantity")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
+                    Dim total As String = Val(.dr("total_amount")).ToString("N2")
+                    Dim stock As String = Val(.dr("stock"))
+                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                    dgvProd.Rows.Add(row)
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+
+    End Sub
+
 End Class

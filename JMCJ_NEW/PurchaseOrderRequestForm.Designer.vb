@@ -25,6 +25,8 @@ Partial Class PurchaseOrderRequestForm
         Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.dtp_por_date = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPORNo = New System.Windows.Forms.TextBox()
@@ -55,8 +57,7 @@ Partial Class PurchaseOrderRequestForm
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.dtp_por_date = New System.Windows.Forms.DateTimePicker()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnCreatePO = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -95,6 +96,22 @@ Partial Class PurchaseOrderRequestForm
         Me.GroupBox1.Size = New System.Drawing.Size(1145, 69)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
+        '
+        'dtp_por_date
+        '
+        Me.dtp_por_date.Location = New System.Drawing.Point(687, 20)
+        Me.dtp_por_date.Name = "dtp_por_date"
+        Me.dtp_por_date.Size = New System.Drawing.Size(201, 20)
+        Me.dtp_por_date.TabIndex = 69
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(601, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(80, 13)
+        Me.Label5.TabIndex = 68
+        Me.Label5.Text = "Recorded Date"
         '
         'txtAmount
         '
@@ -342,34 +359,29 @@ Partial Class PurchaseOrderRequestForm
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(1163, 22)
+        Me.btnSave.Location = New System.Drawing.Point(1163, 12)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(113, 37)
+        Me.btnSave.Size = New System.Drawing.Size(113, 26)
         Me.btnSave.TabIndex = 73
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'dtp_por_date
+        'btnCreatePO
         '
-        Me.dtp_por_date.Location = New System.Drawing.Point(687, 20)
-        Me.dtp_por_date.Name = "dtp_por_date"
-        Me.dtp_por_date.Size = New System.Drawing.Size(201, 20)
-        Me.dtp_por_date.TabIndex = 69
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(601, 23)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(80, 13)
-        Me.Label5.TabIndex = 68
-        Me.Label5.Text = "Recorded Date"
+        Me.btnCreatePO.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreatePO.Location = New System.Drawing.Point(1163, 55)
+        Me.btnCreatePO.Name = "btnCreatePO"
+        Me.btnCreatePO.Size = New System.Drawing.Size(113, 26)
+        Me.btnCreatePO.TabIndex = 74
+        Me.btnCreatePO.Text = "Create PO"
+        Me.btnCreatePO.UseVisualStyleBackColor = True
         '
         'PurchaseOrderRequestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1295, 579)
+        Me.Controls.Add(Me.btnCreatePO)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterBarcode)
@@ -424,4 +436,5 @@ Partial Class PurchaseOrderRequestForm
     Friend WithEvents btnSave As Button
     Friend WithEvents dtp_por_date As DateTimePicker
     Friend WithEvents Label5 As Label
+    Friend WithEvents btnCreatePO As Button
 End Class
