@@ -28,6 +28,7 @@
                     Dim supplier_id As Integer = CInt(.dr("supplier"))
                     Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")
                     Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
+                    Dim processed_by As String = New DatabaseConnect().get_by_id("users", .dr("processed_by"), "first_name") & " " & New DatabaseConnect().get_by_id("users", .dr("processed_by"), "surname")
                     Dim delivery_status As String = ""
 
                     Select Case .dr("delivery_status")
@@ -38,7 +39,7 @@
                         Case "2"
                             delivery_status = "Received"
                     End Select
-                    Dim row As String() = New String() {id, date_issue, pr_no, po_no, dr_no, supplier_name, total_amount, "", delivery_status}
+                    Dim row As String() = New String() {id, date_issue, pr_no, po_no, dr_no, supplier_name, total_amount, processed_by, delivery_status}
                     dgvPR.Rows.Add(row)
                 End While
 

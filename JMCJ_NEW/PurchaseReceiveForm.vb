@@ -401,8 +401,8 @@
         With insertPR
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_receive (purchase_order_id,pr_no,dr_no,supplier,pr_date,eta,ata,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_receive (purchase_order_id,pr_no,dr_no,supplier,pr_date,eta,ata,terms,payment_type,total_amount,delivery_status,payment_status,created_at,updated_at,processed_by)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@purchase_order_id", selectedPO)
             .cmd.Parameters.AddWithValue("@pr_no", generatePRNo)
             .cmd.Parameters.AddWithValue("@dr_no", txtDrNo.Text)
@@ -417,6 +417,7 @@
             .cmd.Parameters.AddWithValue("@payment_status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@processed_by", Main_form.auth_login)
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()

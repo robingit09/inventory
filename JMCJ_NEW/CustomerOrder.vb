@@ -34,14 +34,15 @@
         CustomerOrderForm.enableControl(True)
         CustomerOrderForm.btnSave.Text = "Save"
         CustomerOrderForm.btnSaveAndPrint.Text = "Save and Print"
-        CustomerOrderForm.dgvProd.Visible = True
+
         CustomerOrderForm.gpFields.Enabled = True
         CustomerOrderForm.btnSave.Visible = True
         CustomerOrderForm.btnSaveAndPrint.Visible = True
         CustomerOrderForm.btnCheck.Visible = False
         CustomerOrderForm.btnApprove.Visible = False
-        CustomerOrderForm.ShowDialog()
 
+        CustomerOrderForm.ShowDialog()
+        CustomerOrderForm.dgvProd.Visible = True
         'autocompleteCustomer()
     End Sub
 

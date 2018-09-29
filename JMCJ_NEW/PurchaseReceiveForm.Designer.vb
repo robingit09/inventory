@@ -67,11 +67,11 @@ Partial Class PurchaseReceiveForm
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.txtDrNo = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +105,7 @@ Partial Class PurchaseReceiveForm
         '
         'txtPRNO
         '
-        Me.txtPRNO.Location = New System.Drawing.Point(89, 54)
+        Me.txtPRNO.Location = New System.Drawing.Point(89, 77)
         Me.txtPRNO.Name = "txtPRNO"
         Me.txtPRNO.ReadOnly = True
         Me.txtPRNO.Size = New System.Drawing.Size(249, 20)
@@ -140,7 +140,7 @@ Partial Class PurchaseReceiveForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(18, 57)
+        Me.Label1.Location = New System.Drawing.Point(18, 80)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(65, 13)
         Me.Label1.TabIndex = 66
@@ -149,7 +149,7 @@ Partial Class PurchaseReceiveForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(18, 118)
+        Me.Label4.Location = New System.Drawing.Point(18, 52)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(48, 13)
         Me.Label4.TabIndex = 75
@@ -477,17 +477,25 @@ Partial Class PurchaseReceiveForm
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Receive"
         '
+        'cbSupplier
+        '
+        Me.cbSupplier.FormattingEnabled = True
+        Me.cbSupplier.Location = New System.Drawing.Point(89, 49)
+        Me.cbSupplier.Name = "cbSupplier"
+        Me.cbSupplier.Size = New System.Drawing.Size(249, 21)
+        Me.cbSupplier.TabIndex = 89
+        '
         'txtDrNo
         '
-        Me.txtDrNo.Location = New System.Drawing.Point(89, 85)
+        Me.txtDrNo.Location = New System.Drawing.Point(89, 108)
         Me.txtDrNo.Name = "txtDrNo"
-        Me.txtDrNo.Size = New System.Drawing.Size(251, 20)
+        Me.txtDrNo.Size = New System.Drawing.Size(249, 20)
         Me.txtDrNo.TabIndex = 88
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(18, 88)
+        Me.Label11.Location = New System.Drawing.Point(18, 111)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(66, 13)
         Me.Label11.TabIndex = 87
@@ -514,14 +522,6 @@ Partial Class PurchaseReceiveForm
         Me.Label10.Size = New System.Drawing.Size(154, 30)
         Me.Label10.TabIndex = 91
         Me.Label10.Text = "Total Amount:"
-        '
-        'cbSupplier
-        '
-        Me.cbSupplier.FormattingEnabled = True
-        Me.cbSupplier.Location = New System.Drawing.Point(89, 115)
-        Me.cbSupplier.Name = "cbSupplier"
-        Me.cbSupplier.Size = New System.Drawing.Size(249, 21)
-        Me.cbSupplier.TabIndex = 89
         '
         'PurchaseReceiveForm
         '

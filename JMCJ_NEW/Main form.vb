@@ -25,6 +25,12 @@
         PictureBox1.BorderStyle = BorderStyle.None
 
         Timer1.Start()
+
+        If ModuleSettings.getDBSetup = 1 Then
+            lblTest.Visible = True
+        Else
+            lblTest.Visible = False
+        End If
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
@@ -157,5 +163,9 @@
 
     Private Sub PurchaseOrderRequestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseOrderRequestToolStripMenuItem.Click
         PurchaseOrderRequest.ShowDialog()
+    End Sub
+
+    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        Settings.ShowDialog()
     End Sub
 End Class

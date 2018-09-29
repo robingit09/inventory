@@ -18,8 +18,17 @@ Public Class DatabaseConnect
     End Sub
 
     Public Sub dbConnect()
-        con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
-        'con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\users\inventory.mdb"
+
+        If ModuleSettings.getDBSetup = 0 Then
+            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
+
+        End If
+
+        If ModuleSettings.getDBSetup = 1 Then
+            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory_dev.mdb"
+        End If
+
+
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If

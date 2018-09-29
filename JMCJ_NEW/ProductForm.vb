@@ -277,6 +277,12 @@
                 Exit Sub
             End If
             saveData()
+
+            ' re initialize product selection
+            PurchaseOrderForm.autocompleteProduct()
+            PurchaseOrderForm.populateBrand(0)
+            PurchaseOrderForm.populateUnit(0, 0)
+            PurchaseOrderForm.populateColor(0, 0, 0)
             ProductList.loadList("")
         ElseIf btnSave.Text = "Update" Then
             If validation() = False Then

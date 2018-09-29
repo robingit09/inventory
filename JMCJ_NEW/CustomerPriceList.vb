@@ -85,7 +85,7 @@
                 LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
                 LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
-                where cpp.customer_id = " & customer_id)
+                where cpp.customer_id = " & customer_id & " order by p.description")
             Else
                 .selectByQuery(query)
 

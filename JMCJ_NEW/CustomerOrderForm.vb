@@ -459,7 +459,9 @@
                 End If
             End If
 
-            If e.ColumnIndex = 7 Then
+
+            ' if less change
+            If e.ColumnIndex = 8 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
                 Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
@@ -539,6 +541,10 @@
         End If
         lblTotalAmount.Text = totalamount.ToString("N2")
         txtAmount.Text = totalamount.ToString("N2")
+
+        If rPaidYes.Checked = True Then
+            txtTotalAmountPaid.Text = txtAmount.Text
+        End If
     End Sub
 
 
@@ -1029,8 +1035,12 @@
     End Sub
 
     Private Sub btnExact_Click(sender As Object, e As EventArgs) Handles btnExact.Click
-        txtTotalAmountPaid.Text = txtAmount.Text
-        rPaidYes.Checked = True
+        Dim replace_amount As String = Replace(txtAmount.Text, ",", "")
+        Dim amount As Double = CDbl(replace_amount)
+        If amount > 0 Then
+            txtTotalAmountPaid.Text = txtAmount.Text
+            rPaidYes.Checked = True
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -1253,4 +1263,30 @@
         End If
     End Sub
 
+    Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
+        If selectedCustomer = 0 Then
+            MsgBox("Please select customer!", MsgBoxStyle.Critical)
+            cbCustomer.Focus()
+            Exit Sub
+        End If
+        CustomerProductSelection.loadCustomerProducts(Me.selectedCustomer)
+        CustomerProductSelection.txtCustomer.Text = New DatabaseConnect().get_by_id("company", Me.selectedCustomer, "company")
+        CustomerProductSelection.ShowDialog()
+    End Sub
+
+    Private Sub rPaidNo_CheckedChanged(sender As Object, e As EventArgs) Handles rPaidNo.CheckedChanged
+        If rPaidNo.Checked = True Then
+            txtTotalAmountPaid.Text = "0.00"
+        End If
+    End Sub
+
+    Private Sub rPaidYes_CheckedChanged(sender As Object, e As EventArgs) Handles rPaidYes.CheckedChanged
+        If rPaidYes.Checked = True Then
+            Dim replace_amount As String = Replace(txtAmount.Text, ",", "")
+            Dim amount As Double = CDbl(replace_amount)
+            If amount > 0 Then
+                txtTotalAmountPaid.Text = txtAmount.Text
+            End If
+        End If
+    End Sub
 End Class

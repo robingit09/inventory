@@ -22,7 +22,7 @@ Partial Class CustomerOrderForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
@@ -86,6 +86,7 @@ Partial Class CustomerOrderForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpFields.SuspendLayout()
         Me.gpPaid.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
@@ -570,15 +571,15 @@ Partial Class CustomerOrderForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.price, Me.less, Me.add_less, Me.Column2, Me.sell_price, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(12, 324)
+        Me.dgvProd.Location = New System.Drawing.Point(12, 361)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1346, 259)
+        Me.dgvProd.Size = New System.Drawing.Size(1377, 315)
         Me.dgvProd.TabIndex = 73
         '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle3
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -673,11 +674,21 @@ Partial Class CustomerOrderForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 324)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 75
+        Me.btnSelectProduct.Text = "Select Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'CustomerOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1370, 604)
+        Me.ClientSize = New System.Drawing.Size(1420, 688)
+        Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.gpEnterBarcode)
@@ -762,4 +773,5 @@ Partial Class CustomerOrderForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents btnSelectProduct As Button
 End Class

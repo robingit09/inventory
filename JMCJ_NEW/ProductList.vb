@@ -45,30 +45,6 @@
         End With
     End Sub
 
-    'Public Sub loadDesc()
-    '    cbProductDesc.DataSource = Nothing
-    '    cbProductDesc.Items.Clear()
-    '    Dim comboSource As New Dictionary(Of String, String)()
-    '    comboSource.Add(0, "All")
-    '    Dim dbdesc As New DatabaseConnect
-    '    With dbdesc
-    '        .selectByQuery("Select id,description from products where status <> 0 order by description")
-    '        If .dr.HasRows Then
-    '            While .dr.Read
-    '                Dim id As Integer = .dr.GetValue(0)
-    '                Dim name As String = .dr.GetValue(1)
-    '                comboSource.Add(id, name)
-    '            End While
-    '        End If
-    '        cbProductDesc.DataSource = New BindingSource(comboSource, Nothing)
-    '        cbProductDesc.DisplayMember = "Value"
-    '        cbProductDesc.ValueMember = "Key"
-    '        .dr.Close()
-    '        .cmd.Dispose()
-    '        .con.Close()
-    '    End With
-    'End Sub
-
     Public Sub loadBrand()
         cbBrand.DataSource = Nothing
         cbBrand.Items.Clear()

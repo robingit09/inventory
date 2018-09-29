@@ -2,8 +2,8 @@
     Public selectedSupplier As Integer = 0
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
         btnAddNew.Enabled = False
-        PurchaseOrderForm.clearFields()
         PurchaseOrderForm.initialize()
+        PurchaseOrderForm.clearFields()
         PurchaseOrderForm.btnSave.Enabled = True
         PurchaseOrderForm.btnSaveAndPrint.Enabled = True
         PurchaseOrderForm.dgvProd.Enabled = True
@@ -32,6 +32,7 @@
                     Dim supplier_id As Integer = CInt(.dr("supplier"))
                     Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")
                     Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
+                    Dim processed_by As String = New DatabaseConnect().get_by_id("users", .dr("processed_by"), "first_name") & " " & New DatabaseConnect().get_by_id("users", .dr("processed_by"), "surname")
                     Dim delivery_status As String = ""
 
                     Select Case .dr("delivery_status")
@@ -43,7 +44,7 @@
                             delivery_status = "Received"
 
                     End Select
-                    Dim row As String() = New String() {id, date_issue, po_no, supplier_name, total_amount, "", delivery_status}
+                    Dim row As String() = New String() {id, date_issue, po_no, supplier_name, total_amount, processed_by, delivery_status}
                     dgvPO.Rows.Add(row)
                 End While
                 For Each row As DataGridViewRow In dgvPO.Rows

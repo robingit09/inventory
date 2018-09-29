@@ -521,7 +521,7 @@
             Return False
         End If
 
-        If cbTerms.SelectedIndex = 0 Then
+        If cbPaymentType.Text = "Credit" And cbTerms.SelectedIndex = 0 Then
             MsgBox("Term field is required!", MsgBoxStyle.Critical)
             cbTerms.Focus()
             Return False
@@ -565,15 +565,23 @@
     End Function
 
     Public Sub clearFields()
-        cbSupplier.SelectedIndex = cbSupplier.FindString("Select Supplier")
-        selectedSupplier = 0
         txtPONO.Text = ""
-        cbTerms.SelectedIndex = cbTerms.FindString("Select Terms")
+        If cbSupplier.Items.Count > 0 Then
+            cbSupplier.SelectedIndex = 0
+        End If
+        selectedSupplier = 0
+
+        If cbTerms.Items.Count > 0 Then
+            cbTerms.SelectedIndex = 0
+        End If
         selectedTerm = 0
+
         dtp_po_date.Value = DateTime.Now
         dtpETA.Value = DateTime.Now
         txtAmount.Text = ""
         lblTotalAmount.Text = "0.00"
+        txtDeliverBy.Text = ""
+        txtDeliverTo.Text = ""
         dgvProd.Rows.Clear()
 
     End Sub
@@ -583,8 +591,8 @@
         With insertPO
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,payment_type,total_amount,delivery_status,payment_status,delivered_to,delivered_by,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO purchase_orders (po_no,supplier,po_date,eta,terms,payment_type,total_amount,delivery_status,payment_status,delivered_to,delivered_by,created_at,updated_at,processed_by)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@po_no", generatePONo())
             .cmd.Parameters.AddWithValue("@supplier", selectedSupplier)
             .cmd.Parameters.AddWithValue("@po_date", dtp_po_date.Value.ToString)
@@ -598,6 +606,7 @@
             .cmd.Parameters.AddWithValue("@delivered_to", txtDeliverBy.Text)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@processed_by", Main_form.auth_login)
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -920,6 +929,30 @@
             .con.Close()
         End With
 
+    End Sub
+
+    Private Sub btnAddProduct_Click(sender As Object, e As EventArgs) Handles btnAddProduct.Click
+        ProductForm.btnSave.Text = "Save"
+        'ProductForm.initializeMeasure()
+
+        ProductForm.selectedProduct = 0
+        ProductForm.populateCategory()
+        ProductForm.populateSubcategory(0)
+        ProductForm.clearFields()
+        ProductForm.ShowDialog()
+
+
+    End Sub
+
+    Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
+        If selectedSupplier = 0 Then
+            MsgBox("Please select supplier!", MsgBoxStyle.Critical)
+            cbSupplier.Focus()
+            Exit Sub
+        End If
+        SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
+        SupplierProductSelection.txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
+        SupplierProductSelection.ShowDialog()
     End Sub
 
 End Class

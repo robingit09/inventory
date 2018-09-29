@@ -39,6 +39,7 @@ Partial Class Main_form
         Me.PurchaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseOrderRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupplierToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,7 +59,8 @@ Partial Class Main_form
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseOrderRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblTest = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -94,7 +96,7 @@ Partial Class Main_form
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(214, 110)
+        Me.PictureBox1.Location = New System.Drawing.Point(243, 106)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(648, 266)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -176,6 +178,12 @@ Partial Class Main_form
         Me.PurchaseReceiveToolStripMenuItem1.Name = "PurchaseReceiveToolStripMenuItem1"
         Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
         Me.PurchaseReceiveToolStripMenuItem1.Text = "Purchase Receive"
+        '
+        'PurchaseOrderRequestToolStripMenuItem
+        '
+        Me.PurchaseOrderRequestToolStripMenuItem.Name = "PurchaseOrderRequestToolStripMenuItem"
+        Me.PurchaseOrderRequestToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.PurchaseOrderRequestToolStripMenuItem.Text = "Purchase Order Request"
         '
         'SupplierToolStripMenuItem1
         '
@@ -291,15 +299,28 @@ Partial Class Main_form
         '
         'SystemToolStripMenuItem
         '
+        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
         Me.SystemToolStripMenuItem.Text = "System"
         '
-        'PurchaseOrderRequestToolStripMenuItem
+        'SettingsToolStripMenuItem
         '
-        Me.PurchaseOrderRequestToolStripMenuItem.Name = "PurchaseOrderRequestToolStripMenuItem"
-        Me.PurchaseOrderRequestToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
-        Me.PurchaseOrderRequestToolStripMenuItem.Text = "Purchase Order Request"
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'lblTest
+        '
+        Me.lblTest.AutoSize = True
+        Me.lblTest.BackColor = System.Drawing.Color.Maroon
+        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTest.ForeColor = System.Drawing.Color.White
+        Me.lblTest.Location = New System.Drawing.Point(12, 193)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(114, 25)
+        Me.lblTest.TabIndex = 5
+        Me.lblTest.Text = "Test Mode"
         '
         'Main_form
         '
@@ -308,6 +329,7 @@ Partial Class Main_form
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(926, 429)
+        Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblTime)
         Me.Controls.Add(Me.lblDate)
@@ -358,4 +380,6 @@ Partial Class Main_form
     Friend WithEvents LedgerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LedgerToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PurchaseOrderRequestToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblTest As Label
 End Class
