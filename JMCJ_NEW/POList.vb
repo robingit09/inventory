@@ -27,7 +27,7 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
-                    Dim date_issue As String = .dr("po_date")
+                    Dim date_issue As String = Convert.ToDateTime(.dr("po_date")).ToString("MM-dd-yy")
                     Dim po_no As String = .dr("po_no")
                     Dim supplier_id As Integer = CInt(.dr("supplier"))
                     Dim supplier_name As String = New DatabaseConnect().get_by_id("suppliers", supplier_id, "supplier_name")

@@ -675,7 +675,6 @@
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
-            'MsgBox(selectedPaymentType)
             Select Case selectedPaymentType
                 Case 1
                     ' cash
@@ -955,4 +954,31 @@
         SupplierProductSelection.ShowDialog()
     End Sub
 
+    Private Sub btnSaveAndPrint_Click(sender As Object, e As EventArgs) Handles btnSaveAndPrint.Click
+        If btnSaveAndPrint.Text = "Save and Print" Then
+            If validation() = False Then
+                Exit Sub
+            End If
+            insertData()
+            clearFields()
+
+            'print
+            Dim id As String = New DatabaseConnect().getLastID("purchase_orders")
+            Dim path As String = Application.StartupPath & "\po_report.html"
+            Try
+                Dim code As String = POList.generatePrint(id)
+                Dim myWrite As System.IO.StreamWriter
+                myWrite = IO.File.CreateText(path)
+                myWrite.WriteLine(code)
+                myWrite.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+
+            Dim proc As New System.Diagnostics.Process()
+            proc = Process.Start(path, "")
+            POList.loadPO("")
+        Else
+        End If
+    End Sub
 End Class

@@ -24,6 +24,7 @@
         cbTerms.SelectedIndex = 0
         selectedTerm = 0
         cbPaymentType.SelectedIndex = 0
+        txtDrNo.Text = ""
         selectedPaymentType = 0
         dtp_pr_date.Value = DateTime.Now.Date
         dtpETA.Value = DateTime.Now.Date
@@ -103,6 +104,7 @@
         Me.selectedSupplier = getSupplier(pr_id)
         txtPRNO.Text = New DatabaseConnect().get_by_id("purchase_receive", pr_id, "pr_no")
         cbSupplier.SelectedIndex = cbSupplier.FindString(New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name"))
+        txtDrNo.Text = New DatabaseConnect().get_by_id("purchase_receive", pr_id, "dr_no")
 
         Dim term As String = New DatabaseConnect().get_by_id("purchase_receive", Me.selectedPR, "terms")
         Select Case term
@@ -219,13 +221,14 @@
             Dim dbprod As New DatabaseConnect()
             dgvProd.Rows.Clear()
             With dbprod
-                .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount
-                        FROM (((((purchase_order_products as pop
+                .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+                        FROM ((((((purchase_order_products as pop
                         INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
                         INNER JOIN unit as u ON u.id = pu.unit)
                         LEFT JOIN color as c ON c.id = pu.color)
                         INNER JOIN products as p ON p.id = pu.product_id)
+                        left join product_stocks as ps on ps.product_unit_id = pu.id)
                         where pop.purchase_order_id = " & selectedPO)
                 If .dr.HasRows Then
                     While .dr.Read
@@ -238,8 +241,9 @@
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                         Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
                         Dim total As String = Val(.dr("total_amount")).ToString("N2")
+                        Dim stock As String = CInt(.dr("stock"))
 
-                        Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, "", "Remove"}
+                        Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                         dgvProd.Rows.Add(row)
                     End While
                 End If
@@ -862,6 +866,96 @@
             gpEnterBarcode.Enabled = False
             gpEnterProduct.Enabled = False
             dgvProd.Enabled = False
+        End If
+    End Sub
+
+    Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
+        'remove product
+        If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
+            dgvProd.Rows.RemoveAt(e.RowIndex)
+            computeTotalAmount()
+        End If
+    End Sub
+
+    Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
+        If dgvProd.Rows.Count > 1 Then
+            'change if edit the qty
+            If e.ColumnIndex = 2 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+
+                amount = qty * CDbl(price)
+                dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
+
+
+                'change color
+                If qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                End If
+            End If
+
+            'change if edit unit cost
+            If e.ColumnIndex = 7 Then
+                Dim amount As Double = 0
+                Dim qty As Integer = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
+                Dim cost As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value) Then
+                    cost = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Else
+                    cost = 0
+                End If
+
+                amount = qty * CDbl(cost)
+                dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
+
+
+                'change color
+                If cost > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.White
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("cost").Style.BackColor = Drawing.Color.Red
+                End If
+            End If
+            computeTotalAmount()
+        End If
+    End Sub
+
+    Private Sub btnSaveAndPrint_Click(sender As Object, e As EventArgs) Handles btnSaveAndPrint.Click
+        If btnSaveAndPrint.Text = "Save and Print" Then
+
+            If validation() = False Then
+                Exit Sub
+            End If
+            insertData()
+            clearFields()
+            PurchaseReceive.loadPR("")
+
+            'print
+            Dim id As String = New DatabaseConnect().getLastID("purchase_receive")
+            Dim path As String = Application.StartupPath & "\pr_report.html"
+
+            Try
+                Dim code As String = PurchaseReceive.generatePrint(id)
+                Dim myWrite As System.IO.StreamWriter
+                myWrite = IO.File.CreateText(path)
+                myWrite.WriteLine(code)
+                myWrite.Close()
+            Catch ex As Exception
+
+            End Try
+
+            Dim proc As New System.Diagnostics.Process()
+            proc = Process.Start(path, "")
+
         End If
     End Sub
 End Class

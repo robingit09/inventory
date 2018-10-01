@@ -22,7 +22,7 @@ Partial Class CustomerOrderForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
@@ -578,8 +578,8 @@ Partial Class CustomerOrderForm
         '
         'id
         '
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -687,7 +687,7 @@ Partial Class CustomerOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1420, 688)
+        Me.ClientSize = New System.Drawing.Size(1370, 688)
         Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterProduct)

@@ -95,10 +95,10 @@
         cbPaymentType.DataSource = Nothing
         cbPaymentType.Items.Clear()
         Dim comboSource As New Dictionary(Of String, String)()
-        comboSource.Add(-1, "Select Payment Type")
-        comboSource.Add(0, "Cash")
-        comboSource.Add(1, "C.O.D")
-        comboSource.Add(2, "Credit")
+        comboSource.Add(0, "Select Payment Type")
+        comboSource.Add(1, "Cash")
+        comboSource.Add(2, "C.O.D")
+        comboSource.Add(3, "Credit")
         cbPaymentType.DataSource = New BindingSource(comboSource, Nothing)
         cbPaymentType.DisplayMember = "Value"
         cbPaymentType.ValueMember = "Key"
@@ -108,17 +108,6 @@
     Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
         If cbPaymentType.SelectedIndex > 0 Then
             cbPaymentType.BackColor = Drawing.Color.White
-
-            'Select Case cbPaymentType.Text
-            '    Case "Cash"
-            '        gpCheck.Enabled = False
-            '    Case "C.O.D"
-            '        gpCheck.Enabled = False
-            '    Case "Credit"
-            '        gpCheck.Enabled = True
-            '    Case Else
-            '        gpCheck.Enabled = False
-            'End Select
 
             If Trim(cbPaymentType.Text) = "Credit" Then
                 'txtCounterNo.Enabled = True
@@ -160,23 +149,11 @@
                 cbTerms.Enabled = False
             End If
 
-            If Trim(cbPaymentType.Text) = "Post Dated" Then
-                'txtCounterNo.Enabled = True
-                'txtCounterNo.Text = ""
-                rPaidYes.Checked = True
-                'rbFloatingYes.Checked = True
-                gpPaid.Enabled = False
-                'dtpPaid.Enabled = True
-                'gpCheck.Enabled = True
-                'txtBankDetails.Enabled = True
-                cbTerms.Enabled = False
-            End If
-
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
         Else
-            selectedPaymentType = -1
+            selectedPaymentType = 0
         End If
     End Sub
 
@@ -830,13 +807,13 @@
                     Select Case payment_type
                         Case "0"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("Cash")
-                            selectedPaymentType = 0
+                            selectedPaymentType = 1
                         Case "1"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("C.O.D")
-                            selectedPaymentType = 1
+                            selectedPaymentType = 2
                         Case "2"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("Credit")
-                            selectedPaymentType = 2
+                            selectedPaymentType = 3
                         Case Else
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("Select Payment Type")
                     End Select
@@ -1160,21 +1137,6 @@
                         cmd2.ExecuteNonQuery()
                         cmd2.Parameters.Clear()
 
-                        'decrease stock
-                        'Dim decreasestock As New DatabaseConnect
-                        'With decreasestock
-                        '    Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
-                        '    Dim cur_stock As Integer = Val(temp)
-                        '    cur_stock = cur_stock - Val(qty)
-
-                        '    .cmd.Connection = .con
-                        '    .cmd.CommandType = CommandType.Text
-                        '    .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
-                        '    .cmd.ExecuteNonQuery()
-                        '    .cmd.Dispose()
-                        '    .con.Close()
-                        'End With
-
                         ModelFunction.update_stock(product_unit_id, qty, "-")
                         ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
 
@@ -1289,4 +1251,5 @@
             End If
         End If
     End Sub
+
 End Class
