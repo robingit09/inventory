@@ -1,4 +1,5 @@
 ﻿Public Class SupplierProductSelection
+    Public module_selection As Integer = 0
     Private Sub SupplierProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -92,22 +93,64 @@
                 Dim unitcost As String = dgvProducts.Rows(item.Index).Cells("column_cost").Value
                 Dim stock As String = dgvProducts.Rows(item.Index).Cells("column_stock").Value
 
-                ' check if existing
-                Dim inlist As Boolean = False
-                For Each item2 As DataGridViewRow In PurchaseOrderForm.dgvProd.Rows
-                    If PurchaseOrderForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
-                        Dim p_u_id As String = PurchaseOrderForm.dgvProd.Rows(item2.Index).Cells("id").Value
-                        If p_u_id = product_unit_id Then
-                            inlist = True
-                            Exit For
-                        End If
-                    End If
-                Next
 
-                If inlist = False Then
-                    Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
-                    PurchaseOrderForm.dgvProd.Rows.Add(row)
-                End If
+                Select Case module_selection
+                    ' from purchase Order
+                    Case 1
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In PurchaseOrderForm.dgvProd.Rows
+                            If PurchaseOrderForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = PurchaseOrderForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                            PurchaseOrderForm.dgvProd.Rows.Add(row)
+                        End If
+                    ' from purchase receive
+                    Case 2
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In PurchaseReceiveForm.dgvProd.Rows
+                            If PurchaseReceiveForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = PurchaseReceiveForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                            PurchaseReceiveForm.dgvProd.Rows.Add(row)
+                        End If
+                     ' from purchase return
+                    Case 3
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In PurchaseReturnForm.dgvProd.Rows
+                            If PurchaseReturnForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = PurchaseReturnForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                            PurchaseReturnForm.dgvProd.Rows.Add(row)
+                        End If
+                End Select
+
 
             End If
         Next

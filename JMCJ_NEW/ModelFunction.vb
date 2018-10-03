@@ -145,7 +145,7 @@
         End With
     End Sub
 
-    Public Sub deleteData()
+    Public Sub truncateDatabase()
         Dim dbdelete As New DatabaseConnect
         With dbdelete
             .cmd.Connection = .con
@@ -153,60 +153,139 @@
             .cmd.CommandText = "DELETE FROM products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
-            .cmd.CommandText = "DELETE FROM product_categories"
+            .cmd.CommandText = "Alter Table products Alter Column ID Counter(1,1)"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
-            .cmd.CommandText = "DELETE FROM product_subcategories"
-            .cmd.ExecuteNonQuery()
-            .cmd.Parameters.Clear()
-            .cmd.CommandText = "DELETE FROM brand"
-            .cmd.ExecuteNonQuery()
-            .cmd.Parameters.Clear()
-            .cmd.CommandText = "DELETE FROM unit"
-            .cmd.ExecuteNonQuery()
-            .cmd.Parameters.Clear()
-            .cmd.CommandText = "DELETE FROM color"
-            .cmd.ExecuteNonQuery()
-            .cmd.Parameters.Clear()
+
+
             .cmd.CommandText = "DELETE FROM product_unit"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_unit Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+
+            .cmd.CommandText = "DELETE FROM product_categories"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_categories Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM product_subcategories"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_subcategories Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM brand"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table brand Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM unit"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table unit Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM color"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table color Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_orders"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_orders Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_order_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_order_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_return"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_return Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_return_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_return_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM customer_return"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table customer_return Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM customer_return_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table customer_return_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM ledger"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table ledger Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM customer_order_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table customer_order_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_receive"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_receive Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM purchase_receive_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_receive_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM price_history"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table price_history Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM cost_history"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table cost_history Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+
             .cmd.Dispose()
         End With
     End Sub

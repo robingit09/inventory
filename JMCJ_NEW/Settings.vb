@@ -30,4 +30,13 @@
 
 
     End Sub
+
+    Private Sub btnTruncate_Click(sender As Object, e As EventArgs) Handles btnTruncate.Click
+        MsgBox("Warning! All your data will wipeout or reset.", MsgBoxStyle.Exclamation)
+        Dim yesno As Integer = MsgBox("Are you sure you want to truncate database ?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+        If yesno = MsgBoxResult.Yes Then
+            ModelFunction.truncateDatabase()
+            MsgBox("Database Successfully Truncate.", MsgBoxStyle.Information)
+        End If
+    End Sub
 End Class

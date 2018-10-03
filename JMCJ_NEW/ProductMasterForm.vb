@@ -145,7 +145,7 @@
             .con.Close()
         End With
 
-        MsgBox("Product Information Successfully Save", MsgBoxStyle.Information)
+        MsgBox("Product Sub Information Successfully Save.", MsgBoxStyle.Information)
     End Sub
 
     Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick

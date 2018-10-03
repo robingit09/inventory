@@ -72,6 +72,7 @@ Partial Class PurchaseReceiveForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblTotalAmount = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -245,7 +246,7 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
         Me.gpEnterBarcode.Controls.Add(Me.Label14)
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 205)
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(15, 178)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
         Me.gpEnterBarcode.Size = New System.Drawing.Size(256, 49)
         Me.gpEnterBarcode.TabIndex = 87
@@ -280,7 +281,7 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label16)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 205)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 178)
         Me.gpEnterProduct.Name = "gpEnterProduct"
         Me.gpEnterProduct.Size = New System.Drawing.Size(1003, 49)
         Me.gpEnterProduct.TabIndex = 88
@@ -472,7 +473,7 @@ Partial Class PurchaseReceiveForm
         Me.gpFields.Controls.Add(Me.dtp_pr_date)
         Me.gpFields.Location = New System.Drawing.Point(15, 14)
         Me.gpFields.Name = "gpFields"
-        Me.gpFields.Size = New System.Drawing.Size(1296, 171)
+        Me.gpFields.Size = New System.Drawing.Size(1296, 159)
         Me.gpFields.TabIndex = 90
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Receive"
@@ -523,11 +524,21 @@ Partial Class PurchaseReceiveForm
         Me.Label10.TabIndex = 91
         Me.Label10.Text = "Total Amount:"
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(15, 233)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 93
+        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'PurchaseReceiveForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1327, 618)
+        Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.lblTotalAmount)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.dgvProd)
@@ -599,4 +610,5 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents cbBrand As ComboBox
     Friend WithEvents Label16 As Label
     Friend WithEvents cbSupplier As ComboBox
+    Friend WithEvents btnSelectProduct As Button
 End Class

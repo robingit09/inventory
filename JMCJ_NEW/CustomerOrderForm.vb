@@ -1231,6 +1231,7 @@
             cbCustomer.Focus()
             Exit Sub
         End If
+        CustomerProductSelection.module_selection = 1
         CustomerProductSelection.loadCustomerProducts(Me.selectedCustomer)
         CustomerProductSelection.txtCustomer.Text = New DatabaseConnect().get_by_id("company", Me.selectedCustomer, "company")
         CustomerProductSelection.ShowDialog()

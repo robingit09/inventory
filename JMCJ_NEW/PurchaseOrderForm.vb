@@ -949,6 +949,7 @@
             cbSupplier.Focus()
             Exit Sub
         End If
+        SupplierProductSelection.module_selection = 1
         SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
         SupplierProductSelection.txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
         SupplierProductSelection.ShowDialog()

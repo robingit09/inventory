@@ -22,7 +22,7 @@ Partial Class CustomerOrderForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
@@ -578,8 +578,8 @@ Partial Class CustomerOrderForm
         '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle2
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True

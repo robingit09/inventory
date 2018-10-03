@@ -958,4 +958,16 @@
 
         End If
     End Sub
+
+    Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
+        If selectedSupplier = 0 Then
+            MsgBox("Please select supplier!", MsgBoxStyle.Critical)
+            cbSupplier.Focus()
+            Exit Sub
+        End If
+        SupplierProductSelection.module_selection = 2
+        SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
+        SupplierProductSelection.txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
+        SupplierProductSelection.ShowDialog()
+    End Sub
 End Class

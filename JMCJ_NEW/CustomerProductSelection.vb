@@ -1,4 +1,5 @@
 ﻿Public Class CustomerProductSelection
+    Public module_selection As Integer = 0
     Private Sub CustomerProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -95,22 +96,46 @@
                 Dim sell_price As String = dgvProducts.Rows(item.Index).Cells("column_sell_price").Value
                 Dim stock As String = dgvProducts.Rows(item.Index).Cells("column_stock").Value
 
-                ' check if existing
-                Dim inlist As Boolean = False
-                For Each item2 As DataGridViewRow In CustomerOrderForm.dgvProd.Rows
-                    If CustomerOrderForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
-                        Dim p_u_id As String = CustomerOrderForm.dgvProd.Rows(item2.Index).Cells("id").Value
-                        If p_u_id = product_unit_id Then
-                            inlist = True
-                            Exit For
-                        End If
-                    End If
-                Next
+                'module selection
+                Select Case module_selection
+                    ' from customer orders
+                    Case 1
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In CustomerOrderForm.dgvProd.Rows
+                            If CustomerOrderForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = CustomerOrderForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
 
-                If inlist = False Then
-                    Dim row As String() = New String() {product_unit_id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
-                    CustomerOrderForm.dgvProd.Rows.Add(row)
-                End If
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
+                            CustomerOrderForm.dgvProd.Rows.Add(row)
+                        End If
+                   ' from customer return
+                    Case 2
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In CustomerReturnForm.dgvProd.Rows
+                            If CustomerReturnForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = CustomerReturnForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "", desc, brand, unit, color, price, sell_price, "0.00", stock, "Remove"}
+                            CustomerReturnForm.dgvProd.Rows.Add(row)
+                        End If
+                End Select
+
 
             End If
         Next

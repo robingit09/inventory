@@ -63,6 +63,7 @@ Partial Class PurchaseReturnForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpField.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -88,7 +89,7 @@ Partial Class PurchaseReturnForm
         Me.gpField.Controls.Add(Me.Label1)
         Me.gpField.Location = New System.Drawing.Point(13, 28)
         Me.gpField.Name = "gpField"
-        Me.gpField.Size = New System.Drawing.Size(1216, 157)
+        Me.gpField.Size = New System.Drawing.Size(1216, 142)
         Me.gpField.TabIndex = 0
         Me.gpField.TabStop = False
         Me.gpField.Text = "Purchase Return"
@@ -247,9 +248,9 @@ Partial Class PurchaseReturnForm
         Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
         Me.gpEnterBarcode.Controls.Add(Me.Label14)
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterBarcode.Location = New System.Drawing.Point(13, 191)
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(13, 176)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
-        Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 58)
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 47)
         Me.gpEnterBarcode.TabIndex = 62
         Me.gpEnterBarcode.TabStop = False
         Me.gpEnterBarcode.Text = "Enter Barcode"
@@ -266,9 +267,9 @@ Partial Class PurchaseReturnForm
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label17)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(317, 191)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(317, 176)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(912, 58)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(912, 47)
         Me.gpEnterProduct.TabIndex = 63
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -277,7 +278,7 @@ Partial Class PurchaseReturnForm
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(626, 30)
+        Me.Label20.Location = New System.Drawing.Point(626, 22)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(36, 15)
         Me.Label20.TabIndex = 66
@@ -287,14 +288,14 @@ Partial Class PurchaseReturnForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(668, 24)
+        Me.cbColor.Location = New System.Drawing.Point(668, 19)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(149, 23)
         Me.cbColor.TabIndex = 65
         '
         'txtProductDesc
         '
-        Me.txtProductDesc.Location = New System.Drawing.Point(76, 24)
+        Me.txtProductDesc.Location = New System.Drawing.Point(76, 19)
         Me.txtProductDesc.MaxLength = 32000
         Me.txtProductDesc.Name = "txtProductDesc"
         Me.txtProductDesc.Size = New System.Drawing.Size(173, 21)
@@ -303,9 +304,9 @@ Partial Class PurchaseReturnForm
         'btnAddToCart
         '
         Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToCart.Location = New System.Drawing.Point(829, 16)
+        Me.btnAddToCart.Location = New System.Drawing.Point(829, 15)
         Me.btnAddToCart.Name = "btnAddToCart"
-        Me.btnAddToCart.Size = New System.Drawing.Size(77, 37)
+        Me.btnAddToCart.Size = New System.Drawing.Size(77, 29)
         Me.btnAddToCart.TabIndex = 39
         Me.btnAddToCart.Text = "Add to Cart"
         Me.btnAddToCart.UseVisualStyleBackColor = True
@@ -314,7 +315,7 @@ Partial Class PurchaseReturnForm
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(454, 27)
+        Me.Label15.Location = New System.Drawing.Point(454, 22)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(30, 15)
         Me.Label15.TabIndex = 38
@@ -324,7 +325,7 @@ Partial Class PurchaseReturnForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(490, 24)
+        Me.cbUnit.Location = New System.Drawing.Point(490, 19)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(130, 23)
         Me.cbUnit.TabIndex = 37
@@ -333,7 +334,7 @@ Partial Class PurchaseReturnForm
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(255, 27)
+        Me.Label16.Location = New System.Drawing.Point(255, 22)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(36, 15)
         Me.Label16.TabIndex = 36
@@ -343,7 +344,7 @@ Partial Class PurchaseReturnForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(297, 24)
+        Me.cbBrand.Location = New System.Drawing.Point(297, 19)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(143, 23)
         Me.cbBrand.TabIndex = 35
@@ -352,7 +353,7 @@ Partial Class PurchaseReturnForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(6, 27)
+        Me.Label17.Location = New System.Drawing.Point(6, 22)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(64, 15)
         Me.Label17.TabIndex = 34
@@ -432,11 +433,21 @@ Partial Class PurchaseReturnForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(13, 234)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 94
+        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'PurchaseReturnForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1241, 545)
+        Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.gpEnterBarcode)
@@ -496,4 +507,5 @@ Partial Class PurchaseReturnForm
     Friend WithEvents action As DataGridViewButtonColumn
     Friend WithEvents Label4 As Label
     Friend WithEvents txtPRNo As TextBox
+    Friend WithEvents btnSelectProduct As Button
 End Class

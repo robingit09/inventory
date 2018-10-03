@@ -22,7 +22,7 @@ Partial Class CustomerReturnForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gpEnterBarcode = New System.Windows.Forms.GroupBox()
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -66,6 +66,7 @@ Partial Class CustomerReturnForm
         Me.gpField = New System.Windows.Forms.GroupBox()
         Me.txtIssueBy = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,7 +78,7 @@ Partial Class CustomerReturnForm
         Me.gpEnterBarcode.Controls.Add(Me.txtEnterBarcode)
         Me.gpEnterBarcode.Controls.Add(Me.Label14)
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterBarcode.Location = New System.Drawing.Point(6, 236)
+        Me.gpEnterBarcode.Location = New System.Drawing.Point(6, 203)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
         Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 58)
         Me.gpEnterBarcode.TabIndex = 64
@@ -159,7 +160,7 @@ Partial Class CustomerReturnForm
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label17)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(267, 236)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(267, 203)
         Me.gpEnterProduct.Name = "gpEnterProduct"
         Me.gpEnterProduct.Size = New System.Drawing.Size(916, 58)
         Me.gpEnterProduct.TabIndex = 65
@@ -215,8 +216,8 @@ Partial Class CustomerReturnForm
         '
         'id
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle2
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -417,7 +418,7 @@ Partial Class CustomerReturnForm
         Me.gpField.Controls.Add(Me.Label7)
         Me.gpField.Location = New System.Drawing.Point(6, 13)
         Me.gpField.Name = "gpField"
-        Me.gpField.Size = New System.Drawing.Size(1177, 217)
+        Me.gpField.Size = New System.Drawing.Size(1177, 184)
         Me.gpField.TabIndex = 83
         Me.gpField.TabStop = False
         '
@@ -439,11 +440,21 @@ Partial Class CustomerReturnForm
         Me.Label7.TabIndex = 84
         Me.Label7.Text = "Issued By:"
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(6, 267)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 84
+        Me.btnSelectProduct.Text = "Select Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'CustomerReturnForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1231, 585)
+        Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtTotalAmount)
         Me.Controls.Add(Me.btnSave)
@@ -521,4 +532,5 @@ Partial Class CustomerReturnForm
     Friend WithEvents gpField As GroupBox
     Friend WithEvents txtIssueBy As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents btnSelectProduct As Button
 End Class
