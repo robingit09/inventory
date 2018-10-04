@@ -250,6 +250,13 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM customer_orders"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table customer_orderss Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM customer_order_products"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()

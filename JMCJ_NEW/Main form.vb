@@ -14,7 +14,7 @@
     End Sub
 
     Private Sub CustomerOrderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'CustomerOrder.ShowDialog()
+
         CustomerOrder.ShowDialog()
     End Sub
 
