@@ -24,10 +24,10 @@ Partial Class TopSalesReports
     Private Sub InitializeComponent()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.gpFilter = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.cbYear = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.cbMonth = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.gpFilter.SuspendLayout()
@@ -35,7 +35,7 @@ Partial Class TopSalesReports
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(612, 175)
+        Me.btnPrint.Location = New System.Drawing.Point(265, 176)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(75, 23)
         Me.btnPrint.TabIndex = 3
@@ -52,10 +52,18 @@ Partial Class TopSalesReports
         Me.gpFilter.Controls.Add(Me.Label2)
         Me.gpFilter.Location = New System.Drawing.Point(12, 23)
         Me.gpFilter.Name = "gpFilter"
-        Me.gpFilter.Size = New System.Drawing.Size(675, 136)
+        Me.gpFilter.Size = New System.Drawing.Size(328, 136)
         Me.gpFilter.TabIndex = 2
         Me.gpFilter.TabStop = False
         Me.gpFilter.Text = "Filter"
+        '
+        'cbYear
+        '
+        Me.cbYear.FormattingEnabled = True
+        Me.cbYear.Location = New System.Drawing.Point(73, 81)
+        Me.cbYear.Name = "cbYear"
+        Me.cbYear.Size = New System.Drawing.Size(176, 21)
+        Me.cbYear.TabIndex = 20
         '
         'Label1
         '
@@ -66,22 +74,6 @@ Partial Class TopSalesReports
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Customer"
         '
-        'cbCustomer
-        '
-        Me.cbCustomer.FormattingEnabled = True
-        Me.cbCustomer.Location = New System.Drawing.Point(73, 25)
-        Me.cbCustomer.Name = "cbCustomer"
-        Me.cbCustomer.Size = New System.Drawing.Size(176, 21)
-        Me.cbCustomer.TabIndex = 0
-        '
-        'cbYear
-        '
-        Me.cbYear.FormattingEnabled = True
-        Me.cbYear.Location = New System.Drawing.Point(73, 81)
-        Me.cbYear.Name = "cbYear"
-        Me.cbYear.Size = New System.Drawing.Size(176, 21)
-        Me.cbYear.TabIndex = 20
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -90,6 +82,14 @@ Partial Class TopSalesReports
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 21
         Me.Label3.Text = "Year:"
+        '
+        'cbCustomer
+        '
+        Me.cbCustomer.FormattingEnabled = True
+        Me.cbCustomer.Location = New System.Drawing.Point(73, 25)
+        Me.cbCustomer.Name = "cbCustomer"
+        Me.cbCustomer.Size = New System.Drawing.Size(176, 21)
+        Me.cbCustomer.TabIndex = 0
         '
         'cbMonth
         '
@@ -112,9 +112,11 @@ Partial Class TopSalesReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(709, 220)
+        Me.ClientSize = New System.Drawing.Size(371, 220)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.gpFilter)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "TopSalesReports"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Top Sales Reports"

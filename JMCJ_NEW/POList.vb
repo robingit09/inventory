@@ -1,5 +1,6 @@
 ﻿Public Class POList
     Public selectedSupplier As Integer = 0
+    Public selectedPO As Integer = 0
     Private Sub btnAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
         btnAddNew.Enabled = False
         PurchaseOrderForm.initialize()
@@ -13,6 +14,31 @@
         PurchaseOrderForm.ShowDialog()
         btnAddNew.Enabled = True
     End Sub
+
+    Public Sub loadPOSelection()
+        cbPONo.DataSource = Nothing
+        cbPONo.Items.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT id,po_no from purchase_orders where delivery_status <> 0 order by po_date desc")
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select PO Number")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = CInt(.dr("id"))
+                    Dim po As String = .dr("po_no")
+                    comboSource.Add(id, po)
+                End While
+            End If
+            cbPONo.DataSource = New BindingSource(comboSource, Nothing)
+            cbPONo.DisplayMember = "Value"
+            cbPONo.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
 
     Public Sub loadPO(ByVal query As String)
         dgvPO.Rows.Clear()
@@ -61,10 +87,12 @@
     End Sub
 
     Private Sub POList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadPO("")
+        loadPOSelection()
+
         autocompleteSupplier()
         getMonth()
         getYear()
+        loadPO("")
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -355,8 +383,8 @@
             .AutoCompleteSource = AutoCompleteSource.CustomSource
         End With
 
-        Dim customer As New DatabaseConnect
-        With customer
+        Dim supplier As New DatabaseConnect
+        With supplier
             .selectByQuery("Select distinct supplier_name from suppliers  where status = 1")
             While .dr.Read
                 MySource.Add(.dr.GetValue(0))
@@ -378,7 +406,7 @@
         cbMonth.SelectedIndex = 0
     End Sub
 
-    Private Sub getYear()
+    Public Sub getYear()
         cbYear.Items.Clear()
         cbYear.Items.Add("All")
         Dim db As New DatabaseConnect
@@ -427,7 +455,7 @@
         Return result
     End Function
 
-    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown, TextBox2.KeyDown, TextBox1.KeyDown
+    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown
         If txtSupplier.Text.Length > 0 And e.KeyCode = Keys.Enter Then
             txtSupplier.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtSupplier.Text.ToLower())
             selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
@@ -437,7 +465,7 @@
         End If
     End Sub
 
-    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave, TextBox2.Leave, TextBox1.Leave
+    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave
         If txtSupplier.Text.Length > 0 Then
             selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
             'MsgBox(selectedCustomer)
@@ -446,13 +474,16 @@
         End If
     End Sub
 
-    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click, Button2.Click, Button1.Click
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
         btnFilter.Enabled = False
         Dim query As String = "Select * from purchase_orders where delivery_status > -1 "
         If txtSupplier.Text <> "" And selectedSupplier > 0 Then
             query = query & " and supplier = " & selectedSupplier
         End If
 
+        If cbPONo.SelectedIndex > 0 And selectedPO > 0 Then
+            query = query & " and id = " & selectedPO
+        End If
         If cbMonth.Text <> "All" Then
             query = query & " and MONTH(po_date) = " & monthToNumber(cbMonth.Text)
         End If
@@ -466,5 +497,15 @@
         btnFilter.Enabled = True
     End Sub
 
+    Private Sub cbPONo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPONo.SelectedIndexChanged
+        If cbPONo.SelectedIndex > 0 Then
+            cbPONo.BackColor = Drawing.Color.White
+            Dim key As String = DirectCast(cbPONo.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbPONo.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedPO = key
 
+        Else
+            selectedPO = 0
+        End If
+    End Sub
 End Class

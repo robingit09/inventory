@@ -80,6 +80,8 @@ Public Class DatabaseConnect
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
+        cmd.Dispose()
+        con.Close()
     End Sub
 
     Public Sub update_where(ByVal table As String, ByVal colname As String, ByVal ID As String, ByVal col As String, ByVal val As String)
@@ -198,6 +200,8 @@ Public Class DatabaseConnect
         Else
             id = 1
         End If
+        cmd.Dispose()
+        con.Close()
         Return id
     End Function
 End Class

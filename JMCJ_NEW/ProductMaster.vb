@@ -30,7 +30,7 @@
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0")
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.description")
             Else
                 .selectByQuery(q)
             End If
@@ -298,6 +298,59 @@
         Else
             selectedSubCat = 0
             'populateUnit(SelectedProdID, selectedBrand, selectedColor)
+        End If
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        Dim query As String = "Select distinct pu.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat,sub.name as subcat FROM (((((((((products as p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN product_stocks as ps ON ps.product_unit_id = pu.id)
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 "
+
+        If Trim(txtBarcode.Text) <> "" Then
+            query = query & " and pu.barcode = '" & txtBarcode.Text & "'"
+        End If
+
+        If selectedDesc > 0 And Trim(txtProductDesc.Text) <> "" Then
+            query = query & " and p.id = " & selectedDesc
+        End If
+
+        If cbBrand.Text <> "All" Then
+            query = query & " and b.id = " & selectedBrand
+        End If
+
+        If cbUnit.Text <> "All" Then
+            query = query & " and u.id = " & selectedUnit
+        End If
+
+
+        If cbColor.Text <> "All" Then
+            query = query & " and cc.id = " & selectedColor
+        End If
+
+        If cbCat.Text <> "All" Then
+            query = query & " and c.id = " & selectedCat
+        End If
+
+        If cbSubCat.Text <> "All" Then
+            query = query & " and sub.id = " & selectedSubCat
+        End If
+
+        query = query & " order by p.description"
+        loadList(query)
+    End Sub
+
+    Private Sub txtProductDesc_MouseLeave(sender As Object, e As EventArgs) Handles txtProductDesc.MouseLeave
+        If txtProductDesc.TextLength > 0 Then
+            selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+        Else
+            selectedDesc = 0
         End If
     End Sub
 End Class

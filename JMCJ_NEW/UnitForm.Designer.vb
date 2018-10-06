@@ -68,7 +68,9 @@ Partial Class UnitForm
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSave)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Margin = New System.Windows.Forms.Padding(6)
+        Me.MaximizeBox = False
         Me.Name = "UnitForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Unit Form"

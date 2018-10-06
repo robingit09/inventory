@@ -59,10 +59,12 @@ Partial Class BrandForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 113)
+        Me.ClientSize = New System.Drawing.Size(399, 103)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtBrand)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "BrandForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Brand Form"

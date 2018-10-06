@@ -39,17 +39,6 @@ Partial Class Ledger
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.dgvLedger = New System.Windows.Forms.DataGridView()
-        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TermsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckNotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,6 +54,17 @@ Partial Class Ledger
         Me.PaymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.View = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TermsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckNotificationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvLedger, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -224,76 +224,6 @@ Partial Class Ledger
         Me.dgvLedger.Size = New System.Drawing.Size(1431, 578)
         Me.dgvLedger.TabIndex = 11
         '
-        'View
-        '
-        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
-        Me.View.Name = "View"
-        Me.View.Size = New System.Drawing.Size(155, 26)
-        '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.ViewToolStripMenuItem.Text = "View or Update"
-        '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.NotificationToolStripMenuItem, Me.CheckNotificationToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1247, 24)
-        Me.MenuStrip1.TabIndex = 12
-        Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomerToolStripMenuItem1, Me.LedgerToolStripMenuItem, Me.TermsToolStripMenuItem, Me.CheckToolStripMenuItem})
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
-        Me.PrintToolStripMenuItem.Text = "Reports"
-        '
-        'CustomerToolStripMenuItem1
-        '
-        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
-        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
-        Me.CustomerToolStripMenuItem1.Text = "Customer"
-        '
-        'LedgerToolStripMenuItem
-        '
-        Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
-        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.LedgerToolStripMenuItem.Text = "Ledger"
-        '
-        'TermsToolStripMenuItem
-        '
-        Me.TermsToolStripMenuItem.Name = "TermsToolStripMenuItem"
-        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.TermsToolStripMenuItem.Text = "Terms"
-        '
-        'CheckToolStripMenuItem
-        '
-        Me.CheckToolStripMenuItem.Name = "CheckToolStripMenuItem"
-        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.CheckToolStripMenuItem.Text = "Check"
-        '
-        'CustomerToolStripMenuItem
-        '
-        Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
-        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
-        Me.CustomerToolStripMenuItem.Text = "Customer"
-        '
-        'NotificationToolStripMenuItem
-        '
-        Me.NotificationToolStripMenuItem.Name = "NotificationToolStripMenuItem"
-        Me.NotificationToolStripMenuItem.Size = New System.Drawing.Size(117, 20)
-        Me.NotificationToolStripMenuItem.Text = "Terms Notification"
-        '
-        'CheckNotificationToolStripMenuItem
-        '
-        Me.CheckNotificationToolStripMenuItem.Name = "CheckNotificationToolStripMenuItem"
-        Me.CheckNotificationToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
-        Me.CheckNotificationToolStripMenuItem.Text = "Check Notification"
-        '
         'ID
         '
         Me.ID.HeaderText = "ID"
@@ -395,6 +325,76 @@ Partial Class Ledger
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
         '
+        'View
+        '
+        Me.View.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.View.Name = "View"
+        Me.View.Size = New System.Drawing.Size(155, 26)
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ViewToolStripMenuItem.Text = "View or Update"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem, Me.CustomerToolStripMenuItem, Me.NotificationToolStripMenuItem, Me.CheckNotificationToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1247, 24)
+        Me.MenuStrip1.TabIndex = 12
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomerToolStripMenuItem1, Me.LedgerToolStripMenuItem, Me.TermsToolStripMenuItem, Me.CheckToolStripMenuItem})
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
+        Me.PrintToolStripMenuItem.Text = "Reports"
+        '
+        'CustomerToolStripMenuItem1
+        '
+        Me.CustomerToolStripMenuItem1.Name = "CustomerToolStripMenuItem1"
+        Me.CustomerToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
+        Me.CustomerToolStripMenuItem1.Text = "Customer"
+        '
+        'LedgerToolStripMenuItem
+        '
+        Me.LedgerToolStripMenuItem.Name = "LedgerToolStripMenuItem"
+        Me.LedgerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.LedgerToolStripMenuItem.Text = "Ledger"
+        '
+        'TermsToolStripMenuItem
+        '
+        Me.TermsToolStripMenuItem.Name = "TermsToolStripMenuItem"
+        Me.TermsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.TermsToolStripMenuItem.Text = "Terms"
+        '
+        'CheckToolStripMenuItem
+        '
+        Me.CheckToolStripMenuItem.Name = "CheckToolStripMenuItem"
+        Me.CheckToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.CheckToolStripMenuItem.Text = "Check"
+        '
+        'CustomerToolStripMenuItem
+        '
+        Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
+        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
+        Me.CustomerToolStripMenuItem.Text = "Customer"
+        '
+        'NotificationToolStripMenuItem
+        '
+        Me.NotificationToolStripMenuItem.Name = "NotificationToolStripMenuItem"
+        Me.NotificationToolStripMenuItem.Size = New System.Drawing.Size(117, 20)
+        Me.NotificationToolStripMenuItem.Text = "Terms Notification"
+        '
+        'CheckNotificationToolStripMenuItem
+        '
+        Me.CheckNotificationToolStripMenuItem.Name = "CheckNotificationToolStripMenuItem"
+        Me.CheckNotificationToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
+        Me.CheckNotificationToolStripMenuItem.Text = "Check Notification"
+        '
         'Ledger
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -408,6 +408,8 @@ Partial Class Ledger
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAddNew)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "Ledger"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ledger"

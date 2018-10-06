@@ -615,6 +615,8 @@
             insertData()
             clearFields()
             PurchaseOrderRequest.loadPOR("")
+            PurchaseOrderRequest.loadPORSelection()
+            PurchaseOrderRequest.getYear()
         Else
 
         End If
@@ -680,4 +682,36 @@
         End With
         Return res
     End Function
+
+    Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
+        If selectedSupplier = 0 Then
+            MsgBox("Please select supplier!", MsgBoxStyle.Critical)
+            cbSupplier.Focus()
+            Exit Sub
+        End If
+        SupplierProductSelection.module_selection = 4
+        SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
+        SupplierProductSelection.txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
+        SupplierProductSelection.ShowDialog()
+    End Sub
+
+    Private Sub btnCreatePO_Click(sender As Object, e As EventArgs) Handles btnCreatePO.Click
+        If selectedID > 0 Then
+            PurchaseOrderForm.clearFields()
+            PurchaseOrderForm.initialize()
+            PurchaseOrderForm.createPO(selectedID)
+            PurchaseOrderForm.dgvProd.Visible = True
+            PurchaseOrderForm.ShowDialog()
+        End If
+
+    End Sub
+
+    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
+        SupplierForm.loadstatus()
+        SupplierForm.SelectedSupplier = 0
+        SupplierForm.clearFields()
+        SupplierForm.btnSave.Text = "Save"
+        SupplierForm.from_module = 4
+        SupplierForm.ShowDialog()
+    End Sub
 End Class

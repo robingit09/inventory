@@ -149,6 +149,24 @@
                             Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
                             PurchaseReturnForm.dgvProd.Rows.Add(row)
                         End If
+                        'from purchase order request form
+                    Case 4
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In PurchaseOrderRequestForm.dgvProd.Rows
+                            If PurchaseOrderRequestForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = PurchaseOrderRequestForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                            PurchaseOrderRequestForm.dgvProd.Rows.Add(row)
+                        End If
                 End Select
 
 

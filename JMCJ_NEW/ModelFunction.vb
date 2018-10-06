@@ -215,6 +215,21 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM purchase_orders_request"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table purchase_orders_request Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM por_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table por_products Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+
             .cmd.CommandText = "DELETE FROM purchase_return"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
@@ -253,7 +268,7 @@
             .cmd.CommandText = "DELETE FROM customer_orders"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
-            .cmd.CommandText = "Alter Table customer_orderss Alter Column ID Counter(1,1)"
+            .cmd.CommandText = "Alter Table customer_orders Alter Column ID Counter(1,1)"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 

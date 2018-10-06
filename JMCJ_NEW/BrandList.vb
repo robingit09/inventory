@@ -57,4 +57,22 @@
         loadBrand(query)
         btnSearch.Enabled = True
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If dgvBrand.SelectedRows.Count = 1 Then
+            Dim yesno As Integer = MsgBox("Are you sure you want to delete brand(" & dgvBrand.SelectedRows(0).Cells(1).Value & ") ? ", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+
+            If yesno = MsgBoxResult.Yes Then
+                Dim id As String = dgvBrand.SelectedRows(0).Cells(0).Value
+                Dim dbdelete As New DatabaseConnect()
+                With dbdelete
+                    .update_where("brand", id, "status", 0)
+                End With
+                loadBrand("")
+            End If
+
+        Else
+            MsgBox("Select a brand!", MsgBoxStyle.Critical)
+        End If
+    End Sub
 End Class

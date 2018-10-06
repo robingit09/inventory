@@ -52,6 +52,7 @@ Partial Class PurchaseReturnForm
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,7 +64,6 @@ Partial Class PurchaseReturnForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpField.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -368,6 +368,15 @@ Partial Class PurchaseReturnForm
         Me.dgvProd.Size = New System.Drawing.Size(1216, 229)
         Me.dgvProd.TabIndex = 64
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(13, 234)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 94
+        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'id
         '
         Me.id.HeaderText = "ID"
@@ -391,7 +400,7 @@ Partial Class PurchaseReturnForm
         Me.product.HeaderText = "Product Description"
         Me.product.Name = "product"
         Me.product.ReadOnly = True
-        Me.product.Width = 150
+        Me.product.Width = 250
         '
         'brand
         '
@@ -432,15 +441,6 @@ Partial Class PurchaseReturnForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
-        '
-        'btnSelectProduct
-        '
-        Me.btnSelectProduct.Location = New System.Drawing.Point(13, 234)
-        Me.btnSelectProduct.Name = "btnSelectProduct"
-        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
-        Me.btnSelectProduct.TabIndex = 94
-        Me.btnSelectProduct.Text = "Select Supplier Product"
-        Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'PurchaseReturnForm
         '
@@ -494,6 +494,9 @@ Partial Class PurchaseReturnForm
     Friend WithEvents cbReason As ComboBox
     Friend WithEvents btnSaveAndPrint As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtPRNo As TextBox
+    Friend WithEvents btnSelectProduct As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
@@ -505,7 +508,4 @@ Partial Class PurchaseReturnForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents Label4 As Label
-    Friend WithEvents txtPRNo As TextBox
-    Friend WithEvents btnSelectProduct As Button
 End Class

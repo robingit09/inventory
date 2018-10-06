@@ -15,6 +15,7 @@
         'LedgerForm.txtCounterNo.Text = ""
         'LedgerForm.cbDisable.Checked = False
         CustomerOrderForm.txtAmount.Text = "0.00"
+        CustomerOrderForm.txtTotalAmountPaid.Text = "0.00"
         CustomerOrderForm.cbPaymentType.SelectedIndex = 0
         CustomerOrderForm.selectedPaymentType = 0
         CustomerOrderForm.rPaidYes.Checked = False

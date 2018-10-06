@@ -41,7 +41,7 @@ Partial Class CustomerList
         Me.ContactPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CityTown = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Owner = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Owners = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OwnerAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -162,7 +162,7 @@ Partial Class CustomerList
         'dgvCustomer
         '
         Me.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owner, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus, Me.ledger_type})
+        Me.dgvCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Customer, Me.ContactPerson, Me.Address, Me.CityTown, Me.Owners, Me.OwnerAddress, Me.ContactNumber1, Me.ContactNumber2, Me.FaxTel, Me.TIN, Me.Email, Me.CompanyStatus, Me.ledger_type})
         Me.dgvCustomer.ContextMenuStrip = Me.VIew
         Me.dgvCustomer.Location = New System.Drawing.Point(12, 121)
         Me.dgvCustomer.Name = "dgvCustomer"
@@ -201,11 +201,11 @@ Partial Class CustomerList
         Me.CityTown.Name = "CityTown"
         Me.CityTown.ReadOnly = True
         '
-        'Owner
+        'Owners
         '
-        Me.Owner.HeaderText = "Owner"
-        Me.Owner.Name = "Owner"
-        Me.Owner.ReadOnly = True
+        Me.Owners.HeaderText = "Owner"
+        Me.Owners.Name = "Owners"
+        Me.Owners.ReadOnly = True
         '
         'OwnerAddress
         '
@@ -265,6 +265,8 @@ Partial Class CustomerList
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAddNew)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "CustomerList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Customer List"
@@ -295,7 +297,7 @@ Partial Class CustomerList
     Friend WithEvents ContactPerson As DataGridViewTextBoxColumn
     Friend WithEvents Address As DataGridViewTextBoxColumn
     Friend WithEvents CityTown As DataGridViewTextBoxColumn
-    Friend WithEvents Owner As DataGridViewTextBoxColumn
+    Friend WithEvents Owners As DataGridViewTextBoxColumn
     Friend WithEvents OwnerAddress As DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber1 As DataGridViewTextBoxColumn
     Friend WithEvents ContactNumber2 As DataGridViewTextBoxColumn

@@ -24,12 +24,12 @@ Partial Class BrandList
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvBrand = New System.Windows.Forms.DataGridView()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         CType(Me.dgvBrand, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +52,27 @@ Partial Class BrandList
         Me.dgvBrand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvBrand.Size = New System.Drawing.Size(310, 244)
         Me.dgvBrand.TabIndex = 0
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 5
+        '
+        'Brand
+        '
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Width = 130
+        '
+        'date_created
+        '
+        Me.date_created.HeaderText = "Date Created"
+        Me.date_created.Name = "date_created"
+        Me.date_created.ReadOnly = True
+        Me.date_created.Width = 130
         '
         'btnAdd
         '
@@ -83,27 +104,6 @@ Partial Class BrandList
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        Me.ID.Width = 5
-        '
-        'Brand
-        '
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Width = 130
-        '
-        'date_created
-        '
-        Me.date_created.HeaderText = "Date Created"
-        Me.date_created.Name = "date_created"
-        Me.date_created.ReadOnly = True
-        Me.date_created.Width = 130
-        '
         'txtSearch
         '
         Me.txtSearch.Location = New System.Drawing.Point(50, 124)
@@ -125,13 +125,15 @@ Partial Class BrandList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(451, 445)
+        Me.ClientSize = New System.Drawing.Size(407, 445)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.dgvBrand)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "BrandList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Brand List"

@@ -34,6 +34,7 @@
         cbTerms.Items.Add("60 Days")
         cbTerms.Items.Add("90 Days")
         cbTerms.Items.Add("120 Days")
+        cbTerms.Items.Add("150 Days")
         cbTerms.SelectedIndex = 0
     End Sub
 
@@ -85,9 +86,11 @@
             Dim value As String = DirectCast(cbCustomer.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedCustomer = key
             txtAddress.Text = New DatabaseConnect().get_by_id("company", selectedCustomer, "address")
+            txtAddress.Enabled = False
         Else
             selectedCustomer = 0
             txtAddress.Text = ""
+
         End If
     End Sub
 
@@ -279,7 +282,14 @@
 
         Dim validate As Boolean = False
         For Each item As DataGridViewRow In Me.dgvProd.Rows
-            Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim qty As Integer = 0
+
+            If IsNumeric(dgvProd.Rows(item.Index).Cells("quantity").Value) Then
+                qty = CInt(dgvProd.Rows(item.Index).Cells("quantity").Value)
+            Else
+                qty = 0
+            End If
+
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
             If qty <= 0 And prod <> "" Then
                 dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
@@ -342,6 +352,8 @@
                 term = 90
             Case "120 Days"
                 term = 120
+            Case "150 Days"
+                term = 150
             Case Else
                 term = 0
         End Select
@@ -804,14 +816,15 @@
                     txtInvoiceNo.Text = .dr("invoice_no")
                     txtAmount.Text = amount
                     txtTotalAmountPaid.Text = .dr("amount_paid")
+                    lblTotalAmount.Text = amount
                     Select Case payment_type
-                        Case "0"
+                        Case "1"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("Cash")
                             selectedPaymentType = 1
-                        Case "1"
+                        Case "2"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("C.O.D")
                             selectedPaymentType = 2
-                        Case "2"
+                        Case "3"
                             cbPaymentType.SelectedIndex = cbPaymentType.FindString("Credit")
                             selectedPaymentType = 3
                         Case Else
@@ -830,7 +843,12 @@
                             cbTerms.SelectedIndex = cbTerms.FindString("60 Days")
                         Case "90"
                             cbTerms.SelectedIndex = cbTerms.FindString("90 Days")
-                        Case "0"
+                        Case "120"
+                            cbTerms.SelectedIndex = cbTerms.FindString("120 Days")
+                        Case "150"
+                            cbTerms.SelectedIndex = cbTerms.FindString("150 Days")
+                        Case Else
+
                     End Select
                     txtDeliveredBy.Text = delivered_by
                     txtReceivedBy.Text = received_by
@@ -1234,6 +1252,7 @@
         CustomerProductSelection.module_selection = 1
         CustomerProductSelection.loadCustomerProducts(Me.selectedCustomer)
         CustomerProductSelection.txtCustomer.Text = New DatabaseConnect().get_by_id("company", Me.selectedCustomer, "company")
+        CustomerProductSelection.selectedCustomer = Me.selectedCustomer
         CustomerProductSelection.ShowDialog()
     End Sub
 

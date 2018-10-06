@@ -35,6 +35,10 @@ Partial Class ProductMasterForm
         Me.customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.prices_remove = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.dgvcosthistory = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvPriceHistory = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,19 +56,15 @@ Partial Class ProductMasterForm
         Me.txtPrice = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.dgvcosthistory = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvCPrices, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage3.SuspendLayout()
-        CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         CType(Me.dgvcosthistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -177,6 +177,40 @@ Partial Class ProductMasterForm
         Me.prices_remove.HeaderText = "Action"
         Me.prices_remove.Name = "prices_remove"
         Me.prices_remove.ReadOnly = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.dgvcosthistory)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 23)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(687, 187)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Cost History"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'dgvcosthistory
+        '
+        Me.dgvcosthistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvcosthistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
+        Me.dgvcosthistory.Location = New System.Drawing.Point(6, 39)
+        Me.dgvcosthistory.Name = "dgvcosthistory"
+        Me.dgvcosthistory.Size = New System.Drawing.Size(675, 142)
+        Me.dgvcosthistory.TabIndex = 3
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Unit Cost"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Width = 300
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Date Added"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Width = 200
         '
         'TabPage3
         '
@@ -335,40 +369,6 @@ Partial Class ProductMasterForm
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.dgvcosthistory)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 23)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(687, 187)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Cost History"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'dgvcosthistory
-        '
-        Me.dgvcosthistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvcosthistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
-        Me.dgvcosthistory.Location = New System.Drawing.Point(6, 39)
-        Me.dgvcosthistory.Name = "dgvcosthistory"
-        Me.dgvcosthistory.Size = New System.Drawing.Size(675, 142)
-        Me.dgvcosthistory.TabIndex = 3
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Unit Cost"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Width = 300
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Date Added"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        Me.DataGridViewTextBoxColumn4.Width = 200
-        '
         'ProductMasterForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -388,6 +388,8 @@ Partial Class ProductMasterForm
         Me.Controls.Add(Me.txtBarcode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "ProductMasterForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Product Master Form"
@@ -396,10 +398,10 @@ Partial Class ProductMasterForm
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgvCPrices, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage3.ResumeLayout(False)
-        CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         CType(Me.dgvcosthistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

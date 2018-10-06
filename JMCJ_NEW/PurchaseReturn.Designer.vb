@@ -224,6 +224,8 @@ Partial Class PurchaseReturn
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.dgvPReturn)
         Me.Controls.Add(Me.btnAddNew)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "PurchaseReturn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Return"

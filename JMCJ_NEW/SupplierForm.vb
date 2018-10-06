@@ -1,4 +1,6 @@
 ﻿Public Class SupplierForm
+
+    Public from_module As Integer = 0
     Public SelectedSupplier As Integer
     Private Sub SupplierForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadstatus()
@@ -36,7 +38,31 @@
 
             btnSave.Enabled = False
             saveData()
+
+            ' from PO form
+            If from_module = 2 Then
+                PurchaseOrderForm.loadSupplier()
+                PurchaseOrderForm.cbSupplier.SelectedIndex = PurchaseOrderForm.cbSupplier.FindString(txtSupplier.Text)
+                PurchaseOrderForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
+            End If
+
+            ' from PR form
+            If from_module = 3 Then
+                PurchaseReceiveForm.loadSupplier()
+                PurchaseReceiveForm.cbSupplier.SelectedIndex = PurchaseReceiveForm.cbSupplier.FindString(txtSupplier.Text)
+                PurchaseReceiveForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
+            End If
+
+            ' from PR form
+            If from_module = 4 Then
+                PurchaseOrderRequestForm.loadSupplier()
+                PurchaseOrderRequestForm.cbSupplier.SelectedIndex = PurchaseOrderRequestForm.cbSupplier.FindString(txtSupplier.Text)
+                PurchaseOrderRequestForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
+            End If
+
+            clearFields()
             btnSave.Enabled = True
+
         End If
 
         If btnSave.Text = "Update" Then
@@ -121,7 +147,7 @@
             .con.Close()
 
             MsgBox(txtSupplier.Text & " successfully saved.", MsgBoxStyle.Information)
-            clearFields()
+
             SupplierList.loadlist("")
             Me.Close()
 

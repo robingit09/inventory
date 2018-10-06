@@ -162,7 +162,7 @@ Partial Class Main_form
         '
         'PurchaseToolStripMenuItem
         '
-        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReceiveToolStripMenuItem1, Me.PurchaseOrderRequestToolStripMenuItem, Me.SupplierToolStripMenuItem1, Me.PurchaseReturnToolStripMenuItem})
+        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseOrderRequestToolStripMenuItem, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1, Me.PurchaseReturnToolStripMenuItem})
         Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
         Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
         Me.PurchaseToolStripMenuItem.Text = "Purchase"
@@ -307,7 +307,7 @@ Partial Class Main_form
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(142, 26)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'lblTest
@@ -334,6 +334,8 @@ Partial Class Main_form
         Me.Controls.Add(Me.lblTime)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.MenuStrip2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "Main_form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Main Form"

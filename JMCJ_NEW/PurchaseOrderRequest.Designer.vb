@@ -38,6 +38,12 @@ Partial Class PurchaseOrderRequest
         Me.ProcessedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.create_po = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbPORNo = New System.Windows.Forms.ComboBox()
+        Me.cbYear = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbMonth = New System.Windows.Forms.ComboBox()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -74,12 +80,18 @@ Partial Class PurchaseOrderRequest
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.cbYear)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.cbMonth)
+        Me.GroupBox2.Controls.Add(Me.cbPORNo)
+        Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.btnFilter)
         Me.GroupBox2.Controls.Add(Me.txtSupplier)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 73)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(929, 69)
+        Me.GroupBox2.Size = New System.Drawing.Size(1030, 69)
         Me.GroupBox2.TabIndex = 32
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Filter"
@@ -87,7 +99,7 @@ Partial Class PurchaseOrderRequest
         'btnFilter
         '
         Me.btnFilter.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(832, 22)
+        Me.btnFilter.Location = New System.Drawing.Point(941, 22)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(83, 29)
         Me.btnFilter.TabIndex = 6
@@ -96,7 +108,7 @@ Partial Class PurchaseOrderRequest
         '
         'txtSupplier
         '
-        Me.txtSupplier.Location = New System.Drawing.Point(67, 28)
+        Me.txtSupplier.Location = New System.Drawing.Point(328, 28)
         Me.txtSupplier.Name = "txtSupplier"
         Me.txtSupplier.Size = New System.Drawing.Size(212, 20)
         Me.txtSupplier.TabIndex = 26
@@ -104,7 +116,7 @@ Partial Class PurchaseOrderRequest
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(10, 31)
+        Me.Label9.Location = New System.Drawing.Point(277, 31)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(45, 13)
         Me.Label9.TabIndex = 27
@@ -114,9 +126,9 @@ Partial Class PurchaseOrderRequest
         '
         Me.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPO.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.recorded_date, Me.por_no, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.status, Me.create_po})
-        Me.dgvPO.Location = New System.Drawing.Point(20, 148)
+        Me.dgvPO.Location = New System.Drawing.Point(12, 148)
         Me.dgvPO.Name = "dgvPO"
-        Me.dgvPO.Size = New System.Drawing.Size(1022, 408)
+        Me.dgvPO.Size = New System.Drawing.Size(1030, 408)
         Me.dgvPO.TabIndex = 33
         '
         'id
@@ -170,6 +182,57 @@ Partial Class PurchaseOrderRequest
         Me.create_po.HeaderText = "Action"
         Me.create_po.Name = "create_po"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 31)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(70, 13)
+        Me.Label1.TabIndex = 28
+        Me.Label1.Text = "POR Number"
+        '
+        'cbPORNo
+        '
+        Me.cbPORNo.FormattingEnabled = True
+        Me.cbPORNo.Location = New System.Drawing.Point(82, 28)
+        Me.cbPORNo.Name = "cbPORNo"
+        Me.cbPORNo.Size = New System.Drawing.Size(189, 21)
+        Me.cbPORNo.TabIndex = 29
+        '
+        'cbYear
+        '
+        Me.cbYear.FormattingEnabled = True
+        Me.cbYear.Location = New System.Drawing.Point(781, 28)
+        Me.cbYear.Name = "cbYear"
+        Me.cbYear.Size = New System.Drawing.Size(143, 21)
+        Me.cbYear.TabIndex = 34
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(743, 31)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(32, 13)
+        Me.Label3.TabIndex = 35
+        Me.Label3.Text = "Year:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(561, 31)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(40, 13)
+        Me.Label2.TabIndex = 33
+        Me.Label2.Text = "Month:"
+        '
+        'cbMonth
+        '
+        Me.cbMonth.FormattingEnabled = True
+        Me.cbMonth.Location = New System.Drawing.Point(607, 28)
+        Me.cbMonth.Name = "cbMonth"
+        Me.cbMonth.Size = New System.Drawing.Size(121, 21)
+        Me.cbMonth.TabIndex = 32
+        '
         'PurchaseOrderRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -205,4 +268,10 @@ Partial Class PurchaseOrderRequest
     Friend WithEvents ProcessedBy As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
     Friend WithEvents create_po As DataGridViewButtonColumn
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cbPORNo As ComboBox
+    Friend WithEvents cbYear As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents cbMonth As ComboBox
 End Class

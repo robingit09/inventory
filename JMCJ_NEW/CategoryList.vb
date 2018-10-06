@@ -35,7 +35,7 @@
         If q = "" Then
             db.selectByQuery("Select distinct sub.id, c.name,sub.name,sub.created_at  from categories c right join categories sub on sub.parent_id = c.id order by sub.name")
         Else
-
+            db.selectByQuery(q)
         End If
         With db
             If .dr.HasRows Then
@@ -112,12 +112,10 @@
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
         If txtSearch.Text.Length > 0 Then
-            loadList(txtSearch.Text)
+
         End If
 
-        If txtSearch.Text.Length <= 0 Then
-            loadList("")
-        End If
+
     End Sub
 
     Private Sub lvCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -205,8 +203,9 @@
             MsgBox("Search field is required!", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
-        loadList("Select distinct sub.id, c.name,sub.name  from categories c right join categories sub on sub.parent_id = c.id where c.name like '%" & Trim(txtSearch.Text) & "%' or sub.name like '%" & Trim(txtSearch.Text) & "%' order by sub.name")
+        btnFilter.Enabled = False
+        loadList("Select distinct sub.id, c.name,sub.name,sub.created_at  from categories c right join categories sub on sub.parent_id = c.id where c.name like '%" & Trim(txtSearch.Text) & "%' or sub.name like '%" & Trim(txtSearch.Text) & "%' order by sub.name")
+        btnFilter.Enabled = True
     End Sub
 
     Private Sub btnLoadAll_Click(sender As Object, e As EventArgs) Handles btnLoadAll.Click

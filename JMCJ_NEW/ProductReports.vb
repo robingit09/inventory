@@ -449,4 +449,12 @@
             'populateUnit(SelectedProdID, selectedBrand, selectedColor)
         End If
     End Sub
+
+    Private Sub txtProductDesc_MouseMove(sender As Object, e As MouseEventArgs) Handles txtProductDesc.MouseMove
+        If txtProductDesc.TextLength > 0 Then
+            selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+        Else
+            selectedDesc = 0
+        End If
+    End Sub
 End Class

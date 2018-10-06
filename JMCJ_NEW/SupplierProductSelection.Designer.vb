@@ -114,7 +114,7 @@ Partial Class SupplierProductSelection
         Me.column_description.HeaderText = "Product Description"
         Me.column_description.Name = "column_description"
         Me.column_description.ReadOnly = True
-        Me.column_description.Width = 190
+        Me.column_description.Width = 250
         '
         'column_brand
         '

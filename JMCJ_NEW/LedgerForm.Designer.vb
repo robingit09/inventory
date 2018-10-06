@@ -493,6 +493,8 @@ Partial Class LedgerForm
         Me.Controls.Add(Me.cbCustomer)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.gpInvoiceList)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "LedgerForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ledger Form"

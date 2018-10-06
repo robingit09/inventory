@@ -226,6 +226,8 @@ Partial Class UpdatePriceForm
         Me.Controls.Add(Me.txtBarcode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCustomer)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "UpdatePriceForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Update Price"

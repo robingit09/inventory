@@ -317,9 +317,11 @@
     Private Sub loadTerms()
         cbTerms.Items.Clear()
         cbTerms.Items.Add("Select Terms")
-        cbTerms.Items.Add("15 Days")
         cbTerms.Items.Add("30 Days")
-        cbTerms.Items.Add("Immediate")
+        cbTerms.Items.Add("60 Days")
+        cbTerms.Items.Add("90 Days")
+        cbTerms.Items.Add("120 Days")
+        cbTerms.Items.Add("150 Days")
         cbTerms.SelectedIndex = 0
     End Sub
 
@@ -347,6 +349,10 @@
             insertData()
             clearFields()
             PurchaseReceive.loadPR("")
+            PurchaseReceive.loadPRSelection()
+            PurchaseReceive.loadDRSelection()
+            PurchaseReceive.getYear()
+
         End If
     End Sub
 
@@ -356,7 +362,9 @@
             cbSupplier.Focus()
             Return False
         End If
-        If cbTerms.SelectedIndex = 0 Then
+
+
+        If cbTerms.SelectedIndex = 0 And cbPaymentType.Text = "Credit" Then
             MsgBox("Term field is required!", MsgBoxStyle.Critical)
             cbTerms.Focus()
             Return False
@@ -487,12 +495,16 @@
     Private Sub cbTerms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTerms.SelectedIndexChanged
         If cbTerms.SelectedIndex > 0 Then
             Select Case cbTerms.Text
-                Case "15 Days"
-                    selectedTerm = 15
                 Case "30 Days"
                     selectedTerm = 30
-                Case "Immediate"
-                    selectedTerm = 0
+                Case "60 Days"
+                    selectedTerm = 60
+                Case "90 Days"
+                    selectedTerm = 90
+                Case "120 Days"
+                    selectedTerm = 120
+                Case "150 Days"
+                    selectedTerm = 150
             End Select
         Else
             selectedTerm = 0
@@ -504,6 +516,21 @@
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
             Dim value As String = DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Value
             selectedPaymentType = key
+            Select Case selectedPaymentType
+                Case 1
+                    ' cash
+                    cbTerms.SelectedIndex = 0
+                    selectedTerm = 0
+                    cbTerms.Enabled = False
+                Case 2
+                    ' c.o.d
+                    cbTerms.SelectedIndex = 0
+                    selectedTerm = 0
+                    cbTerms.Enabled = False
+                Case 3
+                    ' credit
+                    cbTerms.Enabled = True
+            End Select
         Else
             selectedPaymentType = 0
         End If
@@ -969,5 +996,14 @@
         SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
         SupplierProductSelection.txtSupplier.Text = New DatabaseConnect().get_by_id("suppliers", Me.selectedSupplier, "supplier_name")
         SupplierProductSelection.ShowDialog()
+    End Sub
+
+    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
+        SupplierForm.loadstatus()
+        SupplierForm.SelectedSupplier = 0
+        SupplierForm.clearFields()
+        SupplierForm.btnSave.Text = "Save"
+        SupplierForm.from_module = 3
+        SupplierForm.ShowDialog()
     End Sub
 End Class

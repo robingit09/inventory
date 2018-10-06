@@ -45,6 +45,9 @@ Partial Class PurchaseOrderRequestForm
         Me.btnAddToCart = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCreatePO = New System.Windows.Forms.Button()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -56,8 +59,7 @@ Partial Class PurchaseOrderRequestForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCreatePO = New System.Windows.Forms.Button()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -69,7 +71,7 @@ Partial Class PurchaseOrderRequestForm
         Me.cbSupplier.FormattingEnabled = True
         Me.cbSupplier.Location = New System.Drawing.Point(95, 19)
         Me.cbSupplier.Name = "cbSupplier"
-        Me.cbSupplier.Size = New System.Drawing.Size(288, 21)
+        Me.cbSupplier.Size = New System.Drawing.Size(228, 21)
         Me.cbSupplier.TabIndex = 7
         '
         'Label2
@@ -83,6 +85,7 @@ Partial Class PurchaseOrderRequestForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnAddSupplier)
         Me.GroupBox1.Controls.Add(Me.dtp_por_date)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtAmount)
@@ -99,15 +102,15 @@ Partial Class PurchaseOrderRequestForm
         '
         'dtp_por_date
         '
-        Me.dtp_por_date.Location = New System.Drawing.Point(687, 20)
+        Me.dtp_por_date.Location = New System.Drawing.Point(724, 20)
         Me.dtp_por_date.Name = "dtp_por_date"
-        Me.dtp_por_date.Size = New System.Drawing.Size(201, 20)
+        Me.dtp_por_date.Size = New System.Drawing.Size(164, 20)
         Me.dtp_por_date.TabIndex = 69
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(601, 23)
+        Me.Label5.Location = New System.Drawing.Point(637, 22)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(80, 13)
         Me.Label5.TabIndex = 68
@@ -135,7 +138,7 @@ Partial Class PurchaseOrderRequestForm
         '
         'txtPORNo
         '
-        Me.txtPORNo.Location = New System.Drawing.Point(447, 19)
+        Me.txtPORNo.Location = New System.Drawing.Point(486, 19)
         Me.txtPORNo.Name = "txtPORNo"
         Me.txtPORNo.ReadOnly = True
         Me.txtPORNo.Size = New System.Drawing.Size(148, 20)
@@ -144,7 +147,7 @@ Partial Class PurchaseOrderRequestForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(394, 22)
+        Me.Label1.Location = New System.Drawing.Point(433, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(47, 13)
         Me.Label1.TabIndex = 9
@@ -286,10 +289,39 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(12, 160)
+        Me.dgvProd.Location = New System.Drawing.Point(12, 197)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1264, 402)
+        Me.dgvProd.Size = New System.Drawing.Size(1264, 365)
         Me.dgvProd.TabIndex = 65
+        '
+        'btnSave
+        '
+        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(1163, 12)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(113, 26)
+        Me.btnSave.TabIndex = 73
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnCreatePO
+        '
+        Me.btnCreatePO.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreatePO.Location = New System.Drawing.Point(1163, 55)
+        Me.btnCreatePO.Name = "btnCreatePO"
+        Me.btnCreatePO.Size = New System.Drawing.Size(113, 26)
+        Me.btnCreatePO.TabIndex = 74
+        Me.btnCreatePO.Text = "Create PO"
+        Me.btnCreatePO.UseVisualStyleBackColor = True
+        '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 160)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 75
+        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -314,7 +346,7 @@ Partial Class PurchaseOrderRequestForm
         Me.product.HeaderText = "Product Description"
         Me.product.Name = "product"
         Me.product.ReadOnly = True
-        Me.product.Width = 150
+        Me.product.Width = 250
         '
         'brand
         '
@@ -356,31 +388,21 @@ Partial Class PurchaseOrderRequestForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
-        'btnSave
+        'btnAddSupplier
         '
-        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(1163, 12)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(113, 26)
-        Me.btnSave.TabIndex = 73
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCreatePO
-        '
-        Me.btnCreatePO.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreatePO.Location = New System.Drawing.Point(1163, 55)
-        Me.btnCreatePO.Name = "btnCreatePO"
-        Me.btnCreatePO.Size = New System.Drawing.Size(113, 26)
-        Me.btnCreatePO.TabIndex = 74
-        Me.btnCreatePO.Text = "Create PO"
-        Me.btnCreatePO.UseVisualStyleBackColor = True
+        Me.btnAddSupplier.Location = New System.Drawing.Point(329, 17)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
+        Me.btnAddSupplier.TabIndex = 71
+        Me.btnAddSupplier.Text = "Add Supplier"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'PurchaseOrderRequestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1295, 579)
+        Me.Controls.Add(Me.btnSelectProduct)
         Me.Controls.Add(Me.btnCreatePO)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.dgvProd)
@@ -420,6 +442,13 @@ Partial Class PurchaseOrderRequestForm
     Friend WithEvents btnAddToCart As Button
     Friend WithEvents Label17 As Label
     Friend WithEvents dgvProd As DataGridView
+    Friend WithEvents txtAmount As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents btnSave As Button
+    Friend WithEvents dtp_por_date As DateTimePicker
+    Friend WithEvents Label5 As Label
+    Friend WithEvents btnCreatePO As Button
+    Friend WithEvents btnSelectProduct As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
@@ -431,10 +460,5 @@ Partial Class PurchaseOrderRequestForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents txtAmount As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents btnSave As Button
-    Friend WithEvents dtp_por_date As DateTimePicker
-    Friend WithEvents Label5 As Label
-    Friend WithEvents btnCreatePO As Button
+    Friend WithEvents btnAddSupplier As Button
 End Class

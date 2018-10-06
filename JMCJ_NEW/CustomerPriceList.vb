@@ -43,6 +43,7 @@
         Else
             selectedCustomer = 0
             AddProductForm.selectedCustomer = 0
+            cbCustomer.Focus()
             MsgBox("Please select customer", MsgBoxStyle.Critical)
         End If
     End Sub

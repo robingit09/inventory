@@ -22,7 +22,7 @@ Partial Class CustomerOrderForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gpFields = New System.Windows.Forms.GroupBox()
@@ -326,7 +326,7 @@ Partial Class CustomerOrderForm
         '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(507, 128)
+        Me.txtRemarks.Location = New System.Drawing.Point(507, 154)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
         Me.txtRemarks.Size = New System.Drawing.Size(256, 64)
@@ -344,7 +344,7 @@ Partial Class CustomerOrderForm
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(426, 201)
+        Me.Label11.Location = New System.Drawing.Point(426, 127)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(36, 13)
         Me.Label11.TabIndex = 46
@@ -361,7 +361,7 @@ Partial Class CustomerOrderForm
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(426, 131)
+        Me.Label12.Location = New System.Drawing.Point(426, 157)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(49, 13)
         Me.Label12.TabIndex = 44
@@ -403,7 +403,7 @@ Partial Class CustomerOrderForm
         'cbTerms
         '
         Me.cbTerms.FormattingEnabled = True
-        Me.cbTerms.Location = New System.Drawing.Point(507, 198)
+        Me.cbTerms.Location = New System.Drawing.Point(507, 124)
         Me.cbTerms.Name = "cbTerms"
         Me.cbTerms.Size = New System.Drawing.Size(256, 21)
         Me.cbTerms.TabIndex = 43
@@ -578,8 +578,8 @@ Partial Class CustomerOrderForm
         '
         'id
         '
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True

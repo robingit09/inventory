@@ -305,7 +305,7 @@
 
             database.cmd.CommandType = CommandType.Text
             database.cmd.CommandText = "UPDATE company SET [company]='" & txtCompany.Text & "',[contact_person]='" & txtContactPerson.Text & "',[address]='" & txtAddress.Text & "',[owner_name]='" & txtOwner.Text & "',[owner_address]='" & txtOwnerAddress.Text & "',[contact_number1]='" & txtContact1.Text & "', " &
-                                        "[contact_number2]='" & txtContact2.Text & "',[fax_tel]='" & txtFax.Text & "', [tin]='" & txtTin.Text & "',[email]='" & txtEmail.Text & "',[city]='" & txtCity.Text & "',[company_status]=" & selectedCompanyStatus & " WHERE [ID] = " & Me.selectedCustomer
+                                        "[contact_number2]='" & txtContact2.Text & "',[fax_tel]='" & txtFax.Text & "', [tin]='" & txtTin.Text & "',[email]='" & txtEmail.Text & "',[city]='" & txtCity.Text & "',[company_status]=" & selectedCompanyStatus & ",[ledger_type] = " & selectedLedgerType & "  WHERE [ID] = " & Me.selectedCustomer
             database.cmd.Connection = database.con
             database.cmd.ExecuteNonQuery()
             database.cmd.Dispose()
@@ -336,6 +336,10 @@
 
         If cbCompanyStatus.Items.Count > 0 Then
             cbCompanyStatus.SelectedIndex = 0
+        End If
+
+        If cbLedgerType.Items.Count > 0 Then
+            cbLedgerType.SelectedIndex = 0
         End If
 
     End Sub
@@ -596,7 +600,7 @@
     End Sub
 
     Private Sub cbLedgerType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLedgerType.SelectedIndexChanged
-        If cbLedgerType.SelectedIndex > -1 Then
+        If cbLedgerType.SelectedIndex > 0 Then
 
             Dim key As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbLedgerType.SelectedItem, KeyValuePair(Of String, String)).Value

@@ -28,12 +28,12 @@ Partial Class CategoryList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.dgvCat = New System.Windows.Forms.DataGridView()
-        Me.btnFilter = New System.Windows.Forms.Button()
-        Me.btnLoadAll = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.btnLoadAll = New System.Windows.Forms.Button()
         CType(Me.dgvCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -62,7 +62,7 @@ Partial Class CategoryList
         'txtSearch
         '
         Me.txtSearch.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(126, 99)
+        Me.txtSearch.Location = New System.Drawing.Point(112, 99)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(5)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(186, 29)
@@ -72,7 +72,7 @@ Partial Class CategoryList
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(49, 102)
+        Me.Label1.Location = New System.Drawing.Point(35, 102)
         Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 22)
@@ -82,7 +82,7 @@ Partial Class CategoryList
         'btnAddNew
         '
         Me.btnAddNew.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNew.Location = New System.Drawing.Point(53, 30)
+        Me.btnAddNew.Location = New System.Drawing.Point(39, 31)
         Me.btnAddNew.Margin = New System.Windows.Forms.Padding(5)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(110, 42)
@@ -94,34 +94,12 @@ Partial Class CategoryList
         '
         Me.dgvCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Category, Me.Subcategory, Me.date_created})
-        Me.dgvCat.Location = New System.Drawing.Point(53, 156)
+        Me.dgvCat.Location = New System.Drawing.Point(39, 156)
         Me.dgvCat.Margin = New System.Windows.Forms.Padding(5)
         Me.dgvCat.Name = "dgvCat"
         Me.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCat.Size = New System.Drawing.Size(654, 400)
+        Me.dgvCat.Size = New System.Drawing.Size(654, 534)
         Me.dgvCat.TabIndex = 24
-        '
-        'btnFilter
-        '
-        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(322, 95)
-        Me.btnFilter.Margin = New System.Windows.Forms.Padding(5)
-        Me.btnFilter.Name = "btnFilter"
-        Me.btnFilter.Size = New System.Drawing.Size(79, 36)
-        Me.btnFilter.TabIndex = 25
-        Me.btnFilter.Text = "Filter"
-        Me.btnFilter.UseVisualStyleBackColor = True
-        '
-        'btnLoadAll
-        '
-        Me.btnLoadAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoadAll.Location = New System.Drawing.Point(411, 95)
-        Me.btnLoadAll.Margin = New System.Windows.Forms.Padding(5)
-        Me.btnLoadAll.Name = "btnLoadAll"
-        Me.btnLoadAll.Size = New System.Drawing.Size(85, 36)
-        Me.btnLoadAll.TabIndex = 26
-        Me.btnLoadAll.Text = "All"
-        Me.btnLoadAll.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -151,6 +129,28 @@ Partial Class CategoryList
         Me.date_created.ReadOnly = True
         Me.date_created.Width = 200
         '
+        'btnFilter
+        '
+        Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFilter.Location = New System.Drawing.Point(308, 95)
+        Me.btnFilter.Margin = New System.Windows.Forms.Padding(5)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(79, 36)
+        Me.btnFilter.TabIndex = 25
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
+        '
+        'btnLoadAll
+        '
+        Me.btnLoadAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoadAll.Location = New System.Drawing.Point(608, 95)
+        Me.btnLoadAll.Margin = New System.Windows.Forms.Padding(5)
+        Me.btnLoadAll.Name = "btnLoadAll"
+        Me.btnLoadAll.Size = New System.Drawing.Size(85, 36)
+        Me.btnLoadAll.TabIndex = 26
+        Me.btnLoadAll.Text = "All"
+        Me.btnLoadAll.UseVisualStyleBackColor = True
+        '
         'CategoryList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 20.0!)
@@ -166,7 +166,9 @@ Partial Class CategoryList
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnAddNew)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Margin = New System.Windows.Forms.Padding(5)
+        Me.MaximizeBox = False
         Me.Name = "CategoryList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Category Management"

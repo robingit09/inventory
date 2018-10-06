@@ -17,7 +17,7 @@
         populateUnit(0, 0)
         populateColor(0, 0, 0)
 
-        lblTotalAmount.Text = "₱ 0.00"
+        'lblTotalAmount.Text = "₱ 0.00"
     End Sub
 
     Public Sub initialize()
@@ -306,6 +306,7 @@
         cbTerms.Items.Add("60 Days")
         cbTerms.Items.Add("90 Days")
         cbTerms.Items.Add("120 Days")
+        cbTerms.Items.Add("150 Days")
         cbTerms.SelectedIndex = 0
 
     End Sub
@@ -367,6 +368,8 @@
                     selectedTerm = 90
                 Case "120 Days"
                     selectedTerm = 120
+                Case "150 Days"
+                    selectedTerm = 150
                 Case Else
                     selectedTerm = 0
             End Select
@@ -502,6 +505,8 @@
             insertData()
             clearFields()
             POList.loadPO("")
+            POList.loadPOSelection()
+            POList.getYear()
         Else
 
         End If
@@ -521,7 +526,7 @@
             Return False
         End If
 
-        If cbPaymentType.Text = "Credit" And cbTerms.SelectedIndex = 0 Then
+        If cbTerms.SelectedIndex = 0 And cbPaymentType.Text = "Credit" Then
             MsgBox("Term field is required!", MsgBoxStyle.Critical)
             cbTerms.Focus()
             Return False
@@ -888,6 +893,7 @@
                     txtPONO.Text = generatePONo()
                     txtAmount.Text = Val(.dr("total_amount")).ToString("N2")
                     lblTotalAmount.Text = "₱ " & Val(.dr("total_amount")).ToString("N2")
+                    'lblTotalAmount.Text = "aa"
                 End If
             End If
             .dr.Close()
@@ -981,5 +987,14 @@
             POList.loadPO("")
         Else
         End If
+    End Sub
+
+    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
+        SupplierForm.loadstatus()
+        SupplierForm.SelectedSupplier = 0
+        SupplierForm.clearFields()
+        SupplierForm.btnSave.Text = "Save"
+        SupplierForm.from_module = 2
+        SupplierForm.ShowDialog()
     End Sub
 End Class

@@ -81,6 +81,8 @@ Partial Class AddCostForm
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cbSupplier)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "AddCostForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add Cost"

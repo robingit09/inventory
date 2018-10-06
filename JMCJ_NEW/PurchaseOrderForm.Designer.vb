@@ -40,17 +40,6 @@ Partial Class PurchaseOrderForm
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
         Me.gpEnterProduct = New System.Windows.Forms.GroupBox()
@@ -72,6 +61,18 @@ Partial Class PurchaseOrderForm
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnAddProduct = New System.Windows.Forms.Button()
         Me.btnSelectProduct = New System.Windows.Forms.Button()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpEnterProduct.SuspendLayout()
@@ -128,7 +129,7 @@ Partial Class PurchaseOrderForm
         Me.cbSupplier.FormattingEnabled = True
         Me.cbSupplier.Location = New System.Drawing.Point(134, 23)
         Me.cbSupplier.Name = "cbSupplier"
-        Me.cbSupplier.Size = New System.Drawing.Size(325, 21)
+        Me.cbSupplier.Size = New System.Drawing.Size(286, 21)
         Me.cbSupplier.TabIndex = 5
         '
         'txtPONO
@@ -136,7 +137,7 @@ Partial Class PurchaseOrderForm
         Me.txtPONO.Location = New System.Drawing.Point(134, 55)
         Me.txtPONO.Name = "txtPONO"
         Me.txtPONO.ReadOnly = True
-        Me.txtPONO.Size = New System.Drawing.Size(325, 20)
+        Me.txtPONO.Size = New System.Drawing.Size(390, 20)
         Me.txtPONO.TabIndex = 6
         '
         'cbTerms
@@ -144,7 +145,7 @@ Partial Class PurchaseOrderForm
         Me.cbTerms.FormattingEnabled = True
         Me.cbTerms.Location = New System.Drawing.Point(134, 109)
         Me.cbTerms.Name = "cbTerms"
-        Me.cbTerms.Size = New System.Drawing.Size(325, 21)
+        Me.cbTerms.Size = New System.Drawing.Size(390, 21)
         Me.cbTerms.TabIndex = 7
         '
         'dtp_po_date
@@ -178,9 +179,9 @@ Partial Class PurchaseOrderForm
         Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
         Me.lblTotalAmount.Location = New System.Drawing.Point(1116, 599)
         Me.lblTotalAmount.Name = "lblTotalAmount"
-        Me.lblTotalAmount.Size = New System.Drawing.Size(55, 30)
+        Me.lblTotalAmount.Size = New System.Drawing.Size(74, 30)
         Me.lblTotalAmount.TabIndex = 17
-        Me.lblTotalAmount.Text = "0.00"
+        Me.lblTotalAmount.Text = "₱ 0.00"
         Me.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnSave
@@ -237,71 +238,6 @@ Partial Class PurchaseOrderForm
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1315, 326)
         Me.dgvProd.TabIndex = 60
-        '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.Name = "quantity"
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 150
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Unit Cost"
-        Me.cost.Name = "cost"
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
         '
         'Label17
         '
@@ -430,7 +366,7 @@ Partial Class PurchaseOrderForm
         Me.cbPaymentType.FormattingEnabled = True
         Me.cbPaymentType.Location = New System.Drawing.Point(134, 82)
         Me.cbPaymentType.Name = "cbPaymentType"
-        Me.cbPaymentType.Size = New System.Drawing.Size(325, 21)
+        Me.cbPaymentType.Size = New System.Drawing.Size(390, 21)
         Me.cbPaymentType.TabIndex = 65
         '
         'Label7
@@ -444,6 +380,7 @@ Partial Class PurchaseOrderForm
         '
         'gpFields
         '
+        Me.gpFields.Controls.Add(Me.btnAddSupplier)
         Me.gpFields.Controls.Add(Me.txtDeliverBy)
         Me.gpFields.Controls.Add(Me.txtDeliverTo)
         Me.gpFields.Controls.Add(Me.Label10)
@@ -522,6 +459,80 @@ Partial Class PurchaseOrderForm
         Me.btnSelectProduct.Text = "Select Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 250
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
+        'btnAddSupplier
+        '
+        Me.btnAddSupplier.Location = New System.Drawing.Point(426, 23)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
+        Me.btnAddSupplier.TabIndex = 70
+        Me.btnAddSupplier.Text = "Add Supplier"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
+        '
         'PurchaseOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -535,6 +546,8 @@ Partial Class PurchaseOrderForm
         Me.Controls.Add(Me.lblTotalAmount)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.gpFields)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "PurchaseOrderForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " Purchase Order Form (Add New)"
@@ -576,17 +589,6 @@ Partial Class PurchaseOrderForm
     Friend WithEvents txtAmount As TextBox
     Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents id As DataGridViewTextBoxColumn
-    Friend WithEvents Barcode As DataGridViewTextBoxColumn
-    Friend WithEvents quantity As DataGridViewTextBoxColumn
-    Friend WithEvents product As DataGridViewTextBoxColumn
-    Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
-    Friend WithEvents Color As DataGridViewTextBoxColumn
-    Friend WithEvents cost As DataGridViewTextBoxColumn
-    Friend WithEvents amount As DataGridViewTextBoxColumn
-    Friend WithEvents stock As DataGridViewTextBoxColumn
-    Friend WithEvents action As DataGridViewButtonColumn
     Friend WithEvents gpFields As GroupBox
     Friend WithEvents txtDeliverBy As TextBox
     Friend WithEvents txtDeliverTo As TextBox
@@ -600,4 +602,16 @@ Partial Class PurchaseOrderForm
     Friend WithEvents cbBrand As ComboBox
     Friend WithEvents btnAddProduct As Button
     Friend WithEvents btnSelectProduct As Button
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents Barcode As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents product As DataGridViewTextBoxColumn
+    Friend WithEvents brand As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents Color As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
+    Friend WithEvents amount As DataGridViewTextBoxColumn
+    Friend WithEvents stock As DataGridViewTextBoxColumn
+    Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents btnAddSupplier As Button
 End Class

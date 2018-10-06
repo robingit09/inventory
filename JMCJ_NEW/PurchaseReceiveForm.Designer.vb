@@ -55,6 +55,13 @@ Partial Class PurchaseReceiveForm
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.cbSupplier = New System.Windows.Forms.ComboBox()
+        Me.txtDrNo = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -66,13 +73,7 @@ Partial Class PurchaseReceiveForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.gpFields = New System.Windows.Forms.GroupBox()
-        Me.cbSupplier = New System.Windows.Forms.ComboBox()
-        Me.txtDrNo = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.lblTotalAmount = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,7 +83,7 @@ Partial Class PurchaseReceiveForm
         'cbPaymentType
         '
         Me.cbPaymentType.FormattingEnabled = True
-        Me.cbPaymentType.Location = New System.Drawing.Point(491, 22)
+        Me.cbPaymentType.Location = New System.Drawing.Point(573, 22)
         Me.cbPaymentType.Name = "cbPaymentType"
         Me.cbPaymentType.Size = New System.Drawing.Size(209, 21)
         Me.cbPaymentType.TabIndex = 73
@@ -90,7 +91,7 @@ Partial Class PurchaseReceiveForm
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(374, 25)
+        Me.Label7.Location = New System.Drawing.Point(456, 25)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(111, 13)
         Me.Label7.TabIndex = 72
@@ -99,7 +100,7 @@ Partial Class PurchaseReceiveForm
         'cbTerms
         '
         Me.cbTerms.FormattingEnabled = True
-        Me.cbTerms.Location = New System.Drawing.Point(491, 51)
+        Me.cbTerms.Location = New System.Drawing.Point(573, 51)
         Me.cbTerms.Name = "cbTerms"
         Me.cbTerms.Size = New System.Drawing.Size(209, 21)
         Me.cbTerms.TabIndex = 71
@@ -109,7 +110,7 @@ Partial Class PurchaseReceiveForm
         Me.txtPRNO.Location = New System.Drawing.Point(89, 77)
         Me.txtPRNO.Name = "txtPRNO"
         Me.txtPRNO.ReadOnly = True
-        Me.txtPRNO.Size = New System.Drawing.Size(249, 20)
+        Me.txtPRNO.Size = New System.Drawing.Size(348, 20)
         Me.txtPRNO.TabIndex = 70
         '
         'cbPO
@@ -117,13 +118,13 @@ Partial Class PurchaseReceiveForm
         Me.cbPO.FormattingEnabled = True
         Me.cbPO.Location = New System.Drawing.Point(89, 22)
         Me.cbPO.Name = "cbPO"
-        Me.cbPO.Size = New System.Drawing.Size(249, 21)
+        Me.cbPO.Size = New System.Drawing.Size(348, 21)
         Me.cbPO.TabIndex = 69
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(374, 54)
+        Me.Label3.Location = New System.Drawing.Point(456, 54)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(72, 13)
         Me.Label3.TabIndex = 68
@@ -382,73 +383,9 @@ Partial Class PurchaseReceiveForm
         Me.dgvProd.Size = New System.Drawing.Size(1296, 288)
         Me.dgvProd.TabIndex = 89
         '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.Name = "quantity"
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 150
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Unit Cost"
-        Me.cost.Name = "cost"
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
-        '
         'gpFields
         '
+        Me.gpFields.Controls.Add(Me.btnAddSupplier)
         Me.gpFields.Controls.Add(Me.cbSupplier)
         Me.gpFields.Controls.Add(Me.txtDrNo)
         Me.gpFields.Controls.Add(Me.Label11)
@@ -483,14 +420,14 @@ Partial Class PurchaseReceiveForm
         Me.cbSupplier.FormattingEnabled = True
         Me.cbSupplier.Location = New System.Drawing.Point(89, 49)
         Me.cbSupplier.Name = "cbSupplier"
-        Me.cbSupplier.Size = New System.Drawing.Size(249, 21)
+        Me.cbSupplier.Size = New System.Drawing.Size(244, 21)
         Me.cbSupplier.TabIndex = 89
         '
         'txtDrNo
         '
         Me.txtDrNo.Location = New System.Drawing.Point(89, 108)
         Me.txtDrNo.Name = "txtDrNo"
-        Me.txtDrNo.Size = New System.Drawing.Size(249, 20)
+        Me.txtDrNo.Size = New System.Drawing.Size(348, 20)
         Me.txtDrNo.TabIndex = 88
         '
         'Label11
@@ -533,6 +470,80 @@ Partial Class PurchaseReceiveForm
         Me.btnSelectProduct.Text = "Select Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 250
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
+        'btnAddSupplier
+        '
+        Me.btnAddSupplier.Location = New System.Drawing.Point(339, 47)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
+        Me.btnAddSupplier.TabIndex = 90
+        Me.btnAddSupplier.Text = "Add Supplier"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
+        '
         'PurchaseReceiveForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -545,6 +556,8 @@ Partial Class PurchaseReceiveForm
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.gpEnterProduct)
         Me.Controls.Add(Me.gpFields)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "PurchaseReceiveForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Receive Form (Add New)"
@@ -585,17 +598,6 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents gpEnterProduct As GroupBox
     Friend WithEvents btnAddToCart As Button
     Friend WithEvents dgvProd As DataGridView
-    Friend WithEvents id As DataGridViewTextBoxColumn
-    Friend WithEvents Barcode As DataGridViewTextBoxColumn
-    Friend WithEvents quantity As DataGridViewTextBoxColumn
-    Friend WithEvents product As DataGridViewTextBoxColumn
-    Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
-    Friend WithEvents Color As DataGridViewTextBoxColumn
-    Friend WithEvents cost As DataGridViewTextBoxColumn
-    Friend WithEvents amount As DataGridViewTextBoxColumn
-    Friend WithEvents stock As DataGridViewTextBoxColumn
-    Friend WithEvents action As DataGridViewButtonColumn
     Friend WithEvents gpFields As GroupBox
     Friend WithEvents lblTotalAmount As Label
     Friend WithEvents Label10 As Label
@@ -611,4 +613,16 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents Label16 As Label
     Friend WithEvents cbSupplier As ComboBox
     Friend WithEvents btnSelectProduct As Button
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents Barcode As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents product As DataGridViewTextBoxColumn
+    Friend WithEvents brand As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents Color As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
+    Friend WithEvents amount As DataGridViewTextBoxColumn
+    Friend WithEvents stock As DataGridViewTextBoxColumn
+    Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents btnAddSupplier As Button
 End Class

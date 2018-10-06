@@ -22,8 +22,8 @@ Partial Class UnitList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -31,17 +31,17 @@ Partial Class UnitList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.dgvUnit = New System.Windows.Forms.DataGridView()
-        Me.btnAll = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAll = New System.Windows.Forms.Button()
         CType(Me.dgvUnit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnAddNew
         '
         Me.btnAddNew.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNew.Location = New System.Drawing.Point(71, 27)
+        Me.btnAddNew.Location = New System.Drawing.Point(28, 27)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 32)
         Me.btnAddNew.TabIndex = 1
@@ -51,7 +51,7 @@ Partial Class UnitList
         'btnUpdate
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(165, 27)
+        Me.btnUpdate.Location = New System.Drawing.Point(132, 27)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(91, 32)
         Me.btnUpdate.TabIndex = 2
@@ -61,7 +61,7 @@ Partial Class UnitList
         'btnDelete
         '
         Me.btnDelete.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Location = New System.Drawing.Point(278, 27)
+        Me.btnDelete.Location = New System.Drawing.Point(248, 27)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 32)
         Me.btnDelete.TabIndex = 3
@@ -70,16 +70,16 @@ Partial Class UnitList
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(132, 84)
+        Me.txtSearch.Location = New System.Drawing.Point(97, 82)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(144, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(215, 20)
         Me.txtSearch.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(64, 84)
+        Me.Label1.Location = New System.Drawing.Point(24, 82)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 22)
         Me.Label1.TabIndex = 5
@@ -88,7 +88,7 @@ Partial Class UnitList
         'btnFilter
         '
         Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(282, 76)
+        Me.btnFilter.Location = New System.Drawing.Point(318, 76)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(75, 32)
         Me.btnFilter.TabIndex = 6
@@ -97,39 +97,29 @@ Partial Class UnitList
         '
         'dgvUnit
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvUnit.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvUnit.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUnit.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Unit, Me.date_created})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvUnit.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvUnit.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvUnit.Location = New System.Drawing.Point(28, 133)
         Me.dgvUnit.Name = "dgvUnit"
         Me.dgvUnit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvUnit.Size = New System.Drawing.Size(446, 353)
         Me.dgvUnit.TabIndex = 7
-        '
-        'btnAll
-        '
-        Me.btnAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAll.Location = New System.Drawing.Point(363, 76)
-        Me.btnAll.Name = "btnAll"
-        Me.btnAll.Size = New System.Drawing.Size(75, 32)
-        Me.btnAll.TabIndex = 8
-        Me.btnAll.Text = "All"
-        Me.btnAll.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -152,6 +142,16 @@ Partial Class UnitList
         Me.date_created.ReadOnly = True
         Me.date_created.Width = 200
         '
+        'btnAll
+        '
+        Me.btnAll.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAll.Location = New System.Drawing.Point(399, 76)
+        Me.btnAll.Name = "btnAll"
+        Me.btnAll.Size = New System.Drawing.Size(75, 32)
+        Me.btnAll.TabIndex = 8
+        Me.btnAll.Text = "All"
+        Me.btnAll.UseVisualStyleBackColor = True
+        '
         'UnitList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -167,6 +167,8 @@ Partial Class UnitList
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAddNew)
         Me.ForeColor = System.Drawing.Color.Black
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "UnitList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Unit List"

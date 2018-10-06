@@ -1,4 +1,7 @@
 ﻿Public Class PurchaseReceive
+    Public selectedSupplier As Integer = 0
+    Public selectedPR As Integer = 0
+    Public selectedDR As Integer = 0
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         btnAddNew.Enabled = False
         PurchaseReceiveForm.clearFields()
@@ -17,7 +20,11 @@
         dgvPR.Rows.Clear()
         Dim dbPO As New DatabaseConnect
         With dbPO
-            .selectByQuery("Select * from purchase_receive order by pr_date desc")
+            If Trim(query) = "" Then
+                .selectByQuery("Select * from purchase_receive order by pr_date desc")
+            Else
+                .selectByQuery(query)
+            End If
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
@@ -57,6 +64,10 @@
     End Sub
 
     Private Sub PurchaseReceive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadPRSelection()
+        loadDRSelection()
+        getMonth()
+        getYear()
         loadPR("")
     End Sub
 
@@ -342,5 +353,203 @@ tr:nth-child(even) {
             End If
         End With
         Return res
+    End Function
+
+    Public Sub autocompleteSupplier()
+        Dim MySource As New AutoCompleteStringCollection()
+        With txtSupplier
+            .AutoCompleteCustomSource = MySource
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+        Dim supplier As New DatabaseConnect
+        With supplier
+            .selectByQuery("Select distinct supplier_name from suppliers  where status = 1")
+            While .dr.Read
+                MySource.Add(.dr.GetValue(0))
+            End While
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadDRSelection()
+        cbDRNo.DataSource = Nothing
+        cbDRNo.Items.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT id,dr_no from purchase_receive where delivery_status <> 0 order by pr_date desc")
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select DR Number")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = CInt(.dr("id"))
+                    Dim dr As String = .dr("dr_no")
+                    comboSource.Add(id, dr)
+                End While
+            End If
+            cbDRNo.DataSource = New BindingSource(comboSource, Nothing)
+            cbDRNo.DisplayMember = "Value"
+            cbDRNo.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+
+    Public Sub loadPRSelection()
+        cbPRNo.DataSource = Nothing
+        cbPRNo.Items.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT id,pr_no from purchase_receive where delivery_status <> 0 order by pr_date desc")
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select PR Number")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = CInt(.dr("id"))
+                    Dim pr As String = .dr("pr_no")
+                    comboSource.Add(id, pr)
+                End While
+            End If
+            cbPRNo.DataSource = New BindingSource(comboSource, Nothing)
+            cbPRNo.DisplayMember = "Value"
+            cbPRNo.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Public Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(pr_date) FROM purchase_receive where delivery_status <> 0 order by YEAR(pr_date) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Sub cbPRNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPRNo.SelectedIndexChanged
+        If cbPRNo.SelectedIndex > 0 Then
+            cbPRNo.BackColor = Drawing.Color.White
+            Dim key As String = DirectCast(cbPRNo.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbPRNo.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedPR = key
+
+        Else
+            selectedPR = 0
+        End If
+    End Sub
+
+    Private Sub cbDRNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDRNo.SelectedIndexChanged
+        If cbDRNo.SelectedIndex > 0 Then
+            cbDRNo.BackColor = Drawing.Color.White
+            Dim key As String = DirectCast(cbDRNo.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbDRNo.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedDR = key
+
+        Else
+            selectedDR = 0
+        End If
+    End Sub
+
+    Private Sub txtSupplier_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSupplier.KeyDown
+        If txtSupplier.Text.Length > 0 And e.KeyCode = Keys.Enter Then
+            txtSupplier.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtSupplier.Text.ToLower())
+            selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
+
+        Else
+            selectedSupplier = 0
+        End If
+    End Sub
+
+    Private Sub txtSupplier_Leave(sender As Object, e As EventArgs) Handles txtSupplier.Leave
+        If txtSupplier.Text.Length > 0 Then
+            selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", txtSupplier.Text)
+
+        Else
+            selectedSupplier = 0
+        End If
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        Dim query As String = "Select * from purchase_receive and delivery_status >- 1"
+
+        If txtSupplier.Text <> "" And selectedSupplier > 0 Then
+            query = query & " and supplier = " & selectedSupplier
+        End If
+
+        If cbPRNo.SelectedIndex > 0 And selectedPR > 0 Then
+            query = query & " and id = " & selectedPR
+        End If
+
+        If cbDRNo.SelectedIndex > 0 And selectedDR > 0 Then
+            query = query & " and id = " & selectedDR
+        End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(pr_date) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(pr_date) = " & cbYear.Text
+        End If
+
+        query = query & " order by pr_date desc"
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
     End Function
 End Class

@@ -48,9 +48,11 @@ Partial Class ColorForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(395, 124)
+        Me.ClientSize = New System.Drawing.Size(400, 113)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.txtColor)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "ColorForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Color Form"

@@ -250,6 +250,8 @@ Partial Class ProductForm
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtProduct)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.Name = "ProductForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Product Form (Add New)"

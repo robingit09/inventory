@@ -1,5 +1,7 @@
 ﻿Public Class CustomerProductSelection
     Public module_selection As Integer = 0
+    Public selectedCustomer As Integer = 0
+
     Private Sub CustomerProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -140,5 +142,19 @@
             End If
         Next
         Me.Close()
+    End Sub
+
+    Private Sub btnAddProduct_Click(sender As Object, e As EventArgs) Handles btnAddProduct.Click
+        If txtCustomer.Text.Length > 0 Then
+            AddProductForm.selectedCustomer = Me.selectedCustomer
+            AddProductForm.initialize()
+            AddProductForm.from_module = 1
+            AddProductForm.ShowDialog()
+        Else
+            'selectedCustomer = 0
+            'AddProductForm.selectedCustomer = 0
+            'cbCustomer.Focus()
+            'MsgBox("Please select customer", MsgBoxStyle.Critical)
+        End If
     End Sub
 End Class

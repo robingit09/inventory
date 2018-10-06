@@ -39,6 +39,7 @@ Partial Class CustomerProductSelection
         Me.column_stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAddProduct = New System.Windows.Forms.Button()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -115,7 +116,7 @@ Partial Class CustomerProductSelection
         Me.column_description.HeaderText = "Product Description"
         Me.column_description.Name = "column_description"
         Me.column_description.ReadOnly = True
-        Me.column_description.Width = 190
+        Me.column_description.Width = 250
         '
         'column_brand
         '
@@ -171,11 +172,21 @@ Partial Class CustomerProductSelection
         Me.column_subcat.ReadOnly = True
         Me.column_subcat.Width = 150
         '
+        'btnAddProduct
+        '
+        Me.btnAddProduct.Location = New System.Drawing.Point(333, 25)
+        Me.btnAddProduct.Name = "btnAddProduct"
+        Me.btnAddProduct.Size = New System.Drawing.Size(114, 23)
+        Me.btnAddProduct.TabIndex = 34
+        Me.btnAddProduct.Text = "Add Products"
+        Me.btnAddProduct.UseVisualStyleBackColor = True
+        '
         'CustomerProductSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1373, 637)
+        Me.Controls.Add(Me.btnAddProduct)
         Me.Controls.Add(Me.btnAddToOrder)
         Me.Controls.Add(Me.txtCustomer)
         Me.Controls.Add(Me.Label1)
@@ -207,4 +218,5 @@ Partial Class CustomerProductSelection
     Friend WithEvents column_stock As DataGridViewTextBoxColumn
     Friend WithEvents column_cat As DataGridViewTextBoxColumn
     Friend WithEvents column_subcat As DataGridViewTextBoxColumn
+    Friend WithEvents btnAddProduct As Button
 End Class

@@ -316,7 +316,7 @@
             query = query & " and pu.barcode = '" & txtBarcode.Text & "'"
         End If
 
-        If selectedDesc > 0 Then
+        If selectedDesc > 0 And Trim(txtProductDesc.Text) <> "" Then
             query = query & " and p.id = " & selectedDesc
         End If
 
@@ -342,7 +342,9 @@
         End If
 
         query = query & " order by p.description"
+        btnFilter.Enabled = False
         loadList(query)
+        btnFilter.Enabled = True
     End Sub
 
     Public Function generatePrint() As String
@@ -524,6 +526,7 @@
     End Function
 
     Private Sub txtProductDesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProductDesc.KeyDown
+        selectedDesc = 0
         If e.KeyCode = Keys.Enter Then
             If txtProductDesc.TextLength > 0 Then
                 selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
@@ -609,4 +612,11 @@
 
     End Sub
 
+    Private Sub txtProductDesc_MouseLeave(sender As Object, e As EventArgs) Handles txtProductDesc.MouseLeave
+        If txtProductDesc.TextLength > 0 Then
+            selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
+        Else
+            selectedDesc = 0
+        End If
+    End Sub
 End Class

@@ -66,4 +66,22 @@
             End If
         End If
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If dgvUnit.SelectedRows.Count = 1 Then
+            Dim yesno As Integer = MsgBox("Are you sure you want to delete Unit(" & dgvUnit.SelectedRows(0).Cells(1).Value & ") ? ", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+
+            If yesno = MsgBoxResult.Yes Then
+                Dim id As String = dgvUnit.SelectedRows(0).Cells(0).Value
+                Dim dbdelete As New DatabaseConnect()
+                With dbdelete
+                    .update_where("unit", id, "status", 0)
+                End With
+                loadList("")
+            End If
+
+        Else
+            MsgBox("Select a Unit.", MsgBoxStyle.Critical)
+        End If
+    End Sub
 End Class

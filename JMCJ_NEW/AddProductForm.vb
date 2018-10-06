@@ -8,6 +8,8 @@
     Public selectedCat As Integer = 0
     Public selectedSubCat As Integer = 0
 
+    Public from_module As Integer = 0
+
     Public Sub initialize()
         getProduct("")
         autocompleteDesc()
@@ -275,6 +277,11 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         saveData()
+        If from_module = 1 Then
+            ' if from customer product selection
+            CustomerProductSelection.loadCustomerProducts(Me.selectedCustomer)
+        End If
+
     End Sub
 
     Private Sub saveData()

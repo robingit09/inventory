@@ -1,8 +1,13 @@
 ﻿Public Class PurchaseOrderRequest
     Public selectedSupplier As Integer = 0
+    Public selectedPOR As Integer = 0
     Private Sub PurchaseOrderRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadPOR("")
+
         autocompleteSupplier()
+        loadPORSelection()
+        getMonth()
+        getYear()
+        loadPOR("")
     End Sub
     Public Sub loadPOR(ByVal query As String)
         dgvPO.Rows.Clear()
@@ -63,6 +68,7 @@
         'PurchaseOrderRequestForm.gpFields.Enabled = True
         PurchaseOrderRequestForm.gpEnterBarcode.Enabled = True
         PurchaseOrderRequestForm.gpEnterProduct.Enabled = True
+        PurchaseOrderRequestForm.btnCreatePO.Visible = False
         PurchaseOrderRequestForm.ShowDialog()
         btnAddNew.Enabled = True
     End Sub
@@ -72,6 +78,7 @@
             MsgBox("Please select one record!", MsgBoxStyle.Critical)
             Exit Sub
         End If
+        btnView.Enabled = False
         Dim por_id As Integer = dgvPO.SelectedRows(0).Cells(0).Value
         PurchaseOrderRequestForm.initialize()
         PurchaseOrderRequestForm.loadInfo(por_id)
@@ -79,13 +86,14 @@
         PurchaseOrderRequestForm.dgvProd.Enabled = False
         PurchaseOrderRequestForm.gpEnterBarcode.Enabled = False
         PurchaseOrderRequestForm.gpEnterProduct.Enabled = False
+        PurchaseOrderRequestForm.btnCreatePO.Visible = True
         PurchaseOrderRequestForm.ShowDialog()
+        btnView.Enabled = True
     End Sub
 
     Private Sub dgvPO_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPO.CellContentClick
-        'remove invoice
+        'create po
         If e.ColumnIndex = 7 And dgvPO.Rows.Count > 1 Then
-            'dgvInvoiceList.Rows.RemoveAt(e.RowIndex)
             If dgvPO.Rows(e.RowIndex).Cells("id").Value <> "" Then
                 Dim id As Integer = dgvPO.Rows(e.RowIndex).Cells("id").Value
                 Dim status As String = dgvPO.Rows(e.RowIndex).Cells("status").Value
@@ -96,10 +104,10 @@
                 PurchaseOrderForm.clearFields()
                 PurchaseOrderForm.initialize()
                 PurchaseOrderForm.createPO(id)
+                PurchaseOrderForm.dgvProd.Visible = True
                 PurchaseOrderForm.ShowDialog()
+
             End If
-
-
         End If
     End Sub
 
@@ -164,17 +172,134 @@
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
         btnFilter.Enabled = False
         Dim query As String = "Select * from purchase_orders_request where status >= 0"
-        If selectedSupplier > 0 Then
+        If txtSupplier.Text <> "" And selectedSupplier > 0 Then
             query = query & " and supplier = " & selectedSupplier
         End If
+
+        If cbPORNo.SelectedIndex > 0 And selectedPOR > 0 Then
+            query = query & " and id = " & selectedPOR
+        End If
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(por_date) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(por_date) = " & cbYear.Text
+        End If
+
         query = query & " order by id desc"
         loadPOR(query)
         btnFilter.Enabled = True
+
     End Sub
 
     Private Sub txtSupplier_TextChanged(sender As Object, e As EventArgs) Handles txtSupplier.TextChanged
         If Trim(txtSupplier.Text) = "" Then
             selectedSupplier = 0
+        End If
+    End Sub
+
+    Private Sub txtSupplier_MouseLeave(sender As Object, e As EventArgs) Handles txtSupplier.MouseLeave
+        If Trim(txtSupplier.Text).Length > 0 Then
+            selectedSupplier = New DatabaseConnect().get_id("suppliers", "supplier_name", Trim(txtSupplier.Text))
+        Else
+            selectedSupplier = 0
+        End If
+    End Sub
+
+    Public Sub loadPORSelection()
+        cbPORNo.DataSource = Nothing
+        cbPORNo.Items.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT id,por_no from purchase_orders_request where status <> 0 order by por_date desc")
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select POR Number")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim id As Integer = CInt(.dr("id"))
+                    Dim por As String = .dr("por_no")
+                    comboSource.Add(id, por)
+                End While
+            End If
+            cbPORNo.DataSource = New BindingSource(comboSource, Nothing)
+            cbPORNo.DisplayMember = "Value"
+            cbPORNo.ValueMember = "Key"
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Private Sub getMonth()
+        cbMonth.Items.Clear()
+        Dim formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo
+        cbMonth.Items.Add("All")
+        For i As Integer = 1 To 12
+            Dim monthName = formatInfo.GetMonthName(i)
+            cbMonth.Items.Add(monthName)
+        Next
+        cbMonth.SelectedIndex = 0
+    End Sub
+
+    Public Sub getYear()
+        cbYear.Items.Clear()
+        cbYear.Items.Add("All")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT distinct YEAR(por_date) FROM purchase_orders_request where status <> 0 order by YEAR(por_date) DESC")
+            While .dr.Read
+                cbYear.Items.Add(.dr.GetValue(0))
+            End While
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+            cbYear.SelectedIndex = 0
+        End With
+    End Sub
+
+    Private Function monthToNumber(ByVal month As String) As String
+        Dim result As String = ""
+        Select Case month.ToUpper
+            Case "JANUARY"
+                result = "1"
+            Case "FEBRUARY"
+                result = "2"
+            Case "MARCH"
+                result = "3"
+            Case "APRIL"
+                result = "4"
+            Case "MAY"
+                result = "5"
+            Case "JUNE"
+                result = "6"
+            Case "JULY"
+                result = "7"
+            Case "AUGUST"
+                result = "8"
+            Case "SEPTEMBER"
+                result = "9"
+            Case "OCTOBER"
+                result = "10"
+            Case "NOVEMBER"
+                result = "11"
+            Case "DECEMBER"
+                result = "12"
+            Case Else
+                result = ""
+        End Select
+        Return result
+    End Function
+
+    Private Sub cbPORNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPORNo.SelectedIndexChanged
+        If cbPORNo.SelectedIndex > 0 Then
+            cbPORNo.BackColor = Drawing.Color.White
+            Dim key As String = DirectCast(cbPORNo.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbPORNo.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedPOR = key
+
+        Else
+            selectedPOR = 0
         End If
     End Sub
 End Class

@@ -22,22 +22,12 @@ Partial Class ProductList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
         Me.cbSubCat = New System.Windows.Forms.ComboBox()
@@ -58,6 +48,16 @@ Partial Class ProductList
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -68,92 +68,15 @@ Partial Class ProductList
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.ProductDesc, Me.Brand, Me.Unit, Me.Color, Me.UnitPrice, Me.StockQty, Me.Category, Me.Subcategory})
         Me.dgvProducts.Location = New System.Drawing.Point(23, 218)
         Me.dgvProducts.Name = "dgvProducts"
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvProducts.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvProducts.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.dgvProducts.Size = New System.Drawing.Size(1379, 461)
         Me.dgvProducts.TabIndex = 20
-        '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'ProductDesc
-        '
-        Me.ProductDesc.HeaderText = "Product Description"
-        Me.ProductDesc.Name = "ProductDesc"
-        Me.ProductDesc.ReadOnly = True
-        Me.ProductDesc.Width = 350
-        '
-        'Brand
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Brand.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Unit.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Unit.Width = 110
-        '
-        'Color
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Color.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        Me.Color.Width = 110
-        '
-        'UnitPrice
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle4
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        Me.UnitPrice.Width = 160
-        '
-        'StockQty
-        '
-        Me.StockQty.HeaderText = "Stock Quantity"
-        Me.StockQty.Name = "StockQty"
-        Me.StockQty.ReadOnly = True
-        Me.StockQty.Width = 80
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        Me.Category.Width = 120
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
-        Me.Subcategory.Width = 120
         '
         'GroupBox1
         '
@@ -360,6 +283,85 @@ Partial Class ProductList
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'ProductDesc
+        '
+        Me.ProductDesc.HeaderText = "Product Description"
+        Me.ProductDesc.Name = "ProductDesc"
+        Me.ProductDesc.ReadOnly = True
+        Me.ProductDesc.Width = 350
+        '
+        'Brand
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Brand.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Unit.DefaultCellStyle = DataGridViewCellStyle12
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Unit.Width = 110
+        '
+        'Color
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Color.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        Me.Color.Width = 110
+        '
+        'UnitPrice
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle14
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        Me.UnitPrice.Width = 160
+        '
+        'StockQty
+        '
+        Me.StockQty.HeaderText = "Stock Quantity"
+        Me.StockQty.Name = "StockQty"
+        Me.StockQty.ReadOnly = True
+        Me.StockQty.Width = 80
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        Me.Category.Width = 120
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 120
+        '
         'ProductList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
@@ -373,7 +375,9 @@ Partial Class ProductList
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvProducts)
         Me.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MaximizeBox = False
         Me.Name = "ProductList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Product List"
@@ -403,6 +407,8 @@ Partial Class ProductList
     Friend WithEvents cbUnit As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents cbBrand As ComboBox
+    Friend WithEvents txtProductDesc As TextBox
+    Friend WithEvents btnPrint As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents ProductDesc As DataGridViewTextBoxColumn
@@ -413,6 +419,4 @@ Partial Class ProductList
     Friend WithEvents StockQty As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Subcategory As DataGridViewTextBoxColumn
-    Friend WithEvents txtProductDesc As TextBox
-    Friend WithEvents btnPrint As Button
 End Class
