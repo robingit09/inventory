@@ -30,12 +30,14 @@ Partial Class TopSalesReports
         Me.cbCustomer = New System.Windows.Forms.ComboBox()
         Me.cbMonth = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cbPrintMethod = New System.Windows.Forms.ComboBox()
         Me.gpFilter.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(265, 176)
+        Me.btnPrint.Location = New System.Drawing.Point(265, 189)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(75, 23)
         Me.btnPrint.TabIndex = 3
@@ -62,7 +64,7 @@ Partial Class TopSalesReports
         Me.cbYear.FormattingEnabled = True
         Me.cbYear.Location = New System.Drawing.Point(73, 81)
         Me.cbYear.Name = "cbYear"
-        Me.cbYear.Size = New System.Drawing.Size(176, 21)
+        Me.cbYear.Size = New System.Drawing.Size(238, 21)
         Me.cbYear.TabIndex = 20
         '
         'Label1
@@ -88,7 +90,7 @@ Partial Class TopSalesReports
         Me.cbCustomer.FormattingEnabled = True
         Me.cbCustomer.Location = New System.Drawing.Point(73, 25)
         Me.cbCustomer.Name = "cbCustomer"
-        Me.cbCustomer.Size = New System.Drawing.Size(176, 21)
+        Me.cbCustomer.Size = New System.Drawing.Size(238, 21)
         Me.cbCustomer.TabIndex = 0
         '
         'cbMonth
@@ -96,7 +98,7 @@ Partial Class TopSalesReports
         Me.cbMonth.FormattingEnabled = True
         Me.cbMonth.Location = New System.Drawing.Point(73, 52)
         Me.cbMonth.Name = "cbMonth"
-        Me.cbMonth.Size = New System.Drawing.Size(176, 21)
+        Me.cbMonth.Size = New System.Drawing.Size(238, 21)
         Me.cbMonth.TabIndex = 18
         '
         'Label2
@@ -108,11 +110,30 @@ Partial Class TopSalesReports
         Me.Label2.TabIndex = 19
         Me.Label2.Text = "Month:"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(28, 194)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(70, 13)
+        Me.Label4.TabIndex = 22
+        Me.Label4.Text = "Print Method:"
+        '
+        'cbPrintMethod
+        '
+        Me.cbPrintMethod.FormattingEnabled = True
+        Me.cbPrintMethod.Location = New System.Drawing.Point(102, 191)
+        Me.cbPrintMethod.Name = "cbPrintMethod"
+        Me.cbPrintMethod.Size = New System.Drawing.Size(157, 21)
+        Me.cbPrintMethod.TabIndex = 22
+        '
         'TopSalesReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(371, 220)
+        Me.ClientSize = New System.Drawing.Size(361, 241)
+        Me.Controls.Add(Me.cbPrintMethod)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.gpFilter)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -123,6 +144,7 @@ Partial Class TopSalesReports
         Me.gpFilter.ResumeLayout(False)
         Me.gpFilter.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -134,4 +156,6 @@ Partial Class TopSalesReports
     Friend WithEvents Label3 As Label
     Friend WithEvents cbMonth As ComboBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents cbPrintMethod As ComboBox
 End Class

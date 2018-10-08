@@ -1,69 +1,40 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-<style>
-table {
-	font-family:serif;
-	border-collapse: collapse;
-	width: 100%;
-}
+<head>  
+<script>
+window.onload = function () {
+	
+var chart = new CanvasJS.Chart('chartContainer', {
+	animationEnabled: true,
+	
+	title:{
+		text:'Top sales '
+	},
+	axisX:{
+		interval: 1
+	},
+	axisY2:{
+		interlacedColor: 'rgba(1,77,101,.2)',
+		gridColor: 'rgba(1,77,101,.1)',
+		title: ''
+	},
+	data: [{
+		type: 'bar',
+		name: 'companies',
+		axisYType: 'secondary',
+		color: '#014D65',
+		dataPoints: [
+			{ y: 4, label: 'Titanium 2K 4-1 Qds Clear + 401S Activator 1.5L,Unit:Liter'},{ y: 4, label: 'Clear Thinner,Unit:Gallon'},{ y: 4, label: 'Clear Thinner,Unit:Liter'},{ y: 6, label: 'Titanium 2K 4-1 Eds Clear + 501S Activator 1.2L,Unit:Liter'},{ y: 7, label: 'Basecoat Binder,Unit:Gallon'},{ y: 10, label: 'Titanum 2K 2-1 Ms Clear + 301S Activator 1.2L,Unit:Liter'}
+		]
+	}]
+});
+chart.render();
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
 }
-
-tr:nth-child(even) {
-
-}
-</style>
+</script>
 </head>
 <body>
-<div id='header' style='text-align:center;'>
-	<img src='header.png' width='180'>
-	<p style='font-family:Arial;margin:1px;font-size:8pt;'>42 K Roosevelt Ave, Quezon City </p>
-	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Telefax: 411-5274. Globe:0917-132-1241</p>
-	<p style='font-family:Arial;margin:1px;font-size:8pt;'>Email:purchasing.jmcj@gmail.com</p>
-	<p style='font-family:Arial black;font-weight:bold;margin:1px;font-size:15pt;'>TOP SALES PRODUCT</p>
-</div>
-<div id='fieldset'>
-	<table>
-		<tr>
-            <td width='160'><span><strong>Customer: </strong></span></td>
-			<td><label>678 Paint Center </label></td>
-			<td width='160'><span><strong>Total Quantity Sold: </strong></span></td>
-			<td style='color:red;'><label>3 </label></td>
-            <td width='160'><span><strong>Total Amount Sold: </strong></span></td>
-			<td style='color:red;'><label>1,050.00 </label></td>
-		</tr>
-	<table>
-</div>
-<br>
-<table>
-  <thead>
-  <tr>
-	<th>Barcode</th>
-	<th>Unit</th>
-	<th>Brand</th>
-	<th>Color</th>
-	<th>Description</th>
-	<th>Total Quantity Sold</th>
-    <th>Percentage</th>
-    <th>Total Amount Sold</th>
-	
-  </tr>
-  </thead>
-  <tbody>
-    <tr><td>1110003</td><td>Gallon</td><td>HPC</td><td></td><td>Basecoat Binder</td><td>3</td><td>Infinity</td><td>1,050.00</td></tr>
-    <tr>
-		<td colspan='5' style='text-align:right;'><strong>Total</strong></td>
-		<td style='color:red'><strong>3</strong></td>
-		<td>100%</td>
-        <td style='color:red'><strong>1,050.00</strong></td>
-	</tr>
-  </tbody>
-</table>
-
+<div id='chartContainer' style='height auto; width: 100%;'></div>
+<script src='https://canvasjs.com/assets/script/canvasjs.min.js'></script>
 </body>
 </html>

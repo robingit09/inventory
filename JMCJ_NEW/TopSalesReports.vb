@@ -6,7 +6,13 @@
         Dim filter() As String = {"brand", "unit"}
 
         'Try
-        Dim code As String = generatePrint(filter)
+        Dim code As String = ""
+        If cbPrintMethod.SelectedIndex = 0 Then
+            code = generatePrint(filter)
+        End If
+        If cbPrintMethod.SelectedIndex = 1 Then
+            code = generatePrintBarChart()
+        End If
         Dim myWrite As System.IO.StreamWriter
         myWrite = IO.File.CreateText(path)
         myWrite.WriteLine(code)
@@ -32,64 +38,6 @@
         Else
             customer_name = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
         End If
-
-        ''get total sold
-        'Dim query_sold As String = "Select SUM(quantity) as qty from customer_order_products as cop
-        '        inner join customer_orders as co on co.id = cop.customer_order_id
-        '        where co.delivery_status <> 0"
-        'If cbCustomer.SelectedIndex > 0 Then
-        '    query_sold = query_sold & " and co.customer_id = " & selectedCustomer
-        'End If
-
-        'Dim total_sold As String = "0"
-        'Dim dbsold As New DatabaseConnect
-        'With dbsold
-        '    .selectByQuery(query_sold)
-        '    If .dr.HasRows Then
-        '        If .dr.Read Then
-        '            If Not IsDBNull(.dr("qty")) Then
-        '                total_sold = Val(.dr("qty")).ToString("N0")
-        '            End If
-
-        '        Else
-        '            total_sold = 0
-        '        End If
-        '    Else
-        '        total_sold = 0
-        '    End If
-        '    .cmd.Dispose()
-        '    .dr.Close()
-        '    .con.Close()
-        'End With
-
-
-        ''get total amount
-        'Dim query_amount As String = "Select SUM(cop.total_amount) as amount from customer_order_products as cop
-        '        inner join customer_orders as co on co.id = cop.customer_order_id where co.delivery_status <> 0 "
-        'If cbCustomer.SelectedIndex > 0 Then
-        '    query_amount = query_amount & " and co.customer_id = " & selectedCustomer
-        'End If
-
-        'Dim grand_total As String = "0"
-        'Dim dbamount As New DatabaseConnect
-        'With dbamount
-        '    .selectByQuery(query_amount)
-        '    If .dr.HasRows Then
-        '        If .dr.Read Then
-        '            If Not IsDBNull(.dr("amount")) Then
-        '                grand_total = Val(.dr("amount")).ToString("N2")
-        '            End If
-        '        Else
-        '                grand_total = 0
-        '        End If
-        '    Else
-        '        grand_total = 0
-        '    End If
-
-        '    .cmd.Dispose()
-        '    .dr.Close()
-        '    .con.Close()
-        'End With
 
         Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
                     Left Join product_unit as pu ON pu.id = cop.product_unit_id)
@@ -227,6 +175,133 @@ tr:nth-child(even) {
         Return result
     End Function
 
+    Private Function generatePrintBarChart()
+        Dim result As String = ""
+        Dim customer_name As String = ""
+        Dim total_sold2 As Integer = 0
+        Dim grand_total2 As Double = 0
+
+        If selectedCustomer = 0 Then
+            customer_name = "All"
+        Else
+            customer_name = New DatabaseConnect().get_by_id("company", selectedCustomer, "company")
+        End If
+
+        Dim query As String = "Select distinct pu.id, pu.barcode, p.description,b.name as brand, u.name as unit,c.name as color,total_qty,total_amount from (((((((customer_order_products as cop
+                    Left Join product_unit as pu ON pu.id = cop.product_unit_id)
+                    INNER JOIN customer_orders as co on co.id = cop.customer_order_id)
+                    Left Join products as p on p.id = pu.product_id)
+                    Left Join brand as b on b.id = pu.brand)
+                    Left Join unit as u on u.id = pu.unit)
+                    Left Join color as c on c.id = pu.color)
+                    Left Join (Select product_unit_id,SUM(quantity) as total_qty,SUM(total_amount) as total_amount from customer_order_products group by product_unit_id) as total ON  pu.id = total.product_unit_id)
+                    where co.delivery_status <> 0 "
+
+        If cbCustomer.SelectedIndex > 0 Then
+            query = query & " and co.customer_id = " & selectedCustomer
+        End If
+
+        If cbMonth.Text <> "All" Then
+            query = query & " and MONTH(co.date_issue) = " & monthToNumber(cbMonth.Text)
+        End If
+
+        If cbYear.Text <> "All" Then
+            query = query & " and YEAR(co.date_issue) = " & cbYear.Text
+        End If
+        query = query & " order by total_qty"
+
+        Dim table_content As String = ""
+        Dim data_pts As String = ""
+        Dim dbprod As New DatabaseConnect()
+        With dbprod
+            .selectByQuery(query)
+
+            If .dr.HasRows Then
+                Dim dict = New Dictionary(Of String, String)
+                While .dr.Read
+                    Dim tr As String = "<tr>"
+                    Dim p_id As String = .dr("id")
+                    Dim barcode As String = .dr("barcode")
+                    Dim desc As String = .dr("description")
+                    Dim brand As String = .dr("brand")
+                    Dim unit As String = .dr("unit")
+                    Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
+                    Dim total_qty As String = .dr("total_qty")
+                    Dim total_amount As String = Val(.dr("total_amount")).ToString("N2")
+                    Dim percent As String = Val(Val(total_qty) / Val(total_sold2)).ToString("#0.##%")
+
+                    total_sold2 += Val(total_qty)
+                    grand_total2 += CDbl(total_amount)
+
+                    tr = tr & "<td>" & barcode & "</td>"
+                    tr = tr & "<td>" & unit & "</td>"
+                    tr = tr & "<td>" & brand & "</td>"
+                    tr = tr & "<td>" & color & "</td>"
+                    tr = tr & "<td>" & desc & "</td>"
+                    tr = tr & "<td>" & total_qty & "</td>"
+                    tr = tr & "<td>" & percent & "</td>"
+                    tr = tr & "<td>" & total_amount & "</td>"
+
+                    tr = tr & "</tr>"
+                    data_pts = data_pts & "{ y: " & total_qty & ", label: '" & desc & ",Unit:" & unit & "'},"
+                    table_content = table_content & tr
+                End While
+                data_pts = data_pts.TrimEnd(CChar(","))
+
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        If customer_name = "All" Then
+            customer_name = ""
+        Else
+            customer_name = " sold by " & customer_name
+        End If
+        result = "<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+	
+var chart = new CanvasJS.Chart('chartContainer', {
+	animationEnabled: true,
+	
+	title:{
+		text:'Top sales" & customer_name & " '
+	},
+	axisX:{
+		interval: 1
+	},
+	axisY2:{
+		interlacedColor: 'rgba(1,77,101,.2)',
+		gridColor: 'rgba(1,77,101,.1)',
+		title: ''
+	},
+	data: [{
+		type: 'bar',
+		name: 'companies',
+		axisYType: 'secondary',
+		color: '#014D65',
+		dataPoints: [
+			" & data_pts & "
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id='chartContainer' style='height auto; width: 100%;'></div>
+<script src='https://canvasjs.com/assets/script/canvasjs.min.js'></script>
+</body>
+</html>"
+        Return result
+    End Function
+
     Public Sub loadCustomer()
         cbCustomer.DataSource = Nothing
         cbCustomer.Items.Clear()
@@ -258,6 +333,7 @@ tr:nth-child(even) {
         loadCustomer()
         getMonth()
         getYear()
+        loadPrintMethod()
     End Sub
 
     Private Sub cbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomer.SelectedIndexChanged
@@ -330,4 +406,10 @@ tr:nth-child(even) {
         Return result
     End Function
 
+    Private Sub loadPrintMethod()
+        cbPrintMethod.Items.Clear()
+        cbPrintMethod.Items.Add("Default")
+        cbPrintMethod.Items.Add("Bar Chart")
+        cbPrintMethod.SelectedIndex = 0
+    End Sub
 End Class
