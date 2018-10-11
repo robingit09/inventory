@@ -81,7 +81,7 @@
             Return result
         End If
 
-        If New DatabaseConnect().isExist("color", "name", txtColor.Text) Then
+        If New DatabaseConnect().isExist("color", "name", txtColor.Text.ToUpper) Then
             MsgBox("Already Exist!", MsgBoxStyle.Critical)
             result = False
             Return result

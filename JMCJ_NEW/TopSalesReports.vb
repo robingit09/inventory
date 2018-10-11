@@ -243,7 +243,7 @@ tr:nth-child(even) {
                     tr = tr & "<td>" & total_amount & "</td>"
 
                     tr = tr & "</tr>"
-                    data_pts = data_pts & "{ y: " & total_qty & ", label: '" & desc & ",Unit:" & unit & "'},"
+                    data_pts = data_pts & "{ y: " & total_qty & ", label: '" & desc & " " & unit & "'},"
                     table_content = table_content & tr
                 End While
                 data_pts = data_pts.TrimEnd(CChar(","))
@@ -307,7 +307,7 @@ chart.render();
         cbCustomer.Items.Clear()
 
         Dim comboSource As New Dictionary(Of String, String)()
-        comboSource.Add(0, "Select Customer")
+        comboSource.Add(0, "All")
         Dim dbcustomer As New DatabaseConnect
         With dbcustomer
             .selectByQuery("Select id,company from company where status = 1 order by company")

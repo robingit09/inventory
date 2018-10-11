@@ -3,6 +3,10 @@
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
         If btnSave.Text = "Save" Then
+            If validation() = False Then
+                Exit Sub
+            End If
+
             saveData()
 
             'after add unit function
@@ -19,6 +23,9 @@
             Next
             txtUnit.Text = ""
         ElseIf btnSave.Text = "Update" Then
+            If validation() = False Then
+                Exit Sub
+            End If
             updateData()
         End If
     End Sub

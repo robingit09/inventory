@@ -108,7 +108,6 @@
 
     Private Function toCapital(ByVal str As String) As String
         Dim result As String
-        'result = str.Substring(0, 1).ToUpper() + str.Substring(1)
         result = str.ToUpper
         Return result
     End Function

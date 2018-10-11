@@ -13,7 +13,7 @@ Module ModuleSettings
         End If
     End Sub
 
-    Public Function getDBSetup()
+    Public Function forTest()
         connect()
         Dim result As Integer = 0
         cmd.Connection = con

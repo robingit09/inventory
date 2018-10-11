@@ -26,7 +26,7 @@
 
         Timer1.Start()
 
-        If ModuleSettings.getDBSetup = 1 Then
+        If ModuleSettings.forTest = 1 Then
             lblTest.Visible = True
         Else
             lblTest.Visible = False

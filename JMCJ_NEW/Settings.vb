@@ -1,7 +1,7 @@
 ﻿Public Class Settings
     Private Sub Settings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If ModuleSettings.getDBSetup = 1 Then
+        If ModuleSettings.forTest = 1 Then
             'test mode
             testYes.Checked = True
         Else
@@ -12,7 +12,7 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         insertForTesting()
-        If ModuleSettings.getDBSetup = 1 Then
+        If ModuleSettings.forTest = 1 Then
             'test mode
             Main_form.lblTest.Visible = True
         Else
@@ -53,7 +53,7 @@
 
         Dim yesno As Integer = MsgBox("Are you sure you want to backup database ?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
         If yesno = MsgBoxResult.Yes Then
-            If ModuleSettings.getDBSetup = 1 Then
+            If ModuleSettings.forTest = 1 Then
                 My.Computer.FileSystem.CopyFile(
                     Application.StartupPath & "\inventory_dev.mdb",
                     "C:\users\inventory_db\inventory_dev_backup.mdb",

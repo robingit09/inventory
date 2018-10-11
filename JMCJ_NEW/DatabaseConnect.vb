@@ -18,20 +18,19 @@ Public Class DatabaseConnect
     End Sub
 
     Public Sub dbConnect()
-
-        If ModuleSettings.getDBSetup = 0 Then
+        If ModuleSettings.forTest = 0 Then
+            'con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\users\inventory.mdb"
             con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
-
         End If
 
-        If ModuleSettings.getDBSetup = 1 Then
+        If ModuleSettings.forTest = 1 Then
             con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory_dev.mdb"
         End If
-
 
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If
+
     End Sub
 
     Public Sub selectTableByColumn(ByVal table As String, ByVal col As String, ByVal oper As String, ByVal val As String)
@@ -106,7 +105,7 @@ Public Class DatabaseConnect
         Try
             cmd.Connection = con
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "SELECT " & column & " FROM " & table & " WHERE " & column & " = '" & val & "'"
+            cmd.CommandText = "SELECT " & column & " FROM " & table & " WHERE " & column & " = '" & Trim(val) & "'"
             dr = cmd.ExecuteReader
             If dr.HasRows Then
                 cmd.Dispose()
@@ -128,7 +127,7 @@ Public Class DatabaseConnect
         Try
             cmd.Connection = con
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "SELECT " & column & " FROM " & table & " WHERE " & column & " = '" & val & "' and id <> " & id
+            cmd.CommandText = "SELECT " & column & " FROM " & table & " WHERE " & column & " = '" & Trim(val) & "' and id <> " & id
             dr = cmd.ExecuteReader
             If dr.HasRows Then
                 cmd.Dispose()
