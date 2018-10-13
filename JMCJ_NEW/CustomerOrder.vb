@@ -310,12 +310,10 @@
                 'LedgerForm.txtBankDetails.Text = bank_details
                 'LedgerForm.dtpCheckDate.Value = check_date
 
-
-
                 Dim payment_type As Integer = If(IsDBNull(.dr("payment_type")), 0, Val(.dr("payment_type")))
                 Dim payment_type_val As String = ""
                 Select Case payment_type
-                    Case 0
+                    Case 1
                         payment_type_val = "Cash"
                         bank_details = ""
 
@@ -323,9 +321,9 @@
                         bank_details_label = ""
 
                         due_date_label = ""
-                    Case 1
-                        payment_type_val = "C.O.D"
                     Case 2
+                        payment_type_val = "C.O.D"
+                    Case 3
                         payment_type_val = "Credit"
                         bank_details = ""
 
@@ -333,7 +331,7 @@
                         bank_details_label = ""
 
                         due_date_label = ""
-                    Case 3
+                    Case 4
                         payment_type_val = "Post Dated"
                 End Select
                 'LedgerForm.txtRemarks.Text = remarks

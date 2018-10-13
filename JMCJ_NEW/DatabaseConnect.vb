@@ -19,8 +19,8 @@ Public Class DatabaseConnect
 
     Public Sub dbConnect()
         If ModuleSettings.forTest = 0 Then
-            'con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\users\inventory.mdb"
-            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
+            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\users\inventory.mdb"
+            'con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory.mdb"
         End If
 
         If ModuleSettings.forTest = 1 Then

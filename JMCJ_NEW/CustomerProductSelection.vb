@@ -38,6 +38,10 @@
                     Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
                     'Dim cost As String = Val(getCost(supplier, p_u_id)).ToString("N2")
 
+                    If Val(sell_price) = 0 Then
+                        sell_price = price
+                    End If
+
                     Dim stock As String = ""
                     Try
                         Dim dbstock As New DatabaseConnect

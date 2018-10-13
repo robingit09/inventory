@@ -11,6 +11,7 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        btnSave.Enabled = False
         insertForTesting()
         If ModuleSettings.forTest = 1 Then
             'test mode
@@ -20,6 +21,7 @@
             Main_form.lblTest.Visible = False
         End If
         MsgBox("Settings sucessfully update.", MsgBoxStyle.Information)
+        btnSave.Enabled = True
     End Sub
 
     Private Sub insertForTesting()
@@ -27,7 +29,7 @@
         If testYes.Checked = True Then
             y = 1
             My.Computer.FileSystem.CopyFile(
-                  Application.StartupPath & "\inventory.mdb",
+                 "C:\users\inventory.mdb",
                    Application.StartupPath & "\inventory_dev.mdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
@@ -36,8 +38,6 @@
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory_dev.mdb")
         End If
         doQuery("UPDATE settings set for_testing = " & y)
-
-
     End Sub
 
     Private Sub btnTruncate_Click(sender As Object, e As EventArgs) Handles btnTruncate.Click
@@ -56,14 +56,14 @@
             If ModuleSettings.forTest = 1 Then
                 My.Computer.FileSystem.CopyFile(
                     Application.StartupPath & "\inventory_dev.mdb",
-                    "C:\users\inventory_db\inventory_dev_backup.mdb",
+                    "C:\users\inventory_db_backup\inventory_dev.mdb",
                     Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                     Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)
             Else
                 My.Computer.FileSystem.CopyFile(
-                  Application.StartupPath & "\inventory.mdb",
-                  "C:\users\inventory_db\inventory_backup.mdb",
+                   "C:\users\inventory.mdb",
+                  "C:\users\inventory_db_backup\inventory.mdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)

@@ -123,6 +123,9 @@
                 'txtBankDetails.Clear()
                 'gpCheck.Enabled = False
                 cbTerms.Enabled = True
+
+                txtTotalAmountPaid.Enabled = False
+                btnExact.Enabled = False
             End If
 
             If Trim(cbPaymentType.Text) = "C.O.D" Then
@@ -136,6 +139,9 @@
                 'gpCheck.Enabled = True
                 'txtBankDetails.Enabled = True
                 cbTerms.Enabled = False
+
+                txtTotalAmountPaid.Enabled = True
+                btnExact.Enabled = True
             End If
 
             If Trim(cbPaymentType.Text) = "Cash" Then
@@ -150,6 +156,9 @@
                 'txtBankDetails.Clear()
                 'gpCheck.Enabled = False
                 cbTerms.Enabled = False
+
+                txtTotalAmountPaid.Enabled = True
+                btnExact.Enabled = True
             End If
 
             Dim key As Integer = CInt(DirectCast(cbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key)
@@ -298,9 +307,19 @@
         Next
 
         For Each item As DataGridViewRow In Me.dgvProd.Rows
-            Dim sell_price As Double = dgvProd.Rows(item.Index).Cells("sell_price").Value
+            'Dim sell_price As Double = dgvProd.Rows(item.Index).Cells("sell_price").Value
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
-            If sell_price <= 0.00 And prod <> "" Then
+            Dim sellprice As Double = 0
+
+            If prod <> "" Then
+                If IsNumeric(dgvProd.Rows(item.Index).Cells("sell_price").Value.ToString.Replace(",", "")) Then
+                    sellprice = CDbl(dgvProd.Rows(item.Index).Cells("sell_price").Value.ToString.Replace(",", ""))
+                Else
+                    sellprice = 0
+                End If
+            End If
+
+            If sellprice <= 0.00 And prod <> "" Then
                 dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.Red
                 validate = True
             End If
@@ -416,11 +435,23 @@
             'change if edit the qty
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+
+                Dim qty As Integer = 0
+                If IsNumeric((dgvProd.Rows(e.RowIndex).Cells("quantity").Value)) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
                 Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
-                Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
 
+                Dim sellprice As Double = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", "")) Then
+                    sellprice = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+                Else
+                    sellprice = 0
+                End If
                 amount = qty * CDbl(sellprice)
 
                 If less.Contains(",") Then
@@ -452,7 +483,14 @@
             ' if less change
             If e.ColumnIndex = 8 Then
                 Dim amount As Double = 0
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+
+                Dim qty As Integer = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
                 Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
                 Dim sellprice As Double = Val(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
@@ -487,10 +525,16 @@
                     qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
                 End If
                 Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
-                    Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
-                    Dim sellprice As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+                Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)
 
-                    amount = qty * CDbl(sellprice)
+                Dim sellprice As Double = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", "")) Then
+                    sellprice = CDbl(dgvProd.Rows(e.RowIndex).Cells("sell_price").Value.ToString.Replace(",", ""))
+                Else
+                    sellprice = 0
+                End If
+
+                amount = qty * CDbl(sellprice)
 
                     If less.Contains(",") Then
                         Dim split = less.Split(",")
@@ -509,11 +553,11 @@
                         dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
                     End If
 
-                'change color
-                If sellprice > 0 Then
-                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
-                Else
-                    dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.Red
+                    'change color
+                    If sellprice > 0 Then
+                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.White
+                    Else
+                        dgvProd.Rows(e.RowIndex).Cells("sell_price").Style.BackColor = Drawing.Color.Red
                     End If
                 End If
                 computeTotalAmount()
@@ -1158,6 +1202,10 @@
                         ModelFunction.update_stock(product_unit_id, qty, "-")
                         ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
 
+                        'MsgBox(selectedCustomer & " " & product_unit_id & " " & sell_price)
+
+                        ModelFunction.updatePrice(selectedCustomer, product_unit_id, sell_price)
+
                     End If
                 Next
                 cmd2.Dispose()
@@ -1272,4 +1320,42 @@
         End If
     End Sub
 
+    Private Sub btnSaveAndPrint_Click(sender As Object, e As EventArgs) Handles btnSaveAndPrint.Click
+        If btnSaveAndPrint.Text = "Save and Print" Then
+            If (validator()) Then
+                Exit Sub
+            End If
+            insertData()
+            clearfields()
+            CustomerOrder.loadList("")
+
+            Dim id As Integer = getLastID()
+
+            Dim path As String = Application.StartupPath & "\co.html"
+            'Dim filter() As String = {"sample1", "sample2"}
+            Try
+                Dim code As String = CustomerOrder.generatePrint(id)
+                Dim myWrite As System.IO.StreamWriter
+                myWrite = IO.File.CreateText(path)
+                myWrite.WriteLine(code)
+                myWrite.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Dim proc As New System.Diagnostics.Process()
+            proc = Process.Start(path, "")
+
+        ElseIf btnSaveAndPrint.Text = "Update and Print" Then
+            'MsgBox(selectedPaymentType)
+            'Exit Sub
+            If (validator()) Then
+                Exit Sub
+            End If
+            updateData()
+            clearfields()
+
+            Me.Close()
+        End If
+    End Sub
 End Class
