@@ -420,7 +420,7 @@
         End If
         'reset less
         If e.ColumnIndex = 10 Then
-            dgvProd.Rows(e.RowIndex).Cells("less").Value = "0"
+            dgvProd.Rows(e.RowIndex).Cells("less").Value = ""
         End If
 
         'remove product
@@ -463,12 +463,12 @@
                         For i As Integer = 0 To split.Length - 1
                             temp = temp * (1.0 - (Val(split(i)) / 100))
                         Next
-                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(temp).ToString("N2")
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount * (1.0 - (Val(less) / 100))).ToString("N2")
                 End If
 
                 'change color
@@ -505,12 +505,12 @@
                         For i As Integer = 0 To split.Length - 1
                             temp = temp * (1.0 - (Val(split(i)) / 100))
                         Next
-                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(temp).ToString("N2")
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
                 Else
-                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount * (1.0 - (Val(less) / 100))).ToString("N2")
                 End If
             End If
 
@@ -545,13 +545,13 @@
                             For i As Integer = 0 To split.Length - 1
                                 temp = temp * (1.0 - (Val(split(i)) / 100))
                             Next
-                            dgvProd.Rows(e.RowIndex).Cells("amount").Value = temp
-                        Catch ex As Exception
+                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(temp).ToString("N2")
+                    Catch ex As Exception
                             MsgBox(ex.Message)
                         End Try
                     Else
-                        dgvProd.Rows(e.RowIndex).Cells("amount").Value = (amount * (1.0 - (Val(less) / 100))).ToString("N2")
-                    End If
+                    dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount * (1.0 - (Val(less) / 100))).ToString("N2")
+                End If
 
                     'change color
                     If sellprice > 0 Then
@@ -568,7 +568,10 @@
         Dim totalamount As Double = 0.0
         If dgvProd.Rows.Count > 1 Then
             For Each item As DataGridViewRow In Me.dgvProd.Rows
-                Dim amount As Double = dgvProd.Rows(item.Index).Cells("amount").Value
+                Dim amount As Double = 0
+                If IsNumeric(dgvProd.Rows(item.Index).Cells("amount").Value) Then
+                    amount = Val(dgvProd.Rows(item.Index).Cells("amount").Value.ToString.Replace(",", ""))
+                End If
                 totalamount += amount
             Next
         End If

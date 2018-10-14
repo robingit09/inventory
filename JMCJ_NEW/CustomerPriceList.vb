@@ -64,18 +64,6 @@
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                '.selectByQuery("Select distinct cpp.product_id,pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,cpp.sell_price,c.name as cat, subc.name as subcat
-                'from (((((((((customer_product_prices as cpp
-                'INNER JOIN products as p ON p.id = cpp.product_id)
-                'INNER JOIN product_unit as pu ON pu.product_id = cpp.product_id and pu.brand = cpp.brand and pu.unit = cpp.unit)
-                'LEFT JOIN brand as b on b.id = cpp.brand)
-                'INNER JOIN unit as u on u.id = cpp.unit)
-                'LEFT JOIN color as cc ON cc.id = cpp.color)
-                'LEFT JOIN product_categories as pc ON pc.product_id = cpp.product_id) 
-                'LEFT JOIN product_subcategories as psc ON psc.product_id = cpp.product_id)
-                'LEFT JOIN categories as c ON c.id = pc.category_id)
-                'LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
-                'where cpp.customer_id = " & customer_id)
                 .selectByQuery("Select distinct pu.id,pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,cpp.sell_price,c.name as cat, subc.name as subcat from (((((((((product_unit as pu
                 INNER JOIN customer_product_prices as cpp ON cpp.product_unit_id = pu.id)
                 LEFT JOIN brand as b on b.id = pu.brand)
@@ -106,6 +94,10 @@
                     Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
+
+                    If Val(sell_price) <= 0 Then
+                        sell_price = price
+                    End If
                     Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
@@ -380,6 +372,10 @@
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
                     Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
+
+                    If Val(sell_price) <= 0 Then
+                        sell_price = price
+                    End If
 
                     total_price += CDbl(price)
                     total_sell_price += CDbl(sell_price)

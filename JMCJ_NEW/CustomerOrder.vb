@@ -86,13 +86,13 @@
                         Case "0"
                             payment_status = "Unpaid"
                         Case "1"
-                            payment_status = "Complete"
+                            payment_status = "Paid"
                         Case "2"
                             payment_status = "Partial"
                     End Select
 
                     If Val(amount_paid) = Val(amount) Then
-                        payment_status = "Complete"
+                        payment_status = "Paid"
                     End If
 
                     If Val(amount_paid) > 0 And Val(amount_paid) < Val(amount) Then

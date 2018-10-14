@@ -240,7 +240,7 @@ Partial Class SupplierForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(611, 468)
+        Me.ClientSize = New System.Drawing.Size(600, 531)
         Me.Controls.Add(Me.txtCity)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbStatus)
