@@ -472,6 +472,12 @@
     <Compile Include="TermReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TopCustomerReports.Designer.vb">
+      <DependentUpon>TopCustomerReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TopCustomerReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TopSalesReports.Designer.vb">
       <DependentUpon>TopSalesReports.vb</DependentUpon>
     </Compile>
@@ -686,6 +692,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TermReport.resx">
       <DependentUpon>TermReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopCustomerReports.resx">
+      <DependentUpon>TopCustomerReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TopSalesReports.resx">
       <DependentUpon>TopSalesReports.vb</DependentUpon>

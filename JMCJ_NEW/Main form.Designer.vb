@@ -38,8 +38,8 @@ Partial Class Main_form
         Me.CategoriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupplierToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,6 +61,7 @@ Partial Class Main_form
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblTest = New System.Windows.Forms.Label()
+        Me.TopCustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -173,17 +174,17 @@ Partial Class Main_form
         Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(261, 26)
         Me.PurchaseOrderToolStripMenuItem2.Text = "Purchase Order"
         '
-        'PurchaseReceiveToolStripMenuItem1
-        '
-        Me.PurchaseReceiveToolStripMenuItem1.Name = "PurchaseReceiveToolStripMenuItem1"
-        Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
-        Me.PurchaseReceiveToolStripMenuItem1.Text = "Purchase Receive"
-        '
         'PurchaseOrderRequestToolStripMenuItem
         '
         Me.PurchaseOrderRequestToolStripMenuItem.Name = "PurchaseOrderRequestToolStripMenuItem"
         Me.PurchaseOrderRequestToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
         Me.PurchaseOrderRequestToolStripMenuItem.Text = "Purchase Order Request"
+        '
+        'PurchaseReceiveToolStripMenuItem1
+        '
+        Me.PurchaseReceiveToolStripMenuItem1.Name = "PurchaseReceiveToolStripMenuItem1"
+        Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
+        Me.PurchaseReceiveToolStripMenuItem1.Text = "Purchase Receive"
         '
         'SupplierToolStripMenuItem1
         '
@@ -236,7 +237,7 @@ Partial Class Main_form
         '
         'ReportsToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MasterListToolStripMenuItem, Me.InventoryReportsToolStripMenuItem, Me.SalesReportToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MasterListToolStripMenuItem, Me.InventoryReportsToolStripMenuItem, Me.SalesReportToolStripMenuItem, Me.TopCustomersToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
         Me.ReportsToolStripMenuItem.Text = "Reports"
@@ -322,6 +323,12 @@ Partial Class Main_form
         Me.lblTest.TabIndex = 5
         Me.lblTest.Text = "Test Mode"
         '
+        'TopCustomersToolStripMenuItem
+        '
+        Me.TopCustomersToolStripMenuItem.Name = "TopCustomersToolStripMenuItem"
+        Me.TopCustomersToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.TopCustomersToolStripMenuItem.Text = "Top Customers"
+        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -384,4 +391,5 @@ Partial Class Main_form
     Friend WithEvents PurchaseOrderRequestToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblTest As Label
+    Friend WithEvents TopCustomersToolStripMenuItem As ToolStripMenuItem
 End Class

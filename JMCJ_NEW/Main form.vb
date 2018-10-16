@@ -168,4 +168,8 @@
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
         Settings.ShowDialog()
     End Sub
+
+    Private Sub TopCustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TopCustomersToolStripMenuItem.Click
+        TopCustomerReports.ShowDialog()
+    End Sub
 End Class
