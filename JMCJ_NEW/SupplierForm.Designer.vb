@@ -192,7 +192,7 @@ Partial Class SupplierForm
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(505, 12)
+        Me.btnSave.Location = New System.Drawing.Point(538, 12)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(81, 35)
         Me.btnSave.TabIndex = 11
@@ -240,7 +240,7 @@ Partial Class SupplierForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(600, 531)
+        Me.ClientSize = New System.Drawing.Size(639, 414)
         Me.Controls.Add(Me.txtCity)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbStatus)

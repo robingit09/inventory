@@ -295,6 +295,7 @@
             gpEnterBarcode.Enabled = False
             gpEnterProduct.Enabled = False
             dgvProd.Enabled = False
+            dgvProd.Rows.Clear()
         End If
 
     End Sub
@@ -436,8 +437,20 @@
             'change if edit the qty
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Dim qty As Integer = 0
+
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
+                Dim price As Double = 0
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", "")) Then
+                    price = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Else
+                    price = 0
+                End If
 
                 amount = qty * CDbl(price)
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")

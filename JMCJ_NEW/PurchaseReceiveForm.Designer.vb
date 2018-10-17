@@ -56,6 +56,7 @@ Partial Class PurchaseReceiveForm
         Me.Label16 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
         Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.txtDrNo = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -65,6 +66,7 @@ Partial Class PurchaseReceiveForm
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.actual_quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,7 +75,6 @@ Partial Class PurchaseReceiveForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -302,7 +303,7 @@ Partial Class PurchaseReceiveForm
         'btnAddToCart
         '
         Me.btnAddToCart.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToCart.Location = New System.Drawing.Point(920, 13)
+        Me.btnAddToCart.Location = New System.Drawing.Point(920, 16)
         Me.btnAddToCart.Name = "btnAddToCart"
         Me.btnAddToCart.Size = New System.Drawing.Size(77, 26)
         Me.btnAddToCart.TabIndex = 39
@@ -377,7 +378,7 @@ Partial Class PurchaseReceiveForm
         'dgvProd
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
+        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.actual_quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
         Me.dgvProd.Location = New System.Drawing.Point(15, 277)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1296, 288)
@@ -414,6 +415,15 @@ Partial Class PurchaseReceiveForm
         Me.gpFields.TabIndex = 90
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Receive"
+        '
+        'btnAddSupplier
+        '
+        Me.btnAddSupplier.Location = New System.Drawing.Point(339, 47)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
+        Me.btnAddSupplier.TabIndex = 90
+        Me.btnAddSupplier.Text = "Add Supplier"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'cbSupplier
         '
@@ -485,8 +495,15 @@ Partial Class PurchaseReceiveForm
         '
         'quantity
         '
-        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.HeaderText = "Qty"
         Me.quantity.Name = "quantity"
+        Me.quantity.Width = 80
+        '
+        'actual_quantity
+        '
+        Me.actual_quantity.HeaderText = "Actual Qty"
+        Me.actual_quantity.Name = "actual_quantity"
+        Me.actual_quantity.Width = 80
         '
         'product
         '
@@ -534,15 +551,6 @@ Partial Class PurchaseReceiveForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
-        '
-        'btnAddSupplier
-        '
-        Me.btnAddSupplier.Location = New System.Drawing.Point(339, 47)
-        Me.btnAddSupplier.Name = "btnAddSupplier"
-        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
-        Me.btnAddSupplier.TabIndex = 90
-        Me.btnAddSupplier.Text = "Add Supplier"
-        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'PurchaseReceiveForm
         '
@@ -613,9 +621,11 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents Label16 As Label
     Friend WithEvents cbSupplier As ComboBox
     Friend WithEvents btnSelectProduct As Button
+    Friend WithEvents btnAddSupplier As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents actual_quantity As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
     Friend WithEvents unit As DataGridViewTextBoxColumn
@@ -624,5 +634,4 @@ Partial Class PurchaseReceiveForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents btnAddSupplier As Button
 End Class

@@ -6,6 +6,8 @@
         btnAddNew.Enabled = False
         PurchaseReceiveForm.clearFields()
         PurchaseReceiveForm.initialize()
+
+
         PurchaseReceiveForm.btnSave.Enabled = True
         PurchaseReceiveForm.btnSaveAndPrint.Enabled = True
         PurchaseReceiveForm.dgvProd.Enabled = True
@@ -64,6 +66,7 @@
     End Sub
 
     Private Sub PurchaseReceive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autocompleteSupplier()
         loadPRSelection()
         loadDRSelection()
         getMonth()
@@ -387,7 +390,10 @@ tr:nth-child(even) {
                 While .dr.Read
                     Dim id As Integer = CInt(.dr("id"))
                     Dim dr As String = .dr("dr_no")
-                    comboSource.Add(id, dr)
+                    If dr <> "" Then
+                        comboSource.Add(id, dr)
+                    End If
+
                 End While
             End If
             cbDRNo.DataSource = New BindingSource(comboSource, Nothing)

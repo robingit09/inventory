@@ -11,19 +11,29 @@
     Public selectedUnit As Integer = 0
 
     Public Sub clearFields()
-        loadPO()
-        loadTerms()
-        loadPaymentType()
-        loadSupplier()
+        If cbPO.Items.Count > 0 Then
+            cbPO.SelectedIndex = 0
+        End If
 
-        cbPO.SelectedIndex = 0
         selectedPO = 0
         txtPRNO.Text = ""
-        cbSupplier.SelectedIndex = 0
+
+        If cbSupplier.Items.Count > 0 Then
+            cbSupplier.SelectedIndex = 0
+        End If
+
         selectedSupplier = 0
-        cbTerms.SelectedIndex = 0
+
+        If cbTerms.Items.Count > 0 Then
+            cbTerms.SelectedIndex = 0
+        End If
+
         selectedTerm = 0
-        cbPaymentType.SelectedIndex = 0
+
+        If cbPaymentType.Items.Count > 0 Then
+            cbPaymentType.SelectedIndex = 0
+        End If
+
         txtDrNo.Text = ""
         selectedPaymentType = 0
         dtp_pr_date.Value = DateTime.Now.Date
@@ -145,7 +155,7 @@
         dgvProd.Rows.Clear()
         Dim dbprod As New DatabaseConnect()
         With dbprod
-            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
+            .selectByQuery("select distinct pu.id,pu.barcode,p.description,b.name as brand,u.name as unit,c.name as color,pop.quantity,pop.actual_quantity,pop.unit_cost,pop.total_amount,ps.qty as stock
                         FROM ((((((purchase_receive_products as pop
                         INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
@@ -159,6 +169,7 @@
                     Dim id As Integer = .dr("id")
                     Dim barcode As String = .dr("barcode")
                     Dim qty As Integer = .dr("quantity")
+                    Dim actual_qty As Integer = .dr("actual_quantity")
                     Dim desc As String = .dr("description")
                     Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
@@ -166,7 +177,7 @@
                     Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
                     Dim total As String = Val(.dr("total_amount")).ToString("N2")
                     Dim stock As String = Val(.dr("stock"))
-                    Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                    Dim row As String() = New String() {id, barcode, qty, actual_qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                     dgvProd.Rows.Add(row)
                 End While
             End If
@@ -243,7 +254,7 @@
                         Dim total As String = Val(.dr("total_amount")).ToString("N2")
                         Dim stock As String = CInt(.dr("stock"))
 
-                        Dim row As String() = New String() {id, barcode, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
+                        Dim row As String() = New String() {id, barcode, qty, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                         dgvProd.Rows.Add(row)
                     End While
                 End If
@@ -253,6 +264,9 @@
 
             End With
         Else
+            'initialize()
+            clearFields()
+
             selectedPO = 0
             gpEnterBarcode.Enabled = False
             gpEnterProduct.Enabled = False
@@ -348,6 +362,9 @@
             End If
             insertData()
             clearFields()
+            initialize()
+
+
             PurchaseReceive.loadPR("")
             PurchaseReceive.loadPRSelection()
             PurchaseReceive.loadDRSelection()
@@ -382,10 +399,12 @@
             Return False
         End If
 
+        Dim err_msg As String = ""
         'qty validation
         Dim validate As Boolean = False
         For Each item As DataGridViewRow In Me.dgvProd.Rows
             Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
+            Dim actual_qty As String = dgvProd.Rows(item.Index).Cells("actual_quantity").Value
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
             If prod <> "" Then
                 If qty = "" Then
@@ -397,10 +416,29 @@
                     dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
                     validate = True
                 End If
-            End If
 
+                If actual_qty = "" Then
+                    dgvProd.Rows(item.Index).Cells("actual_quantity").Style.BackColor = Drawing.Color.Red
+                    validate = True
+                End If
+
+                If IsNumeric(actual_qty) And Val(actual_qty) <= 0 Then
+                    dgvProd.Rows(item.Index).Cells("actual_quantity").Style.BackColor = Drawing.Color.Red
+                    validate = True
+                End If
+
+                If IsNumeric(qty) And IsNumeric(actual_qty) Then
+                    If Val(qty) < Val(actual_qty) Then
+                        err_msg = err_msg & "Product (" & prod & ") quantity must be greater than or equal to actual quantity."
+                        validate = True
+                    End If
+                End If
+            End If
         Next
 
+        If err_msg <> "" Then
+            MsgBox(err_msg, vbCritical)
+        End If
         If validate = True Then
             Return False
         End If
@@ -443,15 +481,17 @@
             For Each item As DataGridViewRow In Me.dgvProd.Rows
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
+                Dim actual_qty As String = dgvProd.Rows(item.Index).Cells("actual_quantity").Value
                 Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                    .cmd.CommandText = "INSERT INTO purchase_receive_products(purchase_receive_id,product_unit_id,quantity,unit_cost,total_amount,created_at,updated_at)
-                        VALUES(?,?,?,?,?,?,?)"
+                    .cmd.CommandText = "INSERT INTO purchase_receive_products(purchase_receive_id,product_unit_id,quantity,actual_quantity,unit_cost,total_amount,created_at,updated_at)
+                        VALUES(?,?,?,?,?,?,?,?)"
 
                     .cmd.Parameters.AddWithValue("@purchase_receive_id", getLastID("purchase_receive"))
                     .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
                     .cmd.Parameters.AddWithValue("@quantity", qty)
+                    .cmd.Parameters.AddWithValue("@actual_quantity", actual_qty)
                     .cmd.Parameters.AddWithValue("@unit_cost", cost)
                     .cmd.Parameters.AddWithValue("@amount", amount)
                     .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
@@ -783,7 +823,7 @@
 
                     Dim stock As String = If(IsDBNull(.dr("stock")), "0", .dr("stock"))
 
-                    Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                    Dim row As String() = New String() {product_unit_id, barcode, "0", "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
                     dgvProd.Rows.Add(row)
                     computeTotalAmount()
 
@@ -847,7 +887,7 @@
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                         Dim cost As String = Val(getCost(selectedSupplier, id)).ToString("N2")
                         Dim stock As Integer = Val(.dr("stock"))
-                        Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, cost, "", stock, "Remove"}
+                        Dim row As String() = New String() {id, barcode, "0", "0", desc, brand, unit, color, cost, "", stock, "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
                     End If
@@ -898,7 +938,7 @@
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
         'remove product
-        If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
+        If e.ColumnIndex = 11 And dgvProd.Rows.Count > 1 Then
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
@@ -909,23 +949,68 @@
             'change if edit the qty
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
-                Dim qty As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
-                Dim price As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Dim qty As Integer = 0
+
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
+                    qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
+                Else
+                    qty = 0
+                End If
+
+                Dim price As Double = 0
+
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", "")) Then
+                    price = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Else
+                    price = 0
+                End If
+
 
                 amount = qty * CDbl(price)
                 dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
 
-
                 'change color
                 If qty > 0 Then
                     dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.White
+                    dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Value = qty
                 Else
                     dgvProd.Rows(e.RowIndex).Cells("quantity").Style.BackColor = Drawing.Color.Red
                 End If
             End If
 
+            'change if edit the actual qty
+            If e.ColumnIndex = 2 Then
+                Dim amount As Double = 0
+                Dim actual_qty As Integer = 0
+
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Value) Then
+                    actual_qty = CInt(dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Value)
+                Else
+                    actual_qty = 0
+                End If
+
+                Dim price As Double = 0
+
+                If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", "")) Then
+                    price = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+                Else
+                    price = 0
+                End If
+
+                amount = actual_qty * CDbl(price)
+                dgvProd.Rows(e.RowIndex).Cells("amount").Value = Val(amount).ToString("N2")
+
+                'change color
+                If actual_qty > 0 Then
+                    dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Style.BackColor = Drawing.Color.White
+                    'dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Value = qty
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("actual_quantity").Style.BackColor = Drawing.Color.Red
+                End If
+            End If
+
             'change if edit unit cost
-            If e.ColumnIndex = 7 Then
+            If e.ColumnIndex = 8 Then
                 Dim amount As Double = 0
                 Dim qty As Integer = 0
                 If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("quantity").Value) Then
@@ -964,6 +1049,9 @@
             End If
             insertData()
             clearFields()
+            initialize()
+
+
             PurchaseReceive.loadPR("")
 
             'print

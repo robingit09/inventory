@@ -128,7 +128,7 @@
                         Next
 
                         If inlist = False Then
-                            Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
+                            Dim row As String() = New String() {product_unit_id, barcode, "0", "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
                             PurchaseReceiveForm.dgvProd.Rows.Add(row)
                         End If
                      ' from purchase return
