@@ -1,10 +1,12 @@
 ﻿Public Class SupplierProductSelection
+    Public selectedSupplier As Integer = 0
     Public module_selection As Integer = 0
     Private Sub SupplierProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Public Sub loadSupplierProducts(ByVal supplier As Integer)
+        selectedSupplier = supplier
         dgvProducts.Rows.Clear()
         Dim db As New DatabaseConnect
         With db
@@ -187,4 +189,15 @@
 
         Return result
     End Function
+
+    Private Sub btnAddProducts_Click(sender As Object, e As EventArgs) Handles btnAddProducts.Click
+        SupplierProducts.initialize()
+
+        SupplierProducts.cbSupplier.SelectedIndex = SupplierProducts.cbSupplier.FindString(txtSupplier.Text)
+        SupplierProducts.selectedSupplier = selectedSupplier
+
+        SupplierProducts.cbSupplier.Enabled = False
+        SupplierProducts.from_module = 1
+        SupplierProducts.ShowDialog()
+    End Sub
 End Class

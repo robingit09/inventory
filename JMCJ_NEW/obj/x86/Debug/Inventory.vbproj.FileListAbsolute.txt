@@ -86,3 +86,4 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierProductSelection.reso
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerProductSelection.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.TopCustomerReports.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierProducts.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SearchSupplierProducts.resources

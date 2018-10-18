@@ -23,10 +23,6 @@ Partial Class SupplierProductSelection
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtSupplier = New System.Windows.Forms.TextBox()
-        Me.btnAddToOrder = New System.Windows.Forms.Button()
         Me.column_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.column_barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,6 +34,11 @@ Partial Class SupplierProductSelection
         Me.column_stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtSupplier = New System.Windows.Forms.TextBox()
+        Me.btnAddToOrder = New System.Windows.Forms.Button()
+        Me.btnAddProducts = New System.Windows.Forms.Button()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,45 +50,6 @@ Partial Class SupplierProductSelection
         Me.dgvProducts.Name = "dgvProducts"
         Me.dgvProducts.Size = New System.Drawing.Size(1255, 512)
         Me.dgvProducts.TabIndex = 22
-        '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(15, 69)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 25
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 30)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 13)
-        Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Supplier"
-        '
-        'txtSupplier
-        '
-        Me.txtSupplier.Location = New System.Drawing.Point(63, 27)
-        Me.txtSupplier.Name = "txtSupplier"
-        Me.txtSupplier.ReadOnly = True
-        Me.txtSupplier.Size = New System.Drawing.Size(252, 20)
-        Me.txtSupplier.TabIndex = 27
-        '
-        'btnAddToOrder
-        '
-        Me.btnAddToOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToOrder.Location = New System.Drawing.Point(1171, 27)
-        Me.btnAddToOrder.Name = "btnAddToOrder"
-        Me.btnAddToOrder.Size = New System.Drawing.Size(99, 39)
-        Me.btnAddToOrder.TabIndex = 28
-        Me.btnAddToOrder.Text = "Add As Orders"
-        Me.btnAddToOrder.UseVisualStyleBackColor = True
         '
         'column_id
         '
@@ -164,11 +126,60 @@ Partial Class SupplierProductSelection
         Me.column_subcat.ReadOnly = True
         Me.column_subcat.Width = 150
         '
+        'ckSelectAll
+        '
+        Me.ckSelectAll.AutoSize = True
+        Me.ckSelectAll.Checked = True
+        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSelectAll.Location = New System.Drawing.Point(15, 69)
+        Me.ckSelectAll.Name = "ckSelectAll"
+        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
+        Me.ckSelectAll.TabIndex = 25
+        Me.ckSelectAll.Text = "Select All"
+        Me.ckSelectAll.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 30)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(45, 13)
+        Me.Label1.TabIndex = 26
+        Me.Label1.Text = "Supplier"
+        '
+        'txtSupplier
+        '
+        Me.txtSupplier.Location = New System.Drawing.Point(63, 27)
+        Me.txtSupplier.Name = "txtSupplier"
+        Me.txtSupplier.ReadOnly = True
+        Me.txtSupplier.Size = New System.Drawing.Size(252, 20)
+        Me.txtSupplier.TabIndex = 27
+        '
+        'btnAddToOrder
+        '
+        Me.btnAddToOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddToOrder.Location = New System.Drawing.Point(1171, 27)
+        Me.btnAddToOrder.Name = "btnAddToOrder"
+        Me.btnAddToOrder.Size = New System.Drawing.Size(99, 39)
+        Me.btnAddToOrder.TabIndex = 28
+        Me.btnAddToOrder.Text = "Add as Order"
+        Me.btnAddToOrder.UseVisualStyleBackColor = True
+        '
+        'btnAddProducts
+        '
+        Me.btnAddProducts.Location = New System.Drawing.Point(330, 27)
+        Me.btnAddProducts.Name = "btnAddProducts"
+        Me.btnAddProducts.Size = New System.Drawing.Size(111, 23)
+        Me.btnAddProducts.TabIndex = 29
+        Me.btnAddProducts.Text = "Add Products"
+        Me.btnAddProducts.UseVisualStyleBackColor = True
+        '
         'SupplierProductSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1295, 637)
+        Me.Controls.Add(Me.btnAddProducts)
         Me.Controls.Add(Me.btnAddToOrder)
         Me.Controls.Add(Me.txtSupplier)
         Me.Controls.Add(Me.Label1)
@@ -199,4 +210,5 @@ Partial Class SupplierProductSelection
     Friend WithEvents column_stock As DataGridViewTextBoxColumn
     Friend WithEvents column_cat As DataGridViewTextBoxColumn
     Friend WithEvents column_subcat As DataGridViewTextBoxColumn
+    Friend WithEvents btnAddProducts As Button
 End Class

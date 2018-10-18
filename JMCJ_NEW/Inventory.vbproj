@@ -406,6 +406,12 @@
     <Compile Include="PurchaseOrderRequestForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SearchSupplierProducts.Designer.vb">
+      <DependentUpon>SearchSupplierProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SearchSupplierProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SupplierProducts.Designer.vb">
       <DependentUpon>SupplierProducts.vb</DependentUpon>
     </Compile>
@@ -663,6 +669,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PurchaseOrderRequestForm.resx">
       <DependentUpon>PurchaseOrderRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchSupplierProducts.resx">
+      <DependentUpon>SearchSupplierProducts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SupplierProducts.resx">
       <DependentUpon>SupplierProducts.vb</DependentUpon>

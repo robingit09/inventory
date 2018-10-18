@@ -172,4 +172,10 @@
     Private Sub TopCustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TopCustomersToolStripMenuItem.Click
         TopCustomerReports.ShowDialog()
     End Sub
+
+    Private Sub SupplierProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupplierProductsToolStripMenuItem.Click
+        SupplierProducts.initialize()
+        SupplierProducts.cbSupplier.Enabled = True
+        SupplierProducts.ShowDialog()
+    End Sub
 End Class

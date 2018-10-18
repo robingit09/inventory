@@ -24,18 +24,18 @@ Partial Class SupplierProducts
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbSupplier = New System.Windows.Forms.ComboBox()
-        Me.dgvProducts = New System.Windows.Forms.DataGridView()
-        Me.column_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit_cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -55,21 +55,21 @@ Partial Class SupplierProducts
         Me.cbSupplier.Size = New System.Drawing.Size(240, 21)
         Me.cbSupplier.TabIndex = 1
         '
-        'dgvProducts
+        'dgvProd
         '
-        Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.unit_cost, Me.Action})
-        Me.dgvProducts.Location = New System.Drawing.Point(12, 53)
-        Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(914, 454)
-        Me.dgvProducts.TabIndex = 25
+        Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.cost, Me.Action})
+        Me.dgvProd.Location = New System.Drawing.Point(12, 53)
+        Me.dgvProd.Name = "dgvProd"
+        Me.dgvProd.Size = New System.Drawing.Size(914, 454)
+        Me.dgvProd.TabIndex = 25
         '
-        'column_id
+        'id
         '
-        Me.column_id.HeaderText = "id"
-        Me.column_id.Name = "column_id"
-        Me.column_id.ReadOnly = True
-        Me.column_id.Width = 5
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
         '
         'column_barcode
         '
@@ -106,12 +106,11 @@ Partial Class SupplierProducts
         Me.column_color.Name = "column_color"
         Me.column_color.ReadOnly = True
         '
-        'unit_cost
+        'cost
         '
-        Me.unit_cost.HeaderText = "Unit Cost"
-        Me.unit_cost.Name = "unit_cost"
-        Me.unit_cost.ReadOnly = True
-        Me.unit_cost.Width = 120
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        Me.cost.Width = 120
         '
         'Action
         '
@@ -143,12 +142,13 @@ Partial Class SupplierProducts
         Me.ClientSize = New System.Drawing.Size(941, 519)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnSearch)
-        Me.Controls.Add(Me.dgvProducts)
+        Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.cbSupplier)
         Me.Controls.Add(Me.Label1)
         Me.Name = "SupplierProducts"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Supplier Products"
-        CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -156,15 +156,15 @@ Partial Class SupplierProducts
 
     Friend WithEvents Label1 As Label
     Friend WithEvents cbSupplier As ComboBox
-    Friend WithEvents dgvProducts As DataGridView
-    Friend WithEvents column_id As DataGridViewTextBoxColumn
+    Friend WithEvents dgvProd As DataGridView
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents column_barcode As DataGridViewTextBoxColumn
     Friend WithEvents column_description As DataGridViewTextBoxColumn
     Friend WithEvents column_brand As DataGridViewTextBoxColumn
     Friend WithEvents column_unit As DataGridViewTextBoxColumn
     Friend WithEvents column_color As DataGridViewTextBoxColumn
-    Friend WithEvents unit_cost As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewButtonColumn
-    Friend WithEvents btnSearch As Button
-    Friend WithEvents btnSave As Button
 End Class

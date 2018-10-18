@@ -58,10 +58,11 @@ Partial Class Main_form
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopSalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TopCustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblTest = New System.Windows.Forms.Label()
-        Me.TopCustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SupplierProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -163,7 +164,7 @@ Partial Class Main_form
         '
         'PurchaseToolStripMenuItem
         '
-        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseOrderRequestToolStripMenuItem, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1, Me.PurchaseReturnToolStripMenuItem})
+        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseOrderRequestToolStripMenuItem, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1, Me.SupplierProductsToolStripMenuItem, Me.PurchaseReturnToolStripMenuItem})
         Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
         Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(91, 25)
         Me.PurchaseToolStripMenuItem.Text = "Purchase"
@@ -298,6 +299,12 @@ Partial Class Main_form
         Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.TopSalesToolStripMenuItem.Text = "Top Sales"
         '
+        'TopCustomersToolStripMenuItem
+        '
+        Me.TopCustomersToolStripMenuItem.Name = "TopCustomersToolStripMenuItem"
+        Me.TopCustomersToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.TopCustomersToolStripMenuItem.Text = "Top Customers"
+        '
         'SystemToolStripMenuItem
         '
         Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
@@ -323,11 +330,11 @@ Partial Class Main_form
         Me.lblTest.TabIndex = 5
         Me.lblTest.Text = "Test Mode"
         '
-        'TopCustomersToolStripMenuItem
+        'SupplierProductsToolStripMenuItem
         '
-        Me.TopCustomersToolStripMenuItem.Name = "TopCustomersToolStripMenuItem"
-        Me.TopCustomersToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
-        Me.TopCustomersToolStripMenuItem.Text = "Top Customers"
+        Me.SupplierProductsToolStripMenuItem.Name = "SupplierProductsToolStripMenuItem"
+        Me.SupplierProductsToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.SupplierProductsToolStripMenuItem.Text = "Supplier Products"
         '
         'Main_form
         '
@@ -392,4 +399,5 @@ Partial Class Main_form
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblTest As Label
     Friend WithEvents TopCustomersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SupplierProductsToolStripMenuItem As ToolStripMenuItem
 End Class

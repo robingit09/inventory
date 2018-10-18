@@ -165,15 +165,7 @@
         With db
             dgvProducts.Rows.Clear()
             If q = "" Then
-                '.selectByQuery("Select distinct pu.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
-                'INNER JOIN product_unit as pu ON p.id = pu.product_id) 
-                'LEFT JOIN brand as b ON b.id = pu.brand)
-                'INNER JOIN unit as u ON u.id = pu.unit)
-                'LEFT JOIN color as cc ON cc.id = pu.color)
-                'INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                'LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
-                'LEFT JOIN categories as c ON c.id = pc.category_id)
-                'LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.description")
+
                 If q = "" Then
                     .selectByQuery("Select distinct pu.id, pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat, subc.name as subcat from ((((((((product_unit as pu     
                     LEFT JOIN brand as b on b.id = pu.brand)
@@ -195,36 +187,7 @@
 
             If .dr.HasRows Then
                 While .dr.Read
-                    'Dim id As String = .dr("id")
-                    'Dim barcode As String = .dr("barcode")
-                    'Dim desc As String = .dr("description")
-                    'Dim brand As String = .dr("brand")
-                    'Dim unit As String = .dr("unit")
-                    'Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
-                    'Dim price As String = .dr("price")
-                    'Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
-                    'Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
 
-                    'Dim b_id As Integer = New DatabaseConnect().get_id("brand", "name", brand)
-                    'Dim u_id As Integer = New DatabaseConnect().get_id("unit", "name", unit)
-                    'Dim c_id As Integer = New DatabaseConnect().get_id("color", "name", color)
-
-                    'Dim cmd2 As New System.Data.OleDb.OleDbCommand
-                    'Dim dr2 As System.Data.OleDb.OleDbDataReader
-                    'cmd2.Connection = .con
-                    'cmd2.CommandType = CommandType.Text
-                    'cmd2.CommandText = "Select * from customer_product_prices where product_id = " & id & " 
-                    'and brand = " & b_id & " and unit = " & u_id & " and color = " & c_id & " and customer_id = " & selectedCustomer
-                    'dr2 = cmd2.ExecuteReader
-
-                    'If dr2.Read Then
-
-                    'Else
-                    '    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, "0.00", cat, subcat}
-                    '    dgvProducts.Rows.Add(row)
-                    'End If
-                    'dr2.Close()
-                    'cmd2.Dispose()
                     Dim id As String = .dr("id")
                     Dim barcode As String = .dr("barcode")
                     Dim desc As String = .dr("description")
@@ -428,6 +391,5 @@
         query = query & " order by p.description"
         getProduct(query)
     End Sub
-
 
 End Class
