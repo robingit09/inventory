@@ -122,16 +122,19 @@
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
         'remove product
-        If e.ColumnIndex = 7 And dgvProd.Rows.Count > 1 Then
-            dgvProd.Rows.RemoveAt(e.RowIndex)
+        If dgvProd.Rows(e.RowIndex).Cells(7).Value <> "" Then
+            If e.ColumnIndex = 7 And dgvProd.Rows.Count > 1 Then
+
+                dgvProd.Rows.RemoveAt(e.RowIndex)
+            End If
         End If
+
     End Sub
 
     Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
         ' if cost if edit
         If e.ColumnIndex = 6 And dgvProd.Rows.Count > 1 Then
-
-            Dim cost As Double = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
+            Dim cost As Double = 0
             If IsNumeric(dgvProd.Rows(e.RowIndex).Cells("cost").Value) Then
                 cost = CDbl(dgvProd.Rows(e.RowIndex).Cells("cost").Value.ToString.Replace(",", ""))
             Else
@@ -164,6 +167,24 @@
         dbdelete.delete_permanent("product_suppliers", "supplier", Me.selectedSupplier)
         dbdelete.cmd.Dispose()
         dbdelete.con.Close()
+
+        ' validation
+        Dim wrong_cost As Boolean = False
+        For Each item As DataGridViewRow In dgvProd.Rows
+            If item.Cells("column_description").Value <> "" Then
+
+                Dim cost As String = item.Cells("cost").Value
+                If Not IsNumeric(cost.Replace(",", "")) Then
+                    item.Cells("cost").Style.BackColor = Drawing.Color.Red
+                    wrong_cost = True
+                End If
+            End If
+        Next
+
+        If wrong_cost = True Then
+            MsgBox("Invalid input for cost. Please check the value you have entered.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         Dim saveCost As New DatabaseConnect
         With saveCost

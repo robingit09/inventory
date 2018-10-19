@@ -174,6 +174,7 @@
     End Sub
 
     Private Sub SupplierProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupplierProductsToolStripMenuItem.Click
+        SupplierProducts.from_module = 0
         SupplierProducts.initialize()
         SupplierProducts.cbSupplier.Enabled = True
         SupplierProducts.ShowDialog()

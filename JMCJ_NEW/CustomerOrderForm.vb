@@ -424,10 +424,14 @@
         End If
 
         'remove product
-        If e.ColumnIndex = 14 And dgvProd.Rows.Count > 1 Then
-            dgvProd.Rows.RemoveAt(e.RowIndex)
-            computeTotalAmount()
+        If dgvProd.Rows(e.RowIndex).Cells(14).Value <> "" Then
+            If e.ColumnIndex = 14 And dgvProd.Rows.Count > 1 Then
+                dgvProd.Rows.RemoveAt(e.RowIndex)
+                computeTotalAmount()
+            End If
         End If
+
+
     End Sub
 
     Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged

@@ -682,10 +682,13 @@
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
         'remove product
-        If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
-            dgvProd.Rows.RemoveAt(e.RowIndex)
-            computeTotalAmount()
+        If dgvProd.Rows(e.RowIndex).Cells(10).Value <> "" Then
+            If e.ColumnIndex = 10 And dgvProd.Rows.Count > 1 Then
+                dgvProd.Rows.RemoveAt(e.RowIndex)
+                computeTotalAmount()
+            End If
         End If
+
     End Sub
 
     Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
