@@ -162,7 +162,7 @@ Partial Class SupplierProductSelection
         Me.btnAddToOrder.Name = "btnAddToOrder"
         Me.btnAddToOrder.Size = New System.Drawing.Size(99, 39)
         Me.btnAddToOrder.TabIndex = 28
-        Me.btnAddToOrder.Text = "Add as Order"
+        Me.btnAddToOrder.Text = "Add"
         Me.btnAddToOrder.UseVisualStyleBackColor = True
         '
         'btnAddProducts
@@ -187,7 +187,7 @@ Partial Class SupplierProductSelection
         Me.Controls.Add(Me.dgvProducts)
         Me.Name = "SupplierProductSelection"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Supplier Products"
+        Me.Text = "Products"
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

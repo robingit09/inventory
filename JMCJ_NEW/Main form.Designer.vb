@@ -41,6 +41,7 @@ Partial Class Main_form
         Me.PurchaseOrderRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReceiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupplierToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SupplierProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,7 +63,11 @@ Partial Class Main_form
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblTest = New System.Windows.Forms.Label()
-        Me.SupplierProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StockControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PhysicalCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -112,7 +117,7 @@ Partial Class Main_form
         'MenuStrip2
         '
         Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.PurchaseToolStripMenuItem, Me.SalesToolStripMenuItem, Me.LedgerToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.SystemToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.StockControlToolStripMenuItem, Me.PurchaseToolStripMenuItem, Me.SalesToolStripMenuItem, Me.LedgerToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.SystemToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(926, 29)
@@ -192,6 +197,12 @@ Partial Class Main_form
         Me.SupplierToolStripMenuItem1.Name = "SupplierToolStripMenuItem1"
         Me.SupplierToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
         Me.SupplierToolStripMenuItem1.Text = "Suppliers"
+        '
+        'SupplierProductsToolStripMenuItem
+        '
+        Me.SupplierProductsToolStripMenuItem.Name = "SupplierProductsToolStripMenuItem"
+        Me.SupplierProductsToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.SupplierProductsToolStripMenuItem.Text = "Supplier Products"
         '
         'PurchaseReturnToolStripMenuItem
         '
@@ -307,7 +318,7 @@ Partial Class Main_form
         '
         'SystemToolStripMenuItem
         '
-        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.UserToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(77, 25)
         Me.SystemToolStripMenuItem.Text = "System"
@@ -330,11 +341,37 @@ Partial Class Main_form
         Me.lblTest.TabIndex = 5
         Me.lblTest.Text = "Test Mode"
         '
-        'SupplierProductsToolStripMenuItem
+        'StockControlToolStripMenuItem
         '
-        Me.SupplierProductsToolStripMenuItem.Name = "SupplierProductsToolStripMenuItem"
-        Me.SupplierProductsToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
-        Me.SupplierProductsToolStripMenuItem.Text = "Supplier Products"
+        Me.StockControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhysicalCountToolStripMenuItem})
+        Me.StockControlToolStripMenuItem.Name = "StockControlToolStripMenuItem"
+        Me.StockControlToolStripMenuItem.Size = New System.Drawing.Size(125, 25)
+        Me.StockControlToolStripMenuItem.Text = "Stock Control"
+        '
+        'PhysicalCountToolStripMenuItem
+        '
+        Me.PhysicalCountToolStripMenuItem.Name = "PhysicalCountToolStripMenuItem"
+        Me.PhysicalCountToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
+        Me.PhysicalCountToolStripMenuItem.Text = "Physical Count"
+        '
+        'UserToolStripMenuItem
+        '
+        Me.UserToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersToolStripMenuItem, Me.UserGroupToolStripMenuItem})
+        Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.UserToolStripMenuItem.Text = "User"
+        '
+        'UsersToolStripMenuItem
+        '
+        Me.UsersToolStripMenuItem.Name = "UsersToolStripMenuItem"
+        Me.UsersToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
+        Me.UsersToolStripMenuItem.Text = "Users"
+        '
+        'UserGroupToolStripMenuItem
+        '
+        Me.UserGroupToolStripMenuItem.Name = "UserGroupToolStripMenuItem"
+        Me.UserGroupToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
+        Me.UserGroupToolStripMenuItem.Text = "User Groups"
         '
         'Main_form
         '
@@ -400,4 +437,9 @@ Partial Class Main_form
     Friend WithEvents lblTest As Label
     Friend WithEvents TopCustomersToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SupplierProductsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StockControlToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PhysicalCountToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UserToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UsersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UserGroupToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -334,6 +334,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PhysicalCount.Designer.vb">
+      <DependentUpon>PhysicalCount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicalCount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhysicalCountForm.Designer.vb">
+      <DependentUpon>PhysicalCountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicalCountForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="POList.Designer.vb">
       <DependentUpon>POList.vb</DependentUpon>
     </Compile>
@@ -514,6 +526,18 @@
     <Compile Include="UpdatePriceForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserForm.Designer.vb">
+      <DependentUpon>UserForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users.Designer.vb">
+      <DependentUpon>Users.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Users.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddCostForm.resx">
@@ -628,6 +652,12 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhysicalCount.resx">
+      <DependentUpon>PhysicalCount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhysicalCountForm.resx">
+      <DependentUpon>PhysicalCountForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POList.resx">
       <DependentUpon>POList.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -727,6 +757,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdatePriceForm.resx">
       <DependentUpon>UpdatePriceForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users.resx">
+      <DependentUpon>Users.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

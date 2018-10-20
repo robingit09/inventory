@@ -21,27 +21,39 @@
         Dim table_content As String = ""
 
         ' get total product
-        Dim total_sold As Integer = 0
+        Dim total As Double = 0
+        Dim grand_total As Double = 0
+        Dim dbgrand_total As New DatabaseConnect
+        With dbgrand_total
+            .selectByQuery("SELECT sum(cop.total_amount) as total from customer_order_products as cop inner join customer_orders as co ON co.id = cop.customer_order_id where delivery_status <> 0")
+            If .dr.Read Then
+                grand_total = CDbl(.dr("total"))
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
 
         Dim dbprod As New DatabaseConnect
         With dbprod
             '.selectByQuery("Select c.id,c.company,(select sum(cop.quantity) from customer_order_products as cop inner join customer_orders as co on co.id = cop.customer_order_id where co.customer_id = c.id) as total_product from company as c
             '    where c.status <> 0 ")
-            .selectByQuery("Select c.id,c.company,total_qty from company as c
-                left join (select sum(cop.quantity) as total_qty,co.customer_id from customer_order_products as cop
+            .selectByQuery("Select c.id,c.company,total_amount from company as c
+                left join (select sum(cop.total_amount) as total_amount,co.customer_id from customer_order_products as cop
                         inner join customer_orders as co on co.id = cop.customer_order_id group by co.customer_id) as total on total.customer_id = c.id 
-                where c.status <> 0 order by total_qty desc,c.company asc")
+                where c.status <> 0 order by total_amount desc,c.company asc")
             If .dr.HasRows Then
                 While .dr.Read
                     Dim tr As String = "<tr>"
 
                     Dim id As Integer = .dr("id")
                     Dim company As String = .dr("company")
-                    Dim total_product As String = If(IsDBNull(.dr("total_qty")), "0", .dr("total_qty"))
-                    If Val(total_product) > total_sold Then
-                        total_sold = Val(total_product)
-                    End If
-                    Dim percent As String = Val(Val(total_product) / Val(total_sold)).ToString("#0.##%")
+                    Dim total_product As Double = If(IsDBNull(.dr("total_amount")), "0", CDbl(.dr("total_amount")))
+                    'If Val(total_product) > total Then
+                    '    total = CDbl(total_product.Replace(",", ""))
+                    'End If
+                    Dim percent As String = Val(Val(total_product) / Val(grand_total)).ToString("#0.##%")
                     'Dim contact_person As String = .dr("contact_person")
                     'Dim address As String = .dr("address")
                     'Dim city As String = .dr("city")
@@ -83,7 +95,7 @@
                     'End Select
 
                     tr = tr & "<td>" & company & "</td>"
-                    tr = tr & "<td>" & percent & "  <div style='height:40px;width:" & percent & " ; background-color:#3AE;'> " & total_product & " </div></td>"
+                    tr = tr & "<td>" & percent & "  <div style='height:40px;width:" & percent & " ; background-color:#3AE;'> <strong>" & Val(total_product).ToString("N2") & "</strong> </div></td>"
                     'tr = tr & "<td>" & address & "</td>"
                     'tr = tr & "<td>" & city & "</td>"
                     'tr = tr & "<td>" & owner & "</td>"
@@ -147,7 +159,7 @@ tr:nth-child(even) {
   <thead>
   <tr>
 	<th width='20%'>Customer</th>
-	<th style='text-align:center;'>Summary of total sold</th>
+	<th style='text-align:center;'>Summary of Total Sales Amount</th>
   </tr>
   </thead>
   <tbody>

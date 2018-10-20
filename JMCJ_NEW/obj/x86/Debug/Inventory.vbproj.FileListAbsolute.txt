@@ -87,3 +87,7 @@ C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.CustomerProductSelection.reso
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.TopCustomerReports.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SupplierProducts.resources
 C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.SearchSupplierProducts.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PhysicalCountForm.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.PhysicalCount.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.Users.resources
+C:\Users\inventory\JMCJ_NEW\obj\x86\Debug\JMCJ_NEW.UserForm.resources

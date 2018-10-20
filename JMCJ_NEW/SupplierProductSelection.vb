@@ -21,7 +21,22 @@
                 LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
                 LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & supplier & " order by p.description"
 
+            If module_selection = 5 Then
+                query = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM (((((((((products as p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0  order by p.description"
 
+                selectedSupplier = 0
+                txtSupplier.Text = ""
+
+            End If
             .selectByQuery(query)
 
             If .dr.HasRows Then
@@ -169,6 +184,25 @@
                             Dim row As String() = New String() {product_unit_id, barcode, "0", desc, brand, unit, color, unitcost, "0.00", stock, "Remove"}
                             PurchaseOrderRequestForm.dgvProd.Rows.Add(row)
                         End If
+
+                        ' from physical count form
+                    Case 5
+                        ' check if existing
+                        Dim inlist As Boolean = False
+                        For Each item2 As DataGridViewRow In PhysicalCountForm.dgvProd.Rows
+                            If PhysicalCountForm.dgvProd.Rows(item2.Index).Cells(3).Value <> "" Then
+                                Dim p_u_id As String = PhysicalCountForm.dgvProd.Rows(item2.Index).Cells("id").Value
+                                If p_u_id = product_unit_id Then
+                                    inlist = True
+                                    Exit For
+                                End If
+                            End If
+                        Next
+
+                        If inlist = False Then
+                            Dim row As String() = New String() {product_unit_id, barcode, desc, brand, unit, color, "", stock, "Remove"}
+                            PhysicalCountForm.dgvProd.Rows.Add(row)
+                        End If
                 End Select
 
 
@@ -200,4 +234,6 @@
         SupplierProducts.from_module = 1
         SupplierProducts.ShowDialog()
     End Sub
+
+
 End Class

@@ -199,6 +199,20 @@
 
     End Sub
 
+    Public Sub adjuststock(ByVal p_u_id As String, ByVal stock As String)
+        Dim dbstock As New DatabaseConnect
+        With dbstock
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "UPDATE product_stocks set qty = ?, updated_at = ? where product_unit_id = " & p_u_id
+            .cmd.Parameters.AddWithValue("@qty", stock)
+            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.ExecuteNonQuery()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
     Public Sub truncateDatabase()
         Dim dbdelete As New DatabaseConnect
         With dbdelete
