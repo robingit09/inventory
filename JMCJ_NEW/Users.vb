@@ -17,7 +17,7 @@
                 While .dr.Read
                     Dim id As String = .dr("id")
                     Dim username As String = .dr("username")
-                    Dim position As String = .dr("user_group")
+                    Dim position As String = New DatabaseConnect().get_by_id("user_groups", CInt(.dr("user_group")), "user_group")
                     Dim firstname As String = .dr("first_name")
                     Dim surname As String = .dr("surname")
                     Dim created_at As String = Convert.ToDateTime(.dr("created_at")).ToString("MM-dd-yyyy")
@@ -29,9 +29,9 @@
                         Case "1"
                             status = "Active"
 
-
                     End Select
-                    Dim row As String() = New String() {id, username, position, firstname, surname, created_at, status}
+
+                    Dim row As String() = New String() {id, username, position.ToUpper, firstname, surname, created_at, status}
                     dgvUser.Rows.Add(row)
                 End While
                 For Each row As DataGridViewRow In dgvUser.Rows
@@ -49,7 +49,21 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        UserForm.initialize()
         UserForm.clearFields()
+        UserForm.btnSave.Text = "Save"
         UserForm.ShowDialog()
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If dgvUser.SelectedRows.Count = 1 Then
+            Dim id As Integer = CInt(dgvUser.SelectedRows(0).Cells("id").Value)
+            UserForm.initialize()
+            UserForm.loadInfo(id)
+            UserForm.btnSave.Text = "Update"
+            UserForm.ShowDialog()
+        Else
+            MsgBox("Please select one record!", MsgBoxStyle.Critical)
+        End If
     End Sub
 End Class

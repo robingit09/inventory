@@ -1,5 +1,6 @@
 ﻿Public Class UserForm
 
+    Public selectedUser As Integer = 0
     Public selectedpos As Integer = 0
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
@@ -10,8 +11,25 @@
             End If
             insertData()
             clearFields()
+            Users.loadList("")
+            Me.Close()
+        End If
+
+        If btnSave.Text = "Update" Then
+
+            If validation() = False Then
+                Exit Sub
+            End If
+            updateData()
+            clearFields()
+            Users.loadList("")
+            Me.Close()
 
         End If
+    End Sub
+
+    Public Sub initialize()
+        loadPosition()
     End Sub
 
     Private Sub insertData()
@@ -19,8 +37,7 @@
         With insertuser
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO users (user_group,first_name,surname,username,password,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO [users] ([user_group],[first_name],[surname],[username],[password],[created_at],[updated_at])VALUES(?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@user_group", selectedpos)
             .cmd.Parameters.AddWithValue("@first_name", Trim(txtFN.Text))
             .cmd.Parameters.AddWithValue("@surname", Trim(txtLN.Text))
@@ -32,6 +49,28 @@
             .cmd.Dispose()
             .con.Close()
             MsgBox("User Successfully Saved.", MsgBoxStyle.Information)
+        End With
+    End Sub
+
+    Private Sub updateData()
+        Dim updateuser As New DatabaseConnect
+        With updateuser
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+            .cmd.CommandText = "UPDATE users set [first_name]='" & Trim(txtFN.Text) & "', [surname] ='" & Trim(txtLN.Text) & "',[user_group]=" & selectedpos & ",[username]='" & Trim(txtUser.Text) & "',[password]='" & Trim(txtPW.Text) & "',
+                [updated_at]='" & DateTime.Now.ToString & "' where id=" & selectedUser
+
+            '.cmd.Parameters.AddWithValue("@first_name", Trim(txtFN.Text))
+            '.cmd.Parameters.AddWithValue("@surname", Trim(txtLN.Text))
+            '.cmd.Parameters.AddWithValue("@user_group", selectedpos)
+            '.cmd.Parameters.AddWithValue("@username", Trim(txtUser.Text))
+            '.cmd.Parameters.AddWithValue("@password", Trim(txtPW.Text))
+            '.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            '.cmd.Parameters.AddWithValue("@id", selectedUser)
+            .cmd.ExecuteNonQuery()
+            .cmd.Dispose()
+            .con.Close()
+            MsgBox("User Successfully Update.", MsgBoxStyle.Information)
         End With
     End Sub
 
@@ -48,7 +87,20 @@
             Return False
         End If
 
+        If cbPosition.SelectedIndex = 0 Then
+            MsgBox("Position field is required!", MsgBoxStyle.Critical)
+            cbPosition.Focus()
+            Return False
+        End If
+
+        If Trim(txtPW.Text) = "" Then
+            MsgBox("Password field is required!", MsgBoxStyle.Critical)
+            txtPW.Focus()
+            Return False
+        End If
+
         If Trim(txtPW.Text.ToLower) <> Trim(txtCPW.Text.ToLower) Then
+            MsgBox("Password did not match!", MsgBoxStyle.Critical)
             txtCPW.Focus()
             txtCPW.SelectAll()
             Return False
@@ -62,6 +114,9 @@
         txtLN.Clear()
         If cbPosition.Items.Count > 0 Then
             cbPosition.SelectedIndex = 0
+            selectedpos = 0
+        Else
+            selectedpos = 0
         End If
         txtUser.Clear()
         txtPW.Clear()
@@ -93,7 +148,7 @@
     End Sub
 
     Private Sub UserForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadPosition()
+        'loadPosition()
     End Sub
 
     Private Sub cbPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPosition.SelectedIndexChanged
@@ -106,5 +161,27 @@
         Else
             selectedpos = 0
         End If
+    End Sub
+
+    Public Sub loadInfo(ByVal id As Integer)
+        selectedUser = id
+        Dim dbuser As New DatabaseConnect
+        With dbuser
+            .selectByQuery("Select * from users where id = " & id)
+            If .dr.Read Then
+                txtFN.Text = If(IsDBNull(.dr("first_name")), " ", .dr("first_name"))
+                txtLN.Text = If(IsDBNull(.dr("surname")), " ", .dr("surname"))
+
+                Dim user_group As String = New DatabaseConnect().get_by_id("user_groups", CInt(.dr("user_group")), "user_group")
+                cbPosition.SelectedIndex = cbPosition.FindString(user_group)
+                txtUser.Text = If(IsDBNull(.dr("username")), " ", .dr("username"))
+                txtPW.Text = If(IsDBNull(.dr("password")), " ", .dr("password"))
+                txtCPW.Text = If(IsDBNull(.dr("password")), " ", .dr("password"))
+
+            End If
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
     End Sub
 End Class
