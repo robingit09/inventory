@@ -188,4 +188,8 @@
     Private Sub UsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsersToolStripMenuItem.Click
         Users.ShowDialog()
     End Sub
+
+    Private Sub UserGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserGroupToolStripMenuItem.Click
+        UserGroups.ShowDialog()
+    End Sub
 End Class

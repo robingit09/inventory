@@ -36,6 +36,8 @@ Partial Class Main_form
         Me.UnitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StockControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PhysicalCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderRequestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,12 +64,10 @@ Partial Class Main_form
         Me.TopCustomersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblTest = New System.Windows.Forms.Label()
-        Me.StockControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PhysicalCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblTest = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -166,6 +166,19 @@ Partial Class Main_form
         Me.CategoriesToolStripMenuItem1.Name = "CategoriesToolStripMenuItem1"
         Me.CategoriesToolStripMenuItem1.Size = New System.Drawing.Size(292, 26)
         Me.CategoriesToolStripMenuItem1.Text = "Categories"
+        '
+        'StockControlToolStripMenuItem
+        '
+        Me.StockControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhysicalCountToolStripMenuItem})
+        Me.StockControlToolStripMenuItem.Name = "StockControlToolStripMenuItem"
+        Me.StockControlToolStripMenuItem.Size = New System.Drawing.Size(125, 25)
+        Me.StockControlToolStripMenuItem.Text = "Stock Control"
+        '
+        'PhysicalCountToolStripMenuItem
+        '
+        Me.PhysicalCountToolStripMenuItem.Name = "PhysicalCountToolStripMenuItem"
+        Me.PhysicalCountToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
+        Me.PhysicalCountToolStripMenuItem.Text = "Physical Count"
         '
         'PurchaseToolStripMenuItem
         '
@@ -326,33 +339,8 @@ Partial Class Main_form
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(142, 26)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
         Me.SettingsToolStripMenuItem.Text = "Settings"
-        '
-        'lblTest
-        '
-        Me.lblTest.AutoSize = True
-        Me.lblTest.BackColor = System.Drawing.Color.Maroon
-        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTest.ForeColor = System.Drawing.Color.White
-        Me.lblTest.Location = New System.Drawing.Point(12, 193)
-        Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(114, 25)
-        Me.lblTest.TabIndex = 5
-        Me.lblTest.Text = "Test Mode"
-        '
-        'StockControlToolStripMenuItem
-        '
-        Me.StockControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhysicalCountToolStripMenuItem})
-        Me.StockControlToolStripMenuItem.Name = "StockControlToolStripMenuItem"
-        Me.StockControlToolStripMenuItem.Size = New System.Drawing.Size(125, 25)
-        Me.StockControlToolStripMenuItem.Text = "Stock Control"
-        '
-        'PhysicalCountToolStripMenuItem
-        '
-        Me.PhysicalCountToolStripMenuItem.Name = "PhysicalCountToolStripMenuItem"
-        Me.PhysicalCountToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
-        Me.PhysicalCountToolStripMenuItem.Text = "Physical Count"
         '
         'UserToolStripMenuItem
         '
@@ -372,6 +360,18 @@ Partial Class Main_form
         Me.UserGroupToolStripMenuItem.Name = "UserGroupToolStripMenuItem"
         Me.UserGroupToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
         Me.UserGroupToolStripMenuItem.Text = "User Groups"
+        '
+        'lblTest
+        '
+        Me.lblTest.AutoSize = True
+        Me.lblTest.BackColor = System.Drawing.Color.Maroon
+        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTest.ForeColor = System.Drawing.Color.White
+        Me.lblTest.Location = New System.Drawing.Point(12, 193)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(114, 25)
+        Me.lblTest.TabIndex = 5
+        Me.lblTest.Text = "Test Mode"
         '
         'Main_form
         '

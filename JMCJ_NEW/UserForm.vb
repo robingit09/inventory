@@ -37,7 +37,8 @@
         With insertuser
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO [users] ([user_group],[first_name],[surname],[username],[password],[created_at],[updated_at])VALUES(?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO [users] ([user_group],[first_name],[surname],[username],[password],[created_at],[updated_at],[address],[contact_no],[in_case_of_emergency])
+            VALUES(?,?,?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@user_group", selectedpos)
             .cmd.Parameters.AddWithValue("@first_name", Trim(txtFN.Text))
             .cmd.Parameters.AddWithValue("@surname", Trim(txtLN.Text))
@@ -45,6 +46,9 @@
             .cmd.Parameters.AddWithValue("@password", Trim(txtCPW.Text))
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            .cmd.Parameters.AddWithValue("@address", txtAddress.Text)
+            .cmd.Parameters.AddWithValue("@contact_no", txtContactNo.Text)
+            .cmd.Parameters.AddWithValue("@in_case_of_emergency", txtInCaseOfEmergency.Text)
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -57,8 +61,8 @@
         With updateuser
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "UPDATE users set [first_name]='" & Trim(txtFN.Text) & "', [surname] ='" & Trim(txtLN.Text) & "',[user_group]=" & selectedpos & ",[username]='" & Trim(txtUser.Text) & "',[password]='" & Trim(txtPW.Text) & "',
-                [updated_at]='" & DateTime.Now.ToString & "' where id=" & selectedUser
+            .cmd.CommandText = "UPDATE users set [first_name]='" & Trim(txtFN.Text) & "', [surname] ='" & Trim(txtLN.Text) & "',[user_group]=" & selectedpos & ", [username]='" & Trim(txtUser.Text) & "',[password]='" & Trim(txtPW.Text) & "',[address] = '" & Trim(txtAddress.Text) & "', [contact_no] = '" & txtContactNo.Text & "', [in_case_of_emergency]  = '" & txtInCaseOfEmergency.Text & "',
+            [updated_at] ='" & DateTime.Now.ToString & "' where id=" & selectedUser
 
             '.cmd.Parameters.AddWithValue("@first_name", Trim(txtFN.Text))
             '.cmd.Parameters.AddWithValue("@surname", Trim(txtLN.Text))
@@ -103,6 +107,24 @@
             MsgBox("Password did not match!", MsgBoxStyle.Critical)
             txtCPW.Focus()
             txtCPW.SelectAll()
+            Return False
+        End If
+
+        If Trim(txtAddress.Text) = "" Then
+            MsgBox("Address field is required!", MsgBoxStyle.Critical)
+            txtAddress.Focus()
+            Return False
+        End If
+
+        If Trim(txtContactNo.Text) = "" Then
+            MsgBox("Contact Number field is required!", MsgBoxStyle.Critical)
+            txtContactNo.Focus()
+            Return False
+        End If
+
+        If Trim(txtInCaseOfEmergency.Text) = "" Then
+            MsgBox("In case of emergency field is required!", MsgBoxStyle.Critical)
+            txtInCaseOfEmergency.Focus()
             Return False
         End If
 
@@ -177,6 +199,9 @@
                 txtUser.Text = If(IsDBNull(.dr("username")), " ", .dr("username"))
                 txtPW.Text = If(IsDBNull(.dr("password")), " ", .dr("password"))
                 txtCPW.Text = If(IsDBNull(.dr("password")), " ", .dr("password"))
+                txtAddress.Text = If(IsDBNull(.dr("address")), " ", .dr("address"))
+                txtContactNo.Text = If(IsDBNull(.dr("contact_no")), " ", .dr("contact_no"))
+                txtInCaseOfEmergency.Text = If(IsDBNull(.dr("in_case_of_emergency")), " ", .dr("in_case_of_emergency"))
 
             End If
             .dr.Close()

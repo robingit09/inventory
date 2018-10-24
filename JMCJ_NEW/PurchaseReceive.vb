@@ -30,7 +30,7 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
-                    Dim date_issue As String = Convert.ToDateTime(.dr("pr_date")).ToString("MM-dd-yy")
+                    Dim date_issue As String = Convert.ToDateTime(.dr("pr_date")).ToString("MM-dd-yyyy")
                     Dim pr_no As String = .dr("pr_no")
                     Dim po_no As String = New DatabaseConnect().get_by_id("purchase_orders", Val(.dr("purchase_order_id")), "po_no")
                     Dim dr_no As String = If(IsDBNull(.dr("dr_no")), "", .dr("dr_no"))

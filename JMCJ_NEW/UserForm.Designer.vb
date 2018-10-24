@@ -35,6 +35,14 @@ Partial Class UserForm
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtCPW = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtContactNo = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtInCaseOfEmergency = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFN
@@ -81,9 +89,9 @@ Partial Class UserForm
         'cbPosition
         '
         Me.cbPosition.FormattingEnabled = True
-        Me.cbPosition.Location = New System.Drawing.Point(661, 70)
+        Me.cbPosition.Location = New System.Drawing.Point(691, 70)
         Me.cbPosition.Name = "cbPosition"
-        Me.cbPosition.Size = New System.Drawing.Size(224, 21)
+        Me.cbPosition.Size = New System.Drawing.Size(205, 21)
         Me.cbPosition.TabIndex = 5
         '
         'Label4
@@ -121,7 +129,7 @@ Partial Class UserForm
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(796, 25)
+        Me.btnSave.Location = New System.Drawing.Point(821, 22)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(89, 29)
         Me.btnSave.TabIndex = 10
@@ -130,10 +138,10 @@ Partial Class UserForm
         '
         'txtCPW
         '
-        Me.txtCPW.Location = New System.Drawing.Point(661, 110)
+        Me.txtCPW.Location = New System.Drawing.Point(691, 110)
         Me.txtCPW.Name = "txtCPW"
         Me.txtCPW.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtCPW.Size = New System.Drawing.Size(224, 20)
+        Me.txtCPW.Size = New System.Drawing.Size(205, 20)
         Me.txtCPW.TabIndex = 12
         '
         'Label6
@@ -145,11 +153,74 @@ Partial Class UserForm
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "Confirm Password:"
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 31)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(48, 13)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Address:"
+        '
+        'txtAddress
+        '
+        Me.txtAddress.Location = New System.Drawing.Point(79, 178)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Size = New System.Drawing.Size(201, 20)
+        Me.txtAddress.TabIndex = 13
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(287, 181)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(87, 13)
+        Me.Label8.TabIndex = 16
+        Me.Label8.Text = "Contact Number:"
+        '
+        'txtContactNo
+        '
+        Me.txtContactNo.Location = New System.Drawing.Point(380, 178)
+        Me.txtContactNo.Name = "txtContactNo"
+        Me.txtContactNo.Size = New System.Drawing.Size(175, 20)
+        Me.txtContactNo.TabIndex = 15
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(561, 181)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(116, 13)
+        Me.Label9.TabIndex = 17
+        Me.Label9.Text = "In Case Of Emergency:"
+        '
+        'txtInCaseOfEmergency
+        '
+        Me.txtInCaseOfEmergency.Location = New System.Drawing.Point(691, 178)
+        Me.txtInCaseOfEmergency.Name = "txtInCaseOfEmergency"
+        Me.txtInCaseOfEmergency.Size = New System.Drawing.Size(205, 20)
+        Me.txtInCaseOfEmergency.TabIndex = 18
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 150)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(898, 73)
+        Me.GroupBox1.TabIndex = 19
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Other Information"
+        '
         'UserForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(915, 183)
+        Me.ClientSize = New System.Drawing.Size(922, 251)
+        Me.Controls.Add(Me.txtInCaseOfEmergency)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.txtContactNo)
+        Me.Controls.Add(Me.txtAddress)
         Me.Controls.Add(Me.txtCPW)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnSave)
@@ -163,9 +234,12 @@ Partial Class UserForm
         Me.Controls.Add(Me.txtLN)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtFN)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "UserForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Form"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -184,4 +258,11 @@ Partial Class UserForm
     Friend WithEvents btnSave As Button
     Friend WithEvents txtCPW As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents txtAddress As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtContactNo As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txtInCaseOfEmergency As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

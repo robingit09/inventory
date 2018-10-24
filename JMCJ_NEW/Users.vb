@@ -25,7 +25,7 @@
 
                     Select Case .dr("status")
                         Case "0"
-                            status = "Inactive"
+                            status = "Deleted/Inactive"
                         Case "1"
                             status = "Active"
 
@@ -35,8 +35,8 @@
                     dgvUser.Rows.Add(row)
                 End While
                 For Each row As DataGridViewRow In dgvUser.Rows
-                    If row.Cells("status").Value = "Inactive" Then
-                        row.DefaultCellStyle.BackColor = Color.Yellow
+                    If row.Cells("status").Value = "Deleted/Inactive" Then
+                        row.DefaultCellStyle.BackColor = Drawing.Color.Yellow
                     End If
                 Next
             End If
@@ -64,6 +64,23 @@
             UserForm.ShowDialog()
         Else
             MsgBox("Please select one record!", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If dgvUser.SelectedRows.Count = 1 Then
+            Dim yesno As Integer = MsgBox("Are you sure you want to delete this record ? ", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
+
+            If yesno = DialogResult.Yes Then
+                Dim id As Integer = CInt(dgvUser.SelectedRows(0).Cells("id").Value)
+                Dim dbupdate As New DatabaseConnect
+                dbupdate.update_where("users", id, "status", 0)
+                Me.loadList("")
+                MsgBox("Users successfully deleted.", MsgBoxStyle.Information)
+            End If
+
+        Else
+                MsgBox("Please select one record!", MsgBoxStyle.Critical)
         End If
     End Sub
 End Class

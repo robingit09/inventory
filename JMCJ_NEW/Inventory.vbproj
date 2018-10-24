@@ -532,6 +532,18 @@
     <Compile Include="UserForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserGroupForm.Designer.vb">
+      <DependentUpon>UserGroupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserGroups.Designer.vb">
+      <DependentUpon>UserGroups.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroups.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Users.Designer.vb">
       <DependentUpon>Users.vb</DependentUpon>
     </Compile>
@@ -760,6 +772,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserGroupForm.resx">
+      <DependentUpon>UserGroupForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserGroups.resx">
+      <DependentUpon>UserGroups.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users.resx">
       <DependentUpon>Users.vb</DependentUpon>
