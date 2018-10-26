@@ -1,9 +1,6 @@
 ﻿Public Class SupplierProductSelection
     Public selectedSupplier As Integer = 0
     Public module_selection As Integer = 0
-    Private Sub SupplierProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Public Sub loadSupplierProducts(ByVal supplier As Integer)
         selectedSupplier = supplier
@@ -235,5 +232,17 @@
         SupplierProducts.ShowDialog()
     End Sub
 
-
+    Private Sub SupplierProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If module_selection = 5 Then
+            gpSupplier.Visible = False
+            txtSupplier.Visible = False
+            btnAddProducts.Visible = False
+            lblSupplier.Visible = False
+        Else
+            gpSupplier.Visible = True
+            txtSupplier.Visible = True
+            btnAddProducts.Visible = True
+            lblSupplier.Visible = True
+        End If
+    End Sub
 End Class

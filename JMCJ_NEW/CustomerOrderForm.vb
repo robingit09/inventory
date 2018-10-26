@@ -301,7 +301,7 @@
 
             Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
             If qty <= 0 And prod <> "" Then
-                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Red
+                dgvProd.Rows(item.Index).Cells("quantity").Style.BackColor = Drawing.Color.Orange
                 validate = True
             End If
         Next
@@ -320,12 +320,32 @@
             End If
 
             If sellprice <= 0.00 And prod <> "" Then
-                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.Red
+                dgvProd.Rows(item.Index).Cells("sell_price").Style.BackColor = Drawing.Color.Orange
                 validate = True
             End If
         Next
 
+        ' validation for stock
+        For Each item As DataGridViewRow In Me.dgvProd.Rows
+            Dim stock As Integer = 0
+
+            If IsNumeric(dgvProd.Rows(item.Index).Cells("stock").Value) Then
+                stock = CInt(dgvProd.Rows(item.Index).Cells("stock").Value)
+            Else
+                stock = 0
+            End If
+
+            Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+            If stock <= 0 And prod <> "" Then
+                dgvProd.Rows(item.Index).Cells("stock").Style.BackColor = Drawing.Color.Orange
+                validate = True
+            End If
+        Next
+        'end validation for stock
+
+
         If validate = True Then
+            MsgBox("Please check your product information.", MsgBoxStyle.Exclamation)
             err_ = True
             Return err_
         End If
@@ -1091,9 +1111,37 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If btnSave.Text = "Save" Then
+
+
+            ' validation for less than 20 stock
+            Dim hasless20 As Boolean = False
+            For Each item As DataGridViewRow In Me.dgvProd.Rows
+                Dim stock As Integer = 0
+
+                If IsNumeric(dgvProd.Rows(item.Index).Cells("stock").Value) Then
+                    stock = CInt(dgvProd.Rows(item.Index).Cells("stock").Value)
+                Else
+                    stock = 0
+                End If
+
+                Dim prod As String = dgvProd.Rows(item.Index).Cells("product").Value
+                If stock <= 20 And prod <> "" Then
+                    dgvProd.Rows(item.Index).Cells("stock").Style.BackColor = Drawing.Color.Yellow
+                    hasless20 = True
+                End If
+            Next
+
+            If hasless20 Then
+                MsgBox("The stock is less than/Equal to 20", MsgBoxStyle.Exclamation)
+            End If
+            'end validation for stock
+
             If (validator()) Then
                 Exit Sub
             End If
+
+
+            'end validation for stock
             insertData()
             clearfields()
             CustomerOrder.loadList("")

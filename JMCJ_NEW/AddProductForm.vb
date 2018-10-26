@@ -239,12 +239,13 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        btnSave.Enabled = False
         saveData()
         If from_module = 1 Then
             ' if from customer product selection
             CustomerProductSelection.loadCustomerProducts(Me.selectedCustomer)
         End If
-
+        btnSave.Enabled = True
     End Sub
 
     Private Sub saveData()

@@ -35,10 +35,11 @@ Partial Class SupplierProductSelection
         Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ckSelectAll = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblSupplier = New System.Windows.Forms.Label()
         Me.txtSupplier = New System.Windows.Forms.TextBox()
         Me.btnAddToOrder = New System.Windows.Forms.Button()
         Me.btnAddProducts = New System.Windows.Forms.Button()
+        Me.gpSupplier = New System.Windows.Forms.GroupBox()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,9 +47,9 @@ Partial Class SupplierProductSelection
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_cost, Me.column_stock, Me.column_cat, Me.column_subcat})
-        Me.dgvProducts.Location = New System.Drawing.Point(15, 102)
+        Me.dgvProducts.Location = New System.Drawing.Point(12, 104)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1255, 512)
+        Me.dgvProducts.Size = New System.Drawing.Size(1255, 474)
         Me.dgvProducts.TabIndex = 22
         '
         'column_id
@@ -131,25 +132,25 @@ Partial Class SupplierProductSelection
         Me.ckSelectAll.AutoSize = True
         Me.ckSelectAll.Checked = True
         Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(15, 69)
+        Me.ckSelectAll.Location = New System.Drawing.Point(15, 81)
         Me.ckSelectAll.Name = "ckSelectAll"
         Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
         Me.ckSelectAll.TabIndex = 25
         Me.ckSelectAll.Text = "Select All"
         Me.ckSelectAll.UseVisualStyleBackColor = True
         '
-        'Label1
+        'lblSupplier
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 30)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 13)
-        Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Supplier"
+        Me.lblSupplier.AutoSize = True
+        Me.lblSupplier.Location = New System.Drawing.Point(37, 36)
+        Me.lblSupplier.Name = "lblSupplier"
+        Me.lblSupplier.Size = New System.Drawing.Size(45, 13)
+        Me.lblSupplier.TabIndex = 26
+        Me.lblSupplier.Text = "Supplier"
         '
         'txtSupplier
         '
-        Me.txtSupplier.Location = New System.Drawing.Point(63, 27)
+        Me.txtSupplier.Location = New System.Drawing.Point(88, 33)
         Me.txtSupplier.Name = "txtSupplier"
         Me.txtSupplier.ReadOnly = True
         Me.txtSupplier.Size = New System.Drawing.Size(252, 20)
@@ -167,12 +168,20 @@ Partial Class SupplierProductSelection
         '
         'btnAddProducts
         '
-        Me.btnAddProducts.Location = New System.Drawing.Point(330, 27)
+        Me.btnAddProducts.Location = New System.Drawing.Point(355, 33)
         Me.btnAddProducts.Name = "btnAddProducts"
         Me.btnAddProducts.Size = New System.Drawing.Size(111, 23)
         Me.btnAddProducts.TabIndex = 29
         Me.btnAddProducts.Text = "Add Products"
         Me.btnAddProducts.UseVisualStyleBackColor = True
+        '
+        'gpSupplier
+        '
+        Me.gpSupplier.Location = New System.Drawing.Point(15, 17)
+        Me.gpSupplier.Name = "gpSupplier"
+        Me.gpSupplier.Size = New System.Drawing.Size(468, 49)
+        Me.gpSupplier.TabIndex = 30
+        Me.gpSupplier.TabStop = False
         '
         'SupplierProductSelection
         '
@@ -182,9 +191,10 @@ Partial Class SupplierProductSelection
         Me.Controls.Add(Me.btnAddProducts)
         Me.Controls.Add(Me.btnAddToOrder)
         Me.Controls.Add(Me.txtSupplier)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblSupplier)
         Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.dgvProducts)
+        Me.Controls.Add(Me.gpSupplier)
         Me.Name = "SupplierProductSelection"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Products"
@@ -196,7 +206,7 @@ Partial Class SupplierProductSelection
 
     Friend WithEvents dgvProducts As DataGridView
     Friend WithEvents ckSelectAll As CheckBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblSupplier As Label
     Friend WithEvents txtSupplier As TextBox
     Friend WithEvents btnAddToOrder As Button
     Friend WithEvents column_id As DataGridViewTextBoxColumn
@@ -211,4 +221,5 @@ Partial Class SupplierProductSelection
     Friend WithEvents column_cat As DataGridViewTextBoxColumn
     Friend WithEvents column_subcat As DataGridViewTextBoxColumn
     Friend WithEvents btnAddProducts As Button
+    Friend WithEvents gpSupplier As GroupBox
 End Class

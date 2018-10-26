@@ -121,6 +121,11 @@
                         If inlist = False Then
                             Dim row As String() = New String() {product_unit_id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
                             CustomerOrderForm.dgvProd.Rows.Add(row)
+                            Dim rowcount As Integer = CustomerOrderForm.dgvProd.Rows.Count
+                            If Val(stock) <= 0 Then
+                                CustomerOrderForm.dgvProd.Rows(rowcount - 2).Cells("stock").Style.ForeColor = Drawing.Color.Red
+                            End If
+
                         End If
                    ' from customer return
                     Case 2

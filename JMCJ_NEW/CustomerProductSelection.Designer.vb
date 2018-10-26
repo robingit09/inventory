@@ -50,7 +50,7 @@ Partial Class CustomerProductSelection
         Me.btnAddToOrder.Name = "btnAddToOrder"
         Me.btnAddToOrder.Size = New System.Drawing.Size(99, 39)
         Me.btnAddToOrder.TabIndex = 33
-        Me.btnAddToOrder.Text = "Add As Order"
+        Me.btnAddToOrder.Text = "Add"
         Me.btnAddToOrder.UseVisualStyleBackColor = True
         '
         'txtCustomer
@@ -185,7 +185,7 @@ Partial Class CustomerProductSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1373, 637)
+        Me.ClientSize = New System.Drawing.Size(1370, 637)
         Me.Controls.Add(Me.btnAddProduct)
         Me.Controls.Add(Me.btnAddToOrder)
         Me.Controls.Add(Me.txtCustomer)
