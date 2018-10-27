@@ -3,7 +3,7 @@
         loadList("")
     End Sub
 
-    Private Sub loadList(ByVal query As String)
+    Public Sub loadList(ByVal query As String)
 
         dgvUserGroup.Rows.Clear()
         Dim dbPO As New DatabaseConnect
@@ -44,5 +44,24 @@
             .cmd.Dispose()
             .con.Close()
         End With
+    End Sub
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        UserGroupForm.clearFields()
+        UserGroupForm.checkAll(True)
+        UserGroupForm.ShowDialog()
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        btnUpdate.Enabled = False
+        If dgvUserGroup.SelectedRows.Count = 1 Then
+            Dim id As Integer = CInt(dgvUserGroup.SelectedRows(0).Cells("id").Value.ToString)
+            UserGroupForm.loadInfo(id)
+            UserGroupForm.btnSave.Text = "Update"
+            UserGroupForm.ShowDialog()
+        Else
+            MsgBox("Please select one!", MsgBoxStyle.Critical)
+        End If
+        btnUpdate.Enabled = True
     End Sub
 End Class

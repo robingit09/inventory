@@ -467,7 +467,7 @@
             .cmd.Parameters.AddWithValue("@payment_status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-            .cmd.Parameters.AddWithValue("@processed_by", Main_form.auth_login)
+            .cmd.Parameters.AddWithValue("@processed_by", Main_form.current_user_id)
             .cmd.ExecuteNonQuery()
             .cmd.Dispose()
             .con.Close()
@@ -1097,4 +1097,5 @@
         SupplierForm.from_module = 3
         SupplierForm.ShowDialog()
     End Sub
+
 End Class

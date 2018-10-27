@@ -19,7 +19,7 @@
 
     Public Sub initialize()
         txtPCNO.Text = generatePCNO()
-        txtIssuedBy.Text = New DatabaseConnect().get_by_id("users", Main_form.auth_login, "first_name") & " " & New DatabaseConnect().get_by_id("users", Main_form.auth_login, "surname")
+        txtIssuedBy.Text = New DatabaseConnect().get_by_id("users", Main_form.current_user_id, "first_name") & " " & New DatabaseConnect().get_by_id("users", Main_form.current_user_id, "surname")
         dtp_r_date.Value = DateTime.Now
     End Sub
 
@@ -134,7 +134,7 @@
                 VALUES(?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@pc_no", generatePCNO())
             .cmd.Parameters.AddWithValue("@issued_by", Trim(txtIssuedBy.Text))
-            .cmd.Parameters.AddWithValue("@user_id", Main_form.auth_login)
+            .cmd.Parameters.AddWithValue("@user_id", Main_form.current_user_id)
             .cmd.Parameters.AddWithValue("@recorded_date", dtp_r_date.Value.Date.ToString)
             .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)

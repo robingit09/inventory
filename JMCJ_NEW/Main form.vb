@@ -1,6 +1,6 @@
 ﻿Public Class Main_form
 
-    Public auth_login As Integer = 1
+    Public current_user_id As Integer = 1
     Private Sub ProductToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ProductList.ShowDialog()
     End Sub

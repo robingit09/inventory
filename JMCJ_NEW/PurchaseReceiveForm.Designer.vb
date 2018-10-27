@@ -55,14 +55,6 @@ Partial Class PurchaseReceiveForm
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.gpFields = New System.Windows.Forms.GroupBox()
-        Me.btnAddSupplier = New System.Windows.Forms.Button()
-        Me.cbSupplier = New System.Windows.Forms.ComboBox()
-        Me.txtDrNo = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.lblTotalAmount = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,6 +67,14 @@ Partial Class PurchaseReceiveForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.gpFields = New System.Windows.Forms.GroupBox()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
+        Me.cbSupplier = New System.Windows.Forms.ComboBox()
+        Me.txtDrNo = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblTotalAmount = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -384,6 +384,78 @@ Partial Class PurchaseReceiveForm
         Me.dgvProd.Size = New System.Drawing.Size(1296, 288)
         Me.dgvProd.TabIndex = 89
         '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Qty"
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 80
+        '
+        'actual_quantity
+        '
+        Me.actual_quantity.HeaderText = "Actual Qty"
+        Me.actual_quantity.Name = "actual_quantity"
+        Me.actual_quantity.Width = 80
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 250
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
+        '
         'gpFields
         '
         Me.gpFields.Controls.Add(Me.btnAddSupplier)
@@ -479,78 +551,6 @@ Partial Class PurchaseReceiveForm
         Me.btnSelectProduct.TabIndex = 93
         Me.btnSelectProduct.Text = "Select Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
-        '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Qty"
-        Me.quantity.Name = "quantity"
-        Me.quantity.Width = 80
-        '
-        'actual_quantity
-        '
-        Me.actual_quantity.HeaderText = "Actual Qty"
-        Me.actual_quantity.Name = "actual_quantity"
-        Me.actual_quantity.Width = 80
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 250
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Unit Cost"
-        Me.cost.Name = "cost"
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
         '
         'PurchaseReceiveForm
         '

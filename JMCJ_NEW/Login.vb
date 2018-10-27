@@ -11,14 +11,14 @@
             .selectByQuery("select * from users where status = 1 and username = '" & Trim(txtUser.Text) & "' and password = '" & Trim(txtPW.Text) & "'")
             If .dr.HasRows Then
                 If .dr.Read Then
-                    Main_form.auth_login = CInt(.dr("id"))
+                    Main_form.current_user_id = CInt(.dr("id"))
                     Main_form.ShowDialog()
                     Me.Close()
                 End If
             Else
                 MsgBox("Incorrect username or password!", MsgBoxStyle.Critical)
                 txtPW.Text = ""
-                Main_form.auth_login = 0
+                Main_form.current_user_id = 0
             End If
 
         End With

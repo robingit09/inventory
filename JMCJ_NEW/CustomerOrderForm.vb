@@ -1079,7 +1079,7 @@
         If yesno = MsgBoxResult.Yes Then
             'update to checked
             Dim dbupdate As New DatabaseConnect
-            dbupdate.update_where("customer_orders", selectedID, "checked_by", Main_form.auth_login)
+            dbupdate.update_where("customer_orders", selectedID, "checked_by", Main_form.current_user_id)
             dbupdate.cmd.Dispose()
             dbupdate.con.Close()
             btnCheck.Enabled = False
@@ -1092,7 +1092,7 @@
         If yesno = MsgBoxResult.Yes Then
             'update to approved
             Dim dbupdate As New DatabaseConnect
-            dbupdate.update_where("customer_orders", selectedID, "approved_by", Main_form.auth_login)
+            dbupdate.update_where("customer_orders", selectedID, "approved_by", Main_form.current_user_id)
             dbupdate.cmd.Dispose()
             dbupdate.con.Close()
             btnApprove.Enabled = False
