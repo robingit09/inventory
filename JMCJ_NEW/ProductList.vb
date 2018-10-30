@@ -21,6 +21,14 @@
         loadSubCat()
         loadList("")
 
+        If ModelFunction.check_access(1, 1) = 1 Then
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
+
     End Sub
 
 
@@ -214,7 +222,7 @@
 
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
-                    Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, stock, cat, subcat}
+                    Dim row As String() = New String() {p_u_id, barcode, desc, brand, unit, color, price, stock, cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If
@@ -289,7 +297,9 @@
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If dgvProducts.SelectedRows.Count = 1 Then
-            Dim product_id As Integer = CInt(dgvProducts.SelectedRows(0).Cells(0).Value)
+            Dim p_u_id As Integer = CInt(dgvProducts.SelectedRows(0).Cells(0).Value)
+
+            Dim product_id As Integer = CInt(New DatabaseConnect().get_by_id("product_unit", p_u_id, "product_id"))
             ProductForm.selectedProduct = product_id
             ProductForm.btnSave.Text = "Update"
             ProductForm.populateCategory()
@@ -617,6 +627,26 @@
             selectedDesc = New DatabaseConnect().get_id("products", "description", txtProductDesc.Text)
         Else
             selectedDesc = 0
+        End If
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If dgvProducts.SelectedRows.Count = 0 Then
+            MsgBox("Please select one record!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Dim id As Integer = dgvProducts.SelectedRows(0).Cells(0).Value
+
+
+        Dim yn As Integer = MsgBox("Are you sure you want to delete this product ? ", MsgBoxStyle.YesNo + MsgBoxStyle.Information, Me.Text)
+        If yn = MsgBoxResult.Yes Then
+            Dim db As New DatabaseConnect
+            db.update_where("product_unit", id, "status", 0)
+            db.cmd.Dispose()
+            db.con.Close()
+            MsgBox("Product Successfully Deleted.", MsgBoxStyle.Information)
+            loadList("")
         End If
     End Sub
 End Class

@@ -31,6 +31,7 @@
         Else
             lblTest.Visible = False
         End If
+        ModelFunction.check_access(1, 1)
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick

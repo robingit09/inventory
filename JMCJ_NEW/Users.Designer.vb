@@ -23,27 +23,54 @@ Partial Class Users
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dgvUser = New System.Windows.Forms.DataGridView()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.position = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.first_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.last_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.created_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
         CType(Me.dgvUser, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgvUser
         '
         Me.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvUser.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.username, Me.position, Me.first_name, Me.last_name, Me.created, Me.status})
+        Me.dgvUser.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.username, Me.position, Me.first_name, Me.last_name, Me.created_at, Me.status})
         Me.dgvUser.Location = New System.Drawing.Point(28, 126)
         Me.dgvUser.Name = "dgvUser"
         Me.dgvUser.Size = New System.Drawing.Size(721, 462)
         Me.dgvUser.TabIndex = 0
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(28, 52)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 1
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(137, 52)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(246, 52)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 3
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -79,44 +106,17 @@ Partial Class Users
         Me.last_name.ReadOnly = True
         Me.last_name.Width = 130
         '
-        'created
+        'created_at
         '
-        Me.created.HeaderText = "Date Created"
-        Me.created.Name = "created"
-        Me.created.ReadOnly = True
+        Me.created_at.HeaderText = "Date Created"
+        Me.created_at.Name = "created_at"
+        Me.created_at.ReadOnly = True
         '
         'status
         '
         Me.status.HeaderText = "Status"
         Me.status.Name = "status"
         Me.status.ReadOnly = True
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Location = New System.Drawing.Point(28, 52)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 1
-        Me.btnAddNew.Text = "Add New"
-        Me.btnAddNew.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(137, 52)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 2
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(246, 52)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 3
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'Users
         '
@@ -136,14 +136,14 @@ Partial Class Users
     End Sub
 
     Friend WithEvents dgvUser As DataGridView
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnDelete As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents position As DataGridViewTextBoxColumn
     Friend WithEvents first_name As DataGridViewTextBoxColumn
     Friend WithEvents last_name As DataGridViewTextBoxColumn
-    Friend WithEvents created As DataGridViewTextBoxColumn
+    Friend WithEvents created_at As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents btnAddNew As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnDelete As Button
 End Class

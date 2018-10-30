@@ -379,4 +379,24 @@
             .cmd.Dispose()
         End With
     End Sub
+
+    Public Function check_access(ByVal module_id As Integer, ByVal action_id As Integer)
+        Dim access As Integer = 0
+        Dim user_group_id As Integer = CInt(New DatabaseConnect().get_by_id("users", Main_form.current_user_id, "user_group"))
+
+        Dim dbaccess As New DatabaseConnect
+        With dbaccess
+            .selectByQuery("select uaa.access from module_action as ma 
+            inner join user_action_access as uaa ON uaa.module_action_id = ma.id 
+            where uaa.user_group_id = " & user_group_id & " and ma.module_id = " & module_id & " and ma.action_id = " & action_id)
+
+            If .dr.Read Then
+                access = CInt(.dr("access"))
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+        End With
+        Return access
+    End Function
 End Module

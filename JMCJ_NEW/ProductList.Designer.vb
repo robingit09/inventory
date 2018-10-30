@@ -28,6 +28,16 @@ Partial Class ProductList
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
         Me.cbSubCat = New System.Windows.Forms.ComboBox()
@@ -46,18 +56,8 @@ Partial Class ProductList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -77,6 +77,85 @@ Partial Class ProductList
         Me.dgvProducts.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.dgvProducts.Size = New System.Drawing.Size(1379, 461)
         Me.dgvProducts.TabIndex = 20
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'ProductDesc
+        '
+        Me.ProductDesc.HeaderText = "Product Description"
+        Me.ProductDesc.Name = "ProductDesc"
+        Me.ProductDesc.ReadOnly = True
+        Me.ProductDesc.Width = 350
+        '
+        'Brand
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Brand.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Unit.DefaultCellStyle = DataGridViewCellStyle12
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Unit.Width = 110
+        '
+        'Color
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Color.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        Me.Color.Width = 110
+        '
+        'UnitPrice
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle14
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        Me.UnitPrice.Width = 160
+        '
+        'StockQty
+        '
+        Me.StockQty.HeaderText = "Stock Quantity"
+        Me.StockQty.Name = "StockQty"
+        Me.StockQty.ReadOnly = True
+        Me.StockQty.Width = 80
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        Me.Category.Width = 120
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 120
         '
         'GroupBox1
         '
@@ -263,15 +342,15 @@ Partial Class ProductList
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnDelete
         '
-        Me.Button4.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(280, 12)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(90, 34)
-        Me.Button4.TabIndex = 24
-        Me.Button4.Text = "Delete"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnDelete.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Location = New System.Drawing.Point(284, 12)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(90, 34)
+        Me.btnDelete.TabIndex = 24
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnPrint
         '
@@ -283,85 +362,6 @@ Partial Class ProductList
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'ProductDesc
-        '
-        Me.ProductDesc.HeaderText = "Product Description"
-        Me.ProductDesc.Name = "ProductDesc"
-        Me.ProductDesc.ReadOnly = True
-        Me.ProductDesc.Width = 350
-        '
-        'Brand
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Brand.DefaultCellStyle = DataGridViewCellStyle11
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Unit.DefaultCellStyle = DataGridViewCellStyle12
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Unit.Width = 110
-        '
-        'Color
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Color.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        Me.Color.Width = 110
-        '
-        'UnitPrice
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle14
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        Me.UnitPrice.Width = 160
-        '
-        'StockQty
-        '
-        Me.StockQty.HeaderText = "Stock Quantity"
-        Me.StockQty.Name = "StockQty"
-        Me.StockQty.ReadOnly = True
-        Me.StockQty.Width = 80
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        Me.Category.Width = 120
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
-        Me.Subcategory.Width = 120
-        '
         'ProductList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
@@ -369,7 +369,7 @@ Partial Class ProductList
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1370, 722)
         Me.Controls.Add(Me.btnPrint)
-        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.GroupBox1)
@@ -399,7 +399,7 @@ Partial Class ProductList
     Friend WithEvents btnFilter As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents cbSubCat As ComboBox
     Friend WithEvents Label7 As Label
     Friend WithEvents cbColor As ComboBox

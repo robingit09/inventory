@@ -24,4 +24,9 @@
         End With
     End Sub
 
+    Private Sub txtPW_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPW.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnLogin.PerformClick()
+        End If
+    End Sub
 End Class
