@@ -162,6 +162,17 @@
     Private Sub ProductMasterForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadCostHistory()
         loadPriceHistory()
+
+        'check user access
+        If ModelFunction.check_access(2, 1) = 1 Then
+            btnSave.Enabled = True
+            btnAddCost.Enabled = True
+            btnAddCPrice.Enabled = True
+        Else
+            btnSave.Enabled = False
+            btnAddCost.Enabled = False
+            btnAddCPrice.Enabled = False
+        End If
     End Sub
 
     Private Sub loadPriceHistory()

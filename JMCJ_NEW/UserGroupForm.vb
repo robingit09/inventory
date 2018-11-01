@@ -4,7 +4,7 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         btnSave.Enabled = False
         If btnSave.Text = "Save" Then
-
+            btnSave.Text = "Saving..."
             If validation() = False Then
                 Exit Sub
             End If
@@ -12,16 +12,18 @@
             clearFields()
             checkAll(False)
             UserGroups.loadList("")
+            btnSave.Text = "Save"
             Me.Close()
 
         ElseIf btnSave.Text = "Update" Then
-
+            btnSave.Text = "updating..."
             If validation() = False Then
                 Exit Sub
             End If
             updateData()
-
+            btnSave.Text = "Update"
         End If
+
         btnSave.Enabled = True
     End Sub
 
@@ -2153,4 +2155,7 @@
         reportModify.Checked = flag
     End Sub
 
+    Private Sub UserGroupForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        reportModify.Visible = False
+    End Sub
 End Class

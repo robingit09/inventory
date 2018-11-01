@@ -54,6 +54,17 @@
         getMonth()
         getYear()
 
+        'check user access
+        If ModelFunction.check_access(14, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
+
     End Sub
 
     Public Sub loadList(ByVal query As String)

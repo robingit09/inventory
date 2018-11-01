@@ -253,6 +253,19 @@
         loadColor()
         loadCat()
         loadSubCat()
+
+        'check user access
+        If ModelFunction.check_access(15, 1) = 1 Then
+            btnAdd.Enabled = True
+            btnUpdatePrice.Enabled = True
+            btnDeleteProduct.Enabled = True
+            btnAddCustomer.Enabled = True
+        Else
+            btnAdd.Enabled = False
+            btnUpdatePrice.Enabled = False
+            btnDeleteProduct.Enabled = False
+            btnAddCustomer.Enabled = False
+        End If
     End Sub
 
     Private Sub btnDeleteProduct_Click(sender As Object, e As EventArgs) Handles btnDeleteProduct.Click

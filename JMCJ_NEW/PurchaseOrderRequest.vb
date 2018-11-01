@@ -8,6 +8,17 @@
         getMonth()
         getYear()
         loadPOR("")
+
+        'check user access
+        If ModelFunction.check_access(9, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnView.Enabled = True
+            btnVoid.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnView.Enabled = False
+            btnVoid.Enabled = False
+        End If
     End Sub
     Public Sub loadPOR(ByVal query As String)
         dgvPO.Rows.Clear()

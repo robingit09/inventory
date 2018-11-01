@@ -5,6 +5,17 @@
         autocompleteCustomer()
         getMonth()
         getYear()
+
+        'check user access
+        If ModelFunction.check_access(17, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnView.Enabled = True
+            btnVoid.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnView.Enabled = False
+            btnVoid.Enabled = False
+        End If
     End Sub
 
     Public Sub loadList(ByVal query As String)

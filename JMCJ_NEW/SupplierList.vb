@@ -2,6 +2,17 @@
     Private Sub SupplierList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadlist("")
 
+        'check user access
+        If ModelFunction.check_access(11, 1) = 1 Then
+            btnAdd.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAdd.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
+
     End Sub
     Public Sub loadlist(ByVal key As String)
         dgvSupplier.Rows.Clear()

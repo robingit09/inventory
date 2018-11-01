@@ -1,6 +1,17 @@
 ﻿Public Class BrandList
     Private Sub BrandList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadBrand("")
+
+        'check user access
+        If ModelFunction.check_access(3, 1) = 1 Then
+            btnAdd.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAdd.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
     End Sub
 
     Public Sub loadBrand(ByVal q As String)

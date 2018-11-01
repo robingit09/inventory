@@ -4,6 +4,17 @@
         loadCustomer("")
         autocompleteCustomer()
         autocompleteCity()
+
+        'check user access
+        If ModelFunction.check_access(16, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
     End Sub
 
     Public Sub autocompleteCustomer()

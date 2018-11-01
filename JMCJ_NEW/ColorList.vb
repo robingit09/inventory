@@ -32,6 +32,17 @@
 
     Private Sub ColorList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadList("")
+
+        'check user access
+        If ModelFunction.check_access(5, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click

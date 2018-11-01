@@ -179,6 +179,17 @@
         loadledgertype()
         getPaymentMode()
         autocompleteCustomer()
+
+        'check user access
+        If ModelFunction.check_access(18, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
     End Sub
 
     Private Sub dgvLedger_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLedger.CellContentClick

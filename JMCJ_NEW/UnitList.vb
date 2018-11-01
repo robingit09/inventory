@@ -11,6 +11,17 @@
 
     Private Sub UnitList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadList("")
+
+        'check user access
+        If ModelFunction.check_access(4, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnUpdate.Enabled = True
+            btnDelete.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+        End If
     End Sub
 
     Public Sub loadList(ByVal q As String)

@@ -26,6 +26,8 @@ Partial Class UserGroupForm
         Me.txtPosition = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.gpUserAccess = New System.Windows.Forms.GroupBox()
+        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
+        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
         Me.GroupBox20 = New System.Windows.Forms.GroupBox()
         Me.reportModify = New System.Windows.Forms.CheckBox()
         Me.reportView = New System.Windows.Forms.CheckBox()
@@ -102,8 +104,6 @@ Partial Class UserGroupForm
         Me.productModify = New System.Windows.Forms.CheckBox()
         Me.productView = New System.Windows.Forms.CheckBox()
         Me.productEnable = New System.Windows.Forms.CheckBox()
-        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
-        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
         Me.gpUserAccess.SuspendLayout()
         Me.GroupBox20.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
@@ -180,6 +180,26 @@ Partial Class UserGroupForm
         Me.gpUserAccess.TabIndex = 3
         Me.gpUserAccess.TabStop = False
         Me.gpUserAccess.Text = "User Access"
+        '
+        'linkSelectAll
+        '
+        Me.linkSelectAll.AutoSize = True
+        Me.linkSelectAll.Location = New System.Drawing.Point(97, 16)
+        Me.linkSelectAll.Name = "linkSelectAll"
+        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
+        Me.linkSelectAll.TabIndex = 20
+        Me.linkSelectAll.TabStop = True
+        Me.linkSelectAll.Text = "Select All"
+        '
+        'linkUnselectAll
+        '
+        Me.linkUnselectAll.AutoSize = True
+        Me.linkUnselectAll.Location = New System.Drawing.Point(19, 16)
+        Me.linkUnselectAll.Name = "linkUnselectAll"
+        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
+        Me.linkUnselectAll.TabIndex = 19
+        Me.linkUnselectAll.TabStop = True
+        Me.linkUnselectAll.Text = "Unselect All"
         '
         'GroupBox20
         '
@@ -978,26 +998,6 @@ Partial Class UserGroupForm
         Me.productEnable.TabIndex = 0
         Me.productEnable.Text = "Enable"
         Me.productEnable.UseVisualStyleBackColor = True
-        '
-        'linkUnselectAll
-        '
-        Me.linkUnselectAll.AutoSize = True
-        Me.linkUnselectAll.Location = New System.Drawing.Point(19, 16)
-        Me.linkUnselectAll.Name = "linkUnselectAll"
-        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
-        Me.linkUnselectAll.TabIndex = 19
-        Me.linkUnselectAll.TabStop = True
-        Me.linkUnselectAll.Text = "Unselect All"
-        '
-        'linkSelectAll
-        '
-        Me.linkSelectAll.AutoSize = True
-        Me.linkSelectAll.Location = New System.Drawing.Point(97, 16)
-        Me.linkSelectAll.Name = "linkSelectAll"
-        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
-        Me.linkSelectAll.TabIndex = 20
-        Me.linkSelectAll.TabStop = True
-        Me.linkSelectAll.Text = "Select All"
         '
         'UserGroupForm
         '

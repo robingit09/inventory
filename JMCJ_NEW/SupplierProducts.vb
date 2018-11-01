@@ -13,7 +13,12 @@
     End Sub
 
     Private Sub SupplierProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'check user access
+        If ModelFunction.check_access(12, 1) = 1 Then
+            btnSave.Enabled = True
+        Else
+            btnSave.Enabled = False
+        End If
     End Sub
 
     Public Sub loadProducts(ByVal query As String)

@@ -58,6 +58,17 @@
         autocompleteSupplier()
         getMonth()
         getYear()
+
+        'check user access
+        If ModelFunction.check_access(13, 1) = 1 Then
+            btnAddNew.Enabled = True
+            btnView.Enabled = True
+            btnVoid.Enabled = True
+        Else
+            btnAddNew.Enabled = False
+            btnView.Enabled = False
+            btnVoid.Enabled = False
+        End If
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click

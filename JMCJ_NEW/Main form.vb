@@ -31,7 +31,157 @@
         Else
             lblTest.Visible = False
         End If
-        ModelFunction.check_access(1, 1)
+
+        ' check user access
+        Dim user_group_id As Integer = CInt(New DatabaseConnect().get_by_val("users", Me.current_user_id, "id", "user_group"))
+        If user_group_id = 1 Then
+            SystemToolStripMenuItem.Visible = True
+        Else
+            SystemToolStripMenuItem.Visible = False
+        End If
+
+        'check user view access
+        'product
+        If ModelFunction.check_access(1, 2) = 1 Then
+            ProductsToolStripMenuItem.Visible = True
+        Else
+            ProductsToolStripMenuItem.Visible = False
+        End If
+
+        'product master info
+        If ModelFunction.check_access(2, 2) = 1 Then
+            ProductMasterInformationToolStripMenuItem.Visible = True
+        Else
+            ProductMasterInformationToolStripMenuItem.Visible = False
+        End If
+
+        'brand  info
+        If ModelFunction.check_access(3, 2) = 1 Then
+            BrandToolStripMenuItem1.Visible = True
+        Else
+            BrandToolStripMenuItem1.Visible = False
+        End If
+
+        'unit  info
+        If ModelFunction.check_access(4, 2) = 1 Then
+            UnitToolStripMenuItem1.Visible = True
+        Else
+            UnitToolStripMenuItem1.Visible = False
+        End If
+
+        'color  info
+        If ModelFunction.check_access(5, 2) = 1 Then
+            ColorToolStripMenuItem1.Visible = True
+        Else
+            ColorToolStripMenuItem1.Visible = False
+        End If
+
+
+        'categories  info
+        If ModelFunction.check_access(6, 2) = 1 Then
+            CategoriesToolStripMenuItem1.Visible = True
+        Else
+            CategoriesToolStripMenuItem1.Visible = False
+        End If
+
+        If ModelFunction.check_access(1, 2) <> 1 And ModelFunction.check_access(2, 2) <> 1 And ModelFunction.check_access(3, 2) <> 1 And ModelFunction.check_access(4, 2) <> 1 And ModelFunction.check_access(5, 2) <> 1 And ModelFunction.check_access(6, 2) <> 1 Then
+            InventoryToolStripMenuItem.Visible = False
+
+        End If
+
+        'physical count info
+        If ModelFunction.check_access(7, 2) = 1 Then
+            PhysicalCountToolStripMenuItem.Visible = True
+        Else
+            PhysicalCountToolStripMenuItem.Visible = False
+        End If
+
+        'po  info
+        If ModelFunction.check_access(8, 2) = 1 Then
+            PurchaseOrderToolStripMenuItem2.Visible = True
+        Else
+            PurchaseOrderToolStripMenuItem2.Visible = False
+        End If
+
+        'por  info
+        If ModelFunction.check_access(9, 2) = 1 Then
+            PurchaseOrderRequestToolStripMenuItem.Visible = True
+        Else
+            PurchaseOrderRequestToolStripMenuItem.Visible = False
+        End If
+
+
+        'preceive  info
+        If ModelFunction.check_access(10, 2) = 1 Then
+            PurchaseReceiveToolStripMenuItem1.Visible = True
+        Else
+            PurchaseReceiveToolStripMenuItem1.Visible = False
+        End If
+
+        'suppliers  info
+        If ModelFunction.check_access(11, 2) = 1 Then
+            SupplierToolStripMenuItem1.Visible = True
+        Else
+            SupplierToolStripMenuItem1.Visible = False
+        End If
+
+        'supplier products info
+        If ModelFunction.check_access(12, 2) = 1 Then
+            SupplierProductsToolStripMenuItem.Visible = True
+        Else
+            SupplierProductsToolStripMenuItem.Visible = False
+        End If
+
+        'preturn info
+        If ModelFunction.check_access(13, 2) = 1 Then
+            PurchaseReturnToolStripMenuItem.Visible = True
+        Else
+            PurchaseReturnToolStripMenuItem.Visible = False
+        End If
+
+        'customer orders info
+        If ModelFunction.check_access(14, 2) = 1 Then
+            CustomerToolStripMenuItem1.Visible = True
+        Else
+            CustomerToolStripMenuItem1.Visible = False
+        End If
+
+        'pricing info
+        If ModelFunction.check_access(15, 2) = 1 Then
+            PricingToolStripMenuItem.Visible = True
+        Else
+            PricingToolStripMenuItem.Visible = False
+        End If
+
+        'customers info
+        If ModelFunction.check_access(16, 2) = 1 Then
+            CustomerToolStripMenuItem2.Visible = True
+        Else
+            CustomerToolStripMenuItem2.Visible = False
+        End If
+
+        'customer return info
+        If ModelFunction.check_access(17, 2) = 1 Then
+            CustomerReturnToolStripMenuItem.Visible = True
+        Else
+            CustomerReturnToolStripMenuItem.Visible = False
+        End If
+
+        'ledger info
+        If ModelFunction.check_access(18, 2) = 1 Then
+            LedgerToolStripMenuItem.Visible = True
+        Else
+            LedgerToolStripMenuItem.Visible = False
+        End If
+
+
+        'reports info
+        If ModelFunction.check_access(19, 2) = 1 Then
+            ReportsToolStripMenuItem.Visible = True
+        Else
+            ReportsToolStripMenuItem.Visible = False
+        End If
+
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
