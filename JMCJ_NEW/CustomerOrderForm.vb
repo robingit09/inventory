@@ -1050,6 +1050,7 @@
                         Dim row As String() = New String() {id, barcode, "", desc, brand, unit, color, price, "", "Add less", "Reset", sell_price, "0.00", stock, "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
+                        txtEnterBarcode.Focus()
                     End If
 
                     .dr.Close()

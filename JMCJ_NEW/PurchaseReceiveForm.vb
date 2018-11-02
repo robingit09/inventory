@@ -44,9 +44,6 @@
         dgvProd.Rows.Clear()
 
     End Sub
-    Private Sub PurchaseReceive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Public Sub initialize()
         loadPO()
@@ -890,6 +887,7 @@
                         Dim row As String() = New String() {id, barcode, "0", "0", desc, brand, unit, color, cost, "", stock, "Remove"}
                         dgvProd.Rows.Add(row)
                         txtEnterBarcode.Text = ""
+                        txtEnterBarcode.Focus()
                     End If
 
                     .dr.Close()
