@@ -238,9 +238,9 @@ Partial Class UserGroupForm
         Me.reportEnable.AutoSize = True
         Me.reportEnable.Location = New System.Drawing.Point(6, 19)
         Me.reportEnable.Name = "reportEnable"
-        Me.reportEnable.Size = New System.Drawing.Size(59, 17)
+        Me.reportEnable.Size = New System.Drawing.Size(70, 17)
         Me.reportEnable.TabIndex = 0
-        Me.reportEnable.Text = "Enable"
+        Me.reportEnable.Text = "Select All"
         Me.reportEnable.UseVisualStyleBackColor = True
         '
         'GroupBox19
@@ -280,9 +280,9 @@ Partial Class UserGroupForm
         Me.ledgerEnable.AutoSize = True
         Me.ledgerEnable.Location = New System.Drawing.Point(6, 19)
         Me.ledgerEnable.Name = "ledgerEnable"
-        Me.ledgerEnable.Size = New System.Drawing.Size(59, 17)
+        Me.ledgerEnable.Size = New System.Drawing.Size(70, 17)
         Me.ledgerEnable.TabIndex = 0
-        Me.ledgerEnable.Text = "Enable"
+        Me.ledgerEnable.Text = "Select All"
         Me.ledgerEnable.UseVisualStyleBackColor = True
         '
         'GroupBox18
@@ -322,9 +322,9 @@ Partial Class UserGroupForm
         Me.crEnable.AutoSize = True
         Me.crEnable.Location = New System.Drawing.Point(6, 19)
         Me.crEnable.Name = "crEnable"
-        Me.crEnable.Size = New System.Drawing.Size(59, 17)
+        Me.crEnable.Size = New System.Drawing.Size(70, 17)
         Me.crEnable.TabIndex = 0
-        Me.crEnable.Text = "Enable"
+        Me.crEnable.Text = "Select All"
         Me.crEnable.UseVisualStyleBackColor = True
         '
         'GroupBox17
@@ -364,9 +364,9 @@ Partial Class UserGroupForm
         Me.cEnable.AutoSize = True
         Me.cEnable.Location = New System.Drawing.Point(6, 19)
         Me.cEnable.Name = "cEnable"
-        Me.cEnable.Size = New System.Drawing.Size(59, 17)
+        Me.cEnable.Size = New System.Drawing.Size(70, 17)
         Me.cEnable.TabIndex = 0
-        Me.cEnable.Text = "Enable"
+        Me.cEnable.Text = "Select All"
         Me.cEnable.UseVisualStyleBackColor = True
         '
         'GroupBox16
@@ -406,9 +406,9 @@ Partial Class UserGroupForm
         Me.pricingEnable.AutoSize = True
         Me.pricingEnable.Location = New System.Drawing.Point(6, 19)
         Me.pricingEnable.Name = "pricingEnable"
-        Me.pricingEnable.Size = New System.Drawing.Size(59, 17)
+        Me.pricingEnable.Size = New System.Drawing.Size(70, 17)
         Me.pricingEnable.TabIndex = 0
-        Me.pricingEnable.Text = "Enable"
+        Me.pricingEnable.Text = "Select All"
         Me.pricingEnable.UseVisualStyleBackColor = True
         '
         'GroupBox15
@@ -448,9 +448,9 @@ Partial Class UserGroupForm
         Me.coEnable.AutoSize = True
         Me.coEnable.Location = New System.Drawing.Point(6, 19)
         Me.coEnable.Name = "coEnable"
-        Me.coEnable.Size = New System.Drawing.Size(59, 17)
+        Me.coEnable.Size = New System.Drawing.Size(70, 17)
         Me.coEnable.TabIndex = 0
-        Me.coEnable.Text = "Enable"
+        Me.coEnable.Text = "Select All"
         Me.coEnable.UseVisualStyleBackColor = True
         '
         'GroupBox14
@@ -490,9 +490,9 @@ Partial Class UserGroupForm
         Me.preturnEnable.AutoSize = True
         Me.preturnEnable.Location = New System.Drawing.Point(6, 19)
         Me.preturnEnable.Name = "preturnEnable"
-        Me.preturnEnable.Size = New System.Drawing.Size(59, 17)
+        Me.preturnEnable.Size = New System.Drawing.Size(70, 17)
         Me.preturnEnable.TabIndex = 0
-        Me.preturnEnable.Text = "Enable"
+        Me.preturnEnable.Text = "Select All"
         Me.preturnEnable.UseVisualStyleBackColor = True
         '
         'GroupBox13
@@ -532,9 +532,9 @@ Partial Class UserGroupForm
         Me.supplierproductEnable.AutoSize = True
         Me.supplierproductEnable.Location = New System.Drawing.Point(6, 19)
         Me.supplierproductEnable.Name = "supplierproductEnable"
-        Me.supplierproductEnable.Size = New System.Drawing.Size(59, 17)
+        Me.supplierproductEnable.Size = New System.Drawing.Size(70, 17)
         Me.supplierproductEnable.TabIndex = 0
-        Me.supplierproductEnable.Text = "Enable"
+        Me.supplierproductEnable.Text = "Select All"
         Me.supplierproductEnable.UseVisualStyleBackColor = True
         '
         'GroupBox12
@@ -574,9 +574,9 @@ Partial Class UserGroupForm
         Me.supplierEnable.AutoSize = True
         Me.supplierEnable.Location = New System.Drawing.Point(6, 19)
         Me.supplierEnable.Name = "supplierEnable"
-        Me.supplierEnable.Size = New System.Drawing.Size(59, 17)
+        Me.supplierEnable.Size = New System.Drawing.Size(70, 17)
         Me.supplierEnable.TabIndex = 0
-        Me.supplierEnable.Text = "Enable"
+        Me.supplierEnable.Text = "Select All"
         Me.supplierEnable.UseVisualStyleBackColor = True
         '
         'GroupBox11
@@ -616,9 +616,9 @@ Partial Class UserGroupForm
         Me.prEnable.AutoSize = True
         Me.prEnable.Location = New System.Drawing.Point(6, 19)
         Me.prEnable.Name = "prEnable"
-        Me.prEnable.Size = New System.Drawing.Size(59, 17)
+        Me.prEnable.Size = New System.Drawing.Size(70, 17)
         Me.prEnable.TabIndex = 0
-        Me.prEnable.Text = "Enable"
+        Me.prEnable.Text = "Select All"
         Me.prEnable.UseVisualStyleBackColor = True
         '
         'GroupBox8
@@ -658,9 +658,9 @@ Partial Class UserGroupForm
         Me.pcEnable.AutoSize = True
         Me.pcEnable.Location = New System.Drawing.Point(6, 19)
         Me.pcEnable.Name = "pcEnable"
-        Me.pcEnable.Size = New System.Drawing.Size(59, 17)
+        Me.pcEnable.Size = New System.Drawing.Size(70, 17)
         Me.pcEnable.TabIndex = 0
-        Me.pcEnable.Text = "Enable"
+        Me.pcEnable.Text = "Select All"
         Me.pcEnable.UseVisualStyleBackColor = True
         '
         'GroupBox10
@@ -700,9 +700,9 @@ Partial Class UserGroupForm
         Me.porEnable.AutoSize = True
         Me.porEnable.Location = New System.Drawing.Point(6, 19)
         Me.porEnable.Name = "porEnable"
-        Me.porEnable.Size = New System.Drawing.Size(59, 17)
+        Me.porEnable.Size = New System.Drawing.Size(70, 17)
         Me.porEnable.TabIndex = 0
-        Me.porEnable.Text = "Enable"
+        Me.porEnable.Text = "Select All"
         Me.porEnable.UseVisualStyleBackColor = True
         '
         'GroupBox9
@@ -742,9 +742,9 @@ Partial Class UserGroupForm
         Me.poEnable.AutoSize = True
         Me.poEnable.Location = New System.Drawing.Point(6, 19)
         Me.poEnable.Name = "poEnable"
-        Me.poEnable.Size = New System.Drawing.Size(59, 17)
+        Me.poEnable.Size = New System.Drawing.Size(70, 17)
         Me.poEnable.TabIndex = 0
-        Me.poEnable.Text = "Enable"
+        Me.poEnable.Text = "Select All"
         Me.poEnable.UseVisualStyleBackColor = True
         '
         'GroupBox7
@@ -784,9 +784,9 @@ Partial Class UserGroupForm
         Me.categoryEnable.AutoSize = True
         Me.categoryEnable.Location = New System.Drawing.Point(6, 19)
         Me.categoryEnable.Name = "categoryEnable"
-        Me.categoryEnable.Size = New System.Drawing.Size(59, 17)
+        Me.categoryEnable.Size = New System.Drawing.Size(70, 17)
         Me.categoryEnable.TabIndex = 0
-        Me.categoryEnable.Text = "Enable"
+        Me.categoryEnable.Text = "Select All"
         Me.categoryEnable.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -826,9 +826,9 @@ Partial Class UserGroupForm
         Me.colorEnable.AutoSize = True
         Me.colorEnable.Location = New System.Drawing.Point(6, 19)
         Me.colorEnable.Name = "colorEnable"
-        Me.colorEnable.Size = New System.Drawing.Size(59, 17)
+        Me.colorEnable.Size = New System.Drawing.Size(70, 17)
         Me.colorEnable.TabIndex = 0
-        Me.colorEnable.Text = "Enable"
+        Me.colorEnable.Text = "Select All"
         Me.colorEnable.UseVisualStyleBackColor = True
         '
         'GroupBox5
@@ -868,9 +868,9 @@ Partial Class UserGroupForm
         Me.unitEnable.AutoSize = True
         Me.unitEnable.Location = New System.Drawing.Point(6, 19)
         Me.unitEnable.Name = "unitEnable"
-        Me.unitEnable.Size = New System.Drawing.Size(59, 17)
+        Me.unitEnable.Size = New System.Drawing.Size(70, 17)
         Me.unitEnable.TabIndex = 0
-        Me.unitEnable.Text = "Enable"
+        Me.unitEnable.Text = "Select All"
         Me.unitEnable.UseVisualStyleBackColor = True
         '
         'GroupBox4
@@ -910,9 +910,9 @@ Partial Class UserGroupForm
         Me.brandEnable.AutoSize = True
         Me.brandEnable.Location = New System.Drawing.Point(6, 19)
         Me.brandEnable.Name = "brandEnable"
-        Me.brandEnable.Size = New System.Drawing.Size(59, 17)
+        Me.brandEnable.Size = New System.Drawing.Size(70, 17)
         Me.brandEnable.TabIndex = 0
-        Me.brandEnable.Text = "Enable"
+        Me.brandEnable.Text = "Select All"
         Me.brandEnable.UseVisualStyleBackColor = True
         '
         'GroupBox3
@@ -952,9 +952,9 @@ Partial Class UserGroupForm
         Me.pMasterEnable.AutoSize = True
         Me.pMasterEnable.Location = New System.Drawing.Point(6, 19)
         Me.pMasterEnable.Name = "pMasterEnable"
-        Me.pMasterEnable.Size = New System.Drawing.Size(59, 17)
+        Me.pMasterEnable.Size = New System.Drawing.Size(70, 17)
         Me.pMasterEnable.TabIndex = 0
-        Me.pMasterEnable.Text = "Enable"
+        Me.pMasterEnable.Text = "Select All"
         Me.pMasterEnable.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -994,9 +994,9 @@ Partial Class UserGroupForm
         Me.productEnable.AutoSize = True
         Me.productEnable.Location = New System.Drawing.Point(6, 19)
         Me.productEnable.Name = "productEnable"
-        Me.productEnable.Size = New System.Drawing.Size(59, 17)
+        Me.productEnable.Size = New System.Drawing.Size(70, 17)
         Me.productEnable.TabIndex = 0
-        Me.productEnable.Text = "Enable"
+        Me.productEnable.Text = "Select All"
         Me.productEnable.UseVisualStyleBackColor = True
         '
         'UserGroupForm

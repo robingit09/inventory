@@ -23,6 +23,8 @@ Partial Class PhysicalCountForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbStockType = New System.Windows.Forms.ComboBox()
         Me.txtIssuedBy = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.dtp_r_date = New System.Windows.Forms.DateTimePicker()
@@ -44,7 +46,6 @@ Partial Class PhysicalCountForm
         Me.Label17 = New System.Windows.Forms.Label()
         Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +55,7 @@ Partial Class PhysicalCountForm
         Me.actual_count = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.system_count = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -62,6 +64,8 @@ Partial Class PhysicalCountForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.cbStockType)
         Me.GroupBox1.Controls.Add(Me.txtIssuedBy)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.dtp_r_date)
@@ -70,13 +74,30 @@ Partial Class PhysicalCountForm
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(659, 97)
+        Me.GroupBox1.Size = New System.Drawing.Size(983, 97)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(7, 61)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(52, 13)
+        Me.Label3.TabIndex = 14
+        Me.Label3.Text = "Stocking:"
+        '
+        'cbStockType
+        '
+        Me.cbStockType.FormattingEnabled = True
+        Me.cbStockType.Location = New System.Drawing.Point(78, 58)
+        Me.cbStockType.Name = "cbStockType"
+        Me.cbStockType.Size = New System.Drawing.Size(250, 21)
+        Me.cbStockType.TabIndex = 13
+        '
         'txtIssuedBy
         '
-        Me.txtIssuedBy.Location = New System.Drawing.Point(78, 57)
+        Me.txtIssuedBy.Location = New System.Drawing.Point(405, 19)
         Me.txtIssuedBy.Name = "txtIssuedBy"
         Me.txtIssuedBy.Size = New System.Drawing.Size(250, 20)
         Me.txtIssuedBy.TabIndex = 12
@@ -84,7 +105,7 @@ Partial Class PhysicalCountForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 60)
+        Me.Label2.Location = New System.Drawing.Point(334, 22)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(56, 13)
         Me.Label2.TabIndex = 11
@@ -92,7 +113,7 @@ Partial Class PhysicalCountForm
         '
         'dtp_r_date
         '
-        Me.dtp_r_date.Location = New System.Drawing.Point(423, 19)
+        Me.dtp_r_date.Location = New System.Drawing.Point(750, 19)
         Me.dtp_r_date.Name = "dtp_r_date"
         Me.dtp_r_date.Size = New System.Drawing.Size(208, 20)
         Me.dtp_r_date.TabIndex = 10
@@ -100,7 +121,7 @@ Partial Class PhysicalCountForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(334, 22)
+        Me.Label5.Location = New System.Drawing.Point(661, 22)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(83, 13)
         Me.Label5.TabIndex = 9
@@ -273,15 +294,6 @@ Partial Class PhysicalCountForm
         Me.dgvProd.Size = New System.Drawing.Size(1229, 422)
         Me.dgvProd.TabIndex = 75
         '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(1070, 13)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(167, 31)
-        Me.btnSave.TabIndex = 77
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
         'id
         '
         Me.id.HeaderText = "ID"
@@ -335,6 +347,15 @@ Partial Class PhysicalCountForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(1070, 13)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(167, 31)
+        Me.btnSave.TabIndex = 77
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'PhysicalCountForm
         '
@@ -393,4 +414,6 @@ Partial Class PhysicalCountForm
     Friend WithEvents actual_count As DataGridViewTextBoxColumn
     Friend WithEvents system_count As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cbStockType As ComboBox
 End Class

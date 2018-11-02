@@ -332,8 +332,9 @@
     End Sub
 
     Private Sub PhysicalCountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PhysicalCountToolStripMenuItem.Click
+
         PhysicalCount.ShowDialog()
-        'PhysicalCountForm.ShowDialog()
+
     End Sub
 
     Private Sub UsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsersToolStripMenuItem.Click

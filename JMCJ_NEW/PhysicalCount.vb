@@ -73,6 +73,7 @@
         End If
 
         Dim id As Integer = Val(dgvPC.SelectedRows(0).Cells("id").Value)
+        PhysicalCountForm.initialize()
         PhysicalCountForm.loadInfo(id)
         PhysicalCountForm.freeView(True)
         PhysicalCountForm.ShowDialog()
@@ -98,6 +99,54 @@
             db.update_where("physical_count", pc_id, "status", 0)
             db.cmd.Dispose()
             db.con.Close()
+
+            Dim stock_type As Integer = CInt(New DatabaseConnect().get_by_id("physical_count", pc_id, "stock_type"))
+
+            'void decrease stock
+            Dim dbprod As New DatabaseConnect()
+            With dbprod
+                .selectByQuery("Select product_unit_id,system_count from physical_count_products where physical_count_id = " & pc_id)
+                If .dr.HasRows Then
+                    While .dr.Read
+                        Dim product_unit_id As Integer = .dr("product_unit_id")
+                        Dim system_count As Integer = .dr("system_count")
+                        If stock_type = 1 Then
+                            'decrease stock
+                            Dim editstock As New DatabaseConnect
+                            With editstock
+                                .cmd.Connection = .con
+                                .cmd.CommandType = CommandType.Text
+                                .cmd.CommandText = "UPDATE product_stocks set [qty] = " & system_count & " where product_unit_id = " & product_unit_id
+                                .cmd.ExecuteNonQuery()
+                                .cmd.Dispose()
+                                .con.Close()
+                            End With
+                        End If
+
+                        If stock_type = 2 Then
+                            'decrease stock
+                            Dim decreasestock As New DatabaseConnect
+                            With decreasestock
+                                Dim temp As String = New DatabaseConnect().get_by_val("product_stocks", product_unit_id, "product_unit_id", "qty")
+                                Dim cur_stock As Integer = Val(temp)
+                                Dim qty As Integer = New DatabaseConnect().get_by_val("physical_count_products", product_unit_id, "product_unit_id", "actual_count")
+                                cur_stock = cur_stock - Val(qty)
+
+                                .cmd.Connection = .con
+                                .cmd.CommandType = CommandType.Text
+                                .cmd.CommandText = "UPDATE product_stocks set [qty] = " & cur_stock & " where product_unit_id = " & product_unit_id
+                                .cmd.ExecuteNonQuery()
+                                .cmd.Dispose()
+                                .con.Close()
+                            End With
+                        End If
+
+                    End While
+                End If
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End With
             MsgBox("Physical Count Successfully Voided.", MsgBoxStyle.Information)
             loadList("")
         End If

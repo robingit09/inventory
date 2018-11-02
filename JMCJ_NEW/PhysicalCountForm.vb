@@ -1,6 +1,7 @@
 ﻿Public Class PhysicalCountForm
 
     Public selectedPC As Integer = 0
+    Public selectedStockType As Integer = 1
     Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
         SupplierProductSelection.module_selection = 5
         SupplierProductSelection.loadSupplierProducts(0)
@@ -21,13 +22,19 @@
         txtPCNO.Text = generatePCNO()
         txtIssuedBy.Text = New DatabaseConnect().get_by_id("users", Main_form.current_user_id, "first_name") & " " & New DatabaseConnect().get_by_id("users", Main_form.current_user_id, "surname")
         dtp_r_date.Value = DateTime.Now
+        loadStockType()
     End Sub
 
-    Private Sub PhysicalCountForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Private Sub loadStockType()
+        cbStockType.DataSource = Nothing
+        cbStockType.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(1, "Stock Adjustment")
+        comboSource.Add(2, "Stock Additional")
+        cbStockType.DataSource = New BindingSource(comboSource, Nothing)
+        cbStockType.DisplayMember = "Value"
+        cbStockType.ValueMember = "Key"
     End Sub
-
-
 
     Private Function generatePCNO()
         Dim result As String = ""
@@ -130,12 +137,13 @@
         With insertPC
             .cmd.Connection = .con
             .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO physical_count (pc_no,issued_by,user_id,recorded_date,status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?)"
+            .cmd.CommandText = "INSERT INTO physical_count (pc_no,issued_by,user_id,recorded_date,stock_type,status,created_at,updated_at)
+                VALUES(?,?,?,?,?,?,?,?)"
             .cmd.Parameters.AddWithValue("@pc_no", generatePCNO())
             .cmd.Parameters.AddWithValue("@issued_by", Trim(txtIssuedBy.Text))
             .cmd.Parameters.AddWithValue("@user_id", Main_form.current_user_id)
             .cmd.Parameters.AddWithValue("@recorded_date", dtp_r_date.Value.Date.ToString)
+            .cmd.Parameters.AddWithValue("@stock_type", selectedStockType)
             .cmd.Parameters.AddWithValue("@status", 1)
             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -169,10 +177,14 @@
                     .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                     .cmd.ExecuteNonQuery()
                     .cmd.Parameters.Clear()
-                    ModelFunction.adjuststock(product_unit_id, actual_count)
 
+                    ' stock update
+                    If selectedStockType = 1 Then
+                        ModelFunction.adjuststock(product_unit_id, actual_count)
+                    ElseIf selectedStockType = 2 Then
+                        ModelFunction.update_stock(product_unit_id, actual_count, "+")
+                    End If
                 End If
-
 
             Next
             .cmd.Dispose()
@@ -198,6 +210,7 @@
 
     Public Sub clearFields()
         selectedPC = 0
+        selectedStockType = 1
         txtPCNO.Text = ""
         txtIssuedBy.Text = ""
         dtp_r_date.Value = DateTime.Now
@@ -210,6 +223,12 @@
         Dim recorded_date As String = New DatabaseConnect().get_by_id("physical_count", id, "recorded_date")
         dtp_r_date.Value = recorded_date
         txtIssuedBy.Text = New DatabaseConnect().get_by_id("physical_count", id, "issued_by")
+        Dim stock_type As Integer = CInt(New DatabaseConnect().get_by_id("physical_count", id, "stock_type"))
+        If stock_type = 1 Then
+            cbStockType.SelectedIndex = 0
+        ElseIf stock_type = 2 Then
+            cbStockType.SelectedIndex = 1
+        End If
 
         Dim dbprod As New DatabaseConnect()
         dgvProd.Rows.Clear()
@@ -255,6 +274,8 @@
 
             btnSelectProduct.Enabled = False
             btnSave.Enabled = False
+
+            cbStockType.Enabled = False
         Else
             txtPCNO.Enabled = True
             txtIssuedBy.Enabled = True
@@ -265,7 +286,17 @@
 
             btnSelectProduct.Enabled = True
             btnSave.Enabled = True
+
+            cbStockType.Enabled = True
         End If
 
+    End Sub
+
+    Private Sub cbStockType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStockType.SelectedIndexChanged
+        If cbStockType.SelectedIndex > -1 Then
+            Dim key As String = DirectCast(cbStockType.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbStockType.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedStockType = key
+        End If
     End Sub
 End Class

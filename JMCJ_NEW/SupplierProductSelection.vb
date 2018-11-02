@@ -5,6 +5,7 @@
     Public Sub loadSupplierProducts(ByVal supplier As Integer)
         selectedSupplier = supplier
         dgvProducts.Rows.Clear()
+        ckSelectAll.Checked = True
         Dim db As New DatabaseConnect
         With db
             Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM (((((((((products as p 

@@ -2,9 +2,10 @@
 
     Public selectedUserGroup As Integer = 0
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        btnSave.Text = "Saving..."
         btnSave.Enabled = False
         If btnSave.Text = "Save" Then
-            btnSave.Text = "Saving..."
+
             If validation() = False Then
                 Exit Sub
             End If
@@ -16,7 +17,7 @@
             Me.Close()
 
         ElseIf btnSave.Text = "Update" Then
-            btnSave.Text = "updating..."
+
             If validation() = False Then
                 Exit Sub
             End If
@@ -2157,5 +2158,185 @@
 
     Private Sub UserGroupForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         reportModify.Visible = False
+    End Sub
+
+    Private Sub productEnable_CheckedChanged(sender As Object, e As EventArgs) Handles productEnable.CheckedChanged
+        If productEnable.Checked = True Then
+            productModify.Checked = True
+            productView.Checked = True
+        Else
+            productModify.Checked = False
+            productView.Checked = False
+        End If
+    End Sub
+
+    Private Sub pMasterEnable_CheckedChanged(sender As Object, e As EventArgs) Handles pMasterEnable.CheckedChanged
+        If pMasterEnable.Checked = True Then
+            pMasterModify.Checked = True
+            pMasterView.Checked = True
+        Else
+            pMasterModify.Checked = False
+            pMasterView.Checked = False
+        End If
+    End Sub
+
+    Private Sub brandEnable_CheckedChanged(sender As Object, e As EventArgs) Handles brandEnable.CheckedChanged
+        If brandEnable.Checked = True Then
+            brandModify.Checked = True
+            brandView.Checked = True
+        Else
+            brandModify.Checked = False
+            brandView.Checked = False
+        End If
+    End Sub
+
+    Private Sub unitEnable_CheckedChanged(sender As Object, e As EventArgs) Handles unitEnable.CheckedChanged
+        If unitEnable.Checked = True Then
+            unitModify.Checked = True
+            unitView.Checked = True
+        Else
+            unitModify.Checked = False
+            unitView.Checked = False
+        End If
+    End Sub
+
+    Private Sub colorEnable_CheckedChanged(sender As Object, e As EventArgs) Handles colorEnable.CheckedChanged
+        If colorEnable.Checked = True Then
+            colorModify.Checked = True
+            colorView.Checked = True
+        Else
+            colorModify.Checked = False
+            colorView.Checked = False
+        End If
+    End Sub
+
+    Private Sub categoryEnable_CheckedChanged(sender As Object, e As EventArgs) Handles categoryEnable.CheckedChanged
+        If categoryEnable.Checked = True Then
+            categoryModify.Checked = True
+            categoryView.Checked = True
+        Else
+            categoryModify.Checked = False
+            categoryView.Checked = False
+        End If
+    End Sub
+
+    Private Sub pcEnable_CheckedChanged(sender As Object, e As EventArgs) Handles pcEnable.CheckedChanged
+        If pcEnable.Checked = True Then
+            pcModify.Checked = True
+            pcView.Checked = True
+        Else
+            pcModify.Checked = False
+            pcView.Checked = False
+        End If
+    End Sub
+
+    Private Sub poEnable_CheckedChanged(sender As Object, e As EventArgs) Handles poEnable.CheckedChanged
+        If poEnable.Checked = True Then
+            poModify.Checked = True
+            poView.Checked = True
+        Else
+            poModify.Checked = False
+            poView.Checked = False
+        End If
+    End Sub
+
+    Private Sub porEnable_CheckedChanged(sender As Object, e As EventArgs) Handles porEnable.CheckedChanged
+        If porEnable.Checked = True Then
+            porModify.Checked = True
+            porView.Checked = True
+        Else
+            porModify.Checked = False
+            porView.Checked = False
+        End If
+    End Sub
+
+    Private Sub prEnable_CheckedChanged(sender As Object, e As EventArgs) Handles prEnable.CheckedChanged
+        If prEnable.Checked = True Then
+            prModify.Checked = True
+            prView.Checked = True
+        Else
+            prModify.Checked = False
+            prView.Checked = False
+        End If
+    End Sub
+
+    Private Sub preturnEnable_CheckedChanged(sender As Object, e As EventArgs) Handles preturnEnable.CheckedChanged
+        If preturnEnable.Checked = True Then
+            preturnModify.Checked = True
+            preturnView.Checked = True
+        Else
+            preturnModify.Checked = False
+            preturnView.Checked = False
+        End If
+    End Sub
+
+    Private Sub supplierEnable_CheckedChanged(sender As Object, e As EventArgs) Handles supplierEnable.CheckedChanged
+        If supplierEnable.Checked = True Then
+            supplierModify.Checked = True
+            supplierView.Checked = True
+        Else
+            supplierModify.Checked = False
+            supplierView.Checked = False
+        End If
+    End Sub
+
+    Private Sub supplierproductEnable_CheckedChanged(sender As Object, e As EventArgs) Handles supplierproductEnable.CheckedChanged
+        If supplierproductEnable.Checked = True Then
+            supplierproductModify.Checked = True
+            supplierproductView.Checked = True
+        Else
+            supplierproductModify.Checked = False
+            supplierproductView.Checked = False
+        End If
+    End Sub
+
+    Private Sub coEnable_CheckedChanged(sender As Object, e As EventArgs) Handles coEnable.CheckedChanged
+        If coEnable.Checked = True Then
+            coModify.Checked = True
+            coView.Checked = True
+        Else
+            coModify.Checked = False
+            coView.Checked = False
+        End If
+    End Sub
+
+    Private Sub pricingEnable_CheckedChanged(sender As Object, e As EventArgs) Handles pricingEnable.CheckedChanged
+        If pricingEnable.Checked = True Then
+            pricingModify.Checked = True
+            pricingView.Checked = True
+        Else
+            pricingModify.Checked = False
+            pricingView.Checked = False
+        End If
+    End Sub
+
+    Private Sub cEnable_CheckedChanged(sender As Object, e As EventArgs) Handles cEnable.CheckedChanged
+        If cEnable.Checked = True Then
+            cModify.Checked = True
+            cView.Checked = True
+        Else
+            cModify.Checked = False
+            cView.Checked = False
+        End If
+    End Sub
+
+    Private Sub crEnable_CheckedChanged(sender As Object, e As EventArgs) Handles crEnable.CheckedChanged
+        If crEnable.Checked = True Then
+            crModify.Checked = True
+            crView.Checked = True
+        Else
+            crModify.Checked = False
+            crView.Checked = False
+        End If
+    End Sub
+
+    Private Sub ledgerEnable_CheckedChanged(sender As Object, e As EventArgs) Handles ledgerEnable.CheckedChanged
+        If reportEnable.Checked = True Then
+            reportModify.Checked = True
+            reportView.Checked = True
+        Else
+            reportModify.Checked = False
+            reportView.Checked = False
+        End If
     End Sub
 End Class
