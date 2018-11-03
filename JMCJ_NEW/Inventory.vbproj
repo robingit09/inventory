@@ -823,6 +823,96 @@
   <ItemGroup>
     <None Include="Resources\99166-200.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categories.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\physical count.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p-o.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purchase receive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\supplier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purchase return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c-o.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pricing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customer return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ledger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purchase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\topsales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\topcustomer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dailysales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monthlysales.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

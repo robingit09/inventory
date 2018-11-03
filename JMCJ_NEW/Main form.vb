@@ -345,7 +345,7 @@
         UserGroups.ShowDialog()
     End Sub
 
-    Private Sub PurchaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseToolStripMenuItem.Click
-
+    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class

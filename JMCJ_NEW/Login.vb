@@ -12,6 +12,9 @@
             If .dr.HasRows Then
                 If .dr.Read Then
                     Main_form.current_user_id = CInt(.dr("id"))
+                    Dim firstname As String = New DatabaseConnect().get_by_id("users", CInt(.dr("id")), "first_name")
+                    Dim lastname As String = New DatabaseConnect().get_by_id("users", CInt(.dr("id")), "surname")
+                    Main_form.lblFullname.Text = firstname & " " & lastname
                     Main_form.ShowDialog()
                     Me.Close()
                 End If
