@@ -344,4 +344,8 @@
     Private Sub UserGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserGroupToolStripMenuItem.Click
         UserGroups.ShowDialog()
     End Sub
+
+    Private Sub PurchaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchaseToolStripMenuItem.Click
+
+    End Sub
 End Class

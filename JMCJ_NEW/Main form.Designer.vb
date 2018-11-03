@@ -103,9 +103,9 @@ Partial Class Main_form
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(243, 106)
+        Me.PictureBox1.Location = New System.Drawing.Point(459, 106)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(648, 266)
+        Me.PictureBox1.Size = New System.Drawing.Size(432, 190)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
@@ -339,14 +339,14 @@ Partial Class Main_form
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(142, 26)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'UserToolStripMenuItem
         '
         Me.UserToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersToolStripMenuItem, Me.UserGroupToolStripMenuItem})
         Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
-        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(142, 26)
         Me.UserToolStripMenuItem.Text = "User"
         '
         'UsersToolStripMenuItem
@@ -365,11 +365,11 @@ Partial Class Main_form
         '
         Me.lblTest.AutoSize = True
         Me.lblTest.BackColor = System.Drawing.Color.Maroon
-        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTest.ForeColor = System.Drawing.Color.White
-        Me.lblTest.Location = New System.Drawing.Point(12, 193)
+        Me.lblTest.Location = New System.Drawing.Point(12, 402)
         Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(114, 25)
+        Me.lblTest.Size = New System.Drawing.Size(79, 18)
         Me.lblTest.TabIndex = 5
         Me.lblTest.Text = "Test Mode"
         '

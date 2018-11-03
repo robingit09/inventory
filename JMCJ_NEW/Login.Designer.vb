@@ -85,9 +85,9 @@ Partial Class Login
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.JMCJ_NEW.My.Resources.Resources._99166_200
-        Me.PictureBox1.Location = New System.Drawing.Point(29, 36)
+        Me.PictureBox1.Location = New System.Drawing.Point(70, 58)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(204, 164)
+        Me.PictureBox1.Size = New System.Drawing.Size(131, 96)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
