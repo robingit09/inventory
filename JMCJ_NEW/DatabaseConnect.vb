@@ -24,7 +24,8 @@ Public Class DatabaseConnect
         End If
 
         If ModuleSettings.forTest = 1 Then
-            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory_dev.mdb"
+            'con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory_dev.mdb"
+            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\inventory_dev.accdb"
         End If
 
         If con.State = ConnectionState.Closed Then

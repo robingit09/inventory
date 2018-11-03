@@ -117,11 +117,11 @@ Partial Class Main_form
         Me.lblTest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblTest.AutoSize = True
         Me.lblTest.BackColor = System.Drawing.Color.White
-        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTest.ForeColor = System.Drawing.Color.Black
-        Me.lblTest.Location = New System.Drawing.Point(83, 402)
+        Me.lblTest.Location = New System.Drawing.Point(74, 402)
         Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(79, 18)
+        Me.lblTest.Size = New System.Drawing.Size(88, 18)
         Me.lblTest.TabIndex = 5
         Me.lblTest.Text = "Test mode"
         '
@@ -130,11 +130,11 @@ Partial Class Main_form
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(14, 402)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 18)
+        Me.Label1.Size = New System.Drawing.Size(61, 18)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Status:"
         '
@@ -442,9 +442,9 @@ Partial Class Main_form
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(9, 113)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(102, 19)
+        Me.Label2.Size = New System.Drawing.Size(99, 19)
         Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Current User:"
+        Me.Label2.Text = "Current user:"
         '
         'lblFullname
         '
