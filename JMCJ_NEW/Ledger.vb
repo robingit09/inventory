@@ -22,7 +22,7 @@
         Dim db As New DatabaseConnect
         With db
             If query = "" Then
-                .selectByQuery("SELECT * from ledger where status <> 0  order by id desc")
+                .selectByQuery("SELECT top 100 * from ledger where status <> 0  order by id desc")
             Else
                 .selectByQuery(query)
             End If
@@ -35,9 +35,9 @@
                 Exit Sub
             End If
             While .dr.Read
-                Dim ID As Integer = CInt(.dr("id"))
+                Dim id As Integer = CInt(.dr("id"))
                 Dim counter_no As String = .dr("counter_no")
-                Dim date_issue As String = .dr("date_issue")
+                Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yyyy")
                 Dim ledger_no As String = If(IsDBNull(.dr("ledger_no")), "", .dr("ledger_no"))
                 Dim amount As String = .dr("amount")
                 Dim paid As Boolean = CBool(.dr("paid"))
@@ -119,7 +119,7 @@
 
                 End Select
 
-                Dim row As String() = New String() {ID, date_issue, customer_val, ledger_no, FormatCurrency(amount).Replace("$", ""), paid_val, date_paid, floating_val, bank_details, check_date, counter_no, term_val, payment_type_val, ledger_type_val, status_val}
+                Dim row As String() = New String() {id, date_issue, customer_val, ledger_no, FormatCurrency(amount).Replace("$", ""), paid_val, date_paid, floating_val, bank_details, check_date, counter_no, term_val, payment_type_val, ledger_type_val, status_val}
                 dgvLedger.Rows.Add(row)
 
             End While
@@ -351,7 +351,9 @@
                 ledgertype_val = -1
         End Select
 
-        Dim queryValidator As String = "SELECT * FROM ledger l inner join company c on c.id = l.customer WHERE l.status <> 0"
+        Dim queryValidator As String = "SELECT l.* FROM ledger as l 
+        inner join company as c on c.id = l.customer 
+        WHERE l.status <> 0"
 
         Dim filters As New Dictionary(Of String, String)
         filters.Add("customer", txtCustomer.Text)

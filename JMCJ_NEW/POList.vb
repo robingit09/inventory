@@ -67,7 +67,9 @@
                         Case "1"
                             delivery_status = "Pending"
                         Case "2"
-                            delivery_status = "Received"
+                            delivery_status = "Completed"
+                        Case "3"
+                            delivery_status = "Partial"
 
                     End Select
                     Dim row As String() = New String() {id, date_issue, po_no, supplier_name, total_amount, processed_by, delivery_status}

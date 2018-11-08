@@ -283,9 +283,9 @@ Partial Class PurchaseReceiveForm
         Me.gpEnterProduct.Controls.Add(Me.cbBrand)
         Me.gpEnterProduct.Controls.Add(Me.Label16)
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpEnterProduct.Location = New System.Drawing.Point(308, 178)
+        Me.gpEnterProduct.Location = New System.Drawing.Point(292, 179)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(1003, 49)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(1019, 49)
         Me.gpEnterProduct.TabIndex = 88
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -379,7 +379,7 @@ Partial Class PurchaseReceiveForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.actual_quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(15, 277)
+        Me.dgvProd.Location = New System.Drawing.Point(15, 270)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1296, 288)
         Me.dgvProd.TabIndex = 89
@@ -526,7 +526,7 @@ Partial Class PurchaseReceiveForm
         Me.lblTotalAmount.AutoSize = True
         Me.lblTotalAmount.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
-        Me.lblTotalAmount.Location = New System.Drawing.Point(819, 579)
+        Me.lblTotalAmount.Location = New System.Drawing.Point(819, 570)
         Me.lblTotalAmount.Name = "lblTotalAmount"
         Me.lblTotalAmount.Size = New System.Drawing.Size(55, 30)
         Me.lblTotalAmount.TabIndex = 92
@@ -537,7 +537,7 @@ Partial Class PurchaseReceiveForm
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(659, 579)
+        Me.Label10.Location = New System.Drawing.Point(659, 570)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(154, 30)
         Me.Label10.TabIndex = 91
@@ -549,7 +549,7 @@ Partial Class PurchaseReceiveForm
         Me.btnSelectProduct.Name = "btnSelectProduct"
         Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
         Me.btnSelectProduct.TabIndex = 93
-        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.Text = "Search Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'PurchaseReceiveForm

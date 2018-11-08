@@ -81,7 +81,7 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
-                    Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yy")
+                    Dim date_issue As String = Convert.ToDateTime(.dr("date_issue")).ToString("MM-dd-yyyy")
                     Dim customer As String = New DatabaseConnect().get_by_id("company", .dr("customer_id"), "company")
                     Dim invoice As String = .dr("invoice_no")
                     Dim amount As String = Val(.dr("amount")).ToString("N2")

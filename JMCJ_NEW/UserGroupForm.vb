@@ -2,7 +2,6 @@
 
     Public selectedUserGroup As Integer = 0
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        btnSave.Text = "Saving..."
         btnSave.Enabled = False
         If btnSave.Text = "Save" Then
 

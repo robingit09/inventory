@@ -451,21 +451,43 @@
             End If
         End If
 
-
     End Sub
+
+    Private Function get_less_val(ByVal p_u_id As Integer, ByVal qty As Integer)
+        Dim result As String = ""
+        Dim db As New DatabaseConnect()
+        With db
+            .selectByQuery("select less from customer_order_products 
+            where product_unit_id = " & p_u_id & " and quantity = " & qty & " and less <> '' order by id desc")
+            If .dr.Read Then
+                result = If(IsDBNull(.dr("less")), "", .dr("less"))
+            End If
+            .dr.Close()
+            .con.Close()
+        End With
+        Return result
+    End Function
 
     Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
         If dgvProd.Rows.Count > 1 Then
             'change if edit the qty
             If e.ColumnIndex = 2 Then
                 Dim amount As Double = 0
-
                 Dim qty As Integer = 0
                 If IsNumeric((dgvProd.Rows(e.RowIndex).Cells("quantity").Value)) Then
                     qty = CInt(dgvProd.Rows(e.RowIndex).Cells("quantity").Value)
                 Else
                     qty = 0
                 End If
+
+                ' check if has less
+                Dim p_u_id As Integer = dgvProd.Rows(e.RowIndex).Cells("id").Value
+                If get_less_val(p_u_id, qty) <> "" Then
+                    dgvProd.Rows(e.RowIndex).Cells("less").Value = get_less_val(p_u_id, qty)
+                Else
+                    dgvProd.Rows(e.RowIndex).Cells("less").Value = ""
+                End If
+
 
                 Dim price As Double = Val(dgvProd.Rows(e.RowIndex).Cells("price").Value)
                 Dim less As String = CStr(dgvProd.Rows(e.RowIndex).Cells("less").Value)

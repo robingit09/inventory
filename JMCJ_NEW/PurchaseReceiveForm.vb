@@ -62,7 +62,7 @@
         cbPO.Items.Clear()
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("SELECT id,po_no from purchase_orders where delivery_status = 1 order by po_date desc")
+            .selectByQuery("SELECT id,po_no from purchase_orders where delivery_status in (1,3) order by po_date desc")
             Dim comboSource As New Dictionary(Of String, String)()
             comboSource.Add(0, "Select PO Number")
             If .dr.HasRows Then
@@ -186,6 +186,7 @@
 
     Private Sub cbPO_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPO.SelectedIndexChanged
         If cbPO.SelectedIndex > 0 Then
+            Dim total_amount As Double = 0
             gpEnterBarcode.Enabled = True
             gpEnterProduct.Enabled = True
             dgvProd.Enabled = True
@@ -251,9 +252,14 @@
                         Dim total As String = Val(.dr("total_amount")).ToString("N2")
                         Dim stock As String = CInt(.dr("stock"))
 
+                        qty = qty - get_receive_qty(selectedPO, id)
+                        Dim temp_amount As Double = qty * Val(cost)
+                        total = temp_amount.ToString("N2")
+
                         Dim row As String() = New String() {id, barcode, qty, qty, desc, brand, unit, color, cost, total, stock, "Remove"}
                         dgvProd.Rows.Add(row)
                     End While
+                    computeTotalAmount()
                 End If
                 .cmd.Dispose()
                 .dr.Close()
@@ -270,6 +276,24 @@
             dgvProd.Enabled = False
         End If
     End Sub
+
+    Private Function get_receive_qty(ByVal po_id As Integer, ByVal p_u_id As Integer)
+        Dim result As Integer = 0
+        Dim db As New DatabaseConnect()
+        With db
+            .selectByQuery("Select prp.actual_quantity from purchase_receive as pr 
+            inner join purchase_receive_products as prp on prp.purchase_receive_id = pr.id
+            where pr.purchase_order_id = " & po_id & " and prp.product_unit_id = " & p_u_id)
+
+            If .dr.Read Then
+                result = CInt(.dr("actual_quantity"))
+            End If
+            .dr.Close()
+            .con.Close()
+        End With
+
+        Return result
+    End Function
 
     Private Function generatePRNo() As String
         Dim result As String = ""
@@ -353,6 +377,7 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        btnSave.Enabled = False
         If btnSave.Text = "Save" Then
             If validation() = False Then
                 Exit Sub
@@ -366,8 +391,8 @@
             PurchaseReceive.loadPRSelection()
             PurchaseReceive.loadDRSelection()
             PurchaseReceive.getYear()
-
         End If
+        btnSave.Enabled = True
     End Sub
 
     Private Function validation() As Boolean
@@ -518,9 +543,10 @@
             .con.Close()
         End With
 
+        Dim po_dstatus As Integer = getPODeliveryStatus(selectedPO, getLastID("purchase_receive"))
         Dim dbupdate As New DatabaseConnect
         With dbupdate
-            .update_where("purchase_orders", selectedPO, "delivery_status", 2)
+            .update_where("purchase_orders", selectedPO, "delivery_status", po_dstatus)
             .cmd.Dispose()
             .con.Close()
         End With
@@ -1096,4 +1122,58 @@
         SupplierForm.ShowDialog()
     End Sub
 
+    Private Function getPODeliveryStatus(ByVal po_id As Integer, ByVal pr As Integer) As Integer
+
+        Dim total_po_qty As Integer = 0
+        Dim total_pr_qty As Integer = 0
+        Dim poProd As New DatabaseConnect
+        With poProd
+            .selectByQuery("select pop.product_unit_id,pop.quantity from purchase_order_products as pop
+                inner join purchase_orders as po on po.id = pop.purchase_order_id
+                where pop.purchase_order_id = " & po_id & " and po.delivery_status = 1")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim p_u_id As Integer = CInt(.dr("product_unit_id"))
+                    Dim qty As Integer = CInt(.dr("quantity"))
+                    Dim pr_actual_qty As Integer = get_pr_prod_qty(po_id, p_u_id)
+
+                    total_po_qty = total_po_qty + qty
+                    total_pr_qty = total_pr_qty + pr_actual_qty
+
+                End While
+            End If
+            .dr.Close()
+            .con.Close()
+            .cmd.Dispose()
+        End With
+
+        'MsgBox(total_pr_qty)
+        If total_pr_qty >= total_po_qty Then
+            Return 2
+        End If
+        If total_pr_qty < total_po_qty Then
+            Return 3
+        End If
+        If total_pr_qty = 0 Then
+            Return 1
+        End If
+        Return 0
+    End Function
+
+    Private Function get_pr_prod_qty(ByVal po_id As Integer, ByVal pu_id As Integer)
+        Dim result As Integer = 0
+        Dim dbpr As New DatabaseConnect
+        With dbpr
+            .selectByQuery("Select SUM(prp.actual_quantity) as qty from purchase_receive as pr 
+            inner join purchase_receive_products as prp on prp.purchase_receive_id = pr.id 
+            where pr.purchase_order_id = " & po_id & " and prp.product_unit_id = " & pu_id)
+
+            If .dr.Read Then
+                result = CInt(.dr("qty"))
+            End If
+            .con.Close()
+            .dr.Close()
+        End With
+        Return result
+    End Function
 End Class

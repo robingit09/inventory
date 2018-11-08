@@ -191,9 +191,9 @@ Partial Class POList
         'cbYear
         '
         Me.cbYear.FormattingEnabled = True
-        Me.cbYear.Location = New System.Drawing.Point(226, 74)
+        Me.cbYear.Location = New System.Drawing.Point(257, 68)
         Me.cbYear.Name = "cbYear"
-        Me.cbYear.Size = New System.Drawing.Size(143, 21)
+        Me.cbYear.Size = New System.Drawing.Size(214, 21)
         Me.cbYear.TabIndex = 30
         '
         'txtSupplier
@@ -206,7 +206,7 @@ Partial Class POList
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(188, 77)
+        Me.Label3.Location = New System.Drawing.Point(206, 71)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 31
@@ -215,7 +215,7 @@ Partial Class POList
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 77)
+        Me.Label2.Location = New System.Drawing.Point(6, 71)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 29
@@ -233,7 +233,7 @@ Partial Class POList
         'cbMonth
         '
         Me.cbMonth.FormattingEnabled = True
-        Me.cbMonth.Location = New System.Drawing.Point(52, 74)
+        Me.cbMonth.Location = New System.Drawing.Point(74, 68)
         Me.cbMonth.Name = "cbMonth"
         Me.cbMonth.Size = New System.Drawing.Size(121, 21)
         Me.cbMonth.TabIndex = 28

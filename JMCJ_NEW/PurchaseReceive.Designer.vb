@@ -46,8 +46,8 @@ Partial Class PurchaseReceive
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbMonth = New System.Windows.Forms.ComboBox()
         Me.gpFilter = New System.Windows.Forms.GroupBox()
-        Me.btnFilter = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnFilter = New System.Windows.Forms.Button()
         CType(Me.dgvPR, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpFilter.SuspendLayout()
         Me.SuspendLayout()
@@ -76,9 +76,9 @@ Partial Class PurchaseReceive
         '
         Me.dgvPR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPR.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.DateIssue, Me.PRNumber, Me.PONumber, Me.dr_no, Me.SupplierName, Me.TotalAmount, Me.ProcessedBy, Me.delivery_status})
-        Me.dgvPR.Location = New System.Drawing.Point(12, 211)
+        Me.dgvPR.Location = New System.Drawing.Point(12, 186)
         Me.dgvPR.Name = "dgvPR"
-        Me.dgvPR.Size = New System.Drawing.Size(1152, 381)
+        Me.dgvPR.Size = New System.Drawing.Size(1152, 406)
         Me.dgvPR.TabIndex = 5
         '
         'id
@@ -162,9 +162,9 @@ Partial Class PurchaseReceive
         'cbDRNo
         '
         Me.cbDRNo.FormattingEnabled = True
-        Me.cbDRNo.Location = New System.Drawing.Point(273, 22)
+        Me.cbDRNo.Location = New System.Drawing.Point(275, 23)
         Me.cbDRNo.Name = "cbDRNo"
-        Me.cbDRNo.Size = New System.Drawing.Size(121, 21)
+        Me.cbDRNo.Size = New System.Drawing.Size(143, 21)
         Me.cbDRNo.TabIndex = 9
         '
         'cbPRNo
@@ -187,14 +187,14 @@ Partial Class PurchaseReceive
         'cbYear
         '
         Me.cbYear.FormattingEnabled = True
-        Me.cbYear.Location = New System.Drawing.Point(226, 74)
+        Me.cbYear.Location = New System.Drawing.Point(275, 50)
         Me.cbYear.Name = "cbYear"
         Me.cbYear.Size = New System.Drawing.Size(143, 21)
         Me.cbYear.TabIndex = 30
         '
         'txtSupplier
         '
-        Me.txtSupplier.Location = New System.Drawing.Point(457, 22)
+        Me.txtSupplier.Location = New System.Drawing.Point(482, 23)
         Me.txtSupplier.Name = "txtSupplier"
         Me.txtSupplier.Size = New System.Drawing.Size(214, 20)
         Me.txtSupplier.TabIndex = 26
@@ -202,7 +202,7 @@ Partial Class PurchaseReceive
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(188, 77)
+        Me.Label3.Location = New System.Drawing.Point(206, 53)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 31
@@ -211,7 +211,7 @@ Partial Class PurchaseReceive
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 77)
+        Me.Label2.Location = New System.Drawing.Point(6, 53)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 29
@@ -220,7 +220,7 @@ Partial Class PurchaseReceive
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(406, 25)
+        Me.Label1.Location = New System.Drawing.Point(431, 26)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(45, 13)
         Me.Label1.TabIndex = 27
@@ -229,7 +229,7 @@ Partial Class PurchaseReceive
         'cbMonth
         '
         Me.cbMonth.FormattingEnabled = True
-        Me.cbMonth.Location = New System.Drawing.Point(52, 74)
+        Me.cbMonth.Location = New System.Drawing.Point(74, 51)
         Me.cbMonth.Name = "cbMonth"
         Me.cbMonth.Size = New System.Drawing.Size(121, 21)
         Me.cbMonth.TabIndex = 28
@@ -247,31 +247,31 @@ Partial Class PurchaseReceive
         Me.gpFilter.Controls.Add(Me.Label2)
         Me.gpFilter.Controls.Add(Me.Label1)
         Me.gpFilter.Controls.Add(Me.cbMonth)
-        Me.gpFilter.Location = New System.Drawing.Point(12, 90)
+        Me.gpFilter.Location = New System.Drawing.Point(12, 80)
         Me.gpFilter.Name = "gpFilter"
-        Me.gpFilter.Size = New System.Drawing.Size(921, 104)
+        Me.gpFilter.Size = New System.Drawing.Size(918, 87)
         Me.gpFilter.TabIndex = 10
         Me.gpFilter.TabStop = False
         Me.gpFilter.Text = "Filter"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(206, 27)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(63, 13)
+        Me.Label4.TabIndex = 34
+        Me.Label4.Text = "DR Number"
+        '
         'btnFilter
         '
         Me.btnFilter.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFilter.Location = New System.Drawing.Point(832, 68)
+        Me.btnFilter.Location = New System.Drawing.Point(821, 44)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(83, 29)
         Me.btnFilter.TabIndex = 6
         Me.btnFilter.Text = "Filter"
         Me.btnFilter.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(206, 25)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(63, 13)
-        Me.Label4.TabIndex = 34
-        Me.Label4.Text = "DR Number"
         '
         'PurchaseReceive
         '

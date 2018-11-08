@@ -501,9 +501,9 @@ Partial Class PurchaseOrderForm
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(878, 58)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(69, 13)
+        Me.Label10.Size = New System.Drawing.Size(58, 13)
         Me.Label10.TabIndex = 67
-        Me.Label10.Text = "Delivered by:"
+        Me.Label10.Text = "Pickup By:"
         '
         'Label9
         '
@@ -530,7 +530,7 @@ Partial Class PurchaseOrderForm
         Me.btnSelectProduct.Name = "btnSelectProduct"
         Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
         Me.btnSelectProduct.TabIndex = 74
-        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.Text = "Search Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'PurchaseOrderForm
