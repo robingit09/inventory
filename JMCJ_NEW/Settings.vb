@@ -30,12 +30,12 @@
             y = 1
             My.Computer.FileSystem.CopyFile(
                  "C:\users\inventory.mdb",
-                   Application.StartupPath & "\inventory_dev.mdb",
+                   Application.StartupPath & "\inventory_dev.accdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
         Else
             y = 0
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory_dev.mdb")
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.mdb")
         End If
         doQuery("UPDATE settings set for_testing = " & y)
     End Sub
@@ -55,8 +55,8 @@
         If yesno = MsgBoxResult.Yes Then
             If ModuleSettings.forTest = 1 Then
                 My.Computer.FileSystem.CopyFile(
-                    Application.StartupPath & "\inventory_dev.mdb",
-                    "C:\users\inventory_db_backup\inventory_dev.mdb",
+                    Application.StartupPath & "\inventory_dev.accdb",
+                    "C:\users\inventory_db_backup\inventory_dev.accdb",
                     Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                     Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)
@@ -72,4 +72,5 @@
         End If
 
     End Sub
+
 End Class

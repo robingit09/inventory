@@ -25,7 +25,6 @@ Partial Class CustomerProductSelection
         Me.btnAddToOrder = New System.Windows.Forms.Button()
         Me.txtCustomer = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
         Me.column_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -40,6 +39,8 @@ Partial Class CustomerProductSelection
         Me.column_cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_subcat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAddProduct = New System.Windows.Forms.Button()
+        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
+        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -70,25 +71,13 @@ Partial Class CustomerProductSelection
         Me.Label1.TabIndex = 31
         Me.Label1.Text = "Customer"
         '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(21, 67)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 30
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
-        '
         'dgvProducts
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_price, Me.column_sell_price, Me.column_stock, Me.column_cat, Me.column_subcat})
-        Me.dgvProducts.Location = New System.Drawing.Point(21, 100)
+        Me.dgvProducts.Location = New System.Drawing.Point(21, 82)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1340, 512)
+        Me.dgvProducts.Size = New System.Drawing.Size(1340, 530)
         Me.dgvProducts.TabIndex = 29
         '
         'column_id
@@ -181,16 +170,37 @@ Partial Class CustomerProductSelection
         Me.btnAddProduct.Text = "Add Products"
         Me.btnAddProduct.UseVisualStyleBackColor = True
         '
+        'linkSelectAll
+        '
+        Me.linkSelectAll.AutoSize = True
+        Me.linkSelectAll.Location = New System.Drawing.Point(87, 54)
+        Me.linkSelectAll.Name = "linkSelectAll"
+        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
+        Me.linkSelectAll.TabIndex = 36
+        Me.linkSelectAll.TabStop = True
+        Me.linkSelectAll.Text = "Select All"
+        '
+        'linkUnselectAll
+        '
+        Me.linkUnselectAll.AutoSize = True
+        Me.linkUnselectAll.Location = New System.Drawing.Point(18, 54)
+        Me.linkUnselectAll.Name = "linkUnselectAll"
+        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
+        Me.linkUnselectAll.TabIndex = 35
+        Me.linkUnselectAll.TabStop = True
+        Me.linkUnselectAll.Text = "Unselect All"
+        '
         'CustomerProductSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 637)
+        Me.Controls.Add(Me.linkSelectAll)
+        Me.Controls.Add(Me.linkUnselectAll)
         Me.Controls.Add(Me.btnAddProduct)
         Me.Controls.Add(Me.btnAddToOrder)
         Me.Controls.Add(Me.txtCustomer)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.dgvProducts)
         Me.Name = "CustomerProductSelection"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -204,7 +214,6 @@ Partial Class CustomerProductSelection
     Friend WithEvents btnAddToOrder As Button
     Friend WithEvents txtCustomer As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents ckSelectAll As CheckBox
     Friend WithEvents dgvProducts As DataGridView
     Friend WithEvents column_id As DataGridViewTextBoxColumn
     Friend WithEvents selectp As DataGridViewCheckBoxColumn
@@ -219,4 +228,6 @@ Partial Class CustomerProductSelection
     Friend WithEvents column_cat As DataGridViewTextBoxColumn
     Friend WithEvents column_subcat As DataGridViewTextBoxColumn
     Friend WithEvents btnAddProduct As Button
+    Friend WithEvents linkSelectAll As LinkLabel
+    Friend WithEvents linkUnselectAll As LinkLabel
 End Class

@@ -207,7 +207,7 @@
                     dr2 = cmd2.ExecuteReader
 
                     If Not dr2.Read Then
-                        Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, "0.00", cat, subcat}
+                        Dim row As String() = New String() {id, False, barcode, desc, brand, unit, color, price, "0.00", cat, subcat}
                         dgvProducts.Rows.Add(row)
                     End If
                     dr2.Close()
@@ -220,22 +220,6 @@
             .cmd.Dispose()
             .con.Close()
         End With
-    End Sub
-
-    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
-        If ckSelectAll.Checked Then
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = True
-                End If
-            Next
-        Else
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = False
-                End If
-            Next
-        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -391,6 +375,22 @@
 
         query = query & " order by p.description"
         getProduct(query)
+    End Sub
+
+    Private Sub linkUnselectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUnselectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = False
+            End If
+        Next
+    End Sub
+
+    Private Sub linkSelectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkSelectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = True
+            End If
+        Next
     End Sub
 
 End Class

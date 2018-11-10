@@ -52,7 +52,8 @@ Partial Class AddProductForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
+        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -61,9 +62,9 @@ Partial Class AddProductForm
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_unit_price, Me.column_sell_price, Me.column_cat, Me.column_subcat})
-        Me.dgvProducts.Location = New System.Drawing.Point(12, 197)
+        Me.dgvProducts.Location = New System.Drawing.Point(12, 210)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1258, 429)
+        Me.dgvProducts.Size = New System.Drawing.Size(1258, 416)
         Me.dgvProducts.TabIndex = 21
         '
         'column_id
@@ -326,24 +327,33 @@ Partial Class AddProductForm
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'ckSelectAll
+        'linkUnselectAll
         '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(12, 174)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 24
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
+        Me.linkUnselectAll.AutoSize = True
+        Me.linkUnselectAll.Location = New System.Drawing.Point(9, 182)
+        Me.linkUnselectAll.Name = "linkUnselectAll"
+        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
+        Me.linkUnselectAll.TabIndex = 25
+        Me.linkUnselectAll.TabStop = True
+        Me.linkUnselectAll.Text = "Unselect All"
+        '
+        'linkSelectAll
+        '
+        Me.linkSelectAll.AutoSize = True
+        Me.linkSelectAll.Location = New System.Drawing.Point(78, 182)
+        Me.linkSelectAll.Name = "linkSelectAll"
+        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
+        Me.linkSelectAll.TabIndex = 26
+        Me.linkSelectAll.TabStop = True
+        Me.linkSelectAll.Text = "Select All"
         '
         'AddProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1301, 638)
-        Me.Controls.Add(Me.ckSelectAll)
+        Me.Controls.Add(Me.linkSelectAll)
+        Me.Controls.Add(Me.linkUnselectAll)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
@@ -362,7 +372,6 @@ Partial Class AddProductForm
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents ckSelectAll As CheckBox
     Friend WithEvents column_id As DataGridViewTextBoxColumn
     Friend WithEvents selectp As DataGridViewCheckBoxColumn
     Friend WithEvents column_barcode As DataGridViewTextBoxColumn
@@ -389,4 +398,6 @@ Partial Class AddProductForm
     Friend WithEvents cbCat As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnFilter As Button
+    Friend WithEvents linkUnselectAll As LinkLabel
+    Friend WithEvents linkSelectAll As LinkLabel
 End Class

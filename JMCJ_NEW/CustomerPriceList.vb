@@ -98,7 +98,7 @@
                     If Val(sell_price) <= 0 Then
                         sell_price = price
                     End If
-                    Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price, sell_price, cat, subcat}
+                    Dim row As String() = New String() {id, False, barcode, desc, brand, unit, color, price, sell_price, cat, subcat}
                     dgvPriceList.Rows.Add(row)
                 End While
             Else
@@ -225,25 +225,6 @@
         End If
     End Sub
 
-    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
-
-        If dgvPriceList.Rows.Count > 0 Then
-            If ckSelectAll.Checked = True Then
-                For Each item As DataGridViewRow In Me.dgvPriceList.Rows
-                    If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
-                        dgvPriceList.Rows(item.Index).Cells(1).Value = True
-                    End If
-                Next
-            Else
-                For Each item As DataGridViewRow In Me.dgvPriceList.Rows
-                    If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
-                        dgvPriceList.Rows(item.Index).Cells(1).Value = False
-                    End If
-                Next
-            End If
-        End If
-
-    End Sub
 
     Private Sub CustomerPriceList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getCustomer()
@@ -741,5 +722,21 @@ tr:nth-child(even) {
 
         getList(query, selectedCustomer)
 
+    End Sub
+
+    Private Sub linkUnselectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUnselectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+            If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvPriceList.Rows(item.Index).Cells(1).Value = False
+            End If
+        Next
+    End Sub
+
+    Private Sub linkSelectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkSelectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvPriceList.Rows
+            If dgvPriceList.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvPriceList.Rows(item.Index).Cells(1).Value = True
+            End If
+        Next
     End Sub
 End Class

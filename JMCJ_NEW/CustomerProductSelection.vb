@@ -62,7 +62,7 @@
 
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
-                    Dim row As String() = New String() {p_u_id, True, barcode, desc, brand, unit, color, price, sell_price, stock, cat, subcat}
+                    Dim row As String() = New String() {p_u_id, False, barcode, desc, brand, unit, color, price, sell_price, stock, cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If
@@ -71,22 +71,6 @@
             .con.Close()
         End With
 
-    End Sub
-
-    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
-        If ckSelectAll.Checked Then
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = True
-                End If
-            Next
-        Else
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = False
-                End If
-            Next
-        End If
     End Sub
 
     Private Sub btnAddToOrder_Click(sender As Object, e As EventArgs) Handles btnAddToOrder.Click
@@ -165,5 +149,21 @@
             'cbCustomer.Focus()
             'MsgBox("Please select customer", MsgBoxStyle.Critical)
         End If
+    End Sub
+
+    Private Sub linkUnselectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUnselectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = False
+            End If
+        Next
+    End Sub
+
+    Private Sub linkSelectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkSelectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = True
+            End If
+        Next
     End Sub
 End Class

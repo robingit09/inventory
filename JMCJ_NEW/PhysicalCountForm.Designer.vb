@@ -282,7 +282,7 @@ Partial Class PhysicalCountForm
         Me.btnSelectProduct.Name = "btnSelectProduct"
         Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
         Me.btnSelectProduct.TabIndex = 76
-        Me.btnSelectProduct.Text = "Select Product"
+        Me.btnSelectProduct.Text = " Search Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'dgvProd

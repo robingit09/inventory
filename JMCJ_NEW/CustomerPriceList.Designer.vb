@@ -40,7 +40,6 @@ Partial Class CustomerPriceList
         Me.btnCreateOrder = New System.Windows.Forms.Button()
         Me.btnUpdatePrice = New System.Windows.Forms.Button()
         Me.btnDeleteProduct = New System.Windows.Forms.Button()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnAddCustomer = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -59,6 +58,8 @@ Partial Class CustomerPriceList
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
+        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
         CType(Me.dgvPriceList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -67,9 +68,9 @@ Partial Class CustomerPriceList
         '
         Me.dgvPriceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPriceList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.selectproduct, Me.Barcode, Me.desc, Me.Brand, Me.Unit, Me.Color, Me.UnitPrice, Me.sell_price, Me.Category, Me.Subcategory})
-        Me.dgvPriceList.Location = New System.Drawing.Point(12, 229)
+        Me.dgvPriceList.Location = New System.Drawing.Point(12, 240)
         Me.dgvPriceList.Name = "dgvPriceList"
-        Me.dgvPriceList.Size = New System.Drawing.Size(1207, 381)
+        Me.dgvPriceList.Size = New System.Drawing.Size(1207, 370)
         Me.dgvPriceList.TabIndex = 21
         '
         'id
@@ -206,18 +207,6 @@ Partial Class CustomerPriceList
         Me.btnDeleteProduct.Text = "Delete Selected Product"
         Me.btnDeleteProduct.UseVisualStyleBackColor = True
         '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(12, 206)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 28
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
-        '
         'btnPrint
         '
         Me.btnPrint.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -255,9 +244,9 @@ Partial Class CustomerPriceList
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(15, 92)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 92)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1204, 108)
+        Me.GroupBox1.Size = New System.Drawing.Size(1207, 108)
         Me.GroupBox1.TabIndex = 31
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter"
@@ -403,15 +392,36 @@ Partial Class CustomerPriceList
         Me.Label8.TabIndex = 18
         Me.Label8.Text = "Product Description"
         '
+        'linkSelectAll
+        '
+        Me.linkSelectAll.AutoSize = True
+        Me.linkSelectAll.Location = New System.Drawing.Point(81, 213)
+        Me.linkSelectAll.Name = "linkSelectAll"
+        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
+        Me.linkSelectAll.TabIndex = 38
+        Me.linkSelectAll.TabStop = True
+        Me.linkSelectAll.Text = "Select All"
+        '
+        'linkUnselectAll
+        '
+        Me.linkUnselectAll.AutoSize = True
+        Me.linkUnselectAll.Location = New System.Drawing.Point(12, 213)
+        Me.linkUnselectAll.Name = "linkUnselectAll"
+        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
+        Me.linkUnselectAll.TabIndex = 37
+        Me.linkUnselectAll.TabStop = True
+        Me.linkUnselectAll.Text = "Unselect All"
+        '
         'CustomerPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1246, 632)
+        Me.Controls.Add(Me.linkSelectAll)
+        Me.Controls.Add(Me.linkUnselectAll)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnAddCustomer)
         Me.Controls.Add(Me.btnPrint)
-        Me.Controls.Add(Me.ckSelectAll)
         Me.Controls.Add(Me.btnDeleteProduct)
         Me.Controls.Add(Me.btnUpdatePrice)
         Me.Controls.Add(Me.btnCreateOrder)
@@ -436,7 +446,6 @@ Partial Class CustomerPriceList
     Friend WithEvents btnCreateOrder As Button
     Friend WithEvents btnUpdatePrice As Button
     Friend WithEvents btnDeleteProduct As Button
-    Friend WithEvents ckSelectAll As CheckBox
     Friend WithEvents btnPrint As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents selectproduct As DataGridViewCheckBoxColumn
@@ -466,4 +475,6 @@ Partial Class CustomerPriceList
     Friend WithEvents txtBarcode As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents linkSelectAll As LinkLabel
+    Friend WithEvents linkUnselectAll As LinkLabel
 End Class
