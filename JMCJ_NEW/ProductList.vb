@@ -200,7 +200,7 @@
                     Dim p_u_id As String = .dr("p_u_id")
                     Dim barcode As String = .dr("barcode")
                     Dim desc As String = .dr("description")
-                    Dim brand As String = .dr("brand")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
