@@ -1,4 +1,5 @@
 ﻿Module ModelFunction
+
     Public Sub updateFloating()
         Dim db As New DatabaseConnect
         With db
@@ -399,4 +400,6 @@
         End With
         Return access
     End Function
+
+
 End Module

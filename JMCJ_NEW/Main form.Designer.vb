@@ -23,14 +23,14 @@ Partial Class Main_form
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main_form))
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.lblTest = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblFullname = New System.Windows.Forms.Label()
         Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductMasterInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,10 +70,7 @@ Partial Class Main_form
         Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblFullname = New System.Windows.Forms.Label()
         Me.MenuStrip2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblDate
@@ -134,23 +131,33 @@ Partial Class Main_form
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(14, 402)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(61, 18)
+        Me.Label1.Size = New System.Drawing.Size(55, 18)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Status:"
+        Me.Label1.Text = "Mode:"
         '
-        'PictureBox1
+        'Label2
         '
-        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(209, 69)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(705, 278)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(9, 113)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(99, 19)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Current user:"
+        '
+        'lblFullname
+        '
+        Me.lblFullname.AutoSize = True
+        Me.lblFullname.BackColor = System.Drawing.Color.White
+        Me.lblFullname.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFullname.ForeColor = System.Drawing.Color.Black
+        Me.lblFullname.Location = New System.Drawing.Point(117, 113)
+        Me.lblFullname.Name = "lblFullname"
+        Me.lblFullname.Size = New System.Drawing.Size(70, 19)
+        Me.lblFullname.TabIndex = 8
+        Me.lblFullname.Text = "Fullname"
         '
         'InventoryToolStripMenuItem
         '
@@ -366,21 +373,21 @@ Partial Class Main_form
         '
         Me.DailyToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.dailysales
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.DailyToolStripMenuItem.Text = "Daily"
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.monthlysales
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'TopSalesToolStripMenuItem
         '
         Me.TopSalesToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.topsales
         Me.TopSalesToolStripMenuItem.Name = "TopSalesToolStripMenuItem"
-        Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
+        Me.TopSalesToolStripMenuItem.Size = New System.Drawing.Size(151, 26)
         Me.TopSalesToolStripMenuItem.Text = "Top Sales"
         '
         'TopCustomersToolStripMenuItem
@@ -434,30 +441,6 @@ Partial Class Main_form
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(92, 25)
         Me.LogoutToolStripMenuItem.Text = "Logout"
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.White
-        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(9, 113)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(99, 19)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Current user:"
-        '
-        'lblFullname
-        '
-        Me.lblFullname.AutoSize = True
-        Me.lblFullname.BackColor = System.Drawing.Color.White
-        Me.lblFullname.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullname.ForeColor = System.Drawing.Color.Black
-        Me.lblFullname.Location = New System.Drawing.Point(117, 113)
-        Me.lblFullname.Name = "lblFullname"
-        Me.lblFullname.Size = New System.Drawing.Size(70, 19)
-        Me.lblFullname.TabIndex = 8
-        Me.lblFullname.Text = "Fullname"
-        '
         'Main_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -469,7 +452,6 @@ Partial Class Main_form
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblTest)
-        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblTime)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.MenuStrip2)
@@ -481,14 +463,12 @@ Partial Class Main_form
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblDate As System.Windows.Forms.Label
     Friend WithEvents lblTime As System.Windows.Forms.Label
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents MenuStrip2 As MenuStrip
     Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem

@@ -190,6 +190,12 @@
     <Compile Include="COMasterList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConnectionSettings.Designer.vb">
+      <DependentUpon>ConnectionSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConnectionSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="COReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -589,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="COMasterList.resx">
       <DependentUpon>COMasterList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConnectionSettings.resx">
+      <DependentUpon>ConnectionSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="COReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

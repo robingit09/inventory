@@ -20,16 +20,27 @@
 
     Private Sub Main_form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'ModelFunction.deleteData()
+
+        If ModuleSettings.forTest = 1 Then
+            MsgBox("You are in a Test Mode", MsgBoxStyle.Exclamation, "System Mode")
+        Else
+
+        End If
+
+
+
         lblDate.Text = DateTime.Now.ToLongDateString
         lblTime.Text = DateTime.Now.ToLongTimeString
-        PictureBox1.BorderStyle = BorderStyle.None
+
 
         Timer1.Start()
 
         If ModuleSettings.forTest = 1 Then
-            lblTest.Visible = True
+            lblTest.Text = "For testing"
+            lblTest.ForeColor = Drawing.Color.Red
         Else
-            lblTest.Visible = False
+            lblTest.Text = "Live"
+            lblTest.ForeColor = Drawing.Color.Green
         End If
 
         ' check user access
@@ -346,6 +357,8 @@
     End Sub
 
     Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
+
         Me.Close()
+
     End Sub
 End Class

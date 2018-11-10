@@ -29,17 +29,17 @@
         If testYes.Checked = True Then
             ' for testing
             y = 1
-            My.Computer.FileSystem.CopyFile(
-                 "C:\users\inventory.accdb",
-                   Application.StartupPath & "\inventory_dev.accdb",
-                  Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
-                  Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
+            'My.Computer.FileSystem.CopyFile(
+            '     "C:\users\inventory.accdb",
+            '       Application.StartupPath & "\inventory_dev.accdb",
+            '      Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
+            '      Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
         Else
             ' not for test
             y = 0
-            If System.IO.File.Exists(Application.StartupPath & "\inventory.accdb") Then
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.accdb")
-            End If
+            'If System.IO.File.Exists(Application.StartupPath & "\inventory.accdb") Then
+            '    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.accdb")
+            'End If
 
         End If
         doQuery("UPDATE settings set for_testing = " & y)
@@ -58,16 +58,17 @@
 
         Dim yesno As Integer = MsgBox("Are you sure you want to backup database ?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
         If yesno = MsgBoxResult.Yes Then
+            Dim path As String = ModuleSettings.get_db_path()
             If ModuleSettings.forTest = 1 Then
                 My.Computer.FileSystem.CopyFile(
-                    Application.StartupPath & "\inventory_dev.accdb",
+                   path,
                     "C:\users\inventory_db_backup\inventory_dev.accdb",
                     Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                     Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)
             Else
                 My.Computer.FileSystem.CopyFile(
-                   "C:\users\inventory.accdb",
+                  path,
                   "C:\users\inventory_db_backup\inventory.accdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)

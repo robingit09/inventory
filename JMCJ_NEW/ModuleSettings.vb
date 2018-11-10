@@ -44,4 +44,33 @@ Module ModuleSettings
         dr.Close()
         con.Close()
     End Sub
+
+    Public Function get_db_path() As String
+        Dim query As String = ""
+
+        If ModuleSettings.forTest = 1 Then
+            query = "select value from database_settings where code ='db_test'"
+        Else
+            query = "select value from database_settings where code ='db'"
+        End If
+
+        connect()
+        Dim result As String = ""
+        cmd.Connection = con
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+        dr = cmd.ExecuteReader
+
+        If dr.HasRows Then
+            If dr.Read Then
+                result = dr("value")
+            End If
+        Else
+            result = 0
+        End If
+        cmd.Dispose()
+        dr.Close()
+        con.Close()
+        Return result
+    End Function
 End Module
