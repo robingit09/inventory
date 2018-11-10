@@ -27,15 +27,20 @@
     Private Sub insertForTesting()
         Dim y As Integer = 0
         If testYes.Checked = True Then
+            ' for testing
             y = 1
             My.Computer.FileSystem.CopyFile(
-                 "C:\users\inventory.mdb",
+                 "C:\users\inventory.accdb",
                    Application.StartupPath & "\inventory_dev.accdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
         Else
+            ' not for test
             y = 0
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.mdb")
+            If System.IO.File.Exists(Application.StartupPath & "\inventory.accdb") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.accdb")
+            End If
+
         End If
         doQuery("UPDATE settings set for_testing = " & y)
     End Sub
@@ -62,8 +67,8 @@
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)
             Else
                 My.Computer.FileSystem.CopyFile(
-                   "C:\users\inventory.mdb",
-                  "C:\users\inventory_db_backup\inventory.mdb",
+                   "C:\users\inventory.accdb",
+                  "C:\users\inventory_db_backup\inventory.accdb",
                   Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                   Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
                 MsgBox("Database Successfully Backup.", MsgBoxStyle.Information)

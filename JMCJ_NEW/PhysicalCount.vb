@@ -28,7 +28,7 @@
             If .dr.HasRows Then
                 While .dr.Read
                     Dim id As String = .dr("id")
-                    Dim recorded_date As String = Convert.ToDateTime(.dr("recorded_date")).ToString("MM-dd-yy")
+                    Dim recorded_date As String = Convert.ToDateTime(.dr("recorded_date")).ToString("MM-dd-yyyy")
                     Dim pc_no As String = .dr("pc_no")
                     Dim issued_by As String = .dr("issued_by")
                     Dim processed_by As String = New DatabaseConnect().get_by_id("users", .dr("user_id"), "first_name") & " " & New DatabaseConnect().get_by_id("users", .dr("user_id"), "surname")
