@@ -1,10 +1,9 @@
 ﻿Public Class ProductAddUnitForm
+
+    Public selectedBarcode As String = ""
     Private selectedBrand As Integer = 0
     Private selectedUnit As Integer = 0
     Private selectedColor As Integer = 0
-    Private Sub ProductAddUnitForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
     Public Sub resetFields()
         txtBarcode.Clear()
@@ -107,14 +106,38 @@
             Exit Sub
         End If
 
+        ' check if barcode exist
         If Trim(txtBarcode.Text) <> "" Then
-            Dim existbarcode As Boolean = New DatabaseConnect().isExist("product_unit", "barcode", Trim(txtBarcode.Text))
-            If existbarcode = True Then
+            'Dim existbarcode As Boolean = New DatabaseConnect().isExist("product_unit", "barcode", Trim(txtBarcode.Text))
+            'If existbarcode = True Then
+            '    MsgBox("product (" & txtBarcode.Text & ") is already exist", MsgBoxStyle.Critical)
+            '    txtBarcode.SelectAll()
+            '    txtBarcode.Focus()
+            '    Exit Sub
+            'End If
+            Dim query As String = ""
+            If btnAdd.Text = "Edit(->)" Then
+                query = "Select * from product_unit where barcode = '" & Trim(txtBarcode.Text) & "' and barcode <> '" & selectedBarcode & "'"
+            Else
+                query = "Select * from product_unit where barcode = '" & Trim(txtBarcode.Text) & "'"
+            End If
+
+            Dim is_exist_barcode As Boolean = False
+            Dim db As New DatabaseConnect
+            With db
+                .selectByQuery(query)
+                If .dr.Read Then
+                    is_exist_barcode = True
+                End If
+            End With
+
+            If is_exist_barcode = True Then
                 MsgBox("product (" & txtBarcode.Text & ") is already exist", MsgBoxStyle.Critical)
                 txtBarcode.SelectAll()
                 txtBarcode.Focus()
                 Exit Sub
             End If
+
         End If
 
         If btnAdd.Text = "Add(+)" Then
@@ -133,11 +156,12 @@
                     End If
                 End If
             Next
-            Dim row As String() = New String() {"", txtBarcode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
+            Dim row As String() = New String() {"", txtBarcode.Text, txtItemCode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
             ProductForm.dgvMeasure.Rows.Add(row)
 
         ElseIf btnAdd.Text = "Edit(->)" Then
             ProductForm.dgvMeasure.SelectedRows(0).Cells("barcode").Value = txtBarcode.Text
+            ProductForm.dgvMeasure.SelectedRows(0).Cells("item_code").Value = txtItemCode.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("unit").Value = cbUnit.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("color").Value = cbColor.Text
@@ -146,9 +170,19 @@
         End If
 
         txtBarcode.Clear()
-        cbBrand.SelectedIndex = 0
-        cbUnit.SelectedIndex = 0
-        cbColor.SelectedIndex = 0
+        txtItemCode.Clear()
+        If cbBrand.Items.Count > 0 Then
+            cbBrand.SelectedIndex = 0
+        End If
+
+        If cbUnit.Items.Count > 0 Then
+            cbUnit.SelectedIndex = 0
+        End If
+
+        If cbColor.Items.Count > 0 Then
+            cbColor.SelectedIndex = 0
+        End If
+
         txtPrice.Clear()
         txtBarcode.Focus()
     End Sub
@@ -208,5 +242,9 @@
         ColorForm.txtColor.Clear()
         ColorForm.txtColor.Focus()
         ColorForm.ShowDialog()
+    End Sub
+
+    Private Sub ProductAddUnitForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

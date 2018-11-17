@@ -181,7 +181,7 @@
         With db
             dgvProducts.Rows.Clear()
             If q = "" Then
-                .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+                .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -199,6 +199,7 @@
                     Dim id As String = .dr("id")
                     Dim p_u_id As String = .dr("p_u_id")
                     Dim barcode As String = .dr("barcode")
+                    Dim itemcode As String = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
                     Dim desc As String = .dr("description")
                     Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
@@ -225,7 +226,7 @@
 
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
-                    Dim row As String() = New String() {p_u_id, barcode, desc, brand, unit, color, price, stock, cat, subcat}
+                    Dim row As String() = New String() {p_u_id, barcode, itemcode, desc, brand, unit, color, price, stock, cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If

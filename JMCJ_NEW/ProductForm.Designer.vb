@@ -32,17 +32,18 @@ Partial Class ProductForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbMeasurement = New System.Windows.Forms.TabPage()
         Me.dgvMeasure = New System.Windows.Forms.DataGridView()
+        Me.btnEditUnit = New System.Windows.Forms.Button()
+        Me.btnAddMoreUnit = New System.Windows.Forms.Button()
+        Me.btnAddCategory = New System.Windows.Forms.Button()
+        Me.btnSubCat = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.item_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_remove = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnEditUnit = New System.Windows.Forms.Button()
-        Me.btnAddMoreUnit = New System.Windows.Forms.Button()
-        Me.btnAddCategory = New System.Windows.Forms.Button()
-        Me.btnSubCat = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasurement.SuspendLayout()
         CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,7 +84,7 @@ Partial Class ProductForm
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSave.Location = New System.Drawing.Point(800, 12)
+        Me.btnSave.Location = New System.Drawing.Point(909, 12)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(94, 37)
         Me.btnSave.TabIndex = 12
@@ -125,7 +126,7 @@ Partial Class ProductForm
         Me.TabControl1.Location = New System.Drawing.Point(39, 226)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(859, 328)
+        Me.TabControl1.Size = New System.Drawing.Size(964, 328)
         Me.TabControl1.TabIndex = 20
         '
         'tbMeasurement
@@ -136,7 +137,7 @@ Partial Class ProductForm
         Me.tbMeasurement.Location = New System.Drawing.Point(4, 22)
         Me.tbMeasurement.Name = "tbMeasurement"
         Me.tbMeasurement.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMeasurement.Size = New System.Drawing.Size(851, 302)
+        Me.tbMeasurement.Size = New System.Drawing.Size(956, 302)
         Me.tbMeasurement.TabIndex = 0
         Me.tbMeasurement.Text = "Measurement"
         Me.tbMeasurement.UseVisualStyleBackColor = True
@@ -144,57 +145,11 @@ Partial Class ProductForm
         'dgvMeasure
         '
         Me.dgvMeasure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.barcode, Me.brand, Me.unit, Me.color, Me.price, Me.col_remove})
+        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.barcode, Me.item_code, Me.brand, Me.unit, Me.color, Me.price, Me.col_remove})
         Me.dgvMeasure.Location = New System.Drawing.Point(6, 57)
         Me.dgvMeasure.Name = "dgvMeasure"
-        Me.dgvMeasure.Size = New System.Drawing.Size(839, 166)
+        Me.dgvMeasure.Size = New System.Drawing.Size(931, 166)
         Me.dgvMeasure.TabIndex = 3
-        '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'barcode
-        '
-        Me.barcode.HeaderText = "Barcode"
-        Me.barcode.Name = "barcode"
-        Me.barcode.ReadOnly = True
-        Me.barcode.Width = 200
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        Me.brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.brand.Width = 150
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'color
-        '
-        Me.color.HeaderText = "Color"
-        Me.color.Name = "color"
-        Me.color.ReadOnly = True
-        '
-        'price
-        '
-        Me.price.HeaderText = "Price"
-        Me.price.Name = "price"
-        Me.price.ReadOnly = True
-        '
-        'col_remove
-        '
-        Me.col_remove.HeaderText = "Action"
-        Me.col_remove.Name = "col_remove"
         '
         'btnEditUnit
         '
@@ -234,12 +189,65 @@ Partial Class ProductForm
         Me.btnSubCat.Text = "Add (+)"
         Me.btnSubCat.UseVisualStyleBackColor = True
         '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'barcode
+        '
+        Me.barcode.HeaderText = "Barcode"
+        Me.barcode.Name = "barcode"
+        Me.barcode.ReadOnly = True
+        Me.barcode.Width = 180
+        '
+        'item_code
+        '
+        Me.item_code.HeaderText = "Item Code"
+        Me.item_code.Name = "item_code"
+        Me.item_code.ReadOnly = True
+        Me.item_code.Width = 150
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        Me.brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.brand.Width = 150
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'color
+        '
+        Me.color.HeaderText = "Color"
+        Me.color.Name = "color"
+        Me.color.ReadOnly = True
+        '
+        'price
+        '
+        Me.price.HeaderText = "Price"
+        Me.price.Name = "price"
+        Me.price.ReadOnly = True
+        '
+        'col_remove
+        '
+        Me.col_remove.HeaderText = "Action"
+        Me.col_remove.Name = "col_remove"
+        '
         'ProductForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(910, 566)
+        Me.ClientSize = New System.Drawing.Size(1015, 566)
         Me.Controls.Add(Me.btnSubCat)
         Me.Controls.Add(Me.btnAddCategory)
         Me.Controls.Add(Me.TabControl1)
@@ -278,6 +286,7 @@ Partial Class ProductForm
     Friend WithEvents btnSubCat As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents barcode As DataGridViewTextBoxColumn
+    Friend WithEvents item_code As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
     Friend WithEvents unit As DataGridViewTextBoxColumn
     Friend WithEvents color As DataGridViewTextBoxColumn

@@ -43,6 +43,7 @@
                 For Each row As DataGridViewRow In dgvMeasure.Rows
                     If row.Cells("unit").Value <> "" Then
                         Dim barcode As String = row.Cells("barcode").Value
+                        Dim itemcode As String = row.Cells("item_code").Value
                         Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
                         Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
                         Dim color As Integer = If(row.Cells("color").Value = "No Color", 0, New DatabaseConnect().get_id("color", "name", row.Cells("color").Value))
@@ -51,12 +52,13 @@
                         With dbinsertUnit
                             dbinsertUnit.cmd.Connection = dbinsertUnit.con
                             dbinsertUnit.cmd.CommandType = CommandType.Text
-                            dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?)"
+                            dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?)"
                             dbinsertUnit.cmd.Parameters.AddWithValue("@product_id", prod_id)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@brand", brand)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@unit", unit)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@color", color)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@barcode", barcode)
+                            dbinsertUnit.cmd.Parameters.AddWithValue("@item_code", itemcode)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@price", price)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@status", 1)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
@@ -135,6 +137,7 @@
             For Each item As DataGridViewRow In Me.dgvMeasure.Rows
                 Dim id As String = dgvMeasure.Rows(item.Index).Cells("id").Value
                 Dim barcode As String = dgvMeasure.Rows(item.Index).Cells("barcode").Value
+                Dim itemcode As String = dgvMeasure.Rows(item.Index).Cells("item_code").Value
                 Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvMeasure.Rows(item.Index).Cells("brand").Value)
                 Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvMeasure.Rows(item.Index).Cells("unit").Value)
                 Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvMeasure.Rows(item.Index).Cells("color").Value)
@@ -144,12 +147,13 @@
                 If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("col_remove").Value)) Then
                     If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("id").Value)) Then
                         'update if exist
-                        cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? , price = ?,status = ?, updated_at = ?
+                        cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? ,item_code = ? , price = ?,status = ?, updated_at = ?
                     where id = " & id
                         cmd2.Parameters.AddWithValue("@brand", brand)
                         cmd2.Parameters.AddWithValue("@unit", unit)
                         cmd2.Parameters.AddWithValue("@color", color)
                         cmd2.Parameters.AddWithValue("@barcode", barcode)
+                        cmd2.Parameters.AddWithValue("@item_code", itemcode)
                         cmd2.Parameters.AddWithValue("@price", price)
                         cmd2.Parameters.AddWithValue("@status", 1)
 
@@ -164,6 +168,7 @@
                         cmd2.Parameters.AddWithValue("@unit", unit)
                         cmd2.Parameters.AddWithValue("@color", color)
                         cmd2.Parameters.AddWithValue("@barcode", barcode)
+                        cmd2.Parameters.AddWithValue("@item_code", itemcode)
                         cmd2.Parameters.AddWithValue("@price", price)
                         cmd2.Parameters.AddWithValue("@status", 1)
                         cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
@@ -350,7 +355,9 @@
     End Sub
 
     Private Sub btnAddMoreUnit_Click(sender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
+        ProductAddUnitForm.Text = "Add"
         ProductAddUnitForm.btnAdd.Text = "Add(+)"
+        ProductAddUnitForm.selectedBarcode = ""
         ProductAddUnitForm.loadBrand()
         ProductAddUnitForm.loadUnit()
         ProductAddUnitForm.loadColor()
@@ -408,7 +415,7 @@
             Dim measure As New DatabaseConnect
             With measure
                 dgvMeasure.Rows.Clear()
-                .selectByQuery("select pu.id,pu.barcode,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
+                .selectByQuery("select pu.id,pu.barcode,pu.item_code,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
                                 LEFT JOIN brand as b ON b.id = pu.brand) 
                                 INNER JOIN unit as u ON u.id = pu.unit)
                                 LEFT JOIN color as c ON c.id = pu.color)
@@ -417,6 +424,7 @@
                     While .dr.Read
                         Dim pu_id As String = .dr("id")
                         Dim barcode As String = .dr("barcode")
+                        Dim itemcode As String = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
                         Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                         Dim unit As String = .dr("unit")
                         Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
@@ -425,11 +433,12 @@
                         dgvMeasure.Rows.Add(1)
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = pu_id
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = barcode
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = brand
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = unit
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = color
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = Val(price).ToString("N2")
-                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(6).Value = "Remove"
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = itemcode
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = brand
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = unit
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = color
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(6).Value = Val(price).ToString("N2")
+                        dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(7).Value = "Remove"
                     End While
                 End If
                 .cmd.Dispose()
@@ -446,11 +455,13 @@
             Exit Sub
         End If
         If dgvMeasure.SelectedRows.Count = 1 Then
-
+            ProductAddUnitForm.Text = "Edit"
             ProductAddUnitForm.loadBrand()
             ProductAddUnitForm.loadUnit()
+            ProductAddUnitForm.loadColor()
             ProductAddUnitForm.btnAdd.Text = "Edit(->)"
             ProductAddUnitForm.txtBarcode.Text = dgvMeasure.SelectedRows(0).Cells("barcode").Value
+            ProductAddUnitForm.selectedBarcode = dgvMeasure.SelectedRows(0).Cells("barcode").Value
             ProductAddUnitForm.cbBrand.SelectedIndex = ProductAddUnitForm.cbBrand.FindString(dgvMeasure.SelectedRows(0).Cells("brand").Value)
             ProductAddUnitForm.cbUnit.SelectedIndex = ProductAddUnitForm.cbUnit.FindString(dgvMeasure.SelectedRows(0).Cells("unit").Value)
             ProductAddUnitForm.txtPrice.Text = dgvMeasure.SelectedRows(0).Cells("price").Value
@@ -532,6 +543,5 @@
         ColorForm.selectedColor = 0
         ColorForm.ShowDialog()
     End Sub
-
 
 End Class

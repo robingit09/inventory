@@ -36,6 +36,8 @@ Partial Class ProductAddUnitForm
         Me.btnAddBrand = New System.Windows.Forms.Button()
         Me.btnAddUnit = New System.Windows.Forms.Button()
         Me.btnAddColor = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtItemCode = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtBarcode
@@ -60,7 +62,7 @@ Partial Class ProductAddUnitForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(168, 43)
+        Me.cbBrand.Location = New System.Drawing.Point(265, 42)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(121, 23)
         Me.cbBrand.TabIndex = 2
@@ -69,7 +71,7 @@ Partial Class ProductAddUnitForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(331, 43)
+        Me.cbUnit.Location = New System.Drawing.Point(428, 42)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(121, 23)
         Me.cbUnit.TabIndex = 3
@@ -77,7 +79,7 @@ Partial Class ProductAddUnitForm
         'txtPrice
         '
         Me.txtPrice.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrice.Location = New System.Drawing.Point(656, 43)
+        Me.txtPrice.Location = New System.Drawing.Point(753, 43)
         Me.txtPrice.Name = "txtPrice"
         Me.txtPrice.Size = New System.Drawing.Size(121, 21)
         Me.txtPrice.TabIndex = 4
@@ -86,7 +88,7 @@ Partial Class ProductAddUnitForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(165, 24)
+        Me.Label2.Location = New System.Drawing.Point(262, 23)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(36, 15)
         Me.Label2.TabIndex = 5
@@ -96,7 +98,7 @@ Partial Class ProductAddUnitForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(328, 24)
+        Me.Label3.Location = New System.Drawing.Point(425, 23)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(29, 15)
         Me.Label3.TabIndex = 6
@@ -106,7 +108,7 @@ Partial Class ProductAddUnitForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(653, 23)
+        Me.Label4.Location = New System.Drawing.Point(750, 23)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(31, 15)
         Me.Label4.TabIndex = 7
@@ -115,7 +117,7 @@ Partial Class ProductAddUnitForm
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(785, 31)
+        Me.btnAdd.Location = New System.Drawing.Point(882, 31)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(84, 45)
         Me.btnAdd.TabIndex = 8
@@ -126,7 +128,7 @@ Partial Class ProductAddUnitForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(491, 23)
+        Me.Label5.Location = New System.Drawing.Point(588, 23)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(34, 15)
         Me.Label5.TabIndex = 10
@@ -136,7 +138,7 @@ Partial Class ProductAddUnitForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(494, 42)
+        Me.cbColor.Location = New System.Drawing.Point(591, 42)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(121, 23)
         Me.cbColor.TabIndex = 9
@@ -144,7 +146,7 @@ Partial Class ProductAddUnitForm
         'btnAddBrand
         '
         Me.btnAddBrand.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddBrand.Location = New System.Drawing.Point(295, 43)
+        Me.btnAddBrand.Location = New System.Drawing.Point(392, 41)
         Me.btnAddBrand.Name = "btnAddBrand"
         Me.btnAddBrand.Size = New System.Drawing.Size(30, 23)
         Me.btnAddBrand.TabIndex = 12
@@ -154,7 +156,7 @@ Partial Class ProductAddUnitForm
         'btnAddUnit
         '
         Me.btnAddUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddUnit.Location = New System.Drawing.Point(458, 41)
+        Me.btnAddUnit.Location = New System.Drawing.Point(555, 41)
         Me.btnAddUnit.Name = "btnAddUnit"
         Me.btnAddUnit.Size = New System.Drawing.Size(30, 23)
         Me.btnAddUnit.TabIndex = 13
@@ -164,18 +166,38 @@ Partial Class ProductAddUnitForm
         'btnAddColor
         '
         Me.btnAddColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddColor.Location = New System.Drawing.Point(621, 41)
+        Me.btnAddColor.Location = New System.Drawing.Point(718, 41)
         Me.btnAddColor.Name = "btnAddColor"
         Me.btnAddColor.Size = New System.Drawing.Size(30, 23)
         Me.btnAddColor.TabIndex = 14
         Me.btnAddColor.Text = "+"
         Me.btnAddColor.UseVisualStyleBackColor = True
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(138, 24)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(57, 15)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Item Code"
+        '
+        'txtItemCode
+        '
+        Me.txtItemCode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtItemCode.Location = New System.Drawing.Point(141, 43)
+        Me.txtItemCode.Name = "txtItemCode"
+        Me.txtItemCode.Size = New System.Drawing.Size(114, 21)
+        Me.txtItemCode.TabIndex = 15
+        '
         'ProductAddUnitForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(907, 96)
+        Me.ClientSize = New System.Drawing.Size(976, 96)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.txtItemCode)
         Me.Controls.Add(Me.btnAddColor)
         Me.Controls.Add(Me.btnAddUnit)
         Me.Controls.Add(Me.btnAddBrand)
@@ -213,4 +235,6 @@ Partial Class ProductAddUnitForm
     Friend WithEvents btnAddBrand As Button
     Friend WithEvents btnAddUnit As Button
     Friend WithEvents btnAddColor As Button
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtItemCode As TextBox
 End Class
