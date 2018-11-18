@@ -56,6 +56,8 @@ Partial Class ProductMasterForm
         Me.txtPrice = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.txtItemCode = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -267,7 +269,7 @@ Partial Class ProductMasterForm
         'txtDescription
         '
         Me.txtDescription.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescription.Location = New System.Drawing.Point(84, 48)
+        Me.txtDescription.Location = New System.Drawing.Point(84, 77)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.ReadOnly = True
         Me.txtDescription.Size = New System.Drawing.Size(204, 20)
@@ -277,7 +279,7 @@ Partial Class ProductMasterForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(20, 51)
+        Me.Label2.Location = New System.Drawing.Point(20, 80)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 14)
         Me.Label2.TabIndex = 3
@@ -286,7 +288,7 @@ Partial Class ProductMasterForm
         'txtBrand
         '
         Me.txtBrand.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBrand.Location = New System.Drawing.Point(84, 74)
+        Me.txtBrand.Location = New System.Drawing.Point(84, 103)
         Me.txtBrand.Name = "txtBrand"
         Me.txtBrand.ReadOnly = True
         Me.txtBrand.Size = New System.Drawing.Size(204, 20)
@@ -296,7 +298,7 @@ Partial Class ProductMasterForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(20, 77)
+        Me.Label3.Location = New System.Drawing.Point(20, 106)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(34, 14)
         Me.Label3.TabIndex = 5
@@ -305,7 +307,7 @@ Partial Class ProductMasterForm
         'txtColor
         '
         Me.txtColor.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtColor.Location = New System.Drawing.Point(84, 100)
+        Me.txtColor.Location = New System.Drawing.Point(391, 21)
         Me.txtColor.Name = "txtColor"
         Me.txtColor.ReadOnly = True
         Me.txtColor.Size = New System.Drawing.Size(204, 20)
@@ -315,7 +317,7 @@ Partial Class ProductMasterForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(20, 103)
+        Me.Label4.Location = New System.Drawing.Point(327, 24)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(33, 14)
         Me.Label4.TabIndex = 7
@@ -324,7 +326,7 @@ Partial Class ProductMasterForm
         'txtUnit
         '
         Me.txtUnit.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.Location = New System.Drawing.Point(84, 124)
+        Me.txtUnit.Location = New System.Drawing.Point(391, 48)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.Size = New System.Drawing.Size(204, 20)
@@ -334,7 +336,7 @@ Partial Class ProductMasterForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(20, 127)
+        Me.Label5.Location = New System.Drawing.Point(327, 51)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(28, 14)
         Me.Label5.TabIndex = 9
@@ -343,17 +345,17 @@ Partial Class ProductMasterForm
         'txtPrice
         '
         Me.txtPrice.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrice.Location = New System.Drawing.Point(406, 21)
+        Me.txtPrice.Location = New System.Drawing.Point(391, 77)
         Me.txtPrice.Name = "txtPrice"
         Me.txtPrice.ReadOnly = True
-        Me.txtPrice.Size = New System.Drawing.Size(109, 20)
+        Me.txtPrice.Size = New System.Drawing.Size(204, 20)
         Me.txtPrice.TabIndex = 12
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(345, 25)
+        Me.Label6.Location = New System.Drawing.Point(327, 80)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(55, 14)
         Me.Label6.TabIndex = 11
@@ -369,11 +371,32 @@ Partial Class ProductMasterForm
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'txtItemCode
+        '
+        Me.txtItemCode.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtItemCode.Location = New System.Drawing.Point(84, 48)
+        Me.txtItemCode.Name = "txtItemCode"
+        Me.txtItemCode.ReadOnly = True
+        Me.txtItemCode.Size = New System.Drawing.Size(204, 20)
+        Me.txtItemCode.TabIndex = 15
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(20, 51)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(55, 14)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Item Code"
+        '
         'ProductMasterForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(730, 390)
+        Me.ClientSize = New System.Drawing.Size(924, 390)
+        Me.Controls.Add(Me.txtItemCode)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.txtPrice)
         Me.Controls.Add(Me.Label6)
@@ -441,4 +464,6 @@ Partial Class ProductMasterForm
     Friend WithEvents dgvcosthistory As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents txtItemCode As TextBox
+    Friend WithEvents Label7 As Label
 End Class

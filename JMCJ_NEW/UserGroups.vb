@@ -64,4 +64,17 @@
         End If
         btnUpdate.Enabled = True
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If dgvUserGroup.SelectedRows.Count = 1 Then
+            Dim position As String = dgvUserGroup.SelectedRows(0).Cells("position").Value.ToString()
+
+            If position = "ADMIN" Then
+                MsgBox("Unable to delete admin.", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+        Else
+
+        End If
+    End Sub
 End Class

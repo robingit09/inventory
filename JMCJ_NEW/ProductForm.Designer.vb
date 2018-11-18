@@ -148,7 +148,7 @@ Partial Class ProductForm
         Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.barcode, Me.item_code, Me.brand, Me.unit, Me.color, Me.price, Me.col_remove})
         Me.dgvMeasure.Location = New System.Drawing.Point(6, 57)
         Me.dgvMeasure.Name = "dgvMeasure"
-        Me.dgvMeasure.Size = New System.Drawing.Size(931, 166)
+        Me.dgvMeasure.Size = New System.Drawing.Size(931, 225)
         Me.dgvMeasure.TabIndex = 3
         '
         'btnEditUnit

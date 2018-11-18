@@ -114,7 +114,7 @@ Public Class btnTest
     Private Sub testConnection()
         Dim con As New OleDbConnection
         Dim cmd As New OleDbCommand
-        Dim dr As OleDbDataReader
+        'Dim dr As OleDbDataReader
 
         con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Trim(txtPath.Text)
 

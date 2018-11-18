@@ -2,40 +2,54 @@
     Public selectedSupplier As Integer = 0
     Public module_selection As Integer = 0
 
-    Public Sub loadSupplierProducts(ByVal supplier As Integer)
+    Public Sub loadSupplierProducts(ByVal supplier As Integer, ByVal filter_query As String)
         selectedSupplier = supplier
         dgvProducts.Rows.Clear()
 
         Dim db As New DatabaseConnect
         With db
-            Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM (((((((((products as p 
-                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
-                LEFT JOIN brand as b ON b.id = pu.brand)
-                INNER JOIN unit as u ON u.id = pu.unit)
-                LEFT JOIN color as cc ON cc.id = pu.color)
-                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
-                LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & supplier & " order by p.description"
+            Dim query As String = ""
 
-            If module_selection = 5 Then
-                query = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM (((((((((products as p 
-                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
-                LEFT JOIN brand as b ON b.id = pu.brand)
-                INNER JOIN unit as u ON u.id = pu.unit)
-                LEFT JOIN color as cc ON cc.id = pu.color)
-                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
-                LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0  order by p.description"
+            If filter_query = "" Then
+                If module_selection = 5 Then
 
-                selectedSupplier = 0
-                txtSupplier.Text = ""
+                    query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                        INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as cc ON cc.id = pu.color)
+                        INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                        LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                        LEFT JOIN categories as c ON c.id = pc.category_id)
+                        LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
 
+                    selectedSupplier = 0
+                    txtSupplier.Text = ""
+
+                Else
+
+                    query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                        INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                        LEFT JOIN brand as b ON b.id = pu.brand)
+                        INNER JOIN unit as u ON u.id = pu.unit)
+                        LEFT JOIN color as cc ON cc.id = pu.color)
+                        INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                        LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                        LEFT JOIN categories as c ON c.id = pc.category_id)
+                        LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & selectedSupplier
+
+                End If
+
+
+                query = query & " order by p.description"
+
+                .selectByQuery(query)
+            Else
+                .selectByQuery(filter_query)
             End If
-            .selectByQuery(query)
+
 
             If .dr.HasRows Then
                 While .dr.Read
@@ -53,7 +67,7 @@
                     Try
                         Dim dbstock As New DatabaseConnect
                         With dbstock
-                            .selectByQuery("select qty from product_stocks where product_unit_id = " & p_u_id)
+                            .selectByQuery("Select qty from product_stocks where product_unit_id = " & p_u_id)
                             If .dr.Read Then
                                 stock = Val(.dr("qty")).ToString
                             Else
@@ -197,7 +211,7 @@
         Dim result As Double = 0
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("select unit_cost from product_suppliers where supplier = " & supplier & " and product_unit_id = " & p_u_id)
+            .selectByQuery("Select unit_cost from product_suppliers where supplier = " & supplier & " And product_unit_id = " & p_u_id)
             If .dr.Read Then
                 result = CDbl(Val(.dr("unit_cost")).ToString("N2"))
             End If
@@ -245,5 +259,53 @@
                 dgvProducts.Rows(item.Index).Cells(1).Value = True
             End If
         Next
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        If Trim(txtSearch.Text) <> "" Then
+            Dim k As String = txtSearch.Text.ToUpper
+            Dim query As String = ""
+
+            If module_selection = 5 Then
+
+                query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
+
+                'selectedSupplier = 0
+                'txtSupplier.Text = ""
+
+            Else
+
+                query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & selectedSupplier
+
+            End If
+
+            'query = query & " or UCASE(p.description) like '%" & k & "%'  or UCASE(pu.item_code) like '%" & k & "%' 
+            'or UCASE(c.name) like '%" & k & "%' or UCASE(sub.name) like '%" & k & "%' or UCASE(cc.name) like '%" & k & "%'"
+            query = query & " and ( UCASE(p.description) like '%" & k & "%'  or UCASE(pu.item_code) like '%" & k & "%' )"
+
+            query = query & " order by p.description"
+            loadSupplierProducts(Me.selectedSupplier, query)
+        Else
+            'MsgBox("No search")
+        End If
+
     End Sub
 End Class

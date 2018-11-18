@@ -219,7 +219,7 @@
             MsgBox("Products Successfully Saved.", MsgBoxStyle.Information)
 
             If from_module = 1 Then
-                SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier)
+                SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier, "")
             End If
         End With
 

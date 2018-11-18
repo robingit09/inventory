@@ -234,6 +234,13 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM product_stocks"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_stocks Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
 
             .cmd.CommandText = "DELETE FROM product_categories"
             .cmd.ExecuteNonQuery()

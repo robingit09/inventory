@@ -116,7 +116,7 @@
             '    Exit Sub
             'End If
             Dim query As String = ""
-            If btnAdd.Text = "Edit(->)" Then
+            If btnAdd.Text = "Update" Then
                 query = "Select * from product_unit where barcode = '" & Trim(txtBarcode.Text) & "' and barcode <> '" & selectedBarcode & "'"
             Else
                 query = "Select * from product_unit where barcode = '" & Trim(txtBarcode.Text) & "'"
@@ -140,7 +140,7 @@
 
         End If
 
-        If btnAdd.Text = "Add(+)" Then
+        If btnAdd.Text = "Add" Then
             ' check if exist
             For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
                 If item.Cells("brand").Value <> "" Then
@@ -159,7 +159,7 @@
             Dim row As String() = New String() {"", txtBarcode.Text, txtItemCode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
             ProductForm.dgvMeasure.Rows.Add(row)
 
-        ElseIf btnAdd.Text = "Edit(->)" Then
+        ElseIf btnAdd.Text = "Update" Then
             ProductForm.dgvMeasure.SelectedRows(0).Cells("barcode").Value = txtBarcode.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("item_code").Value = txtItemCode.Text
             ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text

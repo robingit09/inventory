@@ -41,16 +41,19 @@ Partial Class SupplierProductSelection
         Me.gpSupplier = New System.Windows.Forms.GroupBox()
         Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
         Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgvProducts
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_cost, Me.column_stock, Me.column_cat, Me.column_subcat})
-        Me.dgvProducts.Location = New System.Drawing.Point(15, 104)
+        Me.dgvProducts.Location = New System.Drawing.Point(15, 118)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1252, 474)
+        Me.dgvProducts.Size = New System.Drawing.Size(1252, 460)
         Me.dgvProducts.TabIndex = 22
         '
         'column_id
@@ -192,11 +195,29 @@ Partial Class SupplierProductSelection
         Me.linkUnselectAll.TabStop = True
         Me.linkUnselectAll.Text = "Unselect All"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtSearch)
+        Me.GroupBox1.Location = New System.Drawing.Point(140, 73)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(343, 39)
+        Me.GroupBox1.TabIndex = 41
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Search"
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(6, 13)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(331, 20)
+        Me.txtSearch.TabIndex = 0
+        '
         'SupplierProductSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1295, 637)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.linkSelectAll)
         Me.Controls.Add(Me.linkUnselectAll)
         Me.Controls.Add(Me.btnAddProducts)
@@ -209,6 +230,8 @@ Partial Class SupplierProductSelection
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Products"
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -233,4 +256,6 @@ Partial Class SupplierProductSelection
     Friend WithEvents gpSupplier As GroupBox
     Friend WithEvents linkSelectAll As LinkLabel
     Friend WithEvents linkUnselectAll As LinkLabel
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents txtSearch As TextBox
 End Class

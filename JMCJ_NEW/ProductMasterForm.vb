@@ -7,7 +7,7 @@
         Dim db As New DatabaseConnect
         With db
 
-            .selectByQuery("Select distinct pu.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+            .selectByQuery("Select distinct pu.id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -19,8 +19,9 @@
 
             If .dr.Read Then
                 txtBarcode.Text = .dr("barcode")
+                txtItemCode.Text = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
                 txtDescription.Text = .dr("description")
-                txtBrand.Text = .dr("brand")
+                txtBrand.Text = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                 txtUnit.Text = .dr("unit")
                 txtColor.Text = If(IsDBNull(.dr("color")), "", .dr("color"))
                 txtPrice.Text = Val(.dr("price")).ToString("N2")

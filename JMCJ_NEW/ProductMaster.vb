@@ -21,7 +21,7 @@
         With db
             dgvProducts.Rows.Clear()
             If q = "" Then
-                .selectByQuery("Select distinct pu.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat,sub.name as subcat FROM (((((((((products as p 
+                .selectByQuery("Select distinct pu.id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat,sub.name as subcat FROM (((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN product_stocks as ps ON ps.product_unit_id = pu.id)
                 LEFT JOIN brand as b ON b.id = pu.brand)
@@ -39,15 +39,16 @@
                 While .dr.Read
                     Dim id As String = .dr("id")
                     Dim barcode As String = .dr("barcode")
+                    Dim itemcode As String = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
                     Dim desc As String = .dr("description")
-                    Dim brand As String = .dr("brand")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
                     Dim stock As String = If(IsDBNull(.dr("stock")), "", .dr("stock"))
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
-                    Dim row As String() = New String() {id, barcode, desc, brand, unit, color, price, stock, cat, subcat}
+                    Dim row As String() = New String() {id, barcode, itemcode, desc, brand, unit, color, price, stock, cat, subcat}
                     dgvProducts.Rows.Add(row)
                 End While
             End If

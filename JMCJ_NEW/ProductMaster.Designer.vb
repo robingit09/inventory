@@ -42,6 +42,7 @@ Partial Class ProductMaster
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.item_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -56,11 +57,13 @@ Partial Class ProductMaster
         '
         'dgvProducts
         '
+        Me.dgvProducts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.ProductDesc, Me.Brand, Me.Unit, Me.Color, Me.UnitPrice, Me.StockQty, Me.Category, Me.Subcategory})
+        Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.item_code, Me.ProductDesc, Me.Brand, Me.Unit, Me.Color, Me.UnitPrice, Me.StockQty, Me.Category, Me.Subcategory})
         Me.dgvProducts.Location = New System.Drawing.Point(12, 190)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1150, 397)
+        Me.dgvProducts.Size = New System.Drawing.Size(1209, 397)
         Me.dgvProducts.TabIndex = 21
         '
         'btnView
@@ -249,6 +252,14 @@ Partial Class ProductMaster
         Me.Barcode.HeaderText = "Barcode"
         Me.Barcode.Name = "Barcode"
         Me.Barcode.ReadOnly = True
+        Me.Barcode.Width = 130
+        '
+        'item_code
+        '
+        Me.item_code.HeaderText = "Item Code"
+        Me.item_code.Name = "item_code"
+        Me.item_code.ReadOnly = True
+        Me.item_code.Width = 130
         '
         'ProductDesc
         '
@@ -305,7 +316,7 @@ Partial Class ProductMaster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1233, 607)
+        Me.ClientSize = New System.Drawing.Size(1269, 607)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.dgvProducts)
@@ -342,6 +353,7 @@ Partial Class ProductMaster
     Friend WithEvents btnFilter As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
+    Friend WithEvents item_code As DataGridViewTextBoxColumn
     Friend WithEvents ProductDesc As DataGridViewTextBoxColumn
     Friend WithEvents Brand As DataGridViewTextBoxColumn
     Friend WithEvents Unit As DataGridViewTextBoxColumn

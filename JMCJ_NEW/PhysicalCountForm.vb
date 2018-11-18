@@ -9,7 +9,7 @@
     Public selectedUnit As Integer = 0
     Private Sub btnSelectProduct_Click(sender As Object, e As EventArgs) Handles btnSelectProduct.Click
         SupplierProductSelection.module_selection = 5
-        SupplierProductSelection.loadSupplierProducts(0)
+        SupplierProductSelection.loadSupplierProducts(0, "")
         SupplierProductSelection.ShowDialog()
     End Sub
 

@@ -162,7 +162,7 @@
                         cmd2.Parameters.Clear()
                     Else
                         'save if not exist
-                        cmd2.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,price,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)"
+                        cmd2.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?)"
                         cmd2.Parameters.AddWithValue("@product_id", selectedProduct)
                         cmd2.Parameters.AddWithValue("@brand", brand)
                         cmd2.Parameters.AddWithValue("@unit", unit)
@@ -175,12 +175,30 @@
                         cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                         cmd2.ExecuteNonQuery()
                         cmd2.Parameters.Clear()
+
+                        'insert stock
+                        'Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
+                        'Dim insertstock As New DatabaseConnect
+                        'With insertstock
+                        '    .cmd.Connection = .con
+                        '    .cmd.CommandType = CommandType.Text
+                        '    .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
+                        '    .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                        '    .cmd.Parameters.AddWithValue("@qty", 0)
+                        '    .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                        '    .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                        '    .cmd.ExecuteNonQuery()
+                        '    .cmd.Dispose()
+                        '    .con.Close()
+
+                        'End With
                     End If
                 End If
             Next
             cmd2.Dispose()
             .cmd.Dispose()
             .con.Close()
+
             MsgBox("Product Successfully Update.", MsgBoxStyle.Information)
             clearFields()
             Me.Close()
@@ -208,6 +226,19 @@
         '        ProductList.loadList("")
         '        Me.Close()
 
+    End Sub
+
+    Private Sub initializeStock()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select * from product_unit where id not in (select product_unit_id from product_stocks)")
+            While .dr.Read
+                Dim p_u_id As String = .dr("id")
+                ModelFunction.update_stock(p_u_id, 0, "+")
+            End While
+            .dr.Close()
+            .con.Close()
+        End With
     End Sub
 
     Public Sub populateCategory()
@@ -294,6 +325,7 @@
                 Exit Sub
             End If
             updateData()
+            initializeStock() 'initialize stock of new products
         End If
 
     End Sub
@@ -356,7 +388,7 @@
 
     Private Sub btnAddMoreUnit_Click(sender As Object, e As EventArgs) Handles btnAddMoreUnit.Click
         ProductAddUnitForm.Text = "Add"
-        ProductAddUnitForm.btnAdd.Text = "Add(+)"
+        ProductAddUnitForm.btnAdd.Text = "Add"
         ProductAddUnitForm.selectedBarcode = ""
         ProductAddUnitForm.loadBrand()
         ProductAddUnitForm.loadUnit()
@@ -436,6 +468,8 @@
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = itemcode
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = brand
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = unit
+
+
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = color
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(6).Value = Val(price).ToString("N2")
                         dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(7).Value = "Remove"
@@ -455,15 +489,17 @@
             Exit Sub
         End If
         If dgvMeasure.SelectedRows.Count = 1 Then
-            ProductAddUnitForm.Text = "Edit"
+            ProductAddUnitForm.Text = "Update"
             ProductAddUnitForm.loadBrand()
             ProductAddUnitForm.loadUnit()
             ProductAddUnitForm.loadColor()
-            ProductAddUnitForm.btnAdd.Text = "Edit(->)"
+            ProductAddUnitForm.btnAdd.Text = "Update"
             ProductAddUnitForm.txtBarcode.Text = dgvMeasure.SelectedRows(0).Cells("barcode").Value
             ProductAddUnitForm.selectedBarcode = dgvMeasure.SelectedRows(0).Cells("barcode").Value
+            ProductAddUnitForm.txtItemCode.Text = dgvMeasure.SelectedRows(0).Cells("item_code").Value
             ProductAddUnitForm.cbBrand.SelectedIndex = ProductAddUnitForm.cbBrand.FindString(dgvMeasure.SelectedRows(0).Cells("brand").Value)
             ProductAddUnitForm.cbUnit.SelectedIndex = ProductAddUnitForm.cbUnit.FindString(dgvMeasure.SelectedRows(0).Cells("unit").Value)
+            ProductAddUnitForm.cbColor.SelectedIndex = ProductAddUnitForm.cbColor.FindString(dgvMeasure.SelectedRows(0).Cells("color").Value)
             ProductAddUnitForm.txtPrice.Text = dgvMeasure.SelectedRows(0).Cells("price").Value
             ProductAddUnitForm.ShowDialog()
         Else
@@ -481,6 +517,10 @@
         If (e.ColumnIndex = dgvMeasure.Columns("col_remove").Index) Then
             dgvMeasure.Rows.RemoveAt(e.RowIndex)
         End If
+
+        'If (e.ColumnIndex = dgvMeasure.Columns("unit").Index) Then
+        '    MsgBox("Select Unit")
+        'End If
     End Sub
 
     Private Sub txtProduct_MouseLeave(sender As Object, e As EventArgs) Handles txtProduct.MouseLeave

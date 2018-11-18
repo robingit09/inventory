@@ -20,6 +20,7 @@
         loadCat()
         loadSubCat()
         loadList("")
+        getTotalQty()
 
         'check user access
         If ModelFunction.check_access(1, 1) = 1 Then
@@ -236,12 +237,6 @@
         End With
     End Sub
 
-
-    Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-
-    End Sub
-
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         ProductForm.btnSave.Text = "Save"
         'ProductForm.initializeMeasure()
@@ -317,7 +312,7 @@
     End Sub
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+        Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -328,6 +323,10 @@
                 LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
         If Trim(txtBarcode.Text) <> "" Then
             query = query & " and pu.barcode = '" & txtBarcode.Text & "'"
+        End If
+
+        If Trim(txtItemCode.Text) <> "" Then
+            query = query & " and pu.item_code = '" & txtItemCode.Text & "'"
         End If
 
         If selectedDesc > 0 And Trim(txtProductDesc.Text) <> "" Then
@@ -366,7 +365,7 @@
         Dim total_amount As Double = 0
         Dim dbledger As New DatabaseConnect()
         With dbledger
-            .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat,pu.status FROM ((((((((products as p 
+            .selectByQuery("Select distinct p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat,pu.status FROM ((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN brand as b ON b.id = pu.brand)
                 INNER JOIN unit as u ON u.id = pu.unit)
@@ -382,8 +381,9 @@
                     'Dim id As String = .dr("id")
                     Dim p_u_id As String = .dr("p_u_id")
                     Dim barcode As String = .dr("barcode")
+                    Dim itemcode As String = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
                     Dim desc As String = .dr("description")
-                    Dim brand As String = .dr("brand")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
@@ -420,6 +420,7 @@
 
                     tr = tr & "<td>" & (num + 1) & "</td>"
                     tr = tr & "<td>" & barcode & "</td>"
+                    tr = tr & "<td>" & itemcode & "</td>"
                     tr = tr & "<td>" & desc & "</td>"
                     tr = tr & "<td>" & brand & "</td>"
                     tr = tr & "<td>" & unit & "</td>"
@@ -490,6 +491,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Barcode</th>
+                                <th>Item Code</th>
                                 <th>Description</th>
                                 <th>Brand</th>
                                 <th>Unit</th>
@@ -642,7 +644,6 @@
 
         Dim id As Integer = dgvProducts.SelectedRows(0).Cells(0).Value
 
-
         Dim yn As Integer = MsgBox("Are you sure you want to delete this product ? ", MsgBoxStyle.YesNo + MsgBoxStyle.Information, Me.Text)
         If yn = MsgBoxResult.Yes Then
             Dim db As New DatabaseConnect
@@ -652,5 +653,35 @@
             MsgBox("Product Successfully Deleted.", MsgBoxStyle.Information)
             loadList("")
         End If
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Dim k As String = Trim(txtSearch.Text).ToUpper
+        Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 
+                and UCASE(p.description) like '%" & k & "%'  or UCASE(pu.item_code) like '%" & k & "%' 
+                or UCASE(pu.barcode) like '%" & k & "%' or UCASE(c.name) like '%" & k & "%' 
+                or UCASE(sub.name) like '%" & k & "%' or UCASE(cc.name) like '%" & k & "%'"
+
+        loadList(query)
+    End Sub
+
+    Private Sub getTotalQty()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select sum(qty) as total from product_stocks as  ps inner join product_unit as pu on pu.id = ps.product_unit_id where pu.status <> 0")
+            If .dr.Read Then
+                lblTotalStock.Text = .dr("total")
+            End If
+            .dr.Close()
+            .con.Close()
+        End With
     End Sub
 End Class

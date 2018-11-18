@@ -22,10 +22,9 @@ Partial Class SearchSupplierProducts
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ckSelectAll = New System.Windows.Forms.CheckBox()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
         Me.column_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.selectp = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -35,45 +34,35 @@ Partial Class SearchSupplierProducts
         Me.column_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.column_unit_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.linkSelectAll = New System.Windows.Forms.LinkLabel()
+        Me.linkUnselectAll = New System.Windows.Forms.LinkLabel()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button1
+        'btnSearch
         '
-        Me.Button1.Location = New System.Drawing.Point(677, 37)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Search"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSearch.Location = New System.Drawing.Point(677, 37)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 1
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(776, 36)
+        Me.btnAdd.Location = New System.Drawing.Point(776, 37)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 2
         Me.btnAdd.Text = "Add "
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'txtSearch
         '
-        Me.TextBox1.Location = New System.Drawing.Point(476, 39)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(183, 20)
-        Me.TextBox1.TabIndex = 3
-        '
-        'ckSelectAll
-        '
-        Me.ckSelectAll.AutoSize = True
-        Me.ckSelectAll.Checked = True
-        Me.ckSelectAll.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSelectAll.Location = New System.Drawing.Point(12, 41)
-        Me.ckSelectAll.Name = "ckSelectAll"
-        Me.ckSelectAll.Size = New System.Drawing.Size(70, 17)
-        Me.ckSelectAll.TabIndex = 26
-        Me.ckSelectAll.Text = "Select All"
-        Me.ckSelectAll.UseVisualStyleBackColor = True
+        Me.txtSearch.Location = New System.Drawing.Point(488, 39)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(183, 20)
+        Me.txtSearch.TabIndex = 3
         '
         'dgvProducts
         '
@@ -139,16 +128,37 @@ Partial Class SearchSupplierProducts
         Me.column_unit_price.ReadOnly = True
         Me.column_unit_price.Width = 120
         '
+        'linkSelectAll
+        '
+        Me.linkSelectAll.AutoSize = True
+        Me.linkSelectAll.Location = New System.Drawing.Point(85, 42)
+        Me.linkSelectAll.Name = "linkSelectAll"
+        Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
+        Me.linkSelectAll.TabIndex = 42
+        Me.linkSelectAll.TabStop = True
+        Me.linkSelectAll.Text = "Select All"
+        '
+        'linkUnselectAll
+        '
+        Me.linkUnselectAll.AutoSize = True
+        Me.linkUnselectAll.Location = New System.Drawing.Point(9, 42)
+        Me.linkUnselectAll.Name = "linkUnselectAll"
+        Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
+        Me.linkUnselectAll.TabIndex = 41
+        Me.linkUnselectAll.TabStop = True
+        Me.linkUnselectAll.Text = "Unselect All"
+        '
         'SearchSupplierProducts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(871, 531)
-        Me.Controls.Add(Me.ckSelectAll)
+        Me.Controls.Add(Me.linkSelectAll)
+        Me.Controls.Add(Me.linkUnselectAll)
         Me.Controls.Add(Me.dgvProducts)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSearch)
         Me.Name = "SearchSupplierProducts"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Search Supplier Products"
@@ -157,10 +167,9 @@ Partial Class SearchSupplierProducts
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSearch As Button
     Friend WithEvents btnAdd As Button
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ckSelectAll As CheckBox
+    Friend WithEvents txtSearch As TextBox
     Friend WithEvents dgvProducts As DataGridView
     Friend WithEvents column_id As DataGridViewTextBoxColumn
     Friend WithEvents selectp As DataGridViewCheckBoxColumn
@@ -170,4 +179,6 @@ Partial Class SearchSupplierProducts
     Friend WithEvents column_unit As DataGridViewTextBoxColumn
     Friend WithEvents column_color As DataGridViewTextBoxColumn
     Friend WithEvents column_unit_price As DataGridViewTextBoxColumn
+    Friend WithEvents linkSelectAll As LinkLabel
+    Friend WithEvents linkUnselectAll As LinkLabel
 End Class

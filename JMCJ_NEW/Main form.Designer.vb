@@ -27,10 +27,6 @@ Partial Class Main_form
         Me.lblTime = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
-        Me.lblTest = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblFullname = New System.Windows.Forms.Label()
         Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductMasterInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,6 +66,10 @@ Partial Class Main_form
         Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblTest = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblFullname = New System.Windows.Forms.Label()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -80,9 +80,9 @@ Partial Class Main_form
         Me.lblDate.ForeColor = System.Drawing.Color.Black
         Me.lblDate.Location = New System.Drawing.Point(12, 43)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(60, 26)
+        Me.lblDate.Size = New System.Drawing.Size(141, 26)
         Me.lblDate.TabIndex = 1
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Text = "Initializing..."
         '
         'lblTime
         '
@@ -91,9 +91,9 @@ Partial Class Main_form
         Me.lblTime.ForeColor = System.Drawing.Color.Black
         Me.lblTime.Location = New System.Drawing.Point(12, 78)
         Me.lblTime.Name = "lblTime"
-        Me.lblTime.Size = New System.Drawing.Size(64, 26)
+        Me.lblTime.Size = New System.Drawing.Size(141, 26)
         Me.lblTime.TabIndex = 2
-        Me.lblTime.Text = "Time"
+        Me.lblTime.Text = "Initializing..."
         '
         'Timer1
         '
@@ -108,56 +108,6 @@ Partial Class Main_form
         Me.MenuStrip2.Size = New System.Drawing.Size(926, 29)
         Me.MenuStrip2.TabIndex = 4
         Me.MenuStrip2.Text = "MenuStrip2"
-        '
-        'lblTest
-        '
-        Me.lblTest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblTest.AutoSize = True
-        Me.lblTest.BackColor = System.Drawing.Color.White
-        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTest.ForeColor = System.Drawing.Color.Black
-        Me.lblTest.Location = New System.Drawing.Point(74, 402)
-        Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(88, 18)
-        Me.lblTest.TabIndex = 5
-        Me.lblTest.Text = "Test mode"
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(14, 402)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(55, 18)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Mode:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.White
-        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(9, 113)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(99, 19)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Current user:"
-        '
-        'lblFullname
-        '
-        Me.lblFullname.AutoSize = True
-        Me.lblFullname.BackColor = System.Drawing.Color.White
-        Me.lblFullname.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullname.ForeColor = System.Drawing.Color.Black
-        Me.lblFullname.Location = New System.Drawing.Point(117, 113)
-        Me.lblFullname.Name = "lblFullname"
-        Me.lblFullname.Size = New System.Drawing.Size(70, 19)
-        Me.lblFullname.TabIndex = 8
-        Me.lblFullname.Text = "Fullname"
         '
         'InventoryToolStripMenuItem
         '
@@ -440,6 +390,56 @@ Partial Class Main_form
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(92, 25)
         Me.LogoutToolStripMenuItem.Text = "Logout"
+        '
+        'lblTest
+        '
+        Me.lblTest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblTest.AutoSize = True
+        Me.lblTest.BackColor = System.Drawing.Color.White
+        Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTest.ForeColor = System.Drawing.Color.Black
+        Me.lblTest.Location = New System.Drawing.Point(74, 402)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(97, 18)
+        Me.lblTest.TabIndex = 5
+        Me.lblTest.Text = "Initializing..."
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(14, 402)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(55, 18)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Mode:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(9, 113)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(99, 19)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Current user:"
+        '
+        'lblFullname
+        '
+        Me.lblFullname.AutoSize = True
+        Me.lblFullname.BackColor = System.Drawing.Color.White
+        Me.lblFullname.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFullname.ForeColor = System.Drawing.Color.Black
+        Me.lblFullname.Location = New System.Drawing.Point(117, 113)
+        Me.lblFullname.Name = "lblFullname"
+        Me.lblFullname.Size = New System.Drawing.Size(70, 19)
+        Me.lblFullname.TabIndex = 8
+        Me.lblFullname.Text = "Fullname"
         '
         'Main_form
         '

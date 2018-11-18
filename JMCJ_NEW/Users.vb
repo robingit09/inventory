@@ -69,6 +69,7 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If dgvUser.SelectedRows.Count = 1 Then
+
             Dim yesno As Integer = MsgBox("Are you sure you want to delete this record ? ", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
 
             If yesno = DialogResult.Yes Then
@@ -80,7 +81,7 @@
             End If
 
         Else
-                MsgBox("Please select one record!", MsgBoxStyle.Critical)
+            MsgBox("Please select one record!", MsgBoxStyle.Critical)
         End If
     End Sub
 End Class

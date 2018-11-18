@@ -51,7 +51,7 @@
                     dr2 = cmd2.ExecuteReader
 
                     If Not dr2.Read Then
-                        Dim row As String() = New String() {id, True, barcode, desc, brand, unit, color, price}
+                        Dim row As String() = New String() {id, False, barcode, desc, brand, unit, color, price}
                         dgvProducts.Rows.Add(row)
                     End If
                     dr2.Close()
@@ -66,21 +66,6 @@
         End With
     End Sub
 
-    Private Sub ckSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles ckSelectAll.CheckedChanged
-        If ckSelectAll.Checked Then
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = True
-                End If
-            Next
-        Else
-            For Each item As DataGridViewRow In Me.dgvProducts.Rows
-                If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
-                    dgvProducts.Rows(item.Index).Cells(1).Value = False
-                End If
-            Next
-        End If
-    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If dgvProducts.Rows.Count > 0 Then
@@ -116,5 +101,45 @@
             Next
         End If
         Me.Close()
+    End Sub
+
+    Private Sub linkSelectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkSelectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = True
+            End If
+        Next
+    End Sub
+
+    Private Sub linkUnselectAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUnselectAll.LinkClicked
+        For Each item As DataGridViewRow In Me.dgvProducts.Rows
+            If dgvProducts.Rows(item.Index).Cells(3).Value <> "" Then
+                dgvProducts.Rows(item.Index).Cells(1).Value = False
+            End If
+        Next
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim k As String = txtSearch.Text.ToUpper
+
+        Dim query As String
+        query = "Select distinct pu.id, pu.barcode,p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat, subc.name as subcat from ((((((((product_unit as pu     
+                    LEFT JOIN brand as b on b.id = pu.brand)
+                    INNER JOIN unit as u on u.id = pu.unit)
+                    LEFT JOIN color as cc ON cc.id = pu.color)
+                    INNER JOIN products as p ON p.id = pu.product_id)
+                    LEFT JOIN product_categories as pc ON pc.product_id = pu.product_id) 
+                    LEFT JOIN product_subcategories as psc ON psc.product_id = pu.product_id)
+                    LEFT JOIN categories as c ON c.id = pc.category_id)
+                    LEFT JOIN categories as subc ON subc.id = psc.subcategory_id)
+                    where pu.status = 1 and UCASE(p.description) like '%" & k & "%'"
+
+        query = query & " order by p.description"
+    End Sub
+
+    Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class
