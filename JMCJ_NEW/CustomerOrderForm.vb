@@ -443,6 +443,14 @@
             dgvProd.Rows(e.RowIndex).Cells("less").Value = ""
         End If
 
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
+            Dim p_u As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("id").Value)
+            'MsgBox(p_u)
+            SelectUnit.loadUnit(p_u)
+            SelectUnit.ShowDialog()
+        End If
+
         'remove product
         If dgvProd.Rows(e.RowIndex).Cells(14).Value <> "" Then
             If e.ColumnIndex = 14 And dgvProd.Rows.Count > 1 Then

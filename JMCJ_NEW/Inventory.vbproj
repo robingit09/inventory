@@ -136,6 +136,12 @@
     <Compile Include="AddInvoiceForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AddMeasure.Designer.vb">
+      <DependentUpon>AddMeasure.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddMeasure.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BrandForm.Designer.vb">
       <DependentUpon>BrandForm.vb</DependentUpon>
     </Compile>
@@ -430,6 +436,12 @@
     <Compile Include="SearchSupplierProducts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SelectUnit.Designer.vb">
+      <DependentUpon>SelectUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SelectUnit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SupplierProducts.Designer.vb">
       <DependentUpon>SupplierProducts.vb</DependentUpon>
     </Compile>
@@ -566,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddInvoiceForm.resx">
       <DependentUpon>AddInvoiceForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddMeasure.resx">
+      <DependentUpon>AddMeasure.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BrandForm.resx">
       <DependentUpon>BrandForm.vb</DependentUpon>
@@ -723,6 +738,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSupplierProducts.resx">
       <DependentUpon>SearchSupplierProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectUnit.resx">
+      <DependentUpon>SelectUnit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SupplierProducts.resx">
       <DependentUpon>SupplierProducts.vb</DependentUpon>

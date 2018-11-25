@@ -23,6 +23,9 @@ Partial Class ProductMasterForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.btnAddMeasure = New System.Windows.Forms.Button()
+        Me.dgvMeasure = New System.Windows.Forms.DataGridView()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.btnAddCost = New System.Windows.Forms.Button()
         Me.dgvCost = New System.Windows.Forms.DataGridView()
@@ -58,7 +61,12 @@ Partial Class ProductMasterForm
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtItemCode = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.measure_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.measure_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.measure_action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
+        CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
@@ -71,16 +79,46 @@ Partial Class ProductMasterForm
         '
         'TabControl1
         '
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.Location = New System.Drawing.Point(23, 164)
+        Me.TabControl1.Location = New System.Drawing.Point(23, 190)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(695, 214)
-        Me.TabControl1.TabIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(885, 237)
+        Me.TabControl1.TabIndex = 5
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.btnAddMeasure)
+        Me.TabPage5.Controls.Add(Me.dgvMeasure)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 23)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(877, 210)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Measurement"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'btnAddMeasure
+        '
+        Me.btnAddMeasure.Location = New System.Drawing.Point(789, 13)
+        Me.btnAddMeasure.Name = "btnAddMeasure"
+        Me.btnAddMeasure.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddMeasure.TabIndex = 2
+        Me.btnAddMeasure.Text = "Add"
+        Me.btnAddMeasure.UseVisualStyleBackColor = True
+        '
+        'dgvMeasure
+        '
+        Me.dgvMeasure.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvMeasure.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.measure_unit, Me.measure_price, Me.measure_action})
+        Me.dgvMeasure.Location = New System.Drawing.Point(9, 42)
+        Me.dgvMeasure.Name = "dgvMeasure"
+        Me.dgvMeasure.Size = New System.Drawing.Size(855, 159)
+        Me.dgvMeasure.TabIndex = 1
         '
         'TabPage1
         '
@@ -89,14 +127,14 @@ Partial Class ProductMasterForm
         Me.TabPage1.Location = New System.Drawing.Point(4, 23)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(687, 187)
+        Me.TabPage1.Size = New System.Drawing.Size(877, 210)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Costing"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'btnAddCost
         '
-        Me.btnAddCost.Location = New System.Drawing.Point(606, 11)
+        Me.btnAddCost.Location = New System.Drawing.Point(800, 11)
         Me.btnAddCost.Name = "btnAddCost"
         Me.btnAddCost.Size = New System.Drawing.Size(75, 23)
         Me.btnAddCost.TabIndex = 1
@@ -109,7 +147,7 @@ Partial Class ProductMasterForm
         Me.dgvCost.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Supplier, Me.Cost, Me.Action})
         Me.dgvCost.Location = New System.Drawing.Point(6, 40)
         Me.dgvCost.Name = "dgvCost"
-        Me.dgvCost.Size = New System.Drawing.Size(675, 142)
+        Me.dgvCost.Size = New System.Drawing.Size(869, 164)
         Me.dgvCost.TabIndex = 0
         '
         'Supplier
@@ -138,14 +176,14 @@ Partial Class ProductMasterForm
         Me.TabPage2.Location = New System.Drawing.Point(4, 23)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(687, 187)
+        Me.TabPage2.Size = New System.Drawing.Size(877, 210)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Customer Pricing"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'btnAddCPrice
         '
-        Me.btnAddCPrice.Location = New System.Drawing.Point(606, 10)
+        Me.btnAddCPrice.Location = New System.Drawing.Point(800, 10)
         Me.btnAddCPrice.Name = "btnAddCPrice"
         Me.btnAddCPrice.Size = New System.Drawing.Size(75, 23)
         Me.btnAddCPrice.TabIndex = 2
@@ -158,7 +196,7 @@ Partial Class ProductMasterForm
         Me.dgvCPrices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.customer, Me.price, Me.prices_remove})
         Me.dgvCPrices.Location = New System.Drawing.Point(6, 39)
         Me.dgvCPrices.Name = "dgvCPrices"
-        Me.dgvCPrices.Size = New System.Drawing.Size(675, 142)
+        Me.dgvCPrices.Size = New System.Drawing.Size(869, 165)
         Me.dgvCPrices.TabIndex = 1
         '
         'customer
@@ -186,7 +224,7 @@ Partial Class ProductMasterForm
         Me.TabPage4.Location = New System.Drawing.Point(4, 23)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(687, 187)
+        Me.TabPage4.Size = New System.Drawing.Size(877, 210)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Cost History"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -197,7 +235,7 @@ Partial Class ProductMasterForm
         Me.dgvcosthistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
         Me.dgvcosthistory.Location = New System.Drawing.Point(6, 39)
         Me.dgvcosthistory.Name = "dgvcosthistory"
-        Me.dgvcosthistory.Size = New System.Drawing.Size(675, 142)
+        Me.dgvcosthistory.Size = New System.Drawing.Size(675, 165)
         Me.dgvcosthistory.TabIndex = 3
         '
         'DataGridViewTextBoxColumn3
@@ -219,7 +257,7 @@ Partial Class ProductMasterForm
         Me.TabPage3.Controls.Add(Me.dgvPriceHistory)
         Me.TabPage3.Location = New System.Drawing.Point(4, 23)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(687, 187)
+        Me.TabPage3.Size = New System.Drawing.Size(877, 210)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Price History"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -230,7 +268,7 @@ Partial Class ProductMasterForm
         Me.dgvPriceHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
         Me.dgvPriceHistory.Location = New System.Drawing.Point(3, 42)
         Me.dgvPriceHistory.Name = "dgvPriceHistory"
-        Me.dgvPriceHistory.Size = New System.Drawing.Size(675, 142)
+        Me.dgvPriceHistory.Size = New System.Drawing.Size(675, 165)
         Me.dgvPriceHistory.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -364,7 +402,7 @@ Partial Class ProductMasterForm
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(639, 20)
+        Me.btnSave.Location = New System.Drawing.Point(829, 25)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 13
@@ -390,11 +428,30 @@ Partial Class ProductMasterForm
         Me.Label7.TabIndex = 14
         Me.Label7.Text = "Item Code"
         '
+        'measure_unit
+        '
+        Me.measure_unit.HeaderText = "Unit"
+        Me.measure_unit.Name = "measure_unit"
+        Me.measure_unit.ReadOnly = True
+        Me.measure_unit.Width = 300
+        '
+        'measure_price
+        '
+        Me.measure_price.HeaderText = "Price"
+        Me.measure_price.Name = "measure_price"
+        Me.measure_price.ReadOnly = True
+        '
+        'measure_action
+        '
+        Me.measure_action.HeaderText = "Action"
+        Me.measure_action.Name = "measure_action"
+        Me.measure_action.ReadOnly = True
+        '
         'ProductMasterForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(924, 390)
+        Me.ClientSize = New System.Drawing.Size(935, 458)
         Me.Controls.Add(Me.txtItemCode)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.btnSave)
@@ -417,6 +474,8 @@ Partial Class ProductMasterForm
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Product Master Form"
         Me.TabControl1.ResumeLayout(False)
+        Me.TabPage5.ResumeLayout(False)
+        CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         CType(Me.dgvCost, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
@@ -466,4 +525,10 @@ Partial Class ProductMasterForm
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents txtItemCode As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents dgvMeasure As DataGridView
+    Friend WithEvents btnAddMeasure As Button
+    Friend WithEvents measure_unit As DataGridViewTextBoxColumn
+    Friend WithEvents measure_price As DataGridViewTextBoxColumn
+    Friend WithEvents measure_action As DataGridViewButtonColumn
 End Class

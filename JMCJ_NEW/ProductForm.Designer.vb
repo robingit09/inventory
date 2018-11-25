@@ -32,10 +32,6 @@ Partial Class ProductForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbMeasurement = New System.Windows.Forms.TabPage()
         Me.dgvMeasure = New System.Windows.Forms.DataGridView()
-        Me.btnEditUnit = New System.Windows.Forms.Button()
-        Me.btnAddMoreUnit = New System.Windows.Forms.Button()
-        Me.btnAddCategory = New System.Windows.Forms.Button()
-        Me.btnSubCat = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.item_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,6 +40,10 @@ Partial Class ProductForm
         Me.color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_remove = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnEditUnit = New System.Windows.Forms.Button()
+        Me.btnAddMoreUnit = New System.Windows.Forms.Button()
+        Me.btnAddCategory = New System.Windows.Forms.Button()
+        Me.btnSubCat = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasurement.SuspendLayout()
         CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,10 +123,10 @@ Partial Class ProductForm
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.tbMeasurement)
-        Me.TabControl1.Location = New System.Drawing.Point(39, 226)
+        Me.TabControl1.Location = New System.Drawing.Point(38, 226)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(964, 328)
+        Me.TabControl1.Size = New System.Drawing.Size(965, 328)
         Me.TabControl1.TabIndex = 20
         '
         'tbMeasurement
@@ -137,9 +137,9 @@ Partial Class ProductForm
         Me.tbMeasurement.Location = New System.Drawing.Point(4, 22)
         Me.tbMeasurement.Name = "tbMeasurement"
         Me.tbMeasurement.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMeasurement.Size = New System.Drawing.Size(956, 302)
+        Me.tbMeasurement.Size = New System.Drawing.Size(957, 302)
         Me.tbMeasurement.TabIndex = 0
-        Me.tbMeasurement.Text = "Measurement"
+        Me.tbMeasurement.Text = "Product Information"
         Me.tbMeasurement.UseVisualStyleBackColor = True
         '
         'dgvMeasure
@@ -150,44 +150,6 @@ Partial Class ProductForm
         Me.dgvMeasure.Name = "dgvMeasure"
         Me.dgvMeasure.Size = New System.Drawing.Size(931, 225)
         Me.dgvMeasure.TabIndex = 3
-        '
-        'btnEditUnit
-        '
-        Me.btnEditUnit.Location = New System.Drawing.Point(113, 16)
-        Me.btnEditUnit.Name = "btnEditUnit"
-        Me.btnEditUnit.Size = New System.Drawing.Size(94, 23)
-        Me.btnEditUnit.TabIndex = 2
-        Me.btnEditUnit.Text = "Edit"
-        Me.btnEditUnit.UseVisualStyleBackColor = True
-        '
-        'btnAddMoreUnit
-        '
-        Me.btnAddMoreUnit.Location = New System.Drawing.Point(6, 16)
-        Me.btnAddMoreUnit.Name = "btnAddMoreUnit"
-        Me.btnAddMoreUnit.Size = New System.Drawing.Size(88, 23)
-        Me.btnAddMoreUnit.TabIndex = 1
-        Me.btnAddMoreUnit.Text = "Add"
-        Me.btnAddMoreUnit.UseVisualStyleBackColor = True
-        '
-        'btnAddCategory
-        '
-        Me.btnAddCategory.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddCategory.Location = New System.Drawing.Point(621, 132)
-        Me.btnAddCategory.Name = "btnAddCategory"
-        Me.btnAddCategory.Size = New System.Drawing.Size(59, 23)
-        Me.btnAddCategory.TabIndex = 23
-        Me.btnAddCategory.Text = "Add (+)"
-        Me.btnAddCategory.UseVisualStyleBackColor = True
-        '
-        'btnSubCat
-        '
-        Me.btnSubCat.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCat.Location = New System.Drawing.Point(621, 176)
-        Me.btnSubCat.Name = "btnSubCat"
-        Me.btnSubCat.Size = New System.Drawing.Size(59, 23)
-        Me.btnSubCat.TabIndex = 24
-        Me.btnSubCat.Text = "Add (+)"
-        Me.btnSubCat.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -241,6 +203,44 @@ Partial Class ProductForm
         '
         Me.col_remove.HeaderText = "Action"
         Me.col_remove.Name = "col_remove"
+        '
+        'btnEditUnit
+        '
+        Me.btnEditUnit.Location = New System.Drawing.Point(113, 16)
+        Me.btnEditUnit.Name = "btnEditUnit"
+        Me.btnEditUnit.Size = New System.Drawing.Size(94, 23)
+        Me.btnEditUnit.TabIndex = 2
+        Me.btnEditUnit.Text = "Edit"
+        Me.btnEditUnit.UseVisualStyleBackColor = True
+        '
+        'btnAddMoreUnit
+        '
+        Me.btnAddMoreUnit.Location = New System.Drawing.Point(6, 16)
+        Me.btnAddMoreUnit.Name = "btnAddMoreUnit"
+        Me.btnAddMoreUnit.Size = New System.Drawing.Size(88, 23)
+        Me.btnAddMoreUnit.TabIndex = 1
+        Me.btnAddMoreUnit.Text = "Add"
+        Me.btnAddMoreUnit.UseVisualStyleBackColor = True
+        '
+        'btnAddCategory
+        '
+        Me.btnAddCategory.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddCategory.Location = New System.Drawing.Point(621, 132)
+        Me.btnAddCategory.Name = "btnAddCategory"
+        Me.btnAddCategory.Size = New System.Drawing.Size(59, 23)
+        Me.btnAddCategory.TabIndex = 23
+        Me.btnAddCategory.Text = "Add (+)"
+        Me.btnAddCategory.UseVisualStyleBackColor = True
+        '
+        'btnSubCat
+        '
+        Me.btnSubCat.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubCat.Location = New System.Drawing.Point(621, 176)
+        Me.btnSubCat.Name = "btnSubCat"
+        Me.btnSubCat.Size = New System.Drawing.Size(59, 23)
+        Me.btnSubCat.TabIndex = 24
+        Me.btnSubCat.Text = "Add (+)"
+        Me.btnSubCat.UseVisualStyleBackColor = True
         '
         'ProductForm
         '

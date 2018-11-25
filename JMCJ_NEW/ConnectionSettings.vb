@@ -58,7 +58,7 @@ Public Class btnTest
         End If
 
         doQuery(query)
-        MsgBox("Successfully Save.", MsgBoxStyle.Information)
+        MsgBox("Connection Successfully Save.", MsgBoxStyle.Information)
         Login.getConnectionStatus()
 
     End Sub
@@ -120,10 +120,10 @@ Public Class btnTest
 
         Try
             con.Open()
-            MsgBox("Connection Established.", MsgBoxStyle.Information)
+            MsgBox("Test Connection Succeed.", MsgBoxStyle.Information)
             con.Close()
         Catch ex As Exception
-            MsgBox("Connection Failed.", MsgBoxStyle.Critical)
+            MsgBox("Test Connection Failed.", MsgBoxStyle.Critical)
         End Try
 
     End Sub

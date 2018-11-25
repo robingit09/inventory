@@ -146,7 +146,38 @@
             .con.Close()
         End With
 
-        MsgBox("Product Sub Information Successfully Save.", MsgBoxStyle.Information)
+
+        'insert customer and their price
+        Dim dbdelete3 As New DatabaseConnect
+        dbdelete3.delete_permanent("product_measure", "product_unit_id", Me.selected_prod_unit)
+        dbdelete3.cmd.Dispose()
+        dbdelete3.con.Close()
+        Dim saveUnit As New DatabaseConnect
+        With saveUnit
+            .cmd.Connection = .con
+            .cmd.CommandType = CommandType.Text
+
+            For Each item As DataGridViewRow In dgvMeasure.Rows
+                If item.Cells("measure_unit").Value <> "" Then
+                    Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", item.Cells("measure_unit").Value)
+                    Dim price As Double = Val(item.Cells("measure_price").Value)
+
+                    .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,created_at,updated_at)
+            VALUES(?,?,?,?,?)"
+                    .cmd.Parameters.AddWithValue("@product_unit_id", Me.selected_prod_unit)
+                    .cmd.Parameters.AddWithValue("@unit_id", unit_id)
+                    .cmd.Parameters.AddWithValue("@price", price)
+                    .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                    .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                    .cmd.ExecuteNonQuery()
+                    .cmd.Parameters.Clear()
+                End If
+            Next
+            .cmd.Dispose()
+            .con.Close()
+        End With
+
+        MsgBox("Product Information Successfully Save.", MsgBoxStyle.Information)
     End Sub
 
     Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
@@ -163,6 +194,7 @@
     Private Sub ProductMasterForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadCostHistory()
         loadPriceHistory()
+        loadMeasurement()
 
         'check user access
         If ModelFunction.check_access(2, 1) = 1 Then
@@ -206,5 +238,39 @@
                 End While
             End If
         End With
+    End Sub
+
+    Private Sub loadMeasurement()
+        dgvMeasure.Rows.Clear()
+        Dim dgvhis As New DatabaseConnect
+        With dgvhis
+            .selectByQuery("select u.name,pm.price from product_measure as pm
+            inner join unit as u on u.id = pm.unit_id where pm.product_unit_id = " & selected_prod_unit & " order by pm.price desc")
+            If .dr.HasRows Then
+                While .dr.Read
+                    Dim unit_name As String = .dr("name")
+                    Dim price As String = Val(.dr("price")).ToString("N2")
+                    Dim row As String() = New String() {unit_name, price, "Remove"}
+                    dgvMeasure.Rows.Add(row)
+                End While
+            End If
+        End With
+    End Sub
+
+    Private Sub btnAddMeasure_Click(sender As Object, e As EventArgs) Handles btnAddMeasure.Click
+        AddMeasure.ShowDialog()
+    End Sub
+
+    Private Sub dgvMeasure_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasure.CellContentClick
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvMeasure.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+        'Check if click Is on specific column 
+        If (e.ColumnIndex = dgvMeasure.Columns("measure_action").Index) Then
+            dgvMeasure.Rows.RemoveAt(e.RowIndex)
+        End If
+
     End Sub
 End Class

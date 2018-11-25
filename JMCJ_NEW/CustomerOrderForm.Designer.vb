@@ -71,12 +71,13 @@ Partial Class CustomerOrderForm
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.less = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -86,7 +87,6 @@ Partial Class CustomerOrderForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpFields.SuspendLayout()
         Me.gpPaid.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
@@ -576,6 +576,15 @@ Partial Class CustomerOrderForm
         Me.dgvProd.Size = New System.Drawing.Size(1377, 315)
         Me.dgvProd.TabIndex = 73
         '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 324)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 75
+        Me.btnSelectProduct.Text = "Search Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'id
         '
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Times New Roman", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -616,6 +625,8 @@ Partial Class CustomerOrderForm
         Me.unit.HeaderText = "Unit"
         Me.unit.Name = "unit"
         Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Color
         '
@@ -673,15 +684,6 @@ Partial Class CustomerOrderForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
-        '
-        'btnSelectProduct
-        '
-        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 324)
-        Me.btnSelectProduct.Name = "btnSelectProduct"
-        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
-        Me.btnSelectProduct.TabIndex = 75
-        Me.btnSelectProduct.Text = "Search Product"
-        Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'CustomerOrderForm
         '
@@ -758,12 +760,13 @@ Partial Class CustomerOrderForm
     Friend WithEvents cbBrand As ComboBox
     Friend WithEvents dgvProd As DataGridView
     Friend WithEvents btnExact As Button
+    Friend WithEvents btnSelectProduct As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewButtonColumn
     Friend WithEvents Color As DataGridViewTextBoxColumn
     Friend WithEvents price As DataGridViewTextBoxColumn
     Friend WithEvents less As DataGridViewTextBoxColumn
@@ -773,5 +776,4 @@ Partial Class CustomerOrderForm
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents btnSelectProduct As Button
 End Class
