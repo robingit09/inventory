@@ -147,7 +147,7 @@
         End With
 
 
-        'insert customer and their price
+        'insert multiple unit of product
         Dim dbdelete3 As New DatabaseConnect
         dbdelete3.delete_permanent("product_measure", "product_unit_id", Me.selected_prod_unit)
         dbdelete3.cmd.Dispose()
@@ -162,11 +162,12 @@
                     Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", item.Cells("measure_unit").Value)
                     Dim price As Double = Val(item.Cells("measure_price").Value)
 
-                    .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,created_at,updated_at)
-            VALUES(?,?,?,?,?)"
+                    .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,is_default,created_at,updated_at)
+            VALUES(?,?,?,?,?,?)"
                     .cmd.Parameters.AddWithValue("@product_unit_id", Me.selected_prod_unit)
                     .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                     .cmd.Parameters.AddWithValue("@price", price)
+                    .cmd.Parameters.AddWithValue("@is_default", 0)
                     .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                     .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                     .cmd.ExecuteNonQuery()

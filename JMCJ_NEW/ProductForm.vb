@@ -64,6 +64,8 @@
                             dbinsertUnit.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                             dbinsertUnit.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                             dbinsertUnit.cmd.ExecuteNonQuery()
+
+
                             dbinsertUnit.cmd.Dispose()
                             dbinsertUnit.con.Close()
                         End With
@@ -80,6 +82,20 @@
                             .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                             .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
                             .cmd.ExecuteNonQuery()
+
+
+                            .cmd.Parameters.Clear()
+                            .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,is_default,created_at,updated_at)
+            VALUES(?,?,?,?,?,?)"
+
+                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                            .cmd.Parameters.AddWithValue("@unit_id", unit)
+                            .cmd.Parameters.AddWithValue("@price", price)
+                            .cmd.Parameters.AddWithValue("@is_default", 1)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+
                             .cmd.Dispose()
                             .con.Close()
 

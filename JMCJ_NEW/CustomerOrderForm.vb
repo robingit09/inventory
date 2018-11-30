@@ -447,6 +447,8 @@
         If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
             Dim p_u As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("id").Value)
             'MsgBox(p_u)
+            SelectUnit.from_module = 0
+            SelectUnit.lblDesc.Text = dgvProd.Rows(e.RowIndex).Cells("product").Value
             SelectUnit.loadUnit(p_u)
             SelectUnit.ShowDialog()
         End If

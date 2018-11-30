@@ -515,6 +515,16 @@
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
+
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
+            Dim p_u As Integer = CInt(dgvProd.Rows(e.RowIndex).Cells("id").Value)
+            'MsgBox(p_u)
+            SelectUnit.from_module = 1
+            SelectUnit.lblDesc.Text = dgvProd.Rows(e.RowIndex).Cells("product").Value
+            SelectUnit.loadUnit(p_u)
+            SelectUnit.ShowDialog()
+        End If
     End Sub
 
     Private Function generateCRNo() As String

@@ -1,5 +1,6 @@
 ﻿Public Class SelectUnit
     Public selected_prod_unit As Integer = 0
+    Public from_module As Integer = 0
     Private Sub SelectUnit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -27,19 +28,35 @@
             Dim unit As String = dgvUnit.SelectedRows(0).Cells("unit").Value
             Dim price As String = dgvUnit.SelectedRows(0).Cells("price").Value
 
-            'MsgBox(unit & " " & price)
-            For Each item As DataGridViewRow In CustomerOrderForm.dgvProd.Rows
-                If item.Cells("unit").Value <> "" Then
-                    If item.Cells("id").Value = selected_prod_unit Then
-                        item.Cells("unit").Value = unit
-                        item.Cells("price").Value = price
-                        item.Cells("sell_price").Value = price
-                        item.Cells("less").Value = ""
-                        Me.Close()
-                    End If
-                End If
+            Select Case from_module
+                ' from module customer order
+                Case 0
+                    For Each item As DataGridViewRow In CustomerOrderForm.dgvProd.Rows
+                        If item.Cells("unit").Value <> "" Then
+                            If item.Cells("id").Value = selected_prod_unit Then
+                                item.Cells("unit").Value = unit
+                                item.Cells("price").Value = price
+                                item.Cells("sell_price").Value = price
+                                item.Cells("less").Value = ""
+                                Me.Close()
+                            End If
+                        End If
+                    Next
+                ' from module customer return
+                Case 1
+                    For Each item As DataGridViewRow In CustomerReturnForm.dgvProd.Rows
+                        If item.Cells("unit").Value <> "" Then
+                            If item.Cells("id").Value = selected_prod_unit Then
+                                item.Cells("unit").Value = unit
+                                item.Cells("price").Value = price
+                                item.Cells("sell_price").Value = price
+                                Me.Close()
+                            End If
+                        End If
+                    Next
+            End Select
 
-            Next
+
         Else
 
         End If

@@ -27,6 +27,7 @@ Partial Class SelectUnit
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.lblDesc = New System.Windows.Forms.Label()
         CType(Me.dgvUnit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -34,7 +35,7 @@ Partial Class SelectUnit
         '
         Me.dgvUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUnit.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.unit, Me.price})
-        Me.dgvUnit.Location = New System.Drawing.Point(27, 64)
+        Me.dgvUnit.Location = New System.Drawing.Point(26, 112)
         Me.dgvUnit.Name = "dgvUnit"
         Me.dgvUnit.Size = New System.Drawing.Size(374, 274)
         Me.dgvUnit.TabIndex = 0
@@ -55,7 +56,7 @@ Partial Class SelectUnit
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(235, 25)
+        Me.btnSelect.Location = New System.Drawing.Point(234, 73)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 23)
         Me.btnSelect.TabIndex = 1
@@ -64,19 +65,30 @@ Partial Class SelectUnit
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(326, 25)
+        Me.btnCancel.Location = New System.Drawing.Point(325, 73)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 2
         Me.btnCancel.Text = "CANCEL"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'lblDesc
+        '
+        Me.lblDesc.AutoSize = True
+        Me.lblDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDesc.Location = New System.Drawing.Point(23, 32)
+        Me.lblDesc.Name = "lblDesc"
+        Me.lblDesc.Size = New System.Drawing.Size(119, 13)
+        Me.lblDesc.TabIndex = 3
+        Me.lblDesc.Text = "Product Description"
+        '
         'SelectUnit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(430, 360)
+        Me.ClientSize = New System.Drawing.Size(430, 421)
+        Me.Controls.Add(Me.lblDesc)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.dgvUnit)
@@ -86,6 +98,7 @@ Partial Class SelectUnit
         Me.Text = "Select Unit"
         CType(Me.dgvUnit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -94,4 +107,5 @@ Partial Class SelectUnit
     Friend WithEvents price As DataGridViewTextBoxColumn
     Friend WithEvents btnSelect As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents lblDesc As Label
 End Class
