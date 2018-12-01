@@ -234,10 +234,25 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM product_measure"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_measure Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM product_stocks"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
             .cmd.CommandText = "Alter Table product_stocks Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+
+            .cmd.CommandText = "DELETE FROM categories"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table categories Alter Column ID Counter(1,1)"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
@@ -274,6 +289,20 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
             .cmd.CommandText = "Alter Table color Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM physical_count"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table physical_count Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM physical_count_products"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table physical_count_products Alter Column ID Counter(1,1)"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
@@ -383,6 +412,19 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM suppliers"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table suppliers Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
+            .cmd.CommandText = "DELETE FROM customer_product_prices"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table customer_product_prices Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
 
             .cmd.Dispose()
         End With

@@ -678,7 +678,7 @@
         With db
             .selectByQuery("Select sum(qty) as total from product_stocks as  ps inner join product_unit as pu on pu.id = ps.product_unit_id where pu.status <> 0")
             If .dr.Read Then
-                lblTotalStock.Text = .dr("total")
+                lblTotalStock.Text = If(IsDBNull(.dr("total")), "0", .dr("total"))
             End If
             .dr.Close()
             .con.Close()

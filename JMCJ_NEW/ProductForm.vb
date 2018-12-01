@@ -568,9 +568,11 @@
     End Sub
 
     Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
+        CategoryForm.from_module = 1
         CategoryForm.selectedParent = 0
         CategoryForm.txtName.Text = ""
         CategoryForm.cbParent.Enabled = False
+        CategoryForm.cbParent.Text = ""
         CategoryForm.btnSave.Text = "Save"
         CategoryForm.ShowDialog()
     End Sub

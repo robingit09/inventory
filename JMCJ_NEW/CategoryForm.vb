@@ -1,5 +1,5 @@
 ﻿Public Class CategoryForm
-
+    Public from_module As Integer = 0
     Public selectedParent As Integer
     Public SelectedID As Integer = 0
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -14,8 +14,22 @@
             btnSave.Enabled = False
             saveData()
             btnSave.Enabled = True
-            ProductForm.populateCategory()
-            ProductForm.populateSubcategory(ProductForm.selectedSubcategory)
+
+            If from_module = 1 Then
+                ' from product module
+
+
+                If cbParent.Text = "" Then
+                    ProductForm.populateCategory()
+                    ProductForm.cbCategory.SelectedIndex = ProductForm.cbCategory.FindString(txtName.Text)
+                Else
+                    ProductForm.populateSubcategory(ProductForm.selectedSubcategory)
+                    ProductForm.cbSubcategory.SelectedIndex = ProductForm.cbSubcategory.FindString(txtName.Text)
+                End If
+
+            End If
+            txtName.Text = ""
+
         ElseIf btnSave.Text = "Update" Then
             btnSave.Enabled = False
             UpdateData()
@@ -27,7 +41,7 @@
     Public Sub toUpdateInfo(ByVal id As Integer)
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select id,name,parent_id from categories where status = 1 and id = " & id)
+            .selectByQuery("Select id,name,parent_id from categories where status = 1 And id = " & id)
 
             If .dr.Read Then
                 txtName.Text = .dr.GetValue(1)
@@ -55,7 +69,7 @@
         database.cmd.ExecuteNonQuery()
         database.con.Close()
         MsgBox("Category Save Successful", MsgBoxStyle.Information)
-        txtName.Text = ""
+
         CategoryList.loadList("")
         Me.Close()
     End Sub
@@ -66,9 +80,9 @@
             db.cmd.CommandType = CommandType.Text
 
             If SelectedID > 0 Then
-                db.cmd.CommandText = "UPDATE categories set [parent_id] = '" & selectedParent & "',[name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
+                db.cmd.CommandText = "UPDATE categories Set [parent_id] = '" & selectedParent & "',[name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
             Else
-                db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
+                    db.cmd.CommandText = "UPDATE categories set [name] = '" & txtName.Text.ToUpper & "', [updated_at] = '" & DateTime.Now.ToString & "' where ID = " & SelectedID
             End If
 
             db.cmd.Connection = db.con

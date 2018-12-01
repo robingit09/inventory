@@ -303,7 +303,7 @@
     End Sub
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        Dim query As String = "Select distinct pu.id,pu.barcode, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat,sub.name as subcat FROM (((((((((products as p 
+        Dim query As String = "Select distinct pu.id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,ps.qty as stock,c.name as cat,sub.name as subcat FROM (((((((((products as p 
                 INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                 LEFT JOIN product_stocks as ps ON ps.product_unit_id = pu.id)
                 LEFT JOIN brand as b ON b.id = pu.brand)
