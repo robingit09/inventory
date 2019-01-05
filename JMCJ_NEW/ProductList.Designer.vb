@@ -22,13 +22,26 @@ Partial Class ProductList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvProducts = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.item_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtItemCode = New System.Windows.Forms.TextBox()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.cbSubCat = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbColor = New System.Windows.Forms.ComboBox()
@@ -47,23 +60,10 @@ Partial Class ProductList
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.item_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Subcategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lblTotalStock = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtItemCode = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.dgvProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -71,15 +71,101 @@ Partial Class ProductList
         '
         'dgvProducts
         '
-        Me.dgvProducts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.dgvProducts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.item_code, Me.ProductDesc, Me.Brand, Me.Unit, Me.Color, Me.UnitPrice, Me.StockQty, Me.Category, Me.Subcategory})
         Me.dgvProducts.Location = New System.Drawing.Point(18, 201)
-        Me.dgvProducts.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvProducts.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvProducts.Name = "dgvProducts"
         Me.dgvProducts.Size = New System.Drawing.Size(1168, 397)
         Me.dgvProducts.TabIndex = 20
+        '
+        'id
+        '
+        Me.id.HeaderText = "id"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'item_code
+        '
+        Me.item_code.HeaderText = "Item Code"
+        Me.item_code.Name = "item_code"
+        Me.item_code.ReadOnly = True
+        '
+        'ProductDesc
+        '
+        Me.ProductDesc.HeaderText = "Product Description"
+        Me.ProductDesc.Name = "ProductDesc"
+        Me.ProductDesc.ReadOnly = True
+        Me.ProductDesc.Width = 350
+        '
+        'Brand
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Brand.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Brand.HeaderText = "Brand"
+        Me.Brand.Name = "Brand"
+        Me.Brand.ReadOnly = True
+        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Brand.Width = 110
+        '
+        'Unit
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Unit.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Unit.Width = 110
+        '
+        'Color
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Color.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        Me.Color.Width = 110
+        '
+        'UnitPrice
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle8
+        Me.UnitPrice.HeaderText = "Unit Price"
+        Me.UnitPrice.Name = "UnitPrice"
+        Me.UnitPrice.ReadOnly = True
+        Me.UnitPrice.Width = 160
+        '
+        'StockQty
+        '
+        Me.StockQty.HeaderText = "Stock Quantity"
+        Me.StockQty.Name = "StockQty"
+        Me.StockQty.ReadOnly = True
+        Me.StockQty.Width = 80
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        Me.Category.Width = 120
+        '
+        'Subcategory
+        '
+        Me.Subcategory.HeaderText = "Subcategory"
+        Me.Subcategory.Name = "Subcategory"
+        Me.Subcategory.ReadOnly = True
+        Me.Subcategory.Width = 120
         '
         'GroupBox1
         '
@@ -104,29 +190,49 @@ Partial Class ProductList
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(18, 50)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(1168, 86)
         Me.GroupBox1.TabIndex = 21
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter"
         '
+        'txtItemCode
+        '
+        Me.txtItemCode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtItemCode.Location = New System.Drawing.Point(261, 15)
+        Me.txtItemCode.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtItemCode.Name = "txtItemCode"
+        Me.txtItemCode.Size = New System.Drawing.Size(143, 21)
+        Me.txtItemCode.TabIndex = 19
+        '
         'txtProductDesc
         '
         Me.txtProductDesc.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtProductDesc.Location = New System.Drawing.Point(479, 14)
-        Me.txtProductDesc.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtProductDesc.Margin = New System.Windows.Forms.Padding(2)
         Me.txtProductDesc.Name = "txtProductDesc"
         Me.txtProductDesc.Size = New System.Drawing.Size(179, 21)
         Me.txtProductDesc.TabIndex = 17
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(200, 15)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(57, 15)
+        Me.Label9.TabIndex = 18
+        Me.Label9.Text = "Item Code"
         '
         'cbSubCat
         '
         Me.cbSubCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbSubCat.FormattingEnabled = True
         Me.cbSubCat.Location = New System.Drawing.Point(277, 48)
-        Me.cbSubCat.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbSubCat.Margin = New System.Windows.Forms.Padding(2)
         Me.cbSubCat.Name = "cbSubCat"
         Me.cbSubCat.Size = New System.Drawing.Size(228, 23)
         Me.cbSubCat.TabIndex = 16
@@ -147,7 +253,7 @@ Partial Class ProductList
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
         Me.cbColor.Location = New System.Drawing.Point(1027, 14)
-        Me.cbColor.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbColor.Margin = New System.Windows.Forms.Padding(2)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(132, 23)
         Me.cbColor.TabIndex = 14
@@ -168,7 +274,7 @@ Partial Class ProductList
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
         Me.cbUnit.Location = New System.Drawing.Point(858, 12)
-        Me.cbUnit.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbUnit.Margin = New System.Windows.Forms.Padding(2)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(127, 23)
         Me.cbUnit.TabIndex = 12
@@ -189,7 +295,7 @@ Partial Class ProductList
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
         Me.cbBrand.Location = New System.Drawing.Point(702, 15)
-        Me.cbBrand.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbBrand.Margin = New System.Windows.Forms.Padding(2)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(119, 23)
         Me.cbBrand.TabIndex = 10
@@ -198,7 +304,7 @@ Partial Class ProductList
         '
         Me.btnFilter.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFilter.Location = New System.Drawing.Point(1093, 51)
-        Me.btnFilter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnFilter.Margin = New System.Windows.Forms.Padding(2)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(66, 22)
         Me.btnFilter.TabIndex = 8
@@ -220,7 +326,7 @@ Partial Class ProductList
         '
         Me.txtBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBarcode.Location = New System.Drawing.Point(60, 12)
-        Me.txtBarcode.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtBarcode.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBarcode.Name = "txtBarcode"
         Me.txtBarcode.Size = New System.Drawing.Size(135, 21)
         Me.txtBarcode.TabIndex = 6
@@ -241,7 +347,7 @@ Partial Class ProductList
         Me.cbCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCat.FormattingEnabled = True
         Me.cbCat.Location = New System.Drawing.Point(60, 48)
-        Me.cbCat.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbCat.Margin = New System.Windows.Forms.Padding(2)
         Me.cbCat.Name = "cbCat"
         Me.cbCat.Size = New System.Drawing.Size(135, 23)
         Me.cbCat.TabIndex = 3
@@ -272,7 +378,7 @@ Partial Class ProductList
         '
         Me.btnAdd.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.Location = New System.Drawing.Point(18, 9)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(80, 27)
         Me.btnAdd.TabIndex = 22
@@ -283,7 +389,7 @@ Partial Class ProductList
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.Location = New System.Drawing.Point(118, 9)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(77, 27)
         Me.btnUpdate.TabIndex = 23
@@ -294,7 +400,7 @@ Partial Class ProductList
         '
         Me.btnDelete.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Location = New System.Drawing.Point(221, 9)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(70, 27)
         Me.btnDelete.TabIndex = 24
@@ -305,105 +411,20 @@ Partial Class ProductList
         '
         Me.btnPrint.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPrint.Location = New System.Drawing.Point(313, 9)
-        Me.btnPrint.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnPrint.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(70, 27)
         Me.btnPrint.TabIndex = 25
         Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
-        'id
-        '
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'item_code
-        '
-        Me.item_code.HeaderText = "Item Code"
-        Me.item_code.Name = "item_code"
-        Me.item_code.ReadOnly = True
-        '
-        'ProductDesc
-        '
-        Me.ProductDesc.HeaderText = "Product Description"
-        Me.ProductDesc.Name = "ProductDesc"
-        Me.ProductDesc.ReadOnly = True
-        Me.ProductDesc.Width = 350
-        '
-        'Brand
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Brand.DefaultCellStyle = DataGridViewCellStyle17
-        Me.Brand.HeaderText = "Brand"
-        Me.Brand.Name = "Brand"
-        Me.Brand.ReadOnly = True
-        Me.Brand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Brand.Width = 110
-        '
-        'Unit
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Unit.DefaultCellStyle = DataGridViewCellStyle18
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        Me.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Unit.Width = 110
-        '
-        'Color
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Color.DefaultCellStyle = DataGridViewCellStyle19
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        Me.Color.Width = 110
-        '
-        'UnitPrice
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.UnitPrice.DefaultCellStyle = DataGridViewCellStyle20
-        Me.UnitPrice.HeaderText = "Unit Price"
-        Me.UnitPrice.Name = "UnitPrice"
-        Me.UnitPrice.ReadOnly = True
-        Me.UnitPrice.Width = 160
-        '
-        'StockQty
-        '
-        Me.StockQty.HeaderText = "Stock Quantity"
-        Me.StockQty.Name = "StockQty"
-        Me.StockQty.ReadOnly = True
-        Me.StockQty.Width = 80
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        Me.Category.Width = 120
-        '
-        'Subcategory
-        '
-        Me.Subcategory.HeaderText = "Subcategory"
-        Me.Subcategory.Name = "Subcategory"
-        Me.Subcategory.ReadOnly = True
-        Me.Subcategory.Width = 120
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtSearch)
         Me.GroupBox2.Location = New System.Drawing.Point(18, 140)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Size = New System.Drawing.Size(255, 57)
         Me.GroupBox2.TabIndex = 26
         Me.GroupBox2.TabStop = False
@@ -413,14 +434,14 @@ Partial Class ProductList
         '
         Me.txtSearch.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(11, 20)
-        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(225, 21)
         Me.txtSearch.TabIndex = 18
         '
         'lblTotalStock
         '
-        Me.lblTotalStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTotalStock.AutoSize = True
         Me.lblTotalStock.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalStock.ForeColor = System.Drawing.Color.Red
@@ -432,7 +453,7 @@ Partial Class ProductList
         '
         'Label8
         '
-        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(1041, 616)
@@ -440,26 +461,6 @@ Partial Class ProductList
         Me.Label8.Size = New System.Drawing.Size(119, 19)
         Me.Label8.TabIndex = 28
         Me.Label8.Text = "Total Stock Qty:"
-        '
-        'txtItemCode
-        '
-        Me.txtItemCode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtItemCode.Location = New System.Drawing.Point(261, 15)
-        Me.txtItemCode.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtItemCode.Name = "txtItemCode"
-        Me.txtItemCode.Size = New System.Drawing.Size(143, 21)
-        Me.txtItemCode.TabIndex = 19
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(200, 15)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(57, 15)
-        Me.Label9.TabIndex = 18
-        Me.Label9.Text = "Item Code"
         '
         'ProductList
         '

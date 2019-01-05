@@ -15,34 +15,43 @@
         insertForTesting()
         If ModuleSettings.forTest = 1 Then
             'test mode
-            Main_form.lblTest.Visible = True
+            Main_form.lblTest.Text = "For Testing"
+
         Else
             'ready mode
-            Main_form.lblTest.Visible = False
+            Main_form.lblTest.Text = "Live"
         End If
         MsgBox("Settings sucessfully update.", MsgBoxStyle.Information)
         btnSave.Enabled = True
     End Sub
 
     Private Sub insertForTesting()
+
         Dim y As Integer = 0
+        Dim db_path As String = ModuleSettings.get_db_path
+        Dim temp() As String = db_path.Split("\")
+        Dim database_name = temp(temp.Length - 1)
+        Dim cur_path As String = db_path.Replace(database_name, "")
+
         If testYes.Checked = True Then
             ' for testing
             y = 1
-            'My.Computer.FileSystem.CopyFile(
-            '     "C:\users\inventory.accdb",
-            '       Application.StartupPath & "\inventory_dev.accdb",
-            '      Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
-            '      Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
+            My.Computer.FileSystem.CopyFile(
+                 db_path,
+                   cur_path & "inventory_dev.accdb",
+                  Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
+                  Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
         Else
-            ' not for test
+            ' live
             y = 0
-            'If System.IO.File.Exists(Application.StartupPath & "\inventory.accdb") Then
-            '    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\inventory.accdb")
-            'End If
+            If System.IO.File.Exists(cur_path & "inventory.accdb") Then
+
+                'My.Computer.FileSystem.DeleteFile(cur_path & "inventory_dev.accdb")
+            End If
 
         End If
         doQuery("UPDATE settings set for_testing = " & y)
+
     End Sub
 
     Private Sub btnTruncate_Click(sender As Object, e As EventArgs) Handles btnTruncate.Click
