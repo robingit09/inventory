@@ -3,6 +3,9 @@
     Public selectedCategory As Integer = 0
     Public selectedSubcategory As Integer = 0
     Public selectedColor As Integer = 0
+    Public selectedBrand As Integer = 0
+    Public selected
+
     'Private Function toCapitalFirst(ByVal str As String) As String
     '    Dim result As String
     '    result = str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower
@@ -32,77 +35,162 @@
                 .con.Close()
             End With
 
-            'Dim dbdelete As New DatabaseConnect
-            'With dbdelete
-            '    .delete_permanent("product_unit", "product_id", prod_id)
-            '    .cmd.Dispose()
-            '    .con.Close()
-            'End With
 
-            If dgvMeasure.Rows.Count > 0 Then
-                For Each row As DataGridViewRow In dgvMeasure.Rows
-                    If row.Cells("unit").Value <> "" Then
-                        Dim barcode As String = row.Cells("barcode").Value
-                        Dim itemcode As String = row.Cells("item_code").Value
-                        Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
-                        Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
-                        Dim color As Integer = If(row.Cells("color").Value = "No Color", 0, New DatabaseConnect().get_id("color", "name", row.Cells("color").Value))
-                        Dim price As String = row.Cells("price").Value
-                        Dim dbinsertUnit As New DatabaseConnect
-                        With dbinsertUnit
-                            dbinsertUnit.cmd.Connection = dbinsertUnit.con
-                            dbinsertUnit.cmd.CommandType = CommandType.Text
-                            dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?)"
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@product_id", prod_id)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@brand", brand)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@unit", unit)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@color", color)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@barcode", barcode)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@item_code", itemcode)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@price", price)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@status", 1)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-                            dbinsertUnit.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                            dbinsertUnit.cmd.ExecuteNonQuery()
+            Dim barcode As String = Trim(txtBarcode.Text)
+            Dim itemcode As String = Trim(txtItemCode.Text)
+            Dim brand As Integer = If(cbBrand.Text = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", cbBrand.Text))
+            Dim color As Integer = If(cbColor.Text = "No Color", 0, New DatabaseConnect().get_id("color", "name", cbColor.Text))
+
+            'insert unit and price
+            Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvMeasure2.Rows(0).Cells("mUnit").Value)
+            Dim price As String = dgvMeasure2.Rows(0).Cells("mPrice").Value
 
 
-                            dbinsertUnit.cmd.Dispose()
-                            dbinsertUnit.con.Close()
-                        End With
 
-                        'insert stock
-                        Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
-                        Dim insertstock As New DatabaseConnect
-                        With insertstock
-                            .cmd.Connection = .con
-                            .cmd.CommandType = CommandType.Text
-                            .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
-                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
-                            .cmd.Parameters.AddWithValue("@qty", 0)
-                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                            .cmd.ExecuteNonQuery()
+            Dim dbinsertunit As New DatabaseConnect
+            With dbinsertunit
+                .cmd.Connection = .con
+                .cmd.CommandType = CommandType.Text
+                .cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?)"
+                .cmd.Parameters.AddWithValue("@product_id", prod_id)
+                .cmd.Parameters.AddWithValue("@brand", brand)
+                .cmd.Parameters.AddWithValue("@unit", unit)
+                .cmd.Parameters.AddWithValue("@color", color)
+                .cmd.Parameters.AddWithValue("@barcode", barcode)
+                .cmd.Parameters.AddWithValue("@item_code", itemcode)
+                .cmd.Parameters.AddWithValue("@price", price)
+                .cmd.Parameters.AddWithValue("@status", 1)
+                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                .cmd.ExecuteNonQuery()
+                .cmd.Dispose()
+                .con.Close()
+
+            End With
+
+            'insert stock
+            Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
+            Dim insertstock As New DatabaseConnect
+            With insertstock
+                .cmd.Connection = .con
+                .cmd.CommandType = CommandType.Text
+                .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
+                .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                .cmd.Parameters.AddWithValue("@qty", 0)
+                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                .cmd.ExecuteNonQuery()
+                .cmd.Parameters.Clear()
 
 
-                            .cmd.Parameters.Clear()
-                            .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,is_default,created_at,updated_at)
-            VALUES(?,?,?,?,?,?)"
+                .cmd.CommandText = "INSERT INTO product_measure (barcode,product_unit_id,unit_id,price,is_default,created_at,updated_at)
+            VALUES(?,?,?,?,?,?,?)"
+                .cmd.Parameters.AddWithValue("@barcode", barcode)
+                .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                .cmd.Parameters.AddWithValue("@unit_id", unit)
+                .cmd.Parameters.AddWithValue("@price", price)
+                .cmd.Parameters.AddWithValue("@is_default", 1)
+                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                .cmd.ExecuteNonQuery()
 
-                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
-                            .cmd.Parameters.AddWithValue("@unit_id", unit)
-                            .cmd.Parameters.AddWithValue("@price", price)
-                            .cmd.Parameters.AddWithValue("@is_default", 1)
-                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                            .cmd.ExecuteNonQuery()
+                .cmd.Dispose()
+                .con.Close()
 
-                            .cmd.Dispose()
-                            .con.Close()
+            End With
 
-                        End With
+            'insert measurement
+            If dgvMeasure2.Rows.Count > 2 Then
+                For Each row As DataGridViewRow In dgvMeasure2.Rows
+                    If row.Cells("mUnit").Value <> "Select" And row.Cells("mPrice").Value <> "" Then
+
+                        Dim barcode2 As String = row.Cells("mBarcode").Value
+                        Dim unit2 As String = row.Cells("mUnit").Value
+                        Dim price2 As String = row.Cells("mPrice").Value
+
+
+                        .cmd.CommandText = "INSERT INTO product_measure (barcode,product_unit_id,unit_id,price,is_default,created_at,updated_at)VALUES(?,?,?,?,?,?,?)"
+                        .cmd.Parameters.AddWithValue("@barcode", barcode2)
+                        .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                        .cmd.Parameters.AddWithValue("@unit_id", unit2)
+                        .cmd.Parameters.AddWithValue("@price", price2)
+                        .cmd.Parameters.AddWithValue("@is_default", 1)
+                        .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                        .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                        .cmd.ExecuteNonQuery()
+                        .cmd.Dispose()
+                        .con.Close()
+
                     End If
                 Next
             End If
+
+            'If dgvMeasure.Rows.Count > 0 Then
+            '    For Each row As DataGridViewRow In dgvMeasure.Rows
+            '        If row.Cells("unit").Value <> "" Then
+            '            Dim barcode As String = row.Cells("barcode").Value
+            '            Dim itemcode As String = row.Cells("item_code").Value
+            '            Dim brand As Integer = If(row.Cells("brand").Value = "No Brand", 0, New DatabaseConnect().get_id("brand", "name", row.Cells("brand").Value))
+            '            Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("unit").Value)
+            '            Dim color As Integer = If(row.Cells("color").Value = "No Color", 0, New DatabaseConnect().get_id("color", "name", row.Cells("color").Value))
+            '            Dim price As String = row.Cells("price").Value
+
+            '            Dim dbinsertUnit As New DatabaseConnect
+            '            With dbinsertUnit
+            '                dbinsertUnit.cmd.Connection = dbinsertUnit.con
+            '                dbinsertUnit.cmd.CommandType = CommandType.Text
+            '                dbinsertUnit.cmd.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?)"
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@product_id", prod_id)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@brand", brand)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@unit", unit)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@color", color)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@barcode", barcode)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@item_code", itemcode)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@price", price)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@status", 1)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+            '                dbinsertUnit.cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            '                dbinsertUnit.cmd.ExecuteNonQuery()
+
+
+            '                dbinsertUnit.cmd.Dispose()
+            '                dbinsertUnit.con.Close()
+            '            End With
+
+            '            'insert stock
+            '            Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
+            '            Dim insertstock As New DatabaseConnect
+            '            With insertstock
+            '                .cmd.Connection = .con
+            '                .cmd.CommandType = CommandType.Text
+            '                .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
+            '                .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+            '                .cmd.Parameters.AddWithValue("@qty", 0)
+            '                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+            '                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            '                .cmd.ExecuteNonQuery()
+
+
+            '                .cmd.Parameters.Clear()
+            '                .cmd.CommandText = "INSERT INTO product_measure (product_unit_id,unit_id,price,is_default,created_at,updated_at)
+            '            VALUES(?,?,?,?,?,?)"
+
+            '                .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+            '                .cmd.Parameters.AddWithValue("@unit_id", unit)
+            '                .cmd.Parameters.AddWithValue("@price", price)
+            '                .cmd.Parameters.AddWithValue("@is_default", 1)
+            '                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+            '                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+            '                .cmd.ExecuteNonQuery()
+
+            '                .cmd.Dispose()
+            '                .con.Close()
+
+            '            End With
+            '        End If
+            '    Next
+            'End If
+
             MsgBox("Save Successfully!", MsgBoxStyle.Information)
             Me.Close()
         End With
@@ -370,12 +458,49 @@
         '    Return res
         'End If
 
-        If dgvMeasure.Rows.Count = 0 Or dgvMeasure.Rows.Count = 1 Then
+        'If dgvMeasure.Rows.Count = 0 Or dgvMeasure.Rows.Count = 1 Then
+        '    res = False
+        '    MsgBox("Please add measurement for this product!", MsgBoxStyle.Critical)
+        '    dgvMeasure.Focus()
+        '    Return res
+        'End If
+
+        If dgvMeasure2.Rows.Count = 0 Or dgvMeasure2.Rows.Count = 1 Then
             res = False
             MsgBox("Please add measurement for this product!", MsgBoxStyle.Critical)
-            dgvMeasure.Focus()
+            dgvMeasure2.Focus()
             Return res
         End If
+
+
+        ' validation for measurement
+        Dim validateunit As Boolean = True
+        Dim validateprice As Boolean = True
+
+        If dgvMeasure2.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvMeasure2.Rows
+                If row.Cells("mUnit").Value = "Select" And row.Cells("mPrice").Value <> "" Then
+                    validateunit = False
+                End If
+
+                If row.Cells("mUnit").Value <> "Select" And row.Cells("mPrice").Value = "" Then
+                    validateprice = False
+                End If
+            Next
+        End If
+
+        If validateunit = False Then
+            res = False
+            MsgBox("Please select unit for measure.", MsgBoxStyle.Critical)
+            Return res
+        End If
+
+        If validateprice = False Then
+            res = False
+            MsgBox("Please add price for unit.", MsgBoxStyle.Critical)
+            Return res
+        End If
+
         Return res
     End Function
 
@@ -564,6 +689,16 @@
             cbSubcategory.SelectedIndex = 0
         End If
 
+        selectedBrand = 0
+        If cbBrand.Items.Count > 0 Then
+            cbBrand.SelectedIndex = 0
+        End If
+
+        selectedColor = 0
+        If cbColor.Items.Count > 0 Then
+            cbColor.SelectedIndex = 0
+        End If
+
         dgvMeasure.Rows.Clear()
     End Sub
 
@@ -602,4 +737,77 @@
         ColorForm.ShowDialog()
     End Sub
 
+    Private Sub ProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'loadBrand()
+        'loadColor()
+    End Sub
+
+    Public Sub loadBrand()
+        cbBrand.DataSource = Nothing
+        cbBrand.Items.Clear()
+        Dim comboSource As New Dictionary(Of String, String)()
+        comboSource.Add(0, "Select Brand")
+        Dim dbbrand As New DatabaseConnect
+        With dbbrand
+            .selectByQuery("Select id,name from brand where status = 1 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
+
+                End While
+            End If
+            .cmd.Dispose()
+            .dr.Close()
+            .con.Close()
+            cbBrand.DataSource = New BindingSource(comboSource, Nothing)
+            cbBrand.DisplayMember = "Value"
+            cbBrand.ValueMember = "Key"
+        End With
+    End Sub
+
+    Public Sub loadColor()
+
+        cbColor.DataSource = Nothing
+        cbColor.Items.Clear()
+        Dim comboSourceUnit As New Dictionary(Of String, String)()
+        comboSourceUnit.Add(0, "Select Color")
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("Select id,name from color where status = 1 order by name")
+            If .dr.HasRows Then
+                While .dr.Read
+                    comboSourceUnit.Add(.dr.GetValue(0), .dr.GetValue(1))
+                End While
+            End If
+            cbColor.DataSource = New BindingSource(comboSourceUnit, Nothing)
+            cbColor.DisplayMember = "Value"
+            cbColor.ValueMember = "Key"
+        End With
+    End Sub
+
+    Private Sub dgvMeasure2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasure2.CellContentClick
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvMeasure2.Columns("mUnit").Index) Then
+            'Dim p_u As Integer = CInt(dgvMeasure2.Rows(e.RowIndex).Cells("id").Value)
+            'MsgBox(p_u)
+            'SelectUnit.from_module = 0
+            'SelectUnit.lblDesc.Text = dgvMeasure2.Rows(e.RowIndex).Cells("product").Value
+            'SelectUnit.loadUnit(p_u)
+            'SelectUnit.ShowDialog()
+
+            UnitSelection.ShowDialog()
+
+        End If
+
+
+    End Sub
+
+    Private Sub dgvMeasure2_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvMeasure2.RowsAdded
+        If dgvMeasure2.Rows.Count > 0 Then
+            dgvMeasure2.Rows(e.RowIndex).Cells(2).Value = "Select"
+            dgvMeasure2.Rows(e.RowIndex).Cells(4).Value = "Remove"
+
+        End If
+
+    End Sub
 End Class

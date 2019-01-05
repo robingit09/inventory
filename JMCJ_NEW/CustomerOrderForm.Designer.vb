@@ -71,7 +71,6 @@ Partial Class CustomerOrderForm
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbBrand = New System.Windows.Forms.ComboBox()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,6 +86,7 @@ Partial Class CustomerOrderForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.gpFields.SuspendLayout()
         Me.gpPaid.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
@@ -573,17 +573,8 @@ Partial Class CustomerOrderForm
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.price, Me.less, Me.add_less, Me.Column2, Me.sell_price, Me.amount, Me.stock, Me.action})
         Me.dgvProd.Location = New System.Drawing.Point(12, 361)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1377, 315)
+        Me.dgvProd.Size = New System.Drawing.Size(1346, 315)
         Me.dgvProd.TabIndex = 73
-        '
-        'btnSelectProduct
-        '
-        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 324)
-        Me.btnSelectProduct.Name = "btnSelectProduct"
-        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
-        Me.btnSelectProduct.TabIndex = 75
-        Me.btnSelectProduct.Text = "Search Product"
-        Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -684,6 +675,15 @@ Partial Class CustomerOrderForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
+        '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 324)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 75
+        Me.btnSelectProduct.Text = "Search Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
         'CustomerOrderForm
         '

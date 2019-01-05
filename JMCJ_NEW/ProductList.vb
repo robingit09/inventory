@@ -242,6 +242,8 @@
         'ProductForm.initializeMeasure()
 
         ProductForm.selectedProduct = 0
+        ProductForm.loadBrand()
+        ProductForm.loadColor()
         ProductForm.populateCategory()
         ProductForm.populateSubcategory(0)
         ProductForm.clearFields()

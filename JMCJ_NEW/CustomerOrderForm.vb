@@ -414,6 +414,8 @@
     End Sub
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
+
+
         ' clicking add less
         If e.ColumnIndex = 9 Then
             Dim less As String = ""

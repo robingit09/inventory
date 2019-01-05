@@ -42,6 +42,11 @@ JMCJ_NEW
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:JMCJ_NEW.My.Resources.Resources.check">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:JMCJ_NEW.My.Resources.Resources.color">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

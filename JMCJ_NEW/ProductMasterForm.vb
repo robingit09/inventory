@@ -42,7 +42,7 @@
             left join suppliers as s ON s.id = ps.supplier where ps.product_unit_id = " & selected_prod_unit)
             If .dr.HasRows Then
                 While .dr.Read
-                    Dim s_name As String = .dr("supplier_name")
+                    Dim s_name As String = If(IsDBNull(.dr("supplier_name")), "", .dr("supplier_name"))
                     Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
 
                     Dim row As String() = New String() {s_name, cost, "Remove"}
