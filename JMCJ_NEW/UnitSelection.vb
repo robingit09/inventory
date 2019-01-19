@@ -18,13 +18,14 @@
                     comboSource.Add(.dr.GetValue(0), .dr.GetValue(1))
 
                 End While
+                cbUnit.DataSource = New BindingSource(comboSource, Nothing)
+                cbUnit.DisplayMember = "Value"
+                cbUnit.ValueMember = "Key"
             End If
             .cmd.Dispose()
             .dr.Close()
             .con.Close()
-            cbUnit.DataSource = New BindingSource(comboSource, Nothing)
-            cbUnit.DisplayMember = "Value"
-            cbUnit.ValueMember = "Key"
+
         End With
     End Sub
 
@@ -39,6 +40,10 @@
     End Sub
 
     Private Sub btnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
+        If Trim(cbUnit.Text) = "" Then
+            Exit Sub
+        End If
+
         ' check if exist
         For Each item As DataGridViewRow In ProductForm.dgvMeasure2.Rows
             If item.Cells("mUnit").Value <> "Select" Then
@@ -62,5 +67,10 @@
         'selectedUnit = 0
 
         'txtPrice.Clear()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        UnitForm.selectedUnit = 0
+        UnitForm.ShowDialog()
     End Sub
 End Class

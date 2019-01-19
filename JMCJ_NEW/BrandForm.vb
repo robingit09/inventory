@@ -18,6 +18,16 @@
                         ProductAddUnitForm.cbBrand.SelectedIndex = ProductAddUnitForm.cbBrand.FindString(Me.txtBrand.Text)
                     End If
                 End If
+
+                If (form.name = ProductForm.Name) Then
+                    'form is loaded so can do work 
+                    'if you need to check whether it is actually visible
+                    If form.Visible Then
+                        'do work when visible
+                        ProductForm.loadBrand()
+                        ProductForm.cbBrand.SelectedIndex = ProductForm.cbBrand.FindString(Me.txtBrand.Text)
+                    End If
+                End If
             Next
 
 

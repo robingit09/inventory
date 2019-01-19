@@ -15,25 +15,35 @@
         Dim prod_id = 0
         Dim db As New DatabaseConnect
         With db
-            .cmd.Connection = .con
-            .cmd.CommandType = CommandType.Text
-            .cmd.CommandText = "INSERT INTO PRODUCTS (description,status,created_at,updated_at)
+
+            Dim dbprod As New DatabaseConnect
+            With dbprod
+                .cmd.Connection = .con
+                .cmd.CommandType = CommandType.Text
+                .cmd.CommandText = "INSERT INTO PRODUCTS (description,status,created_at,updated_at)
         VALUES ('" & toFormatLetter(txtProduct.Text) & "',1,'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
-            .cmd.ExecuteNonQuery()
-            .cmd.Dispose()
-            .con.Close()
-            prod_id = getLatestID("products")
+                .cmd.ExecuteNonQuery()
+                .cmd.Parameters.Clear()
+                .cmd.Dispose()
+                .con.Close()
+                prod_id = getLatestID("products")
+            End With
+
             Dim dbinsertcategory As New DatabaseConnect
             With dbinsertcategory
                 .cmd.Connection = .con
                 .cmd.CommandType = CommandType.Text
                 .cmd.CommandText = "INSERT INTO product_categories (product_id,category_id,created_at,updated_at) VALUES(" & prod_id & "," & selectedCategory & ",'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
                 .cmd.ExecuteNonQuery()
+                '.cmd.Parameters.Clear()
+
                 .cmd.CommandText = "INSERT INTO product_subcategories (product_id,subcategory_id,created_at,updated_at) VALUES(" & prod_id & "," & selectedSubcategory & ",'" & DateTime.Now.ToString & "','" & DateTime.Now.ToString & "')"
                 .cmd.ExecuteNonQuery()
+                '.cmd.Parameters.Clear()
                 .cmd.Dispose()
                 .con.Close()
             End With
+
 
 
             Dim barcode As String = Trim(txtBarcode.Text)
@@ -82,48 +92,55 @@
                 .cmd.ExecuteNonQuery()
                 .cmd.Parameters.Clear()
 
-
-                .cmd.CommandText = "INSERT INTO product_measure (barcode,product_unit_id,unit_id,price,is_default,created_at,updated_at)
-            VALUES(?,?,?,?,?,?,?)"
-                .cmd.Parameters.AddWithValue("@barcode", barcode)
-                .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
-                .cmd.Parameters.AddWithValue("@unit_id", unit)
-                .cmd.Parameters.AddWithValue("@price", price)
-                .cmd.Parameters.AddWithValue("@is_default", 1)
-                .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-                .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                .cmd.ExecuteNonQuery()
-
                 .cmd.Dispose()
                 .con.Close()
 
             End With
 
             'insert measurement
-            If dgvMeasure2.Rows.Count > 2 Then
-                For Each row As DataGridViewRow In dgvMeasure2.Rows
-                    If row.Cells("mUnit").Value <> "Select" And row.Cells("mPrice").Value <> "" Then
+            Dim dbprodmeasure As New DatabaseConnect
+            With dbprodmeasure
+                If dgvMeasure2.Rows.Count > 0 Then
+                    For Each row As DataGridViewRow In dgvMeasure2.Rows
+                        If row.Cells("mUnit").Value <> "Select" And row.Cells("mPrice").Value <> "" Then
 
-                        Dim barcode2 As String = row.Cells("mBarcode").Value
-                        Dim unit2 As String = row.Cells("mUnit").Value
-                        Dim price2 As String = row.Cells("mPrice").Value
+                            Dim barcode2 As String = row.Cells("mBarcode").Value
+                            Dim unit2 As String = row.Cells("mUnit").Value
+                            Dim def As Integer = row.Cells("isdefault").Value
+                            If def = True Then
+                                def = 1
+                            Else
+                                def = 0
+                            End If
 
+                            If Trim(row.Cells("mUnit").Value) <> "Select" Or Trim(row.Cells("mUnit").Value) <> "" Then
+                                unit2 = New DatabaseConnect().get_id("unit", "name", Trim(row.Cells("mUnit").Value))
+                            End If
 
-                        .cmd.CommandText = "INSERT INTO product_measure (barcode,product_unit_id,unit_id,price,is_default,created_at,updated_at)VALUES(?,?,?,?,?,?,?)"
-                        .cmd.Parameters.AddWithValue("@barcode", barcode2)
-                        .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
-                        .cmd.Parameters.AddWithValue("@unit_id", unit2)
-                        .cmd.Parameters.AddWithValue("@price", price2)
-                        .cmd.Parameters.AddWithValue("@is_default", 1)
-                        .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-                        .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-                        .cmd.ExecuteNonQuery()
-                        .cmd.Dispose()
-                        .con.Close()
+                            Dim price2 As String = row.Cells("mPrice").Value
 
-                    End If
-                Next
-            End If
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "INSERT INTO product_measure (barcode,product_unit_id,unit_id,price,is_default,created_at,updated_at)VALUES(?,?,?,?,?,?,?)"
+                            .cmd.Parameters.AddWithValue("@barcode", barcode2)
+                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                            .cmd.Parameters.AddWithValue("@unit_id", unit2)
+                            .cmd.Parameters.AddWithValue("@price", price2)
+                            .cmd.Parameters.AddWithValue("@is_default", def)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Parameters.Clear()
+                            '.con.Close()
+
+                        End If
+                    Next
+                    .cmd.Dispose()
+                    .con.Close()
+                End If
+
+            End With
+
 
             'If dgvMeasure.Rows.Count > 0 Then
             '    For Each row As DataGridViewRow In dgvMeasure.Rows
@@ -650,7 +667,7 @@
 
     Private Sub dgvMeasure_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasure.CellContentClick
         '// **  remove column function ** //
-        If (e.RowIndex = dgvMeasure.NewRowIndex Or e.RowIndex < 0) Then
+        If (e.RowIndex = dgvMeasure.NewRowIndex Or e.RowIndex <0) Then
             Exit Sub
         End If
 
@@ -699,7 +716,7 @@
             cbColor.SelectedIndex = 0
         End If
 
-        dgvMeasure.Rows.Clear()
+        dgvMeasure2.Rows.Clear()
     End Sub
 
     Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
@@ -730,12 +747,6 @@
         CategoryForm.ShowDialog()
     End Sub
 
-
-
-    Private Sub btnAddColor_Click(sender As Object, e As EventArgs)
-        ColorForm.selectedColor = 0
-        ColorForm.ShowDialog()
-    End Sub
 
     Private Sub ProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'loadBrand()
@@ -794,8 +805,30 @@
             'SelectUnit.lblDesc.Text = dgvMeasure2.Rows(e.RowIndex).Cells("product").Value
             'SelectUnit.loadUnit(p_u)
             'SelectUnit.ShowDialog()
-
             UnitSelection.ShowDialog()
+        End If
+
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvMeasure2.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+        'Check if click Is on specific column 
+        If (e.ColumnIndex = dgvMeasure2.Columns("mAction").Index) Then
+            dgvMeasure2.Rows.RemoveAt(e.RowIndex)
+        End If
+
+        If (e.ColumnIndex = dgvMeasure2.Columns("isdefault").Index) Then
+
+            Dim row_index As Integer = e.RowIndex
+            For Each row As DataGridViewRow In dgvMeasure2.Rows
+                'If row.Cells("mUnit").Value <> "Select" And row.Cells("mPrice").Value <> "" Then
+                row.Cells("isdefault").Value = False
+                'End If
+            Next
+            'row.Cells("isdefault").Value = True
+
+            dgvMeasure2.Rows(row_index).Cells(e.ColumnIndex).Value = True
 
         End If
 
@@ -805,9 +838,37 @@
     Private Sub dgvMeasure2_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvMeasure2.RowsAdded
         If dgvMeasure2.Rows.Count > 0 Then
             dgvMeasure2.Rows(e.RowIndex).Cells(2).Value = "Select"
-            dgvMeasure2.Rows(e.RowIndex).Cells(4).Value = "Remove"
-
+            dgvMeasure2.Rows(e.RowIndex).Cells(5).Value = "Remove"
         End If
+    End Sub
 
+    Private Sub btnAddColor_Click(sender As Object, e As EventArgs) Handles btnAddColor.Click
+        ColorForm.selectedColor = 0
+        ColorForm.ShowDialog()
+    End Sub
+
+    Private Sub cbColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColor.SelectedIndexChanged
+        If cbColor.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbColor.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedColor = key
+        Else
+            selectedColor = 0
+        End If
+    End Sub
+
+    Private Sub btnAddBrand_Click(sender As Object, e As EventArgs) Handles btnAddBrand.Click
+        BrandForm.selectedBrand = 0
+        BrandForm.ShowDialog()
+    End Sub
+
+    Private Sub cbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBrand.SelectedIndexChanged
+        If cbBrand.SelectedIndex > 0 Then
+            Dim key As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Key
+            Dim value As String = DirectCast(cbBrand.SelectedItem, KeyValuePair(Of String, String)).Value
+            selectedBrand = key
+        Else
+            selectedBrand = 0
+        End If
     End Sub
 End Class

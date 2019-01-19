@@ -20,6 +20,16 @@
                         ProductAddUnitForm.cbUnit.SelectedIndex = ProductAddUnitForm.cbUnit.FindString(Me.txtUnit.Text)
                     End If
                 End If
+
+                If (form.name = UnitSelection.Name) Then
+                    'form is loaded so can do work 
+                    'if you need to check whether it is actually visible
+                    If form.Visible Then
+                        'do work when visible
+                        UnitSelection.loadUnit()
+                        UnitSelection.cbUnit.SelectedIndex = UnitSelection.cbUnit.FindString(Me.txtUnit.Text)
+                    End If
+                End If
             Next
             txtUnit.Text = ""
         ElseIf btnSave.Text = "Update" Then

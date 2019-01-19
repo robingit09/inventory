@@ -60,6 +60,7 @@ Partial Class ProductForm
         Me.mBarcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mUnit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.mPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.isdefault = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.mAction = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbProdInfo.SuspendLayout()
@@ -141,8 +142,8 @@ Partial Class ProductForm
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.tbProdInfo)
         Me.TabControl1.Controls.Add(Me.tbMeasure)
+        Me.TabControl1.Controls.Add(Me.tbProdInfo)
         Me.TabControl1.Location = New System.Drawing.Point(38, 310)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -255,10 +256,10 @@ Partial Class ProductForm
         'dgvMeasure2
         '
         Me.dgvMeasure2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMeasure2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.mBarcode, Me.mUnit, Me.mPrice, Me.mAction})
+        Me.dgvMeasure2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.mBarcode, Me.mUnit, Me.mPrice, Me.isdefault, Me.mAction})
         Me.dgvMeasure2.Location = New System.Drawing.Point(13, 56)
         Me.dgvMeasure2.Name = "dgvMeasure2"
-        Me.dgvMeasure2.Size = New System.Drawing.Size(996, 235)
+        Me.dgvMeasure2.Size = New System.Drawing.Size(997, 235)
         Me.dgvMeasure2.TabIndex = 4
         '
         'btnAddCategory
@@ -407,6 +408,11 @@ Partial Class ProductForm
         Me.mPrice.Name = "mPrice"
         Me.mPrice.Width = 120
         '
+        'isdefault
+        '
+        Me.isdefault.HeaderText = "Default"
+        Me.isdefault.Name = "isdefault"
+        '
         'mAction
         '
         Me.mAction.HeaderText = "Remove"
@@ -492,5 +498,6 @@ Partial Class ProductForm
     Friend WithEvents mBarcode As DataGridViewTextBoxColumn
     Friend WithEvents mUnit As DataGridViewButtonColumn
     Friend WithEvents mPrice As DataGridViewTextBoxColumn
+    Friend WithEvents isdefault As DataGridViewCheckBoxColumn
     Friend WithEvents mAction As DataGridViewButtonColumn
 End Class
