@@ -26,6 +26,9 @@ Partial Class ProductMasterForm
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.btnAddMeasure = New System.Windows.Forms.Button()
         Me.dgvMeasure = New System.Windows.Forms.DataGridView()
+        Me.measure_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.measure_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.measure_action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.btnAddCost = New System.Windows.Forms.Button()
         Me.dgvCost = New System.Windows.Forms.DataGridView()
@@ -61,9 +64,6 @@ Partial Class ProductMasterForm
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtItemCode = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.measure_unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.measure_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.measure_action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         CType(Me.dgvMeasure, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,6 +120,25 @@ Partial Class ProductMasterForm
         Me.dgvMeasure.Size = New System.Drawing.Size(855, 159)
         Me.dgvMeasure.TabIndex = 1
         '
+        'measure_unit
+        '
+        Me.measure_unit.HeaderText = "Unit"
+        Me.measure_unit.Name = "measure_unit"
+        Me.measure_unit.ReadOnly = True
+        Me.measure_unit.Width = 300
+        '
+        'measure_price
+        '
+        Me.measure_price.HeaderText = "Price"
+        Me.measure_price.Name = "measure_price"
+        Me.measure_price.ReadOnly = True
+        '
+        'measure_action
+        '
+        Me.measure_action.HeaderText = "Action"
+        Me.measure_action.Name = "measure_action"
+        Me.measure_action.ReadOnly = True
+        '
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.btnAddCost)
@@ -134,7 +153,7 @@ Partial Class ProductMasterForm
         '
         'btnAddCost
         '
-        Me.btnAddCost.Location = New System.Drawing.Point(800, 11)
+        Me.btnAddCost.Location = New System.Drawing.Point(796, 11)
         Me.btnAddCost.Name = "btnAddCost"
         Me.btnAddCost.Size = New System.Drawing.Size(75, 23)
         Me.btnAddCost.TabIndex = 1
@@ -147,7 +166,7 @@ Partial Class ProductMasterForm
         Me.dgvCost.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Supplier, Me.Cost, Me.Action})
         Me.dgvCost.Location = New System.Drawing.Point(6, 40)
         Me.dgvCost.Name = "dgvCost"
-        Me.dgvCost.Size = New System.Drawing.Size(869, 164)
+        Me.dgvCost.Size = New System.Drawing.Size(865, 164)
         Me.dgvCost.TabIndex = 0
         '
         'Supplier
@@ -183,7 +202,7 @@ Partial Class ProductMasterForm
         '
         'btnAddCPrice
         '
-        Me.btnAddCPrice.Location = New System.Drawing.Point(800, 10)
+        Me.btnAddCPrice.Location = New System.Drawing.Point(796, 10)
         Me.btnAddCPrice.Name = "btnAddCPrice"
         Me.btnAddCPrice.Size = New System.Drawing.Size(75, 23)
         Me.btnAddCPrice.TabIndex = 2
@@ -196,7 +215,7 @@ Partial Class ProductMasterForm
         Me.dgvCPrices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.customer, Me.price, Me.prices_remove})
         Me.dgvCPrices.Location = New System.Drawing.Point(6, 39)
         Me.dgvCPrices.Name = "dgvCPrices"
-        Me.dgvCPrices.Size = New System.Drawing.Size(869, 165)
+        Me.dgvCPrices.Size = New System.Drawing.Size(865, 165)
         Me.dgvCPrices.TabIndex = 1
         '
         'customer
@@ -427,25 +446,6 @@ Partial Class ProductMasterForm
         Me.Label7.Size = New System.Drawing.Size(55, 14)
         Me.Label7.TabIndex = 14
         Me.Label7.Text = "Item Code"
-        '
-        'measure_unit
-        '
-        Me.measure_unit.HeaderText = "Unit"
-        Me.measure_unit.Name = "measure_unit"
-        Me.measure_unit.ReadOnly = True
-        Me.measure_unit.Width = 300
-        '
-        'measure_price
-        '
-        Me.measure_price.HeaderText = "Price"
-        Me.measure_price.Name = "measure_price"
-        Me.measure_price.ReadOnly = True
-        '
-        'measure_action
-        '
-        Me.measure_action.HeaderText = "Action"
-        Me.measure_action.Name = "measure_action"
-        Me.measure_action.ReadOnly = True
         '
         'ProductMasterForm
         '

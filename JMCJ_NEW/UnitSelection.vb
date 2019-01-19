@@ -61,7 +61,7 @@
         'MsgBox(ProductForm.dgvMeasure2.CurrentCell.RowIndex)
         Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
         ProductForm.dgvMeasure2.Rows(cur_index).Cells("mUnit").Value = cbUnit.Text
-
+        Me.Close()
 
         'cbUnit.SelectedIndex = 0
         'selectedUnit = 0

@@ -190,7 +190,7 @@
                 INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                 LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                 LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.description")
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 order by p.id desc")
             Else
                 .selectByQuery(q)
             End If
@@ -303,6 +303,8 @@
             Dim product_id As Integer = CInt(New DatabaseConnect().get_by_id("product_unit", p_u_id, "product_id"))
             ProductForm.selectedProduct = product_id
             ProductForm.btnSave.Text = "Update"
+            ProductForm.loadColor()
+            ProductForm.loadBrand()
             ProductForm.populateCategory()
             ProductForm.populateSubcategory(0)
             ProductForm.toUpdateInfo(product_id)
@@ -499,7 +501,7 @@
                                 <th>Unit</th>
                                 <th>Color</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Stock Qty</th>
                                 <th>Category</th>
                                 <th>Subcategory</th>
                                 <th>Status</th>

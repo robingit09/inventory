@@ -66,7 +66,7 @@ Partial Class UnitSelection
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(73, 30)
         Me.btnAdd.TabIndex = 3
-        Me.btnAdd.Text = "Add New"
+        Me.btnAdd.Text = "New Unit"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'UnitSelection

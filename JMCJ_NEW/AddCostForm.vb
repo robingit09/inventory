@@ -1,4 +1,5 @@
 ﻿Public Class AddCostForm
+    Public selectedSupplier As Integer = 0
     Private Sub AddCostForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadSupplier()
 
@@ -39,7 +40,18 @@
 
         If btnAdd.Text = "Add(+)" Then
             ' check if exist
-            For Each item As DataGridViewRow In ProductMasterForm.dgvCost.Rows
+            'For Each item As DataGridViewRow In ProductMasterForm.dgvCost.Rows
+            '    If item.Cells("Supplier").Value <> "" Then
+            '        Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
+            '        If supplier = cbSupplier.Text.ToUpper Then
+            '            MsgBox("Supplier is already added!", MsgBoxStyle.Critical)
+            '            Exit Sub
+            '        End If
+            '    End If
+            'Next
+
+            ' check if exist
+            For Each item As DataGridViewRow In ProductForm.dgvCost.Rows
                 If item.Cells("Supplier").Value <> "" Then
                     Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
                     If supplier = cbSupplier.Text.ToUpper Then
@@ -66,9 +78,20 @@
 
         Dim row As String() = New String() {cbSupplier.Text, Val(txtCost.Text).ToString("N2"), "Remove"}
         ProductMasterForm.dgvCost.Rows.Add(row)
+        ProductForm.dgvCost.Rows.Add(row)
         cbSupplier.SelectedIndex = 0
         txtCost.Text = ""
         cbSupplier.Focus()
         Me.Close()
     End Sub
+
+    Private Sub btnAddNewSupplier_Click(sender As Object, e As EventArgs) Handles btnAddNewSupplier.Click
+        SupplierForm.loadstatus()
+        SupplierForm.SelectedSupplier = 0
+        SupplierForm.from_module = 5
+        SupplierForm.clearFields()
+        SupplierForm.btnSave.Text = "Save"
+        SupplierForm.ShowDialog()
+    End Sub
+
 End Class

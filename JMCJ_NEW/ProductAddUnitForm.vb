@@ -140,34 +140,34 @@
 
         End If
 
-        If btnAdd.Text = "Add" Then
-            ' check if exist
-            For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
-                If item.Cells("brand").Value <> "" Then
-                    Dim barcode As String = item.Cells("barcode").Value
-                    Dim brand As String = item.Cells("brand").Value.ToString.ToUpper
-                    Dim unit As String = item.Cells("unit").Value.ToString.ToUpper
-                    Dim color As String = item.Cells("Color").Value.ToString.ToUpper
-                    Dim price As Double = CDbl(item.Cells("Price").Value)
+        'If btnAdd.Text = "Add" Then
+        '    ' check if exist
+        '    For Each item As DataGridViewRow In ProductForm.dgvMeasure.Rows
+        '        If item.Cells("brand").Value <> "" Then
+        '            Dim barcode As String = item.Cells("barcode").Value
+        '            Dim brand As String = item.Cells("brand").Value.ToString.ToUpper
+        '            Dim unit As String = item.Cells("unit").Value.ToString.ToUpper
+        '            Dim color As String = item.Cells("Color").Value.ToString.ToUpper
+        '            Dim price As Double = CDbl(item.Cells("Price").Value)
 
-                    If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) And color = (cbColor.Text.ToUpper) Then
-                        MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
-                        Exit Sub
-                    End If
-                End If
-            Next
-            Dim row As String() = New String() {"", txtBarcode.Text, txtItemCode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
-            ProductForm.dgvMeasure.Rows.Add(row)
+        '            If brand = (cbBrand.Text.ToUpper) And unit = (cbUnit.Text.ToUpper) And color = (cbColor.Text.ToUpper) Then
+        '                MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+        '                Exit Sub
+        '            End If
+        '        End If
+        '    Next
+        '    Dim row As String() = New String() {"", txtBarcode.Text, txtItemCode.Text, cbBrand.Text, cbUnit.Text, cbColor.Text, Val(txtPrice.Text).ToString("N2"), "Remove"}
+        '    ProductForm.dgvMeasure.Rows.Add(row)
 
-        ElseIf btnAdd.Text = "Update" Then
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("barcode").Value = txtBarcode.Text
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("item_code").Value = txtItemCode.Text
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("unit").Value = cbUnit.Text
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("color").Value = cbColor.Text
-            ProductForm.dgvMeasure.SelectedRows(0).Cells("price").Value = txtPrice.Text
-            Me.Close()
-        End If
+        'ElseIf btnAdd.Text = "Update" Then
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("barcode").Value = txtBarcode.Text
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("item_code").Value = txtItemCode.Text
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("brand").Value = cbBrand.Text
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("unit").Value = cbUnit.Text
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("color").Value = cbColor.Text
+        '    ProductForm.dgvMeasure.SelectedRows(0).Cells("price").Value = txtPrice.Text
+        '    Me.Close()
+        'End If
 
         txtBarcode.Clear()
         txtItemCode.Clear()

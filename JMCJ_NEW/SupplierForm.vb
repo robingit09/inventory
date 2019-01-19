@@ -53,11 +53,18 @@
                 PurchaseReceiveForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
             End If
 
-            ' from PR form
+            ' from POR form
             If from_module = 4 Then
                 PurchaseOrderRequestForm.loadSupplier()
                 PurchaseOrderRequestForm.cbSupplier.SelectedIndex = PurchaseOrderRequestForm.cbSupplier.FindString(txtSupplier.Text)
                 PurchaseOrderRequestForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
+            End If
+
+            ' from Add Cost/Supplier form
+            If from_module = 5 Then
+                AddCostForm.loadSupplier()
+                AddCostForm.cbSupplier.SelectedIndex = AddCostForm.cbSupplier.FindString(txtSupplier.Text)
+                AddCostForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
             End If
 
             clearFields()
