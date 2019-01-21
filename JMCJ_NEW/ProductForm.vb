@@ -321,70 +321,49 @@
 
                 End If
             Next
-            cmd2.Dispose()
-            .con.Close()
+            If dgvCost.Rows.Count = 1 Then
+                MsgBox("Supplier table field is required!", MsgBoxStyle.Critical)
+                dgvCost.Focus()
+                Exit Sub
+            End If
 
-            'For Each item As DataGridViewRow In Me.dgvMeasure.Rows
-            '    Dim id As String = dgvMeasure.Rows(item.Index).Cells("id").Value
-            '    Dim barcode As String = dgvMeasure.Rows(item.Index).Cells("barcode").Value
-            '    Dim itemcode As String = dgvMeasure.Rows(item.Index).Cells("item_code").Value
-            '    Dim brand As Integer = New DatabaseConnect().get_id("brand", "name", dgvMeasure.Rows(item.Index).Cells("brand").Value)
-            '    Dim unit As Integer = New DatabaseConnect().get_id("unit", "name", dgvMeasure.Rows(item.Index).Cells("unit").Value)
-            '    Dim color As Integer = New DatabaseConnect().get_id("color", "name", dgvMeasure.Rows(item.Index).Cells("color").Value)
-            '    Dim price As String = dgvMeasure.Rows(item.Index).Cells("price").Value
+            'insert supplier and their cost
+            Dim dbdelete As New DatabaseConnect
+            dbdelete.delete_permanent("product_suppliers", "product_unit_id", selectedProduct)
+            dbdelete.cmd.Dispose()
+            dbdelete.con.Close()
+            Dim saveCost As New DatabaseConnect
+            With saveCost
+                .cmd.Connection = .con
+                .cmd.CommandType = CommandType.Text
 
-            '    ' check if not blank
-            '    If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("col_remove").Value)) Then
-            '        If (Not String.IsNullOrEmpty(dgvMeasure.Rows(item.Index).Cells("id").Value)) Then
-            '            'update if exist
-            '            cmd2.CommandText = "UPDATE product_unit set brand = ?, unit = ? , color= ?, barcode = ? ,item_code = ? , price = ?,status = ?, updated_at = ?
-            '        where id = " & id
-            '            cmd2.Parameters.AddWithValue("@brand", brand)
-            '            cmd2.Parameters.AddWithValue("@unit", unit)
-            '            cmd2.Parameters.AddWithValue("@color", color)
-            '            cmd2.Parameters.AddWithValue("@barcode", barcode)
-            '            cmd2.Parameters.AddWithValue("@item_code", itemcode)
-            '            cmd2.Parameters.AddWithValue("@price", price)
-            '            cmd2.Parameters.AddWithValue("@status", 1)
+                For Each item As DataGridViewRow In dgvCost.Rows
+                    If item.Cells("Supplier").Value <> "" Then
+                        Dim supplier As String = item.Cells("Supplier").Value
+                        Dim unit_name As String = item.Cells("sUnit").Value
+                        Dim cost As Double = Val(item.Cells("Cost").Value)
 
-            '            cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-            '            cmd2.ExecuteNonQuery()
-            '            cmd2.Parameters.Clear()
-            '        Else
-            '            'save if not exist
-            '            cmd2.CommandText = "INSERT INTO product_unit (product_id,brand,unit,color,barcode,item_code,price,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?)"
-            '            cmd2.Parameters.AddWithValue("@product_id", selectedProduct)
-            '            cmd2.Parameters.AddWithValue("@brand", brand)
-            '            cmd2.Parameters.AddWithValue("@unit", unit)
-            '            cmd2.Parameters.AddWithValue("@color", color)
-            '            cmd2.Parameters.AddWithValue("@barcode", barcode)
-            '            cmd2.Parameters.AddWithValue("@item_code", itemcode)
-            '            cmd2.Parameters.AddWithValue("@price", price)
-            '            cmd2.Parameters.AddWithValue("@status", 1)
-            '            cmd2.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-            '            cmd2.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-            '            cmd2.ExecuteNonQuery()
-            '            cmd2.Parameters.Clear()
+                        .cmd.CommandText = "INSERT INTO product_suppliers (product_unit_id,unit_id,supplier,unit_cost,created_at,updated_at)
+            VALUES(?,?,?,?,?,?)"
+                        .cmd.Parameters.AddWithValue("@product_unit_id", selectedProduct)
+                        .cmd.Parameters.AddWithValue("@supplier", New DatabaseConnect().get_id("suppliers", "supplier_name", supplier))
+                        .cmd.Parameters.AddWithValue("@unit_id", New DatabaseConnect().get_id("unit", "name", unit_name))
+                        .cmd.Parameters.AddWithValue("@unit_cost", cost)
+                        .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                        .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                        .cmd.ExecuteNonQuery()
+                        .cmd.Parameters.Clear()
+                    End If
+                Next
+                .cmd.Dispose()
+                '.con.Close()
+            End With
 
-            '            'insert stock
-            '            'Dim p_u_id As Integer = New DatabaseConnect().getLastID("product_unit")
-            '            'Dim insertstock As New DatabaseConnect
-            '            'With insertstock
-            '            '    .cmd.Connection = .con
-            '            '    .cmd.CommandType = CommandType.Text
-            '            '    .cmd.CommandText = "INSERT INTO product_stocks (product_unit_id,qty,created_at,updated_at)VALUES(?,?,?,?)"
-            '            '    .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
-            '            '    .cmd.Parameters.AddWithValue("@qty", 0)
-            '            '    .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
-            '            '    .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
-            '            '    .cmd.ExecuteNonQuery()
-            '            '    .cmd.Dispose()
-            '            '    .con.Close()
 
-            '            'End With
-            '        End If
-            '    End If
-            'Next
+
+            'cmd2.Dispose()
+            '.con.Close()
+
             cmd2.Dispose()
             .cmd.Dispose()
             .con.Close()
@@ -746,42 +725,27 @@
             End With
 
 
+            Dim dbsupplier As New DatabaseConnect
+            With dbsupplier
+                dgvCost.Rows.Clear()
+                .selectByQuery("Select s.supplier_name,u.name as unit_name,ps.unit_cost from ((product_suppliers as ps
+            left join suppliers as s ON s.id = ps.supplier)
+            inner join unit as u on u.id = ps.unit_id)
+        where ps.product_unit_id = " & selectedProduct)
+                If .dr.HasRows Then
+                    While .dr.Read
+                        Dim s_name As String = If(IsDBNull(.dr("supplier_name")), "", .dr("supplier_name"))
+                        Dim unit_name As String = If(IsDBNull(.dr("unit_name")), "", .dr("unit_name"))
+                        Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
 
-            'Dim measure As New DatabaseConnect
-            'With measure
-            '    dgvMeasure.Rows.Clear()
-            '    .selectByQuery("select pu.id,pu.barcode,pu.item_code,b.name as brand, u.name as unit,c.name as color, pu.price from (((product_unit as pu 
-            '                    LEFT JOIN brand as b ON b.id = pu.brand) 
-            '                    INNER JOIN unit as u ON u.id = pu.unit)
-            '                    LEFT JOIN color as c ON c.id = pu.color)
-            '                    where pu.product_id = " & id & " and pu.status <> 0")
-            '    If .dr.HasRows Then
-            '        While .dr.Read
-            '            Dim pu_id As String = .dr("id")
-            '            Dim barcode As String = .dr("barcode")
-            '            Dim itemcode As String = If(IsDBNull(.dr("item_code")), "", .dr("item_code"))
-            '            Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
-            '            Dim unit As String = .dr("unit")
-            '            Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
-            '            Dim price As String = .dr("price")
-
-            '            dgvMeasure.Rows.Add(1)
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(0).Value = pu_id
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(1).Value = barcode
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(2).Value = itemcode
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(3).Value = brand
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(4).Value = unit
-
-
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(5).Value = color
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(6).Value = Val(price).ToString("N2")
-            '            dgvMeasure.Rows(dgvMeasure.Rows.Count - 2).Cells(7).Value = "Remove"
-            '        End While
-            '    End If
-            '    .cmd.Dispose()
-            '    .dr.Close()
-            '    .con.Close()
-            'End With
+                        Dim row As String() = New String() {s_name, unit_name, cost, "Remove"}
+                        dgvCost.Rows.Add(row)
+                    End While
+                End If
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End With
 
         End If
     End Sub
@@ -899,6 +863,8 @@
     Private Sub ProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'loadBrand()
         'loadColor()
+        TabControl1.SelectedIndex = 0
+
     End Sub
 
     Public Sub loadBrand()
@@ -1025,5 +991,17 @@
 
     Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
         AddCostForm.ShowDialog()
+    End Sub
+
+    Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvCost.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+        'Check if click Is on specific column 
+        If (e.ColumnIndex = dgvCost.Columns("sAction").Index) Then
+            dgvCost.Rows.RemoveAt(e.RowIndex)
+        End If
     End Sub
 End Class

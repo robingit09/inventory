@@ -2,7 +2,7 @@
     Public selectedSupplier As Integer = 0
     Private Sub AddCostForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadSupplier()
-
+        loadUnit()
     End Sub
 
     Public Sub loadSupplier()
@@ -23,6 +23,31 @@
             cbSupplier.DataSource = New BindingSource(comboSource, Nothing)
             cbSupplier.DisplayMember = "Value"
             cbSupplier.ValueMember = "Key"
+
+            .dr.Close()
+            .cmd.Dispose()
+            .con.Close()
+        End With
+    End Sub
+
+    Public Sub loadUnit()
+        cbUnit.DataSource = Nothing
+        cbUnit.Items.Clear()
+        Dim db As New DatabaseConnect
+        With db
+            .selectByQuery("SELECT id,name from unit where status <> 0 order by name")
+            Dim comboSource As New Dictionary(Of String, String)()
+            comboSource.Add(0, "Select Unit")
+
+            While .dr.Read
+                Dim id As Integer = CInt(.dr.GetValue(0))
+                Dim unit As String = .dr.GetValue(1)
+                comboSource.Add(id, unit)
+            End While
+
+            cbUnit.DataSource = New BindingSource(comboSource, Nothing)
+            cbUnit.DisplayMember = "Value"
+            cbUnit.ValueMember = "Key"
 
             .dr.Close()
             .cmd.Dispose()
@@ -76,7 +101,7 @@
         End If
 
 
-        Dim row As String() = New String() {cbSupplier.Text, Val(txtCost.Text).ToString("N2"), "Remove"}
+        Dim row As String() = New String() {cbSupplier.Text, cbUnit.Text, Val(txtCost.Text).ToString("N2"), "Remove"}
         ProductMasterForm.dgvCost.Rows.Add(row)
         ProductForm.dgvCost.Rows.Add(row)
         cbSupplier.SelectedIndex = 0
