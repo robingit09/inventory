@@ -61,10 +61,16 @@ Partial Class ProductForm
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnAddBrand = New System.Windows.Forms.Button()
         Me.btnAddColor = New System.Windows.Forms.Button()
-        Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Supplier = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.sUnit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.sAction = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.dgvSellPrice = New System.Windows.Forms.DataGridView()
+        Me.spCustomer = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.spUnit = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.spSellPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.spAction = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasure.SuspendLayout()
         CType(Me.dgvMeasure2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +80,8 @@ Partial Class ProductForm
         CType(Me.dgvcosthistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        CType(Me.dgvSellPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -151,6 +159,7 @@ Partial Class ProductForm
         '
         Me.TabControl1.Controls.Add(Me.tbMeasure)
         Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(38, 310)
@@ -436,6 +445,8 @@ Partial Class ProductForm
         Me.Supplier.HeaderText = "Supplier"
         Me.Supplier.Name = "Supplier"
         Me.Supplier.ReadOnly = True
+        Me.Supplier.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Supplier.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Supplier.Width = 350
         '
         'sUnit
@@ -450,13 +461,59 @@ Partial Class ProductForm
         '
         Me.Cost.HeaderText = "Cost"
         Me.Cost.Name = "Cost"
-        Me.Cost.ReadOnly = True
         '
         'sAction
         '
         Me.sAction.HeaderText = "Action"
         Me.sAction.Name = "sAction"
         Me.sAction.ReadOnly = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.dgvSellPrice)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1027, 305)
+        Me.TabPage4.TabIndex = 5
+        Me.TabPage4.Text = "Sell Prices"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'dgvSellPrice
+        '
+        Me.dgvSellPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSellPrice.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.spCustomer, Me.spUnit, Me.spSellPrice, Me.spAction})
+        Me.dgvSellPrice.Location = New System.Drawing.Point(15, 62)
+        Me.dgvSellPrice.Name = "dgvSellPrice"
+        Me.dgvSellPrice.Size = New System.Drawing.Size(994, 224)
+        Me.dgvSellPrice.TabIndex = 2
+        '
+        'spCustomer
+        '
+        Me.spCustomer.HeaderText = "Customer"
+        Me.spCustomer.Name = "spCustomer"
+        Me.spCustomer.ReadOnly = True
+        Me.spCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.spCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.spCustomer.Width = 350
+        '
+        'spUnit
+        '
+        Me.spUnit.HeaderText = "Unit"
+        Me.spUnit.Name = "spUnit"
+        Me.spUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.spUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.spUnit.Width = 200
+        '
+        'spSellPrice
+        '
+        Me.spSellPrice.HeaderText = "Sell Price"
+        Me.spSellPrice.Name = "spSellPrice"
+        '
+        'spAction
+        '
+        Me.spAction.HeaderText = "Action"
+        Me.spAction.Name = "spAction"
+        Me.spAction.ReadOnly = True
         '
         'ProductForm
         '
@@ -498,6 +555,8 @@ Partial Class ProductForm
         CType(Me.dgvcosthistory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         CType(Me.dgvPriceHistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        CType(Me.dgvSellPrice, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -541,8 +600,14 @@ Partial Class ProductForm
     Friend WithEvents dgvPriceHistory As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents Supplier As DataGridViewTextBoxColumn
+    Friend WithEvents Supplier As DataGridViewButtonColumn
     Friend WithEvents sUnit As DataGridViewButtonColumn
     Friend WithEvents Cost As DataGridViewTextBoxColumn
     Friend WithEvents sAction As DataGridViewButtonColumn
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents dgvSellPrice As DataGridView
+    Friend WithEvents spCustomer As DataGridViewButtonColumn
+    Friend WithEvents spUnit As DataGridViewButtonColumn
+    Friend WithEvents spSellPrice As DataGridViewTextBoxColumn
+    Friend WithEvents spAction As DataGridViewButtonColumn
 End Class

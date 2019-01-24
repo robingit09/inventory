@@ -911,14 +911,9 @@
     End Sub
 
     Private Sub dgvMeasure2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMeasure2.CellContentClick
-        'go to selecting unit 
+        'go to selecting unit on click
         If (e.ColumnIndex = dgvMeasure2.Columns("mUnit").Index) Then
-            'Dim p_u As Integer = CInt(dgvMeasure2.Rows(e.RowIndex).Cells("id").Value)
-            'MsgBox(p_u)
-            'SelectUnit.from_module = 0
-            'SelectUnit.lblDesc.Text = dgvMeasure2.Rows(e.RowIndex).Cells("product").Value
-            'SelectUnit.loadUnit(p_u)
-            'SelectUnit.ShowDialog()
+            UnitSelection.from_module = 1
             UnitSelection.ShowDialog()
         End If
 
@@ -994,14 +989,84 @@
     End Sub
 
     Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
+        'go to selecting unit on click
+        If (e.ColumnIndex = dgvCost.Columns("Supplier").Index) Then
+
+            SupplierSelection.ShowDialog()
+        End If
+
+        'go to selecting unit on click
+        If (e.ColumnIndex = dgvCost.Columns("sUnit").Index) Then
+            UnitSelection.from_module = 2
+            UnitSelection.ShowDialog()
+        End If
+
+
         '// **  remove column function ** //
         If (e.RowIndex = dgvCost.NewRowIndex Or e.RowIndex < 0) Then
             Exit Sub
         End If
 
+
+
         'Check if click Is on specific column 
         If (e.ColumnIndex = dgvCost.Columns("sAction").Index) Then
             dgvCost.Rows.RemoveAt(e.RowIndex)
+        End If
+    End Sub
+
+    Private Sub dgvCost_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvCost.RowsAdded
+        If dgvCost.Rows.Count > 0 Then
+            If dgvCost.Rows(e.RowIndex).Cells(0).Value = "" Then
+                dgvCost.Rows(e.RowIndex).Cells(0).Value = "Select"
+            End If
+
+            If dgvCost.Rows(e.RowIndex).Cells(1).Value = "" Then
+                dgvCost.Rows(e.RowIndex).Cells(1).Value = "Select"
+            End If
+
+            dgvCost.Rows(e.RowIndex).Cells(3).Value = "Remove"
+        End If
+    End Sub
+
+    Private Sub dgvSellPrice_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSellPrice.CellContentClick
+        'go to selecting unit on click
+        If (e.ColumnIndex = dgvSellPrice.Columns("spCustomer").Index) Then
+
+            CustomerSelection.ShowDialog()
+        End If
+
+        'go to selecting unit on click
+        If (e.ColumnIndex = dgvSellPrice.Columns("spUnit").Index) Then
+            UnitSelection.from_module = 3
+            UnitSelection.ShowDialog()
+        End If
+
+
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvSellPrice.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+
+
+        'Check if click Is on specific column 
+        If (e.ColumnIndex = dgvSellPrice.Columns("spAction").Index) Then
+            dgvSellPrice.Rows.RemoveAt(e.RowIndex)
+        End If
+    End Sub
+
+    Private Sub dgvSellPrice_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvSellPrice.RowsAdded
+        If dgvSellPrice.Rows.Count > 0 Then
+            If dgvSellPrice.Rows(e.RowIndex).Cells(0).Value = "" Then
+                dgvSellPrice.Rows(e.RowIndex).Cells(0).Value = "Select"
+            End If
+
+            If dgvSellPrice.Rows(e.RowIndex).Cells(1).Value = "" Then
+                dgvSellPrice.Rows(e.RowIndex).Cells(1).Value = "Select"
+            End If
+
+            dgvSellPrice.Rows(e.RowIndex).Cells(3).Value = "Remove"
         End If
     End Sub
 End Class
