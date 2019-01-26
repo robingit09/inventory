@@ -116,10 +116,6 @@
         End If
     End Sub
 
-    Private Sub PurchaseReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Public Sub initialize()
         loadSupplier()
         autocompleteProduct()
@@ -488,6 +484,23 @@
             dgvProd.Rows.RemoveAt(e.RowIndex)
             computeTotalAmount()
         End If
+
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
+
+            ' check if has description
+            If (dgvProd.Rows(e.RowIndex).Cells(3).Value <> "") Then
+                UnitSelection.from_module = 12
+
+                Dim prod_id As String = dgvProd.Rows(e.RowIndex).Cells(0).Value
+                UnitSelection.prod_id = CInt(prod_id)
+                UnitSelection.supplier_id = selectedSupplier
+
+                UnitSelection.ShowDialog()
+            End If
+
+
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -538,17 +551,19 @@
             For Each item As DataGridViewRow In Me.dgvProd.Rows
 
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
+                Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
                 Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim total_amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
 
 
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                    .cmd.CommandText = "INSERT INTO purchase_return_products(purchase_return_id,product_unit_id,unit_cost,qty,total_cost,created_at,updated_at)
-                        VALUES(?,?,?,?,?,?,?)"
+                    .cmd.CommandText = "INSERT INTO purchase_return_products(purchase_return_id,product_unit_id,unit_id,unit_cost,qty,total_cost,created_at,updated_at)
+                        VALUES(?,?,?,?,?,?,?,?)"
 
                     .cmd.Parameters.AddWithValue("@purchase_return_id", getLastID("purchase_return"))
                     .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
+                    .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                     .cmd.Parameters.AddWithValue("@unit_cost", cost)
                     .cmd.Parameters.AddWithValue("@qty", qty)
                     .cmd.Parameters.AddWithValue("@total_cost", total_amount)
@@ -725,7 +740,7 @@
                         FROM ((((((purchase_return_products as prp
                         INNER JOIN product_unit as pu ON pu.id = prp.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
-                        INNER JOIN unit as u ON u.id = pu.unit)
+                        INNER JOIN unit as u ON u.id = prp.unit_id)
                         LEFT JOIN color as c ON c.id = pu.color)
                         INNER JOIN products as p ON p.id = pu.product_id)
                         left join product_stocks as ps on ps.product_unit_id = pu.id)

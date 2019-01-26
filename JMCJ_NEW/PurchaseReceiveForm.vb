@@ -502,16 +502,18 @@
             .cmd.CommandType = CommandType.Text
             For Each item As DataGridViewRow In Me.dgvProd.Rows
                 Dim product_unit_id As String = dgvProd.Rows(item.Index).Cells("id").Value
+                Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", dgvProd.Rows(item.Index).Cells("unit").Value)
                 Dim qty As String = dgvProd.Rows(item.Index).Cells("quantity").Value
                 Dim actual_qty As String = dgvProd.Rows(item.Index).Cells("actual_quantity").Value
                 Dim cost As String = dgvProd.Rows(item.Index).Cells("cost").Value
                 Dim amount As String = dgvProd.Rows(item.Index).Cells("amount").Value
                 If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                    .cmd.CommandText = "INSERT INTO purchase_receive_products(purchase_receive_id,product_unit_id,quantity,actual_quantity,unit_cost,total_amount,created_at,updated_at)
-                        VALUES(?,?,?,?,?,?,?,?)"
+                    .cmd.CommandText = "INSERT INTO purchase_receive_products(purchase_receive_id,product_unit_id,unit_id,quantity,actual_quantity,unit_cost,total_amount,created_at,updated_at)
+                        VALUES(?,?,?,?,?,?,?,?,?)"
 
                     .cmd.Parameters.AddWithValue("@purchase_receive_id", getLastID("purchase_receive"))
                     .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
+                    .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                     .cmd.Parameters.AddWithValue("@quantity", qty)
                     .cmd.Parameters.AddWithValue("@actual_quantity", actual_qty)
                     .cmd.Parameters.AddWithValue("@unit_cost", cost)
@@ -969,6 +971,21 @@
             End If
         End If
 
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
+
+            ' check if has description
+            If (dgvProd.Rows(e.RowIndex).Cells(3).Value <> "") Then
+                UnitSelection.from_module = 10
+                Dim prod_id As String = dgvProd.Rows(e.RowIndex).Cells(0).Value
+                UnitSelection.prod_id = CInt(prod_id)
+                UnitSelection.supplier_id = selectedSupplier
+                UnitSelection.ShowDialog()
+            End If
+
+
+        End If
+
     End Sub
 
     Private Sub dgvProd_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellValueChanged
@@ -1176,4 +1193,5 @@
         End With
         Return result
     End Function
+
 End Class

@@ -59,7 +59,7 @@ Partial Class SupplierProducts
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.cost, Me.Action})
-        Me.dgvProd.Location = New System.Drawing.Point(12, 53)
+        Me.dgvProd.Location = New System.Drawing.Point(12, 74)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(914, 454)
         Me.dgvProd.TabIndex = 25
@@ -139,7 +139,7 @@ Partial Class SupplierProducts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(941, 519)
+        Me.ClientSize = New System.Drawing.Size(941, 552)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.dgvProd)

@@ -25,6 +25,7 @@ Partial Class PurchaseOrderRequestForm
         Me.cbSupplier = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.dtp_por_date = New System.Windows.Forms.DateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
@@ -53,13 +54,12 @@ Partial Class PurchaseOrderRequestForm
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -99,6 +99,15 @@ Partial Class PurchaseOrderRequestForm
         Me.GroupBox1.Size = New System.Drawing.Size(1145, 69)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
+        '
+        'btnAddSupplier
+        '
+        Me.btnAddSupplier.Location = New System.Drawing.Point(329, 17)
+        Me.btnAddSupplier.Name = "btnAddSupplier"
+        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
+        Me.btnAddSupplier.TabIndex = 71
+        Me.btnAddSupplier.Text = "Add Supplier"
+        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'dtp_por_date
         '
@@ -204,7 +213,7 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(708, 25)
+        Me.Label20.Location = New System.Drawing.Point(708, 27)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(36, 15)
         Me.Label20.TabIndex = 72
@@ -214,7 +223,7 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(750, 19)
+        Me.cbColor.Location = New System.Drawing.Point(750, 24)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(149, 23)
         Me.cbColor.TabIndex = 71
@@ -223,7 +232,7 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(536, 22)
+        Me.Label15.Location = New System.Drawing.Point(536, 27)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(30, 15)
         Me.Label15.TabIndex = 70
@@ -233,7 +242,7 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(572, 19)
+        Me.cbUnit.Location = New System.Drawing.Point(572, 24)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(130, 23)
         Me.cbUnit.TabIndex = 69
@@ -242,7 +251,7 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(337, 22)
+        Me.Label16.Location = New System.Drawing.Point(337, 27)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(36, 15)
         Me.Label16.TabIndex = 68
@@ -252,14 +261,14 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(379, 19)
+        Me.cbBrand.Location = New System.Drawing.Point(379, 24)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(143, 23)
         Me.cbBrand.TabIndex = 67
         '
         'txtProductDesc
         '
-        Me.txtProductDesc.Location = New System.Drawing.Point(84, 20)
+        Me.txtProductDesc.Location = New System.Drawing.Point(76, 24)
         Me.txtProductDesc.MaxLength = 32000
         Me.txtProductDesc.Name = "txtProductDesc"
         Me.txtProductDesc.Size = New System.Drawing.Size(241, 21)
@@ -359,6 +368,8 @@ Partial Class PurchaseOrderRequestForm
         Me.unit.HeaderText = "Unit"
         Me.unit.Name = "unit"
         Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Color
         '
@@ -387,15 +398,6 @@ Partial Class PurchaseOrderRequestForm
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
-        '
-        'btnAddSupplier
-        '
-        Me.btnAddSupplier.Location = New System.Drawing.Point(329, 17)
-        Me.btnAddSupplier.Name = "btnAddSupplier"
-        Me.btnAddSupplier.Size = New System.Drawing.Size(98, 23)
-        Me.btnAddSupplier.TabIndex = 71
-        Me.btnAddSupplier.Text = "Add Supplier"
-        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'PurchaseOrderRequestForm
         '
@@ -449,16 +451,16 @@ Partial Class PurchaseOrderRequestForm
     Friend WithEvents Label5 As Label
     Friend WithEvents btnCreatePO As Button
     Friend WithEvents btnSelectProduct As Button
+    Friend WithEvents btnAddSupplier As Button
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewButtonColumn
     Friend WithEvents Color As DataGridViewTextBoxColumn
     Friend WithEvents cost As DataGridViewTextBoxColumn
     Friend WithEvents amount As DataGridViewTextBoxColumn
     Friend WithEvents stock As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents btnAddSupplier As Button
 End Class

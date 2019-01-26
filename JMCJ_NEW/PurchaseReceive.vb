@@ -231,7 +231,7 @@
                         FROM ((((((purchase_receive_products as pop
                         INNER JOIN product_unit as pu ON pu.id = pop.product_unit_id)
                         LEFT JOIN brand as b ON b.id = pu.brand)
-                        INNER JOIN unit as u ON u.id = pu.unit)
+                        INNER JOIN unit as u ON u.id = pop.unit_id)
                         LEFT JOIN color as c ON c.id = pu.color)
                         INNER JOIN products as p ON p.id = pu.product_id)
                         left join product_stocks as ps on ps.product_unit_id = pu.id)

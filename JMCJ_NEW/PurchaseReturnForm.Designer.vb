@@ -58,7 +58,7 @@ Partial Class PurchaseReturnForm
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -250,7 +250,7 @@ Partial Class PurchaseReturnForm
         Me.gpEnterBarcode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpEnterBarcode.Location = New System.Drawing.Point(13, 176)
         Me.gpEnterBarcode.Name = "gpEnterBarcode"
-        Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 47)
+        Me.gpEnterBarcode.Size = New System.Drawing.Size(255, 55)
         Me.gpEnterBarcode.TabIndex = 62
         Me.gpEnterBarcode.TabStop = False
         Me.gpEnterBarcode.Text = "Enter Barcode"
@@ -269,7 +269,7 @@ Partial Class PurchaseReturnForm
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpEnterProduct.Location = New System.Drawing.Point(317, 176)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(912, 47)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(912, 55)
         Me.gpEnterProduct.TabIndex = 63
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -363,14 +363,14 @@ Partial Class PurchaseReturnForm
         '
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
-        Me.dgvProd.Location = New System.Drawing.Point(13, 271)
+        Me.dgvProd.Location = New System.Drawing.Point(13, 285)
         Me.dgvProd.Name = "dgvProd"
         Me.dgvProd.Size = New System.Drawing.Size(1216, 229)
         Me.dgvProd.TabIndex = 64
         '
         'btnSelectProduct
         '
-        Me.btnSelectProduct.Location = New System.Drawing.Point(13, 234)
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 248)
         Me.btnSelectProduct.Name = "btnSelectProduct"
         Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
         Me.btnSelectProduct.TabIndex = 94
@@ -413,6 +413,8 @@ Partial Class PurchaseReturnForm
         Me.unit.HeaderText = "Unit"
         Me.unit.Name = "unit"
         Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Color
         '
@@ -502,7 +504,7 @@ Partial Class PurchaseReturnForm
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewButtonColumn
     Friend WithEvents Color As DataGridViewTextBoxColumn
     Friend WithEvents cost As DataGridViewTextBoxColumn
     Friend WithEvents amount As DataGridViewTextBoxColumn

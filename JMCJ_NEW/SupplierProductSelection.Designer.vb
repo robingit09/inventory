@@ -151,27 +151,27 @@ Partial Class SupplierProductSelection
         'btnAddToOrder
         '
         Me.btnAddToOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddToOrder.Location = New System.Drawing.Point(1171, 27)
+        Me.btnAddToOrder.Location = New System.Drawing.Point(1117, 17)
         Me.btnAddToOrder.Name = "btnAddToOrder"
-        Me.btnAddToOrder.Size = New System.Drawing.Size(99, 39)
+        Me.btnAddToOrder.Size = New System.Drawing.Size(150, 39)
         Me.btnAddToOrder.TabIndex = 28
-        Me.btnAddToOrder.Text = "Add"
+        Me.btnAddToOrder.Text = "Add to Purchase Order"
         Me.btnAddToOrder.UseVisualStyleBackColor = True
         '
         'btnAddProducts
         '
         Me.btnAddProducts.Location = New System.Drawing.Point(355, 33)
         Me.btnAddProducts.Name = "btnAddProducts"
-        Me.btnAddProducts.Size = New System.Drawing.Size(111, 23)
+        Me.btnAddProducts.Size = New System.Drawing.Size(149, 23)
         Me.btnAddProducts.TabIndex = 29
-        Me.btnAddProducts.Text = "Add Products"
+        Me.btnAddProducts.Text = "New Supplier Products"
         Me.btnAddProducts.UseVisualStyleBackColor = True
         '
         'gpSupplier
         '
         Me.gpSupplier.Location = New System.Drawing.Point(15, 17)
         Me.gpSupplier.Name = "gpSupplier"
-        Me.gpSupplier.Size = New System.Drawing.Size(468, 49)
+        Me.gpSupplier.Size = New System.Drawing.Size(506, 49)
         Me.gpSupplier.TabIndex = 30
         Me.gpSupplier.TabStop = False
         '

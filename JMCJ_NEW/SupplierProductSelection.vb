@@ -59,9 +59,10 @@
                     Dim desc As String = .dr("description")
                     Dim brand As String = .dr("brand")
                     Dim unit As String = .dr("unit")
+                    Dim unit_id = New DatabaseConnect().get_id("unit", "name", unit)
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
-                    Dim cost As String = Val(getCost(supplier, p_u_id)).ToString("N2")
+                    Dim cost As String = Val(getCost(supplier, p_u_id, CInt(unit_id))).ToString("N2")
 
                     Dim stock As String = ""
                     Try
@@ -207,11 +208,11 @@
         Me.Close()
     End Sub
 
-    Private Function getCost(ByVal supplier As Integer, ByVal p_u_id As Integer) As Double
+    Private Function getCost(ByVal supplier As Integer, ByVal p_u_id As Integer, ByVal unit_id As Integer) As Double
         Dim result As Double = 0
         Dim db As New DatabaseConnect
         With db
-            .selectByQuery("Select unit_cost from product_suppliers where supplier = " & supplier & " And product_unit_id = " & p_u_id)
+            .selectByQuery("Select unit_cost from product_suppliers where supplier = " & supplier & " And product_unit_id = " & p_u_id & " and " & unit_id)
             If .dr.Read Then
                 result = CDbl(Val(.dr("unit_cost")).ToString("N2"))
             End If
@@ -232,6 +233,14 @@
     End Sub
 
     Private Sub SupplierProductSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If module_selection = 1 Then
+            btnAddToOrder.Text = "Add to Purchase Order"
+        End If
+
+        If module_selection = 2 Then
+            btnAddToOrder.Text = "Add to Purchase Receive"
+        End If
+
         If module_selection = 5 Then
             gpSupplier.Visible = False
             txtSupplier.Visible = False
@@ -308,4 +317,5 @@
         End If
 
     End Sub
+
 End Class

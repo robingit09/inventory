@@ -200,12 +200,14 @@
                 If item.Cells("column_description").Value <> "" Then
                     'MsgBox(item.Cells("column_description").Value)
                     Dim p_u_id As String = item.Cells("id").Value
+                    Dim unit_id As String = New DatabaseConnect().get_id("unit", "name", item.Cells("column_unit").Value)
                     Dim supplier As String = Me.selectedSupplier
                     Dim cost As Double = Val(item.Cells("cost").Value)
 
-                    .cmd.CommandText = "INSERT INTO product_suppliers (product_unit_id,supplier,unit_cost,created_at,updated_at)
-            VALUES(?,?,?,?,?)"
+                    .cmd.CommandText = "INSERT INTO product_suppliers (product_unit_id,unit_id,supplier,unit_cost,created_at,updated_at)
+            VALUES(?,?,?,?,?,?)"
                     .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                    .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                     .cmd.Parameters.AddWithValue("@supplier", supplier)
                     .cmd.Parameters.AddWithValue("@unit_cost", cost)
                     .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
@@ -221,6 +223,7 @@
             If from_module = 1 Then
                 SupplierProductSelection.loadSupplierProducts(Me.selectedSupplier, "")
             End If
+            Me.Close()
         End With
 
     End Sub
