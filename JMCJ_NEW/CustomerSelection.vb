@@ -43,7 +43,7 @@
 
 
                 If customer = (cbCustomer.Text.ToUpper) Then
-                    MsgBox("The supplier you input is already in list", MsgBoxStyle.Critical)
+                    MsgBox("The customer you input is already in list", MsgBoxStyle.Critical)
                     Exit Sub
                 End If
             End If

@@ -141,6 +141,64 @@
 
             End With
 
+            Dim dbinsertsupplier As New DatabaseConnect
+            With dbinsertsupplier
+                If dgvCost.Rows.Count > 0 Then
+                    For Each row As DataGridViewRow In dgvCost.Rows
+                        If row.Cells("sUnit").Value <> "Select" And row.Cells("Supplier").Value <> "Select" Then
+                            Dim supplier_id As Integer = New DatabaseConnect().get_id("suppliers", "supplier_name", row.Cells("Supplier").Value)
+                            Dim unit_id As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("sUnit").Value)
+                            Dim cost As Double = CDbl(row.Cells("Cost").Value)
+
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "INSERT INTO product_suppliers(product_unit_id,unit_id,supplier,unit_cost,created_at,updated_at)
+                            VALUES(?,?,?,?,?,?)"
+                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                            .cmd.Parameters.AddWithValue("@unit_id", unit_id)
+                            .cmd.Parameters.AddWithValue("@supplier", supplier_id)
+                            .cmd.Parameters.AddWithValue("@unit_cost", cost)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Parameters.Clear()
+
+                        End If
+                    Next
+                    .cmd.Dispose()
+                    .con.Close()
+                End If
+            End With
+
+            Dim dginsertcustomer As New DatabaseConnect
+            With dginsertcustomer
+                If dgvSellPrice.Rows.Count > 0 Then
+                    For Each row As DataGridViewRow In dgvSellPrice.Rows
+                        If row.Cells("spUnit").Value <> "Select" And row.Cells("spCustomer").Value <> "Select" Then
+                            Dim customer_id As Integer = New DatabaseConnect().get_id("company", "company", row.Cells("spCustomer").Value)
+                            Dim unit_id As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("spUnit").Value)
+                            Dim sell_price As Double = CDbl(row.Cells("spSellPrice").Value)
+
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "INSERT INTO customer_product_prices(product_unit_id,unit_id,customer_id,sell_price,created_at,updated_at) 
+                        VALUES(?,?,?,?,?,?)"
+                            .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                            .cmd.Parameters.AddWithValue("@unit_id", unit_id)
+                            .cmd.Parameters.AddWithValue("@customer_id", customer_id)
+                            .cmd.Parameters.AddWithValue("@sell_price", sell_price)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Parameters.Clear()
+
+                        End If
+                    Next
+                    .cmd.Dispose()
+                    .con.Close()
+                End If
+            End With
+
 
             'If dgvMeasure.Rows.Count > 0 Then
             '    For Each row As DataGridViewRow In dgvMeasure.Rows
@@ -209,8 +267,8 @@
             'End If
 
             MsgBox("Save Successfully!", MsgBoxStyle.Information)
-            Me.Close()
-        End With
+                Me.Close()
+            End With
 
     End Sub
 
@@ -361,8 +419,38 @@
 
 
 
-            'cmd2.Dispose()
-            '.con.Close()
+            Dim dbdelete2 As New DatabaseConnect
+            dbdelete2.delete_permanent("customer_product_prices", "product_unit_id", selectedProduct)
+            dbdelete2.cmd.Dispose()
+
+            Dim dginsertcustomer As New DatabaseConnect
+            With dginsertcustomer
+                If dgvSellPrice.Rows.Count > 0 Then
+                    For Each row As DataGridViewRow In dgvSellPrice.Rows
+                        If row.Cells("spUnit").Value <> "Select" And row.Cells("spCustomer").Value <> "Select" Then
+                            Dim customer_id As Integer = New DatabaseConnect().get_id("company", "company", row.Cells("spCustomer").Value)
+                            Dim unit_id As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("spUnit").Value)
+                            Dim sell_price As Double = CDbl(row.Cells("spSellPrice").Value)
+
+                            .cmd.Connection = .con
+                            .cmd.CommandType = CommandType.Text
+                            .cmd.CommandText = "INSERT INTO customer_product_prices(product_unit_id,unit_id,customer_id,sell_price,created_at,updated_at) 
+                        VALUES(?,?,?,?,?,?)"
+                            .cmd.Parameters.AddWithValue("@product_unit_id", selectedProduct)
+                            .cmd.Parameters.AddWithValue("@unit_id", unit_id)
+                            .cmd.Parameters.AddWithValue("@customer_id", customer_id)
+                            .cmd.Parameters.AddWithValue("@sell_price", sell_price)
+                            .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
+                            .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
+                            .cmd.ExecuteNonQuery()
+                            .cmd.Parameters.Clear()
+
+                        End If
+                    Next
+                    .cmd.Dispose()
+                    .con.Close()
+                End If
+            End With
 
             cmd2.Dispose()
             .cmd.Dispose()
@@ -740,6 +828,28 @@
 
                         Dim row As String() = New String() {s_name, unit_name, cost, "Remove"}
                         dgvCost.Rows.Add(row)
+                    End While
+                End If
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End With
+
+            Dim dbsellprice As New DatabaseConnect
+            With dbsellprice
+                dgvSellPrice.Rows.Clear()
+                .selectByQuery("Select s.company as customer,u.name as unit_name,ps.sell_price as sell_price from ((customer_product_prices as ps
+            left join company as s ON s.id = ps.customer_id)
+            inner join unit as u on u.id = ps.unit_id)
+        where ps.product_unit_id = " & selectedProduct)
+                If .dr.HasRows Then
+                    While .dr.Read
+                        Dim c_name As String = If(IsDBNull(.dr("customer")), "", .dr("customer"))
+                        Dim unit_name As String = If(IsDBNull(.dr("unit_name")), "", .dr("unit_name"))
+                        Dim sell_price As String = Val(.dr("sell_price")).ToString("N2")
+
+                        Dim row As String() = New String() {c_name, unit_name, sell_price, "Remove"}
+                        dgvSellPrice.Rows.Add(row)
                     End While
                 End If
                 .cmd.Dispose()

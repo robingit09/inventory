@@ -61,30 +61,53 @@
         End If
 
         If from_module = 2 Then
-            For Each item As DataGridViewRow In ProductForm.dgvCost.Rows
-                If item.Cells("sUnit").Value <> "Select" Then
+            'For Each item As DataGridViewRow In ProductForm.dgvCost.Rows
+            '    If item.Cells("sUnit").Value <> "Select" Then
+            '        Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
+            '        Dim unit As String = item.Cells("sUnit").Value.ToString.ToUpper
+            '        Dim cost As Double = CDbl(item.Cells("Cost").Value)
 
-                    Dim unit As String = item.Cells("sUnit").Value.ToString.ToUpper
-                    Dim cost As Double = CDbl(item.Cells("Cost").Value)
+            '        If unit = (cbUnit.Text.ToUpper) Then
+            '            MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+            '            Exit Sub
+            '        End If
+            '    End If
+            'Next
+        End If
 
-                    If unit = (cbUnit.Text.ToUpper) Then
-                        MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
-                        Exit Sub
-                    End If
-                End If
-            Next
+        If from_module = 3 Then
+            'For Each item As DataGridViewRow In ProductForm.dgvSellPrice.Rows
+            '    If item.Cells("spUnit").Value <> "Select" Then
+
+            '        Dim unit As String = item.Cells("spUnit").Value.ToString.ToUpper
+            '        Dim sp As Double = CDbl(item.Cells("spSellPrice").Value)
+
+            '        If unit = (cbUnit.Text.ToUpper) Then
+            '            MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+            '            Exit Sub
+            '        End If
+            '    End If
+            'Next
         End If
 
 
         'MsgBox(ProductForm.dgvMeasure2.CurrentCell.RowIndex)
 
-        Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
+
         If from_module = 1 Then
+            Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
             ProductForm.dgvMeasure2.Rows(cur_index).Cells("mUnit").Value = cbUnit.Text
         End If
 
         If from_module = 2 Then
+            Dim cur_index As Integer = ProductForm.dgvCost.CurrentCell.RowIndex
             ProductForm.dgvCost.Rows(cur_index).Cells("sUnit").Value = cbUnit.Text
+        End If
+
+
+        If from_module = 3 Then
+            Dim cur_index As Integer = ProductForm.dgvSellPrice.CurrentCell.RowIndex
+            ProductForm.dgvSellPrice.Rows(cur_index).Cells("spUnit").Value = cbUnit.Text
         End If
 
         Me.Close()
