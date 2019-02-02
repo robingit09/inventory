@@ -11,6 +11,7 @@
     Public SelectedBrand As Integer = 0
     Public SelectedUnit As Integer = 0
     Public SelectedColor As Integer = 0
+
     Private Sub CustomerOrderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autocompleteProduct()
         populateBrand(0)
@@ -403,6 +404,7 @@
 
     Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnAddCustomer.Click
         CustomerForm.btnSave.Text = "Save"
+        CustomerForm.from_module = 1
         CustomerForm.loadCompanyStatus()
         CustomerForm.ShowDialog()
     End Sub

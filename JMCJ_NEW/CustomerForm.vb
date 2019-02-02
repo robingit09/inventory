@@ -3,6 +3,7 @@
     Public selectedCustomer As Integer = 0
     Public selectedCompanyStatus As Integer = 0
     Public selectedLedgerType As Integer = 0
+    Public from_module As Integer = 0
     Private Sub CustomerForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         autocompleteCity()
@@ -286,7 +287,7 @@
 
                 'frmListEdger.lvEdger.Items.Clear()
                 'frmListEdger.loadList("", "")
-                clearFields()
+
 
                 'frmCustomerList.loadList("")
                 'frmCustomerList.populateComboLocation()
@@ -351,10 +352,23 @@
                 Exit Sub
             End If
             saveData()
-            CustomerOrderForm.getCustomerList("")
-            'CustomerOrder.autocompleteCustomer()
+
             CustomerList.loadCustomer("")
             CustomerPriceList.getCustomer()
+
+
+            ' from customer order form
+            If from_module = 1 Then
+                CustomerOrderForm.getCustomerList("")
+                CustomerOrderForm.cbCustomer.SelectedIndex = CustomerOrderForm.cbCustomer.FindString(Trim(txtCompany.Text))
+            End If
+
+            ' from customer selection form
+            If from_module = 2 Then
+                CustomerSelection.getCustomerList("")
+                CustomerSelection.cbCustomer.SelectedIndex = CustomerSelection.cbCustomer.FindString(Trim(txtCompany.Text))
+            End If
+
             clearFields()
             'LedgerList.loadLedger("", LedgerList.cbShow.Text)
         ElseIf btnSave.Text = "Update" Then

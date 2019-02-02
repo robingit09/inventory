@@ -186,42 +186,42 @@ Partial Class Main_form
         '
         Me.PurchaseOrderToolStripMenuItem2.Image = Global.JMCJ_NEW.My.Resources.Resources.p_o
         Me.PurchaseOrderToolStripMenuItem2.Name = "PurchaseOrderToolStripMenuItem2"
-        Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(261, 26)
+        Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(291, 26)
         Me.PurchaseOrderToolStripMenuItem2.Text = "Purchase Order"
         '
         'PurchaseOrderRequestToolStripMenuItem
         '
         Me.PurchaseOrderRequestToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.p_o
         Me.PurchaseOrderRequestToolStripMenuItem.Name = "PurchaseOrderRequestToolStripMenuItem"
-        Me.PurchaseOrderRequestToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
-        Me.PurchaseOrderRequestToolStripMenuItem.Text = "Purchase Order Request"
+        Me.PurchaseOrderRequestToolStripMenuItem.Size = New System.Drawing.Size(291, 26)
+        Me.PurchaseOrderRequestToolStripMenuItem.Text = "Purchase Order Reservation"
         '
         'PurchaseReceiveToolStripMenuItem1
         '
         Me.PurchaseReceiveToolStripMenuItem1.Image = Global.JMCJ_NEW.My.Resources.Resources.purchase_receive
         Me.PurchaseReceiveToolStripMenuItem1.Name = "PurchaseReceiveToolStripMenuItem1"
-        Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
+        Me.PurchaseReceiveToolStripMenuItem1.Size = New System.Drawing.Size(291, 26)
         Me.PurchaseReceiveToolStripMenuItem1.Text = "Purchase Receive"
         '
         'SupplierToolStripMenuItem1
         '
         Me.SupplierToolStripMenuItem1.Image = Global.JMCJ_NEW.My.Resources.Resources.supplier
         Me.SupplierToolStripMenuItem1.Name = "SupplierToolStripMenuItem1"
-        Me.SupplierToolStripMenuItem1.Size = New System.Drawing.Size(261, 26)
+        Me.SupplierToolStripMenuItem1.Size = New System.Drawing.Size(291, 26)
         Me.SupplierToolStripMenuItem1.Text = "Suppliers"
         '
         'SupplierProductsToolStripMenuItem
         '
         Me.SupplierProductsToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.product
         Me.SupplierProductsToolStripMenuItem.Name = "SupplierProductsToolStripMenuItem"
-        Me.SupplierProductsToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.SupplierProductsToolStripMenuItem.Size = New System.Drawing.Size(291, 26)
         Me.SupplierProductsToolStripMenuItem.Text = "Supplier Products"
         '
         'PurchaseReturnToolStripMenuItem
         '
         Me.PurchaseReturnToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.purchase_return
         Me.PurchaseReturnToolStripMenuItem.Name = "PurchaseReturnToolStripMenuItem"
-        Me.PurchaseReturnToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.PurchaseReturnToolStripMenuItem.Size = New System.Drawing.Size(291, 26)
         Me.PurchaseReturnToolStripMenuItem.Text = "Purchase Return"
         '
         'SalesToolStripMenuItem

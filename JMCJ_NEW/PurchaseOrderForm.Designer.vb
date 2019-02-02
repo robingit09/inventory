@@ -40,6 +40,17 @@ Partial Class PurchaseOrderForm
         Me.txtEnterBarcode = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtProductDesc = New System.Windows.Forms.TextBox()
         Me.gpEnterProduct = New System.Windows.Forms.GroupBox()
@@ -62,17 +73,6 @@ Partial Class PurchaseOrderForm
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnAddProduct = New System.Windows.Forms.Button()
         Me.btnSelectProduct = New System.Windows.Forms.Button()
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.gpEnterBarcode.SuspendLayout()
         CType(Me.dgvProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gpEnterProduct.SuspendLayout()
@@ -236,8 +236,75 @@ Partial Class PurchaseOrderForm
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.Barcode, Me.quantity, Me.product, Me.brand, Me.unit, Me.Color, Me.cost, Me.amount, Me.stock, Me.action})
         Me.dgvProd.Location = New System.Drawing.Point(15, 270)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(1315, 326)
+        Me.dgvProd.Size = New System.Drawing.Size(1329, 326)
         Me.dgvProd.TabIndex = 60
+        '
+        'id
+        '
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 5
+        '
+        'Barcode
+        '
+        Me.Barcode.HeaderText = "Barcode"
+        Me.Barcode.Name = "Barcode"
+        Me.Barcode.ReadOnly = True
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.Name = "quantity"
+        '
+        'product
+        '
+        Me.product.HeaderText = "Product Description"
+        Me.product.Name = "product"
+        Me.product.ReadOnly = True
+        Me.product.Width = 250
+        '
+        'brand
+        '
+        Me.brand.HeaderText = "Brand"
+        Me.brand.Name = "brand"
+        Me.brand.ReadOnly = True
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.Name = "unit"
+        Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'Color
+        '
+        Me.Color.HeaderText = "Color"
+        Me.Color.Name = "Color"
+        Me.Color.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Unit Cost"
+        Me.cost.Name = "cost"
+        '
+        'amount
+        '
+        Me.amount.HeaderText = "Amount"
+        Me.amount.Name = "amount"
+        Me.amount.ReadOnly = True
+        '
+        'stock
+        '
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.Name = "action"
         '
         'Label17
         '
@@ -260,6 +327,7 @@ Partial Class PurchaseOrderForm
         'gpEnterProduct
         '
         Me.gpEnterProduct.Controls.Add(Me.Label20)
+        Me.gpEnterProduct.Controls.Add(Me.btnAddProduct)
         Me.gpEnterProduct.Controls.Add(Me.cbColor)
         Me.gpEnterProduct.Controls.Add(Me.Label15)
         Me.gpEnterProduct.Controls.Add(Me.cbUnit)
@@ -271,7 +339,7 @@ Partial Class PurchaseOrderForm
         Me.gpEnterProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpEnterProduct.Location = New System.Drawing.Point(293, 169)
         Me.gpEnterProduct.Name = "gpEnterProduct"
-        Me.gpEnterProduct.Size = New System.Drawing.Size(968, 58)
+        Me.gpEnterProduct.Size = New System.Drawing.Size(1051, 58)
         Me.gpEnterProduct.TabIndex = 62
         Me.gpEnterProduct.TabStop = False
         Me.gpEnterProduct.Text = "Enter Product"
@@ -403,7 +471,7 @@ Partial Class PurchaseOrderForm
         Me.gpFields.Controls.Add(Me.Label4)
         Me.gpFields.Location = New System.Drawing.Point(12, 12)
         Me.gpFields.Name = "gpFields"
-        Me.gpFields.Size = New System.Drawing.Size(1318, 151)
+        Me.gpFields.Size = New System.Drawing.Size(1332, 151)
         Me.gpFields.TabIndex = 66
         Me.gpFields.TabStop = False
         Me.gpFields.Text = "Purchase Order"
@@ -452,7 +520,7 @@ Partial Class PurchaseOrderForm
         'btnAddProduct
         '
         Me.btnAddProduct.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddProduct.Location = New System.Drawing.Point(1250, 184)
+        Me.btnAddProduct.Location = New System.Drawing.Point(965, 16)
         Me.btnAddProduct.Name = "btnAddProduct"
         Me.btnAddProduct.Size = New System.Drawing.Size(80, 37)
         Me.btnAddProduct.TabIndex = 73
@@ -468,80 +536,12 @@ Partial Class PurchaseOrderForm
         Me.btnSelectProduct.Text = "Search Supplier Product"
         Me.btnSelectProduct.UseVisualStyleBackColor = True
         '
-        'id
-        '
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Width = 5
-        '
-        'Barcode
-        '
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        Me.Barcode.ReadOnly = True
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.Name = "quantity"
-        '
-        'product
-        '
-        Me.product.HeaderText = "Product Description"
-        Me.product.Name = "product"
-        Me.product.ReadOnly = True
-        Me.product.Width = 250
-        '
-        'brand
-        '
-        Me.brand.HeaderText = "Brand"
-        Me.brand.Name = "brand"
-        Me.brand.ReadOnly = True
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.Name = "unit"
-        Me.unit.ReadOnly = True
-        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'Color
-        '
-        Me.Color.HeaderText = "Color"
-        Me.Color.Name = "Color"
-        Me.Color.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Unit Cost"
-        Me.cost.Name = "cost"
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.Name = "amount"
-        Me.amount.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
-        '
-        'action
-        '
-        Me.action.HeaderText = "Action"
-        Me.action.Name = "action"
-        '
         'PurchaseOrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 638)
         Me.Controls.Add(Me.btnSelectProduct)
-        Me.Controls.Add(Me.btnAddProduct)
         Me.Controls.Add(Me.gpEnterBarcode)
         Me.Controls.Add(Me.dgvProd)
         Me.Controls.Add(Me.gpEnterProduct)

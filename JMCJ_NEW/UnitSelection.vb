@@ -3,7 +3,10 @@
     Public supplier_id As Integer = 0
     Public selectedUnit As Integer = 0
     Public from_module As Integer = 0
+    '<<<<<<< HEAD
 
+    '=======
+    '>>>>>>> dev
     Private Sub UnitSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadUnit()
     End Sub
@@ -55,20 +58,54 @@
         End If
 
         ' check if exist
-        For Each item As DataGridViewRow In ProductForm.dgvMeasure2.Rows
-            If item.Cells("mUnit").Value <> "Select" Then
+        If from_module = 1 Then
+            For Each item As DataGridViewRow In ProductForm.dgvMeasure2.Rows
+                If item.Cells("mUnit").Value <> "Select" Then
 
-                Dim unit As String = item.Cells("mUnit").Value.ToString.ToUpper
-                Dim price As Double = CDbl(item.Cells("mPrice").Value)
+                    Dim unit As String = item.Cells("mUnit").Value.ToString.ToUpper
+                    Dim price As Double = CDbl(item.Cells("mPrice").Value)
 
-                If unit = (cbUnit.Text.ToUpper) Then
-                    MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
-                    Exit Sub
+                    If unit = (cbUnit.Text.ToUpper) Then
+                        MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+                        Exit Sub
+                    End If
                 End If
-            End If
-        Next
+            Next
+        End If
+
+        If from_module = 2 Then
+            'For Each item As DataGridViewRow In ProductForm.dgvCost.Rows
+            '    If item.Cells("sUnit").Value <> "Select" Then
+            '        Dim supplier As String = item.Cells("Supplier").Value.ToString.ToUpper
+            '        Dim unit As String = item.Cells("sUnit").Value.ToString.ToUpper
+            '        Dim cost As Double = CDbl(item.Cells("Cost").Value)
+
+            '        If unit = (cbUnit.Text.ToUpper) Then
+            '            MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+            '            Exit Sub
+            '        End If
+            '    End If
+            'Next
+        End If
+
+        If from_module = 3 Then
+            'For Each item As DataGridViewRow In ProductForm.dgvSellPrice.Rows
+            '    If item.Cells("spUnit").Value <> "Select" Then
+
+            '        Dim unit As String = item.Cells("spUnit").Value.ToString.ToUpper
+            '        Dim sp As Double = CDbl(item.Cells("spSellPrice").Value)
+
+            '        If unit = (cbUnit.Text.ToUpper) Then
+            '            MsgBox("The fields of measurement you input is already in list", MsgBoxStyle.Critical)
+            '            Exit Sub
+            '        End If
+            '    End If
+            'Next
+        End If
+
 
         'MsgBox(ProductForm.dgvMeasure2.CurrentCell.RowIndex)
+
 
         If from_module = 9 Then
             Dim cur_index As Integer = PurchaseOrderForm.dgvProd.CurrentCell.RowIndex
@@ -156,11 +193,28 @@
 
 
         Else
-            Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
-            ProductForm.dgvMeasure2.Rows(cur_index).Cells("mUnit").Value = cbUnit.Text
+            'Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
+            'ProductForm.dgvMeasure2.Rows(cur_index).Cells("mUnit").Value = cbUnit.Text
 
+
+
+            If from_module = 1 Then
+                Dim cur_index As Integer = ProductForm.dgvMeasure2.CurrentCell.RowIndex
+                ProductForm.dgvMeasure2.Rows(cur_index).Cells("mUnit").Value = cbUnit.Text
+            End If
+
+            If from_module = 2 Then
+                Dim cur_index As Integer = ProductForm.dgvCost.CurrentCell.RowIndex
+                ProductForm.dgvCost.Rows(cur_index).Cells("sUnit").Value = cbUnit.Text
+            End If
+
+
+            If from_module = 3 Then
+                Dim cur_index As Integer = ProductForm.dgvSellPrice.CurrentCell.RowIndex
+                ProductForm.dgvSellPrice.Rows(cur_index).Cells("spUnit").Value = cbUnit.Text
+
+            End If
         End If
-
         Me.Close()
 
         'cbUnit.SelectedIndex = 0

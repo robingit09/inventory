@@ -67,6 +67,13 @@
                 AddCostForm.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
             End If
 
+            ' from Add Cost/Supplier form
+            If from_module = 6 Then
+                SupplierSelection.loadSupplier()
+                SupplierSelection.cbSupplier.SelectedIndex = SupplierSelection.cbSupplier.FindString(txtSupplier.Text)
+                'SupplierSelection.selectedSupplier = New DatabaseConnect().getLastID("suppliers")
+            End If
+
             clearFields()
             btnSave.Enabled = True
 

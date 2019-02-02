@@ -419,6 +419,13 @@
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()
 
+            .cmd.CommandText = "DELETE FROM product_suppliers"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+            .cmd.CommandText = "Alter Table product_suppliers Alter Column ID Counter(1,1)"
+            .cmd.ExecuteNonQuery()
+            .cmd.Parameters.Clear()
+
             .cmd.CommandText = "DELETE FROM customer_product_prices"
             .cmd.ExecuteNonQuery()
             .cmd.Parameters.Clear()

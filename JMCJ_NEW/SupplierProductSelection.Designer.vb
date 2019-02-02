@@ -51,7 +51,7 @@ Partial Class SupplierProductSelection
         '
         Me.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_cost, Me.column_stock, Me.column_cat, Me.column_subcat})
-        Me.dgvProducts.Location = New System.Drawing.Point(15, 118)
+        Me.dgvProducts.Location = New System.Drawing.Point(12, 118)
         Me.dgvProducts.Name = "dgvProducts"
         Me.dgvProducts.Size = New System.Drawing.Size(1252, 460)
         Me.dgvProducts.TabIndex = 22
@@ -169,16 +169,16 @@ Partial Class SupplierProductSelection
         '
         'gpSupplier
         '
-        Me.gpSupplier.Location = New System.Drawing.Point(15, 17)
+        Me.gpSupplier.Location = New System.Drawing.Point(12, 17)
         Me.gpSupplier.Name = "gpSupplier"
-        Me.gpSupplier.Size = New System.Drawing.Size(506, 49)
+        Me.gpSupplier.Size = New System.Drawing.Size(509, 49)
         Me.gpSupplier.TabIndex = 30
         Me.gpSupplier.TabStop = False
         '
         'linkSelectAll
         '
         Me.linkSelectAll.AutoSize = True
-        Me.linkSelectAll.Location = New System.Drawing.Point(81, 79)
+        Me.linkSelectAll.Location = New System.Drawing.Point(81, 86)
         Me.linkSelectAll.Name = "linkSelectAll"
         Me.linkSelectAll.Size = New System.Drawing.Size(51, 13)
         Me.linkSelectAll.TabIndex = 40
@@ -188,7 +188,7 @@ Partial Class SupplierProductSelection
         'linkUnselectAll
         '
         Me.linkUnselectAll.AutoSize = True
-        Me.linkUnselectAll.Location = New System.Drawing.Point(12, 79)
+        Me.linkUnselectAll.Location = New System.Drawing.Point(9, 86)
         Me.linkUnselectAll.Name = "linkUnselectAll"
         Me.linkUnselectAll.Size = New System.Drawing.Size(63, 13)
         Me.linkUnselectAll.TabIndex = 39
@@ -200,14 +200,14 @@ Partial Class SupplierProductSelection
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Location = New System.Drawing.Point(140, 73)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(343, 39)
+        Me.GroupBox1.Size = New System.Drawing.Size(381, 39)
         Me.GroupBox1.TabIndex = 41
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(6, 13)
+        Me.txtSearch.Location = New System.Drawing.Point(27, 13)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(331, 20)
         Me.txtSearch.TabIndex = 0

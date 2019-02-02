@@ -15,11 +15,33 @@
 
     Private Sub dgvProd_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProd.CellContentClick
         'remove product
+
+        '// **  remove column function ** //
+        If (e.RowIndex = dgvProd.NewRowIndex Or e.RowIndex < 0) Then
+            Exit Sub
+        End If
+
+        'remove product
         If dgvProd.Rows(e.RowIndex).Cells(8).Value <> "" Then
             If e.ColumnIndex = 8 And dgvProd.Rows.Count > 1 Then
                 dgvProd.Rows.RemoveAt(e.RowIndex)
 
             End If
+        End If
+
+        'go to selecting unit 
+        If (e.ColumnIndex = dgvProd.Columns("unit").Index) Then
+
+            ' check if has description
+            If (dgvProd.Rows(e.RowIndex).Cells(2).Value <> "") Then
+                Dim prod_id As String = dgvProd.Rows(e.RowIndex).Cells(0).Value
+                UnitSelection.prod_id = CInt(prod_id)
+                'UnitSelection.supplier_id = selectedSupplier
+
+                UnitSelection.from_module = 13
+                UnitSelection.ShowDialog()
+            End If
+
         End If
     End Sub
 

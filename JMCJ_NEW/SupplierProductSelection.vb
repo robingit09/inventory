@@ -13,23 +13,36 @@
             If filter_query = "" Then
                 If module_selection = 5 Then
 
-                    query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                    query = "Select p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM ((((((((products As p 
                         INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                         LEFT JOIN brand as b ON b.id = pu.brand)
+                  
                         INNER JOIN unit as u ON u.id = pu.unit)
+                
                         LEFT JOIN color as cc ON cc.id = pu.color)
                         INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                         LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                         LEFT JOIN categories as c ON c.id = pc.category_id)
-                        LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
-                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
+            
+                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 "
 
                     selectedSupplier = 0
                     txtSupplier.Text = ""
 
                 Else
 
-                    query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                    'query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM (((((((((products As p 
+                    '    INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                    '    LEFT JOIN brand as b ON b.id = pu.brand)
+                    '    INNER JOIN unit as u ON u.id = pu.unit)
+                    '    LEFT JOIN color as cc ON cc.id = pu.color)
+                    '    INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                    '    LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                    '    LEFT JOIN categories as c ON c.id = pc.category_id)
+                    '    LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
+                    '    LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & selectedSupplier
+
+                    query = "Select distinct p.id,pu.id As p_u_id,pu.barcode,pu.item_code, p.description,b.name As brand, u.name As unit,cc.name As color,pu.price,c.name As cat,Sub.name As subcat FROM ((((((((products As p 
                         INNER JOIN product_unit as pu ON p.id = pu.product_id) 
                         LEFT JOIN brand as b ON b.id = pu.brand)
                         INNER JOIN unit as u ON u.id = pu.unit)
@@ -37,8 +50,7 @@
                         INNER JOIN product_categories as pc ON pc.product_id = p.id) 
                         LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
                         LEFT JOIN categories as c ON c.id = pc.category_id)
-                        LEFT JOIN product_suppliers as ps on ps.product_unit_id = pu.id)
-                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 and ps.supplier = " & selectedSupplier
+                        LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0"
 
                 End If
 
@@ -57,7 +69,7 @@
                     Dim p_u_id As String = .dr("p_u_id")
                     Dim barcode As String = .dr("barcode")
                     Dim desc As String = .dr("description")
-                    Dim brand As String = .dr("brand")
+                    Dim brand As String = If(IsDBNull(.dr("brand")), "", .dr("brand"))
                     Dim unit As String = .dr("unit")
                     Dim unit_id = New DatabaseConnect().get_id("unit", "name", unit)
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
@@ -242,6 +254,7 @@
         End If
 
         If module_selection = 5 Then
+            btnAddToOrder.Text = "Add to Physical Count"
             gpSupplier.Visible = False
             txtSupplier.Visible = False
             btnAddProducts.Visible = False

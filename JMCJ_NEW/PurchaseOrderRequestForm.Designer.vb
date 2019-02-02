@@ -46,9 +46,6 @@ Partial Class PurchaseOrderRequestForm
         Me.btnAddToCart = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCreatePO = New System.Windows.Forms.Button()
-        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,6 +57,9 @@ Partial Class PurchaseOrderRequestForm
         Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCreatePO = New System.Windows.Forms.Button()
+        Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -303,35 +303,6 @@ Partial Class PurchaseOrderRequestForm
         Me.dgvProd.Size = New System.Drawing.Size(1264, 365)
         Me.dgvProd.TabIndex = 65
         '
-        'btnSave
-        '
-        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(1163, 12)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(113, 26)
-        Me.btnSave.TabIndex = 73
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCreatePO
-        '
-        Me.btnCreatePO.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreatePO.Location = New System.Drawing.Point(1163, 55)
-        Me.btnCreatePO.Name = "btnCreatePO"
-        Me.btnCreatePO.Size = New System.Drawing.Size(113, 26)
-        Me.btnCreatePO.TabIndex = 74
-        Me.btnCreatePO.Text = "Create PO"
-        Me.btnCreatePO.UseVisualStyleBackColor = True
-        '
-        'btnSelectProduct
-        '
-        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 160)
-        Me.btnSelectProduct.Name = "btnSelectProduct"
-        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
-        Me.btnSelectProduct.TabIndex = 75
-        Me.btnSelectProduct.Text = "Select Supplier Product"
-        Me.btnSelectProduct.UseVisualStyleBackColor = True
-        '
         'id
         '
         Me.id.HeaderText = "ID"
@@ -399,6 +370,35 @@ Partial Class PurchaseOrderRequestForm
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
         '
+        'btnSave
+        '
+        Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(1163, 12)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(113, 26)
+        Me.btnSave.TabIndex = 73
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnCreatePO
+        '
+        Me.btnCreatePO.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreatePO.Location = New System.Drawing.Point(1163, 55)
+        Me.btnCreatePO.Name = "btnCreatePO"
+        Me.btnCreatePO.Size = New System.Drawing.Size(113, 26)
+        Me.btnCreatePO.TabIndex = 74
+        Me.btnCreatePO.Text = "Create PO"
+        Me.btnCreatePO.UseVisualStyleBackColor = True
+        '
+        'btnSelectProduct
+        '
+        Me.btnSelectProduct.Location = New System.Drawing.Point(12, 160)
+        Me.btnSelectProduct.Name = "btnSelectProduct"
+        Me.btnSelectProduct.Size = New System.Drawing.Size(167, 31)
+        Me.btnSelectProduct.TabIndex = 75
+        Me.btnSelectProduct.Text = "Select Supplier Product"
+        Me.btnSelectProduct.UseVisualStyleBackColor = True
+        '
         'PurchaseOrderRequestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -413,7 +413,7 @@ Partial Class PurchaseOrderRequestForm
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "PurchaseOrderRequestForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "PO Request Form"
+        Me.Text = "Purchase Order Reservation Form"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.gpEnterBarcode.ResumeLayout(False)

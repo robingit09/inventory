@@ -301,6 +301,7 @@
             Dim p_u_id As Integer = CInt(dgvProducts.SelectedRows(0).Cells(0).Value)
 
             Dim product_id As Integer = CInt(New DatabaseConnect().get_by_id("product_unit", p_u_id, "product_id"))
+            'MsgBox(product_id)
             ProductForm.selectedProduct = product_id
             ProductForm.btnSave.Text = "Update"
             ProductForm.loadColor()

@@ -46,16 +46,16 @@ Partial Class PhysicalCountForm
         Me.Label17 = New System.Windows.Forms.Label()
         Me.btnSelectProduct = New System.Windows.Forms.Button()
         Me.dgvProd = New System.Windows.Forms.DataGridView()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.brand = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.actual_count = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.system_count = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.action = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.gpEnterBarcode.SuspendLayout()
         Me.gpEnterProduct.SuspendLayout()
@@ -294,6 +294,15 @@ Partial Class PhysicalCountForm
         Me.dgvProd.Size = New System.Drawing.Size(1229, 422)
         Me.dgvProd.TabIndex = 75
         '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(1070, 13)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(167, 31)
+        Me.btnSave.TabIndex = 77
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
         'id
         '
         Me.id.HeaderText = "ID"
@@ -325,6 +334,8 @@ Partial Class PhysicalCountForm
         Me.unit.HeaderText = "Unit"
         Me.unit.Name = "unit"
         Me.unit.ReadOnly = True
+        Me.unit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Color
         '
@@ -334,28 +345,21 @@ Partial Class PhysicalCountForm
         '
         'actual_count
         '
-        Me.actual_count.HeaderText = "Actual Count"
+        Me.actual_count.HeaderText = "Actual Count(Qty)"
         Me.actual_count.Name = "actual_count"
+        Me.actual_count.Width = 130
         '
         'system_count
         '
-        Me.system_count.HeaderText = "System Count"
+        Me.system_count.HeaderText = "System Count(Qty)"
         Me.system_count.Name = "system_count"
         Me.system_count.ReadOnly = True
+        Me.system_count.Width = 130
         '
         'action
         '
         Me.action.HeaderText = "Action"
         Me.action.Name = "action"
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(1070, 13)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(167, 31)
-        Me.btnSave.TabIndex = 77
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'PhysicalCountForm
         '
@@ -405,15 +409,15 @@ Partial Class PhysicalCountForm
     Friend WithEvents btnSelectProduct As Button
     Friend WithEvents dgvProd As DataGridView
     Friend WithEvents btnSave As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cbStockType As ComboBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents Barcode As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
     Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewButtonColumn
     Friend WithEvents Color As DataGridViewTextBoxColumn
     Friend WithEvents actual_count As DataGridViewTextBoxColumn
     Friend WithEvents system_count As DataGridViewTextBoxColumn
     Friend WithEvents action As DataGridViewButtonColumn
-    Friend WithEvents Label3 As Label
-    Friend WithEvents cbStockType As ComboBox
 End Class
