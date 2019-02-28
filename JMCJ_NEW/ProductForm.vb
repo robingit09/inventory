@@ -921,6 +921,56 @@
                 .con.Close()
             End With
 
+            ' load cost history
+            Dim db_cost_history As New DatabaseConnect
+            With db_cost_history
+                dgvcosthistory.Rows.Clear()
+                .selectByQuery("select pr.pr_no,u.name as unit,prp.unit_cost,pr.created_at from ((purchase_receive_products as prp 
+                inner join purchase_receive as pr on pr.id = prp.purchase_receive_id)
+                inner join unit as u on u.id = prp.unit_id)
+                where prp.product_unit_id = " & selectedProduct)
+
+                If .dr.HasRows Then
+                    While .dr.Read
+                        Dim pr_no As String = .dr("pr_no")
+                        Dim unit As String = .dr("unit")
+                        Dim cost As String = .dr("unit_cost")
+                        Dim created_at As String = .dr("created_at")
+
+                        Dim row As String() = New String() {pr_no, unit, cost, created_at}
+                        dgvcosthistory.Rows.Add(row)
+                    End While
+                End If
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End With
+
+
+            ' load cost history
+            Dim db_price_history As New DatabaseConnect
+            With db_price_history
+                dgvPriceHistory.Rows.Clear()
+                .selectByQuery("select co.invoice_no,u.name as unit,cop.sell_price,co.created_at from ((customer_order_products as cop
+                inner join customer_orders as co on co.id = cop.customer_order_id)
+                inner join unit as u on u.id = cop.unit_id) 
+                where cop.product_unit_id = " & selectedProduct)
+
+                If .dr.HasRows Then
+                    While .dr.Read
+                        Dim invoice_no As String = .dr("invoice_no")
+                        Dim unit As String = .dr("unit")
+                        Dim price As String = .dr("sell_price")
+                        Dim created_at As String = .dr("created_at")
+
+                        Dim row As String() = New String() {invoice_no, unit, price, created_at}
+                        dgvPriceHistory.Rows.Add(row)
+                    End While
+                End If
+                .cmd.Dispose()
+                .dr.Close()
+                .con.Close()
+            End With
         End If
     End Sub
 

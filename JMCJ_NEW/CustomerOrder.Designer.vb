@@ -223,7 +223,7 @@ Partial Class CustomerOrder
         '
         Me.txtCustomer.Location = New System.Drawing.Point(72, 16)
         Me.txtCustomer.Name = "txtCustomer"
-        Me.txtCustomer.Size = New System.Drawing.Size(175, 20)
+        Me.txtCustomer.Size = New System.Drawing.Size(176, 20)
         Me.txtCustomer.TabIndex = 5
         '
         'cbMonth

@@ -1266,7 +1266,10 @@
                 For Each item As DataGridViewRow In Me.dgvProd.Rows
                     Dim customer_order_id As Integer = getLastID("customer_orders")
                     Dim product_unit_id As Integer = dgvProd.Rows(item.Index).Cells("id").Value
-
+                    Dim unit_id As String = dgvProd.Rows(item.Index).Cells("unit").Value
+                    If Trim(unit_id) <> "" Then
+                        unit_id = New DatabaseConnect().get_id("unit", "name", unit_id)
+                    End If
                     Dim qty As Integer = dgvProd.Rows(item.Index).Cells("quantity").Value
                     Dim price As String = dgvProd.Rows(item.Index).Cells("price").Value
                     Dim sell_price As String = dgvProd.Rows(item.Index).Cells("sell_price").Value
@@ -1277,10 +1280,11 @@
 
                     ' check if not blank
                     If (Not String.IsNullOrEmpty(dgvProd.Rows(item.Index).Cells("product").Value)) Then
-                        cmd2.CommandText = "insert into customer_order_products (customer_order_id,product_unit_id,quantity,unit_price,sell_price,less,
-                total_amount,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?)"
+                        cmd2.CommandText = "insert into customer_order_products (customer_order_id,product_unit_id,unit_id,quantity,unit_price,sell_price,less,
+                total_amount,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?,?,?)"
                         cmd2.Parameters.AddWithValue("@customer_order_id", customer_order_id)
                         cmd2.Parameters.AddWithValue("@product_unit_id", product_unit_id)
+                        cmd2.Parameters.AddWithValue("@unit_id", unit_id)
                         cmd2.Parameters.AddWithValue("@quantity", qty)
                         cmd2.Parameters.AddWithValue("@unit_price", price)
                         cmd2.Parameters.AddWithValue("@sell_price", sell_price)
@@ -1292,11 +1296,11 @@
                         cmd2.Parameters.Clear()
 
                         ModelFunction.update_stock(product_unit_id, qty, "-")
-                        ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
+                        'ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
 
                         'MsgBox(selectedCustomer & " " & product_unit_id & " " & sell_price)
 
-                        ModelFunction.updatePrice(selectedCustomer, product_unit_id, sell_price)
+                        'ModelFunction.updatePrice(selectedCustomer, product_unit_id, sell_price)
 
                     End If
                 Next
