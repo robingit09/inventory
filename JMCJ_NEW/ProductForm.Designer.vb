@@ -39,7 +39,6 @@ Partial Class ProductForm
         Me.isdefault = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.mAction = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnAddSupplier = New System.Windows.Forms.Button()
         Me.dgvCost = New System.Windows.Forms.DataGridView()
         Me.Supplier = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.sUnit = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -53,8 +52,16 @@ Partial Class ProductForm
         Me.spAction = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvcosthistory = New System.Windows.Forms.DataGridView()
+        Me.cRefNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvPriceHistory = New System.Windows.Forms.DataGridView()
+        Me.pRefNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAddCategory = New System.Windows.Forms.Button()
         Me.btnSubCat = New System.Windows.Forms.Button()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
@@ -67,14 +74,6 @@ Partial Class ProductForm
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnAddBrand = New System.Windows.Forms.Button()
         Me.btnAddColor = New System.Windows.Forms.Button()
-        Me.cRefNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pRefNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbMeasure.SuspendLayout()
         CType(Me.dgvMeasure2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +104,7 @@ Partial Class ProductForm
         Me.txtProduct.ForeColor = System.Drawing.Color.Black
         Me.txtProduct.Location = New System.Drawing.Point(166, 101)
         Me.txtProduct.Name = "txtProduct"
-        Me.txtProduct.Size = New System.Drawing.Size(445, 22)
+        Me.txtProduct.Size = New System.Drawing.Size(537, 22)
         Me.txtProduct.TabIndex = 3
         '
         'Label5
@@ -147,7 +146,7 @@ Partial Class ProductForm
         Me.cbCategory.FormattingEnabled = True
         Me.cbCategory.Location = New System.Drawing.Point(166, 212)
         Me.cbCategory.Name = "cbCategory"
-        Me.cbCategory.Size = New System.Drawing.Size(445, 23)
+        Me.cbCategory.Size = New System.Drawing.Size(472, 23)
         Me.cbCategory.TabIndex = 4
         '
         'cbSubcategory
@@ -156,7 +155,7 @@ Partial Class ProductForm
         Me.cbSubcategory.FormattingEnabled = True
         Me.cbSubcategory.Location = New System.Drawing.Point(166, 255)
         Me.cbSubcategory.Name = "cbSubcategory"
-        Me.cbSubcategory.Size = New System.Drawing.Size(445, 23)
+        Me.cbSubcategory.Size = New System.Drawing.Size(472, 23)
         Me.cbSubcategory.TabIndex = 5
         '
         'TabControl1
@@ -164,8 +163,8 @@ Partial Class ProductForm
         Me.TabControl1.Controls.Add(Me.tbMeasure)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Location = New System.Drawing.Point(38, 310)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -233,7 +232,6 @@ Partial Class ProductForm
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.btnAddSupplier)
         Me.TabPage1.Controls.Add(Me.dgvCost)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
@@ -241,15 +239,6 @@ Partial Class ProductForm
         Me.TabPage1.TabIndex = 2
         Me.TabPage1.Text = "Suppliers/Costing"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'btnAddSupplier
-        '
-        Me.btnAddSupplier.Location = New System.Drawing.Point(935, 14)
-        Me.btnAddSupplier.Name = "btnAddSupplier"
-        Me.btnAddSupplier.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddSupplier.TabIndex = 2
-        Me.btnAddSupplier.Text = "Add"
-        Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
         'dgvCost
         '
@@ -354,6 +343,34 @@ Partial Class ProductForm
         Me.dgvcosthistory.Size = New System.Drawing.Size(996, 212)
         Me.dgvcosthistory.TabIndex = 4
         '
+        'cRefNo
+        '
+        Me.cRefNo.HeaderText = "Reference Number"
+        Me.cRefNo.Name = "cRefNo"
+        Me.cRefNo.ReadOnly = True
+        Me.cRefNo.Width = 130
+        '
+        'cUnit
+        '
+        Me.cUnit.HeaderText = "Unit"
+        Me.cUnit.Name = "cUnit"
+        Me.cUnit.ReadOnly = True
+        Me.cUnit.Width = 200
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Unit Cost"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Width = 300
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Date Added"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Width = 200
+        '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.dgvPriceHistory)
@@ -373,10 +390,37 @@ Partial Class ProductForm
         Me.dgvPriceHistory.Size = New System.Drawing.Size(996, 217)
         Me.dgvPriceHistory.TabIndex = 3
         '
+        'pRefNo
+        '
+        Me.pRefNo.HeaderText = "Reference Number"
+        Me.pRefNo.Name = "pRefNo"
+        Me.pRefNo.Width = 130
+        '
+        'pUnit
+        '
+        Me.pUnit.HeaderText = "Unit"
+        Me.pUnit.Name = "pUnit"
+        Me.pUnit.ReadOnly = True
+        Me.pUnit.Width = 200
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Unit Price"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Width = 300
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DataGridViewTextBoxColumn5.Width = 200
+        '
         'btnAddCategory
         '
         Me.btnAddCategory.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddCategory.Location = New System.Drawing.Point(621, 211)
+        Me.btnAddCategory.Location = New System.Drawing.Point(644, 211)
         Me.btnAddCategory.Name = "btnAddCategory"
         Me.btnAddCategory.Size = New System.Drawing.Size(59, 23)
         Me.btnAddCategory.TabIndex = 23
@@ -386,7 +430,7 @@ Partial Class ProductForm
         'btnSubCat
         '
         Me.btnSubCat.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubCat.Location = New System.Drawing.Point(621, 255)
+        Me.btnSubCat.Location = New System.Drawing.Point(644, 255)
         Me.btnSubCat.Name = "btnSubCat"
         Me.btnSubCat.Size = New System.Drawing.Size(59, 23)
         Me.btnSubCat.TabIndex = 24
@@ -395,6 +439,7 @@ Partial Class ProductForm
         '
         'txtBarcode
         '
+        Me.txtBarcode.Enabled = False
         Me.txtBarcode.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBarcode.Location = New System.Drawing.Point(166, 29)
         Me.txtBarcode.Name = "txtBarcode"
@@ -408,9 +453,9 @@ Partial Class ProductForm
         Me.Label3.ForeColor = System.Drawing.Color.Black
         Me.Label3.Location = New System.Drawing.Point(35, 31)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(52, 15)
+        Me.Label3.Size = New System.Drawing.Size(95, 15)
         Me.Label3.TabIndex = 26
-        Me.Label3.Text = "Barcode"
+        Me.Label3.Text = "Default Barcode"
         '
         'Label4
         '
@@ -448,7 +493,7 @@ Partial Class ProductForm
         Me.cbBrand.FormattingEnabled = True
         Me.cbBrand.Location = New System.Drawing.Point(166, 173)
         Me.cbBrand.Name = "cbBrand"
-        Me.cbBrand.Size = New System.Drawing.Size(445, 23)
+        Me.cbBrand.Size = New System.Drawing.Size(472, 23)
         Me.cbBrand.TabIndex = 29
         '
         'cbColor
@@ -457,7 +502,7 @@ Partial Class ProductForm
         Me.cbColor.FormattingEnabled = True
         Me.cbColor.Location = New System.Drawing.Point(166, 138)
         Me.cbColor.Name = "cbColor"
-        Me.cbColor.Size = New System.Drawing.Size(445, 23)
+        Me.cbColor.Size = New System.Drawing.Size(472, 23)
         Me.cbColor.TabIndex = 31
         '
         'Label7
@@ -474,7 +519,7 @@ Partial Class ProductForm
         'btnAddBrand
         '
         Me.btnAddBrand.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddBrand.Location = New System.Drawing.Point(621, 171)
+        Me.btnAddBrand.Location = New System.Drawing.Point(644, 171)
         Me.btnAddBrand.Name = "btnAddBrand"
         Me.btnAddBrand.Size = New System.Drawing.Size(59, 23)
         Me.btnAddBrand.TabIndex = 32
@@ -484,67 +529,12 @@ Partial Class ProductForm
         'btnAddColor
         '
         Me.btnAddColor.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddColor.Location = New System.Drawing.Point(621, 136)
+        Me.btnAddColor.Location = New System.Drawing.Point(644, 136)
         Me.btnAddColor.Name = "btnAddColor"
         Me.btnAddColor.Size = New System.Drawing.Size(59, 23)
         Me.btnAddColor.TabIndex = 33
         Me.btnAddColor.Text = "Add (+)"
         Me.btnAddColor.UseVisualStyleBackColor = True
-        '
-        'cRefNo
-        '
-        Me.cRefNo.HeaderText = "Reference Number"
-        Me.cRefNo.Name = "cRefNo"
-        Me.cRefNo.ReadOnly = True
-        Me.cRefNo.Width = 130
-        '
-        'cUnit
-        '
-        Me.cUnit.HeaderText = "Unit"
-        Me.cUnit.Name = "cUnit"
-        Me.cUnit.ReadOnly = True
-        Me.cUnit.Width = 200
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Unit Cost"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Width = 300
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Date Added"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        Me.DataGridViewTextBoxColumn4.Width = 200
-        '
-        'pRefNo
-        '
-        Me.pRefNo.HeaderText = "Reference Number"
-        Me.pRefNo.Name = "pRefNo"
-        Me.pRefNo.Width = 130
-        '
-        'pUnit
-        '
-        Me.pUnit.HeaderText = "Unit"
-        Me.pUnit.Name = "pUnit"
-        Me.pUnit.ReadOnly = True
-        Me.pUnit.Width = 200
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Unit Price"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Width = 300
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Width = 200
         '
         'ProductForm
         '
@@ -622,7 +612,6 @@ Partial Class ProductForm
     Friend WithEvents mAction As DataGridViewButtonColumn
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents dgvCost As DataGridView
-    Friend WithEvents btnAddSupplier As Button
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents dgvcosthistory As DataGridView
     Friend WithEvents TabPage3 As TabPage

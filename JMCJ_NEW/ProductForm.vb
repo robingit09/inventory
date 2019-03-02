@@ -191,7 +191,7 @@
                         If row.Cells("sUnit").Value <> "Select" And row.Cells("Supplier").Value <> "Select" Then
                             Dim supplier_id As Integer = New DatabaseConnect().get_id("suppliers", "supplier_name", row.Cells("Supplier").Value)
                             Dim unit_id As Integer = New DatabaseConnect().get_id("unit", "name", row.Cells("sUnit").Value)
-                            Dim cost As Double = CDbl(row.Cells("Cost").Value)
+                            Dim cost As String = row.Cells("Cost").Value.ToString.Replace(",", "")
 
                             .cmd.Connection = .con
                             .cmd.CommandType = CommandType.Text
@@ -372,7 +372,7 @@
 
                         Dim supplier As String = New DatabaseConnect().get_id("suppliers", "supplier_name", item.Cells("Supplier").Value)
                         Dim unit_name As String = New DatabaseConnect().get_id("unit", "name", item.Cells("sUnit").Value)
-                        Dim cost As Double = Val(item.Cells("Cost").Value)
+                        Dim cost As Double = Val(item.Cells("Cost").Value.ToString.Replace(",", ""))
 
                         'MsgBox(item.Cells("Supplier").Value & " " & item.Cells("sUnit").Value)
                         'MsgBox(supplier & " " & unit_name)
@@ -602,7 +602,7 @@
 
         If Trim(txtProduct.Text) = "" Then
             res = False
-            MsgBox("Product description field is required!", MsgBoxStyle.Critical)
+            MsgBox("Product description field is required.", MsgBoxStyle.Critical)
             txtProduct.Focus()
             Return res
         End If
@@ -631,7 +631,7 @@
 
         If dgvMeasure2.Rows.Count = 0 Or dgvMeasure2.Rows.Count = 1 Then
             res = False
-            MsgBox("Please add measurement for this product!", MsgBoxStyle.Critical)
+            MsgBox("Please add (measurement).", MsgBoxStyle.Critical)
             dgvMeasure2.Focus()
             Return res
         End If
@@ -656,13 +656,13 @@
 
         If validateunit = False Then
             res = False
-            MsgBox("Please select unit for measure.", MsgBoxStyle.Critical)
+            MsgBox("Please select (unit) for measurement.", MsgBoxStyle.Critical)
             Return res
         End If
 
         If validateprice = False Then
             res = False
-            MsgBox("Please add price for unit.", MsgBoxStyle.Critical)
+            MsgBox("Please add (price) per unit.", MsgBoxStyle.Critical)
             Return res
         End If
 
@@ -681,7 +681,7 @@
 
         If validate_has_default = False Then
             res = False
-            MsgBox("Please select the default unit measurement.", MsgBoxStyle.Critical)
+            MsgBox("Please select the (default) unit measurement.", MsgBoxStyle.Critical)
             Return res
         End If
 
@@ -708,7 +708,7 @@
 
         If count_duplicate_supplier > 0 Then
             res = False
-            MsgBox("Does not allow duplicate supplier and unit.", MsgBoxStyle.Critical)
+            MsgBox("Does not allow duplicate (supplier) and (unit).", MsgBoxStyle.Critical)
             Return res
         End If
 
@@ -734,7 +734,7 @@
 
         If count_duplicate_customer > 0 Then
             res = False
-            MsgBox("Does not allow duplicate customer and unit.", MsgBoxStyle.Critical)
+            MsgBox("Does not allow duplicate (customer) and (unit).", MsgBoxStyle.Critical)
             Return res
         End If
 
@@ -928,13 +928,13 @@
                 .selectByQuery("select pr.pr_no,u.name as unit,prp.unit_cost,pr.created_at from ((purchase_receive_products as prp 
                 inner join purchase_receive as pr on pr.id = prp.purchase_receive_id)
                 inner join unit as u on u.id = prp.unit_id)
-                where prp.product_unit_id = " & selectedProduct)
+                where prp.product_unit_id = " & selectedProduct & " order by pr.created_at desc")
 
                 If .dr.HasRows Then
                     While .dr.Read
                         Dim pr_no As String = .dr("pr_no")
                         Dim unit As String = .dr("unit")
-                        Dim cost As String = .dr("unit_cost")
+                        Dim cost As String = Val(.dr("unit_cost")).ToString("N2")
                         Dim created_at As String = .dr("created_at")
 
                         Dim row As String() = New String() {pr_no, unit, cost, created_at}
@@ -954,13 +954,13 @@
                 .selectByQuery("select co.invoice_no,u.name as unit,cop.sell_price,co.created_at from ((customer_order_products as cop
                 inner join customer_orders as co on co.id = cop.customer_order_id)
                 inner join unit as u on u.id = cop.unit_id) 
-                where cop.product_unit_id = " & selectedProduct)
+                where cop.product_unit_id = " & selectedProduct & " order by co.created_at desc")
 
                 If .dr.HasRows Then
                     While .dr.Read
                         Dim invoice_no As String = .dr("invoice_no")
                         Dim unit As String = .dr("unit")
-                        Dim price As String = .dr("sell_price")
+                        Dim price As String = Val(.dr("sell_price")).ToString("N2")
                         Dim created_at As String = .dr("created_at")
 
                         Dim row As String() = New String() {invoice_no, unit, price, created_at}
@@ -1053,6 +1053,10 @@
         End If
 
         dgvMeasure2.Rows.Clear()
+        dgvCost.Rows.Clear()
+        dgvSellPrice.Rows.Clear()
+        dgvcosthistory.Rows.Clear()
+        dgvPriceHistory.Rows.Clear()
     End Sub
 
     Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
@@ -1088,6 +1092,7 @@
         'loadBrand()
         'loadColor()
         TabControl1.SelectedIndex = 0
+        txtItemCode.Focus()
 
     End Sub
 
@@ -1208,9 +1213,7 @@
         End If
     End Sub
 
-    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
-        AddCostForm.ShowDialog()
-    End Sub
+
 
     Private Sub dgvCost_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCost.CellContentClick
         'go to selecting unit on click

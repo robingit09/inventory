@@ -244,11 +244,16 @@
                         .cmd.CommandType = CommandType.Text
 
                         Dim product_unit_id As String = dgvProducts.Rows(item.Index).Cells("column_id").Value
+                        Dim unit_id As String = dgvProducts.Rows(item.Index).Cells("column_unit").Value
+                        If Trim(unit_id) <> "" Then
+                            unit_id = New DatabaseConnect().get_id("unit", "name", unit_id)
+                        End If
                         Dim sell_price As String = dgvProducts.Rows(item.Index).Cells("column_sell_price").Value
-                        .cmd.CommandText = "INSERT INTO customer_product_prices (customer_id,product_unit_id,sell_price,created_at,updated_at)
-                VALUES(?,?,?,?,?)"
+                        .cmd.CommandText = "INSERT INTO customer_product_prices (customer_id,product_unit_id,unit_id,sell_price,created_at,updated_at)
+                VALUES(?,?,?,?,?,?)"
                         .cmd.Parameters.AddWithValue("@customer_id", selectedCustomer)
                         .cmd.Parameters.AddWithValue("@product_unit_id", product_unit_id)
+                        .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                         .cmd.Parameters.AddWithValue("@sell_price", sell_price)
                         .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                         .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)
@@ -392,5 +397,6 @@
             End If
         Next
     End Sub
+
 
 End Class

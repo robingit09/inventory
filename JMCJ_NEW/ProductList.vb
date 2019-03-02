@@ -660,24 +660,6 @@
         End If
     End Sub
 
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        Dim k As String = Trim(txtSearch.Text).ToUpper
-        Dim query As String = "Select distinct p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
-                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
-                LEFT JOIN brand as b ON b.id = pu.brand)
-                INNER JOIN unit as u ON u.id = pu.unit)
-                LEFT JOIN color as cc ON cc.id = pu.color)
-                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
-                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
-                LEFT JOIN categories as c ON c.id = pc.category_id)
-                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 
-                and UCASE(p.description) like '%" & k & "%'  or UCASE(pu.item_code) like '%" & k & "%' 
-                or UCASE(pu.barcode) like '%" & k & "%' or UCASE(c.name) like '%" & k & "%' 
-                or UCASE(sub.name) like '%" & k & "%' or UCASE(cc.name) like '%" & k & "%'"
-
-        loadList(query)
-    End Sub
-
     Private Sub getTotalQty()
         Dim db As New DatabaseConnect
         With db
@@ -689,4 +671,25 @@
             .con.Close()
         End With
     End Sub
+
+    Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim k As String = Trim(txtSearch.Text).ToUpper
+            Dim query As String = "Select p.id,pu.id as p_u_id,pu.barcode,pu.item_code, p.description,b.name as brand, u.name as unit,cc.name as color,pu.price,c.name as cat,sub.name as subcat FROM ((((((((products as p 
+                INNER JOIN product_unit as pu ON p.id = pu.product_id) 
+                LEFT JOIN brand as b ON b.id = pu.brand)
+                INNER JOIN unit as u ON u.id = pu.unit)
+                LEFT JOIN color as cc ON cc.id = pu.color)
+                INNER JOIN product_categories as pc ON pc.product_id = p.id) 
+                LEFT JOIN product_subcategories as psc ON psc.product_id = p.id)
+                LEFT JOIN categories as c ON c.id = pc.category_id)
+                LEFT JOIN categories as sub ON sub.id = psc.subcategory_id)  where pu.status <> 0 and p.status <> 0 
+                and UCASE(p.description) like '%" & k & "%'  or UCASE(pu.item_code) like '%" & k & "%' 
+                or UCASE(pu.barcode) like '%" & k & "%' or UCASE(c.name) like '%" & k & "%' 
+                or UCASE(sub.name) like '%" & k & "%' or UCASE(cc.name) like '%" & k & "%' order by p.created_at desc"
+
+            loadList(query)
+        End If
+    End Sub
+
 End Class

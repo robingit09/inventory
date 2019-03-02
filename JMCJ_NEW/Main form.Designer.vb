@@ -176,7 +176,7 @@ Partial Class Main_form
         '
         'PurchaseToolStripMenuItem
         '
-        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseOrderRequestToolStripMenuItem, Me.PurchaseReceiveToolStripMenuItem1, Me.SupplierToolStripMenuItem1, Me.SupplierProductsToolStripMenuItem, Me.PurchaseReturnToolStripMenuItem})
+        Me.PurchaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReceiveToolStripMenuItem1, Me.PurchaseOrderRequestToolStripMenuItem, Me.SupplierToolStripMenuItem1, Me.SupplierProductsToolStripMenuItem, Me.PurchaseReturnToolStripMenuItem})
         Me.PurchaseToolStripMenuItem.Image = Global.JMCJ_NEW.My.Resources.Resources.purchase
         Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
         Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(107, 25)

@@ -60,7 +60,7 @@ Partial Class SupplierForm
         Me.txtSupplier.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSupplier.Location = New System.Drawing.Point(125, 57)
         Me.txtSupplier.Name = "txtSupplier"
-        Me.txtSupplier.Size = New System.Drawing.Size(356, 21)
+        Me.txtSupplier.Size = New System.Drawing.Size(598, 21)
         Me.txtSupplier.TabIndex = 1
         '
         'Label2
@@ -78,7 +78,7 @@ Partial Class SupplierForm
         Me.txtSupCode.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSupCode.Location = New System.Drawing.Point(125, 90)
         Me.txtSupCode.Name = "txtSupCode"
-        Me.txtSupCode.Size = New System.Drawing.Size(356, 21)
+        Me.txtSupCode.Size = New System.Drawing.Size(598, 21)
         Me.txtSupCode.TabIndex = 2
         '
         'Label3
@@ -146,7 +146,7 @@ Partial Class SupplierForm
         Me.txtAddress.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(125, 128)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(356, 21)
+        Me.txtAddress.Size = New System.Drawing.Size(598, 21)
         Me.txtAddress.TabIndex = 3
         '
         'txtContactPerson
@@ -154,7 +154,7 @@ Partial Class SupplierForm
         Me.txtContactPerson.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtContactPerson.Location = New System.Drawing.Point(125, 198)
         Me.txtContactPerson.Name = "txtContactPerson"
-        Me.txtContactPerson.Size = New System.Drawing.Size(356, 21)
+        Me.txtContactPerson.Size = New System.Drawing.Size(598, 21)
         Me.txtContactPerson.TabIndex = 5
         '
         'txtContactNumber
@@ -162,7 +162,7 @@ Partial Class SupplierForm
         Me.txtContactNumber.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtContactNumber.Location = New System.Drawing.Point(125, 227)
         Me.txtContactNumber.Name = "txtContactNumber"
-        Me.txtContactNumber.Size = New System.Drawing.Size(356, 21)
+        Me.txtContactNumber.Size = New System.Drawing.Size(598, 21)
         Me.txtContactNumber.TabIndex = 6
         '
         'txtContactNumber2
@@ -170,7 +170,7 @@ Partial Class SupplierForm
         Me.txtContactNumber2.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtContactNumber2.Location = New System.Drawing.Point(125, 262)
         Me.txtContactNumber2.Name = "txtContactNumber2"
-        Me.txtContactNumber2.Size = New System.Drawing.Size(356, 21)
+        Me.txtContactNumber2.Size = New System.Drawing.Size(598, 21)
         Me.txtContactNumber2.TabIndex = 7
         '
         'txtFax
@@ -178,7 +178,7 @@ Partial Class SupplierForm
         Me.txtFax.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFax.Location = New System.Drawing.Point(125, 294)
         Me.txtFax.Name = "txtFax"
-        Me.txtFax.Size = New System.Drawing.Size(356, 21)
+        Me.txtFax.Size = New System.Drawing.Size(598, 21)
         Me.txtFax.TabIndex = 8
         '
         'txtEmail
@@ -186,13 +186,13 @@ Partial Class SupplierForm
         Me.txtEmail.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(125, 328)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(356, 21)
+        Me.txtEmail.Size = New System.Drawing.Size(598, 21)
         Me.txtEmail.TabIndex = 9
         '
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(538, 12)
+        Me.btnSave.Location = New System.Drawing.Point(739, 12)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(81, 35)
         Me.btnSave.TabIndex = 11
@@ -233,14 +233,14 @@ Partial Class SupplierForm
         Me.txtCity.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(125, 159)
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(356, 21)
+        Me.txtCity.Size = New System.Drawing.Size(598, 21)
         Me.txtCity.TabIndex = 4
         '
         'SupplierForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(639, 414)
+        Me.ClientSize = New System.Drawing.Size(832, 414)
         Me.Controls.Add(Me.txtCity)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbStatus)

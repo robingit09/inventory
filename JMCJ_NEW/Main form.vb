@@ -43,6 +43,8 @@
             lblTest.ForeColor = Drawing.Color.Green
         End If
 
+
+
         ' check user access
         Dim user_group_id As Integer = CInt(New DatabaseConnect().get_by_val("users", Me.current_user_id, "id", "user_group"))
         If user_group_id = 1 Then
@@ -193,6 +195,9 @@
             ReportsToolStripMenuItem.Visible = False
         End If
 
+
+        'remove access
+        ProductMasterInformationToolStripMenuItem.Visible = False
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick

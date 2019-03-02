@@ -233,7 +233,7 @@
         '    Return err_
         'End If
 
-        If selectedPaymentType = 2 And term = 0 Then
+        If selectedPaymentType = 3 And term = 0 Then
             MsgBox("Please select terms!", MsgBoxStyle.Critical)
             cbTerms.BackColor = Drawing.Color.Red
             cbTerms.Focus()
@@ -1169,7 +1169,7 @@
             Next
 
             If hasless20 Then
-                MsgBox("The stock is less than/Equal to 20", MsgBoxStyle.Exclamation)
+                MsgBox("Warning! The stock is less than/Equal to 20.", MsgBoxStyle.Exclamation)
             End If
             'end validation for stock
 
@@ -1182,6 +1182,7 @@
             insertData()
             clearfields()
             CustomerOrder.loadList("")
+
             'LedgerList.loadLedger("", LedgerList.cbShow.SelectedItem)
             'LedgerList.loadledgertype()
             'LedgerList.getPaymentMode()
@@ -1296,11 +1297,12 @@
                         cmd2.Parameters.Clear()
 
                         ModelFunction.update_stock(product_unit_id, qty, "-")
+                        ModelFunction.updatePrice(selectedCustomer, product_unit_id, unit_id, sell_price)
                         'ModelFunction.save_price_history(product_unit_id, price, dtpDateIssue.Value.ToString)
 
                         'MsgBox(selectedCustomer & " " & product_unit_id & " " & sell_price)
 
-                        'ModelFunction.updatePrice(selectedCustomer, product_unit_id, sell_price)
+
 
                     End If
                 Next

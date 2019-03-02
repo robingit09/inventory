@@ -160,14 +160,14 @@
         End With
     End Sub
 
-    Public Sub updatePrice(ByVal customer_id As String, ByVal p_u_id As String, ByVal new_price As String)
+    Public Sub updatePrice(ByVal customer_id As String, ByVal p_u_id As String, ByVal unit_id As String, ByVal new_price As String)
         new_price = new_price.Replace(",", "")
 
 
         Dim isexist As Boolean = False
         Dim dbcheckexist As New DatabaseConnect
         With dbcheckexist
-            .selectByQuery("Select id from customer_product_prices where customer_id = " & customer_id & " and product_unit_id = " & p_u_id)
+            .selectByQuery("Select id from customer_product_prices where customer_id = " & customer_id & " and product_unit_id = " & p_u_id & " and unit_id =" & unit_id)
 
             If .dr.HasRows Then
                 isexist = True
@@ -187,10 +187,11 @@
             With db
                 .cmd.Connection = .con
                 .cmd.CommandType = CommandType.Text
-                .cmd.CommandText = "Update customer_product_prices set sell_price=? where customer_id = ? and product_unit_id = ?"
+                .cmd.CommandText = "Update customer_product_prices set sell_price=? where customer_id = ? and product_unit_id = ? and unit_id = ?"
                 .cmd.Parameters.AddWithValue("@sell_price", Val(new_price))
                 .cmd.Parameters.AddWithValue("@customer_id", customer_id)
                 .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                 .cmd.ExecuteNonQuery()
                 .cmd.Dispose()
                 .con.Close()
@@ -200,9 +201,10 @@
             With dbinsert
                 .cmd.Connection = .con
                 .cmd.CommandType = cmd.CommandText
-                .cmd.CommandText = "INSERT INTO customer_product_prices (customer_id,product_unit_id,sell_price,created_at,updated_at)VALUES(?,?,?,?,?)"
+                .cmd.CommandText = "INSERT INTO customer_product_prices (customer_id,product_unit_id,unit_id,sell_price,created_at,updated_at)VALUES(?,?,?,?,?,?)"
                 .cmd.Parameters.AddWithValue("@customer_id", customer_id)
                 .cmd.Parameters.AddWithValue("@product_unit_id", p_u_id)
+                .cmd.Parameters.AddWithValue("@unit_id", unit_id)
                 .cmd.Parameters.AddWithValue("@sell_price", new_price)
                 .cmd.Parameters.AddWithValue("@created_at", DateTime.Now.ToString)
                 .cmd.Parameters.AddWithValue("@updated_at", DateTime.Now.ToString)

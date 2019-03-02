@@ -64,7 +64,7 @@ Partial Class AddProductForm
         Me.dgvProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column_id, Me.selectp, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.column_unit_price, Me.column_sell_price, Me.column_cat, Me.column_subcat})
         Me.dgvProducts.Location = New System.Drawing.Point(12, 210)
         Me.dgvProducts.Name = "dgvProducts"
-        Me.dgvProducts.Size = New System.Drawing.Size(1258, 416)
+        Me.dgvProducts.Size = New System.Drawing.Size(1277, 416)
         Me.dgvProducts.TabIndex = 21
         '
         'column_id
@@ -180,7 +180,7 @@ Partial Class AddProductForm
         '
         Me.cbSubCat.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbSubCat.FormattingEnabled = True
-        Me.cbSubCat.Location = New System.Drawing.Point(344, 59)
+        Me.cbSubCat.Location = New System.Drawing.Point(334, 59)
         Me.cbSubCat.Name = "cbSubCat"
         Me.cbSubCat.Size = New System.Drawing.Size(190, 23)
         Me.cbSubCat.TabIndex = 28
@@ -188,7 +188,7 @@ Partial Class AddProductForm
         'txtProductDesc
         '
         Me.txtProductDesc.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProductDesc.Location = New System.Drawing.Point(344, 21)
+        Me.txtProductDesc.Location = New System.Drawing.Point(545, 18)
         Me.txtProductDesc.Name = "txtProductDesc"
         Me.txtProductDesc.Size = New System.Drawing.Size(190, 21)
         Me.txtProductDesc.TabIndex = 27
@@ -197,7 +197,7 @@ Partial Class AddProductForm
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(236, 62)
+        Me.Label7.Location = New System.Drawing.Point(256, 62)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(72, 15)
         Me.Label7.TabIndex = 27
@@ -207,7 +207,7 @@ Partial Class AddProductForm
         '
         Me.cbColor.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbColor.FormattingEnabled = True
-        Me.cbColor.Location = New System.Drawing.Point(957, 21)
+        Me.cbColor.Location = New System.Drawing.Point(1129, 18)
         Me.cbColor.Name = "cbColor"
         Me.cbColor.Size = New System.Drawing.Size(117, 23)
         Me.cbColor.TabIndex = 26
@@ -235,7 +235,7 @@ Partial Class AddProductForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(915, 24)
+        Me.Label6.Location = New System.Drawing.Point(1087, 21)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(34, 15)
         Me.Label6.TabIndex = 25
@@ -245,7 +245,7 @@ Partial Class AddProductForm
         '
         Me.cbUnit.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnit.FormattingEnabled = True
-        Me.cbUnit.Location = New System.Drawing.Point(791, 21)
+        Me.cbUnit.Location = New System.Drawing.Point(963, 18)
         Me.cbUnit.Name = "cbUnit"
         Me.cbUnit.Size = New System.Drawing.Size(117, 23)
         Me.cbUnit.TabIndex = 24
@@ -254,7 +254,7 @@ Partial Class AddProductForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(749, 24)
+        Me.Label5.Location = New System.Drawing.Point(921, 21)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(29, 15)
         Me.Label5.TabIndex = 23
@@ -264,7 +264,7 @@ Partial Class AddProductForm
         '
         Me.cbBrand.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbBrand.FormattingEnabled = True
-        Me.cbBrand.Location = New System.Drawing.Point(600, 21)
+        Me.cbBrand.Location = New System.Drawing.Point(783, 18)
         Me.cbBrand.Name = "cbBrand"
         Me.cbBrand.Size = New System.Drawing.Size(132, 23)
         Me.cbBrand.TabIndex = 22
@@ -291,7 +291,7 @@ Partial Class AddProductForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(558, 24)
+        Me.Label3.Location = New System.Drawing.Point(741, 21)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(36, 15)
         Me.Label3.TabIndex = 19
@@ -301,7 +301,7 @@ Partial Class AddProductForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(233, 24)
+        Me.Label1.Location = New System.Drawing.Point(434, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(105, 15)
         Me.Label1.TabIndex = 18

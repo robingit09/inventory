@@ -52,16 +52,18 @@ Partial Class SupplierProducts
         Me.cbSupplier.FormattingEnabled = True
         Me.cbSupplier.Location = New System.Drawing.Point(63, 13)
         Me.cbSupplier.Name = "cbSupplier"
-        Me.cbSupplier.Size = New System.Drawing.Size(240, 21)
+        Me.cbSupplier.Size = New System.Drawing.Size(257, 21)
         Me.cbSupplier.TabIndex = 1
         '
         'dgvProd
         '
+        Me.dgvProd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.column_barcode, Me.column_description, Me.column_brand, Me.column_unit, Me.column_color, Me.cost, Me.Action})
         Me.dgvProd.Location = New System.Drawing.Point(12, 74)
         Me.dgvProd.Name = "dgvProd"
-        Me.dgvProd.Size = New System.Drawing.Size(914, 454)
+        Me.dgvProd.Size = New System.Drawing.Size(959, 523)
         Me.dgvProd.TabIndex = 25
         '
         'id
@@ -119,7 +121,7 @@ Partial Class SupplierProducts
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(693, 11)
+        Me.btnSearch.Location = New System.Drawing.Point(747, 11)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(109, 23)
         Me.btnSearch.TabIndex = 26
@@ -128,7 +130,7 @@ Partial Class SupplierProducts
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(817, 11)
+        Me.btnSave.Location = New System.Drawing.Point(862, 11)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(109, 23)
         Me.btnSave.TabIndex = 27
@@ -139,7 +141,7 @@ Partial Class SupplierProducts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(941, 552)
+        Me.ClientSize = New System.Drawing.Size(983, 609)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.dgvProd)

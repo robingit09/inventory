@@ -18,6 +18,18 @@
         populateColor(0, 0, 0)
 
         'lblTotalAmount.Text = "₱ 0.00"
+
+        If selectedPO = 0 Then
+            'execute on add new
+            selectedSupplier = 0
+            cbSupplier.SelectedIndex = 0
+            txtPONO.Text = ""
+            gpEnterBarcode.Enabled = False
+            gpEnterProduct.Enabled = False
+            dgvProd.Enabled = False
+            dgvProd.Rows.Clear()
+        End If
+
     End Sub
 
     Public Sub initialize()
@@ -27,6 +39,8 @@
         gpEnterBarcode.Enabled = False
         gpEnterProduct.Enabled = False
         dgvProd.Enabled = False
+
+
     End Sub
 
     Public Sub autocompleteProduct()
@@ -273,7 +287,7 @@
 
         End With
 
-        Return code
+        Return code.ToUpper
     End Function
 
     Private Sub cbSupplier_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbSupplier.SelectedIndexChanged
@@ -852,7 +866,8 @@
 
     Private Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
         If selectedSupplier = 0 Then
-            MsgBox("Please select supplier!", MsgBoxStyle.Critical)
+            MsgBox("Please select supplier.", MsgBoxStyle.Critical)
+            cbSupplier.Focus()
             'cbSupplier.BackColor = Drawing.Color.Red
             Exit Sub
         End If
