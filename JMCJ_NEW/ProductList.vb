@@ -393,6 +393,8 @@
                     Dim color As String = If(IsDBNull(.dr("color")), "", .dr("color"))
                     Dim price As String = Val(.dr("price")).ToString("N2")
                     Dim stock As String = ""
+
+                    'get current stock
                     Try
                         Dim dbstock As New DatabaseConnect
                         With dbstock
@@ -409,6 +411,26 @@
                     Catch ex As Exception
                         stock = ""
                     End Try
+
+                    Dim unit_all As String = ""
+                    Dim price_all As String = ""
+                    Try
+                        Dim dbmeasure As New DatabaseConnect
+                        With dbmeasure
+                            .selectByQuery("select u.name as unit,pm.price from product_measure as pm inner join unit as u on u.id = pm.unit_id
+                                where pm.product_unit_id = " & p_u_id)
+                            While .dr.Read
+                                unit_all = unit_all & .dr("unit") & "<br>"
+                                price_all = price_all & Val(.dr("price")).ToString("N2") & "<br>"
+                            End While
+                            .cmd.Dispose()
+                            .dr.Close()
+                            .con.Close()
+                        End With
+                    Catch ex As Exception
+
+                    End Try
+
 
                     Dim cat As String = If(IsDBNull(.dr("cat")), "", .dr("cat"))
                     Dim subcat As String = If(IsDBNull(.dr("subcat")), "", .dr("subcat"))
@@ -428,9 +450,10 @@
                     tr = tr & "<td>" & itemcode & "</td>"
                     tr = tr & "<td>" & desc & "</td>"
                     tr = tr & "<td>" & brand & "</td>"
-                    tr = tr & "<td>" & unit & "</td>"
                     tr = tr & "<td>" & color & "</td>"
-                    tr = tr & "<td>" & price & "</td>"
+                    tr = tr & "<td>" & unit_all & " </td>"
+
+                    tr = tr & "<td>" & price_all & "</td>"
                     tr = tr & "<td>" & stock & "</td>"
                     tr = tr & "<td>" & cat & "</td>"
                     tr = tr & "<td>" & subcat & "</td>"
@@ -499,8 +522,8 @@
                                 <th>Item Code</th>
                                 <th>Description</th>
                                 <th>Brand</th>
-                                <th>Unit</th>
                                 <th>Color</th>
+                                <th>Unit</th>
                                 <th>Price</th>
                                 <th>Stock Qty</th>
                                 <th>Category</th>
